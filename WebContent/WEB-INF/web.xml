@@ -9,4 +9,89 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  
+  
+  
+ <!--阿群gg small -->
+  <servlet>
+    <servlet-name>MemServlet</servlet-name>
+    <servlet-class>com.mem.controller.MemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemServlet</servlet-name>
+    <url-pattern>/mem/mem.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemShowImage</servlet-name>
+    <servlet-class>com.mem.controller.MemShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemShowImage</servlet-name>
+    <url-pattern>/mem/memShowImage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Update_Show_Image</servlet-name>
+    <servlet-class>com.mem.controller.Update_Show_Image</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update_Show_Image</servlet-name>
+    <url-pattern>/mem/updateShowImage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  
+  <!--阿群 -->
+<!--兆哥 -->
+  <servlet-name>ShowImage</servlet-name>
+    <servlet-class>com.tool.controller.ShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowImage</servlet-name>
+    <url-pattern>/tool/showimage.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProServlet</servlet-name>
+    <servlet-class>com.pro.controller.ProServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProServlet</servlet-name>
+    <url-pattern>/pro/pro.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProClassServlet</servlet-name>
+    <servlet-class>com.proclass.controller.ProClassServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProClassServlet</servlet-name>
+    <url-pattern>/pro/proClass.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProOrderServlet</servlet-name>
+    <servlet-class>com.proorder.controller.ProOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProOrderServlet</servlet-name>
+    <url-pattern>/pro/proOrderServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <servlet-class>com.pro.shoppingcart.ShoppingCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <url-pattern>/pro/shoppingCartServlet.do</url-pattern>
+  </servlet-mapping>
+  <!--兆哥 -->
+   
+  
+  
+  
+  
+  
+  
+  
 </web-app>
