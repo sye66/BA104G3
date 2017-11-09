@@ -24,7 +24,7 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3_TEST");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -41,8 +41,8 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, skillCategoryVO.getSkill_cate_no());
-			pstmt.setString(2, skillCategoryVO.getSkill_cate_name());
+			pstmt.setString(1, skillCategoryVO.getSkill_Cate_No());
+			pstmt.setString(2, skillCategoryVO.getSkill_Cate_Name());
 			
 			pstmt.executeQuery();
 			System.out.println("新增成功");
@@ -116,8 +116,8 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, skillCategoryVO.getSkill_cate_name());
-			pstmt.setString(2, skillCategoryVO.getSkill_cate_no());
+			pstmt.setString(1, skillCategoryVO.getSkill_Cate_Name());
+			pstmt.setString(2, skillCategoryVO.getSkill_Cate_No());
 			
 			pstmt.executeUpdate();
 			
@@ -164,8 +164,8 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 			
 			while(rs.next()) {
 				skillCategoryVO = new SkillCategoryVO();
-				skillCategoryVO.setSkill_cate_no(rs.getString(1));
-				skillCategoryVO.setSkill_cate_name(rs.getString(2));
+				skillCategoryVO.setSkill_Cate_No(rs.getString(1));
+				skillCategoryVO.setSkill_Cate_Name(rs.getString(2));
 			}
 			System.out.println("主鍵查詢完畢");
 		} catch (SQLException e) {
@@ -211,8 +211,8 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 			
 			while(rs.next()) {
 				skillCategoryVO = new SkillCategoryVO();
-				skillCategoryVO.setSkill_cate_no(rs.getString(1));
-				skillCategoryVO.setSkill_cate_name(rs.getString(2));
+				skillCategoryVO.setSkill_Cate_No(rs.getString(1));
+				skillCategoryVO.setSkill_Cate_Name(rs.getString(2));
 				listAllSkillCategory.add(skillCategoryVO);
 			}
 			System.out.println("全部查詢完畢");
@@ -244,24 +244,24 @@ public class SkillCategoryDAO implements SkillCategoryDAO_interface{
 		SkillCategoryVO updateSklCate = new SkillCategoryVO();
 		SkillCategoryVO selectSklCate = new SkillCategoryVO();
 		
-		insertSklCate.setSkill_cate_no("CATE0000005");
-		insertSklCate.setSkill_cate_name("Killing");
+		insertSklCate.setSkill_Cate_No("CATE0000005");
+		insertSklCate.setSkill_Cate_Name("Killing");
 		dao.insert(insertSklCate);
 		
-		updateSklCate.setSkill_cate_no("CATE0000002");
-		updateSklCate.setSkill_cate_name("Saving People");
+		updateSklCate.setSkill_Cate_No("CATE0000002");
+		updateSklCate.setSkill_Cate_Name("Saving People");
 		dao.update(updateSklCate);
 		
 		dao.delete("CATE0000005");
 		
 		selectSklCate = dao.findByPrimaryKey("CATE0000004");
-		System.out.println(selectSklCate.getSkill_cate_no());
-		System.out.println(selectSklCate.getSkill_cate_name());
+		System.out.println(selectSklCate.getSkill_Cate_No());
+		System.out.println(selectSklCate.getSkill_Cate_Name());
 		
 		List<SkillCategoryVO> listGetAll = dao.getall();
 		for(SkillCategoryVO SKVO : listGetAll) {
-			System.out.println(SKVO.getSkill_cate_no());
-			System.out.println(SKVO.getSkill_cate_name());
+			System.out.println(SKVO.getSkill_Cate_No());
+			System.out.println(SKVO.getSkill_Cate_Name());
 		}
 	}
 }

@@ -35,10 +35,10 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, chatRecordVO.getSender_mem_no());
-			pstmt.setString(2, chatRecordVO.getReceiver_mem_no());
-			pstmt.setTimestamp(3, chatRecordVO.getChat_datetime());
-			pstmt.setString(4, chatRecordVO.getChat_content());
+			pstmt.setString(1, chatRecordVO.getSender_Mem_No());
+			pstmt.setString(2, chatRecordVO.getReceiver_Mem_No());
+			pstmt.setTimestamp(3, chatRecordVO.getChat_Datetime());
+			pstmt.setString(4, chatRecordVO.getChat_Content());
 
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
@@ -124,10 +124,10 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
-			pstmt.setString(1, chatRecordVO.getChat_content());
-			pstmt.setString(2, chatRecordVO.getSender_mem_no());
-			pstmt.setString(3, chatRecordVO.getReceiver_mem_no());
-			pstmt.setTimestamp(4, chatRecordVO.getChat_datetime());
+			pstmt.setString(1, chatRecordVO.getChat_Content());
+			pstmt.setString(2, chatRecordVO.getSender_Mem_No());
+			pstmt.setString(3, chatRecordVO.getReceiver_Mem_No());
+			pstmt.setTimestamp(4, chatRecordVO.getChat_Datetime());
 			pstmt.executeUpdate();
 			
 			System.out.println("更新成功");
@@ -179,10 +179,10 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 			
 			while(rs.next()) {
 				chatRecordVO = new ChatRecordVO();
-				chatRecordVO.setSender_mem_no(rs.getString(1));
-				chatRecordVO.setReceiver_mem_no(rs.getString(2));
-				chatRecordVO.setChat_datetime(rs.getTimestamp(3));
-				chatRecordVO.setChat_content(rs.getString(4));
+				chatRecordVO.setSender_Mem_No(rs.getString(1));
+				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
+				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
+				chatRecordVO.setChat_Content(rs.getString(4));
 			}
 			
 			System.out.println("主鍵查詢完畢");
@@ -232,10 +232,10 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 			
 			while(rs.next()) {
 				chatRecordVO = new ChatRecordVO();
-				chatRecordVO.setSender_mem_no(rs.getString(1));
-				chatRecordVO.setReceiver_mem_no(rs.getString(2));
-				chatRecordVO.setChat_datetime(rs.getTimestamp(3));
-				chatRecordVO.setChat_content(rs.getString(4));
+				chatRecordVO.setSender_Mem_No(rs.getString(1));
+				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
+				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
+				chatRecordVO.setChat_Content(rs.getString(4));
 				listAllChatRecord.add(chatRecordVO);
 			}
 			
@@ -272,25 +272,25 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 		ChatRecordVO getOneChatRecord = new ChatRecordVO();
 		List<ChatRecordVO> getAllChatRecord = new ArrayList<>();
 		
-		insertChatRecord.setSender_mem_no("M000005");
-		insertChatRecord.setReceiver_mem_no("M000018");
-		insertChatRecord.setChat_datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		insertChatRecord.setChat_content("HIHIHI!!!!");
+		insertChatRecord.setSender_Mem_No("M000005");
+		insertChatRecord.setReceiver_Mem_No("M000018");
+		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+		insertChatRecord.setChat_Content("HIHIHI!!!!");
 		dao.insert(insertChatRecord);
 		
-		updateChatRecord.setSender_mem_no("M000005");
-		updateChatRecord.setReceiver_mem_no("M000018");
-		updateChatRecord.setChat_datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		updateChatRecord.setChat_content("YOYOYOOYOYOYO!!!");
+		updateChatRecord.setSender_Mem_No("M000005");
+		updateChatRecord.setReceiver_Mem_No("M000018");
+		updateChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+		updateChatRecord.setChat_Content("YOYOYOOYOYOYO!!!");
 		
 		dao.update(updateChatRecord);
 		
 		dao.delete("M000005", "M000018", Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
 		
-		insertChatRecord.setSender_mem_no("M000005");
-		insertChatRecord.setReceiver_mem_no("M000018");
-		insertChatRecord.setChat_datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		insertChatRecord.setChat_content("HIHIHI!!!!");
+		insertChatRecord.setSender_Mem_No("M000005");
+		insertChatRecord.setReceiver_Mem_No("M000018");
+		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+		insertChatRecord.setChat_Content("HIHIHI!!!!");
 		dao.insert(insertChatRecord);
 		
 		dao.findByPrimaryKey("M000005", "M000018", Timestamp.valueOf("2017-11-11 11:11:11.000000000"));

@@ -34,9 +34,9 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, skillVO.getSkill_no());
-			pstmt.setString(2, skillVO.getSkill_name());
-			pstmt.setString(3, skillVO.getSkill_cate_no());
+			pstmt.setString(1, skillVO.getSkill_No());
+			pstmt.setString(2, skillVO.getSkill_Name());
+			pstmt.setString(3, skillVO.getSkill_Cate_No());
 			pstmt.executeQuery();
 			System.out.println("新增成功");
 		} catch (ClassNotFoundException e) {
@@ -64,7 +64,7 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 	}
 
 	@Override
-	public void delete(String skill_no) {
+	public void delete(String skill_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -75,7 +75,7 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			con = DriverManager.getConnection(URL, USR, PSW);
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(DELETE_STMT);
-			pstmt.setString(1, skill_no);
+			pstmt.setString(1, skill_No);
 			pstmt.executeUpdate();
 			System.out.println("刪除成功");
 		} catch (ClassNotFoundException e) {
@@ -117,9 +117,9 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, skillVO.getSkill_name());
-			pstmt.setString(2, skillVO.getSkill_cate_no());
-			pstmt.setString(3, skillVO.getSkill_no());
+			pstmt.setString(1, skillVO.getSkill_Name());
+			pstmt.setString(2, skillVO.getSkill_Cate_No());
+			pstmt.setString(3, skillVO.getSkill_No());
 			
 			pstmt.executeUpdate();
 			
@@ -151,7 +151,7 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 	}
 	
 	@Override
-	public SkillVO findByPrimaryKey(String skill_no) {
+	public SkillVO findByPrimaryKey(String skill_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		SkillVO skillVO = null;
@@ -165,14 +165,14 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, skill_no);
+			pstmt.setString(1, skill_No);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				skillVO = new SkillVO();
-				skillVO.setSkill_no(rs.getString(1));
-				skillVO.setSkill_name(rs.getString(2));
-				skillVO.setSkill_cate_no(rs.getString(3));
+				skillVO.setSkill_No(rs.getString(1));
+				skillVO.setSkill_Name(rs.getString(2));
+				skillVO.setSkill_Cate_No(rs.getString(3));
 			}
 			System.out.println("主鍵查詢完畢");
 		} catch (ClassNotFoundException e) {
@@ -223,9 +223,9 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			
 			while(rs.next()) {
 				skillVO = new SkillVO();
-				skillVO.setSkill_no(rs.getString(1));
-				skillVO.setSkill_name(rs.getString(2));
-				skillVO.setSkill_cate_no(rs.getString(3));
+				skillVO.setSkill_No(rs.getString(1));
+				skillVO.setSkill_Name(rs.getString(2));
+				skillVO.setSkill_Cate_No(rs.getString(3));
 				listSkill.add(skillVO);
 			}
 			System.out.println("全部查詢完畢");
@@ -260,27 +260,27 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 		SkillVO updateSkill = new SkillVO();
 		SkillVO selectSkill = new SkillVO();
 		
-		insertSkill.setSkill_no("SKL000030");
-		insertSkill.setSkill_name("修飛機");
-		insertSkill.setSkill_cate_no("CATE0000003");
+		insertSkill.setSkill_No("SKL000030");
+		insertSkill.setSkill_Name("修飛機");
+		insertSkill.setSkill_Cate_No("CATE0000003");
 		dao.insert(insertSkill);
 		
-		updateSkill.setSkill_no("SKL000030");
-		updateSkill.setSkill_name("修戰鬥機");
-		updateSkill.setSkill_cate_no("CATE0000003");
+		updateSkill.setSkill_No("SKL000030");
+		updateSkill.setSkill_Name("修戰鬥機");
+		updateSkill.setSkill_Cate_No("CATE0000003");
 		dao.update(updateSkill);
 		
 		dao.delete("SKL000030");
 		selectSkill = dao.findByPrimaryKey("SKL000001");
-		System.out.println(selectSkill.getSkill_no());
-		System.out.println(selectSkill.getSkill_name());
-		System.out.println(selectSkill.getSkill_cate_no());
+		System.out.println(selectSkill.getSkill_No());
+		System.out.println(selectSkill.getSkill_Name());
+		System.out.println(selectSkill.getSkill_Cate_No());
 		
 		List<SkillVO> listGetAll = dao.getall();
 		for(SkillVO skillVO : listGetAll) {
-			System.out.println(skillVO.getSkill_no());
-			System.out.println(skillVO.getSkill_name());
-			System.out.println(skillVO.getSkill_cate_no());
+			System.out.println(skillVO.getSkill_No());
+			System.out.println(skillVO.getSkill_Name());
+			System.out.println(skillVO.getSkill_Cate_No());
 		}
 	}
 

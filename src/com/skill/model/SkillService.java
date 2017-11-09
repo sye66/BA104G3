@@ -8,26 +8,26 @@ public class SkillService {
 	public SkillService() {
 		dao = new SkillDAO();
 	}
-	public SkillVO addSkill(String skill_no,String skill_name,String skill_cate_no) {
+	public SkillVO addSkill(String skill_No,String skill_Name,String skill_Cate_No) {
 		SkillVO skillVO = new SkillVO();
-		skillVO.setSkill_no(skill_no);
-		skillVO.setSkill_name(skill_name);
-		skillVO.setSkill_cate_no(skill_cate_no);
+		skillVO.setSkill_No(skill_No);
+		skillVO.setSkill_Name(skill_Name);
+		skillVO.setSkill_Cate_No(skill_Cate_No);
 		return skillVO;
 	}
-	public void deleteSkill(String skill_no) {
-		dao.delete(skill_no);
+	public void deleteSkill(String skill_No) {
+		dao.delete(skill_No);
 	}
-	public SkillVO updateSkill(String skill_no,String skill_name,String skill_cate_no) {
+	public SkillVO updateSkill(String skill_No,String skill_Name,String skill_Cate_No) {
 		SkillVO skillVO = new SkillVO();
-		skillVO.setSkill_no(skill_no);
-		skillVO.setSkill_name(skill_name);
-		skillVO.setSkill_cate_no(skill_cate_no);
+		skillVO.setSkill_No(skill_No);
+		skillVO.setSkill_Name(skill_Name);
+		skillVO.setSkill_Cate_No(skill_Cate_No);
 		dao.update(skillVO);
 		return skillVO;
 	}
-	public SkillVO getOneSkill(String skill_no) {
-		return dao.findByPrimaryKey(skill_no);
+	public SkillVO getOneSkill(String skill_No) {
+		return dao.findByPrimaryKey(skill_No);
 	}
 	public List<SkillVO> getAll() {
 		return dao.getall();

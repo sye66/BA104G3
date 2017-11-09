@@ -23,7 +23,7 @@ public class SkillDAO implements SkillDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3_TEST");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -41,9 +41,9 @@ public class SkillDAO implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, skillVO.getSkill_no());
-			pstmt.setString(2, skillVO.getSkill_name());
-			pstmt.setString(3, skillVO.getSkill_cate_no());
+			pstmt.setString(1, skillVO.getSkill_No());
+			pstmt.setString(2, skillVO.getSkill_Name());
+			pstmt.setString(3, skillVO.getSkill_Cate_No());
 			
 			pstmt.executeQuery();
 			System.out.println("新增成功");
@@ -117,9 +117,9 @@ public class SkillDAO implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, skillVO.getSkill_name());
-			pstmt.setString(2, skillVO.getSkill_cate_no());
-			pstmt.setString(3, skillVO.getSkill_no());
+			pstmt.setString(1, skillVO.getSkill_Name());
+			pstmt.setString(2, skillVO.getSkill_Cate_No());
+			pstmt.setString(3, skillVO.getSkill_No());
 			
 			pstmt.executeUpdate();
 			
@@ -167,9 +167,9 @@ public class SkillDAO implements SkillDAO_interface{
 			
 			while(rs.next()) {
 				skillVO = new SkillVO();
-				skillVO.setSkill_no(rs.getString(1));
-				skillVO.setSkill_name(rs.getString(2));
-				skillVO.setSkill_cate_no(rs.getString(3));
+				skillVO.setSkill_No(rs.getString(1));
+				skillVO.setSkill_Name(rs.getString(2));
+				skillVO.setSkill_Cate_No(rs.getString(3));
 			}
 			System.out.println("主鍵查詢完畢");
 		} catch (SQLException e) {
@@ -215,9 +215,9 @@ public class SkillDAO implements SkillDAO_interface{
 			
 			while(rs.next()) {
 				skillVO = new SkillVO();
-				skillVO.setSkill_no(rs.getString(1));
-				skillVO.setSkill_name(rs.getString(2));
-				skillVO.setSkill_cate_no(rs.getString(3));
+				skillVO.setSkill_No(rs.getString(1));
+				skillVO.setSkill_Name(rs.getString(2));
+				skillVO.setSkill_Cate_No(rs.getString(3));
 				listSkill.add(skillVO);
 			}
 			System.out.println("全部查詢完畢");

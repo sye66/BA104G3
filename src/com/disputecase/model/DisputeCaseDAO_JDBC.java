@@ -49,13 +49,13 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT,1);
 			
-			pstmt.setString(1, disputeCaseVO.getDispute_case_no());
-			pstmt.setString(2, disputeCaseVO.getMission_no());
-			pstmt.setString(3, disputeCaseVO.getDispute_mem_no());
-			pstmt.setString(4, disputeCaseVO.getEmp_no());
-			pstmt.setTimestamp(5, disputeCaseVO.getIssue_datetime());
-			pstmt.setTimestamp(6, disputeCaseVO.getClose_datetime());
-			pstmt.setInt(7, disputeCaseVO.getDispute_case_status());
+			pstmt.setString(1, disputeCaseVO.getDispute_Case_No());
+			pstmt.setString(2, disputeCaseVO.getMission_No());
+			pstmt.setString(3, disputeCaseVO.getDispute_Mem_No());
+			pstmt.setString(4, disputeCaseVO.getEmp_No());
+			pstmt.setTimestamp(5, disputeCaseVO.getIssue_Datetime());
+			pstmt.setTimestamp(6, disputeCaseVO.getClose_Datetime());
+			pstmt.setInt(7, disputeCaseVO.getDispute_Case_Status());
 			
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
@@ -85,7 +85,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 	}
 
 	@Override
-	public void delete(String dispute_case_no) {
+	public void delete(String dispute_Case_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -97,7 +97,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(DELETE_STMT);
 			
-			pstmt.setString(1, dispute_case_no);
+			pstmt.setString(1, dispute_Case_No);
 			pstmt.executeUpdate();
 			
 			System.out.println("刪除成功");
@@ -139,13 +139,13 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
-			pstmt.setString(1, disputeCaseVO.getMission_no());
-			pstmt.setString(2, disputeCaseVO.getDispute_mem_no());
-			pstmt.setString(3, disputeCaseVO.getEmp_no());
-			pstmt.setTimestamp(4, disputeCaseVO.getIssue_datetime());
-			pstmt.setTimestamp(5, disputeCaseVO.getClose_datetime());
-			pstmt.setInt(6, disputeCaseVO.getDispute_case_status());
-			pstmt.setString(7, disputeCaseVO.getDispute_case_no());
+			pstmt.setString(1, disputeCaseVO.getMission_No());
+			pstmt.setString(2, disputeCaseVO.getDispute_Mem_No());
+			pstmt.setString(3, disputeCaseVO.getEmp_No());
+			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
+			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
+			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
+			pstmt.setString(7, disputeCaseVO.getDispute_Case_No());
 			pstmt.executeUpdate();
 			
 			System.out.println("更新成功");
@@ -176,7 +176,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 
 
 	@Override
-	public DisputeCaseVO findByprimaryKey(String dispute_case_no) {
+	public DisputeCaseVO findByprimaryKey(String dispute_Case_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		DisputeCaseVO disputeCaseVO = null;
@@ -190,18 +190,18 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
-			pstmt.setString(1, dispute_case_no);
+			pstmt.setString(1, dispute_Case_No);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				disputeCaseVO = new DisputeCaseVO();
-				disputeCaseVO.setDispute_case_no(rs.getString(1));
-				disputeCaseVO.setMission_no(rs.getString(2));
-				disputeCaseVO.setDispute_mem_no(rs.getString(3));
-				disputeCaseVO.setEmp_no(rs.getString(4));
-				disputeCaseVO.setIssue_datetime(rs.getTimestamp(5));
-				disputeCaseVO.setClose_datetime(rs.getTimestamp(6));
-				disputeCaseVO.setDispute_case_status(rs.getInt(7));
+				disputeCaseVO.setDispute_Case_No(rs.getString(1));
+				disputeCaseVO.setMission_No(rs.getString(2));
+				disputeCaseVO.setDispute_Mem_No(rs.getString(3));
+				disputeCaseVO.setEmp_No(rs.getString(4));
+				disputeCaseVO.setIssue_Datetime(rs.getTimestamp(5));
+				disputeCaseVO.setClose_Datetime(rs.getTimestamp(6));
+				disputeCaseVO.setDispute_Case_Status(rs.getInt(7));
 			}
 			
 			System.out.println("主鍵查詢完畢");
@@ -251,13 +251,13 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			
 			while(rs.next()) {
 				disputeCaseVO = new DisputeCaseVO();
-				disputeCaseVO.setDispute_case_no(rs.getString(1));
-				disputeCaseVO.setMission_no(rs.getString(2));
-				disputeCaseVO.setDispute_mem_no(rs.getString(3));
-				disputeCaseVO.setEmp_no(rs.getString(4));
-				disputeCaseVO.setIssue_datetime(rs.getTimestamp(5));
-				disputeCaseVO.setClose_datetime(rs.getTimestamp(6));
-				disputeCaseVO.setDispute_case_status(rs.getInt(7));
+				disputeCaseVO.setDispute_Case_No(rs.getString(1));
+				disputeCaseVO.setMission_No(rs.getString(2));
+				disputeCaseVO.setDispute_Mem_No(rs.getString(3));
+				disputeCaseVO.setEmp_No(rs.getString(4));
+				disputeCaseVO.setIssue_Datetime(rs.getTimestamp(5));
+				disputeCaseVO.setClose_Datetime(rs.getTimestamp(6));
+				disputeCaseVO.setDispute_Case_Status(rs.getInt(7));
 				listAllDisputeCase.add(disputeCaseVO);
 			}
 			
@@ -300,31 +300,31 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		java.util.Date date = new java.util.Date();
 		Timestamp timestamp = new Timestamp(date.getTime());
 		
-		insertDisputeCase.setDispute_case_no("DIS000006");
-		insertDisputeCase.setMission_no("MISSION000000022");
-		insertDisputeCase.setDispute_mem_no("M000011");
-		insertDisputeCase.setEmp_no("E000009");
-		insertDisputeCase.setIssue_datetime(timestamp);
-		insertDisputeCase.setClose_datetime(Timestamp.valueOf("2017-11-30 11:11:11.000000001"));
-		insertDisputeCase.setDispute_case_status(1);
+		insertDisputeCase.setDispute_Case_No("DIS000006");
+		insertDisputeCase.setMission_No("MISSION000000022");
+		insertDisputeCase.setDispute_Mem_No("M000011");
+		insertDisputeCase.setEmp_No("E000009");
+		insertDisputeCase.setIssue_Datetime(timestamp);
+		insertDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:11.000000001"));
+		insertDisputeCase.setDispute_Case_Status(1);
 		dao.insert(insertDisputeCase);
 		
-		updateDisputeCase.setDispute_case_no("DIS000005");
-		updateDisputeCase.setMission_no("MISSION000000028");
-		updateDisputeCase.setDispute_mem_no("M000008");
-		updateDisputeCase.setIssue_datetime(timestamp);
-		updateDisputeCase.setClose_datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
-		updateDisputeCase.setDispute_case_status(2);
+		updateDisputeCase.setDispute_Case_No("DIS000005");
+		updateDisputeCase.setMission_No("MISSION000000028");
+		updateDisputeCase.setDispute_Mem_No("M000008");
+		updateDisputeCase.setIssue_Datetime(timestamp);
+		updateDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
+		updateDisputeCase.setDispute_Case_Status(2);
 		dao.update(updateDisputeCase);
 		
 		dao.delete("DIS000003");
 		
 		getOneDisputeCase = dao.findByprimaryKey("DIS000002");
-		System.out.println(getOneDisputeCase.getDispute_case_status());
+		System.out.println(getOneDisputeCase.getDispute_Case_Status());
 		
 		getAllDisputeCase = dao.getAll();
 		for (DisputeCaseVO disputeCaseVO : getAllDisputeCase) {
-			System.out.println(disputeCaseVO.getDispute_case_no());
+			System.out.println(disputeCaseVO.getDispute_Case_No());
 		}
 		
 	}

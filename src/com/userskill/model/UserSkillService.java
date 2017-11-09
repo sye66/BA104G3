@@ -10,10 +10,10 @@ public class UserSkillService {
 	}
 	public UserSkillVO addSkill(String mem_no, String skill_no, String skill_detail,byte[] skill_cert) {
 		UserSkillVO userSkillVO = new UserSkillVO();
-		userSkillVO.setMem_no(mem_no);
-		userSkillVO.setSkill_no(skill_no);
-		userSkillVO.setSkill_detail(skill_detail);
-		userSkillVO.setSkill_cert(skill_cert);
+		userSkillVO.setMem_No(mem_no);
+		userSkillVO.setSkill_No(skill_no);
+		userSkillVO.setSkill_Detail(skill_detail);
+		userSkillVO.setSkill_Cert(skill_cert);
 		dao.insert(userSkillVO);
 		return userSkillVO;
 	}
@@ -24,10 +24,10 @@ public class UserSkillService {
 	
 	public UserSkillVO updateSkill(String mem_no, String skill_no, String skill_detail,byte[] skill_cert){
 		UserSkillVO userSkillVO = new UserSkillVO();
-		userSkillVO.setMem_no(mem_no);
-		userSkillVO.setSkill_no(skill_no);
-		userSkillVO.setSkill_detail(skill_detail);
-		userSkillVO.setSkill_cert(skill_cert);
+		userSkillVO.setMem_No(mem_no);
+		userSkillVO.setSkill_No(skill_no);
+		userSkillVO.setSkill_Detail(skill_detail);
+		userSkillVO.setSkill_Cert(skill_cert);
 		dao.update(userSkillVO);
 		return userSkillVO;
 	}

@@ -25,7 +25,7 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3_TEST");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -42,10 +42,10 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setString(1, skillVO.getMem_no());
-			pstmt.setString(2, skillVO.getSkill_no());
-			pstmt.setString(3, skillVO.getSkill_detail());
-			pstmt.setBytes(4, skillVO.getSkill_cert());
+			pstmt.setString(1, skillVO.getMem_No());
+			pstmt.setString(2, skillVO.getSkill_No());
+			pstmt.setString(3, skillVO.getSkill_Detail());
+			pstmt.setBytes(4, skillVO.getSkill_Cert());
 
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
@@ -121,10 +121,10 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
-			pstmt.setString(1, skillVO.getSkill_detail());
-			pstmt.setBytes(2, skillVO.getSkill_cert());
-			pstmt.setString(3, skillVO.getMem_no());
-			pstmt.setString(4, skillVO.getSkill_no());
+			pstmt.setString(1, skillVO.getSkill_Detail());
+			pstmt.setBytes(2, skillVO.getSkill_Cert());
+			pstmt.setString(3, skillVO.getMem_No());
+			pstmt.setString(4, skillVO.getSkill_No());
 			
 			pstmt.executeUpdate();
 			
@@ -173,10 +173,10 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 			
 			while(rs.next()) {
 				skillVO = new UserSkillVO();
-				skillVO.setMem_no(rs.getString(1));
-				skillVO.setSkill_no(rs.getString(2));
-				skillVO.setSkill_detail(rs.getString(3));
-				skillVO.setSkill_cert(rs.getBytes(4));
+				skillVO.setMem_No(rs.getString(1));
+				skillVO.setSkill_No(rs.getString(2));
+				skillVO.setSkill_Detail(rs.getString(3));
+				skillVO.setSkill_Cert(rs.getBytes(4));
 			}
 			System.out.println("主鍵查詢完畢");
 		} catch (SQLException e) {
@@ -222,12 +222,12 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 			
 			while(rs.next()) {
 				skillVO = new UserSkillVO();
-				skillVO.setMem_no(rs.getString("MEM_NO"));
-				skillVO.setSkill_no(rs.getString("SKILL_NO"));
-				skillVO.setSkill_detail(rs.getString("SKILL_DETAIL"));
-				skillVO.setSkill_cert(rs.getBytes("SKILL_CERT"));
+				skillVO.setMem_No(rs.getString(1));
+				skillVO.setSkill_No(rs.getString(2));
+				skillVO.setSkill_Detail(rs.getString(3));
+				skillVO.setSkill_Cert(rs.getBytes(4));
 				listSkillVO.add(skillVO);
-				System.out.println(rs.getString("MEM_NO"));
+				System.out.println(rs.getString(1));
 			}
 			System.out.println("全部查詢完畢");
 		} catch (SQLException e) {
@@ -264,32 +264,32 @@ public class UserSkillDAO implements UserSkillDAO_interface{
 
 		
 		
-		insertUserSkill.setMem_no("M000003");
-		insertUserSkill.setSkill_no("SKL000007");
-		insertUserSkill.setSkill_detail("幽靈馬車");
-		insertUserSkill.setSkill_cert(null);
+		insertUserSkill.setMem_No("M000003");
+		insertUserSkill.setSkill_No("SKL000007");
+		insertUserSkill.setSkill_Detail("幽靈馬車");
+		insertUserSkill.setSkill_Cert(null);
 		dao.insert(insertUserSkill);
 		
-		updateUserSkill.setMem_no("M000002");
-		updateUserSkill.setSkill_no("SKL000017");
-		updateUserSkill.setSkill_detail("double頭");
-		updateUserSkill.setSkill_cert(null);
+		updateUserSkill.setMem_No("M000002");
+		updateUserSkill.setSkill_No("SKL000017");
+		updateUserSkill.setSkill_Detail("double頭");
+		updateUserSkill.setSkill_Cert(null);
 		dao.update(updateUserSkill);
 		
 		dao.delete("M000002", "SKL000017");
 		
 		getOneUserSkill = dao.findByPrimaryKey("M000001","SKL000001");
-		System.out.println(getOneUserSkill.getMem_no());
-		System.out.println(getOneUserSkill.getSkill_no());
-		System.out.println(getOneUserSkill.getSkill_detail());
-		System.out.println(getOneUserSkill.getSkill_cert());
+		System.out.println(getOneUserSkill.getMem_No());
+		System.out.println(getOneUserSkill.getSkill_No());
+		System.out.println(getOneUserSkill.getSkill_Detail());
+		System.out.println(getOneUserSkill.getSkill_Cert());
 		
 		List<UserSkillVO> listGetAll = dao.getall();
 		for(UserSkillVO userSkillVO : listGetAll) {
-			System.out.println(userSkillVO.getMem_no());
-			System.out.println(userSkillVO.getSkill_no());
-			System.out.println(userSkillVO.getSkill_detail());
-			System.out.println(userSkillVO.getSkill_cert());
+			System.out.println(userSkillVO.getMem_No());
+			System.out.println(userSkillVO.getSkill_No());
+			System.out.println(userSkillVO.getSkill_Detail());
+			System.out.println(userSkillVO.getSkill_Cert());
 		}
 		
 	}

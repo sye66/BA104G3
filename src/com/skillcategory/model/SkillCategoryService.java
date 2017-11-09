@@ -9,25 +9,25 @@ public class SkillCategoryService {
 		dao = new SkillCategoryDAO();
 	}
 	
-	public SkillCategoryVO addSklCate(String skill_cate_no, String skill_cate_name) {
+	public SkillCategoryVO addSklCate(String skill_Cate_No, String skill_Cate_Name) {
 		SkillCategoryVO skillCategoryVO = new SkillCategoryVO();
-		skillCategoryVO.setSkill_cate_no(skill_cate_no);
-		skillCategoryVO.setSkill_cate_name(skill_cate_name);
+		skillCategoryVO.setSkill_Cate_No(skill_Cate_No);
+		skillCategoryVO.setSkill_Cate_Name(skill_Cate_Name);
 		dao.insert(skillCategoryVO);
 		return skillCategoryVO;
 	}
-	public void deleteSklCate(String skill_cate_no) {
-		dao.delete(skill_cate_no);
+	public void deleteSklCate(String skill_Cate_No) {
+		dao.delete(skill_Cate_No);
 	}
-	public SkillCategoryVO updateSklCate(String skill_cate_no, String skill_cate_name) {
+	public SkillCategoryVO updateSklCate(String skill_Cate_No, String skill_Cate_Name) {
 		SkillCategoryVO skillCategoryVO = new SkillCategoryVO();
-		skillCategoryVO.setSkill_cate_no(skill_cate_no);
-		skillCategoryVO.setSkill_cate_name(skill_cate_name);
+		skillCategoryVO.setSkill_Cate_No(skill_Cate_No);
+		skillCategoryVO.setSkill_Cate_Name(skill_Cate_Name);
 		dao.update(skillCategoryVO);
 		return skillCategoryVO;
 	}
-	public SkillCategoryVO getOneSkillCate(String skill_cate_no) {
-		return dao.findByPrimaryKey(skill_cate_no);
+	public SkillCategoryVO getOneSkillCate(String skill_Cate_No) {
+		return dao.findByPrimaryKey(skill_Cate_No);
 	}
 	public List<SkillCategoryVO> getAllSklCate(){
 		return dao.getall();
