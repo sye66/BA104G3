@@ -72,7 +72,7 @@ DROP TABLE MEM;                         --會員  ***最後DROP掉***
 --SQL指令--
 
 --阿群--
-
+--要改經緯度--
 --會員 MEM TABLE--
 CREATE TABLE MEM(
 MEM_NO VARCHAR2(20) PRIMARY KEY NOT NULL,
