@@ -9,11 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-  
-  
-  
- <!--阿群gg small -->
   <servlet>
     <servlet-name>MemServlet</servlet-name>
     <servlet-class>com.mem.controller.MemServlet</servlet-class>
