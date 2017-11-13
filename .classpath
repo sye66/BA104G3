@@ -14,5 +14,7 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/MyLib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Java/Documents/課程資料/吳老師分享/SL314_JAVA_EE_Servlet/SL314_課程中分享/17_※JSTL(webapps)/SL314_JSTL/WEB-INF/lib/jstl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Java/Documents/課程資料/吳老師分享/SL314_JAVA_EE_Servlet/SL314_課程中分享/17_※JSTL(webapps)/SL314_JSTL/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
