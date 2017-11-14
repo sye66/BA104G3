@@ -1,7 +1,6 @@
 package com.getmission.model;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
 
 public class GetMissionService {
@@ -114,4 +113,12 @@ public class GetMissionService {
 		
 		return getMissionVO;
 	}
+	
+	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Statuts){
+		return dao.findByMem(issuer_Mem_No, mission_Statuts);
+	}
+	public List<GetMissionVO> findByMem(String issuer_Mem_No) {
+		return dao.findByMem(issuer_Mem_No);
+	}
+
 }

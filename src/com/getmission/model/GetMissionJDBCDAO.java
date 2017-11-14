@@ -13,7 +13,7 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA104G3";
-	String passwd = "BA104G3";
+	String passwd = "123456";
 	
 	
 		private static final String INSERT_STMT = 
@@ -28,15 +28,15 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 			"UPDATE mission set mission_category=?, mission_name=?, mission_des=?, issuer_mem_no=?, takecase_mem_no=?, mission_release_time=?, mission_due_time=?, mission_start_time=?, mission_end_time=?, mission_state=?, mission_pattern=?, mission_pay=? where mission_no = ?";
 		private static final String TAKE_MISSION=
 				"UPDATE mission set mission_State=? where mission_no = ?";
-			
+		private static final String GET_MEM_MISSION_WITH_STATUS_STMT = 
+				"SELECT * FROM MISSION WHERE (issuer_mem_no=? and mission_state=?)";
+		private static final String GET_MEM_MISSION_ALL_STATUS_STMT = 
+				"SELECT * FROM MISSION WHERE issuer_mem_no=?";
 	@Override
 	public void insert(GetMissionVO getMissionVO) {
-
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
 		try {
-
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
@@ -328,7 +328,6 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		return list;
 	}
 	
-	
 	@Override
 	public void takeMission(GetMissionVO getMissionVO) {
 
@@ -378,85 +377,145 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 
 	}
 
+    /**
+     * @author Sander
+     * 用會員去搜尋他的所有的Mission，以狀態做區隔
+     * @param 發案人會員編號
+     * @param 任務狀態，可以查詢待接案或是已結案
+     * @return List<getMissionVO>
+     */
+	
+	@Override
+	public List<GetMissionVO> findByMem(String issuer_Mem_no, Integer mission_Status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		GetMissionVO getMissionVO = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_MEM_MISSION_WITH_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_no);
+			pstmt.setInt(2, mission_Status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Class Not Found");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
+	}
+	
+	/**
+     * @author Sander
+     * Overload findByMem，直接抓出這個會員所有的任務，不分狀態
+     * @param 發案人會員編號
+     * @return List<getMissionVO>
+     */
+	public List<GetMissionVO> findByMem(String issuer_Mem_no){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GetMissionVO getMissionVO = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_MEM_MISSION_ALL_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_no);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println("Class Not Found");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
+	}
+	
 	public static void main(String[] args) {
 
 		GetMissionJDBCDAO dao = new GetMissionJDBCDAO();
 
-		// 新增
-		GetMissionVO getMissionVO1 = new GetMissionVO();
-		getMissionVO1.setMission_Category("教育");
-		getMissionVO1.setMission_Name("救救我Java!!");
-		getMissionVO1.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
-		getMissionVO1.setIssuer_Mem_No("M000004");
-//		getMissionVO1.setTakecase_Mem_No("M000003");
-		getMissionVO1.setMission_Release_Time(java.sql.Date.valueOf("2017-10-27"));
-		getMissionVO1.setMission_Due_Time(java.sql.Date.valueOf("2017-11-01"));
-//		getMissionVO1.setMission_Start_Time(java.sql.Date.valueOf("2017-10-28"));
-//		getMissionVO1.setMission_End_Time(java.sql.Date.valueOf("2017-10-31"));
-		getMissionVO1.setMission_State(1);
-		getMissionVO1.setMission_Pattern(1);
-		getMissionVO1.setMission_Pay(100.00);
-		dao.insert(getMissionVO1);
-		System.out.println("新增成功...");
-		
-// 修改
-		
-//		GetMissionVO getMissionVO2 = new GetMissionVO();
-//		getMissionVO2.setMission_No("20171027MIS000000010");
-//		getMissionVO2.setMission_Category("教育");
-//		getMissionVO2.setMission_Name("救救我Java!!");
-//		getMissionVO2.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
-//		getMissionVO2.setIssuer_Mem_No("M000004");
-////		getMissionVO2.setTakecase_Mem_No("M000003");
-//		getMissionVO2.setMission_Release_Time(java.sql.Date.valueOf("2017-10-27"));
-//		getMissionVO2.setMission_Due_Time(java.sql.Date.valueOf("2017-11-01"));
-////		getMissionVO2.setMission_Start_Time(java.sql.Date.valueOf("2017-10-28"));
-////		getMissionVO2.setMission_End_Time(java.sql.Date.valueOf("2017-10-31"));
-//		getMissionVO2.setMission_State(1);
-//		getMissionVO2.setMission_Pattern(1);
-//		getMissionVO2.setMission_Pay(new Double(100.00));
-//		
-//		dao.update(getMissionVO2);
-//		System.out.println("修改成功...");
-////		// 刪除
-//		dao.delete("20171027MIS000000009");
-		
-		
-
-		// 查詢
-//		GetMissionVO getMissionVO3 = dao.findByPrimaryKey("20171027MIS000000004");
-//		System.out.print(getMissionVO3.getMission_No() + ",");
-//		System.out.print(getMissionVO3.getMission_Category() + ",");
-//		System.out.print(getMissionVO3.getMission_Name() + ",");
-//		System.out.print(getMissionVO3.getMission_Des() + ",");
-//		System.out.print(getMissionVO3.getIssuer_Mem_No() + ",");
-//		System.out.print(getMissionVO3.getTakecase_Mem_No() + ",");
-//		System.out.print(getMissionVO3.getMission_Release_Time() + ",");
-//		System.out.print(getMissionVO3.getMission_Due_Time() + ",");
-//		System.out.print(getMissionVO3.getMission_Start_Time() + ",");
-//		System.out.print(getMissionVO3.getMission_End_Time() + ",");
-//		System.out.print(getMissionVO3.getMission_State() + ",");
-//		System.out.print(getMissionVO3.getMission_Pattern() + ",");
-//		System.out.println(getMissionVO3.getMission_Pay());
-//		System.out.println("---------------------");
-
-		// 查詢
-		List<GetMissionVO> list = dao.getAll();
-		for (GetMissionVO agetMissionVO : list) {
-			System.out.print(agetMissionVO.getMission_No() + ",");
-			System.out.print(agetMissionVO.getMission_Category() + ",");
-			System.out.print(agetMissionVO.getMission_Name() + ",");
-			System.out.print(agetMissionVO.getMission_Des() + ",");
-			System.out.print(agetMissionVO.getIssuer_Mem_No() + ",");
-			System.out.print(agetMissionVO.getTakecase_Mem_No() + ",");
-			System.out.print(agetMissionVO.getMission_Release_Time() + ",");
-			System.out.print(agetMissionVO.getMission_Due_Time() + ",");
-			System.out.print(agetMissionVO.getMission_Start_Time() + ",");
-			System.out.print(agetMissionVO.getMission_End_Time() + ",");
-			System.out.print(agetMissionVO.getMission_State() + ",");
-			System.out.print(agetMissionVO.getMission_Pattern() + ",");
-			System.out.println(agetMissionVO.getMission_Pay());
-			System.out.println();
+		List<GetMissionVO> getMemMission = dao.findByMem("M000002");
+		for (GetMissionVO getMissionVO : getMemMission) {
+			System.out.println(getMissionVO.getIssuer_Mem_No());
+		}
+		List<GetMissionVO> getMemMissionWithStatus = dao.findByMem("M000003",1);
+		for (GetMissionVO getMissionVO : getMemMissionWithStatus) {
+			System.out.println(getMissionVO.getIssuer_Mem_No());
+			System.out.println(getMissionVO.getMission_State());
 		}
 	}
 }

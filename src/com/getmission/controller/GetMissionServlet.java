@@ -21,7 +21,6 @@ public class GetMissionServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		
 		if ("search_Mission".equals(action)) { // 來自getMission.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -339,11 +338,6 @@ public class GetMissionServlet extends HttpServlet {
 					mission_Pay = 0.0;
 					errorMsgs.add("積分請填數字.");
 				}
-				
-				
-				
-				
-
 				GetMissionVO getMissionVO = new GetMissionVO();
 				
 				getMissionVO.setMission_Category(mission_Category);

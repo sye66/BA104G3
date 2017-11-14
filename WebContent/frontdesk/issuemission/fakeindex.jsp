@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +104,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
-				<a href="<%=request.getContextPath()%>/frontdesk/issuemission/MissionIssue.jsp">
+				<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp">
 					<img src="<%=request.getContextPath()%>/res/images/issuemission/EnterPng.png" style="height: 100px;width: 100px;">
 				</a>
 			</div>

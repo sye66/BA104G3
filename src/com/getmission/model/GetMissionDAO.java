@@ -33,8 +33,10 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		"UPDATE mission set mission_category=?, mission_name=?, mission_des=?, issuer_mem_no=?, takecase_mem_no=?, mission_release_time=?, mission_due_time=?, mission_start_time=?, mission_end_time=?, mission_state=?, mission_pattern=?, mission_pay=?,mission_Gps_Lat=?,mission_Gps_Lat=? where mission_no = ?";
 	private static final String TAKE_MISSION=
 		"UPDATE mission set mission_State=? where mission_no = ?";
-	
-	
+	private static final String GET_MEM_MISSION_WITH_STATUS_STMT = 
+			"SELECT * FROM MISSION WHERE (issuer_mem_no=? and mission_state=?)";
+	private static final String GET_MEM_MISSION_ALL_STATUS_STMT = 
+			"SELECT * FROM MISSION WHERE issuer_mem_no=?";
 	
 	@Override
 	public void insert(GetMissionVO getMissionVO) {
@@ -259,11 +261,9 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		ResultSet rs = null;
 
 		try {
-
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				// empVO 也稱為Domain objects
 				getMissionVO = new GetMissionVO();
@@ -315,6 +315,126 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+    /**
+     * @author Sander
+     * 用會員去搜尋他的所有的Mission，以狀態做區隔
+     * @param 發案人會員編號
+     * @param 任務狀態，可以查詢待接案或是已結案
+     * @return List<getMissionVO>
+     */
+	
+	@Override
+	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GetMissionVO getMissionVO = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_MISSION_WITH_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_No);
+			pstmt.setInt(2, mission_Status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
+	}
+	
+	/**
+     * @author Sander
+     * Overload findByMem，直接抓出這個會員所有的任務，不分狀態
+     * @param 發案人會員編號
+     * @return List<getMissionVO>
+     */
+	public List<GetMissionVO> findByMem(String issuer_Mem_No){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GetMissionVO getMissionVO = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_MISSION_ALL_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_No);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
 	}
 	
 	

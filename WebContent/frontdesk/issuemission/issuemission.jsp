@@ -1,3 +1,14 @@
+<%@page import="java.util.*"%>
+<%@page import="com.getmission.model.*"%>
+<%@page import="com.getmission.controller.*"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.getmission.model.*"%>
+
+<%
+GetMissionService getMissionService = new GetMissionService(); 
+
+List<GetMissionVO> listMemMissionPending = getMissionService.findByMem("M000002",1);
+List<GetMissionVO> listMemMission = getMissionService.findByMem("M000002",1);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +19,7 @@
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- TODO記得要放專案路徑 -->
-    <link rel="stylesheet" type="text/css" href="/lib/css/issuemission/SanderTemplate.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/issuemission/SanderTemplate.css">
     <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -20,11 +31,10 @@
     	/* @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
     	font-family: 'Noto Sans TC', sans-serif; */
     </style>
-
 </head>
 
 
-
+           
 <body>
     <!-- 導覽列(NavBar) -->
     	<!-- 我選擇的是沒有固定(fixed)的，搜尋欄位已經被手動刪掉 -->
@@ -45,7 +55,7 @@
 	                <ul class="nav navbar-nav navbar-right">
 	                    <li><a href="#">陳柏炘 您好</a></li>
 	                    <li><a href="#">登出</a></li>
-	                    <li><a href="#">會員中心</a></li>
+	                    <li><a href="<%=request.getContextPath()%>/lib/css/issuemission/SanderTemplate.css">會員中心</a></li>
 	                    <li class="dropdown">
 	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">繁體中文 <b class="caret"></b></a>
 	                        <ul class="dropdown-menu">
@@ -100,20 +110,79 @@
                 </div>
             </div>
 	<!-- =============================================================== -->
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12">
-				<a href="/frontdesk/issuemission/MissionIssue.jsp"><img src="/res/images/issuemission/EnterPng.png"></a>
+	<!-- MissionControlPanel -->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 mg20">
+				<%-- 任務管理面板 --%>
+					<div role="tabpanel">
+					    <!-- 標籤面板：標籤區 -->
+					    <ul class="nav nav-tabs" role="tablist">
+					        <li role="presentation" class="active">
+					            <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">已發任務一覽</a>
+					        </li>
+					        <li role="presentation">
+					            <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">接案人申請列表</a>
+					        </li>
+					        <li role="presentation">
+					            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">待結案與評價</a>
+					        </li>
+					    </ul>
+					
+					    <!-- 標籤面板：內容區 -->
+					    <div class="tab-content">
+					        <div role="tabpanel" class="tab-pane active" id="tab1">
+						        <table class="table table-condensed">
+						        	<thead>
+						        		<tr>
+						        			<td><p>任務編號</p></td>
+						        			<td><p>任務名稱</p></td>
+						        			<td><p>發出日期</p></td>
+						        		</tr>
+						        	</thead>
+						        	<tbody>
+						        		<%for(GetMissionVO getMissionVO : listMemMissionPending){ %>
+						        		<tr>
+						        			<td><p><%=getMissionVO.getMission_No() %></p></td>
+						        			<td><p><%=getMissionVO.getMission_Name() %></p></td>
+						        			<td><p><%=getMissionVO.getMission_Release_Time() %></p></td>
+						        		</tr>
+						        		<%}%>
+						        	</tbody>
+						        </table>
+					        </div>
+					        <div role="tabpanel" class="tab-pane" id="tab2">
+					        	<p>頭條標籤的內容</p>
+					        </div>
+					        <div role="tabpanel" class="tab-pane" id="tab3">
+					        	<p>最新標籤的內容</p>
+					        </div>
+					    </div>
+					</div>
+				</div>
+				<%-- 發案按鈕區 --%>
+				<div class="col-xs-12 col-sm-4">
+					
+				</div>
 			</div>
 		</div>
-	</div>
+	<hr>
+	<!-- Google Map -->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJy02Q7MEjaDQRVuRcRdQpwc0&key=AIzaSyDmUVPrJAUSF9tcavKLw-7m3UWiTTjGtds" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+		<hr>
     <!-- =============================================================== -->
 	<!-- Footer -->
 		<footer><div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-4 middlesection">
 					<h3>關注我們</h3>
-					<img src="images/QRcodeHigh.png" class="qrcode">
+					<img src="${pageContext.request.contextPath}/res/images/issuemission/QRcodeHigh.png" class="qrcode">
 				</div>
 				<div class="col-xs-12 col-sm-8">
 					<h3>聯絡我們</h3>

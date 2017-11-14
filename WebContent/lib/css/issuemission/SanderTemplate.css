@@ -20,7 +20,7 @@
         text-shadow: #757575 1px 1px 0px;
         color: #F7F7F7;
         font-size: 20px;
-        font-family: '微軟正黑體';
+        font-family: '敺株�迤暺��';
         text-decoration: none;
         font-weight: bold;
         -webkit-transition: 0.2s;
@@ -44,13 +44,14 @@
         top: 1px;
         position: relative;
     }
-/* 文字調整 */
+/* ���矽� */
     p,
     h1,
     h2,
     h3,
     li,
     ul,
+    td,
     a {
         color: white;
     }
@@ -114,13 +115,13 @@
         width: 250px;
     }
 
-/* tabs調整 */
+/* tabs隤踵 */
 .ui-tabs { border: 0px none #FFF; background: none;}
 .ui-tabs-nav { border: 0px none #FFF; background: none;}
 .ui-tabs .ui-tabs-panel {background-color: #FFF; border: 1px solid #F93;}
 .ui-tabs .ui-tabs-nav li { margin-bottom: 0px;}
 
-/* navbar調整 */
+/* navbar隤踵 */
     .navbar {
         background-color: #007ca6;
     }
@@ -315,7 +316,7 @@
         text-shadow: #757575 1px 1px 0px;
         color: #F7F7F7;
         font-size: 20px;
-        font-family: '微軟正黑體';
+        font-family: '敺株�迤暺��';
         text-decoration: none;
         font-weight: bold;
         -webkit-transition: 0.2s;
