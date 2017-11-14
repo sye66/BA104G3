@@ -507,7 +507,86 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 	public static void main(String[] args) {
 
 		GetMissionJDBCDAO dao = new GetMissionJDBCDAO();
+		
 
+		// 新增
+		GetMissionVO getMissionVO1 = new GetMissionVO();
+		getMissionVO1.setMission_Category("教育");
+		getMissionVO1.setMission_Name("救救我Java!!");
+		getMissionVO1.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
+		getMissionVO1.setIssuer_Mem_No("M000004");
+//		getMissionVO1.setTakecase_Mem_No("M000003");
+		getMissionVO1.setMission_Release_Time(java.sql.Date.valueOf("2017-10-27"));
+		getMissionVO1.setMission_Due_Time(java.sql.Date.valueOf("2017-11-01"));
+//		getMissionVO1.setMission_Start_Time(java.sql.Date.valueOf("2017-10-28"));
+//		getMissionVO1.setMission_End_Time(java.sql.Date.valueOf("2017-10-31"));
+		getMissionVO1.setMission_State(1);
+		getMissionVO1.setMission_Pattern(1);
+		getMissionVO1.setMission_Pay(100.00);
+		dao.insert(getMissionVO1);
+		System.out.println("新增成功...");
+		
+// 修改
+		
+//		GetMissionVO getMissionVO2 = new GetMissionVO();
+//		getMissionVO2.setMission_No("20171027MIS000000010");
+//		getMissionVO2.setMission_Category("教育");
+//		getMissionVO2.setMission_Name("救救我Java!!");
+//		getMissionVO2.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
+//		getMissionVO2.setIssuer_Mem_No("M000004");
+////		getMissionVO2.setTakecase_Mem_No("M000003");
+//		getMissionVO2.setMission_Release_Time(java.sql.Date.valueOf("2017-10-27"));
+//		getMissionVO2.setMission_Due_Time(java.sql.Date.valueOf("2017-11-01"));
+////		getMissionVO2.setMission_Start_Time(java.sql.Date.valueOf("2017-10-28"));
+////		getMissionVO2.setMission_End_Time(java.sql.Date.valueOf("2017-10-31"));
+//		getMissionVO2.setMission_State(1);
+//		getMissionVO2.setMission_Pattern(1);
+//		getMissionVO2.setMission_Pay(new Double(100.00));
+//		
+//		dao.update(getMissionVO2);
+//		System.out.println("修改成功...");
+////		// 刪除
+//		dao.delete("20171027MIS000000009");
+		
+		
+
+		// 查詢
+//		GetMissionVO getMissionVO3 = dao.findByPrimaryKey("20171027MIS000000004");
+//		System.out.print(getMissionVO3.getMission_No() + ",");
+//		System.out.print(getMissionVO3.getMission_Category() + ",");
+//		System.out.print(getMissionVO3.getMission_Name() + ",");
+//		System.out.print(getMissionVO3.getMission_Des() + ",");
+//		System.out.print(getMissionVO3.getIssuer_Mem_No() + ",");
+//		System.out.print(getMissionVO3.getTakecase_Mem_No() + ",");
+//		System.out.print(getMissionVO3.getMission_Release_Time() + ",");
+//		System.out.print(getMissionVO3.getMission_Due_Time() + ",");
+//		System.out.print(getMissionVO3.getMission_Start_Time() + ",");
+//		System.out.print(getMissionVO3.getMission_End_Time() + ",");
+//		System.out.print(getMissionVO3.getMission_State() + ",");
+//		System.out.print(getMissionVO3.getMission_Pattern() + ",");
+//		System.out.println(getMissionVO3.getMission_Pay());
+//		System.out.println("---------------------");
+
+		// 查詢
+		List<GetMissionVO> list = dao.getAll();
+		for (GetMissionVO agetMissionVO : list) {
+			System.out.print(agetMissionVO.getMission_No() + ",");
+			System.out.print(agetMissionVO.getMission_Category() + ",");
+			System.out.print(agetMissionVO.getMission_Name() + ",");
+			System.out.print(agetMissionVO.getMission_Des() + ",");
+			System.out.print(agetMissionVO.getIssuer_Mem_No() + ",");
+			System.out.print(agetMissionVO.getTakecase_Mem_No() + ",");
+			System.out.print(agetMissionVO.getMission_Release_Time() + ",");
+			System.out.print(agetMissionVO.getMission_Due_Time() + ",");
+			System.out.print(agetMissionVO.getMission_Start_Time() + ",");
+			System.out.print(agetMissionVO.getMission_End_Time() + ",");
+			System.out.print(agetMissionVO.getMission_State() + ",");
+			System.out.print(agetMissionVO.getMission_Pattern() + ",");
+			System.out.println(agetMissionVO.getMission_Pay());
+			System.out.println();
+		}
+		
+		
 		List<GetMissionVO> getMemMission = dao.findByMem("M000002");
 		for (GetMissionVO getMissionVO : getMemMission) {
 			System.out.println(getMissionVO.getIssuer_Mem_No());
