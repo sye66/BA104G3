@@ -15,7 +15,7 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 	private static final String USR = "BA104G3";
 	private static final String PSW = "123456";
 	
-	private static final String INSERT_STMT = "INSERT INTO SKILL(SKILL_NO, SKILL_NAME, SKILL_CATE_NO) VALUES(?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO SKILL(SKILL_NO, SKILL_NAME, SKILL_CATE_NO) VALUES('SKL'||LPAD(SEQ_SKILL_NO.NEXTVAL,6,'0'),?,?)";
 	private static final String GET_ONE_STMT = "SELECT * FROM SKILL WHERE SKILL_NO=?";
 	private static final String GET_ALL_STMT = "SELECT * FROM SKILL";
 	private static final String DELETE_STMT = "DELETE FROM SKILL WHERE SKILL_NO = ?";
@@ -34,9 +34,9 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, skillVO.getSkill_No());
-			pstmt.setString(2, skillVO.getSkill_Name());
-			pstmt.setString(3, skillVO.getSkill_Cate_No());
+			pstmt.setString(1, skillVO.getSkill_Name());
+			pstmt.setString(2, skillVO.getSkill_Cate_No());
+			
 			pstmt.executeQuery();
 			System.out.println("新增成功");
 		} catch (ClassNotFoundException e) {
@@ -260,7 +260,6 @@ public class SkillDAO_JDBC implements SkillDAO_interface{
 		SkillVO updateSkill = new SkillVO();
 		SkillVO selectSkill = new SkillVO();
 		
-		insertSkill.setSkill_No("SKL000030");
 		insertSkill.setSkill_Name("修飛機");
 		insertSkill.setSkill_Cate_No("CATE0000003");
 		dao.insert(insertSkill);
