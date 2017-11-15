@@ -4,7 +4,7 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %>
+<%-- <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>工具人出租</title>
 
     <!-- Bootstrap core CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,8 +23,8 @@
 
     <!-- Custom fonts for this template -->
     <link href="<%=request.getContextPath()%>/lib/publicfile/include/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+<!--     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"> -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
 
 
     <!-- Custom styles for this template -->
@@ -39,56 +39,14 @@
 
   <body id="page-top"  style="font-family:Microsoft JhengHei;">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/profile_1.png"></a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-           
-            
-           
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
-            </li>
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
-            </li>
-             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>
-            </li>
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
-            </li>
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
-            </li>
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#about"><i class="glyphicon glyphicon-user"></i> 會員中心 　</a></h3>
-            </li>
-             <h3><li class="nav-item"><a class="nav-link js-scroll-trigger" id="create-user" href="<%=request.getContextPath() %>/frontdesk/mem/loginBox_mem.jsp" >
-				
-				<c:if test="${not empty login_memVO.mem_id}">
-				<li><a style="text-decoration:none;" href='#modal-id1' data-toggle="modal">${login_memVO.mem_id}　<i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
-				</c:if>
-				<c:if test="${empty login_memVO.mem_id}">
-				<li><a style="text-decoration:none;" href='#modal-id' data-toggle="modal">${login_memVO.mem_id}　<i class="glyphicon glyphicon-log-in"></i> 登入/註冊　</a></li>
-				</c:if>
-				</a>
-<%--               <h1><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio　</a></h1> --%>
-            </li></h3>
-          </ul>
-       </div>
-      </div>
-    </nav>
+<!-- navbar====================================================================== -->
 
-  
-  
-<jsp:include page="/lib/publicfile/include/file/loginBox_mem.jsp" flush="true"></jsp:include>
+
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include>
+<br><br><br><br><br><br>
+
+<!-- navbar====================================================================== -->
+
 
 
 
@@ -107,7 +65,7 @@
     <!-- 幻燈片主圖區 -->
     <div class="carousel-inner">
         <div class="item">
-            <img id="caro" src="<%=request.getContextPath() %>/res/image/index/carousel/call-center-2275745.jpg" alt="">
+            <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_1.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>CSS可樂好喝超爽快</h1>
@@ -117,7 +75,7 @@
             </div>
         </div>
         <div class="item">
-            <img id="caro" src="https://api.fnkr.net/testimg/2800x1200/aaaaaa" alt="">
+            <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_2.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>CSS可樂的外掛真方便</h1>
@@ -127,7 +85,27 @@
             </div>
         </div>
         <div class="item active">
-            <img id="caro" src="https://api.fnkr.net/testimg/2800x1200/aaaaaa" alt="">
+            <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_3.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>我是標題喔～自己改文案吧</h1>
+                    <p>我是內文喔，你可以把字打在這裡呦</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+                </div>
+            </div>
+        </div>
+         <div class="item">
+            <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_4.jpg" alt="">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>我是標題喔～自己改文案吧</h1>
+                    <p>我是內文喔，你可以把字打在這裡呦</p>
+                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_5.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>我是標題喔～自己改文案吧</h1>
@@ -137,6 +115,8 @@
             </div>
         </div>
     </div>
+    </div>
+    
     <!-- 上下頁控制區 -->
     <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -241,57 +221,7 @@
 
 
     
-    <!-- Footer -->
-    <footer class="text-center">
-      <div class="footer-above">
-        <div class="container">
-          <div class="row">
-            <div class="footer-col col-md-4">
-              <h2>Location</h2>
-              <p>桃園市平鎮區
-                <br>中央路300號</p>
-              <br><br>
-              <h2>Contact us</h2>
-              <p>03-3345678</p>
-            </div>
-            <div class="footer-col col-md-4">
-              <h3>Around the Web</h3>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://www.facebook.com/">
-                    <i class="fa fa-fw fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://plus.google.com/">
-                    <i class="fa fa-fw fa-google-plus"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://twitter.com/">
-                    <i class="fa fa-fw fa-twitter"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="footer-col col-md-4">
-              <h3>QR code</h3>
-              <p>
-                <img src="<%=request.getContextPath()%>/lib/publicfile/include/img/QRcode/static_qr_code_100.jpg"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-below">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              Copyright &copy; POTM 2017
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+  
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top d-lg-none">
@@ -565,6 +495,19 @@
         </div>
       </div>
     </div>
+    
+    
+<!-- footer====================================================================== -->
+<br><br><br><br><br><br><br>
+
+
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+
+
+<!-- footer====================================================================== -->
+    
+    
+    
 
     <!-- Bootstrap core JavaScript -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery.js"></script>

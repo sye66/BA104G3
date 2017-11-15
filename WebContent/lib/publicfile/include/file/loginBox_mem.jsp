@@ -4,13 +4,13 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %>
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 
 <div class="modal fade" id="modal-id">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;關閉</button>
 						<h4 class="modal-title">登入</h4>
 					</div>
 					<div class="modal-body">
@@ -25,30 +25,35 @@ function getFocus() {
 --%>				
 					
 						 <!-- Begin # Login Form -->
-                    <form id="login-form" method="post" action="<%=request.getContextPath()%>/mem/mem.do">
+                    <form id="login-form" method="post" action="<%=request.getContextPath()%>/mem/mem.do?reuestURL=<%=request.getServletPath()%>">
 		                <div class="modal-body">
 				    		<div id="div-login-msg">
                                 <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-login-msg">Type your username and password.</span>
                             </div>
-				    		<input name="mem_email" id="login_username" class="form-control" type="text" placeholder="Username" required>
-				    		<input name="mem_pw" id="login_password" class="form-control" type="password" placeholder="Password" required>
+				    		<input name="mem_Email" id="login_username" class="form-control" type="text" placeholder="Username" required>
+				    		<input name="mem_Pw" id="login_password" class="form-control" type="password" placeholder="Password" required><br>
+				    		
 <%--                            <div class="checkbox">
                                 <label>
                                     <input type="checkbox"> Remember me
                                 </label>
                             </div>      --%>
         		    	</div>
-				        <div class="modal-footer">
                             <div>
                             	<input type="hidden" name="action" value="loginServlet">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block">確定登入</button>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">確定登入</button><br>
                             </div>
 <%--  				    	    <div>
                                 <button id="login_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
                                 <button id="login_register_btn" type="button" class="btn btn-link">Register</button>
                             </div>       --%>
-				        </div>
+                    </form>
+                    <form id="login-form" method="post" action="<%=request.getContextPath()%>/mem/mem.do">
+                    	<div>
+                    		<input type="hidden" name="action" value="register">
+                    		<button type="submit" class="btn btn-success btn-lg btn-block">按我註冊</button>
+                    	</div>
                     </form>
                     <!-- End # Login Form -->
                     

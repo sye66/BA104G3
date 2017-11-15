@@ -4,7 +4,7 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %>
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 
 <div class="modal fade" id="modal-id">
 			<div class="modal-dialog">
@@ -31,8 +31,8 @@ function getFocus() {
                                 <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
                                 <span id="text-login-msg">Type your username and password.</span>
                             </div>
-				    		<input name="mem_email" id="login_username" class="form-control" type="text" placeholder="Username" required>
-				    		<input name="mem_pw" id="login_password" class="form-control" type="password" placeholder="Password" required>
+				    		<input name="mem_Email" id="login_username" class="form-control" type="text" placeholder="Username" required>
+				    		<input name="mem_Pw" id="login_password" class="form-control" type="password" placeholder="Password" required>
 <%--                            <div class="checkbox">
                                 <label>
                                     <input type="checkbox"> Remember me

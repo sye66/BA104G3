@@ -18,24 +18,22 @@ package com.mem.controller;
 
 
 	public class Update_Show_Image extends HttpServlet {
-		public Update_Show_Image() {
-
-		}
-
-		
 
 		public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-			res.setContentType("image/*");
+			res.setCharacterEncoding("UTF-8");	//先
+			res.setContentType("image/gif");
 			ServletOutputStream out = res.getOutputStream();
-			String action = req.getParameter("action");
+//			String action = req.getParameter("action");
+//			System.out.println(action);
 			
-			if ("mem_pic".equals(action)) {
-				String mem_no = req.getParameter("mem_no");
+//			if ("mem_Pic".equals(action)) {
+				String mem_No = req.getParameter("mem_No");//後
+//				String mem_No2 = new String(mem_No.getBytes("ISO-8859-1"),"UTF-8");		//再 (用doget & 有需要輸入中文時)
 				MemService memSvc = new MemService();
 				try {
-					MemVO memVO = memSvc.getOneMem(mem_no);
-					InputStream in = new ByteArrayInputStream(memVO.getMem_pic());
+					MemVO memVO = memSvc.getOneMem(mem_No);
+					InputStream in = new ByteArrayInputStream(memVO.getMem_Pic());
 					byte[] buffer = new byte[in.available()];
 					int len = 0;
 					try {
@@ -48,7 +46,7 @@ package com.mem.controller;
 
 					}
 				} catch (Exception e) {
-					FileInputStream in = new FileInputStream(getServletContext().getRealPath("/images/nopic.jpg"));
+					FileInputStream in = new FileInputStream(getServletContext().getRealPath("/lib/publicfile/include/img/nopic.jpg"));
 					byte[] propic = new byte[in.available()];
 					in.read(propic);
 					out.write(propic);
@@ -56,7 +54,7 @@ package com.mem.controller;
 
 				}
 
-			}
+//			}
 		}
 
 		

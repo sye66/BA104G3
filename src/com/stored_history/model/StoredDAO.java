@@ -12,6 +12,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.sql.Timestamp;
 
 public class StoredDAO implements StoredDAO_interface{
 
@@ -26,24 +27,27 @@ public class StoredDAO implements StoredDAO_interface{
 	}
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO stored_history (stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost) VALUES ('S'||LPAD(STORED_NO.NEXTVAL,6,'0'),?, ?, ?,"
+			"INSERT INTO stored_history (stored_No, mem_No, stored_Date, stored_Type,"
+			+ "stored_Cost) VALUES ('S'||LPAD(STORED_NO.NEXTVAL,6,'0'),?, ?, ?,"
 			+ "?)";
 	
-	private static final String GET_ALL_STMT=
-			"SELECT stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost FROM stored_history order by stored_no";
+	private static final String GET_ALL_BYMEM=
+			"SELECT * from stored_history where MEM_NO=? order by MEM_NO";
+	
+//	private static final String GET_ALL_STMT=
+//			"SELECT stored_No, mem_No, stored_Date, stored_Type,"
+//			+ "stored_Cost FROM stored_history order by stored_No";
 	
 	private static final String SELECT=
-			"SELECT stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost FROM stored_history WHERE stored_no=?";
+			"SELECT stored_No, mem_No, stored_Date, stored_Type,"
+			+ "stored_Cost FROM stored_history WHERE stored_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE stored_history SET mem_no=?, stored_date=?, stored_type=?, stored_cost=?"
-			+ "WHERE stored_no=?";
+			"UPDATE stored_history SET mem_No=?, stored_Date=?, stored_Type=?, stored_Cost=?"
+			+ "WHERE stored_No=?";
 	
 	private static final String DELETE=
-			"DELETE FROM stored_history WHERE stored_no = ?";
+			"DELETE FROM stored_history WHERE stored_No = ?";
 	
 	@Override
 	public void insert(StoredVO storedVO) {
@@ -56,11 +60,11 @@ public class StoredDAO implements StoredDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-//			pstmt.setString(1, storedVO.getStored_no());
-			pstmt.setString(1, storedVO.getMem_no());
-			pstmt.setDate(2, storedVO.getStored_date());
-			pstmt.setInt(3, storedVO.getStored_type());
-			pstmt.setDouble(4, storedVO.getStored_cost());
+//			pstmt.setString(1, storedVO.getStored_No());
+			pstmt.setString(1, storedVO.getMem_No());
+			pstmt.setTimestamp(2, storedVO.getStored_Date());
+			pstmt.setInt(3, storedVO.getStored_Type());
+			pstmt.setDouble(4, storedVO.getStored_Cost());
 			
 			pstmt.executeUpdate();
 	} catch (SQLException e) {
@@ -98,11 +102,11 @@ public class StoredDAO implements StoredDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
-			pstmt.setString(1, storedVO.getMem_no());
-			pstmt.setDate(2, storedVO.getStored_date());
-			pstmt.setInt(3, storedVO.getStored_type());
-			pstmt.setDouble(4, storedVO.getStored_cost());
-			pstmt.setString(5, storedVO.getStored_no());
+			pstmt.setString(1, storedVO.getMem_No());
+			pstmt.setTimestamp(2, storedVO.getStored_Date());
+			pstmt.setInt(3, storedVO.getStored_Type());
+			pstmt.setDouble(4, storedVO.getStored_Cost());
+			pstmt.setString(5, storedVO.getStored_No());
 			
 			pstmt.executeUpdate();
 	}catch (SQLException e) {
@@ -130,7 +134,7 @@ public class StoredDAO implements StoredDAO_interface{
 }
 
 	@Override
-	public void delete(String stored_no) {
+	public void delete(String stored_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -138,7 +142,7 @@ public class StoredDAO implements StoredDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setString(1, stored_no);
+			pstmt.setString(1, stored_No);
 			
 			pstmt.executeUpdate();
 	} catch (SQLException e) {
@@ -163,7 +167,7 @@ public class StoredDAO implements StoredDAO_interface{
 }
 
 	@Override
-	public StoredVO findByPrimaryKey(String stored_no) {
+	public StoredVO findByPrimaryKey(String stored_No) {
 		StoredVO storedVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -173,17 +177,17 @@ public class StoredDAO implements StoredDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT);
 			
-			pstmt.setString(1, stored_no);
+			pstmt.setString(1, stored_No);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				storedVO = new StoredVO();
-				storedVO.setStored_no(rs.getString("stored_no"));
-				storedVO.setMem_no(rs.getString("mem_no"));
-				storedVO.setStored_date(rs.getDate("stored_date"));
-				storedVO.setStored_type(rs.getInt("stored_type"));
-				storedVO.setStored_cost(rs.getDouble("stored_cost"));
+				storedVO.setStored_No(rs.getString("stored_No"));
+				storedVO.setMem_No(rs.getString("mem_No"));
+				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
+				storedVO.setStored_Type(rs.getInt("stored_Type"));
+				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
 				
 			}
 		} catch (SQLException e) {
@@ -212,7 +216,7 @@ public class StoredDAO implements StoredDAO_interface{
 	}
 
 	@Override
-	public List<StoredVO> getAll() {
+	public List<StoredVO> getAll(String mem_No) {
 		List<StoredVO> list = new ArrayList<StoredVO>();
 		StoredVO storedVO = null;
 		
@@ -222,16 +226,19 @@ public class StoredDAO implements StoredDAO_interface{
 		
 		try{
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt = con.prepareStatement(GET_ALL_BYMEM);
+			
+			pstmt.setString(1, mem_No);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				storedVO = new StoredVO();
-				storedVO.setStored_no(rs.getString("stored_no"));
-				storedVO.setMem_no(rs.getString("mem_no"));
-				storedVO.setStored_date(rs.getDate("stored_date"));
-				storedVO.setStored_type(rs.getInt("stored_type"));
-				storedVO.setStored_cost(rs.getDouble("stored_cost"));
+				storedVO.setStored_No(rs.getString("stored_No"));
+				storedVO.setMem_No(rs.getString("mem_No"));
+				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
+				storedVO.setStored_Type(rs.getInt("stored_Type"));
+				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
 				list.add(storedVO);
 				
 			}

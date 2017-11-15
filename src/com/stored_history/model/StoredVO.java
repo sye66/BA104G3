@@ -1,58 +1,60 @@
 package com.stored_history.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class StoredVO {
 
-	private String stored_no;
-	private String mem_no;
-	private Date stored_date;
-	private Integer stored_type;
-	private Double stored_cost;
+	private String stored_No;
+	private String mem_No;
+	private Timestamp stored_Date;
+	private Integer stored_Type;
+	private Double stored_Cost;
 	
 	public StoredVO() {
 		super();
 	}
 
-	public String getStored_no() {
-		return stored_no;
+	public String getStored_No() {
+		return stored_No;
 	}
 
-	public void setStored_no(String stored_no) {
-		this.stored_no = stored_no;
+	public void setStored_No(String stored_No) {
+		this.stored_No = stored_No;
 	}
 
-	public String getMem_no() {
-		return mem_no;
+	public String getMem_No() {
+		return mem_No;
 	}
 
-	public void setMem_no(String mem_no) {
-		this.mem_no = mem_no;
+	public void setMem_No(String mem_No) {
+		this.mem_No = mem_No;
 	}
 
-	public Date getStored_date() {
-		return stored_date;
+	public Timestamp getStored_Date() {
+		return stored_Date;
 	}
 
-	public void setStored_date(Date stored_date) {
-		this.stored_date = stored_date;
+	public void setStored_Date(Timestamp stored_Date) {
+		this.stored_Date = stored_Date;
 	}
 
-	public Integer getStored_type() {
-		return stored_type;
+	public Integer getStored_Type() {
+		return stored_Type;
 	}
 
-	public void setStored_type(Integer stored_type) {
-		this.stored_type = stored_type;
+	public void setStored_Type(Integer stored_Type) {
+		this.stored_Type = stored_Type;
 	}
 
-	public Double getStored_cost() {
-		return stored_cost;
+	public Double getStored_Cost() {
+		return stored_Cost;
 	}
 
-	public void setStored_cost(Double stored_cost) {
-		this.stored_cost = stored_cost;
+	public void setStored_Cost(Double stored_Cost) {
+		this.stored_Cost = stored_Cost;
 	}
+
 	
 	
 	

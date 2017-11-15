@@ -1,6 +1,6 @@
 package com.stored_history.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.mem.model.MemVO;
@@ -13,31 +13,25 @@ public class StoredService {
 		dao = new StoredDAO();
 	}
 	
-	public StoredVO addStored(String mem_no, Date stored_date, Integer stored_type,
-			Double stored_cost){
+	public StoredVO addStored(StoredVO storedVO){
 		
-		StoredVO storedVO = new StoredVO();
-		
-		storedVO.setMem_no(mem_no);
-		storedVO.setStored_date(stored_date);
-		storedVO.setStored_type(stored_type);
-		storedVO.setStored_cost(stored_cost);
 		
 		dao.insert(storedVO);
 		
+		System.out.println("--------------------");
 		return storedVO;
 	}
 	
-	public StoredVO updateStored(String stored_no, String mem_no, Date stored_date,
-			Integer stored_type, Double stored_cost){
+	public StoredVO updateStored(String stored_No, String mem_No, Timestamp stored_Date,
+			Integer stored_Type, Double stored_Cost){
 		
 		StoredVO storedVO = new StoredVO();
 		
-		storedVO.setStored_no(stored_no);
-		storedVO.setMem_no(mem_no);
-		storedVO.setStored_date(stored_date);
-		storedVO.setStored_type(stored_type);
-		storedVO.setStored_cost(stored_cost);
+		storedVO.setStored_No(stored_No);
+		storedVO.setMem_No(mem_No);
+		storedVO.setStored_Date(stored_Date);
+		storedVO.setStored_Type(stored_Type);
+		storedVO.setStored_Cost(stored_Cost);
 		
 		dao.update(storedVO);
 		
@@ -45,16 +39,17 @@ public class StoredService {
 		
 	}
 	
-	public void deleteStored(String stored_no){
-		dao.delete(stored_no);
+	public void deleteStored(String stored_No){
+		dao.delete(stored_No);
 	}
 	
-	public StoredVO getOneStored(String stored_no){
-		return dao.findByPrimaryKey(stored_no);
+	public StoredVO getOneStored(String stored_No){
+		return dao.findByPrimaryKey(stored_No);
 	}
 	
-	public List<StoredVO> getAll(){
-		return dao.getAll();
+	public List<StoredVO> getAll(String mem_No){
+		
+		return dao.getAll(mem_No);
 	}
 	
 }

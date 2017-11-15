@@ -26,10 +26,10 @@
 		<form method="post" action="<%=request.getContextPath()%>/mem/mem.do">
 
 			Please enter your E-mail
-			<input type="text" name="mem_email"/><br>		
+			<input type="text" name="mem_Email"/><br>		
 		
 			Please enter your password
-			<input type="text" name="mem_pw"/>
+			<input type="text" name="mem_Pw"/>
 			<input type="hidden" name="action" value="loginServlet">
 			<input type="submit" value="submit">			
 		

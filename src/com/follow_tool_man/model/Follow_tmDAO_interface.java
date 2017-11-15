@@ -6,9 +6,9 @@ public interface Follow_tmDAO_interface {
 	
 		public void insert(Follow_tmVO follow_tmVO);
 		public void update(Follow_tmVO follow_tmVO);
-		public void delete(String follower_mem_no, String followed_mem_no);
-		public Follow_tmVO findByPrimaryKey(String follower_mem_no, String followed_mem_no);
-		public List<Follow_tmVO> getAllDependOnFollower_mem_no(String follower_mem_no);
+		public void delete(String follower_Mem_No, String followed_Mem_No);
+		public Follow_tmVO findByPrimaryKey(String follower_Mem_No, String followed_Mem_No);
+		public List<Follow_tmVO> getAllDependOnFollower_Mem_No(String follower_Mem_No);
 		
 
 	}

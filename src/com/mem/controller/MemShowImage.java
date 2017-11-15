@@ -24,14 +24,14 @@ package com.mem.controller;
 
 			try {
 				Statement stmt = con.createStatement();
-				String mem_no = req.getParameter("mem_no");		//後
-				String mem_no2 = new String(mem_no.getBytes("ISO-8859-1"),"UTF-8");		//再 (用doget & 有需要輸入中文時)
-//				System.out.println(mem_no2);
+				String mem_No = req.getParameter("mem_No");		//後
+				String mem_No2 = new String(mem_No.getBytes("ISO-8859-1"),"UTF-8");		//再 (用doget & 有需要輸入中文時)
+//				System.out.println(mem_No2);
 				ResultSet rs = stmt.executeQuery(
-					"SELECT mem_pic FROM mem WHERE mem_no = '"+mem_no2+"'");		//動態捕捉
+					"SELECT mem_Pic FROM mem WHERE mem_No = '"+mem_No2+"'");		//動態捕捉
 
 				if (rs.next()) {
-					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mem_pic"));
+					BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("mem_Pic"));
 					byte[] buf = new byte[4 * 1024]; // 4K buffer		此時還不能改用in.available()方式存取資料庫檔案，會抓不到準確資料大小 (本機可以)
 					int len;
 					while ((len = in.read(buf)) != -1) {

@@ -7,9 +7,9 @@ public interface RelationDAO_interface {
 
 	public void insert(RelationVO relationVO);
 	public void update(RelationVO relationVO);
-	public void delete(String mem_no, String related_mem_no);
-	public RelationVO findByPrimaryKey(String mem_no, String related_mem_no);
-	public List<RelationVO> getAllRelationWithMem_no(String mem_no);
-	
+	public void delete(String mem_No, String related_Mem_No);
+	public RelationVO findByPrimaryKey(String mem_No, String related_Mem_No);
+	public List<RelationVO> getAllRelationWithMem_No(String mem_No);
+	public List<RelationVO> getWhoAddme(String related_Mem_No);
 
 }

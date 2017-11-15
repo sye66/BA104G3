@@ -13,34 +13,53 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<!--阿群 -->
-	<servlet>
-		<servlet-name>MemServlet</servlet-name>
-		<servlet-class>com.mem.controller.MemServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MemServlet</servlet-name>
-		<url-pattern>/mem/mem.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>MemShowImage</servlet-name>
-		<servlet-class>com.mem.controller.MemShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>MemShowImage</servlet-name>
-		<url-pattern>/mem/memShowImage.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>Update_Show_Image</servlet-name>
-		<servlet-class>com.mem.controller.Update_Show_Image</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Update_Show_Image</servlet-name>
-		<url-pattern>/mem/updateShowImage.do</url-pattern>
-	</servlet-mapping>
-	<servlet>
+	 <servlet>
+    <servlet-name>MemServlet</servlet-name>
+    <servlet-class>com.mem.controller.MemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemServlet</servlet-name>
+    <url-pattern>/mem/mem.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemShowImage</servlet-name>
+    <servlet-class>com.mem.controller.MemShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemShowImage</servlet-name>
+    <url-pattern>/mem/memShowImage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Update_Show_Image</servlet-name>
+    <servlet-class>com.mem.controller.Update_Show_Image</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update_Show_Image</servlet-name>
+    <url-pattern>/mem/updateShowImage.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>Stored_HistoryServlet</servlet-name>
+    <servlet-class>com.stored_history.controller.Stored_HistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Stored_HistoryServlet</servlet-name>
+    <url-pattern>/stored_history/stored_history.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>RelationServlet</servlet-name>
+    <servlet-class>com.relation.controller.RelationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RelationServlet</servlet-name>
+    <url-pattern>/relation/relation.do</url-pattern>
+  </servlet-mapping>
+
 	<!--阿群 -->
 	
 	<!--兆哥 -->
+		<servlet>
 		<servlet-name>ShowImage</servlet-name>
 		<servlet-class>com.tool.controller.ShowImage</servlet-class>
 	</servlet>

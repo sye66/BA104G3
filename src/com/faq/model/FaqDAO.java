@@ -26,20 +26,20 @@ public class FaqDAO implements FaqDAO_interface{
 	
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO faq (faq_no,faq_content,faq_date) VALUES"
+			"INSERT INTO faq (faq_No,faq_Content,faq_Date) VALUES"
 			+ " ('F'||LPAD(FAQ_NO.NEXTVAL,4,'0'),?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT faq_no,faq_content,faq_date FROM faq order by faq_no";
+			"SELECT faq_No,faq_Content,faq_Date FROM faq order by faq_No";
 	
 	private static final String SELECT=
-			"SELECT faq_no,faq_content,faq_date FROM faq WHERE faq_no=?";
+			"SELECT faq_No,faq_Content,faq_Date FROM faq WHERE faq_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE faq SET faq_content=? ,faq_date=? WHERE faq_no=?";
+			"UPDATE faq SET faq_Content=? ,faq_Date=? WHERE faq_No=?";
 	
 	private static final String DELETE=
-			"DELETE FROM faq WHERE faq_no = ?";
+			"DELETE FROM faq WHERE faq_No = ?";
 	
 	
 	@Override
@@ -54,8 +54,8 @@ public class FaqDAO implements FaqDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, faqVO.getFaq_content());
-			pstmt.setDate(2, faqVO.getFaq_date());
+			pstmt.setString(1, faqVO.getFaq_Content());
+			pstmt.setDate(2, faqVO.getFaq_Date());
 			
 			pstmt.executeUpdate();
 		}  catch (SQLException e) {
@@ -91,9 +91,9 @@ public class FaqDAO implements FaqDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setString(1, faqVO.getFaq_content());
-			pstmt.setDate(2, faqVO.getFaq_date());
-			pstmt.setString(3, faqVO.getFaq_no());
+			pstmt.setString(1, faqVO.getFaq_Content());
+			pstmt.setDate(2, faqVO.getFaq_Date());
+			pstmt.setString(3, faqVO.getFaq_No());
 			
 			pstmt.executeUpdate();
 		}  catch (SQLException e) {
@@ -120,7 +120,7 @@ public class FaqDAO implements FaqDAO_interface{
 	}
 
 	@Override
-	public void delete(String faq_no) {
+	public void delete(String faq_No) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -128,7 +128,7 @@ public class FaqDAO implements FaqDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
-			pstmt.setString(1, faq_no);
+			pstmt.setString(1, faq_No);
 			
 			pstmt.executeUpdate();
 			
@@ -156,7 +156,7 @@ public class FaqDAO implements FaqDAO_interface{
 	}
 
 	@Override
-	public FaqVO findByPrimaryKey(String faq_no) {
+	public FaqVO findByPrimaryKey(String faq_No) {
 		
 		FaqVO faqVO = new FaqVO();
 		Connection con = null;
@@ -166,16 +166,16 @@ public class FaqDAO implements FaqDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT);
-pstmt.setString(1, faq_no);
+pstmt.setString(1, faq_No);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				
 				faqVO = new FaqVO();
-				faqVO.setFaq_no(rs.getString("faq_no"));
-				faqVO.setFaq_content(rs.getString("faq_content"));
-				faqVO.setFaq_date(rs.getDate("faq_date"));
+				faqVO.setFaq_No(rs.getString("faq_No"));
+				faqVO.setFaq_Content(rs.getString("faq_Content"));
+				faqVO.setFaq_Date(rs.getDate("faq_Date"));
 				
 			}
 		} catch (SQLException e) {
@@ -219,9 +219,9 @@ pstmt.setString(1, faq_no);
 			while(rs.next()){
 				
 				faqVO = new FaqVO();
-				faqVO.setFaq_no(rs.getString("faq_no"));
-				faqVO.setFaq_content(rs.getString("faq_content"));
-				faqVO.setFaq_date(rs.getDate("faq_date"));
+				faqVO.setFaq_No(rs.getString("faq_No"));
+				faqVO.setFaq_Content(rs.getString("faq_Content"));
+				faqVO.setFaq_Date(rs.getDate("faq_Date"));
 				list.add(faqVO);
 			}
 		} catch (SQLException e) {
