@@ -119,7 +119,7 @@ public class MemServlet extends HttpServlet{
 			String url = "/frontdesk/mem/register.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
-		} 
+		}
 
 
 		

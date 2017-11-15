@@ -13,7 +13,7 @@ public class StoredService {
 		dao = new StoredDAO();
 	}
 	
-	public StoredVO addStored(StoredVO storedVO){ 
+	public StoredVO addStored(StoredVO storedVO){
 		
 		
 		dao.insert(storedVO);

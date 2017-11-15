@@ -277,7 +277,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 
 	@Override
 	public void insert(MemVO memVO) {
-		Connection con = null; 
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		
