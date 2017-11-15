@@ -3,14 +3,18 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %>
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta HTTP-EQUIV="refresh" CONTENT="5;URL=http://localhost:8081/BA104G3_2017_10_31/mem/index.jsp"> 
+<meta HTTP-EQUIV="refresh" CONTENT="5;URL=http://localhost:8081/BA104G3_2017_10_31/mem/index.jsp">
+
+<link href="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.js"></script> 
+
 <title>Insert title here</title>
 </head>
 <body onload="initial();">
@@ -25,7 +29,9 @@
 	</h1></ul>
 </c:if>
 
-
+<script type="text/javascript">
+swal("这是一条信息！");
+</script>
 <h1>五秒後重回首頁</h1>
 
 
@@ -58,6 +64,11 @@ function countdownfunc(){
  }
 }
  </script>
+<script type="text/javascript">
+ document.querySelector('.sweet-1').onclick = function(){
+        swal("Here's a message!");
+      };
+      </script>
 
 
 

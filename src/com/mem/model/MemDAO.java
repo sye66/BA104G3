@@ -28,16 +28,24 @@ public class MemDAO implements MemDAO_interface{
 		}
 	}
 	
+	private static final String REGISTER=
+			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+					+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_State,mem_Ip,mem_Date,mem_Address,"
+					+ "mem_Search,mem_Code) VALUES ('M'||LPAD(mem_No.NEXTVAL,6,'0'), ?, ?, ?,  ?, ?, ?, ?, ?, "
+					+ "?, ?, ?, ?, ?, ?, ?, ?)"; /*先把mem_Pic拿掉*/
+	
 	private static final String LOGIN_MEM=
-			"SELECT * FROM mem WHERE mem_email=?";
-
-		
+			"SELECT * FROM mem WHERE mem_Email=?";
+	
+	private static final String Authentication=
+			"UPDATE mem SET mem_State =?, mem_Id=?, mem_No=? WHERE mem_Email=?";
+	
 	private static final String INSERT_STMT=
-			"INSERT INTO mem (mem_no,mem_pw,mem_name,mem_id,mem_bday,"
-			+ "mem_tel,mem_pho,mem_gend,mem_email,mem_pic,mem_intro,mem_code,"
-			+ "mem_state,mem_gps_lat,mem_gps_lng,mem_ip,mem_date,mission_count,mem_address,"
-			+ "mem_search,mem_point) VALUES ('M'||LPAD(MEM_NO.NEXTVAL,6,'0'), ?, ?, ?,  ?, ?, ?, ?, ?,"
-			+ " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; /*先把mem_pic拿掉*/
+			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
+			+ "mem_State,mem_Gps_Lat,mem_Gps_Lng,mem_Ip,mem_Date,mission_Count,mem_Address,"
+			+ "mem_Search,mem_Point) VALUES ('M'||LPAD(mem_No.NEXTVAL,6,'0'), ?, ?, ?,  ?, ?, ?, ?, ?,"
+			+ " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; /*先把mem_Pic拿掉*/
 		
 //		private static final String GET_ALL_STMT=
 //				"SELECT mem_no,mem_pw,mem_name,mem_id,mem_bday,mem_tel,mem_pho,mem_gend,"
@@ -45,11 +53,25 @@ public class MemDAO implements MemDAO_interface{
 //				+ " mem order by mem_no";/*先把mem_pic拿掉*/		
 
 	private static final String GET_ALL_STMT=
-			"SELECT mem_no,mem_pw,mem_name,mem_id,mem_bday,"
-			+ "mem_tel,mem_pho,mem_gend,mem_email,mem_pic,mem_intro,mem_code,"
-			+ "mem_state,mem_gps_lat,mem_gps_lng,mem_ip,mem_date,mission_count,mem_address,"
-			+ "mem_search,mem_point FROM"
-			+ " mem order by mem_no";/*先把mem_pic拿掉*/
+			"SELECT mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
+			+ "mem_State,mem_Gps_Lat,mem_Gps_Lng,mem_Ip,mem_Date,mission_Count,mem_Address,"
+			+ "mem_Search,mem_Point FROM"
+			+ " mem order by mem_No";/*先把mem_Pic拿掉*/
+	
+	private static final String SELECT=
+			"SELECT mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
+			+ "mem_State,mem_Gps_Lat,mem_Gps_Lng,mem_Ip,mem_Date,mission_Count,mem_Address,"
+			+ "mem_Search,mem_Point FROM"
+			+ " mem WHERE mem_No=?";/*先把mem_Pic拿掉*/
+	
+	private static final String SELECTBYEMAIL=
+			"SELECT mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
+			+ "mem_State,mem_Gps_Lat,mem_Gps_Lng,mem_Ip,mem_Date,mission_Count,mem_Address,"
+			+ "mem_Search,mem_Point FROM"
+			+ " mem WHERE mem_Email=?";/*先把mem_Pic拿掉*/
 		
 //		private static final String SELECT=
 //				"SELECT mem_no,mem_pw,mem_name,mem_id,mem_bday,mem_tel,mem_pho,mem_gend,"
@@ -57,24 +79,25 @@ public class MemDAO implements MemDAO_interface{
 //				+ " mem where mem_no=?";/*先把mem_pic拿掉*/
 
 		
-	private static final String SELECT=
-			"SELECT mem_no,mem_pw,mem_name,mem_id,mem_bday,"
-			+ "mem_tel,mem_pho,mem_gend,mem_email,mem_pic,mem_intro,mem_code,"
-			+ "mem_state,mem_gps_lat,mem_gps_lng,mem_ip,mem_date,mission_count,mem_address,"
-			+ "mem_search,mem_point FROM"
-			+ " mem where mem_no=?";/*先把mem_pic拿掉*/
-		
 		
 //		private static final String UPDATE=
 //				"UPDATE mem SET mem_pic = ? WHERE mem_no = ?";
+	
+	private static final String UPDATEBYMEM=
+			"UPDATE mem SET mem_Pw =?, mem_Name =?, mem_Id =?, mem_Bday =?, mem_Tel =?,"
+			+ "mem_Pho =?, mem_Gend =?, mem_Email =?, mem_Pic =?, mem_Intro =?, "
+			+ "mem_Address =?, mem_Search =? WHERE mem_No = ?";
+	
+	
+	
 	private static final String UPDATE=
-			"UPDATE mem SET mem_pw =?, mem_name =?, mem_id =?, mem_bday =?, mem_tel =?,"
-			+ "mem_pho =?, mem_gend =?, mem_email =?, mem_pic =?, mem_intro =?, "
-			+ "mem_code =?, mem_state =?, mem_gps_lat =?, mem_gps_lng =?,"
-			+ "mem_ip =?, mem_date=?, mission_count =?, mem_address =?, mem_search =?, mem_point=? WHERE mem_no = ?";
+			"UPDATE mem SET mem_Pw =?, mem_Name =?, mem_Id =?, mem_Bday =?, mem_Tel =?,"
+			+ "mem_Pho =?, mem_Gend =?, mem_Email =?, mem_Pic =?, mem_Intro =?, "
+			+ "mem_Code =?, mem_State =?, mem_Gps_Lat =?, mem_Gps_Lng =?,"
+			+ "mem_Date =?, mem_Ip =?,    mission_Count =?, mem_Address =?, mem_Search =?, mem_Point=? WHERE mem_No = ?";
 	
 	private static final String DELETE=
-			"DELETE FROM mem WHERE mem_no = ?";
+			"DELETE FROM mem WHERE mem_No = ?";
 		
 		
 		
@@ -84,7 +107,7 @@ public class MemDAO implements MemDAO_interface{
 
 
 		@Override
-		public MemVO loginMem(String mem_email) {
+		public MemVO loginMem(String mem_Email) {
 			MemVO memVO = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -95,28 +118,34 @@ public class MemDAO implements MemDAO_interface{
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(LOGIN_MEM);
 				
-				pstmt.setString(1, mem_email);
+				pstmt.setString(1, mem_Email);
 				
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()){
 					
 					memVO = new MemVO();
-					memVO.setMem_no(rs.getString("mem_no"));
-					memVO.setMem_pw(rs.getString("mem_pw"));
-					memVO.setMem_name(rs.getString("mem_name"));
-					memVO.setMem_id(rs.getString("mem_id"));
-					memVO.setMem_bday(rs.getDate("mem_bday"));
-					memVO.setMem_tel(rs.getString("mem_tel"));
-					memVO.setMem_pho(rs.getString("mem_pho"));
-					memVO.setMem_gend(rs.getInt("mem_gend"));
-					memVO.setMem_email(rs.getString("mem_email"));
-					memVO.setMem_pic(rs.getBytes("mem_pic"));
-					memVO.setMem_intro(rs.getString("mem_intro"));
-					memVO.setMission_count(rs.getInt("mission_count"));
-					memVO.setMem_address(rs.getString("mem_address"));
-					memVO.setMem_search(rs.getInt("mem_search"));
-					memVO.setMem_point(rs.getInt("mem_point"));
+					memVO.setMem_No(rs.getString("mem_No"));
+					memVO.setMem_Pw(rs.getString("mem_Pw"));
+					memVO.setMem_Name(rs.getString("mem_Name"));
+					memVO.setMem_Id(rs.getString("mem_Id"));
+					memVO.setMem_Bday(rs.getDate("mem_Bday"));
+					memVO.setMem_Tel(rs.getString("mem_Tel"));
+					memVO.setMem_Pho(rs.getString("mem_Pho"));
+					memVO.setMem_Gend(rs.getInt("mem_Gend"));
+					memVO.setMem_Email(rs.getString("mem_Email"));
+					memVO.setMem_Pic(rs.getBytes("mem_Pic"));
+					memVO.setMem_Intro(rs.getString("mem_Intro"));
+					memVO.setMem_Code(rs.getInt("mem_Code"));
+					memVO.setMem_State(rs.getInt("mem_State"));
+					memVO.setMem_Gps_Lat(rs.getDouble("mem_Gps_Lat"));
+					memVO.setMem_Gps_Lng(rs.getDouble("mem_Gps_Lng"));
+					memVO.setMem_Ip(rs.getString("mem_Ip"));
+					memVO.setMem_Date(rs.getDate("mem_Date"));
+					memVO.setMission_Count(rs.getInt("mission_Count"));
+					memVO.setMem_Address(rs.getString("mem_Address"));
+					memVO.setMem_Search(rs.getInt("mem_Search"));
+					memVO.setMem_Point(rs.getInt("mem_Point"));
 					
 					
 				}
@@ -144,6 +173,61 @@ public class MemDAO implements MemDAO_interface{
 		
 		
 		
+		
+		
+		@Override
+		public MemVO Authentication(MemVO memVO) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try{
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(Authentication);
+				
+				pstmt.setInt(1, memVO.getMem_State());
+				pstmt.setString(2, memVO.getMem_Id());
+				pstmt.setString(3, memVO.getMem_No());
+				pstmt.setString(4, memVO.getMem_Email());
+				
+				pstmt.executeQuery();
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally{
+					if (pstmt != null){
+						try {
+							pstmt.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace(System.err);
+						}
+					}
+					if (con != null){
+						try {
+							con.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+			return memVO;
+			}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		@Override
 		public void insert(MemVO memVO) {
@@ -158,27 +242,27 @@ public class MemDAO implements MemDAO_interface{
 				
 				
 				
-//				pstmt.setString(1, memVO.getMem_no());
-				pstmt.setString(1, memVO.getMem_pw());
-				pstmt.setString(2, memVO.getMem_name());
-				pstmt.setString(3, memVO.getMem_id());
-				pstmt.setDate(4, memVO.getMem_bday());
-				pstmt.setString(5, memVO.getMem_tel());
-				pstmt.setString(6, memVO.getMem_pho());
-				pstmt.setInt(7, memVO.getMem_gend());
-				pstmt.setString(8, memVO.getMem_email());
-				pstmt.setBytes(9, memVO.getMem_pic());
-				pstmt.setString(10, memVO.getMem_intro());
-				pstmt.setInt(11, memVO.getMem_code());
-				pstmt.setInt(12, memVO.getMem_state());
-				pstmt.setDouble(13, memVO.getMem_gps_lat());
-				pstmt.setDouble(14, memVO.getMem_gps_lng());
-				pstmt.setString(15, memVO.getMem_ip());
-				pstmt.setDate(16, memVO.getMem_date());
-				pstmt.setInt(17, memVO.getMission_count());
-				pstmt.setString(18, memVO.getMem_address());
-				pstmt.setInt(19, memVO.getMem_search());
-				pstmt.setInt(20, memVO.getMem_point());
+//				pstmt.setString(1, memVO.getMem_No());
+				pstmt.setString(1, memVO.getMem_Pw());
+				pstmt.setString(2, memVO.getMem_Name());
+				pstmt.setString(3, memVO.getMem_Id());
+				pstmt.setDate(4, memVO.getMem_Bday());
+				pstmt.setString(5, memVO.getMem_Tel());
+				pstmt.setString(6, memVO.getMem_Pho());
+				pstmt.setInt(7, memVO.getMem_Gend());
+				pstmt.setString(8, memVO.getMem_Email());
+				pstmt.setBytes(9, memVO.getMem_Pic());
+				pstmt.setString(10, memVO.getMem_Intro());
+				pstmt.setInt(11, memVO.getMem_Code());
+				pstmt.setInt(12, memVO.getMem_State());
+				pstmt.setDouble(13, memVO.getMem_Gps_Lat());
+				pstmt.setDouble(14, memVO.getMem_Gps_Lng());
+				pstmt.setString(15, memVO.getMem_Ip());
+				pstmt.setDate(16, memVO.getMem_Date());
+				pstmt.setInt(17, memVO.getMission_Count());
+				pstmt.setString(18, memVO.getMem_Address());
+				pstmt.setInt(19, memVO.getMem_Search());
+				pstmt.setInt(20, memVO.getMem_Point());
 				
 				pstmt.executeUpdate();
 				
@@ -206,7 +290,126 @@ public class MemDAO implements MemDAO_interface{
 			
 		}
 
-
+		
+		@Override
+		public void register(MemVO memVO) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				
+				con = ds.getConnection();
+				
+	// 1、先建立一個字串陣列,把要使用的自增主鍵參數放進, 再使用con.prepareStatement( 'SQL指令' , 字串陣列) 存到pstmt
+				String[] col = {"mem_No"};
+				pstmt = con.prepareStatement(REGISTER,col);
+				
+				
+//				pstmt.setString(1, memVO.getMem_No());
+				pstmt.setString(1, memVO.getMem_Pw());
+				pstmt.setString(2, memVO.getMem_Name());
+				pstmt.setString(3, memVO.getMem_Id());
+				pstmt.setDate(4, memVO.getMem_Bday());
+				pstmt.setString(5, memVO.getMem_Tel());
+				pstmt.setString(6, memVO.getMem_Pho());
+				pstmt.setInt(7, memVO.getMem_Gend());
+				pstmt.setString(8, memVO.getMem_Email());
+				pstmt.setBytes(9, memVO.getMem_Pic());
+				pstmt.setString(10, memVO.getMem_Intro());
+				pstmt.setInt(11, memVO.getMem_State());
+				pstmt.setString(12, memVO.getMem_Ip());
+				pstmt.setDate(13, memVO.getMem_Date());
+				pstmt.setString(14, memVO.getMem_Address());
+				pstmt.setInt(15, memVO.getMem_Search());
+				pstmt.setInt(16, memVO.getMem_Code());
+				
+				pstmt.executeUpdate();
+				
+	// 2、再用getGeneratedKeys(), 用rs指向直向的欄位,所以第一個在這邊是指 mem_No (再到MemServlet 的registerNew部分的 
+				rs = pstmt.getGeneratedKeys();
+				rs.next();
+				memVO.setMem_No(rs.getString(1));
+				
+//				System.out.println(memVO.getMem_No());
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally{
+				if (pstmt != null){
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace(System.err);
+					}
+				}
+				if (con != null){
+					try {
+						con.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+			
+		}
+		
+		
+		@Override
+		public void updateByMem(MemVO memVO) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATEBYMEM);
+				
+				pstmt.setString(1, memVO.getMem_Pw());
+				pstmt.setString(2, memVO.getMem_Name());
+				pstmt.setString(3, memVO.getMem_Id());
+				pstmt.setDate(4, memVO.getMem_Bday());
+				pstmt.setString(5, memVO.getMem_Tel());
+				pstmt.setString(6, memVO.getMem_Pho());
+				pstmt.setInt(7, memVO.getMem_Gend());
+				pstmt.setString(8, memVO.getMem_Email());
+				pstmt.setBytes(9, memVO.getMem_Pic());
+				pstmt.setString(10, memVO.getMem_Intro());
+				pstmt.setString(11, memVO.getMem_Address());
+				pstmt.setInt(12, memVO.getMem_Search());
+				pstmt.setString(13, memVO.getMem_No());
+				
+				pstmt.executeUpdate();				
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+		
+		
 
 
 
@@ -222,33 +425,29 @@ public class MemDAO implements MemDAO_interface{
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(UPDATE);
 				
-				pstmt.setString(1, memVO.getMem_pw());
-				pstmt.setString(2, memVO.getMem_name());
-				pstmt.setString(3, memVO.getMem_id());
-				pstmt.setDate(4, memVO.getMem_bday());
-				pstmt.setString(5, memVO.getMem_tel());
-				pstmt.setString(6, memVO.getMem_pho());
-				pstmt.setInt(7, memVO.getMem_gend());
-				pstmt.setString(8, memVO.getMem_email());
-				pstmt.setBytes(9, memVO.getMem_pic());
-				pstmt.setString(10, memVO.getMem_intro());
-				pstmt.setInt(11, memVO.getMem_code());
-				pstmt.setInt(12, memVO.getMem_state());
-				pstmt.setDouble(13, memVO.getMem_gps_lat());
-				pstmt.setDouble(14, memVO.getMem_gps_lng());
-				pstmt.setString(15, memVO.getMem_ip());
-				pstmt.setDate(16, memVO.getMem_date());
-				pstmt.setInt(17, memVO.getMission_count());
-				pstmt.setString(18, memVO.getMem_address());
-				pstmt.setInt(19, memVO.getMem_search());
-				pstmt.setInt(20, memVO.getMem_point());
-				pstmt.setString(21, memVO.getMem_no());
-
+				pstmt.setString(1, memVO.getMem_Pw());
+				pstmt.setString(2, memVO.getMem_Name());
+				pstmt.setString(3, memVO.getMem_Id());
+				pstmt.setDate(4, memVO.getMem_Bday());
+				pstmt.setString(5, memVO.getMem_Tel());
+				pstmt.setString(6, memVO.getMem_Pho());
+				pstmt.setInt(7, memVO.getMem_Gend());
+				pstmt.setString(8, memVO.getMem_Email());
+				pstmt.setBytes(9, memVO.getMem_Pic());
+				pstmt.setString(10, memVO.getMem_Intro());
+				pstmt.setInt(11, memVO.getMem_Code());
+				pstmt.setInt(12, memVO.getMem_State());
+				pstmt.setDouble(13, memVO.getMem_Gps_Lat());
+				pstmt.setDouble(14, memVO.getMem_Gps_Lng());
+				pstmt.setDate(15, memVO.getMem_Date());
+				pstmt.setString(16, memVO.getMem_Ip());
+				pstmt.setInt(17, memVO.getMission_Count());
+				pstmt.setString(18, memVO.getMem_Address());
+				pstmt.setInt(19, memVO.getMem_Search());
+				pstmt.setInt(20, memVO.getMem_Point());
+				pstmt.setString(21, memVO.getMem_No());
 				
-				pstmt.executeUpdate();
-				
-				
-				
+				pstmt.executeUpdate();				
 				
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -282,7 +481,7 @@ public class MemDAO implements MemDAO_interface{
 
 
 		@Override
-		public void delete(String mem_no) {
+		public void delete(String mem_No) {
 			
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -291,7 +490,7 @@ public class MemDAO implements MemDAO_interface{
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(DELETE);
 				
-				pstmt.setString(1, mem_no);
+				pstmt.setString(1, mem_No);
 				
 				pstmt.executeUpdate();
 				
@@ -321,7 +520,7 @@ public class MemDAO implements MemDAO_interface{
 
 
 		@Override
-		public MemVO findByPrimaryKey(String mem_no) {
+		public MemVO findByPrimaryKey(String mem_No) {
 			MemVO memVO = new MemVO();
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -331,34 +530,107 @@ public class MemDAO implements MemDAO_interface{
 				con = ds.getConnection();
 				pstmt = con.prepareStatement(SELECT);
 				
-				pstmt.setString(1, mem_no);
+				pstmt.setString(1, mem_No);
 				
 				rs = pstmt.executeQuery();
 				
 				while(rs.next()){
 					
 					//memVO = new MemVO();
-					memVO.setMem_no(rs.getString("mem_no"));
-					memVO.setMem_pw(rs.getString("mem_pw"));
-					memVO.setMem_name(rs.getString("mem_name"));
-					memVO.setMem_id(rs.getString("mem_id"));
-					memVO.setMem_bday(rs.getDate("mem_bday"));
-					memVO.setMem_tel(rs.getString("mem_tel"));
-					memVO.setMem_pho(rs.getString("mem_pho"));
-					memVO.setMem_gend(rs.getInt("mem_gend"));
-					memVO.setMem_email(rs.getString("mem_email"));
-					memVO.setMem_pic(rs.getBytes("mem_pic"));
-					memVO.setMem_intro(rs.getString("mem_intro"));
-					memVO.setMem_code(rs.getInt("mem_code"));
-					memVO.setMem_state(rs.getInt("mem_state"));
-					memVO.setMem_gps_lat(rs.getDouble("mem_gps_lat"));
-					memVO.setMem_gps_lng(rs.getDouble("mem_gps_lng"));
-					memVO.setMem_ip(rs.getString("mem_ip"));
-					memVO.setMem_date(rs.getDate("mem_date"));
-					memVO.setMission_count(rs.getInt("mission_count"));
-					memVO.setMem_address(rs.getString("mem_address"));
-					memVO.setMem_search(rs.getInt("mem_search"));
-					memVO.setMem_point(rs.getInt("mem_point"));
+					memVO.setMem_No(rs.getString("mem_No"));
+					memVO.setMem_Pw(rs.getString("mem_Pw"));
+					memVO.setMem_Name(rs.getString("mem_Name"));
+					memVO.setMem_Id(rs.getString("mem_Id"));
+					memVO.setMem_Bday(rs.getDate("mem_Bday"));
+					memVO.setMem_Tel(rs.getString("mem_Tel"));
+					memVO.setMem_Pho(rs.getString("mem_Pho"));
+					memVO.setMem_Gend(rs.getInt("mem_Gend"));
+					memVO.setMem_Email(rs.getString("mem_Email"));
+					memVO.setMem_Pic(rs.getBytes("mem_Pic"));
+					memVO.setMem_Intro(rs.getString("mem_Intro"));
+					memVO.setMem_Code(rs.getInt("mem_Code"));
+					memVO.setMem_State(rs.getInt("mem_State"));
+					memVO.setMem_Gps_Lat(rs.getDouble("mem_Gps_Lat"));
+					memVO.setMem_Gps_Lng(rs.getDouble("mem_Gps_Lng"));
+					memVO.setMem_Ip(rs.getString("mem_Ip"));
+					memVO.setMem_Date(rs.getDate("mem_Date"));
+					memVO.setMission_Count(rs.getInt("mission_Count"));
+					memVO.setMem_Address(rs.getString("mem_Address"));
+					memVO.setMem_Search(rs.getInt("mem_Search"));
+					memVO.setMem_Point(rs.getInt("mem_Point"));
+					
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{	
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}				
+			return memVO;
+		}
+
+		
+		
+		@Override
+		public MemVO findByMemEmail(String mem_Email) {
+			MemVO memVO = new MemVO();
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(SELECTBYEMAIL);
+				
+				pstmt.setString(1, mem_Email);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					
+					//memVO = new MemVO();
+					memVO.setMem_No(rs.getString("mem_No"));
+					memVO.setMem_Pw(rs.getString("mem_Pw"));
+					memVO.setMem_Name(rs.getString("mem_Name"));
+					memVO.setMem_Id(rs.getString("mem_Id"));
+					memVO.setMem_Bday(rs.getDate("mem_Bday"));
+					memVO.setMem_Tel(rs.getString("mem_Tel"));
+					memVO.setMem_Pho(rs.getString("mem_Pho"));
+					memVO.setMem_Gend(rs.getInt("mem_Gend"));
+					memVO.setMem_Email(rs.getString("mem_Email"));
+					memVO.setMem_Pic(rs.getBytes("mem_Pic"));
+					memVO.setMem_Intro(rs.getString("mem_Intro"));
+					memVO.setMem_Code(rs.getInt("mem_Code"));
+					memVO.setMem_State(rs.getInt("mem_State"));
+					memVO.setMem_Gps_Lat(rs.getDouble("mem_Gps_Lat"));
+					memVO.setMem_Gps_Lng(rs.getDouble("mem_Gps_Lng"));
+					memVO.setMem_Ip(rs.getString("mem_Ip"));
+					memVO.setMem_Date(rs.getDate("mem_Date"));
+					memVO.setMission_Count(rs.getInt("mission_Count"));
+					memVO.setMem_Address(rs.getString("mem_Address"));
+					memVO.setMem_Search(rs.getInt("mem_Search"));
+					memVO.setMem_Point(rs.getInt("mem_Point"));
 					
 					
 				}
@@ -395,7 +667,6 @@ public class MemDAO implements MemDAO_interface{
 
 
 
-
 		@Override
 		public List<MemVO> getAll() {
 			List<MemVO> list = new ArrayList<MemVO>();
@@ -427,27 +698,27 @@ public class MemDAO implements MemDAO_interface{
 					
 //					String mem_no = rs.getString("mem_no").trim();
 					
-					memVO.setMem_no(rs.getString("mem_no"));
-					memVO.setMem_pw(rs.getString("mem_pw"));
-					memVO.setMem_name(rs.getString("mem_name"));
-					memVO.setMem_id(rs.getString("mem_id"));
-					memVO.setMem_bday(rs.getDate("mem_bday"));
-					memVO.setMem_tel(rs.getString("mem_tel"));
-					memVO.setMem_pho(rs.getString("mem_pho"));
-					memVO.setMem_gend(rs.getInt("mem_gend"));
-					memVO.setMem_email(rs.getString("mem_email"));
-					memVO.setMem_pic(rs.getBytes("mem_pic"));
-					memVO.setMem_intro(rs.getString("mem_intro"));
-					memVO.setMem_code(rs.getInt("mem_code"));
-					memVO.setMem_state(rs.getInt("mem_state"));
-					memVO.setMem_gps_lat(rs.getDouble("mem_gps_lat"));
-					memVO.setMem_gps_lng(rs.getDouble("mem_gps_lng"));
-					memVO.setMem_ip(rs.getString("mem_ip"));
-					memVO.setMem_date(rs.getDate("mem_date"));
-					memVO.setMission_count(rs.getInt("mission_count"));
-					memVO.setMem_address(rs.getString("mem_address"));
-					memVO.setMem_search(rs.getInt("mem_search"));
-					memVO.setMem_point(rs.getInt("mem_point"));
+					memVO.setMem_No(rs.getString("mem_No"));
+					memVO.setMem_Pw(rs.getString("mem_Pw"));
+					memVO.setMem_Name(rs.getString("mem_Name"));
+					memVO.setMem_Id(rs.getString("mem_Id"));
+					memVO.setMem_Bday(rs.getDate("mem_Bday"));
+					memVO.setMem_Tel(rs.getString("mem_Tel"));
+					memVO.setMem_Pho(rs.getString("mem_Pho"));
+					memVO.setMem_Gend(rs.getInt("mem_Gend"));
+					memVO.setMem_Email(rs.getString("mem_Email"));
+					memVO.setMem_Pic(rs.getBytes("mem_Pic"));
+					memVO.setMem_Intro(rs.getString("mem_Intro"));
+					memVO.setMem_Code(rs.getInt("mem_Code"));
+					memVO.setMem_State(rs.getInt("mem_State"));
+					memVO.setMem_Gps_Lat(rs.getDouble("mem_Gps_Lat"));
+					memVO.setMem_Gps_Lng(rs.getDouble("mem_Gps_Lng"));
+					memVO.setMem_Ip(rs.getString("mem_Ip"));
+					memVO.setMem_Date(rs.getDate("mem_Date"));
+					memVO.setMission_Count(rs.getInt("mission_Count"));
+					memVO.setMem_Address(rs.getString("mem_Address"));
+					memVO.setMem_Search(rs.getInt("mem_Search"));
+					memVO.setMem_Point(rs.getInt("mem_Point"));
 					list.add(memVO);
 				}
 			
@@ -474,6 +745,11 @@ public class MemDAO implements MemDAO_interface{
 			}				
 			return list;
 		}
+
+
+
+
+		
 
 
 

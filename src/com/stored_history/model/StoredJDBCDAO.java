@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,25 +19,32 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 	String passwd = "BA104"; 
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO stored_history (stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost) VALUES ('S'||LPAD(STORED_NO.NEXTVAL,6,'0'),?, ?, ?,"
+			"INSERT INTO stored_history (stored_No, mem_No, stored_Date, stored_Type,"
+			+ "stored_Cost) VALUES ('S'||LPAD(STORED_NO.NEXTVAL,6,'0'),?, ?, ?,"
 			+ "?)";
+	private static final String GET_ALL_BYMEM=
+			"SELECT * from stored_history where MEM_NO=? order by MEM_NO";
 	
-	private static final String GET_ALL_STMT=
-			"SELECT stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost FROM stored_history order by stored_no";
+//	private static final String GET_ALL_STMT=
+//			"SELECT stored_No, mem_No, stored_Date, stored_Type,"
+//			+ "stored_Cost FROM stored_history order by stored_No";
 	
 	private static final String SELECT=
-			"SELECT stored_no, mem_no, stored_date, stored_type,"
-			+ "stored_cost FROM stored_history WHERE stored_no=?";
+			"SELECT stored_No, mem_No, stored_Date, stored_Type,"
+			+ "stored_Cost FROM stored_history WHERE stored_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE stored_history SET mem_no=?, stored_date=?, stored_type=?, stored_cost=?"
-			+ "WHERE stored_no=?";
+			"UPDATE stored_history SET mem_No=?, stored_Date=?, stored_Type=?, stored_Cost=?"
+			+ "WHERE stored_No=?";
 	
 	private static final String DELETE=
-			"DELETE FROM stored_history WHERE stored_no = ?";
+			"DELETE FROM stored_history WHERE stored_No = ?";
 
+	
+	
+	
+	
+	
 	@Override
 	public void insert(StoredVO storedVO) {
 		Connection con = null;
@@ -47,11 +56,11 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-//			pstmt.setString(1, storedVO.getStored_no());
-			pstmt.setString(1, storedVO.getMem_no());
-			pstmt.setDate(2, storedVO.getStored_date());
-			pstmt.setInt(3, storedVO.getStored_type());
-			pstmt.setDouble(4, storedVO.getStored_cost());
+//			pstmt.setString(1, storedVO.getStored_No());
+			pstmt.setString(1, storedVO.getMem_No());
+			pstmt.setTimestamp(2, storedVO.getStored_Date());
+			pstmt.setInt(3, storedVO.getStored_Type());
+			pstmt.setDouble(4, storedVO.getStored_Cost());
 			
 			pstmt.executeUpdate();
 	} catch (ClassNotFoundException e) {
@@ -93,11 +102,11 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 			
 			
-			pstmt.setString(1, storedVO.getMem_no());
-			pstmt.setDate(2, storedVO.getStored_date());
-			pstmt.setInt(3, storedVO.getStored_type());
-			pstmt.setDouble(4, storedVO.getStored_cost());
-			pstmt.setString(5, storedVO.getStored_no());
+			pstmt.setString(1, storedVO.getMem_No());
+			pstmt.setTimestamp(2, storedVO.getStored_Date());
+			pstmt.setInt(3, storedVO.getStored_Type());
+			pstmt.setDouble(4, storedVO.getStored_Cost());
+			pstmt.setString(5, storedVO.getStored_No());
 			
 			pstmt.executeUpdate();
 	}catch (SQLException e) {
@@ -128,7 +137,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 }
 
 	@Override
-	public void delete(String stored_no) {
+	public void delete(String stored_No) {
 		StoredVO storedVO =null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -139,7 +148,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setString(1, stored_no);
+			pstmt.setString(1, stored_No);
 			
 			pstmt.executeUpdate();
 	}catch (ClassNotFoundException e) {
@@ -167,7 +176,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 }
 
 	@Override
-	public StoredVO findByPrimaryKey(String stored_no) {
+	public StoredVO findByPrimaryKey(String stored_No) {
 		StoredVO storedVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -178,17 +187,17 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT);
 			
-			pstmt.setString(1, stored_no);
+			pstmt.setString(1, stored_No);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				storedVO = new StoredVO();
-				storedVO.setStored_no(rs.getString("stored_no"));
-				storedVO.setMem_no(rs.getString("mem_no"));
-				storedVO.setStored_date(rs.getDate("stored_date"));
-				storedVO.setStored_type(rs.getInt("stored_type"));
-				storedVO.setStored_cost(rs.getDouble("stored_cost"));
+				storedVO.setStored_No(rs.getString("stored_No"));
+				storedVO.setMem_No(rs.getString("mem_No"));
+				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
+				storedVO.setStored_Type(rs.getInt("stored_Type"));
+				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
 				
 			}
 		} catch (ClassNotFoundException e) {
@@ -220,7 +229,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 	}
 
 	@Override
-	public List<StoredVO> getAll() {
+	public List<StoredVO> getAll(String mem_No) {
 		List<StoredVO> list = new ArrayList<StoredVO>();
 		StoredVO storedVO = null;
 		
@@ -231,16 +240,19 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt = con.prepareStatement(GET_ALL_BYMEM);
+			
+			pstmt.setString(1, mem_No);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				storedVO = new StoredVO();
-				storedVO.setStored_no(rs.getString("stored_no"));
-				storedVO.setMem_no(rs.getString("mem_no"));
-				storedVO.setStored_date(rs.getDate("stored_date"));
-				storedVO.setStored_type(rs.getInt("stored_type"));
-				storedVO.setStored_cost(rs.getDouble("stored_cost"));
+				storedVO.setStored_No(rs.getString("stored_No"));
+				storedVO.setMem_No(rs.getString("mem_No"));
+				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
+				storedVO.setStored_Type(rs.getInt("stored_Type"));
+				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
 				list.add(storedVO);
 				
 			}
@@ -275,49 +287,49 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 		
 		StoredJDBCDAO dao = new StoredJDBCDAO();
 		
-		//·s¼W
+		//æ–°å¢ž
 		StoredVO storedVO1 = new StoredVO();
 		
-//		storedVO1.setStored_no("S000003");
-		storedVO1.setMem_no("M000001");
-		storedVO1.setStored_date(Date.valueOf("2017-10-10"));
-		storedVO1.setStored_type(1);
-		storedVO1.setStored_cost(9487943.0);
+//		storedVO1.setStored_No("S000003");
+		storedVO1.setMem_No("M000001");
+		storedVO1.setStored_Date(new Timestamp(System.currentTimeMillis()));
+		storedVO1.setStored_Type(1);
+		storedVO1.setStored_Cost(9487943.0);
 		
 		dao.insert(storedVO1);
 		
-		//­×§ï
+		//ä¿®æ”¹
 		
 		StoredVO storedVO2 = new StoredVO();
 		
-		storedVO2.setStored_no("S000003");
-		storedVO2.setMem_no("M000001");
-		storedVO2.setStored_date(Date.valueOf("2017-10-31"));
-		storedVO2.setStored_type(1);
-		storedVO2.setStored_cost(9487.0);
+		storedVO2.setStored_No("S000003");
+		storedVO2.setMem_No("M000001");
+		storedVO2.setStored_Date(new Timestamp(System.currentTimeMillis()));
+		storedVO2.setStored_Type(1);
+		storedVO2.setStored_Cost(9487.0);
 		
 		dao.update(storedVO2);
 		
-		//§R°£
+		//åˆªé™¤
 //		dao.delete("S000003");
 		
-		//¬d¸ß³æ¤@
+		//æŸ¥è©¢å–®ä¸€
 		StoredVO storedVO3 = dao.findByPrimaryKey("S000001");
-		System.out.println(storedVO3.getStored_no() + ",");
-		System.out.println(storedVO3.getMem_no() + ",");
-		System.out.println(storedVO3.getStored_date() + ",");
-		System.out.println(storedVO3.getStored_type() + ",");
-		System.out.println(storedVO3.getStored_cost() +",");
+		System.out.println(storedVO3.getStored_No() + ",");
+		System.out.println(storedVO3.getMem_No() + ",");
+		System.out.println(storedVO3.getStored_Date() + ",");
+		System.out.println(storedVO3.getStored_Type() + ",");
+		System.out.println(storedVO3.getStored_Cost() +",");
 		System.out.println("================================================");
 		
-		//¬d¸ß¥þ³¡
-		List<StoredVO> list = dao.getAll();
+		//æŸ¥è©¢å…¨éƒ¨
+		List<StoredVO> list = dao.getAll("M000001");
 		for(StoredVO aStored : list){
-			System.out.println(aStored.getStored_no() + ",");
-			System.out.println(aStored.getMem_no() + ",");
-			System.out.println(aStored.getStored_date() + ",");
-			System.out.println(aStored.getStored_type() + ",");
-			System.out.println(aStored.getStored_cost() +",");
+			System.out.println(aStored.getStored_No() + ",");
+			System.out.println(aStored.getMem_No() + ",");
+			System.out.println(aStored.getStored_Date() + ",");
+			System.out.println(aStored.getStored_Type() + ",");
+			System.out.println(aStored.getStored_Cost() +",");
 			System.out.println("================================================");
 		}
 		
@@ -325,5 +337,6 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 		
 		
 	}
+
 	
 }

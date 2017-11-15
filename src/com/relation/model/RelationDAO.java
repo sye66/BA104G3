@@ -26,24 +26,73 @@ public class RelationDAO implements RelationDAO_interface{
 	}
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO relation (mem_no,related_mem_no,relation_status)"
+			"INSERT INTO relation (mem_No,related_Mem_No,relation_Status)"
 			+ "VALUES (?,?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT related_mem_no,relation_status"
-			+ " FROM relation WHERE mem_no=? order by mem_no";
+			"SELECT related_Mem_No,relation_Status"
+			+ " FROM relation WHERE mem_No=? order by mem_No";
+	
+	private static final String GET_WHO_ADDME=
+			"select * from relation where RELATED_MEM_NO=? order by RELATED_MEM_NO";
 	
 	private static final String SELECT=
-			"SELECT mem_no,related_mem_no,relation_status"
-			+ " FROM relation WHERE mem_no=?";
+			"SELECT mem_No,related_Mem_No,relation_Status"
+			+ " FROM relation WHERE mem_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE relation SET relation_status=?"
-			+ "WHERE mem_no=? and related_mem_no=?";
+			"UPDATE relation SET relation_Status=?"
+			+ "WHERE mem_No=? and related_Mem_No=?";
 	
 	private static final String DELETE=
-			"DELETE FROM relation WHERE mem_no=? and related_mem_no=? ";
+			"DELETE FROM relation WHERE mem_No=? and related_Mem_No=? ";
 	
+	
+	
+	@Override
+	public List<RelationVO> getWhoAddme(String related_Mem_No) {
+		List<RelationVO> list = new ArrayList<RelationVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_WHO_ADDME);
+//			System.out.println("連線成功");
+			pstmt.setString(1, related_Mem_No);
+			rs =pstmt.executeQuery();
+//			System.out.println("查詢結束");
+			while(rs.next()){
+				RelationVO relationVO = new RelationVO();
+				relationVO.setMem_No(rs.getString("MEM_NO"));
+				relationVO.setRelation_Status(rs.getInt("RELATION_STATUS"));
+				relationVO.setRelated_Mem_No(rs.getString("RELATED_MEM_NO"));
+				list.add(relationVO);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{	
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}				
+			
+		
+		return list;
+	}
 	
 	
 	
@@ -55,9 +104,9 @@ public class RelationDAO implements RelationDAO_interface{
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setString(1, relationVO.getMem_no());
-			pstmt.setString(2, relationVO.getRelated_mem_no());
-			pstmt.setInt(3, relationVO.getRelation_status());
+			pstmt.setString(1, relationVO.getMem_No());
+			pstmt.setString(2, relationVO.getRelated_Mem_No());
+			pstmt.setInt(3, relationVO.getRelation_Status());
 			
 			pstmt.executeUpdate();
 		
@@ -91,9 +140,9 @@ public class RelationDAO implements RelationDAO_interface{
 
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setInt(1, relationVO.getRelation_status());
-			pstmt.setString(2, relationVO.getMem_no());
-			pstmt.setString(3, relationVO.getRelated_mem_no());
+			pstmt.setInt(1, relationVO.getRelation_Status());
+			pstmt.setString(2, relationVO.getMem_No());
+			pstmt.setString(3, relationVO.getRelated_Mem_No());
 			
 			
 			pstmt.executeUpdate();
@@ -121,7 +170,7 @@ public class RelationDAO implements RelationDAO_interface{
 		}
 	}
 	@Override
-	public void delete(String mem_no, String related_mem_no) {
+	public void delete(String mem_No, String related_Mem_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -129,8 +178,8 @@ public class RelationDAO implements RelationDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setString(1, mem_no);
-			pstmt.setString(2, related_mem_no);
+			pstmt.setString(1, mem_No);
+			pstmt.setString(2, related_Mem_No);
 			
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -154,7 +203,7 @@ public class RelationDAO implements RelationDAO_interface{
 		}
 	}
 	@Override
-	public RelationVO findByPrimaryKey(String mem_no, String related_mem_no) {
+	public RelationVO findByPrimaryKey(String mem_No, String related_Mem_No) {
 		RelationVO relationVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -163,15 +212,15 @@ public class RelationDAO implements RelationDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT);
-			pstmt.setString(1, mem_no);
+			pstmt.setString(1, mem_No);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				relationVO = new RelationVO();
-				relationVO.setMem_no(rs.getString("mem_no"));
-				relationVO.setRelated_mem_no(rs.getString("related_mem_no"));
-				relationVO.setRelation_status(rs.getInt("relation_status"));
+				relationVO.setMem_No(rs.getString("mem_No"));
+				relationVO.setRelated_Mem_No(rs.getString("related_Mem_No"));
+				relationVO.setRelation_Status(rs.getInt("relation_Status"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -195,9 +244,8 @@ public class RelationDAO implements RelationDAO_interface{
 		return relationVO;
 	}
 	@Override
-	public List<RelationVO> getAllRelationWithMem_no(String mem_no) {
+	public List<RelationVO> getAllRelationWithMem_No(String mem_No) {
 		List<RelationVO> list = new ArrayList<RelationVO>();
-		RelationVO relationVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -205,13 +253,13 @@ public class RelationDAO implements RelationDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			
-			pstmt.setString(1, mem_no);
+			pstmt.setString(1, mem_No);
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()){
-				relationVO = new RelationVO();
-				relationVO.setRelated_mem_no(rs.getString("related_mem_no"));
-				relationVO.setRelation_status(rs.getInt("relation_status"));
+				RelationVO relationVO = new RelationVO();
+				relationVO.setRelated_Mem_No(rs.getString("related_Mem_No"));
+				relationVO.setRelation_Status(rs.getInt("relation_Status"));
 				list.add(relationVO);
 			}
 		} catch (SQLException e) {
@@ -237,4 +285,8 @@ public class RelationDAO implements RelationDAO_interface{
 		
 		return list;
 	}
+
+
+
+
 }

@@ -17,20 +17,20 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 	String passwd = "BA104"; 
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO faq (faq_no,faq_content,faq_date) VALUES"
+			"INSERT INTO faq (faq_No,faq_Content,faq_Date) VALUES"
 			+ " ('F'||LPAD(FAQ_NO.NEXTVAL,4,'0'),?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT faq_no,faq_content,faq_date FROM faq order by faq_no";
+			"SELECT faq_No,faq_Content,faq_Date FROM faq order by faq_No";
 	
 	private static final String SELECT=
-			"SELECT faq_no,faq_content,faq_date FROM faq WHERE faq_no=?";
+			"SELECT faq_No,faq_Content,faq_Date FROM faq WHERE faq_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE faq SET faq_content=? ,faq_date=? WHERE faq_no=?";
+			"UPDATE faq SET faq_Content=? ,faq_Date=? WHERE faq_No=?";
 	
 	private static final String DELETE=
-			"DELETE FROM faq WHERE faq_no = ?";
+			"DELETE FROM faq WHERE faq_No = ?";
 	
 	@Override
 	public void insert(FaqVO faqVO) {
@@ -43,9 +43,9 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-//			pstmt.setString(1, faqVO.getFaq_no());
-			pstmt.setString(1, faqVO.getFaq_content());
-			pstmt.setDate(2, faqVO.getFaq_date());
+//			pstmt.setString(1, faqVO.getFaq_No());
+			pstmt.setString(1, faqVO.getFaq_Content());
+			pstmt.setDate(2, faqVO.getFaq_Date());
 			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -85,9 +85,9 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, faqVO.getFaq_content());
-			pstmt.setDate(2, faqVO.getFaq_date());
-			pstmt.setString(3, faqVO.getFaq_no());
+			pstmt.setString(1, faqVO.getFaq_Content());
+			pstmt.setDate(2, faqVO.getFaq_Date());
+			pstmt.setString(3, faqVO.getFaq_No());
 			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -117,7 +117,7 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 	}
 
 	@Override
-	public void delete(String faq_no) {
+	public void delete(String faq_No) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -128,7 +128,7 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setString(1, faq_no);
+			pstmt.setString(1, faq_No);
 			
 			pstmt.executeUpdate();
 			
@@ -159,7 +159,7 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 	}
 
 	@Override
-	public FaqVO findByPrimaryKey(String faq_no) {
+	public FaqVO findByPrimaryKey(String faq_No) {
 		
 		FaqVO faqVO = null;
 		Connection con = null;
@@ -171,16 +171,16 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT);
 			
-			pstmt.setString(1, faq_no);
+			pstmt.setString(1, faq_No);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
 				
 				faqVO = new FaqVO();
-				faqVO.setFaq_no(rs.getString("faq_no"));
-				faqVO.setFaq_content(rs.getString("faq_content"));
-				faqVO.setFaq_date(rs.getDate("faq_date"));
+				faqVO.setFaq_No(rs.getString("faq_No"));
+				faqVO.setFaq_Content(rs.getString("faq_Content"));
+				faqVO.setFaq_Date(rs.getDate("faq_Date"));
 				
 			}
 		} catch (ClassNotFoundException e) {
@@ -226,9 +226,9 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 			while(rs.next()){
 				
 				faqVO = new FaqVO();
-				faqVO.setFaq_no(rs.getString("faq_no"));
-				faqVO.setFaq_content(rs.getString("faq_content"));
-				faqVO.setFaq_date(rs.getDate("faq_date"));
+				faqVO.setFaq_No(rs.getString("faq_No"));
+				faqVO.setFaq_Content(rs.getString("faq_Content"));
+				faqVO.setFaq_Date(rs.getDate("faq_Date"));
 				list.add(faqVO);
 			}
 		}catch (ClassNotFoundException e) {
@@ -259,39 +259,39 @@ public class FaqJDBCDAO implements FaqDAO_interface{
 	public static void main(String[] args){
 		FaqJDBCDAO dao = new FaqJDBCDAO();
 		
-		//·s¼W
+		//æ–°å¢
 		FaqVO faqVO1 = new FaqVO();
 		
-		faqVO1.setFaq_content("¢ß5¡B§Ú·QÂÇ¥ÑÀ°§U§O¤H¼W¥[¦Û¤vªºªÀ¥æ°é¡A¦p¦óª¾¹D¦Û¤vÁÙ¦³­ş¨Ç¯à¤O»İ­n¥[±j¡H ¢Ï5¡B¥i¥H¦Ò¼{¨ì¥»¯¸ªº±Æ¦æº]¡A·j´M¬İ¬İ¥Ø«e­ş¤@Ãşªº¯à¤Oªº»İ¨D©Ê¤ñ¸û°ª");
-		faqVO1.setFaq_date(Date.valueOf("2017-11-01"));
+		faqVO1.setFaq_Content("ï¼±5ã€æˆ‘æƒ³è—‰ç”±å¹«åŠ©åˆ¥äººå¢åŠ è‡ªå·±çš„ç¤¾äº¤åœˆï¼Œå¦‚ä½•çŸ¥é“è‡ªå·±é‚„æœ‰å“ªäº›èƒ½åŠ›éœ€è¦åŠ å¼·ï¼Ÿ ï¼¡5ã€å¯ä»¥è€ƒæ…®åˆ°æœ¬ç«™çš„æ’è¡Œæ¦œï¼Œæœå°‹çœ‹çœ‹ç›®å‰å“ªä¸€é¡çš„èƒ½åŠ›çš„éœ€æ±‚æ€§æ¯”è¼ƒé«˜");
+		faqVO1.setFaq_Date(Date.valueOf("2017-11-01"));
 		
 		dao.insert(faqVO1);
 		
-		//­×§ï
+		//ä¿®æ”¹
 		FaqVO faqVO2 = new FaqVO();
 		
-		faqVO2.setFaq_content("¢ß5¡B±Æ¦æº]¤Wªº¸ê®Æ»P¼Æ¾Ú¦h¤[§ó·s¤@¦¸¡H ¢Ï6¡B§Ú­Ì¦³¶g±Æ¦æ¡B¤ë±Æ¦æ¡B©u±Æ¦æ¡A¥H¤è«K¼W¥[Ãn¥ú«×¥H¤Î¦³ÃB¥~¬¡°Ê¼úÀy¿n¤À¡A¿n¤À¥i¥H¨ì°Óµ{§I´«°Ó«~");
-		faqVO2.setFaq_date(Date.valueOf("2017-11-02"));
-		faqVO2.setFaq_no("F0005");
+		faqVO2.setFaq_Content("ï¼±5ã€æ’è¡Œæ¦œä¸Šçš„è³‡æ–™èˆ‡æ•¸æ“šå¤šä¹…æ›´æ–°ä¸€æ¬¡ï¼Ÿ ï¼¡6ã€æˆ‘å€‘æœ‰é€±æ’è¡Œã€æœˆæ’è¡Œã€å­£æ’è¡Œï¼Œä»¥æ–¹ä¾¿å¢åŠ æ›å…‰åº¦ä»¥åŠæœ‰é¡å¤–æ´»å‹•çå‹µç©åˆ†ï¼Œç©åˆ†å¯ä»¥åˆ°å•†ç¨‹å…Œæ›å•†å“");
+		faqVO2.setFaq_Date(Date.valueOf("2017-11-02"));
+		faqVO2.setFaq_No("F0005");
 		dao.update(faqVO2);
 		
-		//§R°£
+		//åˆªé™¤
 //		dao.delete("F0005");
 		
-		//¬d¸ß³æ¤@
+		//æŸ¥è©¢å–®ä¸€
 		
 		FaqVO faqVO3 = dao.findByPrimaryKey("F0001");
-		System.out.println(faqVO3.getFaq_no() + ",");
-		System.out.println(faqVO3.getFaq_content() + ",");
-		System.out.println(faqVO3.getFaq_date());
+		System.out.println(faqVO3.getFaq_No() + ",");
+		System.out.println(faqVO3.getFaq_Content() + ",");
+		System.out.println(faqVO3.getFaq_Date());
 		System.out.println("===============================================");
 		
-		//¬d¸ß¥ş³¡
+		//æŸ¥è©¢å…¨éƒ¨
 		List<FaqVO> list = dao.getAll();
 		for(FaqVO aFaq : list){
-			System.out.println(aFaq.getFaq_no() + ",");
-			System.out.println(aFaq.getFaq_content() + ",");
-			System.out.println(aFaq.getFaq_date());
+			System.out.println(aFaq.getFaq_No() + ",");
+			System.out.println(aFaq.getFaq_Content() + ",");
+			System.out.println(aFaq.getFaq_Date());
 			System.out.println("===============================================");
 		}
 		

@@ -11,31 +11,31 @@ public class FaqService {
 		dao = new FaqDAO();
 	}
 	
-	public FaqVO addFaq(String faq_content, Date faq_date){
+	public FaqVO addFaq(String faq_Content, Date faq_Date){
 		
 		FaqVO faqVO = new FaqVO();
 		
-		faqVO.setFaq_content(faq_content);
-		faqVO.setFaq_date(faq_date);
+		faqVO.setFaq_Content(faq_Content);
+		faqVO.setFaq_Date(faq_Date);
 		
 		dao.insert(faqVO);
 		return faqVO;
 	}
 	
-	public FaqVO updateFaq(String faq_no, String faq_content, Date faq_date){
+	public FaqVO updateFaq(String faq_No, String faq_Content, Date faq_Date){
 		
 		FaqVO faqVO = new FaqVO();
 		
-		faqVO.setFaq_no(faq_no);
-		faqVO.setFaq_content(faq_content);
-		faqVO.setFaq_date(faq_date);
+		faqVO.setFaq_No(faq_No);
+		faqVO.setFaq_Content(faq_Content);
+		faqVO.setFaq_Date(faq_Date);
 		
 		dao.update(faqVO);
 		return faqVO;
 	}
 	
-	public void deleteFaq(String faq_no){
-		dao.delete(faq_no);
+	public void deleteFaq(String faq_No){
+		dao.delete(faq_No);
 		
 	}
 	

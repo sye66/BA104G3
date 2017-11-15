@@ -19,23 +19,23 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 	String passwd = "BA104"; 
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO follow_tool_man (follower_mem_no,followed_mem_no,follow_status)"
+			"INSERT INTO follow_tool_man (follower_Mem_No,followed_Mem_No,follow_Status)"
 			+ "VALUES (?,?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT followed_mem_no,follow_status"
-			+ " FROM follow_tool_man WHERE follower_mem_no=? order by follower_mem_no";
+			"SELECT followed_Mem_No,follow_Status"
+			+ " FROM follow_tool_man WHERE follower_Mem_No=? order by follower_Mem_No";
 	
 	private static final String SELECT=
-			"SELECT follower_mem_no,followed_mem_no,follow_status"
-			+ " FROM follow_tool_man WHERE follower_mem_no=?";
+			"SELECT follower_Mem_No,followed_Mem_No,follow_Status"
+			+ " FROM follow_tool_man WHERE follower_Mem_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE follow_tool_man SET follow_status=?"
-			+ "WHERE follower_mem_no=? and followed_mem_no=?";
+			"UPDATE follow_tool_man SET follow_Status=?"
+			+ "WHERE follower_Mem_No=? and followed_Mem_No=?";
 			
 	private static final String DELETE=
-			"DELETE FROM follow_tool_man WHERE follower_mem_no=? and followed_mem_no=? ";
+			"DELETE FROM follow_tool_man WHERE follower_Mem_No=? and followed_Mem_No=? ";
 			
 			
 			
@@ -51,9 +51,9 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, follow_tmVO.getFollower_mem_no());
-			pstmt.setString(2, follow_tmVO.getFollowed_mem_no());
-			pstmt.setInt(3, follow_tmVO.getFollow_status());
+			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
+			pstmt.setString(2, follow_tmVO.getFollowed_Mem_No());
+			pstmt.setInt(3, follow_tmVO.getFollow_Status());
 			
 			pstmt.executeUpdate();
 			
@@ -95,10 +95,10 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 			
-//			pstmt.setString(1, follow_tmVO.getFollower_mem_no());
-			pstmt.setInt(1, follow_tmVO.getFollow_status());
-			pstmt.setString(2, follow_tmVO.getFollower_mem_no());
-			pstmt.setString(3, follow_tmVO.getFollowed_mem_no());
+//			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
+			pstmt.setInt(1, follow_tmVO.getFollow_Status());
+			pstmt.setString(2, follow_tmVO.getFollower_Mem_No());
+			pstmt.setString(3, follow_tmVO.getFollowed_Mem_No());
 		
 			pstmt.executeUpdate();
 			
@@ -129,7 +129,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 }
 
 	@Override
-	public void delete(String follower_mem_no, String followed_mem_no) {
+	public void delete(String follower_Mem_No, String followed_Mem_No) {
 		
 		Follow_tmVO follow_tmVO = null;
 		Connection con = null;
@@ -141,8 +141,8 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 			
-			pstmt.setString(1, follower_mem_no);
-			pstmt.setString(2, followed_mem_no);
+			pstmt.setString(1, follower_Mem_No);
+			pstmt.setString(2, followed_Mem_No);
 			
 			pstmt.executeUpdate();
 	}catch (ClassNotFoundException e) {
@@ -170,7 +170,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 }
 
 	@Override
-	public Follow_tmVO findByPrimaryKey(String follower_mem_no, String followed_mem_no) {
+	public Follow_tmVO findByPrimaryKey(String follower_Mem_No, String followed_Mem_No) {
 		Follow_tmVO follow_tmVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -181,15 +181,15 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(SELECT);
 			
-			pstmt.setString(1, follower_mem_no);
+			pstmt.setString(1, follower_Mem_No);
 			
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()){
 				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollower_mem_no(rs.getString("follower_mem_no"));
-				follow_tmVO.setFollowed_mem_no(rs.getString("followed_mem_no"));
-				follow_tmVO.setFollow_status(rs.getInt("follow_status"));
+				follow_tmVO.setFollower_Mem_No(rs.getString("follower_Mem_No"));
+				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
+				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
 			}
 		}catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -218,7 +218,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 	}
 
 	@Override
-	public List<Follow_tmVO> getAllDependOnFollower_mem_no(String follower_mem_no) {
+	public List<Follow_tmVO> getAllDependOnFollower_Mem_No(String follower_Mem_No) {
 		List<Follow_tmVO> list = new ArrayList<Follow_tmVO>();
 		Follow_tmVO follow_tmVO = null;
 		
@@ -229,7 +229,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
-			pstmt.setString(1, follower_mem_no);
+			pstmt.setString(1, follower_Mem_No);
 			
 			rs = pstmt.executeQuery();
 			
@@ -237,8 +237,8 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			
 			while(rs.next()){
 				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollowed_mem_no(rs.getString("followed_mem_no"));
-				follow_tmVO.setFollow_status(rs.getInt("follow_status"));
+				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
+				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
 				list.add(follow_tmVO);
 
 			}
@@ -271,42 +271,42 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 	public static void main(String[] args) {
 		Follow_tmJDBCDAO dao = new Follow_tmJDBCDAO();
 		
-		//·s¼W
+		//ï¿½sï¿½W
 		Follow_tmVO follow_tmVO1 = new Follow_tmVO();
 		
-		follow_tmVO1.setFollower_mem_no("M000001");
-		follow_tmVO1.setFollowed_mem_no("M000011");
-		follow_tmVO1.setFollow_status(0);
+		follow_tmVO1.setFollower_Mem_No("M000001");
+		follow_tmVO1.setFollowed_Mem_No("M000011");
+		follow_tmVO1.setFollow_Status(0);
 		
 		dao.insert(follow_tmVO1);
 		
-		//­×§ï
+		//ï¿½×§ï¿½
 		
 		Follow_tmVO follow_tmVO2 = new Follow_tmVO();
 		
-//		follow_tmVO2.setFollower_mem_no("M000001");
-		follow_tmVO2.setFollow_status(1);
-		follow_tmVO2.setFollower_mem_no("M000001");
-		follow_tmVO2.setFollowed_mem_no("M000002");		
+//		follow_tmVO2.setFollower_Mem_No("M000001");
+		follow_tmVO2.setFollow_Status(1);
+		follow_tmVO2.setFollower_Mem_No("M000001");
+		follow_tmVO2.setFollowed_Mem_No("M000002");		
 		
 		
 		dao.update(follow_tmVO2);
 		
-		//§R°£
+		//ï¿½Rï¿½ï¿½
 //		dao.delete("M000001", "M000020");
 		
-		//¬d¸ß³æ¤@
+		//ï¿½dï¿½ß³ï¿½@
 		Follow_tmVO follow_tmVO3 = dao.findByPrimaryKey("M000001", "M000020");
-		System.out.println("Follow_status :" + follow_tmVO3.getFollow_status());
+		System.out.println("Follow_Status :" + follow_tmVO3.getFollow_Status());
 		System.out.println("================================================");
 		
 		
-		//¬d¸ß©Ò¦³XXX·|­ûªº¥þ³¡°lÂÜªº¤H
+		//ï¿½dï¿½ß©Ò¦ï¿½XXXï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Üªï¿½ï¿½H
 		
-		List<Follow_tmVO> list = dao.getAllDependOnFollower_mem_no("M000001");
+		List<Follow_tmVO> list = dao.getAllDependOnFollower_Mem_No("M000001");
 		for(Follow_tmVO aFollow : list){
-			System.out.println(aFollow.getFollowed_mem_no() + ",");
-			System.out.println(aFollow.getFollow_status() + ",");
+			System.out.println(aFollow.getFollowed_Mem_No() + ",");
+			System.out.println(aFollow.getFollow_Status() + ",");
 			System.out.println("================================================");
 		}
 	}

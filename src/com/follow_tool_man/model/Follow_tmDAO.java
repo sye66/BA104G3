@@ -28,23 +28,23 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 
 	
 	private static final String INSERT_STMT=
-			"INSERT INTO follow_tool_man (follower_mem_no,followed_mem_no,follow_status)"
+			"INSERT INTO follow_tool_man (follower_Mem_No,followed_Mem_No,follow_Status)"
 			+ "VALUES (?,?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT followed_mem_no,follow_status"
-			+ " FROM follow_tool_man WHERE follower_mem_no=? order by follower_mem_no";
+			"SELECT followed_Mem_No,follow_Status"
+			+ " FROM follow_tool_man WHERE follower_Mem_No=? order by follower_Mem_No";
 	
 	private static final String SELECT=
-			"SELECT follower_mem_no,followed_mem_no,follow_status"
-			+ " FROM follow_tool_man WHERE follower_mem_no=?";
+			"SELECT follower_Mem_No,followed_Mem_No,follow_Status"
+			+ " FROM follow_tool_man WHERE follower_Mem_No=?";
 	
 	private static final String UPDATE=
-			"UPDATE follow_tool_man SET follow_status=?"
-			+ "WHERE follower_mem_no=? and followed_mem_no=?";
+			"UPDATE follow_tool_man SET follow_Status=?"
+			+ "WHERE follower_Mem_No=? and followed_Mem_No=?";
 			
 	private static final String DELETE=
-			"DELETE FROM follow_tool_man WHERE follower_mem_no=? and followed_mem_no=? ";
+			"DELETE FROM follow_tool_man WHERE follower_Mem_No=? and followed_Mem_No=? ";
 
 	@Override
 	public void insert(Follow_tmVO follow_tmVO) {
@@ -55,9 +55,9 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, follow_tmVO.getFollower_mem_no());
-			pstmt.setString(2, follow_tmVO.getFollowed_mem_no());
-			pstmt.setInt(3, follow_tmVO.getFollow_status());
+			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
+			pstmt.setString(2, follow_tmVO.getFollowed_Mem_No());
+			pstmt.setInt(3, follow_tmVO.getFollow_Status());
 			
 			pstmt.executeUpdate();
 			
@@ -94,10 +94,10 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
-//			pstmt.setString(1, follow_tmVO.getFollower_mem_no());
-			pstmt.setInt(1, follow_tmVO.getFollow_status());
-			pstmt.setString(2, follow_tmVO.getFollower_mem_no());
-			pstmt.setString(3, follow_tmVO.getFollowed_mem_no());
+//			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
+			pstmt.setInt(1, follow_tmVO.getFollow_Status());
+			pstmt.setString(2, follow_tmVO.getFollower_Mem_No());
+			pstmt.setString(3, follow_tmVO.getFollowed_Mem_No());
 		
 			pstmt.executeUpdate();
 			
@@ -125,7 +125,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 	}
 
 	@Override
-	public void delete(String follower_mem_no, String followed_mem_no) {
+	public void delete(String follower_Mem_No, String followed_Mem_No) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -134,8 +134,8 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setString(1, follower_mem_no);
-			pstmt.setString(2, followed_mem_no);
+			pstmt.setString(1, follower_Mem_No);
+			pstmt.setString(2, followed_Mem_No);
 			
 			pstmt.executeUpdate();
 	} catch (SQLException e) {
@@ -160,7 +160,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 	}
 
 	@Override
-	public Follow_tmVO findByPrimaryKey(String follower_mem_no, String followed_mem_no) {
+	public Follow_tmVO findByPrimaryKey(String follower_Mem_No, String followed_Mem_No) {
 		Follow_tmVO follow_tmVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -170,15 +170,15 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT);
 			
-			pstmt.setString(1, follower_mem_no);
+			pstmt.setString(1, follower_Mem_No);
 			
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()){
 				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollower_mem_no(rs.getString("follower_mem_no"));
-				follow_tmVO.setFollowed_mem_no(rs.getString("followed_mem_no"));
-				follow_tmVO.setFollow_status(rs.getInt("follow_status"));
+				follow_tmVO.setFollower_Mem_No(rs.getString("follower_Mem_No"));
+				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
+				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
 			}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -204,7 +204,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 	}
 
 	@Override
-	public List<Follow_tmVO> getAllDependOnFollower_mem_no(String follower_mem_no) {
+	public List<Follow_tmVO> getAllDependOnFollower_Mem_No(String follower_Mem_No) {
 		List<Follow_tmVO> list = new ArrayList<Follow_tmVO>();
 		Follow_tmVO follow_tmVO = null;
 		
@@ -217,8 +217,8 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollowed_mem_no(rs.getString("followed_mem_no"));
-				follow_tmVO.setFollow_status(rs.getInt("follow_status"));
+				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
+				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
 				list.add(follow_tmVO);
 			}
 			

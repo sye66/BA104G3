@@ -1,7 +1,7 @@
 package com.stored_history.controller;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mem.model.MemService;
 import com.stored_history.model.StoredService;
 import com.stored_history.model.StoredVO;
 
@@ -27,17 +26,16 @@ public class Stored_HistoryServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
 		if ("getOne_For_Display".equals(action)){
 			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try{
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 				String str = req.getParameter("stored_no");
 				if(str == null || (str.trim()).length() == 0){
-					errorMsgs.add("½Ğ¿é¤JÀx­È°O¿ı½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥å„²å€¼è¨˜éŒ„ç·¨è™Ÿ");
 				}
 				
 				if (!errorMsgs.isEmpty()){
@@ -50,7 +48,7 @@ public class Stored_HistoryServlet extends HttpServlet{
 				try{
 					stored_no = new String(str);
 				} catch (Exception e) {
-					errorMsgs.add("Àx­È°O¿ı½s¸¹®æ¦¡¤£¥¿½T");
+					errorMsgs.add("å„²å€¼è¨˜éŒ„ç·¨è™Ÿæ ¼å¼ä¸æ­£ç¢º");
 				}
 				
 				if (!errorMsgs.isEmpty()){
@@ -58,11 +56,11 @@ public class Stored_HistoryServlet extends HttpServlet{
 					failureView.forward(req, res);
 					return;
 				}
-				/***************************2.¶}©l¬d¸ß¸ê®Æ*****************************************/
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™*****************************************/
 				StoredService storedSvc = new StoredService();
 				StoredVO storedVO = storedSvc.getOneStored(stored_no);
 				if (storedVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				
 				if (!errorMsgs.isEmpty()){
@@ -70,98 +68,131 @@ public class Stored_HistoryServlet extends HttpServlet{
 					failureView.forward(req, res);
 					return;
 				}
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)*************/
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)*************/
 				
 				req.setAttribute("storedVO", storedVO);
-				String url = "/stored_history/listOneStored.jsp";
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z*************************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†*************************************/
 			} catch (Exception e){
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView =req.getRequestDispatcher("/stored_history/select_page.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		} //getOne_For_Display end
 		
-		if ("getOne_For_Update".equals(action)){// ¨Ó¦ÛlistAllStored.jspªº½Ğ¨D
+		
+		
+			if ("getAll_For_Display".equals(action)){
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+//			try{
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
+				String mem_No = req.getParameter("mem_No");
+				
+				String stored_No = req.getParameter("stored_No");
+				
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™*****************************************/
+				StoredService storedSvc = new StoredService();
+				List<StoredVO> storedVO = storedSvc.getAll(mem_No);
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)*************/
+				
+				req.setAttribute("storedVO", storedVO);
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†*************************************/
+//			} catch (Exception e){
+//				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
+//				RequestDispatcher failureView =req.getRequestDispatcher("/stored_history/select_page.jsp");
+//				failureView.forward(req, res);
+//			}
+		} //getOne_For_Display end
+		
+		
+		
+		if ("getOne_For_Update".equals(action)){// ä¾†è‡ªlistAllStored.jspçš„è«‹æ±‚
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try{
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ****************************************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸****************************************/
 				
 				String stored_no = new String(req.getParameter("stored_no"));
 				
-				/***************************2.¶}©l¬d¸ß¸ê®Æ****************************************/
+				/***************************2.é–‹å§‹æŸ¥è©¢è³‡æ–™****************************************/
 				
 				StoredService storedSvc = new StoredService();
 				StoredVO storedVO = storedSvc.getOneStored(stored_no);
 				
-				/***************************3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)************/
+				/***************************3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)************/
 				
 				req.setAttribute("storedVO", storedVO);
-				String url = "/stored_history/update_stored_input.jsp";
+				String url = "/stored_history/stored_historyReview.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/listAllStored.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		} //getOne_For_Update end
 		
-		if ("update".equals(action)){// ¨Ó¦Ûupdate_stored_input.jspªº½Ğ¨D
+		
+		
+		
+		
+		
+		
+		if ("update".equals(action)){// ä¾†è‡ªupdate_stored_input.jspçš„è«‹æ±‚
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try{
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 				String stored_no = new String(req.getParameter("stored_no").trim());
 				
-				String mem_no = new String(req.getParameter("mem_no").trim());
-				String mem_no_reg = "^M(0-9){6}$";
-				if (mem_no == null || mem_no.trim().length() == 0){
-					errorMsgs.add("·|­û½s¸¹½Ğ¤ÅªÅ¥Õ");
-				} else if(!mem_no.trim().matches(mem_no_reg)){
-					errorMsgs.add("·|­û½s¸¹ : ¬° MXXXXXX");
+				String mem_No = new String(req.getParameter("mem_No").trim());
+				String mem_No_reg = "^M(0-9){6}$";
+				if (mem_No == null || mem_No.trim().length() == 0){
+					errorMsgs.add("æœƒå“¡ç·¨è™Ÿè«‹å‹¿ç©ºç™½");
+				} else if(!mem_No.trim().matches(mem_No_reg)){
+					errorMsgs.add("æœƒå“¡ç·¨è™Ÿ : ç‚º MXXXXXX");
 				}
 				
-				Date stored_date =null;
-				try{
-					stored_date = Date.valueOf(req.getParameter("stored_date").trim());
+				Timestamp stored_Date = new Timestamp(System.currentTimeMillis());
 					
-				} catch(IllegalArgumentException e){
-					stored_date = new Date(System.currentTimeMillis());
-					errorMsgs.add("½Ğ¿é¤J¥¿½T¤é´Á !");
-				}
 				
-				Integer stored_type;
+				Integer stored_Type;
 				try{
-					stored_type = new Integer(req.getParameter("stored_type").trim());
-//					String stored_type_reg = "^(1-3){1}$";
+					stored_Type = new Integer(req.getParameter("stored_Type").trim());
+//					String stored_Type_reg = "^(1-3){1}$";
 				} catch (NumberFormatException e){
-					errorMsgs.add("½Ğ­×§ï¥¿½T¥I´Ú¤è¦¡  (1.ÂI¼Æ¥d ;2.«H¥Î¥d ;3.½u¤W²Ä¤T¤è¤ä¥I");
-					stored_type = null;
+					errorMsgs.add("è«‹ä¿®æ”¹æ­£ç¢ºä»˜æ¬¾æ–¹å¼  (1.é»æ•¸å¡ ;2.ä¿¡ç”¨å¡ ;3.ç·šä¸Šç¬¬ä¸‰æ–¹æ”¯ä»˜");
+					stored_Type = null;
 				}
 				
-				Double stored_cost = null;
+				Double stored_Cost = null;
 				try{
-					stored_cost = new Double(req.getParameter("stored_cost").trim());
+					stored_Cost = new Double(req.getParameter("stored_Cost").trim());
 				} catch(NumberFormatException e){
-					errorMsgs.add("½Ğ¿é¤J¥¿½Tªºª÷ÃB");
+					errorMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºçš„é‡‘é¡");
 				}
 				
 				StoredVO storedVO = new StoredVO();
 				
-				storedVO.setStored_no(stored_no);
-				storedVO.setMem_no(mem_no);
-				storedVO.setStored_date(stored_date);
-				storedVO.setStored_type(stored_type);
-				storedVO.setStored_cost(stored_cost);
+				storedVO.setStored_No(stored_no);
+				storedVO.setMem_No(mem_No);
+				storedVO.setStored_Date(stored_Date);
+				storedVO.setStored_Type(stored_Type);
+				storedVO.setStored_Cost(stored_Cost);
 				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("storedVO", storedVO);
@@ -170,70 +201,68 @@ public class Stored_HistoryServlet extends HttpServlet{
 					return;
 				}
 				
-				/***************************2.¶}©l·s¼W¸ê®Æ***************************************/
+				/***************************2.é–‹å§‹æ–°å¢è³‡æ–™***************************************/
 				StoredService storedSvc = new StoredService();
-				storedVO = storedSvc.updateStored(stored_no,mem_no,stored_date,stored_type,stored_cost);
+				storedVO = storedSvc.updateStored(stored_no,mem_No,stored_Date,stored_Type,stored_Cost);
 				
-				/***************************3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
+				/***************************3.æ–°å¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)***********/
 				req.setAttribute("storedVO", storedVO);
 				String url = "/stored_history/listOneStored.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†**********************************/
 			} catch (Exception e){
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ :" + e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•— :" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/update_stored_input.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		} //update end
 		
-		if ("insert".equals(action)){// ¨Ó¦ÛaddStored.jspªº½Ğ¨D
+		if ("insert".equals(action)){// ä¾†è‡ªaddStored.jspçš„è«‹æ±‚
+			System.out.println("stored_Date2 :"  );
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+			System.out.println("stored_Date0 :"  );		
 			try{
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z**********************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†**********************/
 //				String stored_no = new String(req.getParameter("stored_no").trim());
-				
-				String mem_no = new String(req.getParameter("mem_no").trim());
-				if (mem_no == null || mem_no.trim().length() ==0 ){
-					errorMsgs.add("½Ğ¿é¤J·|­û½s¸¹");
+				System.out.println("stored_Date2 :"  );
+				String mem_No = new String(req.getParameter("mem_No").trim());
+				if (mem_No == null || mem_No.trim().length() ==0 ){
+					errorMsgs.add("è«‹è¼¸å…¥æœƒå“¡ç·¨è™Ÿ");
 				}
+				System.out.println("stored_Date3 :"  );
 				
-				Date stored_date =null;
-				try{
-					stored_date = Date.valueOf(req.getParameter("stored_date").trim());
-					
-				} catch(IllegalArgumentException e){
-					stored_date = new Date(System.currentTimeMillis());
-					errorMsgs.add("½Ğ¿é¤J¥¿½T¤é´Á !");
-				}
 				
-				Integer stored_type;
+				Timestamp stored_Date = new Timestamp(System.currentTimeMillis());
+				
+				Integer stored_Type;
 				try{
-					stored_type = new Integer(req.getParameter("stored_type").trim());
-//					String stored_type_reg = "^(1-3){1}$";
+					stored_Type = new Integer(req.getParameter("stored_Type").trim());
+//					String stored_Type_reg = "^(1-3){1}$";
 				} catch (NumberFormatException e){
-					errorMsgs.add("½Ğ­×§ï¥¿½T¥I´Ú¤è¦¡  (1.ÂI¼Æ¥d ;2.«H¥Î¥d ;3.½u¤W²Ä¤T¤è¤ä¥I");
-					stored_type = null;
+					errorMsgs.add("è«‹ä¿®æ”¹æ­£ç¢ºä»˜æ¬¾æ–¹å¼  (1.é»æ•¸å¡ ;2.ä¿¡ç”¨å¡ ;3.ç·šä¸Šç¬¬ä¸‰æ–¹æ”¯ä»˜");
+					stored_Type = null;
 				}
 				
-				Double stored_cost = null;
+				Double stored_Cost = null;
 				try{
-					stored_cost = new Double(req.getParameter("stored_cost").trim());
+					stored_Cost = new Double(req.getParameter("stored_Cost").trim());
 				} catch(NumberFormatException e){
-					errorMsgs.add("½Ğ¿é¤J¥¿½Tªºª÷ÃB");
+					errorMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºçš„é‡‘é¡");
 				}
 				
 				StoredVO storedVO = new StoredVO();
 				
-//				storedVO.setStored_no(stored_no);
-				storedVO.setMem_no(mem_no);
-				storedVO.setStored_date(stored_date);
-				storedVO.setStored_type(stored_type);
-				storedVO.setStored_cost(stored_cost);
+//				storedVO.setStored_No(stored_no);
+				storedVO.setMem_No(mem_No);
+				storedVO.setStored_Date(stored_Date);
+				storedVO.setStored_Type(stored_Type);
+				storedVO.setStored_Cost(stored_Cost);
+				
+				System.out.println("stored_Date " + stored_Date);
 				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("storedVO", storedVO);
@@ -242,49 +271,53 @@ public class Stored_HistoryServlet extends HttpServlet{
 					return;
 				}
 				
-				/***************************2.¶}©l·s¼W¸ê®Æ***************************************/
+				/***************************2.é–‹å§‹æ–°å¢è³‡æ–™***************************************/
 				StoredService storedSvc = new StoredService();
-				storedVO = storedSvc.addStored(mem_no,stored_date,stored_type,stored_cost);
+				storedVO = storedSvc.addStored(storedVO);
 				
-				/***************************3.·s¼W§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
-				req.setAttribute("storedVO", storedVO);
-				String url = "/stored_history/listAllStored.jsp";
+				/***************************3.æ–°å¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)***********/
+				req.getSession().setAttribute("storedVO", storedVO);
+				String url = "/frontdesk/stored_history/stored_historyRecharge.jsp";
+				String success ="ok";
+				req.setAttribute("success", success);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†**********************************/
 			} catch (Exception e){
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ :" + e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•— :" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/addStored.jsp");
 				failureView.forward(req, res);
 			}
-		}
+		} //insert end
 		
 		if("delete".equals(action)){
 			List<String> errorMsgs =new LinkedList<String>();
-			
+			System.out.println("======");
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			try{
-				/***************************1.±µ¦¬½Ğ¨D°Ñ¼Æ***************************************/
+				/***************************1.æ¥æ”¶è«‹æ±‚åƒæ•¸***************************************/
 				String stored_no = req.getParameter("stored_no");
 				
-				/***************************2.¶}©l§R°£¸ê®Æ***************************************/
+				/***************************2.é–‹å§‹åˆªé™¤è³‡æ–™***************************************/
 				StoredService storedSvc = new StoredService();
 				storedSvc.deleteStored(stored_no);
 				
-				/***************************3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view)***********/
+				/***************************3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view)***********/
 				String url = "/stored_history/listAllStored.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
-				/***************************¨ä¥L¥i¯àªº¿ù»~³B²z**********************************/
+				/***************************å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç†**********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ : "+e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•— : "+e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/listAllStored.jsp");
 				failureView.forward(req, res);
 			}
-			}
+		}// delete end\
+		System.out.println("==========end");
 	}
+	
 }

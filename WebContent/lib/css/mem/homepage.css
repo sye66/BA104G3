@@ -1,0 +1,44 @@
+/*navbar與btn*/
+
+.navbar-default {
+  background-color: #ccc;
+  border-color: #fa0;
+}
+
+.nav{font-size: 20px;}
+
+
+hr{height: 2px;}
+.main-bar{height: 210px;background-color: #91C9E8;}
+#main-bar{font-size: 70px;margin-top: 30px}
+
+.footer{background-color: #007CA6;
+		height: 300px;}
+#title{margin:auto;}
+#function-btn{border: 2px solid #a1a1a1;
+		    /*padding: 10px 40px; */
+			    height: 50px;
+				width: 150px;
+				border-radius: 25px;}
+
+
+/*下拉式選單*/
+
+
+/*麵包屑*/
+
+.breadcrumb{margin-left: 15%}
+
+
+/* 旋轉木馬 */
+.caro_color1,.caro_color1-1{color: #333}
+
+/* 網站介紹 */
+.introduction{font-size: 20px}
+
+/* contact */
+#contact{font-size: 20px}
+
+/* QRcode */
+
+#QRcode{margin-left: 0%}
