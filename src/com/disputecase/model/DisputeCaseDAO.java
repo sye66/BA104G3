@@ -21,7 +21,7 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			+ "ISSUE_DATE,"
 			+ "CLOSE_TIME,"
 			+ "DISPUTE_CASE_STATUS)"
-			+ " VALUES(?,?,?,?,?,?,?)";
+			+ " VALUES('DIS'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'),?,?,?,?,?,?)";
 	private static final String GET_ONE_STMT = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO =?";
 	private static final String GET_ALL_STMT = "SELECT * FROM DISPUTE_CASE";
 	private static final String DELETE_STMT = "DELETE FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO=?";
@@ -53,15 +53,14 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			System.out.println("---------------------------------------");
 			con = ds.getConnection();
 			System.out.println("連線成功");
-			pstmt = con.prepareStatement(INSERT_STMT,1);
+			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, disputeCaseVO.getDispute_Case_No());
-			pstmt.setString(2, disputeCaseVO.getMission_No());
-			pstmt.setString(3, disputeCaseVO.getDispute_Mem_No());
-			pstmt.setString(4, disputeCaseVO.getEmp_No());
-			pstmt.setTimestamp(5, disputeCaseVO.getIssue_Datetime());
-			pstmt.setTimestamp(6, disputeCaseVO.getClose_Datetime());
-			pstmt.setInt(7, disputeCaseVO.getDispute_Case_Status());
+			pstmt.setString(1, disputeCaseVO.getMission_No());
+			pstmt.setString(2, disputeCaseVO.getDispute_Mem_No());
+			pstmt.setString(3, disputeCaseVO.getEmp_No());
+			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
+			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
+			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
 			
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
