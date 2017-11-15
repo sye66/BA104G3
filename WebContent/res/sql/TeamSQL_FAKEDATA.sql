@@ -605,7 +605,8 @@ INSERT INTO PRO_CLASS VALUES ('C'||LPAD(PRO_CLASS_SEQ.NEXTVAL,4,0),'電腦周邊
 INSERT INTO PRO_CLASS VALUES ('C'||LPAD(PRO_CLASS_SEQ.NEXTVAL,4,0),'廚具');
 COMMIT;
 
---商品 PRO FAKE DATA--INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),40,'C0001','上架',90,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2015-12-10','YYYY-MM-DD'),NULL,'小王子麵','童年記憶的難忘好滋味,小包裝食用更順手,香香脆脆好滋味,絕不添加防腐');
+--商品 PRO FAKE DATA--
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),40,'C0001','上架',90,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2015-12-10','YYYY-MM-DD'),NULL,'小王子麵','童年記憶的難忘好滋味,小包裝食用更順手,香香脆脆好滋味,絕不添加防腐');
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),30,'C0001','上架',90,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2015-12-10','YYYY-MM-DD'),NULL,'休閒丸子','以香脆點心麵為基底，再精製為一顆顆圓圓的脆麵點心,獨特的日式串燒醬風味，加上香脆口感的脆麵丸子，享用方便、不沾手!');
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),40,'C0001','上架',80,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2016-02-10','YYYY-MM-DD'),NULL,'浪味仙','上選馬鈴薯原料，獨家特調蔬菜秘方，讓你上癮的好滋味,口感酥酥脆脆,看電視、出遊好伴侶');
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),50,'C0001','上架',80,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2016-02-10','YYYY-MM-DD'),NULL,'可樂果','試試看「走路有聲」的暢快滋味,堅持選用天然豌豆作為原料,讓你越吃越過癮');
@@ -616,17 +617,29 @@ INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),70,'C0001','下架',100
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),160,'C0001','下架',100,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2017-08-10','YYYY-MM-DD'),NULL,'泡芙米果','知名日本大廠-越後製果,卡滋口感甜鹹不膩,黃豆泡芙可口超有味~');
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),210,'C0001','下架',100,TO_DATE('2015-12-10','YYYY-MM-DD'),TO_DATE('2016-12-10','YYYY-MM-DD'),NULL,'綜合仙貝','知名日本廠牌-栗山米果,蔬菜/沙拉/甘口醬油,一次可以享受三種美味,酥酥脆脆的好口感');
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),41500,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'iPhone X','256G 5.8吋智慧型手機,Super Retina HD 顯示器,5.8 吋 (對角線) 全螢幕 OLED Multi-Touch 顯示器,HDR 顯示,3D Touch');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),21900,'C0002','上架',90,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'HTC U11','HTC首款6吋 18:9 全螢幕手機,全球首款創透明水漾設計,八核心驍龍835處理器2.45GHz,Edge Sense 邊緣觸控技術,3930mAh 大容量電池,6G RAM / 128G ROM');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),24900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'GALAXY S8','5.8 吋 2960X1400 Super AMOLED 螢幕,主相機1200萬,前鏡頭800萬畫素,IP68防水防塵/Type-C,Bixby 圖像辨識、翻譯、搜尋,加購原廠指定配件登錄送1千摩曼頓禮券');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),11900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'SONY Xperia','聯發科P20八核心處理器,5.5吋FHD螢幕,2300萬畫素/800萬畫素相機,4G RAM / 32G ROM,4G+3G雙卡雙待,支援指紋辨識/快速充電');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),5990,'C0002','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'ASUS ZenFone','ZenFone 4 Max長效戀攝影,5000mAh大電量 ,廣角雙鏡頭,戀電能:5000mAh大電量 46 天待機,戀攝影:1300萬+120°超廣角後雙鏡頭,戀美型:洗鍊金屬質感，前置指紋辨識');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),15990,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'OPPO R11','主鏡頭2000萬畫素,長焦鏡頭+1600萬畫素,F1.7大光圈廣角鏡頭,Spectra ISP影像處理技術、專業人像模式,獨家VOOC閃充、微縫天線2.0設計');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),26900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'HUAWEI Mate','5.5吋徠卡雙鏡頭 雙曲面旗艦機,6GB RAM / 128GB ROM,最新Adroid 7.0系統,雙卡雙待4G+3G,4000mAh支援超級快充');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),4990,'C0002','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'InFocus M5s','MT6737 四核處理器,5.2吋IPS高透彩螢幕,3G RAM / 32G ROM,前800/後1300萬畫素相機,指紋辦識 / 雙卡雙待');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),14990,'C0002','下架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'moto Z2 Play','3,000mAh 電池容量,1,200 萬畫素主鏡頭、F1.7 光圈,500萬畫素前鏡頭、F2.2 光圈廣角鏡頭(85度),疏水奈米塗層');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3450,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'GPLUS F1','2.4 吋彩色螢幕,支援3G網路,支援MP3播放器/收音機/手電筒/可拍照,防水、防塵、耐摔 IP68,記憶卡擴充');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),41500,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'iPhoneX','256G 5.8吋智慧型手機,Super Retina HD 顯示器,5.8 吋 (對角線) 全螢幕 OLED Multi-Touch 顯示器,HDR 顯示,3D Touch');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),21900,'C0002','上架',90,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'HtcU11','HTC首款6吋 18:9 全螢幕手機,全球首款創透明水漾設計,八核心驍龍835處理器2.45GHz,Edge Sense 邊緣觸控技術,3930mAh 大容量電池,6G RAM / 128G ROM');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),24900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'GalaxyS8','5.8 吋 2960X1400 Super AMOLED 螢幕,主相機1200萬,前鏡頭800萬畫素,IP68防水防塵/Type-C,Bixby 圖像辨識、翻譯、搜尋,加購原廠指定配件登錄送1千摩曼頓禮券');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),11900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'SonyXperia','聯發科P20八核心處理器,5.5吋FHD螢幕,2300萬畫素/800萬畫素相機,4G RAM / 32G ROM,4G+3G雙卡雙待,支援指紋辨識/快速充電');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),5990,'C0002','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'AsusZenFone','ZenFone 4 Max長效戀攝影,5000mAh大電量 ,廣角雙鏡頭,戀電能:5000mAh大電量 46 天待機,戀攝影:1300萬+120°超廣角後雙鏡頭,戀美型:洗鍊金屬質感，前置指紋辨識');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),15990,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'OppoR11','主鏡頭2000萬畫素,長焦鏡頭+1600萬畫素,F1.7大光圈廣角鏡頭,Spectra ISP影像處理技術、專業人像模式,獨家VOOC閃充、微縫天線2.0設計');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),26900,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'HuaweiMate','5.5吋徠卡雙鏡頭 雙曲面旗艦機,6GB RAM / 128GB ROM,最新Adroid 7.0系統,雙卡雙待4G+3G,4000mAh支援超級快充');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),4990,'C0002','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'InFocusM5s','MT6737 四核處理器,5.2吋IPS高透彩螢幕,3G RAM / 32G ROM,前800/後1300萬畫素相機,指紋辦識 / 雙卡雙待');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),14990,'C0002','下架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'motoZ2','3,000mAh 電池容量,1,200 萬畫素主鏡頭、F1.7 光圈,500萬畫素前鏡頭、F2.2 光圈廣角鏡頭(85度),疏水奈米塗層');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3450,'C0002','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'GplusF1','2.4 吋彩色螢幕,支援3G網路,支援MP3播放器/收音機/手電筒/可拍照,防水、防塵、耐摔 IP68,記憶卡擴充');
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3280,'C0003','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'彩色輪圈-折疊車','20吋高級高碳鋼摺疊式車架,高級24速轉把式變速系統,高級鋁合金輕量化,彩色輪圈,已投保產品責任險5千萬');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3980,'C0003','上架',80,TO_DATE('2017-11-8','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'兒童滑步車','使用符合人體工學安全輕盈舒適材質,獨特耐久材質可從2歲騎到5歲,越野專用胎紋打氣輪胎抓地力超強,身高87~110CM的寶貝都適用');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),28900,'C0003','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'電動智能平衡車','限速安全機制 保證安全,留白設計 揮灑您的創意,App隨意配置不同燈光色彩');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),590,'C0003','下架',100,TO_DATE('2017-11-8','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'籃球 橘','材質：橡膠,斯伯丁籃球');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1760,'C0003','上架',90,TO_DATE('2017-11-8','YYYY-MM-DD'),TO_DATE('2017-11-10','YYYY-MM-DD'),NULL,'兒童網球拍','奧地利國際運動品牌,專為兒童青少年設計,吸震材質，防止運動傷害,容易揮拍，擊球穩定,減震手柄，減少不良震動');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),350,'C0003','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-11-10','YYYY-MM-DD'),NULL,'強力健美輪','台灣製造=品質保證,滾輪健腹器，直徑18CM大雙輪,一體式雙大風火輪設計！,水平止滑紋理＋工學塑膠手把！,贈跪墊');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),510,'C0003','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-11-10','YYYY-MM-DD'),NULL,'輕量啞鈴','1.5KG 紅色 2入組,圓弧設計耐碰撞,握感舒適不冰冷手感佳,環保PE材質方便擦拭不生鏽,配有氧運動，效果加倍');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1750,'C0003','上架',90,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'輕巧健身機','全球熱銷★送初階、進階教學光碟,集中訓練下腹肌中腹肌和上腹肌,每次躺下坐起都能有效產生阻力,強化版本核心彈簧設計,運動中，背部得到更良好的支撐,輕巧好攜帶，可摺疊收納');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),500,'C0003','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'瑜珈墊','7段折疊、折疊約A4大小,加厚材質、充分緩衝地面接觸,質地柔軟、彈性佳,可以緩衝身體與地面接觸,可放置於手提包內,隨帶隨走、攜帶方便具有很好的回彈性,平整性、防滑性');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),2320,'C0003','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-10','YYYY-MM-DD'),NULL,'速開型自動帳篷','一分鐘快速搭建，單人即可輕鬆完成,特殊防紫外線塗層UPF30+,內外帳可分別單獨使用,加細密紗網，夏天涼爽防蚊,雙門設計，通風透氣，進出動線暢通');
 COMMIT;
+
 
 --商品追蹤 PRO_TRACK FAKE DATA--
 
