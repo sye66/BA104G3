@@ -93,7 +93,7 @@
 		<th>文章類別</th>
 		<th>文章狀態</th>
 	</tr>
- 	<%@ include file="/backdesk/page1.file" %> 
+ 	<%@ include file="/frontdesk/page1.file" %> 
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
 		
 		<tr>

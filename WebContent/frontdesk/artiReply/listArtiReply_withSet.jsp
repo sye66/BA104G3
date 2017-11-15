@@ -91,7 +91,7 @@ button{
 	</ul>
 </c:if>
 
-	<%@ include file="/backdesk/page1.file" %> 
+	<%@ include file="/frontdesk/page1.file" %> 
 	<c:forEach var="artiReplyVO" items="${set}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
 	
