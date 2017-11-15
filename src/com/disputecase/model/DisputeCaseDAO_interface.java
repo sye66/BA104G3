@@ -9,4 +9,5 @@ public interface DisputeCaseDAO_interface {
 	public DisputeCaseVO findByprimaryKey(String dispute_case_no);
 	public List<DisputeCaseVO> getAll();
 	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status);
+	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status, String emp_No);
 }

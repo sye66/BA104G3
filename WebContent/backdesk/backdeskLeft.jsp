@@ -17,7 +17,7 @@
 	<!-- 標籤面板：內容區 -->
 		<div role="" class="tab-pane active " id="tab1">
 			<div class="list-group">
-				<a href="#" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_manage.jsp" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
 				<a href="#" class="list-group-item">&nbsp;&nbsp;任務檢舉案件</a> 
 				<a href="#" class="list-group-item">&nbsp;&nbsp;討論區檢舉案件</a> 
 				<a href="#" class="list-group-item">&nbsp;&nbsp;會員檢舉案件</a> 
