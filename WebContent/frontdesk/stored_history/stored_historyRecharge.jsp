@@ -72,7 +72,7 @@
 
 
 
-    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-2">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-2"> 
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do" name="form1">
 

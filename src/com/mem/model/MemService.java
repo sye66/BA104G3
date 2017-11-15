@@ -14,7 +14,7 @@ public class MemService {
 		dao = new MemDAO();
 	}
 	
-	public MemVO loginMem(String mem_Email){
+	public MemVO loginMem(String mem_Email){ 
 		
 		return dao.loginMem(mem_Email);
 	}

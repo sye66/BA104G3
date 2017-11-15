@@ -86,7 +86,7 @@ public class StoredDAO implements StoredDAO_interface{
 				// TODO Auto-generated catch block
 				e.printStackTrace(System.err);
 			}
-		}
+		} 
 	}
 	}
 

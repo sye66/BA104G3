@@ -315,11 +315,11 @@ public class Stored_HistoryServlet extends HttpServlet{
 				String success ="ok";
 				req.setAttribute("success", success);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				successView.forward(req, res); 
 				
 				
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
+//			} catch (Exception e){ 
 //				errorMsgs.add("修改資料失敗 :" + e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
 //				failureView.forward(req, res);
