@@ -38,7 +38,7 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3_TEST");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
