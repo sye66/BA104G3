@@ -55,17 +55,17 @@
               <h3>Around the Web</h3>
               <ul class="list-inline">
                 <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://www.facebook.com/">
+                  <a class="btn-social btn-outline" href="">
                     <i class="fa fa-fw fa-facebook"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://plus.google.com/">
+                  <a class="btn-social btn-outline" href="">
                     <i class="fa fa-fw fa-google-plus"></i>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="https://twitter.com/">
+                  <a class="btn-social btn-outline" href="">
                     <i class="fa fa-fw fa-twitter"></i>
                   </a>
                 </li>
