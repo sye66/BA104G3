@@ -17,7 +17,7 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 	
 	
 		private static final String INSERT_STMT = 
-			"INSERT INTO mission (mission_no,mission_category,mission_name,mission_des,issuer_mem_no,takecase_mem_no,mission_release_time,mission_due_time,mission_start_time,mission_end_time,mission_state,mission_pattern,mission_pay) VALUES (to_char(sysdate,'yyyymmdd')||'MIS'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				"INSERT INTO mission (mission_no,mission_category,mission_name,mission_des,issuer_mem_no,takecase_mem_no,mission_release_time,mission_due_time,mission_start_time,mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng) VALUES ('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 		private static final String GET_ALL_STMT = 
 			"SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay FROM mission order by mission_no";
 		private static final String GET_ONE_STMT = 
