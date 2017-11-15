@@ -47,6 +47,9 @@ public class RelationDAO implements RelationDAO_interface{
 	private static final String DELETE=
 			"DELETE FROM relation WHERE mem_No=? and related_Mem_No=? ";
 	
+	private static final String GET_ALL=
+			"SELECT mem_No,related_Mem_No,relation_Status FROM relation";
+	
 	
 	
 	@Override
@@ -287,6 +290,43 @@ public class RelationDAO implements RelationDAO_interface{
 	}
 
 
+	@Override
+	public List<RelationVO> getAll() {
+		List<RelationVO> list = new ArrayList<RelationVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL);
+			rs =pstmt.executeQuery();
+			while(rs.next()){
+				RelationVO relationVO = new RelationVO();
+				relationVO.setMem_No(rs.getString("MEM_NO"));
+				relationVO.setRelation_Status(rs.getInt("RELATION_STATUS"));
+				relationVO.setRelated_Mem_No(rs.getString("RELATED_MEM_NO"));
+				list.add(relationVO);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{	
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}				
+		return list;
+	}
 
 
 }

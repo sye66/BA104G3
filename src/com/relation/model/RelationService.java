@@ -61,4 +61,8 @@ public class RelationService {
 		
 		return dao.getAllRelationWithMem_No(mem_No);
 	}
+	public List<RelationVO> getAll(){
+		
+		return dao.getAll();
+	}
 }

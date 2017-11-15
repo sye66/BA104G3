@@ -11,5 +11,6 @@ public interface RelationDAO_interface {
 	public RelationVO findByPrimaryKey(String mem_No, String related_Mem_No);
 	public List<RelationVO> getAllRelationWithMem_No(String mem_No);
 	public List<RelationVO> getWhoAddme(String related_Mem_No);
+	public List<RelationVO> getAll();
 
 }

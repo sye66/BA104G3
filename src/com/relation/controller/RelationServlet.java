@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 import com.relation.model.RelationService;
 import com.relation.model.RelationVO;
 import com.stored_history.model.StoredService;
@@ -227,8 +229,6 @@ public class RelationServlet extends HttpServlet{
 				
 				Integer relation_Status = 1;
 				
-				System.out.println(relation_Status);
-				
 				
 				RelationVO relationVO = new RelationVO();
 				
@@ -248,7 +248,6 @@ public class RelationServlet extends HttpServlet{
 				RelationService relationSvc = new RelationService();
 				relationVO = relationSvc.updaterelationVO(mem_No, related_Mem_No, relation_Status);
 				
-				System.out.println("1111111111");
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("relationVO", relationVO);
@@ -270,6 +269,19 @@ public class RelationServlet extends HttpServlet{
 				req.getSession().setAttribute("relationVO", relationVO);
 				
 				
+				
+				/***************************5.將A的mem_No轉換成mem_Name(呼叫memSvc的getAll方法)***********/
+				
+				MemService memSvc = new MemService();
+				System.out.println("related_Mem_No " + related_Mem_No);
+				System.out.println("mem_No " +mem_No);
+				MemVO memVO1 = memSvc.getOneMem(related_Mem_No);
+				System.out.println("memVO1.getMem_Name()" +memVO1.getMem_Name());
+				memVO1.setMem_Name(mem_No);
+				
+				System.out.println("1111memVO1.getMem_Name()" +memVO1.getMem_Name());
+				
+				req.getSession().setAttribute("memVO1", memVO1);
 				
 				RequestDispatcher successView = req.getRequestDispatcher(location);  //讓使用者登入後停留在原頁面
 			    successView.forward(req, res);
@@ -312,7 +324,7 @@ public class RelationServlet extends HttpServlet{
 				
 				/***************************2.開始新增資料***************************************/
 				RelationService relationSvc = new RelationService();
-				relationVO = relationSvc.addRelationVO("M000001", "M000015", relation_Status);
+				relationVO = relationSvc.addRelationVO(mem_No, related_Mem_No, relation_Status);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("relationVO", relationVO);

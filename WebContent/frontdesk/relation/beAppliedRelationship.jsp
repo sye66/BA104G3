@@ -5,12 +5,18 @@
 <%@ page import="com.mem.model.*" %>
 <%@ page import="com.relation.model.*" %>
 
+<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 
+
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
+   MemVO memVO1 = (MemVO)request.getSession().getAttribute("memVO");
+   
+%>
+<%request.getAttribute("updateSuccess");%>
         
 
 
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
-<%request.getAttribute("updateSuccess");%>
 <%
 RelationService relationSvc = new RelationService();
 
@@ -19,13 +25,10 @@ if(related_Mem_No ==null){
 	
 	related_Mem_No= memVO.getMem_No();
 }
- System.out.print(memVO.getMem_No());
-List<RelationVO> list = relationSvc.getWhoAddme(related_Mem_No);
-pageContext.setAttribute("list", list);
-System.out.print(list.size());
-
+ 
+List<RelationVO> relationVO = relationSvc.getWhoAddme(related_Mem_No);
+pageContext.setAttribute("relationVO", relationVO);
 %>
-
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,6 +39,26 @@ System.out.print(list.size());
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 <title>Insert title here</title>
 </head>
+
+
+<style>
+  table {
+	width: 800px;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  table, th, td {
+    border: 3px solid 	#00BFFF;
+  }
+  b,tr, th, td {
+  	font-size: 20px;
+    padding: 5px;
+    text-align: center;
+  }
+</style>
+
+
 <body>
 
 
@@ -109,22 +132,23 @@ System.out.print(list.size());
 		</tr>
 			
 		<%@ include file="page1.file" %>
-		<c:forEach var="relationVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<c:forEach var="relationVO" items="${relationVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
-			<c:if test="${list.getRelation_Status()==0}">
-			<td>${list.mem_No}</td>
+			<c:if test="${relationVO.getRelation_Status()==0}">
+			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
+			<td>${MemSvc.getOneMem(relationVO.mem_No).mem_Name}</td>
 		
 			<td>
 			<input type="hidden" name="action" value="update">
 			<button value="text" type="submit"  class="btn btn-success btn-block btn-lg" tabindex="7">確認
-			</button></h2></td>	
-			</c:if>
+			</button></h2></td>	</c:if></c:if>
+			
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
-        	<input type="hidden" name="mem_No" value="${list.mem_No}">
-        	<input type="hidden" name="related_Mem_No" value="<%= (list==null)? "" : memVO.getMem_No()%>">">
+        	<input type="hidden" name="mem_No" value="${relationVO.mem_No}">
+        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">">
 			<input type="hidden" name="relation_Status" value=1 >
 			
 			
