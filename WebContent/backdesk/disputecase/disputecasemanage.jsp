@@ -1,3 +1,5 @@
+<%@page import="java.sql.Timestamp"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.disputecase.model.*"%>
@@ -7,6 +9,7 @@
 <%
 	DisputeCaseService disputeCaseService = new DisputeCaseService();
 	List<DisputeCaseVO> listAllDisputeCase = disputeCaseService.getAllDisputeCase();
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
 %>
 <html>
 <head>
@@ -37,11 +40,12 @@
 					<td><%=disputeCaseVO.getDispute_Case_No()%></td>
 					<td><%=disputeCaseVO.getMission_No()%></td>
 					<td><%=disputeCaseVO.getDispute_Mem_No() %></td>
-					<td><%=disputeCaseVO.getIssue_Datetime() %>)</td>
+					<td><%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%></td>
+					<td><button class="btn-primary">查看</button></td>
 				</tr>
-				<%} %>
+				<%}%>
 			</tbody>
-
+			
         	<div class="col-lg-3 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -56,11 +60,11 @@
                         </div>
                     </div>
                     <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
+					<div class="panel-footer">
+					    <span class="pull-left">View Details</span>
+					    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+					    <div class="clearfix"></div>
+					</div>
                     </a>
                 </div>
             </div>			
