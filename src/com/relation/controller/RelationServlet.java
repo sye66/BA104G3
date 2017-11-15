@@ -239,7 +239,7 @@ public class RelationServlet extends HttpServlet{
 				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("relationVO", relationVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/addRelationship.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/beAppliedRelationship.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -255,9 +255,22 @@ public class RelationServlet extends HttpServlet{
 				
 				String location = req.getParameter("reuestURL");
 				
-				String url = "/frontdesk/relation/addRelationship.jsp";
+				String url = "/frontdesk/relation/beAppliedRelationship.jsp";
 				String success ="ok";
 				req.setAttribute("success", success);
+				
+				
+				/***************************4.原本為A +B好友 且 B按同意(狀態改為1), 下列為新增一筆 B+A好友並直接確認(狀態改為1)***********/
+				String temp = mem_No;
+				mem_No = related_Mem_No;
+				related_Mem_No = temp;
+				
+				relationVO = relationSvc.addRelationVO(mem_No, related_Mem_No, 1);
+				
+				req.getSession().setAttribute("relationVO", relationVO);
+				
+				
+				
 				RequestDispatcher successView = req.getRequestDispatcher(location);  //讓使用者登入後停留在原頁面
 			    successView.forward(req, res);
 				

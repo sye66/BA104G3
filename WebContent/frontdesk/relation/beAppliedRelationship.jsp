@@ -20,9 +20,9 @@ if(related_Mem_No ==null){
 	related_Mem_No= memVO.getMem_No();
 }
  System.out.print(memVO.getMem_No());
-List<RelationVO> relationVO = relationSvc.getWhoAddme(related_Mem_No);
-pageContext.setAttribute("relationVO", relationVO);
-System.out.print(relationVO.size());
+List<RelationVO> list = relationSvc.getWhoAddme(related_Mem_No);
+pageContext.setAttribute("list", list);
+System.out.print(list.size());
 
 %>
 
@@ -108,23 +108,23 @@ System.out.print(relationVO.size());
 		<th>是否接受</th>
 		</tr>
 			
-<%-- 		<%@ include file="page1.file" %> --%>
-		<c:forEach var="relationVO" items="${relationVO}">
+		<%@ include file="page1.file" %>
+		<c:forEach var="relationVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
-			<c:if test="${relationVO.getRelation_Status()==0}">
-			<td>${relationVO.mem_No}</td>
+			<c:if test="${list.getRelation_Status()==0}">
+			<td>${list.mem_No}</td>
 		
 			<td>
 			<input type="hidden" name="action" value="update">
 			<button value="text" type="submit"  class="btn btn-success btn-block btn-lg" tabindex="7">確認
-			</button></h2></td>	</c:if>
-			
+			</button></h2></td>	
+			</c:if>
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
-        	<input type="hidden" name="mem_No" value="${relationVO.mem_No}">
-        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">">
+        	<input type="hidden" name="mem_No" value="${list.mem_No}">
+        	<input type="hidden" name="related_Mem_No" value="<%= (list==null)? "" : memVO.getMem_No()%>">">
 			<input type="hidden" name="relation_Status" value=1 >
 			
 			
@@ -134,7 +134,7 @@ System.out.print(relationVO.size());
 		</c:forEach>
 		
 </table>
-<%-- <%@ include file="page2.file" %> --%>
+<%@ include file="page2.file" %>
         </div>
         </div>
         

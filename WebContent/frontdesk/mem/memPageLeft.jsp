@@ -161,14 +161,15 @@
                     <div class="panel-heading" role="tab" id="panel5">
                         <h4 class="panel-title">
 			        <a id="noUnderLine" href="#eee" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="eee">
-			           <h2> 加好友</h2>
+			           <h2> 好友</h2>
 			        </a>
 			      </h4>
                     </div>
                     <div id="eee" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel5">
                         <div class="panel-body">
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/applyRelationship.jsp">好友申請</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友列表</a></h3>
                         </div>
                     </div>
                 </div>
