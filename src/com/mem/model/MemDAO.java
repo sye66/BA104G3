@@ -22,7 +22,7 @@ public class MemDAO implements MemDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -39,6 +39,9 @@ public class MemDAO implements MemDAO_interface{
 	
 	private static final String Authentication=
 			"UPDATE mem SET mem_State =?, mem_Id=?, mem_No=? WHERE mem_Email=?";
+	
+	private static final String RECHARGE=
+			"UPDATE MEM SET MEM_POINT=? WHERE MEM_NO=?";
 	
 	private static final String INSERT_STMT=
 			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
@@ -221,7 +224,49 @@ public class MemDAO implements MemDAO_interface{
 		
 		
 		
+		@Override
+		public void recharge(MemVO memVO) {
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(RECHARGE);
+				
+				
+				pstmt.setInt(1, memVO.getMem_Point());
+				pstmt.setString(2, memVO.getMem_No());
+				
+				pstmt.executeUpdate();
+				
+				
+				
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 		
+	}
 		
 		
 		

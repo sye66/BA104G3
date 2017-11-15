@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 import com.stored_history.model.StoredService;
 import com.stored_history.model.StoredVO;
 
@@ -179,9 +181,9 @@ public class Stored_HistoryServlet extends HttpServlet{
 					stored_Type = null;
 				}
 				
-				Double stored_Cost = null;
+				Integer stored_Cost = null;
 				try{
-					stored_Cost = new Double(req.getParameter("stored_Cost").trim());
+					stored_Cost = new Integer(req.getParameter("stored_Cost").trim());
 				} catch(NumberFormatException e){
 					errorMsgs.add("請輸入正確的金額");
 				}
@@ -225,7 +227,7 @@ public class Stored_HistoryServlet extends HttpServlet{
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			System.out.println("stored_Date0 :"  );		
-			try{
+//			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 //				String stored_no = new String(req.getParameter("stored_no").trim());
 				System.out.println("stored_Date2 :"  );
@@ -238,6 +240,8 @@ public class Stored_HistoryServlet extends HttpServlet{
 				
 				Timestamp stored_Date = new Timestamp(System.currentTimeMillis());
 				
+				System.out.println("stored_Date3 :" +stored_Date );
+				
 				Integer stored_Type;
 				try{
 					stored_Type = new Integer(req.getParameter("stored_Type").trim());
@@ -247,14 +251,13 @@ public class Stored_HistoryServlet extends HttpServlet{
 					stored_Type = null;
 				}
 				
-				Double stored_Cost = null;
-				try{
-					stored_Cost = new Double(req.getParameter("stored_Cost").trim());
-				} catch(NumberFormatException e){
-					errorMsgs.add("請輸入正確的金額");
-				}
+				Integer stored_Cost = new Integer(req.getParameter("stored_Cost").trim());
 				
 				StoredVO storedVO = new StoredVO();
+				
+				
+				Integer mem_Point = null;
+				
 				
 //				storedVO.setStored_No(stored_no);
 				storedVO.setMem_No(mem_No);
@@ -262,11 +265,29 @@ public class Stored_HistoryServlet extends HttpServlet{
 				storedVO.setStored_Type(stored_Type);
 				storedVO.setStored_Cost(stored_Cost);
 				
+				MemService memSvc = new MemService();
+				
+				MemVO memVO =memSvc.getOneMem(mem_No);
+				
+				
+				Integer mem_Point_old = memVO.getMem_Point();
+				
+				mem_Point = mem_Point_old + stored_Cost;
+				
+				memVO.setMem_Point(mem_Point);
+				
+				
+				System.out.println("mem_Point "+mem_Point);
+				
+				System.out.println("mem_No " + mem_No);
+				System.out.println("mem_pw " + memVO.getMem_Address());
 				System.out.println("stored_Date " + stored_Date);
+				System.out.println("stored_Type " + stored_Type);
+				System.out.println("stored_Cost " + stored_Cost);
 				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("storedVO", storedVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/update_stored_input.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -275,7 +296,20 @@ public class Stored_HistoryServlet extends HttpServlet{
 				StoredService storedSvc = new StoredService();
 				storedVO = storedSvc.addStored(storedVO);
 				
+				System.out.println("storedVO.getStored_Date() " +storedVO.getStored_Date());
+				
+				System.out.println("storedVO " + storedVO);
+				
+				
+				
+				System.out.println("memSvc " + memVO.getMem_Point());
+				
+				memVO= memSvc.recharge(memVO);
+				
+				System.out.println("memVO " + memVO);
+				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("memVO", memVO);
 				req.getSession().setAttribute("storedVO", storedVO);
 				String url = "/frontdesk/stored_history/stored_historyRecharge.jsp";
 				String success ="ok";
@@ -285,11 +319,11 @@ public class Stored_HistoryServlet extends HttpServlet{
 				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				errorMsgs.add("修改資料失敗 :" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/addStored.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add("修改資料失敗 :" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
+//				failureView.forward(req, res);
+//			}
 		} //insert end
 		
 		if("delete".equals(action)){

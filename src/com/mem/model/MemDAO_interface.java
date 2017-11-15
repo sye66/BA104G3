@@ -13,6 +13,7 @@ public interface MemDAO_interface {
 	public List<MemVO> getAll();
 	public void register(MemVO memVO);
 	public MemVO Authentication(MemVO memVO);
+	public void recharge(MemVO memVO);
 	
 //	public void select(MemVO memVO); 
 }

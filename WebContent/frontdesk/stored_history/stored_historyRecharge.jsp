@@ -84,8 +84,12 @@
 			
 			<input type="hidden" id="success" value="${success}"/>
 			
+			<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
+			
 			<div class="form-group">請輸入儲值金額
-            <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3"/>
+            <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3"
+            value="<%= (storedVO==null)? "": storedVO.getStored_Cost()%>"/>
 			</div>
 			
 			

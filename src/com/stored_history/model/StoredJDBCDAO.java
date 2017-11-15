@@ -15,8 +15,8 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA104_G3";
-	String passwd = "BA104"; 
+	String userid = "BA104G3";
+	String passwd = "123456"; 
 	
 	private static final String INSERT_STMT=
 			"INSERT INTO stored_history (stored_No, mem_No, stored_Date, stored_Type,"
@@ -197,7 +197,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 				storedVO.setMem_No(rs.getString("mem_No"));
 				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
 				storedVO.setStored_Type(rs.getInt("stored_Type"));
-				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
+				storedVO.setStored_Cost(rs.getInt("stored_Cost"));
 				
 			}
 		} catch (ClassNotFoundException e) {
@@ -252,7 +252,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 				storedVO.setMem_No(rs.getString("mem_No"));
 				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
 				storedVO.setStored_Type(rs.getInt("stored_Type"));
-				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
+				storedVO.setStored_Cost(rs.getInt("stored_Cost"));
 				list.add(storedVO);
 				
 			}
@@ -294,7 +294,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 		storedVO1.setMem_No("M000001");
 		storedVO1.setStored_Date(new Timestamp(System.currentTimeMillis()));
 		storedVO1.setStored_Type(1);
-		storedVO1.setStored_Cost(9487943.0);
+		storedVO1.setStored_Cost(9487943);
 		
 		dao.insert(storedVO1);
 		
@@ -306,7 +306,7 @@ public class StoredJDBCDAO implements StoredDAO_interface{
 		storedVO2.setMem_No("M000001");
 		storedVO2.setStored_Date(new Timestamp(System.currentTimeMillis()));
 		storedVO2.setStored_Type(1);
-		storedVO2.setStored_Cost(9487.0);
+		storedVO2.setStored_Cost(9487);
 		
 		dao.update(storedVO2);
 		

@@ -20,7 +20,7 @@ public class StoredDAO implements StoredDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -187,7 +187,7 @@ public class StoredDAO implements StoredDAO_interface{
 				storedVO.setMem_No(rs.getString("mem_No"));
 				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
 				storedVO.setStored_Type(rs.getInt("stored_Type"));
-				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
+				storedVO.setStored_Cost(rs.getInt("stored_Cost"));
 				
 			}
 		} catch (SQLException e) {
@@ -238,7 +238,7 @@ public class StoredDAO implements StoredDAO_interface{
 				storedVO.setMem_No(rs.getString("mem_No"));
 				storedVO.setStored_Date(rs.getTimestamp("stored_Date"));
 				storedVO.setStored_Type(rs.getInt("stored_Type"));
-				storedVO.setStored_Cost(rs.getDouble("stored_Cost"));
+				storedVO.setStored_Cost(rs.getInt("stored_Cost"));
 				list.add(storedVO);
 				
 			}

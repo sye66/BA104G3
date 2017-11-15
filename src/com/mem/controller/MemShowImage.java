@@ -54,7 +54,7 @@ package com.mem.controller;
 		}
 
 		public void exception(ServletOutputStream out){
-			InputStream in = getServletContext().getResourceAsStream("/mem/image/nopic.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/lib/publicfile/include/img/QRcode/nopic.jpg");
 			try {
 				byte b[] = new byte[in.available()];
 				in.read(b);
@@ -69,7 +69,7 @@ package com.mem.controller;
 		public void init() throws ServletException {
 			try {
 				Context ctx = new javax.naming.InitialContext();
-				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 				con = ds.getConnection();
 			} catch (NamingException e) {
 				e.printStackTrace();

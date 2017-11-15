@@ -155,7 +155,7 @@
 <%----------------地址 -------------------------------------------%>
 
 
-<jsp:include page="/frontdesk/mem/register_address.file" flush="true"></jsp:include>
+<jsp:include page="/frontdesk/mem/register_address.jsp" flush="true"></jsp:include>
 <%				String City = request.getParameter("City2");
 				String Area = request.getParameter("Area2");
 				String ZIP = request.getParameter("ZIP"); 			%>

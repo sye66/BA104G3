@@ -9,7 +9,7 @@ public class StoredVO {
 	private String mem_No;
 	private Timestamp stored_Date;
 	private Integer stored_Type;
-	private Double stored_Cost;
+	private Integer stored_Cost;
 	
 	public StoredVO() {
 		super();
@@ -47,11 +47,11 @@ public class StoredVO {
 		this.stored_Type = stored_Type;
 	}
 
-	public Double getStored_Cost() {
+	public Integer getStored_Cost() {
 		return stored_Cost;
 	}
 
-	public void setStored_Cost(Double stored_Cost) {
+	public void setStored_Cost(Integer stored_Cost) {
 		this.stored_Cost = stored_Cost;
 	}
 

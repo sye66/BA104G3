@@ -23,7 +23,7 @@ public class StoredService {
 	}
 	
 	public StoredVO updateStored(String stored_No, String mem_No, Timestamp stored_Date,
-			Integer stored_Type, Double stored_Cost){
+			Integer stored_Type, Integer stored_Cost){
 		
 		StoredVO storedVO = new StoredVO();
 		

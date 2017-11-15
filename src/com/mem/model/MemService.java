@@ -19,6 +19,14 @@ public class MemService {
 		return dao.loginMem(mem_Email);
 	}
 	
+	public MemVO recharge(MemVO memVO) {
+		
+		dao.recharge(memVO);
+		
+		return memVO;
+	}
+	
+	
 	public MemVO addMem(String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday,
 			String mem_Tel, String mem_Pho, Integer mem_Gend, String mem_Email,
 			byte[] mem_Pic, String mem_Intro, Integer mem_Code, Integer mem_State,

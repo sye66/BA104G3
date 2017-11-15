@@ -16,8 +16,8 @@ public class MemJDBCDAO implements MemDAO_interface{
 
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA104_G3";
-	String passwd = "BA104"; 
+	String userid = "BA104G3";
+	String passwd = "123456"; 
 	
 	private static final String REGISTER=
 			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
@@ -30,6 +30,9 @@ public class MemJDBCDAO implements MemDAO_interface{
 	
 	private static final String Authentication=
 			"UPDATE mem SET mem_State =? ,mem_Id=?, mem_No=? WHERE mem_Email=?";
+	
+	private static final String RECHARGE=
+			"UPDATE MEM SET MEM_POINT=? WHERE MEM_NO=?";
 	
 	private static final String INSERT_STMT=
 			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
@@ -208,7 +211,66 @@ public class MemJDBCDAO implements MemDAO_interface{
 		return memVO;
 		}
 
+
 	
+	
+
+	@Override
+	public void recharge(MemVO memVO) {
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(RECHARGE);
+			
+			
+			pstmt.setInt(1, memVO.getMem_Point());
+			pstmt.setString(2, memVO.getMem_No());
+			
+			pstmt.executeUpdate();
+			
+			
+			
+			
+	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally{
+		if (pstmt != null){
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace(System.err);
+			}
+		}
+		if (con != null){
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
 	
 
 
@@ -751,34 +813,34 @@ public class MemJDBCDAO implements MemDAO_interface{
 		//登入驗證
 		
 		
-		MemVO memVO = dao.loginMem("aaa@gmail.com");
-		System.out.print(memVO.getMem_No() + ",");
-		System.out.print(memVO.getMem_Pw() + ",");
-		System.out.print(memVO.getMem_Name() + ",");
-		System.out.print(memVO.getMem_Id() + ",");
-		System.out.print(memVO.getMem_Bday() + ",");
-		System.out.print(memVO.getMem_Tel() + ",");
-		System.out.print(memVO.getMem_Pho() + ",");
-		System.out.print(memVO.getMem_Gend() + ",");
-		System.out.print(memVO.getMem_Email() + ",");
-		System.out.print(memVO.getMem_Pic() + ",");
-		System.out.print(memVO.getMem_Intro() + ",");
-		System.out.print(memVO.getMem_Code() + ",");
-		System.out.print(memVO.getMem_Gps_Lat() + ",");
-		System.out.print(memVO.getMem_Gps_Lng() + ",");
-		System.out.print(memVO.getMem_Ip() + ",");
-		System.out.print(memVO.getMission_Count() + ",");
-		System.out.print(memVO.getMem_Address() + ",");
-		System.out.print(memVO.getMem_Search() + ",");
-		System.out.println(memVO.getMem_Point());
-		System.out.println("===============================================");
+//		MemVO memVO = dao.loginMem("aaa@gmail.com");
+//		System.out.print(memVO.getMem_No() + ",");
+//		System.out.print(memVO.getMem_Pw() + ",");
+//		System.out.print(memVO.getMem_Name() + ",");
+//		System.out.print(memVO.getMem_Id() + ",");
+//		System.out.print(memVO.getMem_Bday() + ",");
+//		System.out.print(memVO.getMem_Tel() + ",");
+//		System.out.print(memVO.getMem_Pho() + ",");
+//		System.out.print(memVO.getMem_Gend() + ",");
+//		System.out.print(memVO.getMem_Email() + ",");
+//		System.out.print(memVO.getMem_Pic() + ",");
+//		System.out.print(memVO.getMem_Intro() + ",");
+//		System.out.print(memVO.getMem_Code() + ",");
+//		System.out.print(memVO.getMem_Gps_Lat() + ",");
+//		System.out.print(memVO.getMem_Gps_Lng() + ",");
+//		System.out.print(memVO.getMem_Ip() + ",");
+//		System.out.print(memVO.getMission_Count() + ",");
+//		System.out.print(memVO.getMem_Address() + ",");
+//		System.out.print(memVO.getMem_Search() + ",");
+//		System.out.println(memVO.getMem_Point());
+//		System.out.println("===============================================");
 		
 		
 		
 		//新增
 		MemVO memVO1 = new MemVO();
 		
-		File pic = new File("WebContent/mem/image","Ui.jpg");
+		File pic = new File("WebContent/lib/publicfile/include/img","登入ICON.png");
 		byte[] buffer = null;
 		try {
 			buffer = Files.readAllBytes(pic.toPath());
@@ -810,7 +872,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 		
 		//修改
 		
-				File pic_update = new File("WebContent/mem/image","M000001.jpg");
+				File pic_update = new File("WebContent/lib/publicfile/include/img","登入ICON.png");
 				byte[] buffer_update = null;
 				try {
 					buffer_update = Files.readAllBytes(pic_update.toPath());
@@ -851,31 +913,31 @@ public class MemJDBCDAO implements MemDAO_interface{
 //				dao.delete("M000004");
 		
 		
-		//查詢
-		MemVO memVO3 = dao.findByPrimaryKey("M000001");
-		System.out.print(memVO3.getMem_No() + ",");
-		System.out.print(memVO3.getMem_Pw() + ",");
-		System.out.print(memVO3.getMem_Name() + ",");
-		System.out.print(memVO3.getMem_Id() + ",");
-		System.out.print(memVO3.getMem_Bday() + ",");
-		System.out.print(memVO3.getMem_Tel() + ",");
-		System.out.print(memVO3.getMem_Pho() + ",");
-		System.out.print(memVO3.getMem_Gend() + ",");
-		System.out.print(memVO3.getMem_Email() + ",");
+//		//查詢
+//		MemVO memVO3 = dao.findByPrimaryKey("M000001");
+//		System.out.print(memVO3.getMem_No() + ",");
+//		System.out.print(memVO3.getMem_Pw() + ",");
+//		System.out.print(memVO3.getMem_Name() + ",");
+//		System.out.print(memVO3.getMem_Id() + ",");
+//		System.out.print(memVO3.getMem_Bday() + ",");
+//		System.out.print(memVO3.getMem_Tel() + ",");
+//		System.out.print(memVO3.getMem_Pho() + ",");
+//		System.out.print(memVO3.getMem_Gend() + ",");
+//		System.out.print(memVO3.getMem_Email() + ",");
 //		System.out.print(memVO3.getMem_Pic() + ",");
-		System.out.print(memVO3.getMem_Intro() + ",");
-		System.out.print(memVO3.getMem_Code() + ",");
-		System.out.print(memVO3.getMem_Gps_Lat() + ",");
-		System.out.print(memVO3.getMem_Gps_Lng() + ",");
-		System.out.print(memVO3.getMem_Ip() + ",");
-		System.out.print(memVO3.getMem_Date() + ",");
-		System.out.print(memVO3.getMission_Count() + ",");
-		System.out.print(memVO3.getMem_Address() + ",");
-		System.out.println(memVO3.getMem_Search() + ",");
-		System.out.println(memVO3.getMem_Point());
-		System.out.println("===============================================");
-		
-		
+//		System.out.print(memVO3.getMem_Intro() + ",");
+//		System.out.print(memVO3.getMem_Code() + ",");
+//		System.out.print(memVO3.getMem_Gps_Lat() + ",");
+//		System.out.print(memVO3.getMem_Gps_Lng() + ",");
+//		System.out.print(memVO3.getMem_Ip() + ",");
+//		System.out.print(memVO3.getMem_Date() + ",");
+//		System.out.print(memVO3.getMission_Count() + ",");
+//		System.out.print(memVO3.getMem_Address() + ",");
+//		System.out.println(memVO3.getMem_Search() + ",");
+//		System.out.println(memVO3.getMem_Point());
+//		System.out.println("===============================================");
+//		
+//		
 		//查詢
 		List<MemVO> list = dao.getAll();
 		for(MemVO aMem : list){
@@ -909,13 +971,13 @@ public class MemJDBCDAO implements MemDAO_interface{
 
 		MemVO memVO4 = new MemVO();
 		
-		File pic_reg = new File("WebContent/mem/image","Ui.jpg");
-		byte[] buffer_reg = null;
-		try {
-			buffer_reg = Files.readAllBytes(pic_reg.toPath());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		File pic_reg = new File("WebContent/mem/image","Ui.jpg");
+//		byte[] buffer_reg = null;
+//		try {
+//			buffer_reg = Files.readAllBytes(pic_reg.toPath());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 		memVO4.setMem_Pw("123456");
 		memVO4.setMem_Name("新垣結衣");
@@ -925,7 +987,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 		memVO4.setMem_Pho("0988-520520");
 		memVO4.setMem_Gend(2);
 		memVO4.setMem_Email("uiui520@gmail.com");
-		memVO4.setMem_Pic(buffer);
+//		memVO4.setMem_Pic(buffer);
 		memVO4.setMem_Intro("大家好 ! 我是結衣 !");
 		memVO4.setMem_State(2);
 		memVO4.setMem_Ip("192.168.0.29");
@@ -950,14 +1012,14 @@ public class MemJDBCDAO implements MemDAO_interface{
 		
 		
 		
-		File pic_updateByMem = new File("WebContent/mem/image","M000001.jpg");
-		byte[] buffer_updateByMem = null;
-		try {
-			buffer_updateByMem = Files.readAllBytes(pic_update.toPath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		File pic_updateByMem = new File("WebContent/mem/image","M000001.jpg");
+//		byte[] buffer_updateByMem = null;
+//		try {
+//			buffer_updateByMem = Files.readAllBytes(pic_update.toPath());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		MemVO memVO6 = new MemVO();
 		
@@ -970,7 +1032,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 		memVO6.setMem_Pho("0987-987987");
 		memVO6.setMem_Gend(1);
 		memVO6.setMem_Email("burnerzx@gmail.com");
-		memVO6.setMem_Pic(buffer_update);
+//		memVO6.setMem_Pic(buffer_update);
 		memVO6.setMem_Intro("黑魔導女孩 ~ 就決定是妳了 !");
 		memVO6.setMem_Code(7533967);
 		memVO6.setMem_State(2);
@@ -984,14 +1046,20 @@ public class MemJDBCDAO implements MemDAO_interface{
 		memVO6.setMem_Point(2400);
 		memVO6.setMem_No("M000021");
 
-		dao.update(memVO2);
+		dao.update(memVO6);
 		
+		
+
+		MemVO memVO7 = new MemVO();
+		
+		memVO7.setMem_Point(3500);
+		memVO7.setMem_No("M000001");
+		
+		dao.recharge(memVO7);
+		
+		System.out.println(memVO7.getMem_Point());
+
 	}
-
-
-
-
-
 
 
 

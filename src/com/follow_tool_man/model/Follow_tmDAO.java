@@ -20,7 +20,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

@@ -14,8 +14,8 @@ public class RelationJDBCDAO implements RelationDAO_interface{
 	
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	String userid = "BA104_G3";
-	String passwd = "BA104"; 
+	String userid = "BA104G3";
+	String passwd = "123456"; 
 	
 	
 	private static final String INSERT_STMT=
