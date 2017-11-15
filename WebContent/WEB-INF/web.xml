@@ -12,6 +12,14 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<resource-ref>
+    <description>DB Connection</description>
+    <res-ref-name>jdbc/BA104G3</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    </resource-ref>
+	
 	<!--阿群 -->
 	 <servlet>
     <servlet-name>MemServlet</servlet-name>
@@ -104,8 +112,42 @@
 		<url-pattern>/pro/shoppingCartServlet.do</url-pattern>
 	</servlet-mapping>
 	<!--兆哥 -->
+	
+	<!--小朱 -->
+  <servlet>
+    <servlet-name>ArtiFormServlet</servlet-name>
+    <servlet-class>com.artiForm.controller.ArtiFormServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArtiFormServlet</servlet-name>
+    <url-pattern>/artiForm/artiForm.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ArtiClassServlet</servlet-name>
+    <servlet-class>com.artiClass.controller.ArtiClassServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArtiClassServlet</servlet-name>
+    <url-pattern>/artiClass/artiClass.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ArtiReplyServlet</servlet-name>
+    <servlet-class>com.artiReply.controller.ArtiReplyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArtiReplyServlet</servlet-name>
+    <url-pattern>/artiReply/artiReply.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ArtiReportServlet</servlet-name>
+    <servlet-class>com.artiReport.controller.ArtiReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArtiReportServlet</servlet-name>
+    <url-pattern>/artiReport/artiReport.do</url-pattern>
+  </servlet-mapping>
 
-
+  	<!--小朱 -->
 
 
 

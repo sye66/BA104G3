@@ -48,6 +48,10 @@ public class DisputeCaseService {
 	public List<DisputeCaseVO> getAllDisputeCase(){
 		return dao.getAll();
 	}
-	
-	
+	public List<DisputeCaseVO> getDisputeCaseByStatus(Integer dispute_Case_Status){
+		return dao.findByStatus(dispute_Case_Status);
+	}
+	public List<DisputeCaseVO> getDisputeCaseByStatus(Integer dispute_Case_Status, String emp_No){
+		return dao.findByStatus(dispute_Case_Status, emp_No);
+	}
 }
