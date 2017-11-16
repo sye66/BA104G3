@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 
-	// �@�����ε{����,�w��@�Ӹ�Ʈw ,�@�Τ@��DataSource�Y�i
+	//  一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
 	private static DataSource ds = null;
 	static {
 		try {
@@ -26,13 +26,15 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 	private static final String GET_ALL_STMT = 
 		"SELECT candidate_mem_no,mission_no FROM case_candidate order by candidate_mem_no , mission_no";
 	private static final String GET_ONE_MISSION = 
-		"SELECT CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO,CD.CANDIDATE_MEM_NO, ME.MEM_NAME FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  CD.CANDIDATE_MEM_NO = ME.MEM_NOWHERE CD.MISSION_NO = ?";
+		"SELECT CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO,CD.CANDIDATE_MEM_NO, ME.MEM_NAME FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  CD.CANDIDATE_MEM_NO = ME.MEM_NO WHERE CD.MISSION_NO = ?";
 	private static final String DELETE = 
 		"DELETE FROM case_candidate where candidate_mem_no=?,mission_no = ?";
+	private static final String DELETE_ONE_CASE =
+		"DELETE FROM case_candidate where mission_no = ?";
 	private static final String UPDATE = 
 		"UPDATE case_candidate set candidate_mem_no=?, mission_no=? where candidate_mem_no=? and mission_no = ?";
 	private static final String GET_ONE_CANDIDATE = 
-		"SELECT candidate_mem_no,mission_no FROM case_candidate where  candidate_mem_no = ?";
+		"SELECT CD.CANDIDATE_MEM_NO, CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO, ME.MEM_NAME FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  M.ISSUER_MEM_NO = ME.MEM_NO WHERE CD.CANDIDATE_MEM_NO = ?";
 	
 	
 	@Override
@@ -158,8 +160,48 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 	}
 
 	@Override
-	public CaseCandidateVO findByMission(String mission_No) {
+	public void deleteOneCase(String mission_No) {
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(DELETE_ONE_CASE);
+
+			pstmt.setString(1, mission_No);
+
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
+
+	
+	@Override
+	public List<CaseCandidateVO> findByMission(String mission_No) {
+		List<CaseCandidateVO> list = new ArrayList<CaseCandidateVO>();
 		CaseCandidateVO caseCandidateVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -182,7 +224,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));
 				caseCandidateVO.setMission_Name(rs.getString("mission_Name"));
 				caseCandidateVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
-				
+				list.add(caseCandidateVO);
 				
 			}
 
@@ -214,13 +256,14 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				}
 			}
 		}
-		return caseCandidateVO;
+		return list;
 	}
 
 	@Override
-	public CaseCandidateVO findByCandidate(String candidate_Mem_No) {
-
+	public List<CaseCandidateVO> findByCandidate(String candidate_Mem_No) {
+		List<CaseCandidateVO> list = new ArrayList<CaseCandidateVO>();
 		CaseCandidateVO caseCandidateVO = null;
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -228,17 +271,21 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ONE_MISSION);
+			pstmt = con.prepareStatement(GET_ONE_CANDIDATE);
 
 			pstmt.setString(1, candidate_Mem_No);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo �]�٬� Domain objects
+				// empVo也稱為Domain objects
 				caseCandidateVO = new CaseCandidateVO();
 				caseCandidateVO.setCandidate_Mem_No(rs.getString("candidate_Mem_No"));
+				caseCandidateVO.setMem_Name(rs.getString("mem_Name"));
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));
+				caseCandidateVO.setMission_Name(rs.getString("mission_Name"));
+				caseCandidateVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
+				list.add(caseCandidateVO);
 			}
 
 			// Handle any driver errors
@@ -269,7 +316,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				}
 			}
 		}
-		return caseCandidateVO;
+		return list;
 	}
 	
 	@Override
@@ -288,7 +335,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO �]�٬� Domain objects
+				// empVO 也稱為 Domain objects
 				caseCandidateVO = new CaseCandidateVO();
 				caseCandidateVO.setCandidate_Mem_No(rs.getString("candidate_Mem_No"));
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));

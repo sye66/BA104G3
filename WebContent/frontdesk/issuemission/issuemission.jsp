@@ -1,13 +1,16 @@
+<%@page import="com.disputecase.model.DisputeCaseVO"%>
+<%@page import="com.disputecase.model.DisputeCaseService"%>
 <%@page import="java.util.*"%>
 <%@page import="com.getmission.model.*"%>
 <%@page import="com.getmission.controller.*"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.getmission.model.*"%>
 
 <%
-GetMissionService getMissionService = new GetMissionService(); 
-
+GetMissionService getMissionService = new GetMissionService();
+DisputeCaseService disputeCaseService = new DisputeCaseService();
 List<GetMissionVO> listMemMissionPending = getMissionService.findByMem("M000002",1);
 List<GetMissionVO> listMemMission = getMissionService.findByMem("M000002",1);
+List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem("M000011");
 %>
 <!DOCTYPE html>
 <html>
@@ -127,8 +130,10 @@ List<GetMissionVO> listMemMission = getMissionService.findByMem("M000002",1);
 					        <li role="presentation">
 					            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">待結案與評價</a>
 					        </li>
+					        <li role="presentation">
+					            <a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">爭議案件處理</a>
+					        </li>
 					    </ul>
-					
 					    <!-- 標籤面板：內容區 -->
 					    <div class="tab-content">
 					        <div role="tabpanel" class="tab-pane active" id="tab1">

@@ -16,7 +16,7 @@ public class CaseCandidateService {
 
 		caseCandidateVO.setCandidate_Mem_No(candidate_Mem_No);
 		caseCandidateVO.setMission_No(mission_No);
-		
+		dao.insert(caseCandidateVO);
 
 		return caseCandidateVO;
 	}
@@ -35,12 +35,16 @@ public class CaseCandidateService {
 	public void deleteCaseCandidate(String candidate_Mem_No, String mission_No) {
 		dao.delete(candidate_Mem_No,  mission_No);
 	}
+	
+	public void deleteOneCase(String mission_No){
+		dao.deleteOneCase(mission_No);
+	}
 
-	public CaseCandidateVO getOneCase(String candidate_Mem_No) {
+	public List<CaseCandidateVO> getCase(String candidate_Mem_No) {
 		return dao.findByCandidate(candidate_Mem_No);
 	}
 
-	public CaseCandidateVO getOneCaseCandidate(String mission_No) {
+	public List<CaseCandidateVO> getCandidate(String mission_No) {
 		return dao.findByMission(mission_No);
 	}
 	

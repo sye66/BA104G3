@@ -70,7 +70,10 @@ public class RelationDAO implements RelationDAO_interface{
 				relationVO.setMem_No(rs.getString("MEM_NO"));
 				relationVO.setRelation_Status(rs.getInt("RELATION_STATUS"));
 				relationVO.setRelated_Mem_No(rs.getString("RELATED_MEM_NO"));
-				list.add(relationVO);
+				System.out.println("rs.getInt(RELATION_STATUS)" + rs.getInt("RELATION_STATUS"));
+				if(rs.getInt("RELATION_STATUS")==0){
+					list.add(relationVO);
+				}
 				
 			}
 		} catch (SQLException e) {
