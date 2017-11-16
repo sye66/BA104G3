@@ -56,9 +56,12 @@ pageContext.setAttribute("relationVO", relationVO);
     padding: 5px;
     text-align: center;
   }
+  #img_pic,#old_pic{width:180px;
+	heigth:230px}
+  
 </style>
 
-
+  </head>
 <body>
 
 
@@ -127,7 +130,9 @@ pageContext.setAttribute("relationVO", relationVO);
 		
 		
 		<tr align="center">
+		<th>圖片</th>
 		<th>申請好友</th>
+		<th>性別</th>
 		<th>是否接受</th>
 		</tr>
 			
@@ -137,8 +142,18 @@ pageContext.setAttribute("relationVO", relationVO);
 		<tr>
 			<c:if test="${relationVO.getRelation_Status()==0}">
 			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
+			<td>
+			<div class="form-group">
+			<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}">
+			</div>
+			</td>
 			<td>${MemSvc.getOneMem(relationVO.mem_No).mem_Name}</td>
-		
+			<c:if test="${MemSvc.getOneMem(relationVO.mem_No).mem_Gend ==0}">
+			<td>女性</td>
+			</c:if>
+			<c:if test="${MemSvc.getOneMem(relationVO.mem_No).mem_Gend ==1}">
+			<td>男性</td>
+			</c:if>
 			<td>
 			<input type="hidden" name="action" value="update">
 			<button value="text" type="submit"  class="btn btn-success btn-block btn-lg" tabindex="7">確認
@@ -148,7 +163,7 @@ pageContext.setAttribute("relationVO", relationVO);
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
         	<input type="hidden" name="mem_No" value="${relationVO.mem_No}">
-        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">">
+        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">
 			<input type="hidden" name="relation_Status" value=1 >
 			
 			
@@ -199,6 +214,27 @@ pageContext.setAttribute("relationVO", relationVO);
 
 
 <script>	
+
+		function previewFile() {
+				 var preview = document.querySelector('#img_pic');
+				 var file    = document.querySelector('input[type=file]').files[0];
+				 var reader  = new FileReader();
+		
+				  reader.addEventListener("load", function () {
+				  preview.src = reader.result;
+					 }, false);
+				 if (file) {
+					 reader.readAsDataURL(file);
+				 }
+}
+
+
+
+
+
+
+
+
 		var updateOk = "ok";
 		var updateSuccess = $('#updateSuccess').val();
 		if(updateOk == updateSuccess){
