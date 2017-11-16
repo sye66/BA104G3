@@ -27,12 +27,12 @@ public class LoginTest extends HttpServlet {
 		PrintWriter out = res.getWriter();
 
 		// 【取得使用者 帳號(account) 密碼(password)】
-		String account = req.getParameter("account");
+		String mem_No = req.getParameter("mem_No");
 		String password = req.getParameter("password");
 
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("account", account); // *工作1: 才在session內做已經登入過的標識
+		session.setAttribute("mem_No", mem_No); // *工作1: 才在session內做已經登入過的標識
 
 		try {
 			String location = (String) session.getAttribute("location");
@@ -45,7 +45,7 @@ public class LoginTest extends HttpServlet {
 		} catch (Exception ignored) {
 		}
 
-		String url = "/frontdesk/getmission/getMission.jsp";
+		String url = "/frontdesk/getmission/getMissionlogin.jsp";
 		RequestDispatcher successView = req.getRequestDispatcher(url); // 如無來源網頁:則至此網頁
 		successView.forward(req, res);
 	}
