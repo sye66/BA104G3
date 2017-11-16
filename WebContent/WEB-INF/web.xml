@@ -67,50 +67,74 @@
 	<!--阿群 -->
 	
 	<!--兆哥 -->
-		<servlet>
-		<servlet-name>ShowImage</servlet-name>
-		<servlet-class>com.tool.controller.ShowImage</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ShowImage</servlet-name>
-		<url-pattern>/tool/showimage.do</url-pattern>
-	</servlet-mapping>
-
 	<servlet>
-		<servlet-name>ProServlet</servlet-name>
-		<servlet-class>com.pro.controller.ProServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ProServlet</servlet-name>
-		<url-pattern>/pro/pro.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ProClassServlet</servlet-name>
-		<servlet-class>com.proclass.controller.ProClassServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ProClassServlet</servlet-name>
-		<url-pattern>/pro/proClass.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ProOrderServlet</servlet-name>
-		<servlet-class>com.proorder.controller.ProOrderServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ProOrderServlet</servlet-name>
-		<url-pattern>/pro/proOrderServlet.do</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ShoppingCartServlet</servlet-name>
-		<servlet-class>com.pro.shoppingcart.ShoppingCartServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ShoppingCartServlet</servlet-name>
-		<url-pattern>/pro/shoppingCartServlet.do</url-pattern>
-	</servlet-mapping>
+    <servlet-name>ShowImage</servlet-name>
+    <servlet-class>com.tool.controller.ShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowImage</servlet-name>
+    <url-pattern>/tool/showimage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MapKey</servlet-name>
+    <servlet-class>com.tool.controller.MapKey</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MapKey</servlet-name>
+    <url-pattern>/tool/MapKey.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProServlet</servlet-name>
+    <servlet-class>com.pro.controller.ProServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProServlet</servlet-name>
+    <url-pattern>/pro/pro.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProClassServlet</servlet-name>
+    <servlet-class>com.proclass.controller.ProClassServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProClassServlet</servlet-name>
+    <url-pattern>/pro/proClass.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ProOrderServlet</servlet-name>
+    <servlet-class>com.proorder.controller.ProOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProOrderServlet</servlet-name>
+    <url-pattern>/pro/proOrderServlet.do</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <servlet-class>com.pro.shoppingcart.ShoppingCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCartServlet</servlet-name>
+    <url-pattern>/pro/shoppingCartServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProOrdListServlet</servlet-name>
+    <servlet-class>com.proordlist.contoller.ProOrdListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProOrdListServlet</servlet-name>
+    <url-pattern>/pro/proOrdListServlet.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ProTrackServlet</servlet-name>
+    <servlet-class>com.protrack.contoller.ProTrackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProTrackServlet</servlet-name>
+    <url-pattern>/pro/proTrackServlet.do</url-pattern>
+  </servlet-mapping>
 	<!--兆哥 -->
 	
 	<!--小朱 -->
