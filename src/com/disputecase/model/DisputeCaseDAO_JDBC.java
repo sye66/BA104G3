@@ -15,6 +15,8 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 	private static final String USR = "BA104G3";
 	private static final String PSW = "123456";
 	
+	// TODO REVISE ALL THE SQL COMMAND
+	
 	private static final String INSERT_STMT = "INSERT INTO DISPUTE_CASE("
 			+ "DISPUTE_CASE_NO,"
 			+ "MISSION_NO,"

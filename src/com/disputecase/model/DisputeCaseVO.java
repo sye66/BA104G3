@@ -10,6 +10,9 @@ public class DisputeCaseVO {
 	Timestamp issue_Datetime;
 	Timestamp close_Datetime;
 	Integer dispute_Case_Status;
+	String dispute_Content;
+	byte[] dispute_Attachment;
+	String dispute_Reply;
 	public String getDispute_Case_No() {
 		return dispute_Case_No;
 	}
@@ -51,5 +54,23 @@ public class DisputeCaseVO {
 	}
 	public void setDispute_Case_Status(Integer dispute_Case_Status) {
 		this.dispute_Case_Status = dispute_Case_Status;
+	}
+	public String getDispute_Content() {
+		return dispute_Content;
+	}
+	public void setDispute_Content(String dispute_Content) {
+		this.dispute_Content = dispute_Content;
+	}
+	public byte[] getDispute_Attachment() {
+		return dispute_Attachment;
+	}
+	public void setDispute_Attachment(byte[] dispute_Attachment) {
+		this.dispute_Attachment = dispute_Attachment;
+	}
+	public String getDispute_Reply() {
+		return dispute_Reply;
+	}
+	public void setDispute_Reply(String dispute_Reply) {
+		this.dispute_Reply = dispute_Reply;
 	}
 }

@@ -13,6 +13,10 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DisputeCaseDAO implements DisputeCaseDAO_interface{
+	
+	//TODO REVISE ALL THE SQL COMMAND
+	
+	
 	private static final String INSERT_STMT = "INSERT INTO DISPUTE_CASE("
 			+ "DISPUTE_CASE_NO,"
 			+ "MISSION_NO,"
