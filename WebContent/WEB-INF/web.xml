@@ -173,9 +173,74 @@
 
   	<!--小朱 -->
 
-
-
-
+	<!-- 家駿 -->
+	
+	<servlet>
+    <servlet-name>EmpServlet</servlet-name>
+    <servlet-class>com.emp.controller.EmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpServlet</servlet-name>
+    <url-pattern>/emp/emp.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AchieveServlet</servlet-name>
+    <servlet-class>com.achieve.controller.AchieveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AchieveServlet</servlet-name>
+    <url-pattern>/achieve/achieve.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AchieveShowImage</servlet-name>
+    <servlet-class>com.achieve.controller.AchieveShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AchieveShowImage</servlet-name>
+    <url-pattern>/achieve/achieveShowImage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>com.auth.controller.AuthServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/auth/auth.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Ach_DetailServlet</servlet-name>
+    <servlet-class>com.ach_detail.controller.Ach_DetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ach_DetailServlet</servlet-name>
+    <url-pattern>/ach_detail/ach_detail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PersonalServlet</servlet-name>
+    <servlet-class>com.personal.controller.PersonalServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PersonalServlet</servlet-name>
+    <url-pattern>/personal/personal.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PersonalShowImage</servlet-name>
+    <servlet-class>com.personal.controller.PersonalShowImage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PersonalShowImage</servlet-name>
+    <url-pattern>/personalShowPic/personalShowPic.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginHandler</servlet-name>
+    <servlet-class>com.emp.controller.LoginHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginHandler</servlet-name>
+    <url-pattern>/loginhandler/loginhandler.do</url-pattern>
+  </servlet-mapping>
+	
+	<!-- 家駿 -->
 
 
 </web-app>

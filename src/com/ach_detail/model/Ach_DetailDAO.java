@@ -13,14 +13,14 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.ach_detail.model.Ach_DetailVO;
-import com.emp.model.EmpVO;
+
 
 public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 	private static DataSource ds = null;
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
@@ -32,8 +32,6 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 			"SELECT MEM_NO,ACH_NO,ACH_TIME FROM ACH_DETAIL order by MEM_NO";
 	private static final String GET_ONE = 
 			"SELECT MEM_NO,ACH_NO,ACH_TIME FROM ACH_DETAIL where MEM_NO = ?";
-	private static final String UPDATE = 
-			"UPDATE ACH_DETAIL set MEM_NO=?, ACH_NO=?, ACH_TIME=? where MEM_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM ACH_DETAIL where MEM_NO = ?";
 	
@@ -79,7 +77,8 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 		
 
 	@Override
-	public Ach_DetailVO findByPrimaryKey(String mem_No) {
+	public List<Ach_DetailVO> findByPrimaryKey(String mem_No) {
+		List<Ach_DetailVO> list1 = new ArrayList<Ach_DetailVO>();
 		Ach_DetailVO ach_DetailVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -95,11 +94,12 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo �]�٬� Domain objects
+				
 				ach_DetailVO = new Ach_DetailVO();
 				ach_DetailVO.setMem_No(rs.getString("mem_No"));
 				ach_DetailVO.setAch_No(rs.getString("ach_No"));
 				ach_DetailVO.setAch_Time(rs.getDate("ach_Time"));
+				list1.add(ach_DetailVO);
 			}
 
 			// Handle any driver errors
@@ -130,7 +130,7 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 				}
 			}
 		}
-		return ach_DetailVO;
+		return list1;
 	}
 
 	@Override

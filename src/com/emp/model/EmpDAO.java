@@ -32,7 +32,7 @@ public class EmpDAO implements EmpDAO_interface{
 	private static final String GET_ONE = 
 			"SELECT EMP_NO,EMP_NAME,EMP_PWD,EMP_MAIL,EMP_JOB,EMP_PHONE,EMP_STATE FROM EMP where EMP_NO = ?";
 	private static final String UPDATE = 
-			"UPDATE EMP set EMP_NAME=?, EMP_PWD=?, EMP_MAIL=?, EMP_JOB=?, EMP_PHONE=?, EMP_STATE=? where EMP_NO = ?";
+			"UPDATE EMP set EMP_NAME=?, EMP_MAIL=?, EMP_JOB=?, EMP_PHONE=?, EMP_STATE=? where EMP_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM EMP where EMP_NO = ?";
 	@Override
@@ -90,12 +90,12 @@ public class EmpDAO implements EmpDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1, empVO.getEmp_Name());
-			pstmt.setString(2, empVO.getEmp_Pwd());
-			pstmt.setString(3, empVO.getEmp_Mail());
-			pstmt.setString(4, empVO.getEmp_Job());
-			pstmt.setString(5, empVO.getEmp_Phone());
-			pstmt.setString(6, empVO.getEmp_State());
-			pstmt.setString(7, empVO.getEmp_No());
+//			pstmt.setString(2, empVO.getEmp_Pwd());
+			pstmt.setString(2, empVO.getEmp_Mail());
+			pstmt.setString(3, empVO.getEmp_Job());
+			pstmt.setString(4, empVO.getEmp_Phone());
+			pstmt.setString(5, empVO.getEmp_State());
+			pstmt.setString(6, empVO.getEmp_No());
 
 			pstmt.executeUpdate();
 

@@ -200,7 +200,7 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL);
 			rs = pstmt.executeQuery();
-
+				
 			while (rs.next()) {
 				// empVO �]�٬� Domain objects
 				empVO = new EmpVO();

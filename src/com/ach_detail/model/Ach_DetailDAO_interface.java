@@ -7,7 +7,7 @@ import com.ach_detail.model.Ach_DetailVO;
 public interface Ach_DetailDAO_interface {
 	public void insert(Ach_DetailVO ach_detailVO);
     
-    public void delete(String mem_No);
-    public Ach_DetailVO findByPrimaryKey(String mem_No);
+	public void delete(String mem_No);
+    public List<Ach_DetailVO> findByPrimaryKey(String mem_No);
     public List<Ach_DetailVO> getAll();
 }

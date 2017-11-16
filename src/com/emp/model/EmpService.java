@@ -31,14 +31,14 @@ public class EmpService {
 		dao.insert(empVO);
 	}
 	
-	public EmpVO updateEmp(String emp_No, String emp_Name, String emp_Pwd, String emp_Mail,
+	public EmpVO updateEmp(String emp_No, String emp_Name,String emp_Mail,
 			String emp_Job, String emp_Phone, String emp_State) {
 
 		EmpVO empVO = new EmpVO();
 
 		empVO.setEmp_No(emp_No);
 		empVO.setEmp_Name(emp_Name);
-		empVO.setEmp_Pwd(emp_Pwd);
+//		empVO.setEmp_Pwd(emp_Pwd);
 		empVO.setEmp_Mail(emp_Mail);
 		empVO.setEmp_Job(emp_Job);
 		empVO.setEmp_Phone(emp_Phone);
