@@ -21,16 +21,26 @@
 	</resource-ref>
 	
 	<!-- Sander 開始 -->
+	
 	<servlet>
 		<servlet-name>SkillServlet</servlet-name>
-		<servlet-class>com.skill.controller.SKillServlet</servlet-class>
+		<servlet-class>com.skill.controller.SkillServlet</servlet-class>	
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SkillServlet</servlet-name>
-		<url-pattern>skill/skill.do</url-pattern>
+		<url-pattern>/skill/skill.do</url-pattern>	
 	</servlet-mapping>
-	<servlet>
 	
+	<servlet>
+		<servlet-name>UserSkillServlet</servlet-name>
+		<servlet-class>com.userskill.controller.UserskillServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserSkillServlet</servlet-name>
+		<url-pattern>/userskill/userskill.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>DisputeCaseServlet</servlet-name>
 		<servlet-class>com.disputecase.controller.DisputeCaseServlet</servlet-class>
 	</servlet>
@@ -38,7 +48,6 @@
 		<servlet-name>DisputeCaseServlet</servlet-name>
 		<url-pattern>/disputecase/disputecase.do</url-pattern>
 	</servlet-mapping>
-		
 	<servlet>
 		<servlet-name>SkillCategoryServlet</servlet-name>
 		<servlet-class>com.skillcategory.controller.SkillCategoryServlet</servlet-class>
@@ -47,24 +56,14 @@
 		<servlet-name>SkillCategoryServlet</servlet-name>
 		<url-pattern>/skillcategory/skillcategory.do</url-pattern>
 	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>UserSkillServlet</servlet-name>
-		<servlet-class>com.userskill.controller.UserSkillServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UserSkillServlet</servlet-name>
-		<url-pattern>/userskill/userskill.do</url-pattern>
-	</servlet-mapping>
 	<servlet>
 		<servlet-name>ChatRecordServlet</servlet-name>
-		<servlet-class>com.chatrecord.contorller.ChatRecordServlet</servlet-class>
+		<servlet-class>com.chatrecord.controller.ChatRecordServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ChatRecordServlet</servlet-name>
 		<url-pattern>/chatrecord/chatrecord.do</url-pattern>
-	</servlet-mapping>	
-	
+	</servlet-mapping>
 	<!-- Sander 結束 -->
 	
 	<!--阿群 -->
