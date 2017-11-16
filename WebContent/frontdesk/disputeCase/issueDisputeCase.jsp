@@ -10,8 +10,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	
+		
 		<script type="text/javascript">
 			$(function (){
 			 
@@ -39,7 +38,6 @@
 			    $("body").on("change", "#dispute_Attachment", function (){
 			        preview(this);
 			    })
-			    
 			})
 		</script>	
 		<!--[if lt IE 9]>
@@ -51,16 +49,23 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2">
-					<div class="form-group">
-						<label for="dispute_Content">申訴內容</label>
-						<input type="text" name="dispute_Content" id="dispute_Content" placeholder="臣等恭營聖旨" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="dispute_Attachment">申訴附件</label>
-						<input type="file" name="dispute_Attachment" id="dispute_Attachment" class="form-control" multiple="true">
-        				<img class="preview" style="max-width: 600px; max-height: 600px;">
-					</div>
-					<input type="submit" name="" class=" btn btn-primary">
+					<form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do" enctype="multipart/form-data">
+						<input type="hidden" name="action" value="issue_Dispute_Case">
+						<div class="form-group">
+							<label for="dispute_Content">申訴內容</label>
+							<input type="text" name="dispute_Content" id="dispute_Content" placeholder="臣等恭營聖旨" class="form-control">
+						</div>
+
+						<div class="form-group">
+							<label for="dispute_Attachment">申訴附件</label>
+
+							<input type="file" name="dispute_Attachment" id="dispute_Attachment" class="form-control">
+
+	        				<img class="preview" style="max-width: 600px; max-height: 600px;">
+						</div>
+
+						<input type="submit" name="" class=" btn btn-primary">
+					</form>
 				</div>
 			</div>
 		</div>

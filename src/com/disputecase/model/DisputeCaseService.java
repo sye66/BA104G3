@@ -25,6 +25,7 @@ public class DisputeCaseService {
 		disputeCaseVO.setClose_Datetime(close_Datetime);
 		disputeCaseVO.setDispute_Case_Status(dispute_Case_Status);		
 		dao.insert(disputeCaseVO);
+		System.out.println("DISPUTE_SERVICE更新成功");
 		return disputeCaseVO;
 	}
 	public void deleteDisputeCase(String dispute_Case_No) {
