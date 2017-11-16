@@ -39,22 +39,12 @@
   	text-decoration:line-through;
   
 } 
-/*  #ontopDiv { */
-/*     top: 0; */
-/*     width: 80%; */
-/*     height: 60px; */
-/*     background-color: #ffffff; */
-/*     padding: 15px; */
-/*     font-size: 16px; */
-   
-/* } */
-
-/* .float { */
-/* 	position:fixed; */
-/*  	box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5); */
-/*  	z-index: 100; */
- 
-/* } */
+.card{
+	
+	box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
 </style>
 
 
