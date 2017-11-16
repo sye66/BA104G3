@@ -7,9 +7,11 @@ import java.util.List;
 public class DisputeCaseService {
 	private DisputeCaseDAO_interface dao;
 	
+	// Constructor
 	public DisputeCaseService() {
 		dao = new DisputeCaseDAO();
 	}
+
 	public DisputeCaseVO addDisputeCase(
 			String dispute_Case_No,String mission_No,String dispute_Mem_No,String emp_No,
 			Timestamp issue_datetime,Timestamp close_Datetime,Integer dispute_Case_Status) {
@@ -47,6 +49,9 @@ public class DisputeCaseService {
 	}
 	public List<DisputeCaseVO> getAllDisputeCase(){
 		return dao.getAll();
+	}
+	public List<DisputeCaseVO> getDisputeCaseByMem(String mem_No){
+		return dao.findByMem(mem_No);
 	}
 	public List<DisputeCaseVO> getDisputeCaseByStatus(Integer dispute_Case_Status){
 		return dao.findByStatus(dispute_Case_Status);
