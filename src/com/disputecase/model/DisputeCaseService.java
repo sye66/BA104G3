@@ -29,7 +29,7 @@ public class DisputeCaseService {
 		disputeCaseVO.setDispute_Attachment(dispute_Attachment);
 		disputeCaseVO.setDispute_Reply(dispute_Reply);
 		dao.insert(disputeCaseVO);
-		System.out.println("DISPUTE_SERVICE更新成功");
+		System.out.println("DISPUTEDAO_SERVICE新增成功");
 		return disputeCaseVO;
 	}
 	public void deleteDisputeCase(String dispute_Case_No) {
