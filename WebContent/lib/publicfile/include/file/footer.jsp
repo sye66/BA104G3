@@ -33,8 +33,10 @@
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 
+<style>
+	
 
-<title>Insert title here</title>
+</style>
 </head>
 <body>
 

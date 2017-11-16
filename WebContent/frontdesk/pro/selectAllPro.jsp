@@ -16,12 +16,7 @@
 // 	System.out.println(ProUp);
 %>
  <style>
-.proDiv{
-	margin:16px;
-	border:3px orange double;
-	height: 300px;
-	margin-left:40px;
-} 
+
 .proName{
   	font-size:20px;
 } 
@@ -39,21 +34,15 @@
  	font-size:16px;
  	text-decoration:line-through;
  }
- #ontopDiv {
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #ffffff;
-    padding: 15px;
-    font-size: 16px;
-   
-}
-
-.float {
-	position:fixed;
- 	box-shadow:4px 4px 12px 4px rgba(20%,20%,40%,0.5);
- 	z-index: 100;
  
+.card{
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+.allPro{
+	marager-top:16px;
+	
 }
 </style>
 
@@ -66,27 +55,28 @@
 <body>
 
 <div style="text-align:center;">
-  <div>
+ <br><br>
   
 	<c:forEach var="proVO" items="${list}">
+	<div class="allPro">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
 <!-- 		目前上架是寫死的 -->
 		<c:if test="${proVO.pro_Status=='上架'}" >
-			<div class="col-xs-12 col-sm-3 proDiv">
-		     	<div class="card" style="width:100%;">
+			<div class="col-xs-12 col-sm-3 ">
+		     	<div class="card" style="width:110%;">
 			 	    <div class="imgCont">
 		  				<img class="card-img-top" style="width:100%;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	    </div>
 	  				<div class="card-body">
-	   			 		<p class="card-text proName">${proVO.pro_Name}</p>
+	   			 		<p class="card-text proName" style="height:28px;color:#000;">${proVO.pro_Name}</p>
 	   			 		<c:if test="${proVO.pro_Discount==100}">
-	   			 			<P>　</P>
-	   			 			<p class="card-footer proPrice">價格:$${proVO.pro_Price}</p>
+	   			 			<P style="height:25px;">　</P>
+	   			 			<p class="card-footer proPrice" style="height:28px;">價格:$${proVO.pro_Price}</p>
 	   			 		</c:if>
 	   			 		
 	   			 		<c:if test="${proVO.pro_Discount!=100}">
-	   			 		<p class="card-footer proDiscount">原價:$${proVO.pro_Price}</p>
-	   			 		<p class="card-footer proPrice">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
+	   			 		<p class="card-footer proDiscount" style="height:25px ;color:#000;">原價:$${proVO.pro_Price}</p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
 	   			 		</c:if>
 	 			 	</div>
 				</div>
@@ -94,10 +84,11 @@
 		
 		</c:if>
 	 	</a>
+	 </div>	
  	</c:forEach>  	
- 	
+ 
  </div>
-</div>
+
  
 </body>
 </html>

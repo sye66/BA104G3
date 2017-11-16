@@ -16,7 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css" media="screen">
 #ontopDiv {
-	top: 0;
+	top: 0px;
 	width: 100%;
 	height: 60px;
 	background-color: #ffffff;

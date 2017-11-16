@@ -20,12 +20,11 @@
 
 </head>
 <body>
-
-<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/>
-
+<!-- 引入TOP-->
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/> --%>
+<!-- 商城TOP -->
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
 
-<%-- <jsp:include page="<%=request.getContextPath()%>/frontdesk/pro/selectProTOP.jsp" flush="true" />	 --%>
 
 
 
@@ -63,7 +62,7 @@
 
 			<br>
 			<ol class="breadcrumb">
-				<li><a href="<%=request.getContextPath()%>">首頁</a></li>
+				<li><a href="http://localhost:8081/BA104G3/lib/publicfile/include/file/index.jsp">首頁</a></li>
 				<li class="active">積分商城
 				</li>
 
@@ -116,239 +115,15 @@
 
 
 
-
+<div class="col-xs-12 col-sm-12">
 
 <jsp:include page="/frontdesk/pro/selectAllPro.jsp" flush="true" />
 
+</div>
 
 
 
-
-
-
-		<div role="tabpanel">
-			<!-- 標籤面板：標籤區 -->
-			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a href="#tab1"
-					aria-controls="tab1" role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
-				<li role="presentation"><a href="#tab2" aria-controls="tab2"
-					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
-				<li role="presentation"><a href="#tab3" aria-controls="tab3"
-					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
-				<li role="presentation"><a href="#amos" aria-controls="amos"
-					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
-			</ul>
-
-			<!-- 標籤面板：內容區 -->
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="tab1">
-					<table class="table table-hover">
-
-
-						<tbody>
-							<tr>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00ED21/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/20CED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="tab2">
-					<table class="table table-hover">
-
-
-						<tbody>
-							<tr>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/02CED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00C1D1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00CE11/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="tab3">
-					<table class="table table-hover">
-
-
-						<tbody>
-							<tr>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/10CED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/0aCED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-							</tr>
-
-						</tbody>
-					</table>
-
-				</div>
-				<div role="tabpanel" class="tab-pane" id="amos">
-					<table class="table table-hover">
-
-
-						<tbody>
-							<tr>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00CED1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00CEa1/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-								<td><div>
-										<a href=""> <img
-											src="https://api.fnkr.net/testimg/170x200/00CEDa/FFF/?text=img+placeholder">XXXXXX
-										</a>
-										<p>SSSS</p>
-										<p>
-											$987 <input type="button" name="" value="購買">
-										</p>
-
-									</div></td>
-							</tr>
-
-						</tbody>
-					</table>
-
-				</div>
-			</div>
-		</div>
+<div class="col-xs-12 col-sm-12">
 
 		<div role="tabpanel">
 			<!-- 標籤面板：標籤區 -->
@@ -574,6 +349,230 @@
 			</div>
 		</div>
 
+		<div role="tabpanel">
+			<!-- 標籤面板：標籤區 -->
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"><a href="#tab1"
+					aria-controls="tab1" role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
+				<li role="presentation"><a href="#tab2" aria-controls="tab2"
+					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
+				<li role="presentation"><a href="#tab3" aria-controls="tab3"
+					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
+				<li role="presentation"><a href="#amos" aria-controls="amos"
+					role="tab" data-toggle="tab"><h2>熱門</h2></a></li>
+			</ul>
+
+			<!-- 標籤面板：內容區 -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="tab1">
+					<table class="table table-hover">
+
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00ED21/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/20CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab2">
+					<table class="table table-hover">
+
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/02CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00C1D1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CE11/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab3">
+					<table class="table table-hover">
+
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/10CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/0aCED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+				<div role="tabpanel" class="tab-pane" id="amos">
+					<table class="table table-hover">
+
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEa1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEDa/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+</div>
 
 	</div>
 	
@@ -595,8 +594,8 @@
 
 	</div>
 	<!-- 右2結束 -->
-
-	
-	
+<div class="col-xs-12 col-sm-12">
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+</div>	
 </body>
 </html>

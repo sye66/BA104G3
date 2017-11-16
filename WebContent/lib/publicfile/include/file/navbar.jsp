@@ -38,6 +38,8 @@
 
 
 
+
+
   </head>
 
   <body id="page-top"  style="font-family:Microsoft JhengHei;">
@@ -221,6 +223,12 @@ function getFocus() {
 	<script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
+  
+  
+  
+  
+  
+  
   </body>
 
 </html>
