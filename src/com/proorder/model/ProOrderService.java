@@ -3,7 +3,7 @@ package com.proorder.model;
 import java.sql.Date;
 import java.util.List;
 
-import com.proclass.model.ProClassVO;
+import com.pro.shoppingcart.ProCartVO;
 
 public class ProOrderService {
 	private ProOrderDAO_interface dao;
@@ -11,7 +11,7 @@ public class ProOrderService {
 		dao = new ProOrderJDBCDAO();
 	}
 	
-	public ProOrderVO addProOrder(String mem_No ,Date ord_Date,Integer ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
+	public ProOrderVO addProOrder(String mem_No ,Date ord_Date,Double ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
 		ProOrderVO proOrderVO = new ProOrderVO();
 		
 		proOrderVO.setMem_No(mem_No);
@@ -27,7 +27,7 @@ public class ProOrderService {
 		return proOrderVO;
 	}
 	
-	public ProOrderVO updateProOrder(String mem_No ,Date ord_Date,Integer ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
+	public ProOrderVO updateProOrder(String mem_No ,Date ord_Date,Double ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
 		ProOrderVO proOrderVO = new ProOrderVO();
 		
 		proOrderVO.setMem_No(mem_No);
@@ -56,5 +56,21 @@ public class ProOrderService {
 		dao.delete(ord_No);
 	}
 	
-	
+	public void addProOrd_OrdList(ProOrderVO proOrderVO , List<ProCartVO> list){
+		dao.insertProOrder_ProOrdList(proOrderVO, list);
+	}
+	public List<ProOrderVO> listProOrder(String mem_No) {
+		return dao.listProOrder(mem_No);
+
+	}
+	public ProOrderVO updateProOrderUp(String ord_No,String ord_Shipinfo,Date ord_Ship_Date){
+		ProOrderVO proOrderVO = new ProOrderVO();
+		
+		proOrderVO.setMem_No(ord_No);
+		proOrderVO.setOrd_Shipinfo(ord_Shipinfo);
+		proOrderVO.setOrd_Ship_Date(ord_Ship_Date);
+		
+		dao.updateOrderUp(proOrderVO);
+		return proOrderVO;
+	}
 }

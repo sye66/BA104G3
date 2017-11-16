@@ -17,6 +17,7 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 	private static final String DELETE = "DELETE FROM PRO_ORD_LIST WHERE ORD_NO = ?";
 	private static final String GET_ONE_BY_NO = "SELECT * FROM PRO_ORD_LIST WHERE ORD_NO=?";
 	
+	 
 	@Override
 	public void insert(ProOrdListVO proOrdListVO) {
 		Connection con = null;
@@ -27,16 +28,18 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 			con = DriverManager.getConnection(url,use,pwd);
 			pst = con.prepareStatement(INSERT);
 			con.setAutoCommit(false);
-			
+System.out.println("開始新增清單");			
 			pst.setString(1,proOrdListVO.getOrd_No());
 			pst.setString(2,proOrdListVO.getPro_No());
 			pst.setInt(3,proOrdListVO.getOrdPro_Count());
-			pst.setInt(4,proOrdListVO.getOrdPro_Price());
+			pst.setDouble(4,proOrdListVO.getOrdPro_Price());
 			
+System.out.println("清單 訂單編號"+proOrdListVO.getOrd_No());				
+		
 			pst.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
-			System.out.println("新增成功");
+
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
 					+ e.getMessage());
@@ -83,7 +86,7 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 			con.setAutoCommit(false);
 			
 			pst.setInt(1,proOrdListVO.getOrdPro_Count());
-			pst.setInt(2,proOrdListVO.getOrdPro_Price());
+			pst.setDouble(2,proOrdListVO.getOrdPro_Price());
 			pst.setString(3,proOrdListVO.getOrd_No());
 			pst.setString(4,proOrdListVO.getPro_No());
 			
@@ -197,7 +200,7 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 				proOrdListVO.setOrd_No(res.getString("ord_No"));
 				proOrdListVO.setPro_No(res.getString("pro_No"));
 				proOrdListVO.setOrdPro_Count(res.getInt("ordPro_Count"));
-				proOrdListVO.setOrdPro_Price(res.getInt("ordPro_Price"));
+				proOrdListVO.setOrdPro_Price(res.getDouble("ordPro_Price"));
 				list.add(proOrdListVO);
 				
 			}
@@ -253,7 +256,7 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 				proOrdListVO.setOrd_No(ord_No);
 				proOrdListVO.setPro_No(res.getString("pro_No"));
 				proOrdListVO.setOrdPro_Count(res.getInt("ordPro_Count"));
-				proOrdListVO.setOrdPro_Price(res.getInt("ordPro_Price"));
+				proOrdListVO.setOrdPro_Price(res.getDouble("ordPro_Price"));
 				list.add(proOrdListVO);
 			}
 			
@@ -293,12 +296,12 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 		//新增
 //		ProOrdListJDBCDAO p1 = new ProOrdListJDBCDAO();
 //		ProOrdListVO p1VO = new ProOrdListVO();
-//		p1VO.setOrd_No("20171026-000005");
-//		p1VO.setPro_No("P000007");
+//		p1VO.setOrd_No("20171112-000004");
+//		p1VO.setPro_No("P000004");
 //		p1VO.setOrdPro_Count(10);
-//		p1VO.setOrdPro_Price(400);
+//		p1VO.setOrdPro_Price(400.0);
 //		p1.insert(p1VO);
-		
+//		
 		//修改
 //		ProOrdListJDBCDAO p2 = new ProOrdListJDBCDAO();
 //		ProOrdListVO p2VO = new ProOrdListVO();
@@ -310,21 +313,21 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 		
 		//刪除
 //		ProOrdListJDBCDAO pro3 = new ProOrdListJDBCDAO();
-//		pro3.delete("20171026-000005");
+//		pro3.delete("20171115-000002");
 		
 		//查詢全部
-		ProOrdListJDBCDAO pro4 = new ProOrdListJDBCDAO();
-		for(ProOrdListVO p:pro4.getAll()){
-			System.out.println(p.getOrd_No()+" "+p.getPro_No()
-			+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
-		}
+//		ProOrdListJDBCDAO pro4 = new ProOrdListJDBCDAO();
+//		for(ProOrdListVO p:pro4.getAll()){
+//			System.out.println(p.getOrd_No()+" "+p.getPro_No()
+//			+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
+//		}
 		
 		//查單個
-		ProOrdListJDBCDAO pro5 = new ProOrdListJDBCDAO();
-		for(ProOrdListVO p:pro5.getAll()){
-			System.out.println(p.getOrd_No()+" "+p.getPro_No()
-			+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
-		}
+//		ProOrdListJDBCDAO pro5 = new ProOrdListJDBCDAO();
+//		for(ProOrdListVO p:pro5.getAll()){
+//			System.out.println(p.getOrd_No()+" "+p.getPro_No()
+//			+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
+//		}
 		
 		
 	}

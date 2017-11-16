@@ -40,7 +40,7 @@ public class ProClassServlet extends HttpServlet{
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("proClassVO", proClassVO); 
-					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/addProClass.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/proClass/addProClass.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -60,14 +60,14 @@ public class ProClassServlet extends HttpServlet{
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/addProClass.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/proCalss/addProClass.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		if ("getOneClassPro".equals(action)) {
 
-			
+	
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -75,7 +75,7 @@ public class ProClassServlet extends HttpServlet{
 				 * 1.接收請求參數 
 				 **********************/
 				String pro_Class_No = req.getParameter("pro_Class_No");
-
+					
 				/*************************** 2.開始查詢資料 *****************************************/
 				ProClassService proClassSvc = new ProClassService();
 				
@@ -86,15 +86,15 @@ public class ProClassServlet extends HttpServlet{
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
 				req.setAttribute("oneClassPro", oneClassPro);
-				              
-				String url = "/frontdesk/pro/showAllPro.jsp";
+			              
+				String url = "/frontdesk/pro/selectOneClassPro.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/pro/showAllPro.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/proClass/addProClass.jsp");
 				failureView.forward(req, res);
 			}
 		}

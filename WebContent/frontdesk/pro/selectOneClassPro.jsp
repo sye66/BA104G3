@@ -16,8 +16,7 @@
 
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <title>商品</title>
 
 <style>
@@ -231,10 +230,13 @@
 			<div class="col-xs-12 col-sm-12">
 				<c:forEach var="proVO" items="${oneClassPro}">
 				     <!-- Button trigger modal -->
-					<a data-toggle="modal" data-target="#${fn.trim(proVO.pro_Name)}"> <c:if
-							test="${proVO.pro_Status=='上架'}">
+					<a data-toggle="modal" data-target="# ${proVO.pro_No}">
+<%-- 					<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No} ">   --%>
+					<c:if test="${proVO.pro_Status=='上架'}">
+						<p data-toggle="modal" data-target="#$(proVO.pro_No}">
 							<div class="col-xs-12 col-sm-3 proDiv">
 								<div class="card" style="width: 100%;">
+									
 									<div class="imgCont">
 										<img class="card-img-top" style="width: 100%;"
 											src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}"
@@ -253,7 +255,9 @@
 									</div>
 								</div>
 							</div>
+						
 						</c:if>
+					
 					</a>
 
 
@@ -261,9 +265,8 @@
 
 
 
-
 					<!-- Modal -->
-					<div class="modal fade" id="${fn.trim(proVO.pro_Name)}" tabindex="-1"
+					<div class="modal fade" id=" ${proVO.pro_No}" tabindex="-1"
 						role="dialog" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog" role="document">

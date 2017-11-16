@@ -27,8 +27,8 @@ public class ProTrackService {
 		return dao.findByPrimaryKey(mem_No);
 	}
 	
-	public void deletePro(ProTrackVO proTrackVO){
-		dao.delete(proTrackVO);
+	public void deleteProTrack(String mem_No,String pro_No){
+		dao.delete(mem_No,pro_No);
 	}
 	
 	

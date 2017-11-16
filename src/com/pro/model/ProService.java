@@ -1,6 +1,8 @@
 package com.pro.model;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+
 
 public class ProService {
 	private ProDAO_interface dao;
@@ -57,5 +59,13 @@ public class ProService {
 	public void deletePro(String pro_No){
 		dao.delete(pro_No);
 	}
-	
+	public List<ProVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
+	}
+	public List<ProVO> getHot() {
+		return dao.getHot();
+	}
+	public List<ProVO> getTop10() {
+		return dao.getTop10();
+	}
 }

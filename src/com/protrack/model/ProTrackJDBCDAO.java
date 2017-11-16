@@ -67,7 +67,7 @@ public class ProTrackJDBCDAO implements ProTrackDAO_interface{
 
 	
 	@Override
-	public void delete(ProTrackVO proTrackVO) {
+	public void delete(String mem_No,String pro_No) {
 		Connection con = null;
 		PreparedStatement pst = null;
 		
@@ -77,8 +77,8 @@ public class ProTrackJDBCDAO implements ProTrackDAO_interface{
 			pst = con.prepareStatement(DELETE);
 			con.setAutoCommit(false);
 			
-			pst.setString(1,proTrackVO.getMem_No());
-			pst.setString(2,proTrackVO.getPro_No());
+			pst.setString(1,mem_No);
+			pst.setString(2,pro_No);
 			
 			pst.executeUpdate();
 			con.commit();
@@ -241,21 +241,19 @@ public class ProTrackJDBCDAO implements ProTrackDAO_interface{
 //		p1.insert(p1VO);
 		
 		//刪除
-//		ProTrackJDBCDAO p2 = new ProTrackJDBCDAO();
-//		ProTrackVO p2VO = new ProTrackVO();
-//		p2VO.setMem_No("M0002");
-//		p2VO.setPro_No("P000001");
-//		p2.delete(p2VO);
+		ProTrackJDBCDAO p2 = new ProTrackJDBCDAO();
+		
+		p2.delete("M000001","P000001");
 		
 		//查全部
-		ProTrackJDBCDAO p3 = new ProTrackJDBCDAO();
-		for(ProTrackVO p:p3.getAll()){
-			System.out.println(p.getMem_No()+" "+p.getPro_No());
-		}
+//		ProTrackJDBCDAO p3 = new ProTrackJDBCDAO();
+//		for(ProTrackVO p:p3.getAll()){
+//			System.out.println(p.getMem_No()+" "+p.getPro_No());
+//		}
 		
 		//查單
 		ProTrackJDBCDAO p4 = new ProTrackJDBCDAO();
-		for(ProTrackVO p:p4.findByPrimaryKey("M0001")){
+		for(ProTrackVO p:p4.findByPrimaryKey("M000001")){
 			System.out.println(p.getMem_No()+" "+p.getPro_No());
 		}
 		

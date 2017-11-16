@@ -4,7 +4,7 @@ public class ProOrdListVO implements java.io.Serializable{
 	private String ord_No;
 	private String pro_No;
 	private Integer ordPro_Count;
-	private Integer ordPro_Price;
+	private Double ordPro_Price;
 	
 	public String getOrd_No() {
 		return ord_No;
@@ -24,10 +24,10 @@ public class ProOrdListVO implements java.io.Serializable{
 	public void setOrdPro_Count(Integer ordPro_Count) {
 		this.ordPro_Count = ordPro_Count;
 	}
-	public Integer getOrdPro_Price() {
+	public Double getOrdPro_Price() {
 		return ordPro_Price;
 	}
-	public void setOrdPro_Price(Integer ordPor_Price) {
+	public void setOrdPro_Price(Double ordPor_Price) {
 		this.ordPro_Price = ordPor_Price;
 	}
 	
