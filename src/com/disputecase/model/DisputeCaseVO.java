@@ -13,6 +13,8 @@ public class DisputeCaseVO {
 	String dispute_Content;
 	byte[] dispute_Attachment;
 	String dispute_Reply;
+	
+	
 	public String getDispute_Case_No() {
 		return dispute_Case_No;
 	}

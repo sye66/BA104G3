@@ -14,33 +14,36 @@ import javax.sql.DataSource;
 
 public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 	
-	//TODO REVISE ALL THE SQL COMMAND
-	
-	
 	private static final String INSERT_STMT = "INSERT INTO DISPUTE_CASE("
 			+ "DISPUTE_CASE_NO,"
 			+ "MISSION_NO,"
 			+ "DISPUTE_MEM_NO,"
 			+ "EMP_NO,"
-			+ "ISSUE_DATE,"
-			+ "CLOSE_TIME,"
-			+ "DISPUTE_CASE_STATUS)"
-			+ " VALUES('DIS'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'),?,?,?,?,?,?)";
-	private static final String GET_ONE_STMT = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO =?";
-	private static final String GET_ALL_STMT = "SELECT * FROM DISPUTE_CASE";
-	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
-	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
-	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
+			+ "ISSUE_DATETIME,"
+			+ "CLOSE_DATETIME,"
+			+ "DISPUTE_CASE_STATUS,"
+			+ "DISPUTE_CONTENT,"
+			+ "DISPUTE_ATTACHMENT,"
+			+ "DISPUTE_REPLY)"
+			+ " VALUES('DIS'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_STMT = "DELETE FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO=?";
 	private static final String UPDATE_STMT = "UPDATE DISPUTE_CASE SET "
 			+ "MISSION_NO=?, "
 			+ "DISPUTE_MEM_NO=?, "
 			+ "EMP_NO=?, "
-			+ "ISSUE_DATE=?, "
-			+ "CLOSE_TIME=?, "
-			+ "DISPUTE_CASE_STATUS=? "
+			+ "ISSUE_DATETIME=?, "
+			+ "CLOSE_DATETIME=?, "
+			+ "DISPUTE_CASE_STATUS=?,"
+			+ "DISPUTE_CONTENT=?,"
+			+ "DISPUTE_ATTACHMENT=?, "
+			+ "DISPUTE_REPLY=? "
 			+ "WHERE DISPUTE_CASE_NO=?";
-	
+	private static final String GET_ONE_STMT = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO =?";
+	private static final String GET_ALL_STMT = "SELECT * FROM DISPUTE_CASE";
+	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
+	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
+	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
+
 	private static DataSource ds = null;
 	static {
 		try {
@@ -68,6 +71,9 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
 			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
 			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
+			pstmt.setString(7, disputeCaseVO.getDispute_Content());
+			pstmt.setBytes(8, disputeCaseVO.getDispute_Attachment());
+			pstmt.setString(9, disputeCaseVO.getDispute_Reply());
 			
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
@@ -147,7 +153,10 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
 			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
 			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
-			pstmt.setString(7, disputeCaseVO.getDispute_Case_No());
+			pstmt.setString(7, disputeCaseVO.getDispute_Content());
+			pstmt.setBytes(8, disputeCaseVO.getDispute_Attachment());
+			pstmt.setString(9, disputeCaseVO.getDispute_Reply());
+			pstmt.setString(10, disputeCaseVO.getMission_No());
 			pstmt.executeUpdate();
 			
 			System.out.println("更新成功");
@@ -223,7 +232,6 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 		}
 		return disputeCaseVO;
 	}
-
 
 	@Override
 	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status) {
