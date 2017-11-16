@@ -19,13 +19,12 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 	
 	 
 	@Override
-	public void insert(ProOrdListVO proOrdListVO) {
-		Connection con = null;
+	public void insert(ProOrdListVO proOrdListVO,Connection con) {
+		
 		PreparedStatement pst = null;
 		
 		try {
 			Class.forName(driver);
-			con = DriverManager.getConnection(url,use,pwd);
 			pst = con.prepareStatement(INSERT);
 			con.setAutoCommit(false);
 System.out.println("開始新增清單");			
@@ -61,13 +60,7 @@ System.out.println("清單 訂單編號"+proOrdListVO.getOrd_No());
 					se.printStackTrace(System.err);
 				}
 			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
+			
 		}
 		
 		

@@ -38,7 +38,7 @@
 
 <script>
 	window.onscroll = function() {
-		if ($(document).scrollTop() > 60)//这个60是距离顶部高度
+		if ($(document).scrollTop() > 200)//这个60是距离顶部高度
 		{
 			$("#ontopDiv").addClass('float');//
 		} else {
