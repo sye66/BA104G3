@@ -1,32 +1,12 @@
 package com.follow_tool_man.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import org.hibernate.*;
+import hibernate.util.HibernateUtil;
+import java.util.*;
 
 public class Follow_tmDAO implements Follow_tmDAO_interface{
 	
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
-
-	
 	private static final String INSERT_STMT=
 			"INSERT INTO follow_tool_man (follower_Mem_No,followed_Mem_No,follow_Status)"
 			+ "VALUES (?,?,?)";
@@ -45,205 +25,125 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 			
 	private static final String DELETE=
 			"DELETE FROM follow_tool_man WHERE follower_Mem_No=? and followed_Mem_No=? ";
-
+	
+	
 	@Override
 	public void insert(Follow_tmVO follow_tmVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT);
-			
-			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
-			pstmt.setString(2, follow_tmVO.getFollowed_Mem_No());
-			pstmt.setInt(3, follow_tmVO.getFollow_Status());
-			
-			pstmt.executeUpdate();
-			
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally{
-		if (pstmt != null){
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace(System.err);
-			}
-		}
-		if (con != null){
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace(System.err);
-			}
+			session.beginTransaction();
+			session.saveOrUpdate(follow_tmVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
 		}
 	}
-}
+	
+	
+	@Override
+	public void delete(String follower_Mem_No, String followed_Mem_No) {
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(follower_Mem_No,followed_Mem_No);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
+	
 	
 
 	@Override
 	public void update(Follow_tmVO follow_tmVO) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
-			
-//			pstmt.setString(1, follow_tmVO.getFollower_Mem_No());
-			pstmt.setInt(1, follow_tmVO.getFollow_Status());
-			pstmt.setString(2, follow_tmVO.getFollower_Mem_No());
-			pstmt.setString(3, follow_tmVO.getFollowed_Mem_No());
-		
-			pstmt.executeUpdate();
-			
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally{
-		if (pstmt != null){
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace(System.err);
-			}
-		}
-		if (con != null){
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace(System.err);
-			}
+			session.beginTransaction();
+			session.saveOrUpdate(follow_tmVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
 		}
 	}
-	}
 
-	@Override
-	public void delete(String follower_Mem_No, String followed_Mem_No) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		
-		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
-			pstmt.setString(1, follower_Mem_No);
-			pstmt.setString(2, followed_Mem_No);
-			
-			pstmt.executeUpdate();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally{	
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
-	}	
-	}
+	
 
 	@Override
 	public Follow_tmVO findByPrimaryKey(String follower_Mem_No, String followed_Mem_No) {
 		Follow_tmVO follow_tmVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(SELECT);
-			
-			pstmt.setString(1, follower_Mem_No);
-			
-			rs =pstmt.executeQuery();
-			
-			while(rs.next()){
-				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollower_Mem_No(rs.getString("follower_Mem_No"));
-				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
-				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
-			}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally{	
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}			
-				
+			session.beginTransaction();
+			follow_tmVO = (Follow_tmVO) session.get(Follow_tmVO.class, follow_tmVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
 		return follow_tmVO;
 	}
 
 	@Override
 	public List<Follow_tmVO> getAllDependOnFollower_Mem_No(String follower_Mem_No) {
-		List<Follow_tmVO> list = new ArrayList<Follow_tmVO>();
-		Follow_tmVO follow_tmVO = null;
+		List<Follow_tmVO> list = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(GET_ALL_STMT);
+			list = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return list;
+	}
+	
+	
+	public static void main(String[] args) {
+
+		Follow_tmDAO dao = new Follow_tmDAO();
+
+		// 新增
+		Follow_tmVO follow_tmVO1 = new Follow_tmVO();
+		follow_tmVO1.setFollower_Mem_No("吳永志1");
+		follow_tmVO1.setFollowed_Mem_No("MANAGER");
+		follow_tmVO1.setFollow_Status(0);
+		dao.insert(follow_tmVO1);
+
+		// 修改
+		Follow_tmVO follow_tmVO3 = new Follow_tmVO();
+		follow_tmVO3.setFollower_Mem_No("吳永志1");
+		follow_tmVO3.setFollowed_Mem_No("MANAGER");
+		follow_tmVO3.setFollow_Status(0);
+	
+		dao.update(follow_tmVO3);
+
+		// 刪除
+//		dao.delete(7014);
+
+		// 查詢
+		Follow_tmVO follow_tmVO2 = dao.findByPrimaryKey("M000001","M000002");
+		System.out.print(follow_tmVO2.getFollower_Mem_No() + ",");
+		System.out.print(follow_tmVO2.getFollowed_Mem_No() + ",");
+		System.out.print(follow_tmVO2.getFollow_Status() + ",");
 		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try{
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
-			rs = pstmt.executeQuery();
-			while(rs.next()){
-				follow_tmVO = new Follow_tmVO();
-				follow_tmVO.setFollowed_Mem_No(rs.getString("followed_Mem_No"));
-				follow_tmVO.setFollow_Status(rs.getInt("follow_Status"));
-				list.add(follow_tmVO);
-			}
-			
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally{	
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException se) {
-						se.printStackTrace(System.err);
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (Exception e) {
-						e.printStackTrace(System.err);
-					}
-				}
-			}				
-				
-			
-			return list;
+		System.out.println("---------------------");
+
+		// 查詢
+		List<Follow_tmVO> list = dao.getAllDependOnFollower_Mem_No("M000001");
+		for (Follow_tmVO aFollow_tmVO : list) {
+			System.out.print(aFollow_tmVO.getFollower_Mem_No() + ",");
+			System.out.print(aFollow_tmVO.getFollowed_Mem_No() + ",");
+			System.out.print(aFollow_tmVO.getFollow_Status() + ",");
+	
+			System.out.println();
+		}
 	}
 			
 }
