@@ -32,12 +32,33 @@
 	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
 </head>
+
 <body>
-	<h1 class="samples">
-		TOOLMAN - Article Area
-	</h1>
 
 <div class="container">
+<div class="widget-body">
+<hr>
+                  </div>                    
+         </div>
+
+<div class="container">
+<div class="widget-body">
+             <div class="widget-toolbox">
+                 <div class="btn-toolbar">
+                     <div class="btn-group">
+                         <div class="widget-toolbar">
+                             <div class="widget-main padding-6">
+                              <i class="icon-ok bigger-110"></i>
+                              	<h1 class="samples">TOOLMAN - Article Area</h1>
+
+                              </div>
+                          </div>
+                          
+                           </div>
+                       </div>
+                  </div>                    
+         </div>
+
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
 <div class="col-xs-12 col-sm-11 widget-container-span">
@@ -46,16 +67,16 @@
             <h5 class="bigger lighter">
             <input type="hidden" name="mem_No" size="45"
 			 value="<%= (artiFormVO==null)? "M000006" : artiFormVO.getMem_No()%>" />
-			 <input type="text" name="arti_Title" size="45" 
+			 請輸入主題文章標題 : <input type="text" name="arti_Title" size="45" 
 			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
             </h5>
             <div class="widget-toolbar">
                 <div class="" style="width:100px;">
-                    <div class="" style="">
+                    <div class="" style="">文章分類 :
                     <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
                     <select size="1" name="arti_Cls_No">
 		            <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-		            <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
+		             <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
 		            </c:forEach>
 		            </select>
                     </div>
