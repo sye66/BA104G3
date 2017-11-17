@@ -1,6 +1,6 @@
 package com.follow_tool_man.model;
 
-public class Follow_tmVO {
+public class Follow_tmVO implements java.io.Serializable{
 	private String follower_Mem_No;
 	private String followed_Mem_No;
 	private Integer follow_Status;

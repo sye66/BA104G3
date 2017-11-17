@@ -146,7 +146,7 @@ System.out.println("memVOlist " +memVOlist);
 		</tr>
 			
 		<%@ include file="page1.file" %>
-		<c:forEach var="memVOlist" items="${memVOlist}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<c:forEach var="memVO" items="${memVOlist}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
 			<c:if test="${relationSvc.getWhoAddme(mem_No).relation_Status==0}">

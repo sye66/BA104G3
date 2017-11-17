@@ -56,8 +56,11 @@ pageContext.setAttribute("relationVO", relationVO);
     padding: 5px;
     text-align: center;
   }
-  #img_pic,#old_pic{width:180px;
-	heigth:230px}
+  #img_pic,#old_pic{
+	max-width:150px;
+	max-height:150px;}
+  
+  
   
 </style>
 

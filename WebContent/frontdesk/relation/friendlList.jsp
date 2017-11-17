@@ -56,8 +56,10 @@ pageContext.setAttribute("relationVO", relationVO);
     padding: 5px;
     text-align: center;
   }
-  #img_pic,#old_pic{width:180px;
-	heigth:230px}
+  #img_pic,#old_pic{
+	max-width:150px;
+	max-height:150px;}
+  
   
 </style>
 
@@ -144,7 +146,7 @@ pageContext.setAttribute("relationVO", relationVO);
 			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
 			<td>
 			<div class="form-group">
-			<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}">
+			<a href="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"></a>
 			</div>
 			</td>
 			<td>${MemSvc.getOneMem(relationVO.mem_No).mem_Name}</td>
