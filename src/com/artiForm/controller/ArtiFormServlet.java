@@ -144,6 +144,7 @@ public class ArtiFormServlet extends HttpServlet {
 			}
 		}
 		
+		
 //		/******[ 取出ㄧ個要給收尋展示 ]******/
 //		if("GetOne_For_SearchDisplay".equals(action)){
 //			List<String> errorMsgs = new LinkedList<String>();
