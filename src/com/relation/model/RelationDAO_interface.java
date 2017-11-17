@@ -12,5 +12,6 @@ public interface RelationDAO_interface {
 	public List<RelationVO> getAllRelationWithMem_No(String mem_No);
 	public List<RelationVO> getWhoAddme(String related_Mem_No);
 	public List<RelationVO> getAll();
+	List<RelationVO> getAllFriends(String related_Mem_No);
 
 }

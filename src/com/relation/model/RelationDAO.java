@@ -53,6 +53,70 @@ public class RelationDAO implements RelationDAO_interface{
 	
 	
 	@Override
+	public List<RelationVO> getAllFriends(String related_Mem_No) {
+		List<RelationVO> list = new ArrayList<RelationVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_WHO_ADDME);
+//			System.out.println("連線成功");
+			pstmt.setString(1, related_Mem_No);
+			rs =pstmt.executeQuery();
+//			System.out.println("查詢結束");
+			while(rs.next()){
+				RelationVO relationVO = new RelationVO();
+				relationVO.setMem_No(rs.getString("MEM_NO"));
+				relationVO.setRelation_Status(rs.getInt("RELATION_STATUS"));
+				relationVO.setRelated_Mem_No(rs.getString("RELATED_MEM_NO"));
+				System.out.println("rs.getInt(RELATION_STATUS)" + rs.getInt("RELATION_STATUS"));
+				if(rs.getInt("RELATION_STATUS")==1){
+					list.add(relationVO);
+				}
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{	
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}				
+			
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
 	public List<RelationVO> getWhoAddme(String related_Mem_No) {
 		List<RelationVO> list = new ArrayList<RelationVO>();
 		Connection con = null;

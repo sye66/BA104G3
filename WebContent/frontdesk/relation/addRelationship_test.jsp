@@ -10,7 +10,6 @@
 
 
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
-   MemVO memVO1 = (MemVO)request.getSession().getAttribute("memVO");
    
 %>
 <%request.getAttribute("updateSuccess");%>
@@ -21,14 +20,24 @@
 RelationService relationSvc = new RelationService();
 
  String related_Mem_No = request.getParameter("relationVO");
-if(related_Mem_No ==null){
-	
-	related_Mem_No= memVO.getMem_No();
-}
- 
-List<RelationVO> relationVO = relationSvc.getWhoAddme(related_Mem_No);
+ if(related_Mem_No ==null){
+		
+		related_Mem_No= memVO.getMem_No();
+	}
+List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
 pageContext.setAttribute("relationVO", relationVO);
+
+String mem_No= related_Mem_No;
+MemService memSvc = new MemService();
+System.out.println("related_Mem_No " +related_Mem_No);
+List<MemVO> memVOlist = memSvc.getAllForFriend(related_Mem_No); 
+pageContext.setAttribute("memVOlist", memVOlist);
+System.out.println("memVOlist " +memVOlist);
 %>
+<c:forEach var="memVOlist" items="${memVOlist}" >
+<td>${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
+</c:forEach>
+
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -133,16 +142,16 @@ pageContext.setAttribute("relationVO", relationVO);
 		<th>圖片</th>
 		<th>申請好友</th>
 		<th>性別</th>
-		<th>是否接受</th>
+		<th>完成任務數</th>
 		</tr>
 			
 		<%@ include file="page1.file" %>
-		<c:forEach var="relationVO" items="${relationVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		<c:forEach var="memVOlist" items="${memVOlist}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
-			<c:if test="${relationVO.getRelation_Status()==0}">
-			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
-			<td>
+			<c:if test="${relationSvc.getWhoAddme(mem_No).relation_Status==0}">
+			<c:if test="${relationSvc.getWhoAddme(relationVO.mem_No).relationVO.related_Mem_No != memVO.mem_No and relationSvc.getWhoAddme(relationVO.mem_No).mem_No !=memVO.mem_No}">
+			<td><% System.out.println("memVOlist  " + memVOlist);%>
 			<div class="form-group">
 			<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}">
 			</div>
@@ -156,13 +165,13 @@ pageContext.setAttribute("relationVO", relationVO);
 			</c:if>
 			<td>
 			<input type="hidden" name="action" value="update">
-			<button value="text" type="submit"  class="btn btn-success btn-block btn-lg" tabindex="7">確認
-			</button></h2></td>	</c:if></c:if>
+			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
+				</h2></c:if></c:if>
 			
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
-        	<input type="hidden" name="mem_No" value="${relationVO.mem_No}">
+        	<input type="hidden" name="mem_No" value="${relationSvc.getWhoAddme(relationVO.mem_No).mem_No}">
         	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">
 			<input type="hidden" name="relation_Status" value=1 >
 			

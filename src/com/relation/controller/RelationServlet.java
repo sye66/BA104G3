@@ -346,6 +346,59 @@ public class RelationServlet extends HttpServlet{
 //			}
 		} //insert end
 		
+		
+		if ("insert_New".equals(action)){// 來自addStored.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+//			try{
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+//				String stored_no = new String(req.getParameter("stored_no").trim());
+				String mem_No = req.getParameter("mem_No").trim();
+				
+				String related_Mem_No = req.getParameter("related_Mem_No").trim();
+				
+				Integer relation_Status = new Integer(req.getParameter("relation_Status").trim());
+				
+				
+				RelationVO relationVO = new RelationVO();
+				
+				relationVO.setMem_No(mem_No);
+				relationVO.setRelated_Mem_No(related_Mem_No);
+				relationVO.setRelation_Status(relation_Status);
+				
+				
+				if (!errorMsgs.isEmpty()){
+					req.setAttribute("relationVO", relationVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/addRelationship.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/***************************2.開始新增資料***************************************/
+				RelationService relationSvc = new RelationService();
+				relationVO = relationSvc.addRelationVO("M000001", "M000018", 0);
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("relationVO", relationVO);
+				
+				String location = req.getParameter("reuestURL");
+				
+//				String url = "/frontdesk/relation/addRelationship.jsp";
+				String success ="ok";
+				req.setAttribute("success", success);
+				RequestDispatcher successView = req.getRequestDispatcher(location);  //讓使用者登入後停留在原頁面
+			    successView.forward(req, res);
+				
+				
+				/***************************其他可能的錯誤處理**********************************/
+//			} catch (Exception e){
+//				errorMsgs.add("修改資料失敗 :" + e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/addRelationship.jsp");
+//				failureView.forward(req, res);
+//			}
+		} //insert end
+		
+		
 		if("delete".equals(action)){
 			List<String> errorMsgs =new LinkedList<String>();
 			System.out.println("======");

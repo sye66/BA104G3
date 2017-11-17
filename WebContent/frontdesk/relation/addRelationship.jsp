@@ -5,7 +5,11 @@
 <%@ page import="com.mem.model.*" %>
 <%@ page import="com.relation.model.*" %>
 
+
+<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 <% RelationVO relationVO = (RelationVO)request.getSession().getAttribute("relationVO"); %>
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <%request.getAttribute("updateSuccess");%>
 
 
@@ -77,10 +81,11 @@
     <form id="login-form" method="post" action="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>">
         <div>
         <h2>
-        <input type="hidden" name="action" value="update">
+        <input type="hidden" name="action" value="insert_New">
         <input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
         <input type="hidden" name="mem_No" value="<%= (relationVO==null)? "" : relationVO.getMem_No()%>">
+      
         <input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : relationVO.getRelated_Mem_No()%>">
         
         <c:if test="${relationVO.relation_Status == null}">

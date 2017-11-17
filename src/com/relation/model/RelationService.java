@@ -10,10 +10,20 @@ public class RelationService {
 		dao = new RelationDAO();
 	}
 	
+	public List<RelationVO> getAllFriends(String related_Mem_No){
+		RelationVO relationVO = new RelationVO();
+		relationVO.setRelated_Mem_No(related_Mem_No);
+//		 List<RelationVO> list =dao.getWhoAddme("M000001");
+//		 System.out.println( "svc取得的LIST長度"+list.size());
+		return dao.getAllFriends(related_Mem_No);
+		
+	}
+	
+	
 	public List<RelationVO> getWhoAddme(String related_Mem_No){
 		RelationVO relationVO = new RelationVO();
 		relationVO.setRelated_Mem_No(related_Mem_No);
-		 List<RelationVO> list =dao.getWhoAddme("M000001");
+//		 List<RelationVO> list =dao.getWhoAddme("M000001");
 //		 System.out.println( "svc取得的LIST長度"+list.size());
 		return dao.getWhoAddme(related_Mem_No);
 		

@@ -62,6 +62,13 @@ public class MemDAO implements MemDAO_interface{
 			+ "mem_Search,mem_Point FROM"
 			+ " mem order by mem_No";/*先把mem_Pic拿掉*/
 	
+	private static final String GET_ALL_MEM_WITHOUT_ME=
+			"SELECT mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
+			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
+			+ "mem_State,mem_Gps_Lat,mem_Gps_Lng,mem_Ip,mem_Date,mission_Count,mem_Address,"
+			+ "mem_Search,mem_Point FROM"
+			+ " mem where mem_No<>?";/*先把mem_Pic拿掉*/
+	
 	private static final String SELECT=
 			"SELECT mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
 			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
@@ -105,8 +112,81 @@ public class MemDAO implements MemDAO_interface{
 		
 		
 
+
 	
-	
+		@Override
+		public List<MemVO> getAllForFriend(String mem_No){
+			List<MemVO> list = new ArrayList<MemVO>();
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try{
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(GET_ALL_MEM_WITHOUT_ME);
+				rs = pstmt.executeQuery();
+				
+//				File pic = new File("WebContent/mem/image","Ui.jpg");
+//				byte[] buffer = null;
+//				try {
+//					buffer = Files.readAllBytes(pic.toPath());
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//				
+				while (rs.next()){
+					MemVO memVO =  new MemVO();
+					
+//					String mem_no = rs.getString("mem_no").trim();
+					
+					memVO.setMem_No(rs.getString("mem_No"));
+					memVO.setMem_Pw(rs.getString("mem_Pw"));
+					memVO.setMem_Name(rs.getString("mem_Name"));
+					memVO.setMem_Id(rs.getString("mem_Id"));
+					memVO.setMem_Bday(rs.getDate("mem_Bday"));
+					memVO.setMem_Tel(rs.getString("mem_Tel"));
+					memVO.setMem_Pho(rs.getString("mem_Pho"));
+					memVO.setMem_Gend(rs.getInt("mem_Gend"));
+					memVO.setMem_Email(rs.getString("mem_Email"));
+					memVO.setMem_Pic(rs.getBytes("mem_Pic"));
+					memVO.setMem_Intro(rs.getString("mem_Intro"));
+					memVO.setMem_Code(rs.getInt("mem_Code"));
+					memVO.setMem_State(rs.getInt("mem_State"));
+					memVO.setMem_Gps_Lat(rs.getDouble("mem_Gps_Lat"));
+					memVO.setMem_Gps_Lng(rs.getDouble("mem_Gps_Lng"));
+					memVO.setMem_Ip(rs.getString("mem_Ip"));
+					memVO.setMem_Date(rs.getDate("mem_Date"));
+					memVO.setMission_Count(rs.getInt("mission_Count"));
+					memVO.setMem_Address(rs.getString("mem_Address"));
+					memVO.setMem_Search(rs.getInt("mem_Search"));
+					memVO.setMem_Point(rs.getInt("mem_Point"));
+					list.add(memVO);
+				}
+			
+			
+			
+			}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally{	
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}				
+			return list;
+		}
+
 
 
 		@Override

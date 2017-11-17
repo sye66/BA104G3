@@ -26,7 +26,7 @@ if(related_Mem_No ==null){
 	related_Mem_No= memVO.getMem_No();
 }
  
-List<RelationVO> relationVO = relationSvc.getWhoAddme(related_Mem_No);
+List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
 pageContext.setAttribute("relationVO", relationVO);
 %>
 
@@ -133,14 +133,14 @@ pageContext.setAttribute("relationVO", relationVO);
 		<th>圖片</th>
 		<th>申請好友</th>
 		<th>性別</th>
-		<th>是否接受</th>
+		<th>完成任務數</th>
 		</tr>
 			
 		<%@ include file="page1.file" %>
 		<c:forEach var="relationVO" items="${relationVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
-			<c:if test="${relationVO.getRelation_Status()==0}">
+			<c:if test="${relationVO.getRelation_Status()==1}">
 			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
 			<td>
 			<div class="form-group">
@@ -156,8 +156,8 @@ pageContext.setAttribute("relationVO", relationVO);
 			</c:if>
 			<td>
 			<input type="hidden" name="action" value="update">
-			<button value="text" type="submit"  class="btn btn-success btn-block btn-lg" tabindex="7">確認
-			</button></h2></td>	</c:if></c:if>
+			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
+				</h2></c:if></c:if>
 			
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>

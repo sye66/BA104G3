@@ -180,6 +180,10 @@ public class MemService {
 		return dao.getAll();
 	}
 	
+	public List<MemVO> getAllForFriend(String mem_No){
+		return dao.getAllForFriend(mem_No);
+	}
+	
 	public MemVO memAuthentication(MemVO memVO){
 		
 		//可以更新資料，順便回傳需要的資料
