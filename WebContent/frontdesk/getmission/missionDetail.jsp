@@ -10,7 +10,7 @@
 <%@ page import="com.missionimages.model.*"%>
 
 <%
-	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
+	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
@@ -35,6 +35,11 @@
 </style>
 </head>
 <body>
+
+<div class="col-xs-12 col-sm-12">
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+</div>
+
 	<table>
 		<tr>
 		<td>
@@ -51,12 +56,14 @@
 			<div class="panel-body">
 
 					<form method="post"
-						action="<%=request.getContextPath()%>/getmission/getmission.do"
+						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 						name="getmission3">
 						<button class="btn-lg btn-danger" type="submit" name="action"
 							value="accusecase">檢舉任務</button>
 						<input type="hidden" name="mission_No"
 							value="${getMissionVO.mission_No}">
+						<input type="hidden" name="mem_No"
+							value="${mem_No}">
 					</form>
 				</div>
 			</td>
@@ -70,7 +77,7 @@
 						<!-- 幻燈片小圓點區 -->
 						<ol class="carousel-indicators">
 							<c:forEach var="missionImagesVO"
-								items="${missionImagesSvc.getMissionpho(mission_No.mission_No)}"
+								items="${missionImagesSvc.getMissionpho(getMissionVO.mission_No)}"
 								varStatus="p">
 								<c:if test="${p.index == 0 }">
 									<li data-target="#carousel-id" data-slide-to="${p.index}"
@@ -85,7 +92,7 @@
 						<!-- 幻燈片主圖區 -->
 						<div class="carousel-inner">
 							<c:forEach var="missionImagesVO"
-								items="${missionImagesSvc.getMissionpho(mission_No.mission_No)}"
+								items="${missionImagesSvc.getMissionpho(getMissionVO.mission_No)}"
 								varStatus="p">
 
 								<c:if test="${p.index == 0 }">
@@ -137,15 +144,15 @@
 				<div class="col-xs-12 col-sm-6 ">
 					<h3 class="text-center">任務簡介</h3>
 					<h4>任務編號:</h4>
-					<p>----${mission_No.mission_No}</p>
+					<p>----${getMissionVO.mission_No}</p>
 					<h4>任務名稱:</h4>
-					<p>----${mission_No.mission_Name}</p>
+					<p>----${getMissionVO.mission_Name}</p>
 					<h4>任務種類:</h4>
-					<p>----${mission_No.mission_Category}</p>
+					<p>----${getMissionVO.mission_Category}</p>
 					<h4>任務狀態:</h4>
-					<p>----${mission_No.mission_State}</p>
+					<p>----${getMissionVO.mission_State}</p>
 					<h4>發案人:</h4>
-					<p>發案人:${memSvc.getOneMem(mission_No.issuer_Mem_No).mem_Name}</p>
+					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 				</div>
 		</tr>
 		</div>
@@ -157,13 +164,13 @@
 						<h3 class="panel-title">任務細節</h3>
 					</div>
 					<div class="panel-body">
-						<p>----發案人${mission_No.issuer_Mem_No}~${memSvc.getOneMem(mission_No.issuer_Mem_No).mem_Name}</p>
+						<p>----發案人${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 
-						<p>----${mission_No.mission_Des}</p>
-						<p>----${mission_No.mission_Release_Time}</p>
-						<p>----${mission_No.mission_Due_Time}</p>
-						<p>----${mission_No.mission_Pattern}</p>
-						<p>----${mission_No.mission_Pay} 積分</p>
+						<p>----${getMissionVO.mission_Des}</p>
+						<p>----${getMissionVO.mission_Release_Time}</p>
+						<p>----${getMissionVO.mission_Due_Time}</p>
+						<p>----${getMissionVO.mission_Pattern}</p>
+						<p>----${getMissionVO.mission_Pay} 積分</p>
 					</div>
 				</div>
 
@@ -197,13 +204,13 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">任務編號:${mission_No.mission_No}</h4>
+							<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
 						</div>
 						<div class="modal-body">
 							<h4>任務名稱:</h4>
-							<p>----${mission_No.mission_Name}</p>
+							<p>----${getMissionVO.mission_Name}</p>
 							<h4>任務種類:</h4>
-							<p>----${mission_No.mission_Category}</p>
+							<p>----${getMissionVO.mission_Category}</p>
 						</div>
 						<div class="modal-footer">
 
@@ -257,6 +264,10 @@
 			</td>
 		</tr>
 	</table>
+	
+	<div class="col-xs-12 col-sm-12">
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+	</div>
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

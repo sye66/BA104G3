@@ -10,7 +10,7 @@ public class AccuseCaseService {
 		dao = new AccuseCaseDAO();
 	}
 
-	public AccuseCaseVO addAccuseCase( String mission_No,String accuser_No,String emp_No, java.sql.Date accuse_Date,
+	public AccuseCaseVO addAccuseCase( String mission_No,String accuser_No,String emp_No,
 			java.sql.Date closed_Case_Date, String accuse_Detail, Integer accuse_State) {
 
 		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
@@ -19,7 +19,6 @@ public class AccuseCaseService {
 		accuseCaseVO.setMission_No(mission_No);
 		accuseCaseVO.setAccuser_No(accuser_No);
 		accuseCaseVO.setEmp_No(emp_No);
-		accuseCaseVO.setAccuse_Date(accuse_Date);
 		accuseCaseVO.setClosed_Case_Date(closed_Case_Date);
 		accuseCaseVO.setAccuse_Detail(accuse_Detail);
 		accuseCaseVO.setAccuse_State(accuse_State);
@@ -56,5 +55,18 @@ public class AccuseCaseService {
 
 	public List<AccuseCaseVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public AccuseCaseVO updateAccuseCaseState(String mission_No,String accuser_No,
+			  Integer accuse_State) {
+
+		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
+
+		accuseCaseVO.setAccuse_No(mission_No);
+		accuseCaseVO.setAccuser_No(accuser_No);
+		accuseCaseVO.setAccuse_State(accuse_State);
+		dao.update(accuseCaseVO);
+
+		return accuseCaseVO;
 	}
 }
