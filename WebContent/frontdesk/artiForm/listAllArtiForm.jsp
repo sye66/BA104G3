@@ -63,6 +63,8 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
@@ -152,4 +154,6 @@
  <%@ include file="/backdesk/page2.file" %> 
 
 </body>
+
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </html>

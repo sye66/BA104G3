@@ -19,6 +19,10 @@
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+
+
 	<title>CKFinder - Sample - CKEditor Integration</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, nofollow" />
@@ -32,6 +36,8 @@
 	<h1 class="samples">
 		TOOLMAN - Article Area
 	</h1>
+
+<div class="container">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
 <div class="col-xs-12 col-sm-11 widget-container-span">
@@ -103,21 +109,25 @@
                        </div>
                   </div>                    
          </div>
-         
-
- 
 		 
          <div class="widget-header header-color-dark">
          <h5 class="bigger lighter"><input type="hidden" name="arti_Time" id="f_date1" /></h5>
              <div class="widget-toolbar">
                  <div class="btn-group">
+
+                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
+		        <input type="hidden" name="describe"  value="${artiFormVO.describe}">	        
+                <button class="btn btn-info" type="submit" name="action" value="insertArti"> 新增文章 </button>
+                </FORM>
+
+                  </div>
+              </div>
+
+              <div class="widget-toolbar">
+                 <div class="btn-group">
                  <button class="btn btn-sm btn-success">
                   <a href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"> 取消 </a> 
                   </button>
-
-                  <i class="icon-remove bigger-110"></i>
-                  	<input type="hidden" name="action" value="insertArti"/>
-                    <input type="submit" value="送出新增"/>
 
                   </div>
               </div>
@@ -127,6 +137,7 @@
 <hr />	
 	
 </FORM>
+</div>
 	<script src="//cdn.ckeditor.com/4.5.6/standard-all/ckeditor.js"></script>
 	<script>
 		// Note: in this sample we use CKEditor with two extra plugins:
@@ -176,6 +187,8 @@
             }
         }
     </script>
+    
+     <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
     
 </body>
 </html>

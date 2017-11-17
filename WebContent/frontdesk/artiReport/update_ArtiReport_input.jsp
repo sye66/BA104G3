@@ -51,6 +51,8 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+
 <table id="table-1">
 	<tr><td>
 		 <h3>檢舉文章資料修改 - update_artiReport_input.jsp</h3>
@@ -70,6 +72,7 @@
 	</ul>
 </c:if>
 
+<div class="container">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
@@ -112,6 +115,8 @@
 <input type="hidden" name="action" value="updateReply">
 <input type="hidden" name="arti_No" value="<%=artiReportVO.getReport_No()%>">
 <input type="submit" value="送出修改"></FORM>
+</div>
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </body>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
