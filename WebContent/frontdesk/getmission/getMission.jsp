@@ -23,9 +23,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Title Page</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel=stylesheet type="text/css" href="css/map.css">
+
 <link rel="stylesheet" href="css/map.css">
 <script type="text/javascript" src="js/*"></script>
 <script src="js/map.js"></script>
@@ -44,7 +42,10 @@
 </head>
 <body>
 
-	<%@ include file="/frontdesk/header.jsp"%>
+	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
+	
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-4">
@@ -61,7 +62,7 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="input-group container">
+			<div class="input-group ">
 				<FORM METHOD="post"
 					ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
 					<div class="input-group">
@@ -313,12 +314,16 @@
 	<br>
 
 
-	<%@ include file="/frontdesk/footer.jsp"%>
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 </body>
+<style><link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel=stylesheet type="text/css" href="css/map.css"></style>
 </html>

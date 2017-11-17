@@ -22,7 +22,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,closed_case_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, ?,?)";
+		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,closed_case_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, sysdate, ?, ?,?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd') accuse_date,to_char(closed_case_date,'yyyy-mm-dd') closed_case_date,accuse_detail,accuse_state FROM accuse_case order by accuse_no";
 	private static final String GET_ONE_STMT = 
@@ -30,7 +30,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	private static final String DELETE = 
 		"DELETE FROM accuse_case where accuse_no = ?";
 	private static final String UPDATE = 
-		"UPDATE accuse_case set mission_no=?, accuser_no=?, emp_no=?, accuse_date=?, closed_case_date=?, accuse_detail=?, accuse_state=? where accuse_no = ?";
+		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), closed_case_date= nvl(?,closed_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
 
 	@Override
 	public void insert(AccuseCaseVO accuseCaseVO) {
@@ -46,10 +46,10 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(1, accuseCaseVO.getMission_No());
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
-			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-			pstmt.setDate(5, accuseCaseVO.getClosed_Case_Date());
-			pstmt.setString(6, accuseCaseVO.getAccuse_Detail());
-			pstmt.setInt(7, accuseCaseVO.getAccuse_State());
+//			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
+			pstmt.setDate(4, accuseCaseVO.getClosed_Case_Date());
+			pstmt.setString(5, accuseCaseVO.getAccuse_Detail());
+			pstmt.setInt(6, accuseCaseVO.getAccuse_State());
 
 			pstmt.executeUpdate();
 
