@@ -36,7 +36,7 @@
  }
  
 .card{
-	
+	width:256px;
 	box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
@@ -47,7 +47,6 @@
 }
 </style>
 
-
 <html>
 <head>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
@@ -56,17 +55,22 @@
 <body>
 
 <div style="text-align:center;">
+
  <br><br>
+  
+ 
+
+
   
 	<c:forEach var="proVO" items="${list}">
 	<div class="allPro">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
 <!-- 		目前上架是寫死的 -->
 		<c:if test="${proVO.pro_Status=='上架'}" >
-			<div class="col-xs-12 col-sm-3 ">
-		     	<div class="card" style="width:110%;">
+			<div class="col-xs-12 col-sm-4 ">
+		     	<div class="card" style="width:100%;">
 			 	    <div class="imgCont">
-		  				<img class="card-img-top" style="width:100%;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+		  				<img class="card-img-top" style="width:80%;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	    </div>
 	  				<div class="card-body">
 	   			 		<p class="card-text proName" style="height:28px;color:#000;">${proVO.pro_Name}</p>
@@ -79,13 +83,17 @@
 	   			 		<p class="card-footer proDiscount" style="height:25px ;color:#000;">原價:$${proVO.pro_Price}</p>
 	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
 	   			 		</c:if>
+	   			 		
+	   			 		
+<%-- 	 			 	<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}" class="button orange addcar">加入購物車</a>  --%>
+		
 	 			 	</div>
 				</div>
 			</div>
-		
-		</c:if>
+		 </c:if>
 	 	</a>
-	 </div>	
+	 </div>
+	 	
  	</c:forEach>  	
  
  </div>

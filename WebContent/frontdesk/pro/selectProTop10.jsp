@@ -13,27 +13,33 @@
     
 %>
  <style>
-.proDiv2{
+.proDiv0{
 	
-	border:3px orange double;
+/* 	border:3px orange double; */
 	height: 180px;
 	width:200px;
-	margin:0px,audio;
+ 	margin:0px,audio; 
+	
 	
 } 
-.proName2{ 
+.proName0{ 
    	font-size:18px; 
 }  
-.proPrice2{
+.proPrice0{
  	font-size:16; 
     color:red; 
 } 
-.proDiscount2{ 
+.proDiscount0{ 
   	font-size:14px; 
   	text-decoration:line-through;
   
 } 
-
+.card0{
+	
+	box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
 </style>
 
 
@@ -45,7 +51,7 @@
 <body>
 
 
-  <div>
+  <div class="col-xs-12 col-sm-12">
   
 	<c:forEach var="proVO" items="${list}" end="9">
 	
@@ -55,17 +61,17 @@
 		<c:if test="${proVO.pro_Status=='上架'}" >
 		<h3 style="margin-left:16px; color:red;">TOP:<%=count %></h3>
 		<div style="text-align:center ">
-			<div class="col-xs-12 col-sm-10 proDiv2">
-		     	<div class="card1" style="margin-top:0px ">
+			<div class="col-xs-12 col-sm-12 proDiv0">
+		     	<div class="card0"  >
 		     	
-			 	    <div class="imgCont3">
+			 	    <div class="imgCont0">
 			 	    
 		  				<img class="card-img-top" style="width:100px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	        
 			   	    </div>
 	  				<div class="card-body">
-	   			 		<p class="card-text proName2">${proVO.pro_Name}</p>
-	   			 		<p class="card-footer proPrice2">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
+	   			 		<p class="card-text proName0">${proVO.pro_Name}</p>
+	   			 		<p class="card-footer proPrice0">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
 	   			 		
 	 			 	</div>
 				</div>

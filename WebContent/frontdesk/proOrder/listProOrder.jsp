@@ -10,8 +10,44 @@
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+<style>
 
+</style>
+
+<script>
+$(function(){
+	$("#xx").click(event){
+		alert('You clicked the button!')
+		swal({
+			  title: 'Are you sure?',
+			  text: "You won't be able to revert this!",
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'Yes, delete it!'
+			}).then(function (result) {
+			  if (result.value) {
+			    swal(
+			      'Deleted!',
+			      'Your file has been deleted.',
+			      'success'
+			    )
+			  }
+			})
+
+		
+		
+	})
+});
+
+
+
+
+
+
+</script>
+	
 </head>
 <body>
 
@@ -74,7 +110,7 @@
               							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No }">
               							<input type="hidden" name="ord_Shipinfo"  value="${proOrder.ord_Shipinfo}">
-             							<button type="submit" class="btn btn-danger"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button>
+             							<button type="submit" class="btn btn-danger" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button>
           								</form></div>
        								 </td>
 								</c:if>

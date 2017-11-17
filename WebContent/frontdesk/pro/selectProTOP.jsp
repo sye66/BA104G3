@@ -82,7 +82,7 @@
 
 </head>
 <body>
-
+<div class="row">
 <!--搜尋12 -->
 <div class="col-xs-12 col-sm-12 " id="ontopDiv">
 		<!--搜尋 -->
@@ -161,6 +161,6 @@
 		<div class="col-xs-12 col-sm-2"><!--空 --></div>
 		
 	</div><!--搜尋結束 12 -->
-
+</div>
 </body>
 </html>

@@ -80,8 +80,8 @@ System.out.println("購物車增加商品");
 //System.out.println("購物車引入路徑"+requestURL);			
 //				 url=requestURL;
 //			}else{
-				 url = "/frontdesk/pro/cart.jsp";
-//				 url = "/frontdesk/pro/showProIndex.jsp";
+//				 url = "/frontdesk/pro/cart.jsp";
+				 url = "/frontdesk/pro/showProIndex.jsp";
 System.out.println("刪除購物車商品 回購物車"+url);						 
 //			}
 			// String url = req.getParameter("requestURL");
