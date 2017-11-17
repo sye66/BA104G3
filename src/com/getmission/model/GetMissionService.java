@@ -1,7 +1,9 @@
 package com.getmission.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public class GetMissionService {
 
@@ -89,6 +91,25 @@ public class GetMissionService {
 
 		return getMissionVO;
 	}
+	
+	public GetMissionVO updateOneMission(
+			String mission_No,
+			String takecase_Mem_No,
+			Date mission_Start_Time,
+			Date mission_End_Time,
+			Integer mission_State
+			) {
+
+		GetMissionVO getMissionVO = new GetMissionVO();
+		getMissionVO.setMission_No(mission_No);
+		getMissionVO.setTakecase_Mem_No(takecase_Mem_No);
+		getMissionVO.setMission_Start_Time(mission_Start_Time);
+		getMissionVO.setMission_End_Time(mission_End_Time);
+		getMissionVO.setMission_State(mission_State);
+		dao.update(getMissionVO);
+
+		return getMissionVO;
+	}
 
 	public void deleteMission(String mission_No) {
 		dao.delete(mission_No);
@@ -97,9 +118,21 @@ public class GetMissionService {
 	public GetMissionVO getOneMission(String mission_No) {
 		return dao.findByPrimaryKey(mission_No);
 	}
+	
+	public List<GetMissionVO> findIssuerCase(String issuer_Mem_No){
+		return dao.findIssuerCase(issuer_Mem_No);
+	}
 
 	public List<GetMissionVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<GetMissionVO> getOkAll(){
+		return dao.getOkAll();
+	}
+	
+	public List<GetMissionVO> getAll(Map<String, String[]> map) {
+		return dao.getAll(map);
 	}
 	
 	public GetMissionVO takeMission(
@@ -109,16 +142,13 @@ public class GetMissionService {
 	GetMissionVO getMissionVO = new GetMissionVO();
 	getMissionVO.setMission_No(mission_No);
 	getMissionVO.setMission_State(mission_State);
-	dao.update(getMissionVO);
+	dao.takeMission(getMissionVO);
 		
 		return getMissionVO;
 	}
 	
-	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Statuts){
-		return dao.findByMem(issuer_Mem_No, mission_Statuts);
+	public List<GetMissionVO> successGetMission(String takecase_Mem_No){
+		return dao.successGetMission(takecase_Mem_No);
 	}
-	public List<GetMissionVO> findByMem(String issuer_Mem_No) {
-		return dao.findByMem(issuer_Mem_No);
-	}
-
+	
 }

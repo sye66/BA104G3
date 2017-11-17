@@ -65,7 +65,7 @@ pageContext.setAttribute("relationVO", relationVO);
 <body>
 
 
-<!-- navbar====================================================================== -->
+<!-- navbar======================================================================= -->
 
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include>

@@ -212,7 +212,7 @@ System.out.println("----------------------------------------");
 			 			try {
 			 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 
-			 				String ach_No = req.getParameter("ach_No").trim();
+			 				
 			 				String ach_Name = req.getParameter("ach_Name").trim();
 			 				String ach_Explain = req.getParameter("ach_Explain").trim();
 			 				
@@ -232,7 +232,7 @@ System.out.println("----------------------------------------");
 			 				
 			 				AchieveVO achieveVO = new AchieveVO();
 			 				
-			 				achieveVO.setAch_No(ach_No);
+			 				
 			 				achieveVO.setAch_Name(ach_Name);
 			 				achieveVO.setAch_Picture(ach_Picture);
 			 				achieveVO.setAch_Explain(ach_Explain);

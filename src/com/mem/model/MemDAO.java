@@ -110,7 +110,8 @@ public class MemDAO implements MemDAO_interface{
 			"DELETE FROM mem WHERE mem_No = ?";
 		
 		
-		
+	private static final String UPDATE_POINT = 
+			"UPDATE mem set mem_Point = ? where mem_No=? ";
 
 
 	
@@ -875,7 +876,45 @@ public class MemDAO implements MemDAO_interface{
 
 
 		
-
+		@Override
+		public void updateMemPoint(MemVO memVO) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATEBYMEM);
+				
+				pstmt.setInt(1, memVO.getMem_Point());
+				pstmt.setString(2, memVO.getMem_No());
+				
+				pstmt.executeUpdate();				
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 
 
 

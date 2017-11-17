@@ -5,10 +5,16 @@ public class AchieveVO implements java.io.Serializable{
 	private String ach_Name;
 	private byte[] ach_Picture;
 	private String ach_Explain;
-	
+	private String mem_No;
 	
 	public String getAch_No() {
 		return ach_No;
+	}
+	public String getMem_No() {
+		return mem_No;
+	}
+	public void setMem_No(String mem_No) {
+		this.mem_No = mem_No;
 	}
 	public void setAch_No(String ach_No) {
 		this.ach_No = ach_No;

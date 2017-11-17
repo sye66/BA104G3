@@ -15,6 +15,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 	private static final String USR = "BA104G3";
 	private static final String PSW = "123456";
 	
+	
 	private static final String INSERT_STMT = "INSERT INTO DISPUTE_CASE("
 			+ "DISPUTE_CASE_NO,"
 			+ "MISSION_NO,"
@@ -22,13 +23,11 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			+ "EMP_NO,"
 			+ "ISSUE_DATETIME,"
 			+ "CLOSE_DATETIME,"
-			+ "DISPUTE_CASE_STATUS)"
-			+ " VALUES('DIS'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'),?,?,?,?,?,?)";
-	private static final String GET_ONE_STMT = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO =?";
-	private static final String GET_ALL_STMT = "SELECT * FROM DISPUTE_CASE";
-	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
-	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
-	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
+			+ "DISPUTE_CASE_STATUS,"
+			+ "DISPUTE_CONTENT,"
+			+ "DISPUTE_ATTACHMENT,"
+			+ "DISPUTE_REPLY)"
+			+ " VALUES('DIS'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_STMT = "DELETE FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO=?";
 	private static final String UPDATE_STMT = "UPDATE DISPUTE_CASE SET "
 			+ "MISSION_NO=?, "
@@ -36,8 +35,16 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			+ "EMP_NO=?, "
 			+ "ISSUE_DATETIME=?, "
 			+ "CLOSE_DATETIME=?, "
-			+ "DISPUTE_CASE_STATUS=? "
+			+ "DISPUTE_CASE_STATUS=?,"
+			+ "DISPUTE_CONTENT=?,"
+			+ "DISPUTE_ATTACHMENT=?, "
+			+ "DISPUTE_REPLY=? "
 			+ "WHERE DISPUTE_CASE_NO=?";
+	private static final String GET_ONE_STMT = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_NO =?";
+	private static final String GET_ALL_STMT = "SELECT * FROM DISPUTE_CASE";
+	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
+	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
+	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
 
 	@Override
 	public void insert(DisputeCaseVO disputeCaseVO) {
@@ -58,6 +65,9 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
 			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
 			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
+			pstmt.setString(7, disputeCaseVO.getDispute_Content());
+			pstmt.setBytes(8, disputeCaseVO.getDispute_Attachment());
+			pstmt.setString(9, disputeCaseVO.getDispute_Reply());
 			
 			pstmt.executeUpdate();
 			System.out.println("新增成功");
@@ -147,7 +157,11 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 			pstmt.setTimestamp(4, disputeCaseVO.getIssue_Datetime());
 			pstmt.setTimestamp(5, disputeCaseVO.getClose_Datetime());
 			pstmt.setInt(6, disputeCaseVO.getDispute_Case_Status());
-			pstmt.setString(7, disputeCaseVO.getDispute_Case_No());
+			pstmt.setString(7, disputeCaseVO.getDispute_Content());
+			pstmt.setBytes(8, disputeCaseVO.getDispute_Attachment());
+			pstmt.setString(9, disputeCaseVO.getDispute_Reply());
+			pstmt.setString(10, disputeCaseVO.getMission_No());
+			
 			pstmt.executeUpdate();
 			
 			System.out.println("更新成功");
@@ -289,7 +303,6 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		return listAllDisputeCase;
 	}
 	
-
 	@Override
 	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status) {
 		Connection con = null;
@@ -464,6 +477,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		}
 		return listDisputeCaseMem;
 	}
+
 	
 	public static void main(String[] args) {
 		DisputeCaseDAO_interface dao = new DisputeCaseDAO_JDBC();
@@ -471,7 +485,6 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		DisputeCaseVO updateDisputeCase = new DisputeCaseVO();
 		DisputeCaseVO getOneDisputeCase = new DisputeCaseVO();
 		List<DisputeCaseVO> getAllDisputeCase = new ArrayList<>();
-		
 		java.util.Date date = new java.util.Date();
 		Timestamp timestamp = new Timestamp(date.getTime());
 		
@@ -483,13 +496,16 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		insertDisputeCase.setDispute_Case_Status(1);
 		dao.insert(insertDisputeCase);
 		
-//		updateDisputeCase.setDispute_Case_No("DIS000005");
-//		updateDisputeCase.setMission_No("MISSION000000028");
-//		updateDisputeCase.setDispute_Mem_No("M000008");
-//		updateDisputeCase.setIssue_Datetime(timestamp);
-//		updateDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
-//		updateDisputeCase.setDispute_Case_Status(2);
-//		dao.update(updateDisputeCase);
+		updateDisputeCase.setDispute_Case_No("DIS000005");
+		updateDisputeCase.setMission_No("MISSION000000028");
+		updateDisputeCase.setDispute_Mem_No("M000008");
+		updateDisputeCase.setIssue_Datetime(timestamp);
+		updateDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
+		updateDisputeCase.setDispute_Case_Status(2);
+//		updateDisputeCase.setDispute_Content("1");
+//		updateDisputeCase.setDispute_Attachment(null);
+//		updateDisputeCase.setDispute_Reply("3");
+		dao.update(updateDisputeCase);
 //		
 //		dao.delete("DIS000003");
 //		
@@ -501,12 +517,12 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 //			System.out.println(disputeCaseVO.getDispute_Case_No());
 //		}
 //		getAllDisputeCase = dao.findByStatus(1,"E000009");
-		getAllDisputeCase = dao.findByMem("M000011");
-		for (DisputeCaseVO disputeCaseVO : getAllDisputeCase) {
-			System.out.println(disputeCaseVO.getDispute_Case_No());
-			System.out.println(disputeCaseVO.getIssue_Datetime());
-			System.out.println(disputeCaseVO.getEmp_No());
-		}
+//		getAllDisputeCase = dao.findByMem("M000011");
+//		for (DisputeCaseVO disputeCaseVO : getAllDisputeCase) {
+//			System.out.println(disputeCaseVO.getDispute_Case_No());
+//			System.out.println(disputeCaseVO.getIssue_Datetime());
+//			System.out.println(disputeCaseVO.getEmp_No());
+//		}
 		
 		
 	}

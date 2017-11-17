@@ -17,5 +17,6 @@ public interface MemDAO_interface {
 	public void register(MemVO memVO);
 	public MemVO Authentication(MemVO memVO);
 	public void recharge(MemVO memVO);
+	public void updateMemPoint(MemVO memVO);
 //	public void select(MemVO memVO); 
 }

@@ -1142,6 +1142,16 @@ public class MemJDBCDAO implements MemDAO_interface{
 
 
 
+	@Override
+	public void updateMemPoint(MemVO memVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
 
 
 

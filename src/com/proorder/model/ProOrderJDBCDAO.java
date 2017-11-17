@@ -345,8 +345,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 			pstmt.setDate(8,proOrderVO.getOrd_Ship_Date());
 			
 			pstmt.executeUpdate();
-			con.commit();
-			con.setAutoCommit(true);
+			
 			//掘取對應的自增主鍵值
 			String next_Ord_No = null;
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -366,7 +365,7 @@ System.out.println(list.size());
 				Integer ordPro_Count = proCartVO.getProCar_Quantity();
 				Double ordPor_Price = proCartVO.getProCar_Price();
 System.out.println(next_Ord_No +" "+pro_No+" "+ordPro_Count+" "+ordPor_Price);					
-				proOrdListSvc.addProOrdList(ord_No, pro_No, ordPro_Count, ordPor_Price);
+				proOrdListSvc.addProOrdList(ord_No, pro_No, ordPro_Count, ordPor_Price,con);
 			}
 System.out.println("同時新增完成");			
 			con.commit();
