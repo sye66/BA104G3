@@ -14,7 +14,7 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA104G3";
-	String passwd = "BA104G3";
+	String passwd = "123456";
 	
 	private static final String INSERT = 
 			"INSERT INTO EMP(EMP_NO,EMP_NAME,EMP_PWD,EMP_MAIL,EMP_JOB,EMP_PHONE,EMP_STATE)VALUES('E'||LPAD(MEM_NO.NEXTVAL,6,'0'),?,?,?,?,?,?)";
