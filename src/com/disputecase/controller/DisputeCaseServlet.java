@@ -2,7 +2,6 @@ package com.disputecase.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedList;
@@ -15,13 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import javax.xml.ws.Dispatch;
 
 import com.disputecase.model.DisputeCaseService;
 import com.disputecase.model.DisputeCaseVO;
-import com.sun.xml.internal.txw2.DatatypeWriter;
 
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
@@ -145,12 +141,12 @@ public class DisputeCaseServlet extends HttpServlet {
 				disputeCaseVO.setDispute_Case_Status(3);
 				disputeCaseService.replyDisputeCase(disputeCaseNo, timestamp, 3, disputeReply);				
 				System.out.println("爭議案件結案: " + disputeCaseNo);
-				RequestDispatcher issueDoneView = request.getRequestDispatcher("/backdesk/disputeCase/disputeSuccess.jsp");
-				issueDoneView.forward(request, response);
+				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
+				ReplyDoneView.forward(request, response);
 			} catch (Exception e) {
 				errorMsg.add("無法取得資料" + e.getMessage());
 				// TODO ADD DISPATCH PAGE
-				RequestDispatcher failureView = request.getRequestDispatcher("/backdesk/disputeCase/disputeSuccess.jsp"); 
+				RequestDispatcher failureView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp"); 
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}
