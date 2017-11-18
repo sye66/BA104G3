@@ -8,12 +8,16 @@
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
+<%@ page import="com.accusecase.model.*"%>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
+<jsp:useBean id="accusecaseSvc" scope="page"
+	class="com.accusecase.model.AccuseCaseService" />
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
+	AccuseCaseVO accusecaseVO = (AccuseCaseVO) request.getAttribute("accusecaseVO");
 %>
 
 <!DOCTYPE html>
@@ -61,7 +65,7 @@
 			
 			<td>
 			<div class="panel-body">
-
+<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
 					<form method="post"
 						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 						name="getmission3">
@@ -72,6 +76,20 @@
 						<input type="hidden" name="mem_No"
 							value="${mem_No}">
 					</form>
+					</c:if>
+					
+					<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
+					<form method="post"
+						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
+						name="getmission3">
+						<button class="btn-lg btn-info" type="submit" name="action"
+							value="cancelaccusecase">取消檢舉任務</button>
+						<input type="hidden" name="mission_No"
+							value="${getMissionVO.mission_No}">
+						<input type="hidden" name="mem_No"
+							value="${mem_No}">
+					</form>
+					</c:if>
 				</div>
 			</td>
 		</tr>

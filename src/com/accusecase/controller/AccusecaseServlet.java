@@ -35,25 +35,26 @@ public class AccusecaseServlet extends HttpServlet {
 				res.sendRedirect("/BA104G3/loginTest.jsp");
 				return;
 			}
-System.out.println("11111111");
+			
 			try {
-				String mission_No = (String) req.getSession().getAttribute("mission_No");
+				String mission_No = (String) req.getParameter("mission_No");
 				String accuse_Detail = (String) req.getSession().getAttribute("accuse_Detail");
 				GetMissionService GetMissionSvc = new GetMissionService();
 				GetMissionVO getMissionVO = new GetMissionVO();
+				if(GetMissionSvc.getOneMission(mission_No)==null){
+				}
+				
+				
 				Integer mission_State = GetMissionSvc.getOneMission(mission_No).getMission_State();
 				AccuseCaseService accuseCaseSevc = new AccuseCaseService();
 				AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
-System.out.println("22222222222222222222");
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
 
 				if (issuer_No != mem_No) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7) {
 						mission_State = 7;
-System.out.println("333333333333333333");
 						getMissionVO = GetMissionSvc.takeMission(mission_No, mission_State);
-						accuseCaseVO = accuseCaseSevc.addAccuseCase(mission_No, mem_No, null, null, accuse_Detail, 1);
-System.out.println("4444444444444444");
+						accuseCaseVO = accuseCaseSevc.addAccuseCase(mission_No, mem_No, null, accuse_Detail, 1);
 					} else if (mission_State == 3 || mission_State == 4) {
 						errorMsgs.add("這任務已經有人接案囉,不能檢舉,如有問題請反應後台管理員,謝謝。");
 					} else {
@@ -63,14 +64,16 @@ System.out.println("4444444444444444");
 				} else {
 					errorMsgs.add("嘿~不要檢舉自己的任務!");
 				}
-System.out.println("5555555555555555555555555555");
+				getMissionVO = GetMissionSvc.getOneMission(mission_No);
 				req.setAttribute("getMissionVO", getMissionVO);
 				req.setAttribute("accuseCaseVO", accuseCaseVO);
+				req.setAttribute("mem_No", mem_No);
 				req.setAttribute("errorMsgs", errorMsgs);
 				String url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 			} catch (Exception e) {
+				System.out.println(e);
 				errorMsgs.add("檢舉失敗:" + e.getMessage());
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req.getRequestDispatcher("");
