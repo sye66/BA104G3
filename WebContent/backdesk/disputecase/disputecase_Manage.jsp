@@ -77,10 +77,12 @@
                             <%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%>
                         </td>
                         <td>
-							<form method="post" action="disputecase_Check.jsp">
+							<form method="post" action="disputecase_Reply.jsp">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
 								<input type="submit" class="btn btn-info"value="回覆此案鍵">
 							</form>
+						</td>
+						<td>
                             <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
 								<input type="hidden" name="action" value="reply_Dispute_Case">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">

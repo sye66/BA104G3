@@ -17,6 +17,12 @@ import javax.servlet.http.Part;
 
 import com.disputecase.model.DisputeCaseService;
 import com.disputecase.model.DisputeCaseVO;
+import com.getmission.model.GetMissionService;
+import com.getmission.model.GetMissionVO;
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
+
+import oracle.net.aso.n;
 
 
 
@@ -125,22 +131,39 @@ public class DisputeCaseServlet extends HttpServlet {
 				
 				/**********準備寫入與轉向**********/
 				
-				// 先抓出原本的VO
+				// 抓原本VO出來
+				
 				DisputeCaseService disputeCaseService = new DisputeCaseService();
 				DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(disputeCaseNo);
-
-				// 1. 寫入回覆存入資料庫
-				disputeCaseVO.setDispute_Reply(disputeReply);
 				
+				// 1. 寫入回覆存入資料庫
 				// 2. 寫入結案時間存入資料庫
+				// 3. 改變爭議案件狀態 - 爭議結案(3)		
 				Date date = new Date();
 				Timestamp timestamp = new Timestamp(date.getTime());
-				disputeCaseVO.setClose_Datetime(timestamp);
-				
-				// 3. 改變爭議案件狀態 - 爭議結案(3)
-				disputeCaseVO.setDispute_Case_Status(3);
-				disputeCaseService.replyDisputeCase(disputeCaseNo, timestamp, 3, disputeReply);				
+				disputeCaseService.replyDisputeCase(disputeCaseNo, timestamp, 3, disputeReply);		
 				System.out.println("爭議案件結案: " + disputeCaseNo);
+
+				// 4. 改變任務狀態 (5)
+				GetMissionService getMissionService = new GetMissionService();
+				String mission_No = disputeCaseVO.getMission_No();
+				getMissionService.updateOneMissionStatus(mission_No, 5);
+				System.out.println("狀態改變 - 任務: " + mission_No);
+				
+				// 5. 退回積分給發案人
+				
+				GetMissionVO getMissionVO = getMissionService.getOneMission(mission_No);
+				Integer mission_Pay = 0;
+				try {
+					mission_Pay = Integer.parseInt((getMissionVO.getMission_Pay()).toString());
+				} catch (NumberFormatException e) {
+					System.out.println("數字格式錯誤，使用預設值50");
+					mission_Pay = 50;
+				}
+				MemService memService = new MemService();
+				
+				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getIssuer_Mem_No(),mission_Pay);
+				
 				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
 				ReplyDoneView.forward(request, response);
 			} catch (Exception e) {

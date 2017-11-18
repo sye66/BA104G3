@@ -885,7 +885,7 @@ public class MemDAO implements MemDAO_interface{
 			
 			try {
 				con = ds.getConnection();
-				pstmt = con.prepareStatement(UPDATEBYMEM);
+				pstmt = con.prepareStatement(UPDATE_POINT);
 				
 				pstmt.setInt(1, memVO.getMem_Point());
 				pstmt.setString(2, memVO.getMem_No());

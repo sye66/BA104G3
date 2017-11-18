@@ -17,7 +17,7 @@
 	<!-- 標籤面板：內容區 -->
 		<div role="" class="tab-pane active " id="tab1">
 			<div class="list-group">
-				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_manage.jsp" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputeCase_manage.jsp" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
 				<a href="disputecase_pending.jsp" class="list-group-item ">&nbsp;&nbsp;等待處理</a>
 				<a href="disputecase_hadling.jsp" class="list-group-item">&nbsp;&nbsp;正在處理</a>
 				<a href="disputecase_closed.jsp" class="list-group-item">&nbsp;&nbsp;已結束</a>

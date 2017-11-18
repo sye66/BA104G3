@@ -20,7 +20,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>查看爭議案件</title>
+<title>回覆爭議案件</title>
 </head>
 
 <body>
@@ -86,7 +86,6 @@
 						<div class="col-xs-12 col-sm-12"
 							style="margin-top: 30px; text-align: center;">
 							<input type="submit" class="btn btn-primary" value="回覆爭議案件">
-							<input type="button" name="">
 						</div>
 					</div>
 				</form>
