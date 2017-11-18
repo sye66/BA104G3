@@ -30,8 +30,8 @@ public class Ach_DetailServlet extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		HttpSession session = req.getSession();
-		session.getAttribute("mem_No");
+//		HttpSession session = req.getSession();
+//		session.getAttribute("mem_No");
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -42,8 +42,8 @@ public class Ach_DetailServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("mem_No");
-				
-				session.setAttribute("mem_No", str);
+System.out.println(str+"11111111111111");
+//				session.setAttribute("mem_No", str);
 				
 				if (str == null || (str.trim()).length() == 0) {
 					errorMsgs.add("請輸入會員編號");
@@ -51,7 +51,7 @@ public class Ach_DetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -65,26 +65,29 @@ public class Ach_DetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
+System.out.println(mem_No);
 				Ach_DetailService ach_DetailSvc = new Ach_DetailService();
 				Ach_DetailVO ach_DetailVO = ach_DetailSvc.getOneAch_Detail(mem_No);
+System.out.println(mem_No+"333333333333");
 				if (ach_DetailVO == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+System.out.println(mem_No+"22222222222222222");
 				req.setAttribute("ach_DetailVO", ach_DetailVO); 
 				String url = "/frontdesk/ach_detail/listOneAch_Detail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
@@ -94,7 +97,7 @@ public class Ach_DetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/selectAch_Detail_page.jsp");
+						.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -118,7 +121,7 @@ public class Ach_DetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -132,7 +135,7 @@ public class Ach_DetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -146,7 +149,7 @@ public class Ach_DetailServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAch_Detail_page.jsp");
+							.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -161,7 +164,7 @@ public class Ach_DetailServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/selectAch_Detail_page.jsp");
+						.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

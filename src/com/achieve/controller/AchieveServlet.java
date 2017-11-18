@@ -54,7 +54,7 @@ public class AchieveServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAchieve_page.jsp");
+							.getRequestDispatcher("/backdesk/achieve/selectAchieve_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -68,7 +68,7 @@ public class AchieveServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAchieve_page.jsp");
+							.getRequestDispatcher("/backdesk/achieve/selectAchieve_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -82,7 +82,7 @@ public class AchieveServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAchieve_page.jsp");
+							.getRequestDispatcher("/backdesk/achieve/selectAchieve_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -97,7 +97,7 @@ public class AchieveServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/selectAchieve_page.jsp");
+						.getRequestDispatcher("/backdesk/achieve/selectAchieve_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

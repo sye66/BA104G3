@@ -115,8 +115,8 @@ public class Ach_DetailJdbcDAO implements Ach_DetailDAO_interface{
 	}
 
 	@Override
-	public List<Ach_DetailVO> findByPrimaryKey(String mem_No) {
-		List<Ach_DetailVO> list1 = new ArrayList<Ach_DetailVO>();
+	public Ach_DetailVO findByPrimaryKey(String mem_No) {
+		
 		Ach_DetailVO ach_DetailVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -138,7 +138,7 @@ public class Ach_DetailJdbcDAO implements Ach_DetailDAO_interface{
 				ach_DetailVO.setMem_No(rs.getString("mem_No"));
 				ach_DetailVO.setAch_No(rs.getString("ach_No"));
 				ach_DetailVO.setAch_Time(rs.getDate("ach_Time"));
-				list1.add(ach_DetailVO);
+				
 			}
 
 			// Handle any driver errors
@@ -173,7 +173,7 @@ public class Ach_DetailJdbcDAO implements Ach_DetailDAO_interface{
 				}
 			}
 		}
-		return list1;
+		return ach_DetailVO ;
 	}
 
 
@@ -252,13 +252,13 @@ public class Ach_DetailJdbcDAO implements Ach_DetailDAO_interface{
 		//do.delete();
 		
 		// 查詢
-		List<Ach_DetailVO> list1 = dao.findByPrimaryKey("M000001");
-		for(Ach_DetailVO ach_DetailVO3 : list1){
-		System.out.print(ach_DetailVO3.getMem_No() + ",");
-		System.out.print(ach_DetailVO3.getAch_No() + ",");
-		System.out.println(ach_DetailVO3.getAch_Time());
-		}
-		System.out.println("---------------------");
+//		List<Ach_DetailVO> list1 = dao.findByPrimaryKey("M000001");
+//		for(Ach_DetailVO ach_DetailVO3 : list1){
+//		System.out.print(ach_DetailVO3.getMem_No() + ",");
+//		System.out.print(ach_DetailVO3.getAch_No() + ",");
+//		System.out.println(ach_DetailVO3.getAch_Time());
+//		}
+//		System.out.println("---------------------");
 
 		// 查詢
 		List<Ach_DetailVO> list = dao.getAll();

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -221,10 +222,24 @@
 </style>
 </head>
 
+	
+
 <body class="loginpage">
+
+	
+	
 	<div class="loginbox">
 		<div class="loginboxinner">
-
+		
+		<c:if test="${not empty errorMsgs}">
+	<font color='red'>請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+	</c:if>
+		
 			<div class="logo">
 				<h1 class="logo">
 					ToolMan.<span>Admin</span>
@@ -256,20 +271,22 @@
 				<!--loginf-->
 			</div>
 			<!--nopassword-->
+			
+			
 
 			<form id="login" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do" method="post">
 
 				<div class="username">
 					<div class="usernameinner">
 						<input type="text" name="username" id="username" />
-						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="action" value="emplogin">
 					</div>
 				</div>
 
 				<div class="password">
 					<div class="passwordinner">
 						<input type="password" name="password" id="password" />
-						<input type="hidden" name="action" value="getOne_For_Display">
+						<input type="hidden" name="action" value="emplogin">
 					</div>
 				</div>
 

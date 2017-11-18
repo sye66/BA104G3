@@ -23,10 +23,11 @@
 					</h1>
 				</div>
 			</div>
+			<form id="login-form" method="post" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do">
 			<div class="col-xs-12 col-sm-1" id="name1">XXX 你好!</div>
 			<div class="col-xs-12 col-sm-1" id="name2">
-				<br> <a href="index.html">退出</a>
-			</div>
+				<br> <button type="submit" name="action" value="logout">登出</button></div>
+				</form>
 		</div>
 	</div>
 	<div class="row">
@@ -45,7 +46,7 @@
 						<li><a
 							href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span
 								class="icon icon-pencil"></span>商城管理</a></li>
-						<li><a href="#"><span class="icon icon-pencil"></span>員工管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
 					</ul>
 				</div><!--header-->
 			</div>
