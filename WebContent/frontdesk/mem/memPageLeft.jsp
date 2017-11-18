@@ -167,7 +167,8 @@
                     </div>
                     <div id="eee" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel5">
                         <div class="panel-body">
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友按鈕</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTm.jsp">關注工具人按鈕</a></h3>
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請</a></h3>
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/friendlList.jsp">好友列表</a></h3>
                         </div>

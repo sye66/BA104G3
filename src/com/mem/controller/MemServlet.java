@@ -270,6 +270,7 @@ public class MemServlet extends HttpServlet{
 				String Area = req.getParameter("Area2");
 				String ZIP = req.getParameter("ZIP");
 				String mem_Address = req.getParameter("mem_Address");
+				String mem_Address1 = mem_Address;
 				String real_mem_Address = ZIP +City + Area + mem_Address;
 //				System.out.println("real_mem_Address :" +real_mem_Address);
 				mem_Address = real_mem_Address;
@@ -342,6 +343,12 @@ public class MemServlet extends HttpServlet{
 				memVO.setMem_Address(real_mem_Address);
 				memVO.setMem_Search(mem_Search);
 //				memVO.setMem_Point(mem_Point);//
+				req.setAttribute("City2", City);
+				req.setAttribute("Area2", Area);
+				req.setAttribute("ZIP", ZIP);
+				req.setAttribute("mem_Address", mem_Address1);
+				
+				
 				
 				
 				if (!errorMsgs.isEmpty()){
@@ -555,13 +562,17 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				
-				
-				
+				String City = req.getParameter("City2");
+				String Area = req.getParameter("Area2");
+				String ZIP = req.getParameter("ZIP");
 				String mem_Address = req.getParameter("mem_Address");
-				String mem_Address_reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{15,30}$";
-				if (mem_Address == null || mem_Address.trim().length() == 0){
+				String real_mem_Address = ZIP +City + Area + mem_Address;
+//				System.out.println("real_mem_Address :" +real_mem_Address);
+				
+				String mem_Address_reg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{10,30}$";
+				if (real_mem_Address == null || real_mem_Address.trim().length() == 0){
 					errorMsgs.add("請輸入地址 ! ");
-				} else if(!mem_Address.trim().matches(mem_Address_reg)){
+				} else if(!real_mem_Address.trim().matches(mem_Address_reg)){
 					errorMsgs.add("請正確輸入地址格式 ! ");
 				}
 				
@@ -611,7 +622,12 @@ public class MemServlet extends HttpServlet{
 				memVO.setMem_Address(mem_Address);
 				memVO.setMem_Search(mem_Search);
 //				memVO.setMem_Point(mem_Point);
-				
+				req.setAttribute("City2", City);
+				req.setAttribute("Area2", Area);
+				req.setAttribute("ZIP", ZIP);
+//				req.setAttribute("mem_Address", mem_Address);
+				System.out.println("City2 + " +City);
+				System.out.println("Area2 + " +Area);
 				
 				
 				if (!errorMsgs.isEmpty()){
@@ -624,7 +640,7 @@ public class MemServlet extends HttpServlet{
 System.out.println("STEP1");				
 				/***************************2.開始新增資料***************************************/
 				MemService memSvc = new MemService();
-				memVO = memSvc.updateByMem(mem_No,mem_Pw, mem_Name, mem_Id, mem_Bday, mem_Tel, mem_Pho, mem_Gend, mem_Email, buffer_update, mem_Intro, mem_Address,mem_Search);
+				memVO = memSvc.updateByMem(mem_No,mem_Pw, mem_Name, mem_Id, mem_Bday, mem_Tel, mem_Pho, mem_Gend, mem_Email, buffer_update, mem_Intro, real_mem_Address,mem_Search);
 				
 System.out.println("STEP2");				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
@@ -641,7 +657,7 @@ System.out.println("STEP3");
 			} catch (Exception e){
 				e.printStackTrace();
 				errorMsgs.add("修改資料失敗 :" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/mem/update_mem_input.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mem/memUpdateFile.jsp");
 				failureView.forward(req, res);
 			}
 		}

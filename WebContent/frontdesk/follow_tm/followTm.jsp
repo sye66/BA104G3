@@ -4,11 +4,12 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 <%@ page import="com.relation.model.*" %>
+<%@ page import="com.follow_tool_man.model.*" %>
 
 
-<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="Follow_tmSvc" scope="page" class="com.follow_tool_man.model.Follow_tmService"/>
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
-<% RelationVO relationVO = (RelationVO)request.getSession().getAttribute("relationVO"); %>
+<% Follow_tmVO follow_tmVO = (Follow_tmVO)request.getSession().getAttribute("follow_tmVO"); %>
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <%request.getAttribute("updateSuccess");%>
 
@@ -78,38 +79,39 @@
 
 
 <div class="col-xs-12 col-sm-9">
-    <form id="login-form" method="post" action="<%=request.getContextPath()%>/relation/relation.do?">
+    <form id="login-form" method="post" action="<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do?reuestURL=<%=request.getServletPath()%>">
+   
         <div>
         <h2>
         <input type="hidden" name="action" value="insert_New">
-        <input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
-        
-        <input type="hidden" name="mem_No" value="<%= (relationVO==null)? "" : relationVO.getMem_No()%>">
+       <%/* <input type="hidden" id="updateSuccess" value="${updateSuccess}"/> */ %>
+        <input type="hidden" name="mem_No" value="<%= (memVO==null)? "" : memVO.getMem_No()%>">
+        <input type="hidden" name="follower_Mem_No" value="<%= (follow_tmVO==null)? "" : follow_tmVO.getFollower_Mem_No()%>">
       
-        <input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : relationVO.getRelated_Mem_No()%>">
+        <input type="hidden" name="followed_Mem_No" value="<%= (follow_tmVO==null)? "" : follow_tmVO.getFollowed_Mem_No()%>">
         
-        <c:if test="${relationVO.relation_Status == null}">
+        <c:if test="${follow_tmVO.follow_Status == null}">
         <a class="nav-link js-scroll-trigger" href="#">
         <img alt="" src="<%=request.getContextPath()%>/res/images/relation/icon/bluelike.png"></a>
         </c:if>
-        <c:if test="${relationVO.relation_Status == 1}">
+        <c:if test="${follow_tmVO.follow_Status == 1}">
         <a class="nav-link js-scroll-trigger" href="#">
         <img alt="" src="<%=request.getContextPath()%>/res/images/relation/icon/greenlike.png"></a>
         </c:if>
-        <c:if test="${relationVO.relation_Status == 2}">
+        <c:if test="${follow_tmVO.follow_Status == 2}">
         <a class="nav-link js-scroll-trigger" href="#">
         <img alt="" src="<%=request.getContextPath()%>/res/images/relation/icon/purplelike.png"></a>
         </c:if>
-        <c:if test="${relationVO.relation_Status == 3}">
+        <c:if test="${follow_tmVO.follow_Status == 3}">
         <a class="nav-link js-scroll-trigger" href="#">
         <img alt="" src="<%=request.getContextPath()%>/res/images/relation/icon/redlike.png"></a>
         </c:if>
-        <c:if test="${relationVO.relation_Status == 4}">
+        <c:if test="${follow_tmVO.follow_Status == 4}">
         <a class="nav-link js-scroll-trigger" href="#">
         <img alt="" src="<%=request.getContextPath()%>/res/images/relation/icon/blacklike.png"></a>
         </c:if>
         <div class="form-group">互動關係
-			<select size="1" name="relation_Status" id="estadocivil" class="form-control input-lg" tabindex="3">${relationVO.relation_Status}
+			<select size="1" name="follow_Status" id="estadocivil" class="form-control input-lg" tabindex="3">${follow_tmVO.follow_Status}
 			<option value="1" selected>點頭之交</option>
 			<option value="2">普通朋友</option>
 			<option value="3">摯友</option>

@@ -96,6 +96,16 @@
     <url-pattern>/relation/relation.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>Follow_tmServlet</servlet-name>
+    <servlet-class>com.follow_tool_man.controller.Follow_tmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Follow_tmServlet</servlet-name>
+    <url-pattern>/follow_tool_man/follow_tool_man.do</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
     <servlet-name>ShowImage</servlet-name>
     <servlet-class>com.tool.controller.ShowImage</servlet-class>
   </servlet>

@@ -118,8 +118,8 @@
 			<div class="row">
             	<div class="col-xs-6 col-sm-6 col-md-6">
 			<div class="form-group">性別
-			<select size="1" name="mem_Gend" value="<%= (memVO==null)? "": memVO.getMem_Gend()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
-			<option value="1">男</option>
+			<select size="1" name="mem_Gend" id="estadocivil" class="form-control input-lg" tabindex="3">${memVO.mem_Gend}
+			<option value="1" selected>男</option>
 			<option value="2">女</option>
 			<option value="3">其他</option>
 			</select>
@@ -272,6 +272,22 @@
 				  showConfirmButton: false,
 				  timer: 1500
 				})
+				
+				
+				
+				$(document).ready(function(){
+				var city2 = $('#City2').val();
+				console.log(city2);
+				$('#City').find("option[text="+city2+"]").attr("selected",true);
+
+				});
+				
+				$(document).ready(function(){
+					var area2 = $('#Area2').val();
+					console.log(area2);
+					$('#Area').find("option[text="+area2+"]").attr("selected",true);
+
+					});
 		};
 		
 		

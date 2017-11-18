@@ -1,7 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+    <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery.js"></script>
+        <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery-3.2.1.js"></script>
 <div class="row">
 <div class="col-xs-4 col-sm-4 col-md-4">
 <div class="form-group">
+
+
+
 請選擇縣市
 <select class="form-control input-lg" name="City" id="City" tabindex="3">
 <option value="">請選擇</option>
