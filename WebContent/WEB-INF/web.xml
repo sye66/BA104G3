@@ -174,6 +174,8 @@
   
  
  <!--   兆哥 --> 
+ 
+<!--  家駿 -->
   
    <servlet>
     <servlet-name>EmpServlet</servlet-name>
@@ -239,6 +241,17 @@
     <servlet-name>LoginHandler</servlet-name>
     <url-pattern>/loginhandler/loginhandler.do</url-pattern>
   </servlet-mapping>
+  <!-- 	<filter> -->
+<!-- 		<filter-name>LoginHandler</filter-name> -->
+<!-- 		<filter-class>com.emp.controller.LoginHandler</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>LoginHandler</filter-name> -->
+<!-- 		<url-pattern>/emp/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+  
+  <!--  家駿 -->
+  
   <servlet>
     <servlet-name>ArtiFormServlet</servlet-name>
     <servlet-class>com.artiForm.controller.ArtiFormServlet</servlet-class>
