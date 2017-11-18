@@ -193,7 +193,7 @@ System.out.println("清單 訂單編號"+proOrdListVO.getOrd_No());
 				proOrdListVO.setOrd_No(res.getString("ord_No"));
 				proOrdListVO.setPro_No(res.getString("pro_No"));
 				proOrdListVO.setOrdPro_Count(res.getInt("ordPro_Count"));
-				proOrdListVO.setOrdPro_Price(res.getDouble("ordPro_Price"));
+				proOrdListVO.setOrdPro_Price(res.getInt("ordPro_Price"));
 				list.add(proOrdListVO);
 				
 			}
@@ -249,7 +249,7 @@ System.out.println("清單 訂單編號"+proOrdListVO.getOrd_No());
 				proOrdListVO.setOrd_No(ord_No);
 				proOrdListVO.setPro_No(res.getString("pro_No"));
 				proOrdListVO.setOrdPro_Count(res.getInt("ordPro_Count"));
-				proOrdListVO.setOrdPro_Price(res.getDouble("ordPro_Price"));
+				proOrdListVO.setOrdPro_Price(res.getInt("ordPro_Price"));
 				list.add(proOrdListVO);
 			}
 			

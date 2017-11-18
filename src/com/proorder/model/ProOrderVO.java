@@ -6,7 +6,7 @@ public class ProOrderVO implements java.io.Serializable{
 	private String ord_No;
 	private String mem_No;
 	private Date ord_Date;
-	private Double ord_Price;
+	private Integer ord_Price;
 	private String ord_Consignee;
 	private String ord_Address;
 	private String ord_Phone;
@@ -31,10 +31,10 @@ public class ProOrderVO implements java.io.Serializable{
 	public void setOrd_Date(Date ord_Date) {
 		this.ord_Date = ord_Date;
 	}
-	public Double getOrd_Price() {
+	public Integer getOrd_Price() {
 		return ord_Price;
 	}
-	public void setOrd_Price(Double ord_Price) {
+	public void setOrd_Price(Integer ord_Price) {
 		this.ord_Price = ord_Price;
 	}
 	public String getOrd_Consignee() {

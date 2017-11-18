@@ -60,7 +60,7 @@ System.out.println("取資料");
 				
 //				String newDate =  new SimpleDateFormat("yy-MM-dd").format(new Date());
 				java.sql.Date ord_Date = new java.sql.Date(System.currentTimeMillis());
-				Double	ord_Price = new Double(req.getParameter("ord_Price").trim());
+				Integer	ord_Price = new Integer(req.getParameter("ord_Price").trim());
 				String ord_Consignee = new String(req.getParameter("ord_Consignee").trim());
 				String ord_Address = new String(req.getParameter("ord_Address").trim());
 				String ord_Phone = new String(req.getParameter("ord_Phone").trim());

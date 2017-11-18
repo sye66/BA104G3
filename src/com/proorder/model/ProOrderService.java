@@ -11,7 +11,7 @@ public class ProOrderService {
 		dao = new ProOrderJDBCDAO();
 	}
 	
-	public ProOrderVO addProOrder(String mem_No ,Date ord_Date,Double ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
+	public ProOrderVO addProOrder(String mem_No ,Date ord_Date,Integer ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
 		ProOrderVO proOrderVO = new ProOrderVO();
 		
 		proOrderVO.setMem_No(mem_No);
@@ -27,7 +27,7 @@ public class ProOrderService {
 		return proOrderVO;
 	}
 	
-	public ProOrderVO updateProOrder(String mem_No ,Date ord_Date,Double ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
+	public ProOrderVO updateProOrder(String mem_No ,Date ord_Date,Integer ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){
 		ProOrderVO proOrderVO = new ProOrderVO();
 		
 		proOrderVO.setMem_No(mem_No);
