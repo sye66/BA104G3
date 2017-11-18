@@ -215,7 +215,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 				proOrderVO.setOrd_No(res.getString("ord_No"));
 				proOrderVO.setMem_No(res.getString("mem_No"));
 				proOrderVO.setOrd_Date(res.getDate("ord_Date"));
-				proOrderVO.setOrd_Price(res.getDouble("ord_Price"));
+				proOrderVO.setOrd_Price(res.getInt("ord_Price"));
 				proOrderVO.setOrd_Consignee(res.getString("ord_Consignee"));
 				proOrderVO.setOrd_Address(res.getString("ord_Address"));
 				proOrderVO.setOrd_Phone(res.getString("ord_Phone"));
@@ -279,7 +279,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 			proOrderVO.setOrd_No(res.getString("ord_No"));
 			proOrderVO.setMem_No(res.getString("mem_No"));
 			proOrderVO.setOrd_Date(res.getDate("ord_Date"));
-			proOrderVO.setOrd_Price(res.getDouble("ord_Price"));
+			proOrderVO.setOrd_Price(res.getInt("ord_Price"));
 			proOrderVO.setOrd_Consignee(res.getString("ord_Consignee"));
 			proOrderVO.setOrd_Address(res.getString("ord_Address"));
 			proOrderVO.setOrd_Phone(res.getString("ord_Phone"));
@@ -363,7 +363,7 @@ System.out.println(list.size());
 				String ord_No = next_Ord_No;
 				String pro_No = proCartVO.getProCar_No();
 				Integer ordPro_Count = proCartVO.getProCar_Quantity();
-				Double ordPor_Price = proCartVO.getProCar_Price();
+				Integer ordPor_Price = proCartVO.getProCar_Price();
 System.out.println(next_Ord_No +" "+pro_No+" "+ordPro_Count+" "+ordPor_Price);					
 				proOrdListSvc.addProOrdList(ord_No, pro_No, ordPro_Count, ordPor_Price,con);
 			}
@@ -428,7 +428,7 @@ System.out.println("同時新增完成");
 				proOrderVO.setOrd_No(res.getString("ord_No"));
 				proOrderVO.setMem_No(mem_No);
 				proOrderVO.setOrd_Date(res.getDate("ord_Date"));
-				proOrderVO.setOrd_Price(res.getDouble("ord_Price"));
+				proOrderVO.setOrd_Price(res.getInt("ord_Price"));
 				proOrderVO.setOrd_Consignee(res.getString("ord_Consignee"));
 				proOrderVO.setOrd_Address(res.getString("ord_Address"));
 				proOrderVO.setOrd_Phone(res.getString("ord_Phone"));

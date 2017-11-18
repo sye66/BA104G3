@@ -44,7 +44,7 @@ public class AuthServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAuth_page.jsp");
+							.getRequestDispatcher("/backdesk/auth/selectAuth_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -58,7 +58,7 @@ public class AuthServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAuth_page.jsp");
+							.getRequestDispatcher("/backdesk/auth/selectAuth_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -72,7 +72,7 @@ public class AuthServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/selectAuth_page.jsp");
+							.getRequestDispatcher("/backdesk/auth/selectAuth_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -87,7 +87,7 @@ public class AuthServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/selectAuth_page.jsp");
+						.getRequestDispatcher("/backdesk/auth/selectAuth_page.jsp");
 				failureView.forward(req, res);
 			}
 		}

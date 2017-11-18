@@ -308,7 +308,7 @@ public class ProClassJDBCDAO implements ProClassDAO_interface{
 				proVO = new ProVO();
 				proVO.setPro_No(res.getString("pro_No"));
 				proVO.setPro_Name(res.getString("pro_Name"));
-				proVO.setPro_Price(res.getDouble("pro_Price"));
+				proVO.setPro_Price(res.getInt("pro_Price"));
 				proVO.setPro_Info(res.getString("pro_Info"));
 				proVO.setPro_Status(res.getString("pro_Status"));
 				proVO.setPro_Class_No(res.getString("pro_Class_No"));

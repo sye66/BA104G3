@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.artiForm.model.ArtiFormService;
+import com.artiForm.model.ArtiFormVO;
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
 import com.pro.model.ProService;
 import com.pro.model.ProVO;
 
@@ -52,8 +56,63 @@ public class ShowImage extends HttpServlet {
 				out.write(propic);
 				in.close();
 			}
+		}
 		
+		if("arti_Pic".equals(action)){
+			String arti_No = req.getParameter("arti_No");
+			ArtiFormService artiFormSvc = new ArtiFormService();
+			
+			try{
+				System.out.println("*222222222*");
+				ArtiFormVO artiFormVO =  artiFormSvc.getOneArtiForm(arti_No);
+				System.out.println("*111111111*");
+				InputStream in = new ByteArrayInputStream(artiFormVO.getArti_Pic());
+				byte[] buffer = new byte[in.available()];
+				int len = 0;
+				
+				try{
+					while((len=in.read(buffer))!=-1){
+						out.write(buffer,0,len);
+						out.close();
+					}
+				} catch(IOException ie){
+					ie.printStackTrace();
+				}
+			} catch (Exception e){
+				FileInputStream in = new FileInputStream(getServletContext().getRealPath("/res/images/arti_ref/XXX.jpg"));
+				byte [] arti_Pic = new byte[in.available()];
+				in.read(arti_Pic);
+				out.write(arti_Pic);
+				in.close();
+			}
+		}
 		
+		if("mem_Pic".equals(action)){
+			String mem_No = req.getParameter("mem_No");
+			MemService memSvc = new MemService();
+			
+			try{
+
+				MemVO memVO =  memSvc.getOneMem(mem_No);
+				InputStream in = new ByteArrayInputStream(memVO.getMem_Pic());
+				byte[] buffer = new byte[in.available()];
+				int len = 0;
+				
+				try{
+					while((len=in.read(buffer))!=-1){
+						out.write(buffer,0,len);
+						out.close();
+					}
+				} catch(IOException ie){
+					ie.printStackTrace();
+				}
+			} catch (Exception e){
+				FileInputStream in = new FileInputStream(getServletContext().getRealPath("/res/images/arti_ref/XXX.jpg"));
+				byte [] arti_Pic = new byte[in.available()];
+				in.read(arti_Pic);
+				out.write(arti_Pic);
+				in.close();
+			}
 		}
 	}
 }

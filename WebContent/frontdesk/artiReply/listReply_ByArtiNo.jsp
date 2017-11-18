@@ -83,6 +83,36 @@ ${arti_No}
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> ${artiReplyVO.mem_No} </h5>
+                        
+                        <div class="widget-toolbar">
+                            <div class="" style="width:100px;">
+                                <div class="" style="">
+			                        
+			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+			                        <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
+ 			                    </FORM>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                      <div class="widget-toolbar">
+                            <div class="" style="width:100px;">
+                                <div class="" style="">
+                                
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+                                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+ 			                        <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
+			                    </FORM>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">${artiReplyVO.arti_Cls_No}</div>
@@ -98,6 +128,15 @@ ${arti_No}
                                 <div class="" style="">${artiReplyVO.reply_No}</div>
                             </div>
                         </div>
+                        
+                        <div class="widget-toolbar">
+                            <div class="" style="width:100px;">
+                                <div class="" style="">
+                                ${artiReplyVO.reply_Time}
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                     <div class="widget-body">
                         <div class="widget-toolbox">
@@ -106,49 +145,23 @@ ${arti_No}
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
                                             <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
+    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${(replyVO.mem_No)}"
 	                     style="height:100px;width:120px;"/>
     </div>
                                     </div>
                                     </div>
                                     <div class="widget-toolbar">
-                                    <div class="widget-main padding-6">
-                                        <i class="icon-remove bigger-110"></i>Reject
+                                         ${artiReplyVO.reply_Desc}                               
                                     </div>
+         
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="widget-main padding-16">
-                            ${artiReplyVO.reply_Desc}
-                        </div>
                     </div>
-                    
-                    <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter">${artiReplyVO.reply_Time}</h5>
-                        <div class="widget-toolbar">
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
-			                    </FORM>
-                            </div>
-                            </div>
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
-			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
- 			                    </FORM>  
-                            </div>
-                            </div>
-                            </div>
-                        </div>
+
                     </div>
-                </div>
+                
 
 	</c:forEach>
 

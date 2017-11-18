@@ -117,11 +117,11 @@ public class ProServlet extends HttpServlet {
 					errorMsgs.add("請輸入日期!");
 				}
 
-				Double pro_Price = null;
+				Integer pro_Price = null;
 				try {
-					pro_Price = new Double(req.getParameter("pro_Price").trim());
+					pro_Price = new Integer(req.getParameter("pro_Price").trim());
 				} catch (NumberFormatException e) {
-					pro_Price = 0.0;
+					pro_Price = 0;
 					errorMsgs.add("售價請填數字");
 				}
 
@@ -232,16 +232,24 @@ public class ProServlet extends HttpServlet {
 				 **********************/
 				String pro_No = req.getParameter("pro_No").trim();
 				String pro_Name = req.getParameter("pro_Name").trim();
+				if(pro_Name==null){
+					errorMsgs.add("商品名稱不可空白");
+				}
+				
 				String pro_Info = req.getParameter("pro_Info").trim();
 				String pro_Status = req.getParameter("pro_Status").trim();
 				String pro_Class_No = req.getParameter("pro_Class_No").trim();
 				
-				Double pro_Price = null;
+				Integer pro_Price = null;
 				try {
-					pro_Price = new Double(req.getParameter("pro_Price").trim());
+					pro_Price = new Integer(req.getParameter("pro_Price").trim());
 				} catch (NumberFormatException e) {
-					pro_Price = 0.0;
+					pro_Price = 0;
 					errorMsgs.add("商品價錢請填數字.");
+				}
+				if(pro_Price<0){
+					errorMsgs.add("商品價錢不正確");
+					
 				}
 
 				Integer pro_Discount = null;

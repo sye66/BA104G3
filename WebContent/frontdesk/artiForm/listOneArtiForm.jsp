@@ -112,6 +112,8 @@ button{
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+
 <h4></h4>
 <table id="table-1">
 	<tr><td>
@@ -325,4 +327,6 @@ button{
 	<jsp:include page="/frontdesk/artiReply/listReply_ByArtiNo.jsp" flush="true" />
 
 </body>
+
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </html>

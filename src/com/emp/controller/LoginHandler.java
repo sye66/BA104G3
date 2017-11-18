@@ -1,6 +1,7 @@
 package com.emp.controller;
 
 import java.io.*;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class LoginHandler extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		
-		if ("getOne_For_Display".equals(action)) { 
+		if ("emplogin".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -41,7 +42,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backdesk/emp/index.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -56,7 +57,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backdesk/emp/index.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -70,7 +71,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backdesk/emp/index.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -78,41 +79,31 @@ public class LoginHandler extends HttpServlet {
 				/***************************2.開始查詢資料*****************************************/
 				EmpService empSvc = new EmpService();
 				EmpVO empVO = empSvc.getOneEmp(emp_No);
-System.out.println(empVO);
-System.out.println(emp_No);
-				
+
 				String pwd = empVO.getEmp_Pwd();
-System.out.println(pwd);
-System.out.println(str1);
-				
+
 				if (empVO == null || !pwd.equals(emp_Pwd) ) {
 					errorMsgs.add("查無資料password is wrong");
-System.out.println("SFDSGDSGDSG");
+
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backdesk/emp/index.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}else{
 					req.setAttribute("empVO", empVO); 
 					HttpSession session = req.getSession();
-					session.setAttribute("empVO", empVO);   //*工作1: 才在session內做已經登入過的標識
-  
-					try {                                                        
-						String location = (String) session.getAttribute("location");
-						if (location != null) {
-							session.removeAttribute("location");   //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-							res.sendRedirect(location);            
-							return;
-						}
-					}catch (Exception ignored) { }
-
-					res.sendRedirect(req.getContextPath()+"/backdesk/backdesk.jsp");
+					session.setAttribute("empVO", empVO); 
+System.out.println(empVO.getEmp_No());
+					String url = "/backdesk/backdesk.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); 
+					successView.forward(req, res);
+					
 	
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/backdesk/emp/index.jsp");
+							.getRequestDispatcher("/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -124,9 +115,18 @@ System.out.println("SFDSGDSGDSG");
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/backdesk/emp/index.jsp");
+						.getRequestDispatcher("/index.jsp");
 				failureView.forward(req, res);
 			}
 		}
-  }
+		
+		if ("logout".equals(action)){
+			req.getSession().invalidate();
+	
+			String url = "/backdesk/backdesk.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
+			
+		}
+  	}
 }

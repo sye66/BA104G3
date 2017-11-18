@@ -17,6 +17,8 @@ import com.ad.model.AdVO;
 @MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 5*1024*1024, maxRequestSize = 5*5*1024*1024)
 public class AdServlet extends HttpServlet {
 	
+	private String ad_Fty_No;
+
 	public void doGet (HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException{
 		doPost(req, res);
@@ -80,35 +82,33 @@ public class AdServlet extends HttpServlet {
 			}
 		}
 		
-		//@O@???
-		if("getAdByArtiTitle_For_Display".equals(action)){
+		if("getOneAdFMback_For_Display".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String arti_No = req.getParameter("arti_Title");
-				if(arti_No==null||(arti_No.trim()).length()==0){
-					errorMsgs.add(" 請輸入回覆廣告編號 !!! ");
+				String str = req.getParameter("ad_No");
+				if(str==null||(str.trim()).length()==0){
+					errorMsgs.add(" 請輸入回覆文章編號 !!! ");
 				}
-
+				
 				if(!errorMsgs.isEmpty()){
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
-//				String arti_No= null;
-//				try{
-//					arti_No = req.getParameter("arti_No");
-//				} catch (Exception e){
-//					errorMsgs.add(" 回覆文章編號格式不正確 ");
-//				}
+				
+				String ad_No = null;
+				try{
+					ad_No = req.getParameter("ad_No");
+				} catch (Exception e){
+					errorMsgs.add(" 廣告編號格式不正確 ");
+				}
 				
 				/***************************2.開始查詢資料*****************************************/
 				AdService adSvc = new AdService ();
-				AdVO adVO = adSvc.getOneAd(arti_No);
-	
+				AdVO adVO = adSvc.getOneAd(ad_No);
 				if (adVO==null){
 					errorMsgs.add(" 查無資料 ");
 				}
@@ -118,31 +118,31 @@ public class AdServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-
+				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("adVO", adVO);
 				String url = "/backdesk/ad/listOneAd.jsp";
-				
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e){
-				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
+				errorMsgs.add(" 無法取得廣告 : "+ e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
+		
 		//@O@???
-		if("listArtiReply_ByArtiClsNo".equals(action)){
+		if("listAd_ByFtyNo".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("ad_No");
-				if(str==null||(str.trim()).length()==0){
+				String ad_No = req.getParameter("ad_No");
+				if(ad_No==null||(ad_No.trim()).length()==0){
 					errorMsgs.add(" 請輸入回覆文章分類編號 !!! ");
 				}
 
@@ -154,7 +154,7 @@ public class AdServlet extends HttpServlet {
 
 				/***************************2.開始查詢資料*****************************************/
 				AdService adSvc = new AdService ();
-				AdVO adVO = adSvc.findAd(ad_No);
+				Set<AdVO> adVO = adSvc.findAdByFtyNo(ad_Fty_No);
 
 				if (adVO==null){
 					errorMsgs.add(" 查無分類回覆資料 ");
@@ -180,6 +180,48 @@ public class AdServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		if ("listAD_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				/***************************1.將輸入資料轉為Map**********************************/ 
+				//採用Map<String,String[]> getParameterMap()的方法 
+				//注意:an immutable java.util.Map 
+				//Map<String, String[]> map = req.getParameterMap();
+				HttpSession session = req.getSession();
+				Map<String, String[]> map = (Map<String, String[]>)session.getAttribute("map");
+				if (req.getParameter("whichPage") == null){
+					HashMap<String, String[]> map1 = (HashMap<String, String[]>)req.getParameterMap();
+					HashMap<String, String[]> map2 = new HashMap<String, String[]>();
+					map2 = (HashMap<String, String[]>)map1.clone();
+					session.setAttribute("map",map2);
+					map = (HashMap<String, String[]>)req.getParameterMap();
+				} 
+				
+				/***************************2.開始複合查詢***************************************/
+				AdService adSvc = new AdService();
+				List<AdVO> list  = adSvc.getAllAD(map);
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("listAD_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+				RequestDispatcher successView = req.getRequestDispatcher("/backdesk/ad/listAD_ByCompositeQuery.jsp"); // 成功轉交listEmps_ByCompositeQuery.jsp
+				successView.forward(req, res);
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/select_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		
 		
 		/******[ 取出ㄧ個準備更新 ]******/
 		if ("getOneAd_For_Update".equals(action)){
@@ -236,9 +278,7 @@ public class AdServlet extends HttpServlet {
 			
 			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 			Timestamp ad_Start = nowTime;
-			
-//			Timestamp nowTime1 = new Timestamp(System.currentTimeMillis());
-//			Timestamp ad_End = nowTime1;
+			Timestamp ad_End = new Timestamp(System.currentTimeMillis()+60*60*24*30*1000);
 			
 			String ad_Fty_No = req.getParameter("ad_Fty_No");
 			String ad_Fty_Name = req.getParameter("ad_Fty_Name");
@@ -249,7 +289,7 @@ public class AdServlet extends HttpServlet {
 			adVO.setAd_Pic(ad_Pic);
 			adVO.setAd_Desc(ad_Desc);
 			adVO.setAd_Start (ad_Start);
-//			adVO.setAd_End(ad_End);
+			adVO.setAd_End(ad_End);
 			adVO.setAd_Fty_No(ad_Fty_No);
 			adVO.setAd_Fty_Name (ad_Fty_Name);
 			
@@ -300,9 +340,7 @@ public class AdServlet extends HttpServlet {
 				
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp ad_Start = nowTime;
-				
-//				Timestamp nowTime1 = new Timestamp(System.currentTimeMillis());
-//				Timestamp ad_End = nowTime1;
+				Timestamp ad_End = new Timestamp(System.currentTimeMillis()+60*60*24*30*1000);
 				
 				String ad_Fty_No = req.getParameter("arti_Fty_No").trim();			
 				String ad_Fty_Name = req.getParameter("arti_Fty_Name").trim();

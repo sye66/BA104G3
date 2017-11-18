@@ -2,6 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.protrack.model.*" %>
 <%@ page import="com.pro.model.*" %>
+<%@ page import="com.mem.model.*" %>
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -38,8 +39,12 @@ th  {
 			
 <br>
 <% 
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	String mem_No = memVO.getMem_No();
+	System.out.println("session取得的會員編號 "+mem_No);
 	ProTrackService proTrackSvc = new ProTrackService();
-	String mem_No = "M000001";
+	
+	
 	List<ProTrackVO> listProTrack = proTrackSvc.getOnePro(mem_No);
 	ProService proSvc = new ProService();
    	ProVO proVO = null;

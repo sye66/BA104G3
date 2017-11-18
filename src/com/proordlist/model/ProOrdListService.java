@@ -12,7 +12,7 @@ public class ProOrdListService {
 		dao = new ProOrdListJDBCDAO();
 	}
 	
-	public ProOrdListVO addProOrdList(String ord_No,String pro_No,Integer ordPro_Count,Double ordPor_Price,Connection con){
+	public ProOrdListVO addProOrdList(String ord_No,String pro_No,Integer ordPro_Count,Integer ordPor_Price,Connection con){
 		ProOrdListVO proOrdListVO = new ProOrdListVO();
 		proOrdListVO.setOrd_No(ord_No);
 		proOrdListVO.setPro_No(pro_No);
@@ -23,7 +23,7 @@ public class ProOrdListService {
 		
 	}
 
-	public ProOrdListVO updateProOrdList(String ord_No,String pro_No,Integer ordPro_Count,Double ordPor_Price){
+	public ProOrdListVO updateProOrdList(String ord_No,String pro_No,Integer ordPro_Count,Integer ordPor_Price){
 		ProOrdListVO proOrdListVO = new ProOrdListVO();
 		proOrdListVO.setOrd_No(ord_No);
 		proOrdListVO.setPro_No(pro_No);

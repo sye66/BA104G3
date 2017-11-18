@@ -8,12 +8,16 @@
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
+<%@ page import="com.accusecase.model.*"%>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
+<jsp:useBean id="accusecaseSvc" scope="page"
+	class="com.accusecase.model.AccuseCaseService" />
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
+	AccuseCaseVO accusecaseVO = (AccuseCaseVO) request.getAttribute("accusecaseVO");
 %>
 
 <!DOCTYPE html>
@@ -26,6 +30,9 @@
 <title>Mission_Detail</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.min.css">
+<script type="text/javascript" href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.all.min.js"></script>
 <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -45,6 +52,21 @@
 </div>
 </div>
 <br><br><br><br><br><br><br>
+
+
+
+<script type="text/javascript">
+.textar
+const {value: text} = await swal({
+  input: 'textarea',
+  inputPlaceholder: 'Type your message here',
+  showCancelButton: true
+})
+
+if (text) {
+  swal(text)
+}
+</script>
 <div class="container-fluid">
 	<div class="row">
 <div class="col-xs-12 col-sm-12">
@@ -61,17 +83,31 @@
 			
 			<td>
 			<div class="panel-body">
-
+<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
 					<form method="post"
 						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 						name="getmission3">
-						<button class="btn-lg btn-danger" type="submit" name="action"
-							value="accusecase">檢舉任務</button>
+						<button class="btn-lg btn-danger textar" type="submit" name="action"
+							value="accusecase" >檢舉任務</button>
 						<input type="hidden" name="mission_No"
 							value="${getMissionVO.mission_No}">
 						<input type="hidden" name="mem_No"
 							value="${mem_No}">
 					</form>
+					</c:if>
+					
+					<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
+					<form method="post"
+						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
+						name="getmission3">
+						<button class="btn-lg btn-info" type="submit" name="action"
+							value="cancelaccusecase">取消檢舉任務</button>
+						<input type="hidden" name="mission_No"
+							value="${getMissionVO.mission_No}">
+						<input type="hidden" name="mem_No"
+							value="${mem_No}">
+					</form>
+					</c:if>
 				</div>
 			</td>
 		</tr>

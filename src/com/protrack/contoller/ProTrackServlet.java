@@ -9,7 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.mem.model.MemVO;
 import com.pro.model.ProService;
 import com.protrack.model.*;
 
@@ -35,11 +37,10 @@ System.out.println("加入追蹤");
 				/***********************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *************************/
-//				HttpSession session = req.getSession();
-//				MemVO memVO = (MemVO)session.getAttribute("register_memVO");
-//目前寫死M000001
-//				String mem_No = memVO.getMem_no();
-				String mem_No = "M000001";
+				HttpSession session = req.getSession();
+				MemVO memVO = (MemVO)session.getAttribute("memVO");
+				String mem_No = memVO.getMem_No();
+				
 				
 				String pro_No = req.getParameter("pro_No").trim();
 				String requestURL = req.getParameter("requestURL");

@@ -22,7 +22,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,closed_case_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, sysdate, ?, ?,?)";
+		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, sysdate, ?,?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd') accuse_date,to_char(closed_case_date,'yyyy-mm-dd') closed_case_date,accuse_detail,accuse_state FROM accuse_case order by accuse_no";
 	private static final String GET_ONE_STMT = 
@@ -32,6 +32,8 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	private static final String UPDATE = 
 		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), closed_case_date= nvl(?,closed_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
 
+	private static final String GET_ONE_ACCUSECASE =
+			"select *from accuse_case where mission_No = ? and accuser_No = ?";
 	@Override
 	public void insert(AccuseCaseVO accuseCaseVO) {
 
@@ -47,9 +49,9 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
 //			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-			pstmt.setDate(4, accuseCaseVO.getClosed_Case_Date());
-			pstmt.setString(5, accuseCaseVO.getAccuse_Detail());
-			pstmt.setInt(6, accuseCaseVO.getAccuse_State());
+//			pstmt.setDate(4, accuseCaseVO.getClosed_Case_Date());
+			pstmt.setString(4, accuseCaseVO.getAccuse_Detail());
+			pstmt.setInt(5, accuseCaseVO.getAccuse_State());
 
 			pstmt.executeUpdate();
 
@@ -281,5 +283,67 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			}
 		}
 		return list;
+	}
+	
+	@Override
+	public AccuseCaseVO getOneAccusecase(String mission_No,String Accuser_No) {
+
+		AccuseCaseVO accuseCaseVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ONE_ACCUSECASE);
+
+			pstmt.setString(1, mission_No);
+			pstmt.setString(2, Accuser_No);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVo 也稱為Domain objects
+				accuseCaseVO = new AccuseCaseVO();
+				accuseCaseVO.setAccuse_No(rs.getString("accuse_no"));
+				accuseCaseVO.setMission_No(rs.getString("mission_no"));
+				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
+				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
+				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
+				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
+				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return accuseCaseVO;
 	}
 }

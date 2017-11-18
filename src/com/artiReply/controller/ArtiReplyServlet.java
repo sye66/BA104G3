@@ -500,12 +500,13 @@ System.out.println("insert-reply-server-111");
 //				}
 //				Integer arti_Cls_No =  Integer.valueOf(req.getParameter("arti_Cls_No"));
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
-				String arti_No = req.getParameter("arti_No").trim();			
-				String reply_Desc = req.getParameter("reply_Desc").trim();
-				
+				String arti_No = req.getParameter("arti_No").trim();
+System.out.println(mem_No);
 System.out.println(arti_No);
 System.out.println(arti_Cls_No);
-System.out.println(mem_No);
+
+				String reply_Desc = req.getParameter("reply_Desc").trim();
+
 System.out.println(reply_Desc);
 System.out.println("@____@A");
 				
@@ -539,8 +540,8 @@ System.out.println("insert-reply-server-666");
 				artiReplyVO = artiReplySvc.addArtiReply(mem_No, arti_No,reply_Desc,reply_Time,arti_Cls_No);
 
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				req.setAttribute("artiReplyVO", artiReplyVO);
-				String url = "/backdesk/artiReply/listAllArtiReply.jsp";
+				req.setAttribute("artiReplyVO41", artiReplyVO);
+				String url = "/frontdesk/artiReply/listOneArtiReply.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

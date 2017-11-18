@@ -11,7 +11,7 @@ public class ProService {
 	}
 
 	
-	public ProVO addPro(String pro_Name,Double pro_Price,String pro_Info,
+	public ProVO addPro(String pro_Name,Integer pro_Price,String pro_Info,
 			String pro_Class_No,String pro_Status,Integer pro_Discount,
 			Date pro_Dis_StartDAte,Date pro_Dis_EndDate,byte[] pro_Pic){
 		ProVO proVO = new ProVO();
@@ -29,7 +29,7 @@ public class ProService {
 		
 	}
 
-	public ProVO updatePro(String pro_Name,Double pro_Price,String pro_Info,
+	public ProVO updatePro(String pro_Name,Integer pro_Price,String pro_Info,
 			String pro_Class_No,String pro_Status,Integer pro_Discount
 			,Date pro_Dis_StartDate,Date pro_Dis_EndDate,byte[] pro_Pic,String pro_No
 			){

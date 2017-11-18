@@ -55,6 +55,8 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+
 <table id="table-1">
 	<tr><td>
 		 <h3>檢舉文章新增 - AddArtiReport.jsp</h3></td><td>
@@ -74,9 +76,10 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" name="form1" enctype="multipart/form-data">
 
+<div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" name="form1" enctype="multipart/form-data">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> 
@@ -162,8 +165,11 @@
                             </div>
                         </div>
                     </div>
+                    </FORM>
                 </div>
-</FORM>
+</div>
+
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </body>
 
 <% 

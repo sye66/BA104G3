@@ -15,18 +15,18 @@ public class CompJdbcDAO implements CompDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA104G3";
-	String passwd = "BA104G3";
+	String passwd = "123456";
 	
 	private static final String INSERT = 
-			"INSERT INTO COMP(EMP_NO,AUTH_NO)VALUES(EMP_SEQ.NEXTVAL,AUTH_SEQ.NEXTVAL)";
+			"INSERT INTO COMP(AUTH_NO)VALUES(?)";
 	private static final String GET_ALL = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP order by EMP_NO";
 	private static final String GET_ONE = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP where EMP_NO = ?";
 	private static final String UPDATE = 
-			"UPDATE EMP set AUTH_NO=? where EMP_NO = ?";
-	private static final String DELETE =
-			"DELETE FROM COMP WHERE EMP_NO = ?";
+			"UPDATE COMP set AUTH_NO=? where EMP_NO = ?";
+	private static final String DELETE = 
+			"DELETE from COMP where Auth_No=? and EMP_NO =?";
 	
 
 	
@@ -41,8 +41,7 @@ public class CompJdbcDAO implements CompDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT);
 
-			pstmt.setString(1, compVO.getEmp_No());
-			pstmt.setString(2, compVO.getAuth_No());
+			pstmt.setString(1, compVO.getAuth_No());
 
 			pstmt.executeUpdate();
 
@@ -85,8 +84,8 @@ public class CompJdbcDAO implements CompDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setString(1, compVO.getEmp_No());
-			pstmt.setString(2, compVO.getAuth_No());
+			pstmt.setString(1, compVO.getAuth_No());
+			pstmt.setString(2, compVO.getEmp_No());
 
 			pstmt.executeUpdate();
 
@@ -119,7 +118,7 @@ public class CompJdbcDAO implements CompDAO_interface{
 	}
 
 	@Override
-	public void delete(String emp_No) {
+	public void delete(CompVO compVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -129,7 +128,8 @@ public class CompJdbcDAO implements CompDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, emp_No);
+			pstmt.setString(1, compVO.getAuth_No());
+			pstmt.setString(2, compVO.getEmp_No());
 
 			pstmt.executeUpdate();
 
@@ -287,10 +287,15 @@ public class CompJdbcDAO implements CompDAO_interface{
 			CompJdbcDAO dao = new CompJdbcDAO();
 			
 			CompVO compVO = new CompVO();
+			compVO.setAuth_No("AU000001");
+			compVO.setEmp_No("E000001");
 			
 			CompVO compVO2 = new CompVO();
-			compVO2.setEmp_No("QQ");
-			compVO2.setAuth_No("QQ3");
+			compVO2.setAuth_No("AU000002");
+			compVO2.setEmp_No("E000002");
+			dao.delete(compVO2);
+			
+			
 			
 			// 查詢
 			CompVO compVO3 = dao.findByPrimaryKey("E000001");

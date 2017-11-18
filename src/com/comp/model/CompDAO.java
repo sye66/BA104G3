@@ -19,22 +19,22 @@ public class CompDAO implements CompDAO_interface{
 	static {
 		try {
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	private static final String INSERT = 
-			"INSERT INTO COMP(EMP_NO,AUTH_NO)VALUES(?,?)";
+			"INSERT INTO COMP(AUTH_NO)VALUES(?)";
 	private static final String GET_ALL = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP order by EMP_NO";
 	private static final String GET_ONE = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP where EMP_NO = ?";
 	private static final String UPDATE = 
-			"UPDATE COMP set EMP_NO=?, AUTH_NO=? where EMP_NO = ?";
+			"UPDATE COMP set AUTH_NO=? where EMP_NO = ?";
 	private static final String DELETE = 
-			"DELETE FROM COMP where EMP_NO = ?";
+			"DELETE from COMP where auth_no=? and EMP_NO =?";
 
 	@Override
 	public void insert(CompVO compVO) {
@@ -134,7 +134,7 @@ public class CompDAO implements CompDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ¤]ºÙ¬° Domain objects
+				// empVo ï¿½]ï¿½Ù¬ï¿½ Domain objects
 				compVO = new CompVO();
 				compVO.setEmp_No(rs.getString("emp_No"));
 				compVO.setAuth_No(rs.getString("auth_No"));
@@ -188,7 +188,7 @@ public class CompDAO implements CompDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ¤]ºÙ¬° Domain objects
+				// empVO ï¿½]ï¿½Ù¬ï¿½ Domain objects
 				compVO = new CompVO();
 				compVO.setEmp_No(rs.getString("emp_No"));
 				compVO.setAuth_No(rs.getString("auth_No"));
@@ -227,7 +227,7 @@ public class CompDAO implements CompDAO_interface{
 	}
 
 	@Override
-	public void delete(String emp_No) {
+	public void delete(CompVO compVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -236,7 +236,8 @@ public class CompDAO implements CompDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setString(1, emp_No);
+			pstmt.setString(1, compVO.getAuth_No());
+			pstmt.setString(2, compVO.getEmp_No());
 
 			pstmt.executeUpdate();
 

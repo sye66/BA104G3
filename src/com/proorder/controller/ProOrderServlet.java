@@ -60,7 +60,7 @@ System.out.println("取資料");
 				
 //				String newDate =  new SimpleDateFormat("yy-MM-dd").format(new Date());
 				java.sql.Date ord_Date = new java.sql.Date(System.currentTimeMillis());
-				Double	ord_Price = new Double(req.getParameter("ord_Price").trim());
+				Integer	ord_Price = new Integer(req.getParameter("ord_Price").trim());
 				String ord_Consignee = new String(req.getParameter("ord_Consignee").trim());
 				String ord_Address = new String(req.getParameter("ord_Address").trim());
 				String ord_Phone = new String(req.getParameter("ord_Phone").trim());
@@ -128,7 +128,10 @@ System.out.println("查詢個人訂單");
 				/***************************
 				 * 1.接收請求參數 
 				 **********************/
-				String mem_No = "M000001";
+				HttpSession session = req.getSession();
+				MemVO memVO = (MemVO) session.getAttribute("memVO");
+				String mem_No = memVO.getMem_No();
+System.out.println("session取得的會員編號 "+mem_No);
 					
 				/*************************** 2.開始查詢資料 *****************************************/
 				ProOrderService proOrderSvc = new ProOrderService();

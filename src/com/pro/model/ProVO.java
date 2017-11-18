@@ -7,7 +7,7 @@ public class ProVO implements java.io.Serializable{
 	private String pro_Class_No;
 	private String pro_Name;
 	private String pro_Info;
-	private Double pro_Price;
+	private Integer pro_Price;
 	private String pro_Status;
 	private Integer pro_Discount;
 	private Date pro_Dis_StartDate;
@@ -33,11 +33,11 @@ public class ProVO implements java.io.Serializable{
 		this.pro_Name = pro_Name;
 	}
 	
-	public Double getPro_Price() {
+	public Integer getPro_Price() {
 		return pro_Price;
 	}
 
-	public void setPro_Price(Double pro_Price) {
+	public void setPro_Price(Integer pro_Price) {
 		this.pro_Price = pro_Price;
 	}
 
