@@ -33,15 +33,18 @@ public class ShoppingCartServlet extends HttpServlet {
 		List<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 		String requestURL = req.getParameter("requestURL");
-		
+								  
+System.out.println("購物車來源網頁: "+ requestURL);
+
+
 		if (!action.equals("checkOut")) {
 			//刪除購物車商品
 			if (action.equals("deletePro")) {
 				String del = req.getParameter("del");
 System.out.println("購物車刪除商品 index: "+del);
 				int d = Integer.parseInt(del);
-System.out.println("購物車 件數: "+ buylist.size());				
 				buylist.remove(d);
+		
 			} else if (action.equals("addPro")) { //購物車加入商品
 System.out.println("購物車增加商品");				
 				ProCartVO proCartVO = getProCartVO(req);
@@ -58,6 +61,7 @@ System.out.println("購物車增加商品");
 					}
 				}
 			}else if (action.equals("addPro2")) { //從最愛加入 購物車商品
+System.out.println("從清單 放商品 到購物車");
 				ProCartVO proCartVO = getProCartVO2(req);
 				if (buylist == null) {
 					buylist = new Vector<ProCartVO>();
@@ -76,13 +80,19 @@ System.out.println("購物車增加商品");
 			session.setAttribute("shoppingcart", buylist);
 			String url = null;
 			
-//			if(requestURL.equals("/frontdesk/proTrack/listProTrack.jsp")){
+			if(requestURL.equals("/frontdesk/pro/cart.jsp")){
+				url = "/frontdesk/pro/cart.jsp";
+				System.out.println("刪除購物車商品 回購物車 url: "+url);	
+			}else{
+					
+				url = "/frontdesk/pro/showProIndex.jsp";
+				System.out.println("回首頁 url: "+url); 
+			}
 //System.out.println("購物車引入路徑"+requestURL);			
 //				 url=requestURL;
 //			}else{
 //				 url = "/frontdesk/pro/cart.jsp";
-				 url = "/frontdesk/pro/showProIndex.jsp";
-System.out.println("刪除購物車商品 回購物車"+url);						 
+					 
 //			}
 			// String url = req.getParameter("requestURL");
 			RequestDispatcher rd = req.getRequestDispatcher(url);

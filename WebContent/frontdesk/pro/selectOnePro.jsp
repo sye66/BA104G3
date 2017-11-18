@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.pro.model.*"%>
 <%@ page import="com.protrack.model.*"%>
+<%@ page import="com.mem.model.*" %>	
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -235,44 +236,7 @@
 
 </head>
 <body>
-	<!--搜尋 12-->
-	<div class="col-xs-12 col-sm-12 " id="ontopDiv">
-		<!--搜尋 -->
-		<div class="col-xs-12 col-sm-4 col-sm-offset-3">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" name="form1">
-				<table >
-					<tr style="font-size:20px;text-align:center;">
-			      	    <td style="width:200px;"></td>	
-						<td><select size="1" name="pro_Class_No" style="height: 36px;">
-         					   <option value="">分類
-        					   <c:forEach var="proClassVO" items="${proClassSvc.all}" > 
-        					   <option value="${proClassVO.pro_Class_No}">${proClassVO.pro_Class_Name}
-        				 	   </c:forEach>   
-       						</select>
-						</td>
-						<td>
-							<input type="text" name="pro_Name" value="" placeholder="請輸入商品關鍵字" style="height: 36px;marager-top:0px;">
-						</td>	
-						<td>
-							<button type="submit" class="btn btn-secondary" style="font-size:16px;"><img alt="" src="../res/images/pro_icons/resizeApi.png" style="height: 20px;">搜尋</button>
-        					<input type="hidden" name="action" value="listPro_ByCompositeQuery">
-						</td>	
-					</tr>		
-				</table>
-			</FORM>	
-		</div><!--搜尋結束 -->
-		<!-- 購物車_通知 -->
-		<div class="col-xs-12 col-sm-2 ">
-				<span>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/frontdesk/pro/cart.jsp"><img alt="購物車" src="../res/images/pro_icons/cart01.gif" style="height: 40px;"></a></span>
-			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>					
-			<span><a href="
-<%-- 				<%=request.getContextPath()%>/frontdesk/pro/cart.jsp --%>
-				">
-				<img alt="通知" src="../res/images/pro_icons/1183340.gif" style="height: 40px;"></a></span>					
-		</div><!-- 購物車_通知 結束-->
-		<div class="col-xs-12 col-sm-3"><!--空 --></div>
-		
-	</div><!--搜尋結束 12 -->
+	
 <div class="col-xs-12 col-sm-12">	
 	<!--中6-->
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -325,11 +289,9 @@
 
 						<tr>
 							<%
-								// 					HttpSession session = req.getSession();
-								// 					MemVO memVO = (MemVO)session.getAttribute("register_memVO");
-								// 	目前寫死M000001
-								// 					String mem_No = memVO.getMem_no();
-								String mem_No = "M000001";
+								
+								MemVO memVO = (MemVO) session.getAttribute("memVO");
+								String mem_No = memVO.getMem_No();
 								ProTrackService proTrackSvc = new ProTrackService();
 								List<ProTrackVO> list = proTrackSvc.getOnePro(mem_No);
 								List<String> list2 = new ArrayList<String>();
@@ -348,14 +310,11 @@
 
 							<td style="padding-left: 130px; padding-top: 13px;">
 							<FORM METHOD="post" style="height: 42px; width: 180px;" ACTION="<%=request.getContextPath()%>/pro/proTrackServlet.do">
-									<button type="submit" class="btn btn-Secondary" 
-											style="width: 180px; margin-top: 5px; font-size: 20px;">加入追蹤清單</button>
-									<input type="hidden" name="pro_No" value="${proVO.pro_No}" 
-											type="hidden" name="proCar_Price"
-										    value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}">
+									<button type="submit" class="btn btn-Secondary"  style="width: 180px; margin-top: 5px; font-size: 20px;">加入追蹤清單</button>
+									<input type="hidden" name="pro_No" value="${proVO.pro_No}" >
+									<input type="hidden" name="proCar_Price"  value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}">
 									<input type="hidden" name="action" value="insertProTrack">
-									<input type="hidden" name="requestURL"
-											value="<%=request.getServletPath()%>">
+									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 							</FORM></td>
 
 							<%}else{%>

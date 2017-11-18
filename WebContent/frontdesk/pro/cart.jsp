@@ -61,8 +61,9 @@ window.onscroll = function() {
 </script>
 </head>
 <body>
-<% @SuppressWarnings("unchecked")
-   Vector<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
+<% 
+	@SuppressWarnings("unchecked")
+    Vector<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 	int quantity = 0;
 	int count = 0;
 	if(buylist != null && (buylist.size() > 0)){
@@ -116,7 +117,7 @@ window.onscroll = function() {
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
 		<nav aria-label="breadcrumb" role="navigation">
   			<ol class="breadcrumb">
-    			<li class="breadcrumb-item"><a href="#">首頁</a></li>
+    			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
     			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">積分商城</a></li>
   				<li class="breadcrumb-item active">購物車</li>
   			
@@ -172,10 +173,10 @@ window.onscroll = function() {
 				<div align="center"><b id="totlPrice">$<%=order.getProCar_Price()*order.getProCar_Quantity()%></b></div>
 			</td>
         	<td width="100"><div align="center">
-           <form name="deleteForm" 
-           			action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
+           <form name="deleteForm"  action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
               <input type="hidden" name="action"  value="deletePro">
               <input type="hidden" name="del" value="<%= index %>">
+              <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               <button type="submit" class="btn btn-danger"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button>
           </form></div></td>
 	</tr>

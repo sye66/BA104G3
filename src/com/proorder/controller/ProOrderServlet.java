@@ -128,7 +128,10 @@ System.out.println("查詢個人訂單");
 				/***************************
 				 * 1.接收請求參數 
 				 **********************/
-				String mem_No = "M000001";
+				HttpSession session = req.getSession();
+				MemVO memVO = (MemVO) session.getAttribute("memVO");
+				String mem_No = memVO.getMem_No();
+System.out.println("session取得的會員編號 "+mem_No);
 					
 				/*************************** 2.開始查詢資料 *****************************************/
 				ProOrderService proOrderSvc = new ProOrderService();
