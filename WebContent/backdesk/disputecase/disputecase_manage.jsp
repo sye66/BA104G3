@@ -1,15 +1,20 @@
 <%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.disputecase.model.*"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="com.disputecase.model.*"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	DisputeCaseService disputeCaseService = new DisputeCaseService();
-	List<DisputeCaseVO> listAllDisputeCase = disputeCaseService.getAllDisputeCase();
-	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
+	List<DisputeCaseVO> listAllCase = disputeCaseService.getAllDisputeCase();
+	List<DisputeCaseVO> listAllPendingCase = disputeCaseService.getDisputeCaseByStatus(1);
+	List<DisputeCaseVO> listAllHandlingCase = disputeCaseService.getDisputeCaseByStatus(2);
+	List<DisputeCaseVO> listAllClosedCase = disputeCaseService.getDisputeCaseByStatus(3);
+	List<DisputeCaseVO> listAllRejectCase = disputeCaseService.getDisputeCaseByStatus(4);
+
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 %>
 <html>
 <head>
@@ -47,7 +52,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-9">
         <table class="table table-hover">
-            <h2>爭議案件</h2>
+            <h2>爭議案件 - 待處理</h2>
             <thead>
                 <tr>
                     <th>案件編號</th>
@@ -57,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-                <%for(DisputeCaseVO disputeCaseVO : listAllDisputeCase){%>
+                <%for(DisputeCaseVO disputeCaseVO : listAllCase){%>
                     <tr>
                         <td>
                             <%=disputeCaseVO.getDispute_Case_No()%>
@@ -72,10 +77,15 @@
                             <%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%>
                         </td>
                         <td>
-                            <button class="btn-primary">查看</button>
+                            <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
+								<input type="hidden" name="action" value="checkdetail_Dispute_Case">
+								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
+                            	<input type="submit" class="btn btn-danger"value="刪除此案件">
+                            </form>
                         </td>
                     </tr>
                     <%}%>
+              	
             </tbody>
     	</table>
 	</div>

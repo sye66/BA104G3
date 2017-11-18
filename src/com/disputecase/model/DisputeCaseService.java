@@ -49,6 +49,15 @@ public class DisputeCaseService {
 		dao.update(disputeCaseVO);
 		return disputeCaseVO;
 	}
+	public DisputeCaseVO replyDisputeCase(String dispute_Case_No, Timestamp close_Datetime, Integer dispute_Case_Status, String dispute_Reply) {
+		DisputeCaseVO disputeCaseVO = dao.findByprimaryKey(dispute_Case_No);
+		disputeCaseVO.setClose_Datetime(close_Datetime);
+		disputeCaseVO.setDispute_Case_Status(dispute_Case_Status);
+		disputeCaseVO.setDispute_Content(dispute_Reply);
+		dao.update(disputeCaseVO);
+		System.out.println("Service更新送出");
+		return disputeCaseVO;
+	}
 	public DisputeCaseVO getOneDisputeCase(String dispute_Case_No) {
 		return dao.findByprimaryKey(dispute_Case_No);
 	}

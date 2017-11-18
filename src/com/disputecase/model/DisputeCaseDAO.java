@@ -144,6 +144,7 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 		try {
 			System.out.println("---------------------------------------");
 			con = ds.getConnection();
+			con.setAutoCommit(false);
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(UPDATE_STMT);
 			
@@ -156,10 +157,10 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			pstmt.setString(7, disputeCaseVO.getDispute_Content());
 			pstmt.setBytes(8, disputeCaseVO.getDispute_Attachment());
 			pstmt.setString(9, disputeCaseVO.getDispute_Reply());
-			pstmt.setString(10, disputeCaseVO.getMission_No());
+			pstmt.setString(10, disputeCaseVO.getDispute_Case_No());
 			pstmt.executeUpdate();
-			
 			System.out.println("更新成功");
+			con.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("SQL異常");
