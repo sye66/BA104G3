@@ -5,14 +5,14 @@ public class ProCartVO implements java.io.Serializable{
 	private String proCar_No;
 	private String proCar_Name;
 	private String proCar_Info;
-	private Double proCar_Price;
+	private Integer proCar_Price;
 	private Integer proCar_Quantity;
 	
 	public ProCartVO(){
 		proCar_No = "";
 		proCar_Name = "";
 		proCar_Info = "";
-		proCar_Price = 0.0;
+		proCar_Price = 0;
 		proCar_Quantity = 0;
 	}
 
@@ -41,11 +41,11 @@ public class ProCartVO implements java.io.Serializable{
 		this.proCar_Info = proCar_Info;
 	}
 
-	public Double getProCar_Price() {
+	public Integer getProCar_Price() {
 		return proCar_Price;
 	}
 
-	public void setProCar_Price(Double proCar_Price) {
+	public void setProCar_Price(Integer proCar_Price) {
 		this.proCar_Price = proCar_Price;
 	}
 
