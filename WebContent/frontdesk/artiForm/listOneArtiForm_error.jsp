@@ -51,8 +51,6 @@ div {
   }
 </style>
 
-</style>
-
 </head>
 <body bgcolor='white'>
 

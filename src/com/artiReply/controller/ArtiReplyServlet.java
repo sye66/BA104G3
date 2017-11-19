@@ -622,7 +622,6 @@ System.out.println("insert-reply-server-111");
 	            session.setAttribute("mem_No", mem_No);
 	            String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 	            
-	            
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
