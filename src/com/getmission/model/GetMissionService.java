@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.tribes.util.StringManager;
+
 public class GetMissionService {
 
 	private GetMissionDAO_interface dao;
@@ -111,6 +113,7 @@ public class GetMissionService {
 		return getMissionVO;
 	}
 
+	
 	public void deleteMission(String mission_No) {
 		dao.delete(mission_No);
 	}
@@ -149,6 +152,21 @@ public class GetMissionService {
 	
 	public List<GetMissionVO> successGetMission(String takecase_Mem_No){
 		return dao.successGetMission(takecase_Mem_No);
+	}
+
+	/**
+	 * @author Sander
+	 * @param mission_No
+	 * @param mission_Status
+	 * @return GetMissionVO
+	 * 更改任務狀態
+	 */
+	public GetMissionVO updateOneMissionStatus(String mission_No, Integer mission_Status) {
+		GetMissionVO getMissionVO = dao.findByPrimaryKey(mission_No);
+		getMissionVO.setMission_State(5);
+		dao.update(getMissionVO);
+		
+		return getMissionVO;
 	}
 	
 }

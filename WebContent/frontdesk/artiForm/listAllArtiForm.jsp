@@ -16,46 +16,15 @@
 <html>
 <head>
 <title>所有文章資料 - listAllArtiForm.jsp</title>
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  
-  .widget-main padding-16{
-  word-wrap:break-word;
-  word-break:normal;
+div> .timeline-body{
+    float: left;
 }
   
 </style>
@@ -65,10 +34,11 @@
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
+
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>所有文張列表 - listAllArtiForm.jsp</h3>
+		 <h3>@@</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
 	</td></tr>
 </table>
@@ -83,76 +53,123 @@
 	</ul>
 </c:if>
 
-<table>
-	<tr>
-		<th>文章編號</th>
-		<th>會員名稱</th>
-		<th>文章標題</th>
-		<th>文章人氣</th>
-		<th>文章內容</th>
-		<th>發文時間</th>
-		<th>文章附圖</th>
-		<th>文章類別</th>
-		<th>文章狀態</th>
-	</tr>
- 	<%@ include file="/frontdesk/page1.file" %> 
-	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-		
-		<tr>
-		    <td>
-		    
-		    <a href="javascript:presses${s.index}()">${artiFormVO.arti_No}</a></td>
- <!-- 			<td>${artiFormVO.arti_No}</td> --> 
-			<td>${artiFormVO.mem_No}</td>
 
-			<td>${artiFormVO.arti_Title}</td>
-			
-			<td>${artiFormVO.arti_Like}</td>
-			<td>${artiFormVO.describe}</td>
-			<td> <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> </td>
-			<td><img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
-	                     style="height:111px;width:120px;"/></td>
- <!--  			<td>${artiFormVO.arti_Pic}</td> --> 
- <!-- 			<td>${artiFormVO.arti_Cls_No}</td>  --> 
-            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			<td>${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}</td>
-			
-			<td>${artiFormVO.arti_Status}</td> 
-			
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     <input type="hidden" name="action"	value="getOneArti_For_Update">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     </FORM>
-			     
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			     <input type="hidden" name="action" value="deleteArti">
- 			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     </FORM>
-			</td>
-		</tr>
-		
-	    <script>
+
+<div class="page-header position-relative">
+                    <div class="header-title">
+                        <h1>
+                            所有文章列表 - listAllArtiForm.jsp
+                        </h1>
+                    </div>
+                    <!--Header Buttons-->
+                    
+                    <div class="header-buttons">
+                        <a class="sidebar-toggler" href="#">
+                            <i class="fa fa-arrows-h"></i>111
+                        </a>
+                        <a class="refresh" id="refresh-toggler" href="">
+                            <i class="glyphicon glyphicon-refresh"></i>222
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="#">
+                            <i class="glyphicon glyphicon-fullscreen"></i>333
+                        </a>
+                    </div>
+                    <!--Header Buttons End-->
+                </div>
+
+                <!-- /Page Header -->
+                <!-- Page Body -->
+                
+<%@ include file="/frontdesk/page1.file" %> 
+	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
+                        
+                <div class="page-body">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-datetime">
+                                <div class="timeline-time">
+                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
+                                </div>
+                                <div class="timeline-date">${artiFormVO.mem_No}</div>
+                                <div class="timeline-date">
+                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+                                </div>
+                                <div class="timeline-time">
+                                <p></p>
+                                
+                                </div>
+                            </div>
+                            <div class="timeline-badge sky">
+                                <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
+			                    <td>${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}</td>
+                            </div>
+                            <div class="timeline-panel bordered-top-3 bordered-azure">
+                                <div class="timeline-header bordered-bottom bordered-blue">
+                                    <span class="timeline-title">
+                                        <td><a href="javascript:presses${s.index}()">${artiFormVO.arti_No}</a></td>
+                                        <td> ${artiFormVO.arti_Status} </td>
+                                    </span>
+
+                                </div>
+                                <div class="timeline-body">
+                                <div class="">
+                                    <p> ${artiFormVO.arti_Title}</p>
+                                    <p> ${artiFormVO.arti_Like} </p>
+                                </div>                                
+                            </div>
+                            
+                            <div class="timeline-body">
+                                
+                                    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
+	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                
+    <!--Basic Scripts-->
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--Beyond Scripts-->
+    <script src="js/beyond.min.js"></script>
+
+    <!--Page Related Scripts-->
+    <!--Google Analytics::Demo Only-->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-52103994-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+    	    <script>
          function presses${s.index}(){
         	 console.log('${artiFormVO.arti_No}');
         	 document.open("/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&action=jumpOne_For_Display", "" ,"height=250,width=850,left=65,top=157,resizable=yes,scrollbars=yes");
          }
         </script>
         
+</body>
+
+			
+
+
+		
+
+        
     </c:forEach>
 </table>
  <%@ include file="/backdesk/page2.file" %> 
-
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />

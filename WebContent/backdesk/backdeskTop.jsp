@@ -1,5 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
+<%@ page import="com.comp.model.*"%>
+<%
+	EmpVO empVO = new EmpVO();
+	empVO = (EmpVO) request.getSession().getAttribute("empVO");
+	String emp_No = empVO.getEmp_No();
+%>
+
+<%
+	CompService compSvc = new CompService();
+	List<CompVO> list = compSvc.getAllAuthNo(emp_No);
+	pageContext.setAttribute("list",list);
+	String str = "AU000002";
+	pageContext.setAttribute("str",str);
+%>
+
+<%
+	request.getSession().setAttribute("empVO" ,empVO); 
+%>
 
 <html>
 
@@ -43,14 +64,36 @@
 						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span
-								class="icon icon-pencil"></span>商城管理</a></li>
+						<li>
+						
+						<c:forEach var="compVO" items="${list}">
+						<c:if test="${compVO.auth_No==str}">
+						<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">
+						<span class="icon icon-pencil"></span>
+						商城管理	
+						</a>				
+						</c:if>
+						</c:forEach >
+<%-- 						<c:forEach var="compVO" items="${list}"> --%>
+<%-- 						<c:if test="${!compVO.auth_No==str}"> --%>
+<%-- 						<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil disabled"></span> --%>
+<!-- 						商城管理	 -->
+<!-- 						</a>	 -->
+<%-- 						</c:if> --%>
+<%-- 						</c:forEach > --%>
+						
+
+						</li>
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
 					</ul>
 				</div><!--header-->
 			</div>
 		</div>
+		
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/decideempcomp/decideempcomp.do">
+		<input type="hidden" name="action" value="insert">
+		<input type="submit" value="送出新增">
+		</FORM>
 	
 
 	<script src="https://code.jquery.com/jquery.js"></script>

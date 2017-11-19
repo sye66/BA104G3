@@ -17,11 +17,12 @@
 	<!-- 標籤面板：內容區 -->
 		<div role="" class="tab-pane active " id="tab1">
 			<div class="list-group">
-				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputeCase_manage.jsp" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
-				<a href="disputecase_pending.jsp" class="list-group-item ">&nbsp;&nbsp;等待處理</a>
-				<a href="disputecase_hadling.jsp" class="list-group-item">&nbsp;&nbsp;正在處理</a>
-				<a href="disputecase_closed.jsp" class="list-group-item">&nbsp;&nbsp;已結束</a>
-				<a href="disputecase_reject.jsp" class="list-group-item">&nbsp;&nbsp;退件</a>
+				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_manage.jsp" class="list-group-item">&nbsp;&nbsp;任務爭議案件</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;任務檢舉案件</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;討論區檢舉案件</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;會員檢舉案件</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;訂單審核</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;新進員工授權</a>
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->

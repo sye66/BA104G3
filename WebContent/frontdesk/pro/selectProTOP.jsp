@@ -6,6 +6,7 @@
 <%@ page import="com.pro.shoppingcart.*"%>
 <%@ page import="com.protrack.model.*" %>
 <%@ page import="com.proorder.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -47,21 +48,21 @@
 	}
 	
 </script>
+
 <%
+int count = 0;
+int count2 = 0;
+int count3 = 0;
 
-	String mem_No = "M000001";
+	MemVO memVO =(MemVO) session.getAttribute("memVO");
+	
+	if(session.getAttribute("memVO")!=null){
+		String mem_No =	memVO.getMem_No();
 
-	ProService proSvc = new ProService();
-	List<ProVO> list = proSvc.getAll();
-	@SuppressWarnings("unchecked")
-	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
-	int count = 0;
-	if(buylist != null && (buylist.size() > 0)){
-		count = buylist.size();
-	}
+	
 	
 	//追蹤
-	int count2 = 0;
+	
 	ProTrackService proTrackSvc = new ProTrackService();
 	List<ProTrackVO> listProTrack = proTrackSvc.getOnePro(mem_No);
 	if(listProTrack != null && (listProTrack.size() > 0)){
@@ -69,14 +70,23 @@
 	
 	}
 	//清單
-	int count3 = 0;
+
 	ProOrderService proOrderSvc = new ProOrderService();
 	List<ProOrderVO> listProOrder = proOrderSvc.listProOrder(mem_No);
 	if(listProOrder != null && (listProOrder.size() > 0)){
 		count3 = listProOrder.size();
 		
 	}
+	}	
 	
+	ProService proSvc = new ProService();
+	List<ProVO> list = proSvc.getAll();
+	@SuppressWarnings("unchecked")
+	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
+	
+	if(buylist != null && (buylist.size() > 0)){
+		count = buylist.size();
+	}
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
 

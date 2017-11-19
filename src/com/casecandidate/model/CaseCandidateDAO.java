@@ -22,19 +22,19 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO case_candidate (candidate_mem_no,mission_no) VALUES (?, ?)";
+		"INSERT INTO case_candidate (candidate_mem_no,mission_no,issuer_Inviting) VALUES (?, ?,?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT candidate_mem_no,mission_no FROM case_candidate order by candidate_mem_no , mission_no";
+		"SELECT candidate_mem_no,mission_no,issuer_Inviting FROM case_candidate order by candidate_mem_no , mission_no";
 	private static final String GET_ONE_MISSION = 
-		"SELECT CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO,CD.CANDIDATE_MEM_NO, ME.MEM_NAME FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  CD.CANDIDATE_MEM_NO = ME.MEM_NO WHERE CD.MISSION_NO = ?";
+		"SELECT CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO,CD.CANDIDATE_MEM_NO, ME.MEM_NAME ,issuer_Inviting FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  CD.CANDIDATE_MEM_NO = ME.MEM_NO WHERE CD.MISSION_NO = ?";
 	private static final String DELETE = 
 		"DELETE FROM case_candidate where candidate_mem_no=?,mission_no = ?";
 	private static final String DELETE_ONE_CASE =
 		"DELETE FROM case_candidate where mission_no = ?";
 	private static final String UPDATE = 
-		"UPDATE case_candidate set candidate_mem_no=?, mission_no=? where candidate_mem_no=? and mission_no = ?";
+		"UPDATE case_candidate set candidate_mem_no=?, mission_no=?,issuer_Inviting=?  where candidate_mem_no=? and mission_no = ?";
 	private static final String GET_ONE_CANDIDATE = 
-		"SELECT CD.CANDIDATE_MEM_NO, CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO, ME.MEM_NAME FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  M.ISSUER_MEM_NO = ME.MEM_NO WHERE CD.CANDIDATE_MEM_NO = ?";
+		"SELECT CD.CANDIDATE_MEM_NO, CD.MISSION_NO, M.MISSION_NAME, M.ISSUER_MEM_NO, ME.MEM_NAME ,issuer_Inviting FROM CASE_CANDIDATE CD JOIN MISSION M ON CD.MISSION_NO = M.MISSION_NO JOIN MEM ME ON  M.ISSUER_MEM_NO = ME.MEM_NO WHERE CD.CANDIDATE_MEM_NO = ?";
 	
 	
 	@Override
@@ -50,7 +50,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 
 			pstmt.setString(1, caseCandidateVO.getCandidate_Mem_No());
 			pstmt.setString(2, caseCandidateVO.getMission_No());
-			
+			pstmt.setInt(3, caseCandidateVO.getIssuer_Inviting());
 
 			pstmt.executeUpdate();
 
@@ -91,7 +91,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 
 			pstmt.setString(1, caseCandidateVO.getCandidate_Mem_No());
 			pstmt.setString(2, caseCandidateVO.getMission_No());
-			
+			pstmt.setInt(3, caseCandidateVO.getIssuer_Inviting());
 
 			pstmt.executeUpdate();
 
@@ -132,6 +132,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 
 			pstmt.setString(1,candidate_Mem_No );
 			pstmt.setString(2, mission_No);
+			
 
 			pstmt.executeUpdate();
 
@@ -224,6 +225,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));
 				caseCandidateVO.setMission_Name(rs.getString("mission_Name"));
 				caseCandidateVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
+				caseCandidateVO.setIssuer_Inviting(rs.getInt("issuer_Inviting"));
 				list.add(caseCandidateVO);
 				
 			}
@@ -285,6 +287,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));
 				caseCandidateVO.setMission_Name(rs.getString("mission_Name"));
 				caseCandidateVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
+				caseCandidateVO.setIssuer_Inviting(rs.getInt("issuer_Inviting"));
 				list.add(caseCandidateVO);
 			}
 
@@ -339,6 +342,7 @@ public class CaseCandidateDAO implements CaseCandidateDAO_interface {
 				caseCandidateVO = new CaseCandidateVO();
 				caseCandidateVO.setCandidate_Mem_No(rs.getString("candidate_Mem_No"));
 				caseCandidateVO.setMission_No(rs.getString("mission_No"));
+				caseCandidateVO.setIssuer_Inviting(rs.getInt("issuer_Inviting"));
 				list.add(caseCandidateVO); // Store the row in the list
 			}
 

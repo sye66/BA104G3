@@ -4,39 +4,53 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BA104G3:Emp</title>
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 
 	<style>
 	  table#table-1 {
-		width: 450px;
-		background-color: #CCCCFF;
-		margin-top: 5px;
-		margin-bottom: 10px;
-	    border: 3px ridge Gray;
-	    height: 80px;
-	    text-align: center;
-	  }
-	  table#table-1 h4 {
-	    color: red;
-	    display: block;
-	    margin-bottom: 1px;
-	  }
-	  h4 {
-	    color: blue;
-	    display: inline;
-	  }
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
+    border-radius: 20px;
+    text-align: center;
+    width: 80%;
+    height: 60px;
+    padding-top: 30px;
+    color: #4cae4c;
+    margin : 20px;
+    margin-left : 20px;
+  }
+  
+  h3{
+    width: 80%;
+    height: 25px;  
+    margin : 20px;
+  }
+  
+  body{margin:40px;}
 	</style>
 
 </head>
 <body bgcolor='white'>
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
+	
+	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+		<br>
+		<nav aria-label="breadcrumb" role="navigation">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
+    		
+    		<li class="breadcrumb-item active" aria-current="page">員工管理</li>
+  		</ol>
+	</nav>
+	</div>
 
 <table id="table-1">
    <tr><td><h3>IBM Emp: Home</h3><h4>( MVC )</h4></td></tr>
 </table>
+<br>
 
-<p>This is the Home page for IBM Emp: Home</p>
-
+<br>
+<div >
 <h3>資料查詢:</h3>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -47,9 +61,9 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<br>
 <ul>
-  <li><a href='<%=request.getContextPath()%>/backdesk/emp/listAllEmp.jsp'>List</a> all Emps. <br><br></li>
+  <li><a href='<%=request.getContextPath()%>/backdesk/emp/listAllEmp.jsp'><font color="blue"><b>查詢所有</b></font></a>員工<br><br></li>
   
   <li>
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
@@ -59,7 +73,7 @@
         <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
-
+<br>
   <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
    
 
@@ -75,7 +89,7 @@
        <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
-  
+  <br>
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
        <b>選擇員工姓名:</b>
@@ -88,17 +102,17 @@
        <input type="hidden" name="action" value="getOne_For_Display">
      </FORM>
   </li>
-  
+  <br>
    
 </ul>
 
 
 <h3>員工管理</h3>
-
+<br>
 <ul>
-  <li><a href='<%=request.getContextPath()%>/backdesk/emp/addEmp.jsp'>Add</a> a new Emp.</li>
+  <li><a href='<%=request.getContextPath()%>/backdesk/emp/addEmp.jsp'><font color="blue"><b>新增</b></font></a>一位員工</li>
 </ul>
-
+</div>
 
 </body>
 </html>

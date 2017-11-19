@@ -10,6 +10,7 @@
   ArtiReplyService artiReplySvc = new ArtiReplyService();
   Set<ArtiReplyVO> set= (Set<ArtiReplyVO>) request.getAttribute("artiReplySet");
   pageContext.setAttribute("set",set);
+  
 %>
 
 <html>
@@ -145,7 +146,9 @@ button{
                             <div class="btn-group">
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+                                <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
                                 <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
  			                    <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
@@ -156,7 +159,9 @@ button{
                             <div class="btn-group">
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+			                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>

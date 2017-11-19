@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.sql.Date;
 import java.util.List;
 
+import javax.mail.search.IntegerComparisonTerm;
+
 public class MemService {
 
 	private MemDAO_interface dao;
@@ -199,4 +201,27 @@ public class MemService {
 
 		return memVO;
 	}
+	
+	/**
+	 * @author Sander
+	 * @param mem_No
+	 * @param mem_Point
+	 * @return
+	 * 增加會員積分
+	 */
+	public MemVO IncreaseMemPoint(String mem_No, Integer mem_Point) {
+
+		MemVO memVO = dao.findByPrimaryKey(mem_No);
+		// 抓出原本積分
+		Integer origin_Mem_Point = memVO.getMem_Point();
+		// 加入得到積分
+		Integer got_Paid_Mem_point = origin_Mem_Point + mem_Point; 
+		memVO.setMem_Point(got_Paid_Mem_point);
+		dao.updateMemPoint(memVO);
+		System.out.printf("會員: %s, 加總後積分: %d",mem_No,got_Paid_Mem_point);
+
+		return memVO;
+	}
+
+
 }
