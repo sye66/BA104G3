@@ -14,7 +14,6 @@
 	String arti_No = (String) session.getAttribute("arti_No");
 	String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
-	
 
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);

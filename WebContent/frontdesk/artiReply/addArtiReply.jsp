@@ -9,7 +9,6 @@
 <%
     ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplyVO");
     String arti_No = (String) session.getAttribute("arti_No");
-
 %>
 
 

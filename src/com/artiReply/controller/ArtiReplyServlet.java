@@ -550,6 +550,7 @@ System.out.println("insert-reply-server-666");
 				req.setAttribute("artiReplyVO41", artiReplyVO);
 				req.setAttribute("artiFormVO", artiFormVO);
 				session.setAttribute("arti_No", arti_No);
+				session.setAttribute("mem_No", mem_No);
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
