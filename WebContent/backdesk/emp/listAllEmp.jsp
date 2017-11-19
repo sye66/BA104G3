@@ -18,20 +18,25 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
+   table#table-1 {
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
+    border-radius: 20px;
     text-align: center;
+    width: 80%;
+    height: 60px;
+    padding-top: 30px;
+    color: #4cae4c;
+    margin : 20px;
+    margin-left : 20px;
   }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
+  
+  h3{
+    width: 80%;
+    height: 25px;  
+    margin : 20px;
   }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+  
+  body{margin:40px;}
 </style>
 
 <style>
@@ -60,20 +65,23 @@
 		<nav aria-label="breadcrumb" role="navigation">
   		<ol class="breadcrumb">
     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">商品查詢</li>
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">所有員工查詢</li>
   		</ol>
 	</nav>
 	</div>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
+
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllEmp.jsp</h3>
 		 
 	</td></tr>
 </table>
+<br>
+	<br>
 
+<div align="center">
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -125,10 +133,8 @@
 	</c:forEach>
 </table>
 <%@ include file="pages/page2.file" %>
+</div>
 
-<br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
 
 </body>
 </html>
