@@ -558,21 +558,22 @@ System.out.println("insert-reply-server-666");
 		if ("deleteReply".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			
+System.out.println("D-Server-111");
 			try{
 				/***************************1.接收請求參數***************************************/
 				HttpSession session = req.getSession();
 				String reply_No = req.getParameter("reply_No");
-				
+System.out.println("D-Server-222***");
 				String mem_No = req.getParameter("mem_No");
 				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
+System.out.println("D-Server-222");
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
-				
+System.out.println("D-Server-333");
 				String user = (String) req.getSession().getAttribute("mem_No");
 				if(user!=mem_No){
 					String contextPath = getServletContext().getContextPath();
@@ -581,16 +582,16 @@ System.out.println("insert-reply-server-666");
 					failuewView.forward(req, res);
 					return;
 				}
-
+System.out.println("D-Server-444");
 				/***************************2.開始刪除資料***************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				artiReplySvc.deleteArtiReply(reply_No, mem_No);
-
+System.out.println("D-Server-555");
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/backdesk/artiReply/listAllArtiReply.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
-
+System.out.println("D-Server-666");
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());

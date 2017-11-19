@@ -3,9 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReply.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
 <jsp:useBean id="artiReplySvc1" scope="session" class="com.artiReply.model.ArtiReplyService" />
+
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
 	String arti_No = (String) session.getAttribute("arti_No");
@@ -82,6 +84,7 @@ ${arti_No}
 <div class="col-xs-12 col-sm-11 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
+                    
                         <h5 class="bigger lighter"> ${artiReplyVO.mem_No} </h5>
                         
                         <div class="widget-toolbar">
@@ -143,25 +146,25 @@ ${arti_No}
                             <div class="btn-toolbar">
                                 <div class="btn-group">
                                     <div class="widget-toolbar">
-                                    <div class="widget-main padding-6">
+                                        <div class="widget-main padding-6">
                                             <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${(replyVO.mem_No)}"
-	                     style="height:100px;width:120px;"/>
-    </div>
-                                    </div>
+                                            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiReplyVO.mem_No}&mem_${memSvc.getOneMem(artiReplyVO.mem_No).mem_pic}"
+	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                                        <p>${memSvc.getOneMem(artiReplyVO.mem_No).mem_Name}</p>
+	                                        </div>
+                                        </div>
                                     </div>
                                     <div class="widget-toolbar">
-                                         ${artiReplyVO.reply_Desc}                               
+                                        <font size="3"> ${artiReplyVO.reply_Desc} </font>                        
                                     </div>
          
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-
                     </div>
-                
 
 	</c:forEach>
 

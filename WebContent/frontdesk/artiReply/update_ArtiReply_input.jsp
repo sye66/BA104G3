@@ -143,10 +143,7 @@
                             </div>
                         </div>
                         <div class="widget-main padding-16">
-                        <TEXTAREA style="height:200px; width:100%;">
                         <input type="hidden" name="reply_Desc" size="45" value="<%= (artiReplyVO==null)? "【@@?】 " : artiReplyVO.getReply_Desc()%>"/>
-                        </TEXTAREA>
-                        
                         </div>
                     </div>
                     <div class="widget-header header-color-dark">

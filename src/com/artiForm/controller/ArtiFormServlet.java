@@ -14,6 +14,7 @@ import com.artiClass.model.ArtiClassService;
 import com.artiForm.model.ArtiFormDAO;
 import com.artiForm.model.ArtiFormService;
 import com.artiForm.model.ArtiFormVO;
+import com.artiReply.model.ArtiReplyService;
 import com.artiReply.model.ArtiReplyVO;
 
 @MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 5*1024*1024, maxRequestSize = 5*5*1024*1024)
@@ -56,11 +57,14 @@ public class ArtiFormServlet extends HttpServlet {
 					errorMsgs.add(" 主題文章編號格式不正確 ");
 				}
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
-
+				String reply_No = null;
 
 				/***************************2.開始查詢資料*****************************************/
 				ArtiFormService artiFormSvc = new ArtiFormService ();
 				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
+				
+//				ArtiReplyService artiReplySvc = new ArtiReplyService ();
+//				ArtiReplyVO artiReplyVO = artiReplySvc.getOneArtiReply(reply_No);
 
 				if (artiFormVO==null){
 					errorMsgs.add(" 查無資料 ");
@@ -73,6 +77,7 @@ public class ArtiFormServlet extends HttpServlet {
 				}
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+//				session.setAttribute("artiReplyVO", artiReplyVO);
 				req.setAttribute("artiFormVO", artiFormVO);
 				req.setAttribute("arti_No", arti_No);
 

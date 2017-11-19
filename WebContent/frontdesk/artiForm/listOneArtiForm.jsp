@@ -12,16 +12,11 @@
 <%
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
-    ArtiReplyVO artiReplyVO = new ArtiReplyVO();
+    ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
-    
 	String arti_No = (String) request.getAttribute("arti_No");
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
-<%
-  ArtiClassDAO dao = new ArtiClassDAO();
-  ArtiClassVO artiClassVO = dao.findByPrimaryKey(artiFormVO.getArti_Cls_No());
-%>
 
 <html>
 <head>
@@ -55,57 +50,6 @@ div {
   }
 </style>
 
-<style>
-  table {
-	width: 900px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  
-  body{margin:40px;}
-  
-  .btn-circle {
-  width: auto;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-  margin : 30 px;
-}
-
-.btn-circle.btn-lg {
-  width: auto;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
-  margin : 30 px;
-}
-
-.btn-circle.btn-xl {
-  width: autox;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 200px;
-  margin : 30 px;
-}
-button{
-  float: left;
-  margin : 30 px;
-}
   
 </style>
 
@@ -132,7 +76,6 @@ button{
             <div class="widget-toolbar">
                 <div class="" style="width:100px;">
                     <div class="" style="">
-                    
                     <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
                       ${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}
                     </div>
@@ -163,26 +106,29 @@ button{
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
                               <img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
-	                     style="height:250px;width:300px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     style="height:350px;width:500px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                               </div>
                           </div>
+                          
                               <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
                                   <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                              <p>${artiFormVO.mem_No}&mem_${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
                                   </div>
                                </div>
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  ${artiFormVO.mem_No}
+                                  <h4>詳細內文 : </h4><br>
+                                   <font size="4">${artiFormVO.describe}</font>
                                   </div>
                                </div>
                            </div>
                        </div>
                     </div>
                     <div class="widget-main padding-16">
-                    <h4>詳細內文 : </h4><br>
-                    ${artiFormVO.describe}
+                    
+                    
                     </div>                    
          </div>
 		 
@@ -237,14 +183,11 @@ button{
    </div>
 <hr>	
 
-
 <div class="widget-body">
     <div class="widget-toolbox">
-
-            <div class="btn-group">
-                                
-                 <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}" 
-                 style="height:100px;width:120px;"/>
+            <div class="btn-group">             
+                 <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
+	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                     
     <div class="widget-toolbar">
         <div class="widget-main padding-6">                   
@@ -254,10 +197,9 @@ button{
 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >
 		        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
-		        <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
-		        <input type="hidden" name="reply_Desc"  value="${artiReplyVO.reply_Desc}">
+		        <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
                 <button class="btn btn-primary" type="submit" name="action" value="insertReply"> 回覆文章</button>
-                </FORM>
+                
 		        </div>
 		    </div>
                                     
@@ -266,18 +208,15 @@ button{
                                     
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
-                    <div class="pic">
-                                            
+                    <div class="pic"> 
                      <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="45"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
-                      ${artiReplyVO.reply_Desc}
-    
                      </div>
                  </div>
              </div>
                                           
              </div>
          </div>
-
+</FORM>
 </div>
 <hr>
 
@@ -285,9 +224,9 @@ button{
     <div class="widget-toolbox">
         <div class="btn-toolbar">
             <div class="btn-group">
-                                
-                 <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}" 
-                 style="height:100px;width:120px;"/>
+            
+            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
+	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                     
     <div class="widget-toolbar">
         <div class="widget-main padding-6">

@@ -157,6 +157,7 @@ button{
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                    <input type="hidden" name="reply_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
