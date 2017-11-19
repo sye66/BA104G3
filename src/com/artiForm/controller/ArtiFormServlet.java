@@ -435,6 +435,7 @@ public class ArtiFormServlet extends HttpServlet {
 			}
 		}
 
+		
 		/******[ 後台刪除 ]******/
 		if ("deleteArtiFMBack".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
