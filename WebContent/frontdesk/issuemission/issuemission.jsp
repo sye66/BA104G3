@@ -8,8 +8,8 @@
 <%
 GetMissionService getMissionService = new GetMissionService();
 DisputeCaseService disputeCaseService = new DisputeCaseService();
-List<GetMissionVO> listMemMissionPending = getMissionService.findByMem("M000002",1);
-List<GetMissionVO> listMemMission = getMissionService.findByMem("M000002",1);
+List<GetMissionVO> listUserMissionPending = getMissionService.findByMem("M000002",1);
+List<GetMissionVO> listUserMission = getMissionService.findByMem("M000002",1);
 List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem("M000011");
 %>
 <!DOCTYPE html>
@@ -146,7 +146,7 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 						        		</tr>
 						        	</thead>
 						        	<tbody>
-						        		<%for(GetMissionVO getMissionVO : listMemMissionPending){ %>
+						        		<%for(GetMissionVO getMissionVO : listUserMissionPending){ %>
 						        		<tr>
 						        			<td><p><%=getMissionVO.getMission_No() %></p></td>
 						        			<td><p><%=getMissionVO.getMission_Name() %></p></td>

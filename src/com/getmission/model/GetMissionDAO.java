@@ -10,7 +10,6 @@ import javax.sql.DataSource;
 
 import com.emp.model.EmpVO;
 
-
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Mission;
 
 public class GetMissionDAO implements GetMissionDAO_interface {
@@ -26,30 +25,24 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = 
-		"INSERT INTO mission (mission_no,mission_category,mission_name,mission_des,issuer_mem_no,takecase_mem_no,"
-		+ "mission_release_time,mission_due_time,mission_start_time,mission_end_time,"
-		+ "mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng) "
-		+ "'MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?,?,?)";
-	private static final String GET_ALL_STMT = 
-		"SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission order by mission_no";
-	private static final String GET_ONE_STMT = 
-		"SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission where mission_no = ?";
-	private static final String DELETE = 
-		"DELETE FROM mission where mission_no = ?";
-	private static final String UPDATE = 
-		"UPDATE mission set mission_category = nvl(?,mission_category), mission_name= nvl(?,mission_name), mission_des=nvl(?, mission_des  ), issuer_mem_no=nvl(?, issuer_mem_no), takecase_mem_no=nvl(?, takecase_mem_no  ), mission_release_time=nvl(?, mission_release_time  ), mission_due_time=nvl(?, mission_due_time  ), mission_start_time=nvl(?, mission_start_time  ), mission_end_time=nvl(?, mission_end_time  ), mission_state=nvl(?, mission_state  ), mission_pattern=nvl(?,  mission_pattern ), mission_pay=nvl(?, mission_pay  ),mission_Gps_Lat=nvl(?, mission_Gps_Lat  ),mission_Gps_Lng=nvl(?, mission_Gps_Lng  ) where mission_no = ?";
-	private static final String CHANG_MISSION_STATE=
-		"UPDATE mission set mission_State=? where mission_no = ?";
-	
-	private static final String ISSUER_CASE = 
-		"SELECT * FROM mission where issuer_mem_no = ? order by mission_No";
-	
-	private static final String GET_OK_MISSION = 
-		"select * from mission where  mission_state = 1 or  mission_state = 2 or mission_state = 7 ";
-	
-	private static final String SUCCESS_GET_MISSION = 
-		"SELECT* FROM mission where takecase_mem_no = ? order by mission_no";
+	private static final String INSERT_STMT = "INSERT INTO mission (mission_no,mission_category,mission_name,mission_des,issuer_mem_no,takecase_mem_no,"
+			+ "mission_release_time,mission_due_time,mission_start_time,mission_end_time,"
+			+ "mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng) "
+			+ "'MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?,?,?)";
+	private static final String GET_ALL_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission order by mission_no";
+	private static final String GET_ONE_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission where mission_no = ?";
+	private static final String DELETE = "DELETE FROM mission where mission_no = ?";
+	private static final String UPDATE = "UPDATE mission set mission_category = nvl(?,mission_category), mission_name= nvl(?,mission_name), mission_des=nvl(?, mission_des  ), issuer_mem_no=nvl(?, issuer_mem_no), takecase_mem_no=nvl(?, takecase_mem_no  ), mission_release_time=nvl(?, mission_release_time  ), mission_due_time=nvl(?, mission_due_time  ), mission_start_time=nvl(?, mission_start_time  ), mission_end_time=nvl(?, mission_end_time  ), mission_state=nvl(?, mission_state  ), mission_pattern=nvl(?,  mission_pattern ), mission_pay=nvl(?, mission_pay  ),mission_Gps_Lat=nvl(?, mission_Gps_Lat  ),mission_Gps_Lng=nvl(?, mission_Gps_Lng  ) where mission_no = ?";
+	private static final String CHANG_MISSION_STATE = "UPDATE mission set mission_State=? where mission_no = ?";
+
+	private static final String ISSUER_CASE = "SELECT * FROM mission where issuer_mem_no = ? order by mission_No";
+
+	private static final String GET_OK_MISSION = "select * from mission where  mission_state = 1 or  mission_state = 2 or mission_state = 7 ";
+
+	private static final String SUCCESS_GET_MISSION = "SELECT* FROM mission where takecase_mem_no = ? order by mission_no";
+
+	private static final String GET_MEM_MISSION_WITH_STATUS_STMT = "SELECT * FROM MISSION WHERE (issuer_mem_no=? and mission_state=?)";
+	private static final String GET_MEM_MISSION_ALL_STATUS_STMT = "SELECT * FROM MISSION WHERE issuer_mem_no=?";
 	
 	@Override
 	public void insert(GetMissionVO getMissionVO) {
@@ -80,8 +73,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -123,21 +115,20 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			pstmt.setDate(8, getMissionVO.getMission_Start_Time());
 			pstmt.setDate(9, getMissionVO.getMission_End_Time());
 			pstmt.setInt(10, getMissionVO.getMission_State());
-			if(getMissionVO.getMission_Pattern() != null){
+			if (getMissionVO.getMission_Pattern() != null) {
 				pstmt.setInt(11, getMissionVO.getMission_Pattern());
-			}
-			else{
+			} else {
 				pstmt.setNull(11, java.sql.Types.INTEGER);
 			}
-			if(getMissionVO.getMission_Pay()!=null)
+			if (getMissionVO.getMission_Pay() != null)
 				pstmt.setDouble(12, getMissionVO.getMission_Pay());
 			else
 				pstmt.setDouble(12, java.sql.Types.DOUBLE);
-			if(getMissionVO.getMission_Gps_Lat()!= null)
-			pstmt.setDouble(13, getMissionVO.getMission_Gps_Lat());
+			if (getMissionVO.getMission_Gps_Lat() != null)
+				pstmt.setDouble(13, getMissionVO.getMission_Gps_Lat());
 			else
 				pstmt.setDouble(13, java.sql.Types.DOUBLE);
-			if(getMissionVO.getMission_Gps_Lng()!= null)
+			if (getMissionVO.getMission_Gps_Lng() != null)
 				pstmt.setDouble(14, getMissionVO.getMission_Gps_Lng());
 			else
 				pstmt.setDouble(14, java.sql.Types.DOUBLE);
@@ -147,8 +138,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -186,8 +176,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -243,14 +232,13 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
 				getMissionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
 				getMissionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
-				
+
 			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
 			System.out.println("888888");
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -296,7 +284,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			while (rs.next()) {
 				// empVO 也稱為Domain objects
 				getMissionVO = new GetMissionVO();
-			
+
 				getMissionVO.setMission_No(rs.getString("mission_no"));
 				getMissionVO.setMission_Category(rs.getString("mission_category"));
 				getMissionVO.setMission_Name(rs.getString("mission_name"));
@@ -317,8 +305,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -345,7 +332,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<GetMissionVO> getOkAll() {
 		List<GetMissionVO> list = new ArrayList<GetMissionVO>();
@@ -364,7 +351,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			while (rs.next()) {
 				// empVO 也稱為Domain objects
 				getMissionVO = new GetMissionVO();
-			
+
 				getMissionVO.setMission_No(rs.getString("mission_no"));
 				getMissionVO.setMission_Category(rs.getString("mission_category"));
 				getMissionVO.setMission_Name(rs.getString("mission_name"));
@@ -385,8 +372,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -413,7 +399,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public void takeMission(GetMissionVO getMissionVO) {
 
@@ -425,18 +411,15 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(CHANG_MISSION_STATE);
 
-			
 			pstmt.setInt(1, getMissionVO.getMission_State());
-			
-			
+
 			pstmt.setString(2, getMissionVO.getMission_No());
 
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -456,27 +439,25 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 
 	}
-	
 
 	@Override
 	public List<GetMissionVO> getAll(Map<String, String[]> map) {
 		List<GetMissionVO> list = new ArrayList<GetMissionVO>();
 		GetMissionVO getMissionVO = null;
-	
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-	
+
 		try {
-			
+
 			con = ds.getConnection();
-			String finalSQL = "select * from mission "
-		          + jdbcUtil_CompositeQuery_Mission.get_WhereCondition(map)
-		          + "order by mission_No";
+			String finalSQL = "select * from mission " + jdbcUtil_CompositeQuery_Mission.get_WhereCondition(map)
+					+ "order by mission_No";
 			pstmt = con.prepareStatement(finalSQL);
-			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
+			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
 			rs = pstmt.executeQuery();
-	
+
 			while (rs.next()) {
 				getMissionVO = new GetMissionVO();
 				getMissionVO.setMission_No(rs.getString("mission_No"));
@@ -496,11 +477,10 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 				getMissionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(getMissionVO); // Store the row in the List
 			}
-	
+
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -526,6 +506,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
+
 	@Override
 	public List<GetMissionVO> findIssuerCase(String issuer_Mem_No) {
 		List<GetMissionVO> list = new ArrayList<GetMissionVO>();
@@ -566,8 +547,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -594,7 +574,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
-	
+
 	@Override
 	public List<GetMissionVO> successGetMission(String takecase_Mem_No) {
 		List<GetMissionVO> list = new ArrayList<GetMissionVO>();
@@ -635,8 +615,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -663,4 +642,128 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
+
+
+    /**
+     * @author Sander
+     * 用會員去搜尋他的所有的Mission，以狀態做區隔
+     * @param 發案人會員編號
+     * @param 任務狀態，可以查詢待接案或是已結案
+     * @return List<getMissionVO>
+     */
+	
+	@Override
+	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Status) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GetMissionVO getMissionVO = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_MISSION_WITH_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_No);
+			pstmt.setInt(2, mission_Status);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
+	}
+	
+	/**
+     * @author Sander
+     * Overload findByMem，直接抓出這個會員所有的任務，不分狀態
+     * @param 發案人會員編號
+     * @return List<getMissionVO>
+     */
+	public List<GetMissionVO> findByMem(String issuer_Mem_No){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GetMissionVO getMissionVO = null;
+		List<GetMissionVO> listMemMission = new ArrayList<>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_MEM_MISSION_ALL_STATUS_STMT);
+			pstmt.setString(1, issuer_Mem_No);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				getMissionVO = new GetMissionVO();
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getDate("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getDate("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getDate("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getDate("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				listMemMission.add(getMissionVO); // Store the row in the list
+			}
+		} catch (SQLException e) {
+			System.out.println("SQL issue");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt!=null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {				
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listMemMission;
+	}
+	
+	
+
 }
