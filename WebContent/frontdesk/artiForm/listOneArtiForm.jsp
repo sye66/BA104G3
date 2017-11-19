@@ -14,7 +14,8 @@
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
-	String arti_No = (String) request.getAttribute("arti_No");
+	String arti_No = (String) session.getAttribute("arti_No");
+	String mem_No = (String) session.getAttribute("mem_No");
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 

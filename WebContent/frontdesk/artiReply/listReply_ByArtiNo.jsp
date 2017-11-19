@@ -10,13 +10,17 @@
 
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
+
 	String arti_No = (String) session.getAttribute("arti_No");
+	String mem_No = (String) session.getAttribute("mem_No");
+	session.setAttribute("mem_No",mem_No);
+
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);
 %>
 
 <html>
-<head><title> 分類文章 - listReply_ByArtiNo.jsp   ${arti_No}</title>
+<head><title> 分類文章 - listReply_ByArtiNo.jsp   ${arti_No} </title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -65,7 +69,7 @@ ${arti_No}
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-2">
 	<tr><td>
-		 <h3> 分標題列出回覆文章 - listReply_ByArtiNo.jsp ${arti_No }</h3>
+		 <h3> 分標題列出回覆文章 - listReply_ByArtiNo.jsp ${arti_No } </h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -92,7 +96,9 @@ ${arti_No}
                                 <div class="" style="">
 			                        
 			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+			                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                        <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                        <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
  			                    </FORM>
@@ -107,7 +113,9 @@ ${arti_No}
                                 <div class="" style="">
                                 
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+                                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
                                     <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+                                    <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                        <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
 			                    </FORM>

@@ -178,16 +178,16 @@ System.out.println("addReply-DAO-888");
 	public void deleteReply(String reply_No, String mem_No) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+System.out.println("Delete-DAO-111");
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_REPLY);
-			
+System.out.println("Delete-DAO-222");
 			pstmt.setString(1, reply_No);
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
-			
+System.out.println("Delete-DAO-111");
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} catch (Exception e){
