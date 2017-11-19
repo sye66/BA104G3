@@ -1,10 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.artiReply.model.*"%>
+<%@ page import="com.artiForm.model.*"%>
 
 <%
+    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplyVO41"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-
+	String arti_No = (String) session.getAttribute("arti_No");
+	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
 
@@ -144,7 +147,7 @@
                             </div>
                         </div>
                         <div class="widget-main padding-16">
-                        <input type="hidden" name="reply_Desc" size="45" value="<%= (artiReplyVO==null)? "【@@?】 " : artiReplyVO.getReply_Desc()%>"/>
+                        <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="45"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
                         </div>
                     </div>
                     <div class="widget-header header-color-dark">
@@ -156,6 +159,7 @@
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
                                 <input type="hidden" name="reply_No"  value="${artiReplyVO41.reply_No}">
+                                <input type="hidden" name="mem_No"  value="${artiReplyVO41.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                    <button class="btn btn-success" type="submit" name="action" value="updateReply">修改回覆</button>
 			                    </FORM>

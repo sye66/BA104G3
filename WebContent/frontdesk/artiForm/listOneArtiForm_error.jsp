@@ -62,16 +62,17 @@ div {
 <h4></h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>文章資料 - ListOneArtiFrom_改版.jsp    ${ arti_No}</h3>
+		 <h3>文章資料 - ListOneArtiFrom_ERROR.jsp    ${ arti_No}</h3>
 		 <h4><a href="/BA104G3/frontdesk/artiForm/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 <hr>
-
+<hr>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
-
+<div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">
     <div class="widget-box">
+    
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">${artiFormVO.arti_Title}</h5>
             <div class="widget-toolbar">
@@ -113,15 +114,13 @@ div {
                           
                               <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
-	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-	                              <p>${artiFormVO.mem_No}&mem_${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
+                                  <h4> </h4>
                                   </div>
                                </div>
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <h4>詳細內文 : </h4><br>
-                                   <font size="4">${artiFormVO.describe}</font>
+                                  <h4> 系統訊息 : </h4><br>
+                                     <font size="4"> 要本人才能修改或刪除喔~~~ </font>
                                   </div>
                                </div>
                            </div>
@@ -135,63 +134,23 @@ div {
 		 
          <div class="widget-header header-color-dark">
          <h5 class="bigger lighter">${artiFormVO.arti_Time}</h5>
-         
-         <div class="widget-toolbar">
-             <div class="" style="width:100px;">
-                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-			    <input type="hidden" name="mem_No"  value="${artiFormVO.mem_No}">
-    			<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-                <button class="btn btn-link" type="submit" name="action" value="giveOneLike">讚ㄧ個! </button>
-		        </FORM>		
-		    </div>
+
+
 		</div>
 		
-		<div class="widget-toolbar">
-            <div class="" style="width:100px;">
-               <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-			   <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			   <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-			   <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-               <button class="btn btn-success" type="submit" name="action" value="getOneArti_For_Update">修改文章</button>
-		       </FORM>
-		    </div>
-		</div>
-		
-		<div class="widget-toolbar">
-            <div class="" style="width:100px;">
-                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-			    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			    <button class="btn btn-danger" type="submit" name="action" value="deleteArti">刪除文章</button>
-                </FORM>
-             </div>
-		</div>
-</FORM>
-		
-		
-		<div class="widget-toolbar">
-            <div class="" style="width:100px;">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >
-		        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-		        <input type="hidden" name="mem_No"  value="${artiFormVO.mem_No}">
-                <button class="btn btn-info" type="submit" name="action" value="listReply_ByArtiNo"> 查看回覆</button>
-                </FORM>
-		    </div>
-		</div>
            </div>
        </div>
    </div>
+  </FORM>
 <hr>	
 
-<hr>
 
 <hr>
 
-	<jsp:include page="/frontdesk/artiReply/listReply_ByArtiNo.jsp" flush="true" />
+<hr>
+
 
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
-
 </html>

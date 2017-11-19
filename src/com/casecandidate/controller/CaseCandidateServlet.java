@@ -67,7 +67,7 @@ public class CaseCandidateServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢 *****************************************/
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
-			CaseCandidateVo = caseCandidateSvc.addCaseCandidate(mem_No, mission_No);
+			CaseCandidateVo = caseCandidateSvc.addCaseCandidate(mem_No, mission_No, 1);
 
 			req.setAttribute("CaseCandidateVo", CaseCandidateVo);
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmission_success.jsp");

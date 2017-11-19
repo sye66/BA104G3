@@ -7,7 +7,14 @@ public class CaseCandidateVO implements java.io.Serializable{
 	private String mission_Name;
 	private String issuer_Mem_No;
 	private String mem_Name;
+	private Integer issuer_Inviting;
 	
+	public Integer getIssuer_Inviting() {
+		return issuer_Inviting;
+	}
+	public void setIssuer_Inviting(Integer issuer_Inviting) {
+		this.issuer_Inviting = issuer_Inviting;
+	}
 	public String getCandidate_Mem_No() {
 		return candidate_Mem_No;
 	}
