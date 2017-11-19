@@ -7,22 +7,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/homepage.css">
 	 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/recharge/credit.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
-	
-	<style>
-#noUnderLine{text-decoration:none;}
-</style>
 <title>Insert title here</title>
 </head>
 <body>
 
- 
+
+<!-- navbar====================================================================== -->
 
 
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include>
 
+<br><br><br><br><br><br><br>
+<!-- navbar====================================================================== -->
 
 
 
@@ -66,7 +65,7 @@
 
 
 
-
+<jsp:include page="/frontdesk/mem/memPageLeft.jsp" flush="true"></jsp:include>
 
 
 <div class="col-xs-12 col-sm-9">
@@ -75,6 +74,7 @@
 
            
         <div class="demo-container-fluid">
+            <h1>After <small>(interactive, exciting)</small></h1>
             <div class="card-wrapper"></div>
 
             <div class="form-container active">
@@ -107,6 +107,28 @@
 
     </div>
 
+
+            
+            
+            
+            
+        </div>
+</div>
+</div>
+
+<!-- memPageLeft====================================================================== -->
+
+
+
+
+<!-- footer====================================================================== -->
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+
+
+<!-- footer====================================================================== -->
 <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
