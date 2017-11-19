@@ -223,7 +223,7 @@ function getFocus() {
 	<script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
-  
+ 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
   
   
   

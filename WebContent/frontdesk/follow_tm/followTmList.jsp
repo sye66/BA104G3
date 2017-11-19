@@ -3,9 +3,9 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
-<%@ page import="com.relation.model.*" %>
+<%@ page import="com.follow_tool_man.model.*" %>
 
-<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="Follow_tmSvc" scope="page" class="com.follow_tool_man.model.Follow_tmService"/>
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 
 
@@ -18,18 +18,18 @@
 
 
 <%
-RelationService relationSvc = new RelationService();
+Follow_tmService follow_tmSvc = new Follow_tmService();
 
- String related_Mem_No = request.getParameter("relationVO");
-if(related_Mem_No ==null){
-	
-	related_Mem_No= memVO.getMem_No();
-	System.out.println("related_Mem_No + " +related_Mem_No);
+ String follower_Mem_No = request.getParameter("follow_tmVO");
+if(follower_Mem_No ==null){
+	follower_Mem_No= memVO.getMem_No();
+	System.out.println("follower_Mem_No + " +follower_Mem_No);
 }
  
-List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
-pageContext.setAttribute("relationVO", relationVO);
-System.out.println("relationVO + " +relationVO);
+List<Follow_tmVO> follow_tmVO = follow_tmSvc.getAllDependOnFollower_Mem_No(follower_Mem_No);
+pageContext.setAttribute("follow_tmVO", follow_tmVO);
+
+System.out.println("follow_tmVO + " +follow_tmVO);
 %>
 
 
@@ -139,36 +139,35 @@ System.out.println("relationVO + " +relationVO);
 		<th>性別</th>
 		<th>完成任務數</th>
 		</tr>
-			
-		<%@ include file="page1.file" %>
-		<c:forEach var="relationVO" items="${relationVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
+		<%@ include file="page1.file" %>	 
+		<c:forEach var="follow_tmVO" items="${follow_tmVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
 		<tr>
-			<c:if test="${relationVO.getRelation_Status()==1}">
-			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
+			<c:if test="${follow_tmVO.getFollow_Status()==0}">
+			<c:if test="${follow_tmVO.followed_Mem_No != memVO.mem_No and follow_tmVO.follower_Mem_No !=memVO.mem_No}">
 			<td>
 			<div class="form-group">
-			<a href="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"></a>
+			<a href="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"></a>
 			</div>
 			</td>
-			<td>${MemSvc.getOneMem(relationVO.mem_No).mem_Name}</td>
-			<c:if test="${MemSvc.getOneMem(relationVO.mem_No).mem_Gend ==1}">
+			<td>${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_Name}</td>
+			<c:if test="${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_Gend ==1}">
 			<td>男性</td>
 			</c:if>
-			<c:if test="${MemSvc.getOneMem(relationVO.mem_No).mem_Gend ==2}">
+			<c:if test="${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_Gend ==2}">
 			<td>女性</td>
 			</c:if>
 			<td>
 			<input type="hidden" name="action" value="update">
-			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
+			${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mission_Count}</td>
 				</h2></c:if></c:if>
 			
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         
-        	<input type="hidden" name="mem_No" value="${relationVO.mem_No}">
-        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">
-			<input type="hidden" name="relation_Status" value=1 >
+        	<input type="hidden" name="follower_Mem_No" value="${follow_tmVO.follower_Mem_No}">
+        	<input type="hidden" name="followed_Mem_No" value="<%= (follow_tmVO==null)? "" : memVO.getMem_No()%>">
+			<input type="hidden" name="follow_Status" value=1 >
 			
 			
 			
@@ -176,7 +175,7 @@ System.out.println("relationVO + " +relationVO);
 		</form>	
 		</c:forEach>
 </table>
-<%@ include file="page2.file" %>
+		<%@ include file="page2.file" %>
         </div>
         </div>
         

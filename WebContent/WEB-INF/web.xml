@@ -98,7 +98,6 @@
     <url-pattern>/relation/relation.do</url-pattern>
   </servlet-mapping>
   
-<!--   兆哥 -->
   <servlet>
     <servlet-name>Follow_tmServlet</servlet-name>
     <servlet-class>com.follow_tool_man.controller.Follow_tmServlet</servlet-class>
@@ -107,6 +106,7 @@
     <servlet-name>Follow_tmServlet</servlet-name>
     <url-pattern>/follow_tool_man/follow_tool_man.do</url-pattern>
   </servlet-mapping>
+<!--   兆哥 -->
   
   
   <servlet>

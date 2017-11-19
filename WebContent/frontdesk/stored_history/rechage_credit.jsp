@@ -3,13 +3,20 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
+<%@ page import="com.stored_history.model.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<jsp:useBean id="StoredSvc" scope="page" class="com.stored_history.model.StoredService"/>
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
+<% StoredVO storedVO = (StoredVO)request.getSession().getAttribute("storedVO"); %>
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/recharge/credit.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
+		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/recharge/default.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -67,52 +74,53 @@
 
 <jsp:include page="/frontdesk/mem/memPageLeft.jsp" flush="true"></jsp:include>
 
+	<div id="container">
+	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-2">
+		    			<img id="image1" src="<%=request.getContextPath()%>/res/images/stored_history/postive.png" />
+		   				<img id="image2" src="<%=request.getContextPath()%>/res/images/stored_history/negitive.png" />
+					</div>
 
-<div class="col-xs-12 col-sm-9">
 
+</div>
 
+    		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do?reuestURL=<%=request.getServletPath()%>" name="form1">
+    		<script>
+    		</script>
+    					<input type="hidden" name="action" value="insert">
+    					 <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
+    					<input type="hidden" name="stored_Type" size="36" class="form-control input-lg" tabindex="3" value="1">
+    					<input type="hidden" name="stored_Date" size="36" class="form-control input-lg" tabindex="3"
+			value="<%= (storedVO==null)? "": storedVO.getStored_Date()%>" />
+    					<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
+    					<div class="small-6 ">請輸入儲值金額
+                            <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
+                        </div><br>
+                        <div class="small-6 ">
+                            <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
+                        </div><br>
+                        <div class="small-6 ">
+                           <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
+                        </div><br>
+                        <div class="small-3 ">
+                         <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="MM/YY"  >
+                        </div><br>
 
-           
-        <div class="demo-container-fluid">
-            <h1>After <small>(interactive, exciting)</small></h1>
-            <div class="card-wrapper"></div>
+                        <div class="small-3 ">
+                         <input type="text" id="switch" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
+                        </div><br>
 
-            <div class="form-container active">
-                <form action="">
-                    <p class="small">Start typing in here to take over and try it out</p>
-                    <div class="row collapse">
-                        <div class="small-6 columns">
-                            <input placeholder="Card number" type="text" name="number">
+                        <div class="small-6 ">
+                            <input type="submit" value="Submit" class="button btn-defult">
                         </div>
-                        <div class="small-6 columns">
-                            <input placeholder="Full name" type="text" name="name">
-                        </div>
-                    </div>
-                    <div class="row collapse">
-                        <div class="small-3 columns">
-                            <input placeholder="MM/YY" type="text" name="expiry">
-                        </div>
-
-                        <div class="small-3 columns">
-                            <input placeholder="CVC" type="text" name="cvc">
-                        </div>
-
-                        <div class="small-6 columns">
-                            <input type="submit" value="Submit" class="button postfix">
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-
-            
-            
-            
-            
-        </div>
+                        
+                        
+                      
+   				</FORM>
+			</div>
+    	 </div>       
+       </div>
 </div>
 </div>
 
@@ -129,26 +137,32 @@
 
 
 <!-- footer====================================================================== -->
-<script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-51659791-1', 'jessepollak.github.io');
-      ga('send', 'pageview');
-      
-    </script>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.0/highlight.min.js"></script>
-    <script src="<%=request.getContextPath()%>/lib/js/recharge/credit.js"></script>
-    <script src="https://rawgit.com/jessepollak/card/master/dist/card.js"></script>
-    <script>
-        $('code').each(function(i, e) {hljs.highlightBlock(e)});
-        var card = new Card({ form: '.active form', container: '.card-wrapper' })
-    </script>
             
 
 
 </body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+  <script>
+                        var margin = $("#image1").width()/2;
+                		var width = $("#image1").width();
+                		var height = $("#image1").height();
+                		$("#image2").css({width:'0px', height:height+'px', marginLeft:margin+'px', opacity:'0.5'});
+                        $(document).ready(function(){
+                        	$('#switch').focus(function(){
+                        		$("#image1").stop().animate({width:'0px', height:height+'px', marginLeft:margin+'px', opacity:'0.5'}, 500);
+                    			window.setTimeout(function() {
+                    				$("#image2").stop().animate({width:width+'px', height:height+'px', marginLeft:'0px', opacity:'1'}, 500);
+                    			}, 500)
+                        	})
+                        	$('#switch').blur(function(){
+                        		$("#image2").stop().animate({width:'0px', height:height+'px', marginLeft:margin+'px', opacity:'0.5'}, 500);
+                    			window.setTimeout(function() {
+                    				$("#image1").stop().animate({width:width+'px', height:height+'px', marginLeft:'0px', opacity:'1'}, 500);
+                    			}, 500);
+                        	})
+                        });
+                        </script>
+
 </html>

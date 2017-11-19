@@ -4,15 +4,15 @@
 
 <hibernate-mapping>
     <class name="com.follow_tool_man.model.Follow_tmVO" table="FOLLOW_TOOL_MAN" >
-
-        <id name="empno" column="empno">
-            <generator class="sequence" >
-              <param name="sequence">emp2_seq</param>
-            </generator>  
-        </id>
-        
-        <property name="follower_Mem_No" column="follower_Mem_No" />
-        <property name="followed_Mem_No" column="followed_Mem_No" />
+		<composite-id>
+       		<key-many-to-one name="memVO1" class="com.mem.model.MemVO" lazy="false">
+       		<column name="mem_No"/>
+       		</key-many-to-one>
+       		<key-many-to-one name="memVO2" class="com.mem.model.MemVO" lazy="false">
+       		<column name="mem_No"/>
+       		</key-many-to-one>
+       		
+        </composite-id>
         <property name="follow_Status" column="follow_Status" />
      
     </class>

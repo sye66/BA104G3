@@ -214,6 +214,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt.setString(1, follower_Mem_No);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				follow_tmVO = new Follow_tmVO();
