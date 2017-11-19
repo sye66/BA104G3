@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mem.model.MemVO;
 import com.pro.model.ProService;
 import com.pro.model.ProVO;
 import com.protrack.model.ProTrackService;
@@ -33,8 +34,9 @@ public class ShoppingCartServlet extends HttpServlet {
 		List<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 		String requestURL = req.getParameter("requestURL");
-								  
+		String mem_No =	req.getParameter("mem_No");					  
 System.out.println("購物車來源網頁: "+ requestURL);
+
 
 
 		if (!action.equals("checkOut")) {
@@ -86,7 +88,7 @@ System.out.println("從清單 放商品 到購物車");
 			}else{
 					
 				url = "/frontdesk/pro/showProIndex.jsp";
-				System.out.println("回首頁 url: "+url); 
+System.out.println("回商城首頁 url: "+url); 
 			}
 //System.out.println("購物車引入路徑"+requestURL);			
 //				 url=requestURL;
@@ -122,8 +124,8 @@ System.out.println("從清單 放商品 到購物車");
 		String proCar_No = req.getParameter("proCar_No");
 		String proCar_Name = req.getParameter("proCar_Name");
 		String proCar_Info = req.getParameter("proCar_Info");
-		String proCar_Price = req.getParameter("proCar_Price");
-		String proCar_Quantity = req.getParameter("proCar_Quantity");
+		Integer proCar_Price = new Integer(req.getParameter("proCar_Price"));
+		Integer proCar_Quantity = new Integer(req.getParameter("proCar_Quantity"));
 
 		//刪除在清單商品
 //		String mem_No = req.getParameter("mem_No");

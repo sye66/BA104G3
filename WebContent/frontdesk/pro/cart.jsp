@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.*"%>
+<%@ page import="com.mem.model.*"%>
+<%@ page import="com.pro.shoppingcart.*"%>
+<%@ page import="com.protrack.model.*" %>
 <%@ page import="com.pro.shoppingcart.*" %>
 <%@ page import="com.pro.model.*"%>
+<%@ page import="com.proorder.model.*"%>
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -62,56 +66,52 @@ window.onscroll = function() {
 </head>
 <body>
 <% 
-	@SuppressWarnings("unchecked")
-    Vector<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
-	int quantity = 0;
 	int count = 0;
+	int count2 = 0;
+	int count3 = 0;
+	MemVO memVO =(MemVO) session.getAttribute("memVO");
+	
+	if(session.getAttribute("memVO")!=null){
+
+		String mem_No =	memVO.getMem_No();
+	
+	
+	//追蹤
+	
+	ProTrackService proTrackSvc = new ProTrackService();
+	List<ProTrackVO> listProTrack = proTrackSvc.getOnePro(mem_No);
+	if(listProTrack != null && (listProTrack.size() > 0)){
+		count2 = listProTrack.size();
+	
+	}
+	//清單
+
+	ProOrderService proOrderSvc = new ProOrderService();
+	List<ProOrderVO> listProOrder = proOrderSvc.listProOrder(mem_No);
+	if(listProOrder != null && (listProOrder.size() > 0)){
+		count3 = listProOrder.size();
+		
+	 }
+	}	
+	
+	ProService proSvc = new ProService();
+	List<ProVO> list = proSvc.getAll();
+	@SuppressWarnings("unchecked")
+	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
+	
 	if(buylist != null && (buylist.size() > 0)){
 		count = buylist.size();
 	}
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
-<!--搜尋 12-->
-	<div class="col-xs-12 col-sm-12 " id="ontopDiv">
-		<!--搜尋 -->
-		<div class="col-xs-12 col-sm-4 col-sm-offset-3">
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" name="form1">
-				<table >
-					<tr style="font-size:20px;text-align:center;">
-			      	    <td style="width:200px;"></td>	
-						<td><select size="1" name="pro_Class_No" style="height: 36px;">
-         					   <option value="">分類
-        					   <c:forEach var="proClassVO" items="${proClassSvc.all}" > 
-        					   <option value="${proClassVO.pro_Class_No}">${proClassVO.pro_Class_Name}
-        				 	   </c:forEach>   
-       						</select>
-						</td>
-						<td>
-							<input type="text" name="pro_Name" value="" placeholder="請輸入商品關鍵字" style="height: 36px;marager-top:0px;">
-						</td>	
-						<td>
-							<button type="submit" class="btn btn-secondary" style="font-size:16px;"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="height: 20px;">搜尋</button>
-        					<input type="hidden" name="action" value="listPro_ByCompositeQuery">
-						</td>	
-					</tr>		
-				</table>
-			</FORM>	
-		</div><!--搜尋結束 -->
-		<!-- 購物車_通知 -->
-		<div class="col-xs-12 col-sm-2 ">
-				<span>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/frontdesk/pro/cart.jsp"><img alt="購物車" src="<%=request.getContextPath()%>/res/images/pro_icons/cart01.gif" style="height: 40px;"></a></span>
-			<span class="badge" ><%=count%></span>
-			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>					
-			<span><a href="
-<%-- 				<%=request.getContextPath()%>/frontdesk/pro/cart.jsp --%>
-				">
-				<img alt="通知" src="<%=request.getContextPath()%>/res/images/pro_icons/1183340.gif" style="height: 40px;"></a></span>					
-<span class="badge" >10</span>	
-		</div><!-- 購物車_通知 結束-->
-		<div class="col-xs-12 col-sm-3"><!--空 --></div>
-		
-	</div><!--搜尋結束 12 -->
 
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
+</div>
 
 <div class="col-xs-12 col-sm-12 "><br></div>
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -132,9 +132,9 @@ window.onscroll = function() {
 			<!-- 標籤面板：標籤區 -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#FFFFBB;"><h4>購物車</h4></a></li>
+					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#FFFFBB;"><h4>購物車(<%=count%>)</h4></a></li>
 				<li role="presentation">
-					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#96FFFF; "><h4>商品追蹤清單</h4></a></li>
+					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#96FFFF; "><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
 			</ul>
 
 			<!-- 標籤面板：內容區 -->
@@ -192,14 +192,14 @@ window.onscroll = function() {
 	
 	
 	
-<p>
+
           <form name="checkoutForm" action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
               <input type="hidden" name="action"  value="checkOut"> 
               <button type="submit" class="btn btn-warning" style="width:100%;height:60px;margin:16px;font-size:30px">付款結帳</button>
         
           </form>
 <% }else{%>
-	<H1 Style="text-align:center;">尚無商品</H1>
+	<H1 Style="text-align:center;background-color:#FFFFBB;">尚無商品</H1>
 <% }%>
 <!-- 					</table> -->
 				</div>

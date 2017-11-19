@@ -237,6 +237,17 @@
 </head>
 <body>
 	
+<div class="col-xs-12 col-sm-12 ">
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/> --%>
+</div>	
+	
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
+</div>
 <div class="col-xs-12 col-sm-12">	
 	<!--中6-->
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
@@ -282,29 +293,35 @@
 									<p class="proPrice">價格:$${proVO.pro_Price}</p>
 								</c:if> <c:if test="${proVO.pro_Discount!=100}">
 									<p class="proDiscount">原價:$${proVO.pro_Price}</p>
-									<p class="proPrice">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
+									
+									 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+									<fmt:formatNumber type="number" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" maxFractionDigits="0" var="dsPrice" />
+									
+									<p class="proPrice">折扣價:$${dsPrice}</p>
 								</c:if></td>
 						</tr>
 
 
 						<tr>
 							<%
-								
-								MemVO memVO = (MemVO) session.getAttribute("memVO");
+							
+							MemVO memVO = (MemVO)session.getAttribute("memVO");
+							List<String> list2 = new ArrayList<String>();
+System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
+								if(session.getAttribute("memVO")!=null){
 								String mem_No = memVO.getMem_No();
 								ProTrackService proTrackSvc = new ProTrackService();
 								List<ProTrackVO> list = proTrackSvc.getOnePro(mem_No);
-								List<String> list2 = new ArrayList<String>();
-								for (ProTrackVO p : list) {
-									list2.add(p.getPro_No());
-
-								}
-
+								
+									for (ProTrackVO p : list) {
+										list2.add(p.getPro_No());
+									}
+								
 								ProVO proVO = (ProVO) request.getAttribute("proVO");
 								String pro_No = proVO.getPro_No();
 
-								if (!list2.contains(pro_No)) {
-								
+								if (!list2.contains(pro_No)){
+															
 							%>
 
 
@@ -312,7 +329,7 @@
 							<FORM METHOD="post" style="height: 42px; width: 180px;" ACTION="<%=request.getContextPath()%>/pro/proTrackServlet.do">
 									<button type="submit" class="btn btn-Secondary"  style="width: 180px; margin-top: 5px; font-size: 20px;">加入追蹤清單</button>
 									<input type="hidden" name="pro_No" value="${proVO.pro_No}" >
-									<input type="hidden" name="proCar_Price"  value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}">
+									<input type="hidden" name="proCar_Price"  value="${dsPrice}">
 									<input type="hidden" name="action" value="insertProTrack">
 									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 							</FORM></td>
@@ -323,9 +340,16 @@
 								<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
 								style="width: 50px;">已加入追蹤</td>
 
-							<%}%>
+							<%
+								}
+								}else{
+								%>
+							<td></td>
+							<%
+							}
+							%>
 							<td>
-
+								
 								<form METHOD="post"
 									ACTION="<%=request.getContextPath()%>/pro/shoppingCartServlet.do">
 
@@ -341,18 +365,26 @@
 									<input type="hidden" name="proCar_No" value="${proVO.pro_No}">
 									<input type="hidden" name="proCar_Name" value="${proVO.pro_Name}"> 
 									<input type="hidden" name="proCar_Info" value="${proVO.pro_Info}"> 
-									<input type="hidden" name="proCar_Price" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}">
+									<input type="hidden" name="proCar_Price" value="${dsPrice}">
+									<input type="hidden" name="mem_NO" value="${memVO.mem_No}">
+									
 									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> 
 									<input type="hidden" name="action" value="addPro">
 								</form>
 							<td>
+							
+							
+
+
+
+						
 						</tr>
 						<tr>
 							<td></td>
 						</tr>
+						
 					</tbody>
 				</table>
-
 			</div>
 
 		</div>
