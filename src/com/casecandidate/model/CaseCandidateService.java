@@ -10,23 +10,25 @@ public class CaseCandidateService {
 		dao = new CaseCandidateDAO();
 	}
 
-	public CaseCandidateVO addCaseCandidate(String candidate_Mem_No, String mission_No) {
+	public CaseCandidateVO addCaseCandidate(String candidate_Mem_No, String mission_No,Integer issuer_Inviting) {
 
 		CaseCandidateVO caseCandidateVO = new CaseCandidateVO();
 
 		caseCandidateVO.setCandidate_Mem_No(candidate_Mem_No);
 		caseCandidateVO.setMission_No(mission_No);
+		caseCandidateVO.setIssuer_Inviting(issuer_Inviting);
 		dao.insert(caseCandidateVO);
 
 		return caseCandidateVO;
 	}
 
-	public CaseCandidateVO updateCaseCandidate(String candidate_Mem_No, String mission_No) {
+	public CaseCandidateVO updateCaseCandidate(String candidate_Mem_No, String mission_No,Integer issuer_Inviting) {
 
 		CaseCandidateVO caseCandidateVO = new CaseCandidateVO();
 
 		caseCandidateVO.setCandidate_Mem_No(candidate_Mem_No);
 		caseCandidateVO.setMission_No(mission_No);
+		caseCandidateVO.setIssuer_Inviting(issuer_Inviting);
 		dao.update(caseCandidateVO);
 
 		return caseCandidateVO;
