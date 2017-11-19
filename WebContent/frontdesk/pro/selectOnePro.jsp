@@ -4,7 +4,10 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.pro.model.*"%>
 <%@ page import="com.protrack.model.*"%>
-<%@ page import="com.mem.model.*" %>	
+<%@ page import="com.mem.model.*" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+
+	
 <html>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -290,14 +293,19 @@
 						<tr>
 							<td><c:if test="${proVO.pro_Discount==100}">
 									<P></P>
-									<p class="proPrice">價格:$${proVO.pro_Price}</p>
-								</c:if> <c:if test="${proVO.pro_Discount!=100}">
+									
+									<c:set var="balance" value="${proVO.pro_Price}" />
+	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
+									<p class="proPrice">價格:$${dsPrice}</p>
+								</c:if> 
+								<c:if test="${proVO.pro_Discount!=100}">
 									<p class="proDiscount">原價:$${proVO.pro_Price}</p>
 									
-									 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-									<fmt:formatNumber type="number" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" maxFractionDigits="0" var="dsPrice" />
-									
-									<p class="proPrice">折扣價:$${dsPrice}</p>
+									<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
+	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
+	   			 		 
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		
 								</c:if></td>
 						</tr>
 

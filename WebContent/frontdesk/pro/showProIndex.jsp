@@ -30,7 +30,7 @@
 
 
 	
-${memVO.mem_No}
+
 	<div class="col-xs-12 col-sm-2 col-sm-offset-1">
 		<br><br><br>
 		<div class="panel panel-info left001">

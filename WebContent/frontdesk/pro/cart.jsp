@@ -148,7 +148,7 @@ window.onscroll = function() {
 
 <%if (buylist != null && (buylist.size() > 0)) {%>
 	<%
-	 double totalPrice=0;	
+	 Integer totalPrice=0;	
 	 for (int index = 0; index < buylist.size(); index++) {
 		 
 		 ProCartVO order = buylist.get(index);
@@ -181,7 +181,7 @@ window.onscroll = function() {
           </form></div></td>
 	</tr>
 </table>	
-	<%totalPrice=totalPrice+(order.getProCar_Price()*order.getProCar_Quantity()); }%>
+	<%totalPrice=totalPrice+(int)(order.getProCar_Price()*order.getProCar_Quantity()); }%>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-3 col-sm-offset-3"><h1 class="" >共<%=buylist.size()%>項商品</h1></div>

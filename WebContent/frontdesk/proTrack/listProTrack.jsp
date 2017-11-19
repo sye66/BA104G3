@@ -41,7 +41,7 @@ th  {
 <% 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
-	System.out.println("session取得的會員編號 "+mem_No);
+System.out.println("session取得的會員編號 "+mem_No);
 	ProTrackService proTrackSvc = new ProTrackService();
 	
 	
@@ -56,7 +56,7 @@ th  {
 		 String pro_No = proTrackVO.getPro_No();
 		 proVO= proSvc.getOnePro(pro_No);
 		 //算折扣價
-		 double price = proVO.getPro_Discount()*proVO.getPro_Price()/100; 
+		 Integer price =(int) proVO.getPro_Discount()*proVO.getPro_Price()/100; 
 	%>
 <table class="cartPro2">	
 	<tr>
