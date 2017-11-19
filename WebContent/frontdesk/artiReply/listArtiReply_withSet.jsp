@@ -10,7 +10,6 @@
   ArtiReplyService artiReplySvc = new ArtiReplyService();
   Set<ArtiReplyVO> set= (Set<ArtiReplyVO>) request.getAttribute("artiReplySet");
   pageContext.setAttribute("set",set);
-  
 %>
 
 <html>

@@ -159,7 +159,6 @@
 			              <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                           <button class="btn btn-info" type="submit" name="action" value="jumpOne_For_Display"> 剛才瀏覽文章頁面 </a></button>，謝謝。</p>  
                           </div>
-                        </div>
-                          
+                        </div>                  
 </body>
 </html>
