@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 
 <%
     ProService proSvc = new ProService();
@@ -81,7 +81,10 @@
 	   			 		
 	   			 		<c:if test="${proVO.pro_Discount!=100}">
 	   			 		<p class="card-footer proDiscount" style="height:25px ;color:#000;">原價:$${proVO.pro_Price}</p>
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
+	   			 		
+	   			 		<fmt:formatNumber type="number" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" maxFractionDigits="0" var="dsPrice" />
+	   			 		 
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$${dsPrice}</p>
 	   			 		</c:if>
 	   			 		
 	   			 		
