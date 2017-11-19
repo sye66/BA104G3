@@ -501,23 +501,14 @@ System.out.println("insert-reply-server-111");
 //				Integer arti_Cls_No =  Integer.valueOf(req.getParameter("arti_Cls_No"));
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
 				String arti_No = req.getParameter("arti_No").trim();
-System.out.println(mem_No);
-System.out.println(arti_No);
-System.out.println(arti_Cls_No);
-
 				String reply_Desc = req.getParameter("reply_Desc").trim();
 
-System.out.println(reply_Desc);
-System.out.println("@____@A");
-				
-System.out.println("insert-reply-server-222");
 				if (reply_Desc ==null||reply_Desc.trim().length()==0){
 					errorMsgs.add(" 回覆內容敘述請勿空白 ");
 				}
-System.out.println(reply_Desc);
+
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp reply_Time = nowTime;
-System.out.println(reply_Time);
 
 				ArtiReplyVO artiReplyVO = new ArtiReplyVO();
 				artiReplyVO.setMem_No(mem_No);
@@ -526,13 +517,11 @@ System.out.println(reply_Time);
 				artiReplyVO.setReply_Time(reply_Time);
 				artiReplyVO.setArti_Cls_No(arti_Cls_No);
 		
-System.out.println("insert-reply-server-444");
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("artiReplyVO", artiReplyVO);
-System.out.println("insert-reply-server-555");
+
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiReply/addArtiReply.jsp");
 					failureView.forward(req, res);
-System.out.println("insert-reply-server-666");
 					return;
 				}
 
@@ -597,17 +586,23 @@ System.out.println("D-Server-333");
 //					return;
 //				}
 System.out.println("D-Server-444");
-                
-                
-                
+
 				/***************************2.開始刪除資料***************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				artiReplySvc.deleteArtiReply(reply_No, mem_No);
 System.out.println("D-Server-555");
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
+
                 Set<ArtiReplyVO> artiReplyVO =  artiReplySvc.findReplyByArtiNo(arti_No);
-                req.setAttribute("artiReplySet", artiReplyVO);
-                String url = "/frontdesk/artiReply/listArtiReply_withSet.jsp";
+				ArtiFormService artiFormSvc = new ArtiFormService ();
+				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
+                
+                req.setAttribute("artiReplyVO41", artiReplyVO);
+                req.setAttribute("artiFormVO", artiFormVO);
+                session.setAttribute("arti_No", arti_No);
+                session.setAttribute("mem_No", mem_No);
+                String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
+                
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 System.out.println("D-Server-666");

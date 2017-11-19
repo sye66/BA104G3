@@ -98,7 +98,7 @@ ${arti_No}
 			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                        <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                        <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+			                        <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
  			                    </FORM>
@@ -113,8 +113,9 @@ ${arti_No}
                                 <div class="" style="">
                                 
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+                                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
                                     <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-                                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+                                    <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                        <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
 			                    </FORM>
