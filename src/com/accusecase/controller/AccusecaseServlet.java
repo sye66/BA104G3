@@ -116,21 +116,18 @@ public class AccusecaseServlet extends HttpServlet {
 				res.sendRedirect("/BA104G3/loginTest.jsp");
 				return;
 			}
-			try {
+//			try {
 				String mission_No = (String) req.getParameter("mission_No");
 				GetMissionService GetMissionSvc = new GetMissionService();
 				GetMissionVO getMissionVO = new GetMissionVO();
-				if (GetMissionSvc.getOneMission(mission_No) == null) {
-				}
+				
 				Integer mission_State = GetMissionSvc.getOneMission(mission_No).getMission_State();
 				AccuseCaseService accuseCaseSevc = new AccuseCaseService();
 				AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
-				
-
 				if (issuer_No != mem_No) {
-					if ( mission_State != 7 || mission_State == 72) {
-						
+					if ( mission_State == 7 || mission_State == 72) {
+						System.out.println("2222");
 						if(mission_State == 7 ){
 							mission_State = 1;
 						}else if(mission_State == 72 && accuseCaseSevc.getCaseBymission(mission_No)==null){
@@ -140,13 +137,13 @@ public class AccusecaseServlet extends HttpServlet {
 						}
 						getMissionVO = GetMissionSvc.takeMission(mission_No, mission_State);
 						String accuse_No = accuseCaseSevc.getOneAccuseCaseBymissionAndmem(mission_No, mem_No).getAccuse_No();
+						System.out.println();
 						accuseCaseSevc.deleteAccuseCase(accuse_No);
 					}else if(mission_State == 1 || mission_State == 2){
 						errorMsgs.add("嘿~你從來沒檢舉過喔");
 					}else if (mission_State == 3 || mission_State == 4) {
 						errorMsgs.add("這任務已經有人接案囉,檢舉已失效,如有問題請反應後台管理員,謝謝。");
 					} else {
-
 						errorMsgs.add("不好意思 此任務已經結案囉~有問題請反應後台管理員,謝謝。");
 					}
 				} else {
@@ -154,11 +151,11 @@ public class AccusecaseServlet extends HttpServlet {
 				}
 
 				if (errorMsgs.size() != 0) {
-					obj.put("errormessage", errorMsgs);
+//					obj.put("errormessage", errorMsgs);
 
 				} else {
 					String value = "消除檢舉成功~";
-					obj.put("message", value);
+//					obj.put("message", value);
 
 				}
 				out.write(obj.toString());
@@ -173,13 +170,13 @@ public class AccusecaseServlet extends HttpServlet {
 				successView.forward(req, res);
 				out.flush();
 				out.close();
-			} catch (Exception e) {
-				System.out.println(e);
-				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
-				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher("");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e) {
+//				System.out.println(e);
+//				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
+//				req.setAttribute("errorMsgs", errorMsgs);
+//				RequestDispatcher failureView = req.getRequestDispatcher("");
+//				failureView.forward(req, res);
+//			}
 
 		}
 		

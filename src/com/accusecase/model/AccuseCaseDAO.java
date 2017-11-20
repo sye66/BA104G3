@@ -299,7 +299,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_ALL_STMT);
+			pstmt = con.prepareStatement(GET_ACCUSECASE_BY_MISSION);
 			pstmt.setString(1, mission_No);
 			rs = pstmt.executeQuery();
 
