@@ -14,7 +14,7 @@ public class AuthJdbcDAO implements AuthDAO_interface{
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:XE";
 	String userid = "BA104G3";
-	String passwd = "BA104G3";
+	String passwd = "123456";
 	
 	private static final String INSERT = 
 			"INSERT INTO AUTH(AUTH_NO,AUTH_NAME)VALUES(AUTH_SEQ.NEXTVAL,?)";
@@ -26,6 +26,8 @@ public class AuthJdbcDAO implements AuthDAO_interface{
 			"UPDATE AUTH set AUTH_NO=?, AUTH_NAME=? where AUTH_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM ACHIEVE where AUTH_NO = ?";
+	private static final String GETAUTHNO = 
+			"SELECT AUTH_NO FROM AUTH order by AUTH_NO";
 	
 
 	@Override
@@ -285,9 +287,9 @@ public class AuthJdbcDAO implements AuthDAO_interface{
 	public static void main(String[] args) {
 			AuthJdbcDAO dao = new AuthJdbcDAO();
 			
-			AuthVO authVO1 = new AuthVO();
-			authVO1.setAuth_Name("888");
-			dao.insert(authVO1);
+//			AuthVO authVO1 = new AuthVO();
+//			authVO1.setAuth_Name("888");
+//			dao.insert(authVO1);
 			
 			AuthVO authVO2 = new AuthVO();
 			authVO2.setAuth_No("777");
@@ -308,8 +310,73 @@ public class AuthJdbcDAO implements AuthDAO_interface{
 				
 				System.out.println();
 			}
+			
+			List<AuthVO> list1 = dao.getAuth_No();
+			for (AuthVO authVO5 : list1) {
+				System.out.print(authVO5.getAuth_No() + ",");
+				
+				
+				System.out.println();
+			}
 		}
 
+	@Override
+	public List<AuthVO> getAuth_No() {
+		List<AuthVO> list = new ArrayList<AuthVO>();
+		AuthVO authVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GETAUTHNO);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO �]�٬� Domain objects
+				authVO = new AuthVO();
+				authVO.setAuth_No(rs.getString("auth_No"));
+				list.add(authVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 }
 
 

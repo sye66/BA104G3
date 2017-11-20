@@ -35,6 +35,8 @@ public class AuthDAO implements AuthDAO_interface{
 			"UPDATE AUTH set AUTH_NAME=? where AUTH_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM AUTH where AUTH_NO = ?";
+	private static final String GETAUTHNO = 
+			"SELECT AUTH_NO FROM AUTH order by AUTH_NO";
 	
 	@Override
 	public void insert(AuthVO authVO) {
@@ -259,5 +261,59 @@ public class AuthDAO implements AuthDAO_interface{
 			}
 		}
 
+	}
+
+
+	@Override
+	public List<AuthVO> getAuth_No() {
+		List<AuthVO> list = new ArrayList<AuthVO>();
+		AuthVO authVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GETAUTHNO);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				authVO = new AuthVO();
+				authVO.setAuth_No(rs.getString("auth_No"));	
+				list.add(authVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

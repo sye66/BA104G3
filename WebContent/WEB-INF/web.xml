@@ -267,6 +267,15 @@
     <servlet-name>DecideEmpComp</servlet-name>
     <url-pattern>/decideempcomp/decideempcomp.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CompServlet</servlet-name>
+    <servlet-class>com.comp.controller.CompServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompServlet</servlet-name>
+    <url-pattern>/comp/comp.do</url-pattern>
+  </servlet-mapping>
+  
   
   <!--  家駿 -->
   
