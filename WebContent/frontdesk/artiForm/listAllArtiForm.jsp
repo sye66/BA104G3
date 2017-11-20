@@ -58,22 +58,22 @@ div> .timeline-body{
 
 <div class="page-header position-relative">
 
-                  <div class="title">
+                <div class="title">
                     <div class="list">
                         <h1>所有文章列表 </h1>
                     </div>
-                    </div>
+                </div>
                     
-                  <div class="title">
-                    <div class="search">
+                <div class="title">
+                      <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
                         <input type="text" size="80" class="" placeholder="請輸入關鍵字">
                         <button type="submit" class="btn btn-default">Submit</button>
                         </FORM>
                         </h1>
-                    </div>
-                    </div>
+                      </div>
+                  </div>
 
                     
                     
