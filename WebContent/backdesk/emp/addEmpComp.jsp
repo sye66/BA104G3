@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
+<%@ page import="com.auth.model.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,19 +34,67 @@
 
 </head>
 <body bgcolor='white'>
-	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-	<table id="table-1">
-	<tr><td>
-		 <h3 >員工資料</h3>
-	</td></tr>
+	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+		<br>
+		<nav aria-label="breadcrumb" role="navigation">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">員工管理</li>
+  		</ol>
+	</nav>
+	</div>
+
+<table id="table-1">
+   <tr><td><h3>員工授權</h3><h4>( MVC )</h4></td></tr>
 </table>
-	<br>
-	<br>
-	
-	
-	
-	
+<br>
+
+<br>
+<div >
+<h3>資料查詢:</h3>
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font color='red'>請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+<br>
+
+  
+  
+  <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+   
+	<table>
+   		<tr>
+    	<td>
+	       <b>選擇員工編號:</b>
+	       <select size="1" name="emp_No">
+	         <c:forEach var="empVO" items="${empSvc.all}" > 
+	          <option value="${empVO.emp_No}">${empVO.emp_No}
+	         </c:forEach>   
+	       </select>
+       </td>
+       <td>
+       		<b>選擇給予權限:</b>
+       </td>
+       </tr>
+     </table>
+       
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/comp/comp.do" >
+<input type="submit" value="送出">
+<input type="hidden" name="action" value="insert">
+</FORM>   
+   
+
+
+</div>
+
 </body>
 </html>

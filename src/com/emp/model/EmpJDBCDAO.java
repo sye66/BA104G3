@@ -24,6 +24,8 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			"SELECT EMP_NO,EMP_NAME,EMP_PWD,EMP_MAIL,EMP_JOB,EMP_PHONE,EMP_STATE FROM EMP where EMP_NO = ?";
 	private static final String UPDATE = 
 			"UPDATE EMP set EMP_NAME=?, EMP_PWD=?, EMP_MAIL=?, EMP_JOB=?, EMP_PHONE=?, EMP_STATE=? where EMP_NO = ?";
+	private static final String GETEMPNO = 
+			"SELECT EMP_NO FROM EMP ORDER BY EMP_NO";
 	
 	
 	@Override
@@ -249,6 +251,65 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 		return list;
 	}
 	
+	@Override
+	public List<EmpVO> getEmp_No() {
+		List<EmpVO> list = new ArrayList<EmpVO>();
+		EmpVO empVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GETEMPNO);
+			rs = pstmt.executeQuery();
+				
+			while (rs.next()) {
+				// empVO �]�٬� Domain objects
+				empVO = new EmpVO();
+				empVO.setEmp_No(rs.getString("emp_No"));
+				
+				list.add(empVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
 	public static void main(String[] args) {
 
 		EmpJDBCDAO dao = new EmpJDBCDAO();
@@ -299,6 +360,15 @@ public class EmpJDBCDAO implements EmpDAO_interface{
 			System.out.print(aEmp.getEmp_State());
 			System.out.println();
 		}
+		
+		List<EmpVO> list1 = dao.getEmp_No();
+		for (EmpVO bEmp : list1) {
+			System.out.print(bEmp.getEmp_No() + ",");
+			
+			System.out.println();
+		}
+		
+		
 	}
 
 	@Override

@@ -39,4 +39,8 @@ public class AuthService {
 	public void deleteAuth(String auth_No) {
 		dao.delete(auth_No);
 	}
+	
+	public List<AuthVO> getAuth_No(){
+		return dao.getAuth_No();
+	}
 }

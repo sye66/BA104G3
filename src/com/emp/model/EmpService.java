@@ -59,4 +59,8 @@ public class EmpService {
 		dao.delete(emp_No);
 	}
 	
+	public List<EmpVO> getEmp_No(){
+		return dao.getEmp_No();
+	}
+	
 }
