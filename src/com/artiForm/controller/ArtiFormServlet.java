@@ -78,7 +78,7 @@ public class ArtiFormServlet extends HttpServlet {
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 //				session.setAttribute("artiReplyVO", artiReplyVO);
-				req.setAttribute("artiFormVO", artiFormVO);
+				req.getSession().setAttribute("artiFormVO", artiFormVO);
 				req.setAttribute("arti_No", arti_No);
 
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";

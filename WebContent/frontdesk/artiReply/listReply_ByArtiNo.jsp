@@ -11,9 +11,11 @@
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
 
-	String arti_No = (String) session.getAttribute("arti_No");
-	String mem_No = (String) session.getAttribute("mem_No");
+    MemVO memVO =(MemVO) session.getAttribute("memVO");
+    String mem_No = memVO.getMem_No();
 	session.setAttribute("mem_No",mem_No);
+	
+	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
