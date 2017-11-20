@@ -66,18 +66,14 @@ String str = "AU000002";
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
 					
-						<%for(CompVO c: list){
-							if((c.getAuth_No()).contains(str)){
-						%>
+<%-- 						<%for(CompVO c: list){ --%>
+<!--  							if((c.getAuth_No()).contains(str)){ -->
+<%-- 						%> --%>
 							<li>	<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
 								
-						<%	}
+<%-- 						<%	} --%>
 							
-							} %>
-<%-- 						<c:forEach var="compVO" items="${list}"> --%>
-<%-- 						<c:if test="${compVO.auth_No==str}"> --%>
-						
-
+<%-- 							} %> --%>
 						
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
 					</ul>

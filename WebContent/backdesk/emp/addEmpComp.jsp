@@ -54,7 +54,7 @@
 <br>
 
 <br>
-<div >
+<div align="center">
 <h3>資料查詢:</h3>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -67,9 +67,10 @@
 </c:if>
 <br>
 
-  
-  
   <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+  <jsp:useBean id="authSvc" scope="page" class="com.auth.model.AuthService" />
+ <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/comp/comp.do" > 
+  
    
 	<table>
    		<tr>
@@ -82,12 +83,17 @@
 	       </select>
        </td>
        <td>
-       		<b>選擇給予權限:</b>
+       		<b>選擇給予權限:</b><br>
+       		<c:forEach var="authVO" items="${authSvc.all}" > 
+	          
+	          <input type="checkbox" name="auth_No" value="${authVO.auth_No}">${authVO.auth_Name}<br>
+	          
+	         </c:forEach>
        </td>
        </tr>
      </table>
        
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/comp/comp.do" >
+
 <input type="submit" value="送出">
 <input type="hidden" name="action" value="insert">
 </FORM>   
