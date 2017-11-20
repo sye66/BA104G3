@@ -309,8 +309,7 @@ public class ArtiReplyServlet extends HttpServlet {
 		
 				String mem_No = req.getParameter("mem_No");
 				if(req.getSession().getAttribute("mem_No")==null){
-					
-					
+
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("c");
@@ -587,7 +586,7 @@ System.out.println("insert-reply-server-111");
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
 				String mem_No = req.getParameter("mem_No");
 
-				if(mem_No==null){
+				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
 
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
