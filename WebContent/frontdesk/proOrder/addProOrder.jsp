@@ -48,6 +48,7 @@ text-align:center;
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
 </div>
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+	<br>
 		<nav aria-label="breadcrumb" role="navigation">
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
@@ -56,10 +57,27 @@ text-align:center;
   			
   			</ol>
 		</nav>
+	
 </div>
 <!-- 進度條 -->
 <div class="col-xs-12 col-sm-12">
-
+<div class="col-xs-12 col-sm-6  col-sm-offset-3" >
+		<table>
+			<tr>
+				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">購物車明細&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(2).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">填寫訂單&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+			</tr>
+		</table>
+		<br>
+	</div>
 
 </div>	
 <!-- 進度條 -->
@@ -91,7 +109,7 @@ text-align:center;
 			</div>
 			
 			<div class="form-group"><h3>手機號碼</h3>
-            <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978-978978" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978978978" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Pho()%>" />
 			
 			</div>
