@@ -107,8 +107,6 @@
     <url-pattern>/follow_tool_man/follow_tool_man.do</url-pattern>
   </servlet-mapping>
 <!--   兆哥 -->
-  
-  
   <servlet>
     <servlet-name>ShowImage</servlet-name>
     <servlet-class>com.tool.controller.ShowImage</servlet-class>
@@ -311,6 +309,9 @@
     <servlet-name>ArtiReportServlet</servlet-name>
     <url-pattern>/artiReport/artiReport.do</url-pattern>
   </servlet-mapping>
+  
+  
+  <!-- 鴨子 -->
   <servlet>
     <servlet-name>GetMissionServlet</servlet-name>
     <servlet-class>com.getmission.controller.GetMissionServlet</servlet-class>
