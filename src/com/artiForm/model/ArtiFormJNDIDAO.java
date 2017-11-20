@@ -356,9 +356,9 @@ public class ArtiFormJNDIDAO implements ArtiFormDAO_interface {
 	}
 	
 	@Override
-	public Set<ArtiReplyVO> getAllArti4Serach(String describe){
-		Set<ArtiReplyVO> set = new LinkedHashSet<ArtiReplyVO>();
-		ArtiReplyVO artiReplyVO = null;
+	public Set<ArtiFormVO> getAllArti4Serach(String describe){
+		Set<ArtiFormVO> set = new LinkedHashSet<ArtiFormVO>();
+		ArtiFormVO artiFormVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -373,13 +373,16 @@ public class ArtiFormJNDIDAO implements ArtiFormDAO_interface {
 	
 		    
 		    while(rs.next()){
-		    	artiReplyVO = new ArtiReplyVO();
-		    	artiReplyVO.setReply_No(rs.getString("reply_No"));
-		    	artiReplyVO.setMem_No(rs.getString("mem_No"));
-		    	artiReplyVO.setArti_No(rs.getString("arti_No"));
-		    	artiReplyVO.setReply_Desc(rs.getString("reply_Desc"));
-		    	artiReplyVO.setReply_Time(rs.getTimestamp("reply_Time"));
-		    	artiReplyVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiFormVO = new ArtiFormVO();	
+				artiFormVO.setArti_No(rs.getString("ARTI_NO"));
+				artiFormVO.setMem_No(rs.getString("MEM_NO"));
+				artiFormVO.setArti_Title(rs.getString("ARTI_TITLE"));
+				artiFormVO.setArti_Like(rs.getInt("ARTI_LIKE"));
+				artiFormVO.setDescribe(rs.getString("DESCRIBE"));
+				artiFormVO.setArti_Time(rs.getTimestamp("ARTI_TIME"));
+				artiFormVO.setArti_Pic(rs.getBytes("ARTI_PIC"));
+				artiFormVO.setArti_Cls_No(rs.getInt("ARTI_CLS_NO"));
+				artiFormVO.setArti_Status(rs.getString("ARTI_STATUS"));
 
 		    }
 		} catch (SQLException se){
