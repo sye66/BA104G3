@@ -348,31 +348,34 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 	}
 	
 	@Override
-	public Set<ArtiReplyVO> getAllArti4Serach(String describe){
-		Set<ArtiReplyVO> set = new LinkedHashSet<ArtiReplyVO>();
-		ArtiReplyVO artiReplyVO = null;
-
+	public Set<ArtiFormVO> getAllArti4Serach(String describe){
+		Set<ArtiFormVO> set = new LinkedHashSet<ArtiFormVO>();
+		ArtiFormVO artiFormVO = null;
+System.out.print("Search-DAO-111");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+System.out.print("Search-DAO-222");	
 		try{			
-			
+System.out.print("Search-DAO-333");
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT_4_SEARCH);
-			
+System.out.print("Search-DAO-444");
 			pstmt.setString(1, describe);
 			rs = pstmt.executeQuery();
-		    
+System.out.print("Search-DAO-555");
 		    while(rs.next()){
-		    	artiReplyVO = new ArtiReplyVO();
-		    	artiReplyVO.setReply_No(rs.getString("reply_No"));
-		    	artiReplyVO.setMem_No(rs.getString("mem_No"));
-		    	artiReplyVO.setArti_No(rs.getString("arti_No"));
-		    	artiReplyVO.setReply_Desc(rs.getString("reply_Desc"));
-		    	artiReplyVO.setReply_Time(rs.getTimestamp("reply_Time"));
-		    	artiReplyVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
-		    	
+				artiFormVO = new ArtiFormVO();
+				artiFormVO.setArti_No(rs.getString("arti_No"));
+				artiFormVO.setMem_No(rs.getString("mem_No"));
+				artiFormVO.setArti_Title(rs.getString("arti_Title"));
+				artiFormVO.setArti_Like(rs.getInt("arti_Like"));
+				artiFormVO.setDescribe(rs.getString("describe"));
+				artiFormVO.setArti_Time(rs.getTimestamp("arti_Time"));
+				artiFormVO.setArti_Pic(rs.getBytes("arti_Pic"));
+				artiFormVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiFormVO.setArti_Status(rs.getString("arti_Status"));
+System.out.print("Search-DAO-666");
 		    }
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());

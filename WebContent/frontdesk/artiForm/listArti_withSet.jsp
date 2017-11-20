@@ -3,17 +3,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiForm.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.mem.model.*"%>
+<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-    ArtiFormVO artiFormVO = new ArtiFormVO();
-    ArtiFormService artiSvc = new ArtiFormService();
-    Set<ArtiFormVO> set = artiSvc.getAll();
-    pageContext.setAttribute("set",set);
-    
-%>
+  ArtiFormVO artiFormVO = new ArtiFormVO();
 
-<jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
+  ArtiFormService artiFormSvc = new ArtiFormService();
+  Set<ArtiFormVO> set= (Set<ArtiFormVO>) request.getAttribute("artiFormSet");
+  pageContext.setAttribute("set",set);
+  
+%>
 
 <html>
 <head>
@@ -36,12 +36,11 @@ div> .timeline-body{
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
+<h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>@@</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
+		 <h3>文章回覆資料 - ListOneArtiReply_WithSet (REVISED)).jsp</h3>
+		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章回覆首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -61,7 +60,7 @@ div> .timeline-body{
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 </h1>
+                        <h1>所有文章列表 ${artiFormVO.describe}</h1>
                     </div>
                 </div>
                     
@@ -69,8 +68,8 @@ div> .timeline-body{
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do"  name="form1" enctype="multipart/form-data">
-                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入內文關鍵字">
-                        <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+                         <input type="text" size="40" class="" placeholder="請輸入內文關鍵字">
+                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
     			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                         <button class="btn btn-info" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
                         </FORM>

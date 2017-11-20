@@ -153,34 +153,36 @@ public class ArtiFormServlet extends HttpServlet {
 		if ("listArti_BySearch".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
-			try{
+System.out.println("Search-server-111");
+//			try{
 				/***************************1.接收請求參數****************************************/
 				HttpSession session = req.getSession();
-
+System.out.println("Search-server-222");
 				String describe = req.getParameter("describe");
+System.out.println("000000000"+describe);
 				if(describe==null||(describe.trim()).length()==0){
+System.out.println(describe);
 					errorMsgs.add(" 沒有輸入沒辦法幫你尋找喔~~~ ");
 				}
-
+System.out.println("Search-server-333");
 				/***************************2.開始查詢資料****************************************/
 				ArtiFormService artiFormSvc = new ArtiFormService();
-				Set<ArtiReplyVO> artiFormVO = artiFormSvc.getAllArti4Serach(describe);
-
+				Set<ArtiFormVO> artiFormVO = artiFormSvc.getAllArti4Serach(describe);
+System.out.println("Search-server-444");
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("artiReplySet", artiFormVO);
-				session.setAttribute("arti_No", describe);
-				String url = "/frontdesk/artiForm/listArtiForm_withSet.jsp";
-
+				req.setAttribute("artiFormSet", artiFormVO);
+//				session.setAttribute("describe", describe);
+				String url = "/frontdesk/artiForm/listArti_withSet.jsp";
+System.out.println("Search-server-555");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
+System.out.println("Search-server-666");
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		
