@@ -95,20 +95,20 @@
     					<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
     					<div class="small-6 ">請輸入儲值金額
-                            <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
+                                 <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="" >
                         </div><br>
                         <div class="small-6 ">
-                            <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
+                            <input type="text" name="card_number" onblur="checkCreditCard(this)" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
                         </div><br>
                         <div class="small-6 ">
-                           <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
+                           <input type="text" name="full_name" onblur="full_name(this)" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
                         </div><br>
                         <div class="small-3 ">
-                         <input type="text" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="MM/YY"  >
+                         <input type="text" name="mmyy" onblur="mmyy(this)" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="MM/YY"  >
                         </div><br>
 
                         <div class="small-3 ">
-                         <input type="text" id="switch" name="" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
+                         <input type="text" id="switch" name="cvc" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
                         </div><br>
 
                         <div class="small-6 ">
@@ -163,6 +163,28 @@
                     			}, 500);
                         	})
                         });
+                        
+                        
+                        function checkCreditCard(control)
+                        {
+                            re = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+                            if (!re.test(control.value))
+                            	swal('Oops !','你的信用卡號碼不符合「xxxx-xxxx-xxxx-xxxx」的格式！' , 'error');
+                        }
+                        
+                        function full_name(control)
+                        {
+                            re1 = /^[a-zA-Z-]{2,10}[a-zA-Z-]{2,10}[a-zA-Z-]{2,10}$/;
+                            if (!re1.test(control.value))
+                            	alert('Oops !','你輸入的姓名不合英文格式' , 'error');
+                        }
+                        function mmyy(control)
+                        {
+                        	re2 = /^[1]{0,1}[0-9/]{1,2}[1-2]{1}[0-9]{1}$/;
+                            if (!re2.test(control.value))
+                            	swal('Oops !','你輸入的卡片有效日期不正確' , 'error');
+                        }
+                        
                         </script>
 
 </html>
