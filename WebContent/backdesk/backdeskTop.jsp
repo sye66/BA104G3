@@ -5,21 +5,22 @@
 <%@ page import="com.emp.model.*"%>
 <%@ page import="com.comp.model.*"%>
 <%
-	EmpVO empVO = new EmpVO();
-	empVO = (EmpVO) request.getSession().getAttribute("empVO");
-	String emp_No = empVO.getEmp_No();
+String emp_No=null;
+List<CompVO> list = null;
+String str = "AU000002";
+	EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+	if(session.getAttribute("empVO")!=null){
+		emp_No = empVO.getEmp_No();
+		CompService compSvc = new CompService();
+		list = compSvc.getAllAuthNo(emp_No);
+// 		pageContext.setAttribute("list",list);
+	
+	}
+
 %>
 
 <%
-	CompService compSvc = new CompService();
-	List<CompVO> list = compSvc.getAllAuthNo(emp_No);
-	pageContext.setAttribute("list",list);
-	String str = "AU000002";
-	pageContext.setAttribute("str",str);
-%>
-
-<%
-	request.getSession().setAttribute("empVO" ,empVO); 
+// 	request.getSession().setAttribute("empVO" ,empVO); 
 %>
 
 <html>
@@ -45,7 +46,7 @@
 				</div>
 			</div>
 			<form id="login-form" method="post" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do">
-			<div class="col-xs-12 col-sm-1" id="name1">XXX 你好!</div>
+			<div class="col-xs-12 col-sm-1" id="name1">${empVO.emp_Name} 你好</div>
 			<div class="col-xs-12 col-sm-1" id="name2">
 				<br> <button type="submit" name="action" value="logout">登出</button></div>
 				</form>
@@ -64,16 +65,23 @@
 						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
-						<li>
+					
+						<%for(CompVO c: list){
+							if((c.getAuth_No()).contains(str)){
+						%>
+							<li>	<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
+								
+						<%	}
+							
+							} %>
+<%-- 						<c:forEach var="compVO" items="${list}"> --%>
+<%-- 						<c:if test="${compVO.auth_No==str}"> --%>
 						
-						<c:forEach var="compVO" items="${list}">
-						<c:if test="${compVO.auth_No==str}">
-						<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">
-						<span class="icon icon-pencil"></span>
-						商城管理	
-						</a>				
-						</c:if>
-						</c:forEach >
+						
+						
+										
+<%-- 						</c:if> --%>
+<%-- 						</c:forEach > --%>
 <%-- 						<c:forEach var="compVO" items="${list}"> --%>
 <%-- 						<c:if test="${!compVO.auth_No==str}"> --%>
 <%-- 						<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil disabled"></span> --%>
@@ -83,7 +91,7 @@
 <%-- 						</c:forEach > --%>
 						
 
-						</li>
+						
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
 					</ul>
 				</div><!--header-->

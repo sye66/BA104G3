@@ -17,10 +17,10 @@
 	<!-- 標籤面板：內容區 -->
 		<div role="" class="tab-pane active " id="tab1">
 			<div class="list-group">
-				<a href="addEmp.jsp" class="list-group-item">&nbsp;&nbsp;新增員工</a> 
-				<a href="listAllEmp.jsp" class="list-group-item">&nbsp;&nbsp;所有員工</a>
-				<a href="select_page.jsp" class="list-group-item">&nbsp;&nbsp;資料修改</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;新進員工授權</a>
+				<a href="<%=request.getContextPath()%>/backdesk/emp/addEmp.jsp" class="list-group-item">&nbsp;&nbsp;新增員工</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/emp/listAllEmp.jsp" class="list-group-item">&nbsp;&nbsp;所有員工</a>
+				<a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp" class="list-group-item">&nbsp;&nbsp;資料修改</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/emp/addEmpComp.jsp" class="list-group-item">&nbsp;&nbsp;新進員工授權</a>
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->
