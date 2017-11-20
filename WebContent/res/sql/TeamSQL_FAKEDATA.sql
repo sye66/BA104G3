@@ -734,7 +734,7 @@ COMMIT;
 
 --討論區 ARTI_FORM FAKE DATA--
 
-INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000001','驊哥工具人不推他就ㄧ直神靠北 ~"~',3,'讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚爆',TO_date('2017-09-10 12:13:14','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX1.jpg'),1,'ㄧ般'); 
+INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000001','「工具人」最大的誤會，就是以為愛情中付出就絕對有回報',3,'你聽過「工具人」這個說法嗎？所謂的「工具人」，泛指感情中被喜歡的對象當做工具利用，但是付出再多也沒有交往機會的人。人人都不希望自己變成那個被利用的人，那麼該怎麼避開這種令人難堪的情境呢？許多人以為愛情就像電動裡的打怪升等，只要你多努力多付出，就能從朋友升格成情人，但追求本來就是技巧性和運氣問題，絕非做越多就能讓對方愛上你，只要抱著「付出就會有回報」的心態，就註定容易變成工具人。「追求」喜歡的人這件事，從來就不是一個「打怪升等」的過程，喜歡的人能夠依賴你對你提出要求，這像是一個甜蜜的毒藥，你感覺能完成喜歡的人提出的任務，就把自己視為對方重要的人，殊不知如果對方對你沒有曖昧情愫，你就已經變成他的「工具人」。許多努力付出的「工具人」，到最後發現對方居然選擇跟另一個人在一起，可能會心生怨恨想說：「你的宵夜我幫你買的、是我接送你上下班的，付出這麼多，你居然跟別人在一起！」但是，愛情中付出本來就是用在對的人身上才有回報，如果從頭到尾都對你沒意思，付出再多也沒有用。試著換位思考：如果有一天，有一個完全不是你的菜的人，繞在你身邊幫你做東做西，你有一天愛上他的可能性有多少呢？在追求過程中付出，請了解「一個願打、一個願挨」的道理，你的付出是因為你喜歡他，但絕不要覺得付出一定有回報，如果有這樣的心態，就容易陷入無限付出又抱著無限期待的心情在等著對方的青睞，最後也只是一場空。',TO_date('2017-09-10 12:13:14','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX1.jpg'),1,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000002','大家心目中宅男的形象跟現實中的宅男其實不太一樣',3,'一般世俗人提到宅男，腦中都是那個體態肥胖、好幾天不洗澡、身上穿動漫T、家裡一堆美女手辦、桌面放油圖、臉上滿臉油、女性絕緣體的傢伙。但是事實上這種“經典款”真的是少數，至少我自己自命是非常宅的人，也認識一些宅宅朋友，在我看來一般所謂的宅男不一定是這個樣子。現在開放大家來討論一下吧!!!',TO_date('2012-01-19 10:26:11','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX2.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000003','【問題】我這工作是好還是爛',2,'要會開堆高機 會開貨車 要收送貨 要會電腦(PS AE PR MAX ZB SBP) 平面動畫+3D動畫 一人完成 EXCEL資料登記 要做體力活 全身汗濕那種 要吸粉塵 會弄得全身髒 24HR待命+保全 電話來就要馬上處理 即使已經是假日 沒三節 年終 中午有80元便當 一個月18K 這樣算好ㄇ?',TO_date('2013-05-24 10:26:40','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX3.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000004','【問題】彈吉他碰到的問題 這樣有解嗎',9,'1.手指太僵硬  2.手指不協調  3.手指頭肉太粗太多 會悶到其他弦  4.常常談到手好痠痛  這些有解嗎???',TO_date('2013-11-13 20:45:35','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX4.jpg'),4,'ㄧ般'); 
@@ -771,7 +771,7 @@ commit;
 
 --回覆文章 ARTI_REPLY FAKE DATA--
 
-INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000009','AR00000001','ME, TOO',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),1); 
+INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000009','AR00000001','工具人三個字，代表著你潛意識裡認為愛情帶有利益交換的本質。代表著你認為所有的付出，理應要得到回饋，把愛情中愛與被愛的關係擬人化，甚至拿來量化。這樣的愛情，究竟有甚麼意思？不管交往關係或分手戀人，工具人三個字，說穿了都是一個願打一個願挨。你打著工具人的身份，去獲得旁人的許可，認同你在這段無法獲得回應的關係哩，還有一點利用的價值。你同時又認為自己委屈，像個呼之則來揮之則去的「無愛情關係人」，為什麼要被這樣對待？我想說的是，如果你為一個人付出了很多，他卻不知道。如果你希望獲得注意，為什麼不把你的愛表達出來？如果你覺得這樣的身份很累，又為什麼不轉身離開？如果你所做的一切，都是出自於愛，那是你的選擇。你沒有立場去責怪提出要求的一方。',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),1); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000004','AR00000002','阿宅就是阿宅',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000003','AR00000003','SOSO',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000003','AR00000004','白天不懂夜的黑',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
