@@ -125,7 +125,23 @@ window.onscroll = function() {
 		</nav>
 </div>
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-
+<div class="col-xs-12 col-sm-12 " >
+		<table>
+			<tr>
+				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">購物車明細&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/004-number-1.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">填寫訂單&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+			</tr>
+		</table>
+		<br>
+	</div>
 
 
 		<div role="tabpanel" >
