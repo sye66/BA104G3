@@ -57,11 +57,26 @@ div> .timeline-body{
 
 
 <div class="page-header position-relative">
-                    <div class="header-title">
+
+                  <div class="title">
+                    <div class="list">
+                        <h1>所有文章列表 </h1>
+                    </div>
+                    </div>
+                    
+                  <div class="title">
+                    <div class="search">
                         <h1>
-                            所有文章列表 - listAllArtiForm.jsp
+                       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
+                        <input type="text" size="80" class="" placeholder="請輸入關鍵字">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        </FORM>
                         </h1>
                     </div>
+                    </div>
+
+                    
+                    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
@@ -81,7 +96,7 @@ div> .timeline-body{
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 
-<%@ include file="/frontdesk/page1.file" %> 
+<%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
                         
                 <div class="page-body">
