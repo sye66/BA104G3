@@ -42,4 +42,8 @@ public class CompService {
 	public List<CompVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<CompVO> getAllAuthNo(String emp_No){
+		return dao.findByPk(emp_No);
+	}
 }

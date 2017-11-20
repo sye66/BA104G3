@@ -168,8 +168,7 @@ div {
              </div>
 		</div>
 </FORM>
-		
-		
+
 		<div class="widget-toolbar">
             <div class="" style="width:100px;">
 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >

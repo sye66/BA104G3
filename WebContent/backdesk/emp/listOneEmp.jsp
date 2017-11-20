@@ -4,24 +4,29 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
   table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
+    border-radius: 20px;
     text-align: center;
+    width: 80%;
+    height: 60px;
+    padding-top: 30px;
+    color: #4cae4c;
+    margin : 20px;
+    margin-left : 20px;
   }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
+  
+  h3{
+    width: 80%;
+    height: 25px;  
+    margin : 20px;
   }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+  
+  body{margin:40px;}
 </style>
 
 <style>
@@ -44,14 +49,28 @@
 <body bgcolor='white'>
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
+	
+	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+		<br>
+		<nav aria-label="breadcrumb" role="navigation">
+  		<ol class="breadcrumb">
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
+    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
+    		<li class="breadcrumb-item active" aria-current="page">單一員工查詢</li>
+  		</ol>
+	</nav>
+	</div>
+	
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+<div align="center">
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料 - ListOneEmp.jsp</h3>
+		 <h3 >員工資料</h3>
 		 
 	</td></tr>
 </table>
+<br>
+<br>
 
 <table>
 	<tr>
@@ -86,6 +105,7 @@
 	</tr>
 	
 </table>
+</div>
 
 </body>
 </html>

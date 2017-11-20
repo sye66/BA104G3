@@ -24,10 +24,12 @@ RelationService relationSvc = new RelationService();
 if(related_Mem_No ==null){
 	
 	related_Mem_No= memVO.getMem_No();
+	System.out.println("related_Mem_No + " +related_Mem_No);
 }
  
 List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
 pageContext.setAttribute("relationVO", relationVO);
+System.out.println("relationVO + " +relationVO);
 %>
 
 
@@ -173,7 +175,6 @@ pageContext.setAttribute("relationVO", relationVO);
 		</tr>
 		</form>	
 		</c:forEach>
-		
 </table>
 <%@ include file="page2.file" %>
         </div>

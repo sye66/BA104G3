@@ -27,6 +27,8 @@ public class CompJdbcDAO implements CompDAO_interface{
 			"UPDATE COMP set AUTH_NO=? where EMP_NO = ?";
 	private static final String DELETE = 
 			"DELETE from COMP where Auth_No=? and EMP_NO =?";
+	private static final String GET_AUTH_NO = 
+			"SELECT AUTH_NO FROM COMP WHERE EMP_NO=?";
 	
 
 	
@@ -286,33 +288,93 @@ public class CompJdbcDAO implements CompDAO_interface{
 	public static void main(String[] args) {
 			CompJdbcDAO dao = new CompJdbcDAO();
 			
-			CompVO compVO = new CompVO();
-			compVO.setAuth_No("AU000001");
-			compVO.setEmp_No("E000001");
+//			CompVO compVO = new CompVO();
+//			compVO.setAuth_No("AU000001");
+//			compVO.setEmp_No("E000001");
+//			
+//			CompVO compVO2 = new CompVO();
+//			compVO2.setAuth_No("AU000002");
+//			compVO2.setEmp_No("E000002");
+//			dao.delete(compVO2);
 			
-			CompVO compVO2 = new CompVO();
-			compVO2.setAuth_No("AU000002");
-			compVO2.setEmp_No("E000002");
-			dao.delete(compVO2);
+			List<CompVO> list1 = dao.findByPk("E000001");
+			for(CompVO compVO5 : list1){
+				System.out.println(compVO5.getAuth_No());
+			}
+			
+			
 			
 			
 			
 			// 查詢
-			CompVO compVO3 = dao.findByPrimaryKey("E000001");
-			System.out.print(compVO3.getEmp_No() + ",");
-			System.out.print(compVO3.getAuth_No() + ",");
-						
-			System.out.println("---------------------");
+//			CompVO compVO3 = dao.findByPrimaryKey("E000001");
+//			System.out.print(compVO3.getEmp_No() + ",");
+//			System.out.print(compVO3.getAuth_No() + ",");
+//						
+//			System.out.println("---------------------");
+//
+//			// 查詢
+//			List<CompVO> list = dao.getAll();
+//			for (CompVO compVO4 : list) {
+//				System.out.print(compVO4.getEmp_No() + ",");
+//				System.out.print(compVO4.getAuth_No() + ",");
+//							
+//				System.out.println();
+			}
+		
 
-			// 查詢
-			List<CompVO> list = dao.getAll();
-			for (CompVO compVO4 : list) {
-				System.out.print(compVO4.getEmp_No() + ",");
-				System.out.print(compVO4.getAuth_No() + ",");
-							
-				System.out.println();
+	@Override
+	public List<CompVO> findByPk(String emp_No) {
+		List<CompVO> list1 = new ArrayList<CompVO>();
+		CompVO compVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_AUTH_NO);
+			
+			pstmt.setString(1, emp_No);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				compVO = new CompVO();
+				compVO.setAuth_No(rs.getString("auth_No"));
+				list1.add(compVO);
+			}
+		}catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
 			}
 		}
-
+		return list1;
+	}
 }
-

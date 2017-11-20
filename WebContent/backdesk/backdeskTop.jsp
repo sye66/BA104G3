@@ -1,5 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
+<%@ page import="com.comp.model.*"%>
+<%
+String emp_No=null;
+List<CompVO> list = null;
+String str = "AU000002";
+	EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+	if(session.getAttribute("empVO")!=null){
+		emp_No = empVO.getEmp_No();
+		CompService compSvc = new CompService();
+		list = compSvc.getAllAuthNo(emp_No);
+// 		pageContext.setAttribute("list",list);
+	
+	}
+
+%>
+
+<%
+// 	request.getSession().setAttribute("empVO" ,empVO); 
+%>
 
 <html>
 
@@ -24,7 +46,7 @@
 				</div>
 			</div>
 			<form id="login-form" method="post" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do">
-			<div class="col-xs-12 col-sm-1" id="name1">XXX 你好!</div>
+			<div class="col-xs-12 col-sm-1" id="name1">${empVO.emp_Name} 你好</div>
 			<div class="col-xs-12 col-sm-1" id="name2">
 				<br> <button type="submit" name="action" value="logout">登出</button></div>
 				</form>
@@ -43,14 +65,26 @@
 						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span
-								class="icon icon-pencil"></span>商城管理</a></li>
+					
+<%-- 						<%for(CompVO c: list){ --%>
+<!--  							if((c.getAuth_No()).contains(str)){ -->
+<%-- 						%> --%>
+							<li>	<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
+								
+<%-- 						<%	} --%>
+							
+<%-- 							} %> --%>
+						
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
 					</ul>
 				</div><!--header-->
 			</div>
 		</div>
+		
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/decideempcomp/decideempcomp.do">
+		<input type="hidden" name="action" value="insert">
+		<input type="submit" value="送出新增">
+		</FORM>
 	
 
 	<script src="https://code.jquery.com/jquery.js"></script>

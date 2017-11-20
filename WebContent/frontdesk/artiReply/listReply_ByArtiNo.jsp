@@ -14,6 +14,7 @@
 	String arti_No = (String) session.getAttribute("arti_No");
 	String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
+	session.setAttribute("arti_No",arti_No);
 
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);
@@ -97,6 +98,7 @@ ${arti_No}
 			                        
 			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+			                        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 			                        <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
 			                        <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -107,13 +109,13 @@ ${arti_No}
                             </div>
                         </div>
                         
-                        
                       <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
                                 
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
                                     <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+                                    <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
                                     <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
                                     <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">

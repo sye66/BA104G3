@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.mem.model.MemVO" table="MEM" >
+		 <id name="mem_No" column="mem_No">
+            <generator class="generator.MyGenerator_mem_No" />
+        </id>
+        
+        <property name="follow_Status" column="follow_Status" />
+     
+    </class>
+</hibernate-mapping>

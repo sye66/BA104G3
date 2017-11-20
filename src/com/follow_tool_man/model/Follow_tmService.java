@@ -52,6 +52,9 @@ public class Follow_tmService {
 	
 	public List<Follow_tmVO> getAllDependOnFollower_Mem_No(String follower_Mem_No) {
 		
+		Follow_tmVO follow_tmVO = new Follow_tmVO();
+		follow_tmVO.setFollowed_Mem_No(follower_Mem_No);
+		
 		return dao.getAllDependOnFollower_Mem_No(follower_Mem_No);
 	}
 	

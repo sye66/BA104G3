@@ -98,7 +98,6 @@
     <url-pattern>/relation/relation.do</url-pattern>
   </servlet-mapping>
   
-<!--   兆哥 -->
   <servlet>
     <servlet-name>Follow_tmServlet</servlet-name>
     <servlet-class>com.follow_tool_man.controller.Follow_tmServlet</servlet-class>
@@ -107,6 +106,7 @@
     <servlet-name>Follow_tmServlet</servlet-name>
     <url-pattern>/follow_tool_man/follow_tool_man.do</url-pattern>
   </servlet-mapping>
+<!--   兆哥 -->
   
   
   <servlet>
@@ -259,6 +259,23 @@
 <!-- 		<filter-name>LoginHandler</filter-name> -->
 <!-- 		<url-pattern>/emp/*</url-pattern> -->
 <!-- 	</filter-mapping> -->
+<servlet>
+    <servlet-name>DecideEmpComp</servlet-name>
+    <servlet-class>com.emp.controller.DecideEmpComp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DecideEmpComp</servlet-name>
+    <url-pattern>/decideempcomp/decideempcomp.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CompServlet</servlet-name>
+    <servlet-class>com.comp.controller.CompServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompServlet</servlet-name>
+    <url-pattern>/comp/comp.do</url-pattern>
+  </servlet-mapping>
+  
   
   <!--  家駿 -->
   
