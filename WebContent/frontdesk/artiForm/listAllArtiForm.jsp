@@ -57,11 +57,29 @@ div> .timeline-body{
 
 
 <div class="page-header position-relative">
-                    <div class="header-title">
-                        <h1>
-                            所有文章列表 - listAllArtiForm.jsp
-                        </h1>
+
+                <div class="title">
+                    <div class="list">
+                        <h1>所有文章列表 </h1>
                     </div>
+                </div>
+                    
+                <div class="title">
+                      <div class="search">
+                        <h1>
+                       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
+                         <input type="text" size="40" class="" placeholder="請輸入內文關鍵字">
+                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+    			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+                        <button class="btn btn-link" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
+                        </FORM>
+                        </h1>
+                      </div>
+                  </div>
+
+                    
+                    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
@@ -81,7 +99,7 @@ div> .timeline-body{
                 <!-- /Page Header -->
                 <!-- Page Body -->
                 
-<%@ include file="/frontdesk/page1.file" %> 
+<%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
                         
                 <div class="page-body">
@@ -130,7 +148,7 @@ div> .timeline-body{
 
                     </ul>
                 </div>
-                
+      
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -161,11 +179,6 @@ div> .timeline-body{
         </script>
         
 </body>
-
-			
-
-
-		
 
         
     </c:forEach>
