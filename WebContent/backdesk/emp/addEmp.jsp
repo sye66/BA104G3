@@ -74,6 +74,7 @@
 	</ul>
 </c:if>
 
+<div align="center">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" name="form1">
 <table>
 	<tr>
@@ -104,14 +105,15 @@
 
 
 </table>
-</div>
+
 <br>
 <br>
-<div align="center">
+
 <input type="hidden" name="action" value="insert">
 <input type="submit" value="送出新增">
-</div>
+
 </FORM>
+</div>
 </body>
 
 

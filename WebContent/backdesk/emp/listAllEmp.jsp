@@ -74,7 +74,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>所有員工資料 - listAllEmp.jsp</h3>
+		 <h3>所有員工資料</h3>
 		 
 	</td></tr>
 </table>
