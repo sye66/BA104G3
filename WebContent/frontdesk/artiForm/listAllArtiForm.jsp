@@ -68,8 +68,11 @@ div> .timeline-body{
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-                        <input type="text" size="80" class="" placeholder="請輸入關鍵字">
-                        <button type="submit" class="btn btn-default">Submit</button>
+                         <input type="text" size="40" class="" placeholder="請輸入內文關鍵字">
+                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+    			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+                        <button class="btn btn-link" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
                         </FORM>
                         </h1>
                       </div>
@@ -145,7 +148,7 @@ div> .timeline-body{
 
                     </ul>
                 </div>
-                
+      
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -176,11 +179,6 @@ div> .timeline-body{
         </script>
         
 </body>
-
-			
-
-
-		
 
         
     </c:forEach>

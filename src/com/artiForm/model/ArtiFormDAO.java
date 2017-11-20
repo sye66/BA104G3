@@ -31,6 +31,9 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM order by ARTI_NO DESC";
 	
+	private static final String GET_ALL_STMT_4_SEARCH = 
+			"SELECT * FROM ARTI_FORM WHERE upper(DESCRIBE)LIKE '%?%' ORDER BY ARTI_NO DESC";
+	
 	private static final String GET_ONE_STMT =
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM where ARTI_NO = ?";
 	
@@ -342,6 +345,63 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 			}
 		}
 		return artiFormVO;
+	}
+	
+	@Override
+	public Set<ArtiReplyVO> getAllArti4Serach(String describe){
+		Set<ArtiReplyVO> set = new LinkedHashSet<ArtiReplyVO>();
+		ArtiReplyVO artiReplyVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{			
+			
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_4_SEARCH);
+			
+			pstmt.setString(1, describe);
+			rs = pstmt.executeQuery();
+		    
+		    while(rs.next()){
+		    	artiReplyVO = new ArtiReplyVO();
+		    	artiReplyVO.setReply_No(rs.getString("reply_No"));
+		    	artiReplyVO.setMem_No(rs.getString("mem_No"));
+		    	artiReplyVO.setArti_No(rs.getString("arti_No"));
+		    	artiReplyVO.setReply_Desc(rs.getString("reply_Desc"));
+		    	artiReplyVO.setReply_Time(rs.getTimestamp("reply_Time"));
+		    	artiReplyVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+		    	
+		    }
+		} catch (SQLException se){
+			throw new RuntimeException("A database error occured." + se.getMessage());
+		} catch (Exception e){
+			e.printStackTrace(System.err);
+		} finally {
+			if(rs!=null){
+				try{
+					rs.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt!=null){
+				try{
+					pstmt.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con!=null){
+				try{
+					con.close();
+				} catch (Exception e){
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
 
 	@Override
