@@ -69,10 +69,8 @@ div> .timeline-body{
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do"  name="form1" enctype="multipart/form-data">
-                         <input type="text" size="40" class="" placeholder="請輸入內文關鍵字">
-                         <input type="hidden" name="describe"  value="<%= (artiFormVO==null)? " @@? " : artiFormVO.getDescribe()%>">
-                         <input type="hidden" name="arti_Title"  value="${artiFormVO.arti_Title}">
-                         <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入內文關鍵字">
+                        <input type="hidden" name="describe"  value="${artiFormVO.describe}">
     			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                         <button class="btn btn-info" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
                         </FORM>

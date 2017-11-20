@@ -351,19 +351,19 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 	public Set<ArtiFormVO> getAllArti4Serach(String describe){
 		Set<ArtiFormVO> set = new LinkedHashSet<ArtiFormVO>();
 		ArtiFormVO artiFormVO = null;
-
+System.out.print("Search-DAO-111");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+System.out.print("Search-DAO-222");	
 		try{			
-			
+System.out.print("Search-DAO-333");
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT_4_SEARCH);
-			
+System.out.print("Search-DAO-444");
 			pstmt.setString(1, describe);
 			rs = pstmt.executeQuery();
-		    
+System.out.print("Search-DAO-555");
 		    while(rs.next()){
 				artiFormVO = new ArtiFormVO();
 				artiFormVO.setArti_No(rs.getString("arti_No"));
@@ -375,7 +375,7 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 				artiFormVO.setArti_Pic(rs.getBytes("arti_Pic"));
 				artiFormVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
 				artiFormVO.setArti_Status(rs.getString("arti_Status"));
-		    	
+System.out.print("Search-DAO-666");
 		    }
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());

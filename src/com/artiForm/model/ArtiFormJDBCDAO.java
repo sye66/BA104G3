@@ -19,7 +19,7 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM order by ARTI_NO DESC";
 	
 	private static final String GET_ALL_STMT_4_SEARCH = 
-			"SELECT * FROM ARTI_FORM WHERE upper(DESCRIBE)LIKE '%?%' ORDER BY ARTI_NO DESC";
+			"SELECT * FROM ARTI_FORM WHERE upper(DESCRIBE)LIKE ? ORDER BY ARTI_NO DESC";
 	
 	private static final String GET_ONE_STMT =
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM where ARTI_NO = ?";
@@ -257,6 +257,7 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 		    	artiReplyVO.setReply_Desc(rs.getString("reply_Desc"));
 		    	artiReplyVO.setReply_Time(rs.getTimestamp("reply_Time"));
 		    	artiReplyVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+		    	set.add(artiReplyVO);
 
 		    }
 			
@@ -367,10 +368,13 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 		    con = DriverManager.getConnection(url, userid, passwd);
 		    pstmt = con.prepareStatement(GET_ALL_STMT_4_SEARCH);
 
-		    pstmt.setString(1, describe);
+		    pstmt.setString(1, "%"+describe+"%");
 		    rs = pstmt.executeQuery();
 
 		    while(rs.next()){
+		    	
+		    	artiFormVO = new ArtiFormVO();
+
 				artiFormVO.setArti_No(rs.getString("ARTI_NO"));
 				artiFormVO.setMem_No(rs.getString("MEM_NO"));
 				artiFormVO.setArti_Title(rs.getString("ARTI_TITLE"));
@@ -380,13 +384,18 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 				artiFormVO.setArti_Pic(rs.getBytes("ARTI_PIC"));
 				artiFormVO.setArti_Cls_No(rs.getInt("ARTI_CLS_NO"));
 				artiFormVO.setArti_Status(rs.getString("ARTI_STATUS"));
+				set.add(artiFormVO);
+
 		    }
 			
 		} catch (ClassNotFoundException ce){
+			System.out.println(ce);
 			throw new RuntimeException("Couldn't find database driver." + ce.getMessage());
 		} catch (SQLException se){
+			System.out.println(se);
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} catch (Exception e){
+			System.out.println(e);
 			e.printStackTrace(System.err);
 		} finally {
 			if(rs!=null){
