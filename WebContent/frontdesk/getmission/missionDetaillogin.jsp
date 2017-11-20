@@ -59,68 +59,47 @@
 	<br>
 	<br>
 	<br>
+	<br><br>
+	<br>
+	<br>
+	<br>
+	<br><br>
+	<br>
+	<br>
+	<br>
 	<br>
 
 
 
-	<script type="text/javascript">
+<div class="modal fade" id="accuse">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h4 class="modal-title">檢舉原因</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				
+			</div>
+			<form method="post" action="<%=request.getContextPath()%>/accusecase/accusecase.do"
+										name="getmission3">
+			<div class="modal-body">
+				<textarea class="container accuse_Detail" name="accuse_Detail" ><c:out value="${uabout}" /> </textarea>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+				
+				<button type="submit" name="action" class="btn btn-danger" value="accusecase">確認送出檢舉</button>
+				<input type="hidden" name="mission_No"
+											value="${getMissionVO.mission_No}"> <input
+											type="hidden" name="mem_No" value="${mem_No}">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
-$(function(){
-
-	$('#accuse').on('click' function(){
-		
-	console.log("xxxx");
-(async function getMessage(){
-const {value: text} = await swal({
-		  input: 'textarea',
-		  inputPlaceholder: '寫下你的檢舉原因', 
-		 
-		  showCancelButton: true
-		})
 
 
-
-
-		
-
-		if (text) {
-		 $.ajax({
-			type:"post",
-			utl:"<%=request.getContextPath()%>/accusecase/accusecase.do",
-			date:{"mission_No":${getMissionVO.mission_No},"mem_No":${mem_No}},
-			dataType:"json",
-			async:false,
-
-			success: function(date){
-				console.log(date.message);
-					if(data.message != null){
-						swal({
-							  position: 'center',
-							  type: 'success',
-							  title: data.message,
-							  showConfirmButton: true,
-							  timer: 2500
-							})
-						}	
-					 if(data.errormessage != null){
-						 swal({
-							  position: 'center',
-							  type: 'error',
-							  title: data.errormessage,
-							  showConfirmButton: true,
-							  timer: 2500
-							})
-						}
-			}
-
-	     	
-		}	
-		})
-
-}
 	
-
-</script>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
@@ -142,8 +121,8 @@ const {value: text} = await swal({
 									<form method="post"
 										action=""
 										name="getmission3">
-										<button class="btn-lg btn-danger " id="accuse" name="action"
-											value="accusecase">檢舉任務</button>
+										<a href='#accuse' data-toggle="modal"><button class="btn-lg btn-danger " id="accuse" name="action"
+											value="accusecase">檢舉任務</button></a>
 										<input type="hidden" name="mission_No"
 											value="${getMissionVO.mission_No}"> <input
 											type="hidden" name="mem_No" value="${mem_No}">
@@ -385,6 +364,43 @@ const {value: text} = await swal({
 
 	<script type="text/javascript">
 		
+
+function setBstModalMaxHeight(element) {
+  this.$element          = $(element);
+  this.$modalContent     = this.$element.find('.modal-content');
+  var $window            = $(window);
+  var $modalContentOH    = this.$modalContent.outerHeight();
+  var $modalContentIH    = this.$modalContent.innerHeight();
+  var _modalBorderWidth   = $modalContentOH - $modalContentIH;
+  var _modalDialogMargin  = $window.width() < 768 ? 20 : 60;
+  var _modalContentHeight = $window.height() - (_modalDialogMargin + _modalBorderWidth);
+  var _modalHeaderHeight  = this.$element.find('.modal-header').outerHeight() || 0;
+  var _modalFooterHeight  = this.$element.find('.modal-footer').outerHeight() || 0;
+  var _modalMaxHeight     = _modalContentHeight - (_modalHeaderHeight + _modalFooterHeight);
+
+  this.$modalContent.css({
+      'overflow': 'hidden'
+  });
+  
+  this.$element
+    .find('.modal-body').css({
+      'max-height': _modalMaxHeight,
+      'overflow-y': 'auto'
+  });
+}
+
+$('.modal').on('show.bs.modal', function() {
+  $(this).show();
+  setBstModalMaxHeight(this);
+});
+
+$(window).resize(function() {
+  if ($('.modal.in').length != 0) {
+    setBstModalMaxHeight($('.modal.in'));
+  }
+});
+
+
 	</script>
 </body>
 </html>
