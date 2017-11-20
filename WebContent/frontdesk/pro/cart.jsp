@@ -5,7 +5,6 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.pro.shoppingcart.*"%>
 <%@ page import="com.protrack.model.*" %>
-<%@ page import="com.pro.shoppingcart.*" %>
 <%@ page import="com.pro.model.*"%>
 <%@ page import="com.proorder.model.*"%>
 <html>
