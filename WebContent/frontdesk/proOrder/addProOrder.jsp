@@ -6,7 +6,7 @@
 <%@ page import="com.mem.model.*"%>
 
 <%
-  MemVO memVO = (MemVO) request.getSession().getAttribute("register_memVO");		
+  MemVO memVO = (MemVO) session.getAttribute("memVO");		
   ProOrderVO proOrderVO = (ProOrderVO) request.getAttribute("ProOrderVO");
 %>
 <html>
@@ -31,26 +31,32 @@
   }
 </style>
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
+
 
 </head>
 <body>
+	<!-- TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
+</div>
+<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+		<nav aria-label="breadcrumb" role="navigation">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
+    			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">積分商城</a></li>
+  				<li class="breadcrumb-item active">購物車</li>
+  			
+  			</ol>
+		</nav>
+</div>
 	
-
-<h3>新增訂單:</h3>
+<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+ 
+        <h3>新增訂單:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -64,22 +70,8 @@
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/proOrderServlet.do" name="form1">
 <table>
-	<tr>
-<!-- 	注意會員變數還是小寫未更改版 -->
-		<td>姓名:</td>
-		<td><input type="TEXT" name="ord_Consignee" size="45" 
-			 value="<%= (memVO==null)? "吳永志" : memVO.getMem_Name()%>" /></td>
-	</tr>
-	<tr>
-		<td>地址:</td>
-		<td><input type="TEXT" name="ord_Address" size="45"
-			 value="<%= (proOrderVO==null)? "MANAGER" : proOrderVO.getOrd_Address()%>" /></td>
-	</tr>
-	<tr>
-		<td>電話:</td>
-		<td><input type="TEXT" name="ord_Phone" size="45"
-			 value="<%= (proOrderVO==null)? "0953711015" : proOrderVO.getOrd_Phone()%>" /></td>
-	</tr>
+	
+	
 	<tr>
 		<td>總價:${totalPrice} </td>
 		
@@ -87,11 +79,47 @@
 	
 </table>
 <br>
-<input type="hidden" name="ord_Price" value="${totalPrice}">
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
-	
-	
+			<div class="form-group"><h3>姓名</h3>
+            <input type="TEXT" name="mem_Name" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
+    		</div>
+									
+			<div class="form-group"><h3>市話號碼</h3>
+            <input type="TEXT" name="mem_Tel" size="36" placeholder="EX:03-3345678" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Tel()%>" />
+			</div>
+			
+			<div class="form-group"><h3>手機號碼</h3>
+            <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978-978978" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Pho()%>" />
+			
+			</div>
+			
+			
+<%----------------地址 -------------------------------------------%>
+
+
+
+			<div class="form-group"><h3>通訊地址</h3>
+            <input type="TEXT" name="mem_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
+			
+			</div>
+			
+<%----------------地址 -------------------------------------------%>
+			
+			
+			<button type="submit" class="btn btn-success" style="font-size:26px;">確認送出訂單</button>
+			<input type="hidden" name="mem_No" value="<%=memVO.getMem_No()%>">
+			
+	</FORM>		
+			
+</div>		
+			
+
+   
+
+
 	
 </body>
 </html>

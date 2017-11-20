@@ -11,11 +11,12 @@
 <style>
 
 .cartPro2{ 
-	width:100%;
-	border-bottom:3px #0000E6 solid;
-	margin:16px;
+	width:918px;
+	border-bottom:3px #FFBA3B solid;
+	border-left:1px #CCC solid;
+	border-right:1px #CCC solid;
 	background-color: #DEFFFF;
-	padding:5px;
+	
 }
 .breadcrumb li,.breadcrumb li a {
     color: #f90;
@@ -37,19 +38,24 @@ th  {
 <body>
 
 			
-<br>
+
+
 <% 
 	MemVO memVO = (MemVO) session.getAttribute("memVO");
-	String mem_No = memVO.getMem_No();
+	String mem_No = null;
+	List<ProTrackVO> listProTrack = null;
+	if(session.getAttribute("memVO")!=null){
+		mem_No = memVO.getMem_No();
 System.out.println("session取得的會員編號 "+mem_No);
-	ProTrackService proTrackSvc = new ProTrackService();
+		ProTrackService proTrackSvc = new ProTrackService();
+		listProTrack = proTrackSvc.getOnePro(mem_No);
+	}
 	
-	
-	List<ProTrackVO> listProTrack = proTrackSvc.getOnePro(mem_No);
-	ProService proSvc = new ProService();
-   	ProVO proVO = null;
 %>
-<%if (listProTrack != null && (listProTrack.size() > 0)) {%>
+<%
+	ProService proSvc = new ProService();
+	ProVO proVO = null;
+	if (listProTrack != null && (listProTrack.size() > 0)) {%>
 	<%
 	 for (int index = 0; index < listProTrack.size(); index++) {
 		 ProTrackVO proTrackVO = listProTrack.get(index);
@@ -60,7 +66,7 @@ System.out.println("session取得的會員編號 "+mem_No);
 	%>
 <table class="cartPro2">	
 	<tr>
-		<th>照片</th><th>品名</th><th >單價</th><th colspan="2"></th>
+		<th>照片</th><th>品名</th><th >單價</th><th colspan="2">更動</th>
 	</tr>
 	<tr height="30" >
 		<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=proVO.getPro_No()%>" alt="Card image cap"></td>
