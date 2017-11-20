@@ -274,6 +274,7 @@ public class ArtiReplyServlet extends HttpServlet {
 			try{
 				/***************************1.接收請求參數****************************************/
 				String reply_No = req.getParameter("reply_No");
+				String arti_No =  (String) req.getSession().getAttribute("arti_No");
 
 				/***************************2.開始查詢資料****************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
@@ -302,41 +303,52 @@ public class ArtiReplyServlet extends HttpServlet {
 			try{
 				/***************************1.接收請求參數****************************************/
 				HttpSession session = req.getSession();
+//				String arti_No =  (String) req.getSession().getAttribute("arti_No");
+				String arti_No = req.getParameter("arti_No");
 				String reply_No = req.getParameter("reply_No");
 		
-//				String mem_No = req.getParameter("mem_No");
-//				if(req.getSession().getAttribute("mem_No")==null){
-//					String contextPath = getServletContext().getContextPath();
-//					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
-//					failuewView.forward(req, res);
-//					return;
-//				}
-//				
-//				String user = (String) req.getSession().getAttribute("mem_No");
-//				if(user!=mem_No){
-//					String contextPath = getServletContext().getContextPath();
-//					errorMsgs.add(" = ___ = A 要本人才能修改喔~");
-//					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
-//					failuewView.forward(req, res);
-//					return;
-//				}
+				String mem_No = req.getParameter("mem_No");
+				if(req.getSession().getAttribute("mem_No")==null){
+
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add("@@ 要麻煩請你先登入喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("c");
+					failuewView.forward(req, res);
+					return;
+				}
+				
+				String user = (String) req.getSession().getAttribute("mem_No");
+				if(user!=mem_No){
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add(" = ___ = A 要本人才能修改喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					failuewView.forward(req, res);
+					return;
+				}
 
 				/***************************2.開始查詢資料****************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				ArtiReplyVO artiReplyVO = artiReplySvc.getOneArtiReply(reply_No);
+				
+				ArtiFormService artiFormSvc = new ArtiFormService ();
+				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("artiReplyVO41", artiReplyVO);
-				String url = "/frontdesk/artiReply/update_ArtiReply_input.jsp";
-
-				RequestDispatcher successView = req.getRequestDispatcher(url);
+       
+	            req.setAttribute("artiReplyVO41", artiReplyVO);
+	            req.setAttribute("artiFormVO", artiFormVO);
+	            session.setAttribute("arti_No", arti_No);
+	            session.setAttribute("mem_No", mem_No);
+	            String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
+	            
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
+
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -353,22 +365,22 @@ public class ArtiReplyServlet extends HttpServlet {
 			String reply_No = req.getParameter("reply_No");
 			
 			String mem_No = req.getParameter("mem_No");
-//			if(req.getSession().getAttribute("mem_No")==null){
-//				String contextPath = getServletContext().getContextPath();
-//				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
-//				failuewView.forward(req, res);
-//				return;
-//			}
-//			
-//			String user = (String) req.getSession().getAttribute("mem_No");
-//			if(user!=mem_No){
-//				String contextPath = getServletContext().getContextPath();
-//				errorMsgs.add(" = ___ = A 要本人才能更新喔~");
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/rontdesk/artiReply/listArtiReply_withSet_test.jsp");
-//				failuewView.forward(req, res);
-//				return;
-//			}
+			if(req.getSession().getAttribute("mem_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
+			
+			String user = (String) req.getSession().getAttribute("mem_No");
+			if(user!=mem_No){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add(" = ___ = A 要本人才能更新喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/rontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
 			
 			String arti_No = req.getParameter("arti_No");
 			String reply_Desc = req.getParameter("reply_Desc");
@@ -401,13 +413,24 @@ public class ArtiReplyServlet extends HttpServlet {
 			/***************************2.開始修改資料*****************************************/
 			ArtiReplyService artiReplySvc = new ArtiReplyService();
 			artiReplyVO = artiReplySvc.updateArtiReply(reply_No,mem_No,arti_No,reply_Desc,reply_Time,arti_Cls_No);
+			
+			ArtiFormService artiFormSvc = new ArtiFormService ();
+			ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
 
-			/***************************3.修改完成,準備轉交(Send the Success view)*************/
-			req.setAttribute("artiReplyVO41",artiReplyVO);
-			String url = "/frontdesk/artiReply/listOneArtiReply.jsp";
-
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			/***************************3.查詢完成,準備轉交(Send the Success view)************/
+            Set<ArtiReplyVO> artiReplyVO1 =  artiReplySvc.findReplyByArtiNo(arti_No);
+            
+            req.setAttribute("artiReplyVO41", artiReplyVO);
+            req.setAttribute("artiFormVO", artiFormVO);
+            session.setAttribute("arti_No", arti_No);
+            session.setAttribute("mem_No", mem_No);
+            String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
+            
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 			successView.forward(req, res);
+
+			/***************************其他可能的錯誤處理**********************************/
+
 		}
 		
 		if("updateReplyFMSet".equals(action)){
@@ -529,9 +552,6 @@ System.out.println("insert-reply-server-111");
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				artiReplyVO = artiReplySvc.addArtiReply(mem_No, arti_No,reply_Desc,reply_Time,arti_Cls_No);
 				
-//				ArtiFormService artiFormSvc = new ArtiFormService ();
-//				ArtiFormVO artiFormVO1 = artiFormSvc.getOneArtiForm(arti_No);
-				
 				ArtiFormService artiFormSvc = new ArtiFormService ();
 				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
 
@@ -557,59 +577,58 @@ System.out.println("insert-reply-server-111");
 		if ("deleteReply".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-System.out.println("D-Server-111");
+
 //			try{
 				/***************************1.接收請求參數***************************************/
 				HttpSession session = req.getSession();
-				String arti_No = req.getParameter("arti_No");
+				String arti_No = (String) req.getSession().getAttribute("arti_No");
 				String reply_No = req.getParameter("reply_No");
-System.out.println(reply_No);
-System.out.println("D-Server-222***");
+				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
 				String mem_No = req.getParameter("mem_No");
-System.out.println(mem_No);
-				if(mem_No==null){
+
+				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
 
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
-System.out.println(req.getSession().getAttribute("mem_No"));
-System.out.println("D-Server-333");
-				String user = (String) req.getSession().getAttribute("mem_No");
-//				if(user!=mem_No){
-//					String contextPath = getServletContext().getContextPath();
-//					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
-//					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp");
-//					failuewView.forward(req, res);
-//					return;
-//				}
-System.out.println("D-Server-444");
 
+				String user = (String) req.getSession().getAttribute("mem_No");
+				if(user!=mem_No){
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					failuewView.forward(req, res);
+					return;
+				}
+                
 				/***************************2.開始刪除資料***************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				artiReplySvc.deleteArtiReply(reply_No, mem_No);
-System.out.println("D-Server-555");
-				/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
-
-                Set<ArtiReplyVO> artiReplyVO =  artiReplySvc.findReplyByArtiNo(arti_No);
+				
 				ArtiFormService artiFormSvc = new ArtiFormService ();
 				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
-                
-                req.setAttribute("artiReplyVO41", artiReplyVO);
-                req.setAttribute("artiFormVO", artiFormVO);
-                session.setAttribute("arti_No", arti_No);
-                session.setAttribute("mem_No", mem_No);
-                String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
-                
+
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/	
+				ArtiReplyVO artiReplyVO = new ArtiReplyVO();
+	            Set<ArtiReplyVO> artiReplyVO1 =  artiReplySvc.findReplyByArtiNo(arti_No);
+	            
+	            req.setAttribute("artiReplyVO41", artiReplyVO);
+	            req.setAttribute("artiFormVO", artiFormVO);
+	            session.setAttribute("arti_No", arti_No);
+	            session.setAttribute("mem_No", mem_No);
+	            String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
+	            
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
-System.out.println("D-Server-666");
+
+				
 				/***************************其他可能的錯誤處理**********************************/
 //			} catch (Exception e){
 //				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp.jsp");
+//				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
 //				failuewView.forward(req, res);
 //			}
 		}

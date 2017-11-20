@@ -5,7 +5,6 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.pro.shoppingcart.*"%>
 <%@ page import="com.protrack.model.*" %>
-<%@ page import="com.pro.shoppingcart.*" %>
 <%@ page import="com.pro.model.*"%>
 <%@ page import="com.proorder.model.*"%>
 <html>
@@ -29,11 +28,12 @@
 }
 
 .cartPro{ 
-	width:100%;
+	width:918px;
 	border-bottom:3px #FFBA3B solid;
-	margin:16px;
+	border-left:1px #CCC solid;
+	border-right:1px #CCC solid;
 	background-color: #FFFFE8;
-	padding:5px;
+	
 }
 .breadcrumb li,.breadcrumb li a {
     color: #f90;
@@ -125,16 +125,32 @@ window.onscroll = function() {
 		</nav>
 </div>
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-
+<div class="col-xs-12 col-sm-12 " >
+		<table>
+			<tr>
+				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">購物車明細&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/004-number-1.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">填寫訂單&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+			</tr>
+		</table>
+		<br>
+	</div>
 
 
 		<div role="tabpanel" >
 			<!-- 標籤面板：標籤區 -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#FFFFBB;"><h4>購物車(<%=count%>)</h4></a></li>
+					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:458px;text-align:center;background-color:#FFFFBB;border:1px 1px 1px 1px #CCC solid;"><h4>購物車(<%=count%>)</h4></a></li>
 				<li role="presentation">
-					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:400px;text-align:center;background-color:#96FFFF; "><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
+					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:458px;text-align:center;background-color:#96FFFF;border:1px 1px 1px 1px #CCC solid;"><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
 			</ul>
 
 			<!-- 標籤面板：內容區 -->
@@ -155,7 +171,7 @@ window.onscroll = function() {
 	%>
 	<table class="cartPro">	
 		<tr>
-			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>異動</th>
+			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
 		<tr height="30" >
 			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
@@ -165,7 +181,7 @@ window.onscroll = function() {
 			<td width="100">
 				<div align="center">
 					<button type="button" id="backPro"  style="width: 30px;">-</button>
-					<input type="text" id="proCount" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 30px;text-align:center">	
+					<input type="text" id="proCount" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 35px;text-align:center">	
 					<button type="button" id="addPro"  style="width: 30px;">+</button>
 				</div>
 			</td>
@@ -195,7 +211,7 @@ window.onscroll = function() {
 
           <form name="checkoutForm" action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
               <input type="hidden" name="action"  value="checkOut"> 
-              <button type="submit" class="btn btn-warning" style="width:100%;height:60px;margin:16px;font-size:30px">付款結帳</button>
+              <button type="submit" class="btn btn-warning" style="width:100%;height:60px;font-size:30px">付款結帳</button>
         
           </form>
 <% }else{%>
@@ -258,6 +274,6 @@ window.onscroll = function() {
 	
 </script>
 
-
+<br><br>
 </body>
 </html>

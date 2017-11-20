@@ -12,6 +12,7 @@
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
+	String errorMsgs = (String) session.getAttribute("errorMsgs");
 %>
 
 <!DOCTYPE html>

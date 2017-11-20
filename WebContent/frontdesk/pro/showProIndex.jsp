@@ -17,7 +17,7 @@
 
 </head>
 <body>
-
+<!-- TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
 </div>

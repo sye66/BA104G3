@@ -2,55 +2,88 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.proorder.model.*"%>
-
+<%@ page import="com.pro.shoppingcart.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.pro.model.*"%>
+<%@ page import="java.util.*"%>
 
 <%
-  MemVO memVO = (MemVO) request.getSession().getAttribute("register_memVO");		
-  ProOrderVO proOrderVO = (ProOrderVO) request.getAttribute("ProOrderVO");
+  MemVO memVO = (MemVO) session.getAttribute("memVO");		
+  
 %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>訂單</title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
+.cartPro3{ 
+	text-align:center; 
+	border:3px #FFBA3B solid;
+	background-color: #FFFFE8;
+	
+}
+.price{
+	color:red;
+} 
+.totalPrice2{
+	color:red;
+}
+tr th , td { 
+text-align:center; 
+/* 	border-bottom:3px orange double; */
+/* 	border-right: 3px orange double; */
+} 
 </style>
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
+
 
 </head>
 <body>
+	<!-- TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
+</div>
+<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+	<br>
+		<nav aria-label="breadcrumb" role="navigation">
+  			<ol class="breadcrumb">
+    			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
+    			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">積分商城</a></li>
+  				<li class="breadcrumb-item active">購物車</li>
+  			
+  			</ol>
+		</nav>
 	
+</div>
+<!-- 進度條 -->
+<div class="col-xs-12 col-sm-12">
+<div class="col-xs-12 col-sm-6  col-sm-offset-3" >
+		<table>
+			<tr>
+				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">購物車明細&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(2).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">填寫訂單&nbsp;&nbsp;</td>
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				
+				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+			</tr>
+		</table>
+		<br>
+	</div>
 
-<h3>新增訂單:</h3>
+</div>	
+<!-- 進度條 -->
+<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+ 
+
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -63,35 +96,100 @@
 </c:if>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/proOrderServlet.do" name="form1">
-<table>
-	<tr>
-<!-- 	注意會員變數還是小寫未更改版 -->
-		<td>姓名:</td>
-		<td><input type="TEXT" name="ord_Consignee" size="45" 
-			 value="<%= (memVO==null)? "吳永志" : memVO.getMem_Name()%>" /></td>
-	</tr>
-	<tr>
-		<td>地址:</td>
-		<td><input type="TEXT" name="ord_Address" size="45"
-			 value="<%= (proOrderVO==null)? "MANAGER" : proOrderVO.getOrd_Address()%>" /></td>
-	</tr>
-	<tr>
-		<td>電話:</td>
-		<td><input type="TEXT" name="ord_Phone" size="45"
-			 value="<%= (proOrderVO==null)? "0953711015" : proOrderVO.getOrd_Phone()%>" /></td>
-	</tr>
-	<tr>
-		<td>總價:${totalPrice} </td>
-		
-	</tr>
-	
-</table>
+
 <br>
-<input type="hidden" name="ord_Price" value="${totalPrice}">
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+			<div class="form-group"><h3>姓名</h3>
+            <input type="TEXT" name="mem_Name" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
+    		</div>
+									
+			<div class="form-group"><h3>市話號碼</h3>
+            <input type="TEXT" name="mem_Tel" size="36" placeholder="EX:03-3345678" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Tel()%>" />
+			</div>
+			
+			<div class="form-group"><h3>手機號碼</h3>
+            <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978978978" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Pho()%>" />
+			
+			</div>
+			
+			
+<%----------------地址 -------------------------------------------%>
+
+
+
+			<div class="form-group"><h3>通訊地址</h3>
+            <input type="TEXT" name="mem_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
+			
+			</div>
+			
+<%----------------地址 -------------------------------------------%>
+		
+			
+			<button type="submit" class="btn btn-success" style="font-size:26px;">確認送出訂單</button>
+			<input type="hidden" name="mem_No" value="<%=memVO.getMem_No()%>">
+			</FORM>			
 	
+			
+</div>		
+<!-- 購物車瀏覽			 -->
+<div class="col-xs-12 col-sm-3 ">
+<br><br>
+<table class="cartPro3">	
+		<tr>
+			<th>照片</th><th>品名</th><th>單價</th><th >數量</th><th>小計</th>
+		</tr>
+	<%
+	int count= 0;
 	
+	@SuppressWarnings("unchecked")
+	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
+	
+	 if (buylist != null && (buylist.size() > 0)) {
+		 count = buylist.size();
+	 	Integer totalPrice=0;	
+	 for (int index = 0; index < buylist.size(); index++) {
+		 
+		 ProCartVO order = buylist.get(index);
+	%>
+	
+		<tr height="30" >
+			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
+			<td width="100"><div align="center"><b><%=order.getProCar_Name()%></b></div></td>
+		
+			<td width="100"><div align="center" id="proPrice"><b>$<%=order.getProCar_Price()%></b></div></td>
+			<td width="100">
+				<div align="center">
+					<%=order.getProCar_Quantity()%>	
+				</div>
+			</td>
+			<td width="100" class="price">
+				<div align="center"><b id="totlPrice">$<%=order.getProCar_Price()*order.getProCar_Quantity()%></b></div>
+			</td>
+			
+			
+          
+	</tr>
+		<tr><%totalPrice=totalPrice+(int)(order.getProCar_Price()*order.getProCar_Quantity()); }%>
+        	
+        	<td width="200" colspan="2">
+        		<h3 >共<%=buylist.size()%>項商品</h3>
+			
+    		</td>
+    		<td width="200" colspan="3">
+    			<h3 class="totalPrice2">總計:$<%=totalPrice %></h3>
+    		</td>
+    	</tr>
+    	
+</table>	
+	
+<%}%>	
+	 
+</div>	  
+
+
 	
 </body>
 </html>

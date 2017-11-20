@@ -31,6 +31,9 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 	private static final String GET_ALL_STMT = 
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM order by ARTI_NO DESC";
 	
+	private static final String GET_ALL_STMT_4_SEARCH = 
+			"SELECT * FROM ARTI_FORM WHERE upper(DESCRIBE)LIKE '%?%' ORDER BY ARTI_NO DESC";
+	
 	private static final String GET_ONE_STMT =
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM where ARTI_NO = ?";
 	
@@ -342,6 +345,66 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 			}
 		}
 		return artiFormVO;
+	}
+	
+	@Override
+	public Set<ArtiFormVO> getAllArti4Serach(String describe){
+		Set<ArtiFormVO> set = new LinkedHashSet<ArtiFormVO>();
+		ArtiFormVO artiFormVO = null;
+System.out.print("Search-DAO-111");
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+System.out.print("Search-DAO-222");	
+		try{			
+System.out.print("Search-DAO-333");
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_STMT_4_SEARCH);
+System.out.print("Search-DAO-444");
+			pstmt.setString(1, describe);
+			rs = pstmt.executeQuery();
+System.out.print("Search-DAO-555");
+		    while(rs.next()){
+				artiFormVO = new ArtiFormVO();
+				artiFormVO.setArti_No(rs.getString("arti_No"));
+				artiFormVO.setMem_No(rs.getString("mem_No"));
+				artiFormVO.setArti_Title(rs.getString("arti_Title"));
+				artiFormVO.setArti_Like(rs.getInt("arti_Like"));
+				artiFormVO.setDescribe(rs.getString("describe"));
+				artiFormVO.setArti_Time(rs.getTimestamp("arti_Time"));
+				artiFormVO.setArti_Pic(rs.getBytes("arti_Pic"));
+				artiFormVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiFormVO.setArti_Status(rs.getString("arti_Status"));
+System.out.print("Search-DAO-666");
+		    }
+		} catch (SQLException se){
+			throw new RuntimeException("A database error occured." + se.getMessage());
+		} catch (Exception e){
+			e.printStackTrace(System.err);
+		} finally {
+			if(rs!=null){
+				try{
+					rs.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt!=null){
+				try{
+					pstmt.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con!=null){
+				try{
+					con.close();
+				} catch (Exception e){
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
 	}
 
 	@Override

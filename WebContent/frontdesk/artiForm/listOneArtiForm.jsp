@@ -168,8 +168,7 @@ div {
              </div>
 		</div>
 </FORM>
-		
-		
+
 		<div class="widget-toolbar">
             <div class="" style="width:100px;">
 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >
@@ -237,7 +236,7 @@ div {
 		         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
 		         <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
-		         <input type="hidden" name="mem_No"  value="${artiReportVO.mem_No}">
+		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 		         <input type="hidden" name="report_Desc"  value="${artiReportVO.report_Desc}">
                  <button class="btn btn-warning" type="submit" name="action" value="insertReport"> 檢舉文章</button>
 		         </FORM>

@@ -39,6 +39,7 @@ public class ArtiReplyService {
 		return artiReplyVO;
 	}
 	
+	
 	public ArtiReplyVO updateArtiReply(String reply_No, String mem_No, String arti_No, String reply_Desc, java.sql.Timestamp reply_Time, Integer arti_Cls_No){
 		ArtiReplyVO artiReplyVO = new ArtiReplyVO();
 		System.out.println("============================================="+reply_No);

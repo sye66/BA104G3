@@ -267,6 +267,15 @@
     <servlet-name>DecideEmpComp</servlet-name>
     <url-pattern>/decideempcomp/decideempcomp.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CompServlet</servlet-name>
+    <servlet-class>com.comp.controller.CompServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompServlet</servlet-name>
+    <url-pattern>/comp/comp.do</url-pattern>
+  </servlet-mapping>
+  
   
   <!--  家駿 -->
   
@@ -302,6 +311,16 @@
     <servlet-name>ArtiReportServlet</servlet-name>
     <url-pattern>/artiReport/artiReport.do</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>com.ad.controller.AdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/ad/ad.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetMissionServlet</servlet-name>
     <servlet-class>com.getmission.controller.GetMissionServlet</servlet-class>

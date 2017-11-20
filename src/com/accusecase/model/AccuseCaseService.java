@@ -72,4 +72,7 @@ public class AccuseCaseService {
 
 		return accuseCaseVO;
 	}
+	public List<AccuseCaseVO> getCaseBymission(String mission_No){
+		return dao.getCaseBymission(mission_No);
+	}
 }

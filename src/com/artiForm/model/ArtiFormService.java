@@ -80,6 +80,10 @@ public class ArtiFormService {
 		return dao.findReplyByArtiNo(arti_No);
 	}
 	
+	public Set<ArtiFormVO> getAllArti4Serach(String describe){
+		return dao.getAllArti4Serach(describe);
+	}
+	
 //	public List<ArtiReplyVO> findReplyByArtiClsNo (Map<String, String[]> map){
 //		return dao.findReplyByArtiClsNo(map);
 //	}

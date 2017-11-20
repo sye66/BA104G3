@@ -104,6 +104,7 @@ System.out.println("回商城首頁 url: "+url);
 			Integer total = 0;
 			for (int i = 0; i < buylist.size(); i++) {
 				ProCartVO proCartVO = buylist.get(i);
+System.out.println(proCartVO.getProCar_Price());				
 				Integer price = proCartVO.getProCar_Price();
 				Integer quantity = proCartVO.getProCar_Quantity();
 				total += (price * quantity);

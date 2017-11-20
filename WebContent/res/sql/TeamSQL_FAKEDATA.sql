@@ -3,7 +3,7 @@
 
 --阿群--
 
----會員 MEM FAKE DATA--
+--會員 MEM FAKE DATA--
 --官方
 INSERT INTO MEM(MEM_NO,MEM_PW,MEM_NAME,MEM_ID,MEM_BDAY,MEM_TEL,MEM_PHO,MEM_GEND,MEM_EMAIL,MEM_PIC,MEM_INTRO,MEM_CODE,MEM_STATE,MEM_GPS_LAT,MEM_GPS_LNG,MEM_IP,MEM_DATE,MISSION_COUNT,MEM_ADDRESS,MEM_SEARCH,MEM_POINT)
 VALUES('OFFICAL'||LPAD(OFFICAL_NO.NEXTVAL,6,'0'),'OFFICAL1','官方1','GM1',TO_DATE('1987-09-10','YYYY-MM-DD'),'03-3456789','0912-345678',1,'burnerzx@gmail.com',load_blob('profile_1.png'),'這是個官方帳號','1',1,'123.123465','88.332244','192.168.0.1',TO_DATE('2017-09-10 12:13:14','YYYY-MM-DD HH24:MI:SS'),10,'中壢資策會中壢中心','1',99999);
@@ -290,22 +290,22 @@ VALUES('M000010',3,5,7,3,4,4,1,2);
 --任務 MISSION FAKE DATA--
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'教育','教教我英文','幫幫我,我的英文爛的跟狗屎一樣 大QQ' , 'M000008', to_date('2017/11/18','yyyy/mm/dd'),to_date('2017/11/23','yyyy/mm/dd'),1,2,50.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'教育','教教我英文','幫幫我,我的英文爛的跟狗屎一樣 大QQ' , 'M000008', to_date('2017/11/18','yyyy/mm/dd'),to_date('2017/11/23','yyyy/mm/dd'),2,2,50.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0') ,'其他','幫我打掃','阿~~~這個房間有蟑螂!!!幫我打掃我給你一頓飯喔 PS.我是正妹' , 'M000001', to_date('2017/11/18','yyyy/mm/dd'),to_date('2017/11/23','yyyy/mm/dd'),1,2,10.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0') ,'其他','幫我打掃','阿~~~這個房間有蟑螂!!!幫我打掃我給你一頓飯喔 PS.我是正妹' , 'M000001', to_date('2017/11/18','yyyy/mm/dd'),to_date('2017/11/23','yyyy/mm/dd'),72,2,10.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
 VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','幫我修電腦','電腦最近當當的,常常藍屏,跪求大大解救!!' , 'M000003', to_date('2017/11/20','yyyy/mm/dd'),to_date('2017/11/25','yyyy/mm/dd'),1,1,500.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','幫我修理我的心','最近失戀了,可以幫我縫補我破碎的心嗎?' , 'M000002', to_date('2017/11/10','yyyy/mm/dd'),to_date('2017/11/15','yyyy/mm/dd'),1,1,1000.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','幫我修理我的心','最近失戀了,可以幫我縫補我破碎的心嗎?' , 'M000002', to_date('2017/11/10','yyyy/mm/dd'),to_date('2017/11/15','yyyy/mm/dd'),72,1,1000.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','紗窗問題','痾...紗窗壞壞,拜託幫幫' , 'M000003', to_date('2017/10/25','yyyy/mm/dd'),to_date('2017/10/30','yyyy/mm/dd'),1,1,1000.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','紗窗問題','痾...紗窗壞壞,拜託幫幫' , 'M000003', to_date('2017/10/25','yyyy/mm/dd'),to_date('2017/10/30','yyyy/mm/dd'),72,1,1000.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'教育','教育的喔','我想知道咪咪長怎樣可以告訴我嗎~XD' , 'M000002', to_date('2017/10/25','yyyy/mm/dd'),to_date('2017/10/30','yyyy/mm/dd'),1,2,2000.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'教育','教育的喔','我想知道咪咪長怎樣可以告訴我嗎~XD' , 'M000002', to_date('2017/10/25','yyyy/mm/dd'),to_date('2017/10/30','yyyy/mm/dd'),2,2,2000.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
 VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'其他','買午餐','最近下雨懶洋洋,給我一個可以幫我買午餐的人吧~' , 'M000005', to_date('2017/11/3','yyyy/mm/dd'),to_date('2017/11/8','yyyy/mm/dd'),1,1,20.00 );
@@ -329,7 +329,7 @@ INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , 
 VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','砂輪機壞了','靠~!!機台壞了!跪求大神幫忙~阿阿阿!!作業要GG了阿' , 'M000004', to_date('2017/11/3','yyyy/mm/dd'),to_date('2017/11/8','yyyy/mm/dd'),1,2,50.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
-VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'其他','顧小孩','恩...最近事情一大堆~需要一個人幫我顧小孩~!' , 'M000001', to_date('2017/11/3','yyyy/mm/dd'),to_date('2017/11/8','yyyy/mm/dd'),1,2,700.00 );
+VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'其他','顧小孩','恩...最近事情一大堆~需要一個人幫我顧小孩~!' , 'M000001', to_date('2017/11/3','yyyy/mm/dd'),to_date('2017/11/8','yyyy/mm/dd'),7,2,700.00 );
 
 INSERT INTO MISSION(MISSION_NO, MISSION_CATEGORY , MISSION_NAME , MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY)
 VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),'修繕','馬桶壞了QQ','糟糕糟糕,馬桶壞了!!!求幫幫' , 'M000001', to_date('2017/11/3','yyyy/mm/dd'),to_date('2017/11/8','yyyy/mm/dd'),1,2,100.00 );
@@ -504,23 +504,26 @@ COMMIT;
 --檢舉案件 ACCUSE_CASE--
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000004','M000003','E000004',  to_date('2017/10/25','yyyy/mm/dd'),'這根本跟修繕無關',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000004','M000003','E000004',  sysdate,'這根本跟修繕無關',1);
 
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000006','M000001','E000004',  to_date('2017/10/25','yyyy/mm/dd'),'大大!!!有變態',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000006','M000001','E000004',  sysdate,'大大!!!有變態',1);
 
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000004','M000001','',  to_date('2017/10/25','yyyy/mm/dd'),'我覺得這個任務不行',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000004','M000001','',  sysdate,'我覺得這個任務不行',1);
 
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000002','M000004','',  to_date('2017/10/25','yyyy/mm/dd'),'我覺得他不是 騙人',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000002','M000004','',  sysdate,'我覺得他不是 騙人',1);
 
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000006','M000003','',  to_date('2017/10/25','yyyy/mm/dd'),'警察叔叔這裡有怪人',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000006','M000003','',  sysdate,'警察叔叔這裡有怪人',1);
+
+INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000014','M000007','',  sysdate,'我覺得他沒有小孩 呵呵',1);
 COMMIT;
 
 --==================================================--
@@ -731,8 +734,7 @@ COMMIT;
 
 --討論區 ARTI_FORM FAKE DATA--
 
-
-INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000001','我要推推阿偉工具人',3,'讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚讚爆',TO_date('2017-09-10 12:13:14','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX1.jpg'),1,'ㄧ般'); 
+INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000001','「工具人」最大的誤會，就是以為愛情中付出就絕對有回報',3,'你聽過「工具人」這個說法嗎？所謂的「工具人」，泛指感情中被喜歡的對象當做工具利用，但是付出再多也沒有交往機會的人。人人都不希望自己變成那個被利用的人，那麼該怎麼避開這種令人難堪的情境呢？許多人以為愛情就像電動裡的打怪升等，只要你多努力多付出，就能從朋友升格成情人，但追求本來就是技巧性和運氣問題，絕非做越多就能讓對方愛上你，只要抱著「付出就會有回報」的心態，就註定容易變成工具人。「追求」喜歡的人這件事，從來就不是一個「打怪升等」的過程，喜歡的人能夠依賴你對你提出要求，這像是一個甜蜜的毒藥，你感覺能完成喜歡的人提出的任務，就把自己視為對方重要的人，殊不知如果對方對你沒有曖昧情愫，你就已經變成他的「工具人」。許多努力付出的「工具人」，到最後發現對方居然選擇跟另一個人在一起，可能會心生怨恨想說：「你的宵夜我幫你買的、是我接送你上下班的，付出這麼多，你居然跟別人在一起！」但是，愛情中付出本來就是用在對的人身上才有回報，如果從頭到尾都對你沒意思，付出再多也沒有用。試著換位思考：如果有一天，有一個完全不是你的菜的人，繞在你身邊幫你做東做西，你有一天愛上他的可能性有多少呢？在追求過程中付出，請了解「一個願打、一個願挨」的道理，你的付出是因為你喜歡他，但絕不要覺得付出一定有回報，如果有這樣的心態，就容易陷入無限付出又抱著無限期待的心情在等著對方的青睞，最後也只是一場空。',TO_date('2017-09-10 12:13:14','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX1.jpg'),1,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000002','大家心目中宅男的形象跟現實中的宅男其實不太一樣',3,'一般世俗人提到宅男，腦中都是那個體態肥胖、好幾天不洗澡、身上穿動漫T、家裡一堆美女手辦、桌面放油圖、臉上滿臉油、女性絕緣體的傢伙。但是事實上這種“經典款”真的是少數，至少我自己自命是非常宅的人，也認識一些宅宅朋友，在我看來一般所謂的宅男不一定是這個樣子。現在開放大家來討論一下吧!!!',TO_date('2012-01-19 10:26:11','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX2.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000003','【問題】我這工作是好還是爛',2,'要會開堆高機 會開貨車 要收送貨 要會電腦(PS AE PR MAX ZB SBP) 平面動畫+3D動畫 一人完成 EXCEL資料登記 要做體力活 全身汗濕那種 要吸粉塵 會弄得全身髒 24HR待命+保全 電話來就要馬上處理 即使已經是假日 沒三節 年終 中午有80元便當 一個月18K 這樣算好ㄇ?',TO_date('2013-05-24 10:26:40','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX3.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000004','【問題】彈吉他碰到的問題 這樣有解嗎',9,'1.手指太僵硬  2.手指不協調  3.手指頭肉太粗太多 會悶到其他弦  4.常常談到手好痠痛  這些有解嗎???',TO_date('2013-11-13 20:45:35','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX4.jpg'),4,'ㄧ般'); 
@@ -765,13 +767,11 @@ INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000012','【問題】請問大家都在哪裡買實木傢俱?有在景富莊買過傢俱嗎?',6,'最近在挑些實木傢俱，想問問大家有去過景富莊買過嗎?他們家的品質如何呢?因為聽過其他人說優木那些大牌子 ，大多都是買他們的牌子 東西就比較貴，要挑實木傢俱 柚木那些 有哪些該注意的呢?',TO_date('2017-11-07 07:38:54','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX29.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000006','【問題】蝦皮怎麼退款',3,'請問各位大大，按完成訂單後還能退款嗎？賣家因重量問題所以拿了一樣商品起來，結果我不小心按到完成訂單，賣家說還可以按退款，可我不知道退款怎麼用。',TO_date('2017-11-08 22:12:58','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX30.jpg'),4,'ㄧ般'); 
 
-
-
 commit;
 
 --回覆文章 ARTI_REPLY FAKE DATA--
 
-INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000009','AR00000001','ME, TOO',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),1); 
+INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000009','AR00000001','工具人三個字，代表著你潛意識裡認為愛情帶有利益交換的本質。代表著你認為所有的付出，理應要得到回饋，把愛情中愛與被愛的關係擬人化，甚至拿來量化。這樣的愛情，究竟有甚麼意思？不管交往關係或分手戀人，工具人三個字，說穿了都是一個願打一個願挨。你打著工具人的身份，去獲得旁人的許可，認同你在這段無法獲得回應的關係哩，還有一點利用的價值。你同時又認為自己委屈，像個呼之則來揮之則去的「無愛情關係人」，為什麼要被這樣對待？我想說的是，如果你為一個人付出了很多，他卻不知道。如果你希望獲得注意，為什麼不把你的愛表達出來？如果你覺得這樣的身份很累，又為什麼不轉身離開？如果你所做的一切，都是出自於愛，那是你的選擇。你沒有立場去責怪提出要求的一方。',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),1); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000004','AR00000002','阿宅就是阿宅',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000003','AR00000003','SOSO',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000003','AR00000004','白天不懂夜的黑',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4); 
@@ -806,6 +806,7 @@ INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000010','AR00000028','asus zenpad很推薦，現在去台哥大辦平板雙享方案，可以直接帶二台回家，一台自己用， 一台當作孝親機，一舉二得XD',TO_date('2017-11-08 20:23:29','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000007','AR00000030','已完成收貨的訂單沒辦法自己在系統上退款，要蝦皮客服立案處理。我試過，已經二個月了，還沒收到退款，我建議你請賣家把差額隨包裏退款給你比較快。補充，我是商城的訂單。',TO_date('2017-11-09 09:25:58','YYYY-MM-DD HH24:MI:SS'),4); 
 INSERT INTO ARTI_REPLY VALUES ('RE'||LPAD(to_char(ARTI_REPLY_SEQUENCE.NEXTVAL),8,'0'),'M000020','AR00000027','小孩不跟你姓就跟你一點關係也沒有嗎?不是你的種?以後生小孩要跟老婆姓我是沒問題，家裡人不會因為他姓什麼而有差別待遇...自己的父母就說已經決定好了，請他們尊重你們家的決定即可。',TO_date('2017-11-15 12:02:48','YYYY-MM-DD HH24:MI:SS'),4); 
+
 commit;
 
 --檢舉文章ARTI_REPORT FAKE DATA--
@@ -822,6 +823,8 @@ INSERT INTO ARTI_REPORT VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL
 INSERT INTO ARTI_REPORT VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL),7,'0'),'M000010','AR00000010','看....有白癡',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),2,'已處理'); 
 INSERT INTO ARTI_REPORT VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL),7,'0'),'M000011','AR00000011','有礙觀瞻',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),1,'待處理'); 
 INSERT INTO ARTI_REPORT VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL),7,'0'),'M000012','AR00000012','我的白眼都快翻到外太空去了.....',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),4,'待處理'); 
+
+
 commit;
 
 
@@ -848,4 +851,5 @@ INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob(
 INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob('YYY19.jpg'),'【桃園美食】享樂煮義義大利麵餐廳-不到百元就能吃到義大利麵',TO_date('2017-07-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),TO_date('2017-10-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),'FTY000016','享樂煮義');
 INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob('YYY20.jpg'),'【桃園餐廳】庶民食堂創意炒飯-超大份加飯不用錢的美味炒飯',TO_date('2017-09-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),TO_date('2017-12-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),'FTY000018','庶民食堂'); 
 INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob('YYY21.jpg'),'【桃園餐廳】第三航廈咖啡店-坐著喝咖啡也能看到飛機',TO_date('2017-10-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),TO_date('2018-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),'FTY000018','第三航廈咖啡店'); 
-commit;
+
+COMMIT;
