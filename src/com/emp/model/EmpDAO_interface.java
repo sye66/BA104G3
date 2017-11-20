@@ -10,6 +10,7 @@ public interface EmpDAO_interface {
      public EmpVO findByPrimaryKey(String emp_No);
      public List<EmpVO> getAll();
      //�U�νƦX�d��(�ǤJ�Ѽƫ��AMap)(�^�� List)
-//   public List<EmpVO> getAll(Map<String, String[]> map); 
+//   public List<EmpVO> getAll(Map<String, String[]> map);
+     public List<EmpVO> getEmp_No();
 	
 }

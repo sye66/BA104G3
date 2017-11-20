@@ -77,19 +77,6 @@ String str = "AU000002";
 <%-- 						<c:forEach var="compVO" items="${list}"> --%>
 <%-- 						<c:if test="${compVO.auth_No==str}"> --%>
 						
-						
-						
-										
-<%-- 						</c:if> --%>
-<%-- 						</c:forEach > --%>
-<%-- 						<c:forEach var="compVO" items="${list}"> --%>
-<%-- 						<c:if test="${!compVO.auth_No==str}"> --%>
-<%-- 						<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil disabled"></span> --%>
-<!-- 						商城管理	 -->
-<!-- 						</a>	 -->
-<%-- 						</c:if> --%>
-<%-- 						</c:forEach > --%>
-						
 
 						
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
