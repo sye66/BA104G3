@@ -7,7 +7,6 @@ bordered-blue{border-color:#5db2ff!important}
 
 .page-header-fixed{left:0!important}
 
-
 .page-breadcrumbs.breadcrumbs-fixed{position:fixed;right:0;left:224px;top:45px;z-index:999}
 
 .page-breadcrumbs.breadcrumbs-fixed+.page-header{margin-top:40px}
