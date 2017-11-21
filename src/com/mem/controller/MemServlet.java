@@ -680,6 +680,8 @@ System.out.println("STEP3");
 				
 				Integer mem_State = new Integer (req.getParameter("mem_State"));
 				
+				String mem_Id = req.getParameter("mem_Id").trim();
+				
 				
 				/***************************mail區塊 1***************************************/
 				
@@ -687,11 +689,12 @@ System.out.println("STEP3");
 			      
 			    String subject = "密碼通知";
 			      
-			    String ch_name = memVO.getMem_Id();
+			    String ch_name = mem_Id;
 //			    String passRandom = "111";
 			    String messageText =  ch_name + " 你好 " +  "\n" +
 			    					 " 由於您在討論區或發表任務內容，發佈了有關不雅或腥羶色的圖片或字眼，經查證後予以停權 三 天，並刪除相關發佈資訊。"
-			    					 + "煩請避免相關行為，如果查證繼續發生，將給予更嚴重的處理。以上!"; 
+			    					 + "煩請避免相關行為，如果查證繼續發生，將給予更嚴重的處理。" + "\n"
+			    					 + "工具人出租平台  敬上!"; 
 			    
 //			    Integer mem_Code = Integer.valueOf(passRandom);
 			    
