@@ -33,6 +33,10 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
     /* 字體from Google	 */
     	/* @import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
     	font-family: 'Noto Sans TC', sans-serif; */
+       #map {
+        height: 400px;
+        width: 100%;
+       }
     </style>
 </head>
 
@@ -167,7 +171,7 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-					
+				
 				</div>
 			</div>
 		</div>
@@ -176,7 +180,56 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
-					<iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJy02Q7MEjaDQRVuRcRdQpwc0&key=AIzaSyDmUVPrJAUSF9tcavKLw-7m3UWiTTjGtds" allowfullscreen></iframe>
+					<%-- 地圖 --%>
+					<label>所在位置</label>
+				    <div id="map"></div>
+				    <script>
+				      function initMap() {
+				      	var pos;
+				      	var lat;
+				      	var lng;
+				      	var contentString = '<div class="content"><input type="submit" class="btn btn-primary" name="" value="Check"></div>';
+				        var map = new google.maps.Map(document.getElementById('map'), {
+				          center: {lat: -34.397, lng: 150.644},
+				          zoom: 15
+				        });
+				        var infoWindow = new google.maps.InfoWindow({contents: contentString});
+				        // Try HTML5 geolocation.
+				        if (navigator.geolocation) {
+				          navigator.geolocation.getCurrentPosition(function(position) {
+				            pos = {
+				              lat: position.coords.latitude,
+				              lng: position.coords.longitude
+				            };
+
+				            infoWindow.setPosition(pos);
+				            infoWindow.setContent(contentString);
+				            map.setCenter(pos);
+				            var marker = new google.maps.Marker({
+				          		position: pos,
+				          		map: map,
+				          		title: "某工具人"
+				        	});	
+				           	marker.addListener('click', function () {
+				           		infoWindow.open(map,marker);
+				           	})
+				        }, function() {
+				            handleLocationError(true, infoWindow, map.getCenter());
+				          });
+				        } else {
+				          // Browser doesn't support Geolocation
+				          handleLocationError(false, infoWindow, map.getCenter());
+				        }
+				      }
+			      
+				      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+				        infoWindow.setPosition(pos);
+				        infoWindow.setContent(browserHasGeolocation ?
+				                              'Error: The Geolocation service failed.' :
+				                              'Error: Your browser doesn\'t support geolocation.');
+				      }
+				    </script>
+				 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
 				</div>
 			</div>
 		</div>

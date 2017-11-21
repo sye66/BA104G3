@@ -35,7 +35,7 @@
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
-				<form>
+				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do">
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 						<%-- 任務類別 --%>
 							<div class="form-group">
@@ -68,10 +68,10 @@
 								<label>
 									任務發布時間
 								</label>
-									<input type="text" name="missionreleastime" id="missionreleastime" class="form-control">
+									<input type="text" name="missionreleasetime" id="missionreleasetime" class="form-control">
 								<script type="text/javascript">
 									$(function(){
-										$('#missionreleastime').datepicker({
+										$('#missionreleasetime').datepicker({
 											dateFormat: 'yy-mm-dd'
 										});
 									});
@@ -158,8 +158,9 @@
 						    </script>
 						 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
 
-						<div style="text-align: center; height: 200px; width: 100%;">
-								<button class="btn btn-primary" type="submit" style="margin-top: 30px">發出任務</button>		
+						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
+								<input type="hidden" name="action" value="issueNormalMission">
+								<input type="submit" name="發出任務">
 						</div>
 						
 					</div>

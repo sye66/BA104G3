@@ -3,9 +3,11 @@ package com.getmission.controller;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
-
+import java.sql.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
+
+import org.hibernate.hql.ast.SqlASTFactory;
 
 import com.casecandidate.model.CaseCandidateService;
 import com.emp.model.EmpService;
@@ -884,6 +886,26 @@ public class GetMissionServlet extends HttpServlet {
 			// .getRequestDispatcher("/frontdesk/getmission/getmission.jsp");
 			// failureView.forward(req, res);
 			// }
+		}
+		
+		/**
+		 * @author Sander
+		 */
+		// 任務類別
+		// 任務名稱
+		// 任務敘述
+		// 任務發布時間
+		java.sql.Date startDate = Date.valueOf((req.getParameter("missionreleasetime")));
+		// 任務截止時間
+		java.util.Date endDate = Date.valueOf((req.getParameter("missionduetime")));
+		System.out.println(req.getParameter("missionreleasetime"));
+		if ("issueNormalMission".equals(action)) {
+			List<String> errorMsg = new LinkedList<>();
+			req.setAttribute("errorMsg", errorMsg);
+			System.out.println("got post from issuemission");
+			if (startDate.after(endDate)) {
+				System.out.println("ERROR here");
+			}
 		}
 	}
 	
