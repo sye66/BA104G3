@@ -4,7 +4,7 @@
 <%@ page import="com.proorder.model.*"%>
 <%-- <%@ page import="javax.servlet.http.HttpSession"%> --%>
 <%@ page import="com.mem.model.*"%><html>
-
+<%@page import="java.util.*"%>
 
 
 <head>
@@ -23,26 +23,40 @@
 <body>
 
 <%
+MemVO memVO =(MemVO) session.getAttribute("memVO");
+String mem_No = null;
+if(session.getAttribute("memVO")!=null){
+	mem_No = memVO.getMem_No();
+	
 	ProOrderService proOrderSvc = new ProOrderService();
-// 	String mem_No1 =(String)session.getAttribute("");
-	String mem_No = "M000001";	
-	proOrderSvc.listProOrder(mem_No);
+		
+	List<ProOrderVO> list =	proOrderSvc.listProOrder(mem_No);
+	pageContext.setAttribute("list",list);
+}
 %>
 
-
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/>  --%>
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<%-- <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	 --%>
+</div>
 
 <div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+					<h3>訂單查詢:</h3>
 					<table class="table table-hover">
-					
-						<caption>訂單查詢</caption>
+				
+						<caption></caption>
 						<thead>
 							<tr>
 								<th>訂單編號</th>
 								<th>收件人</th>
-								<th>電話</th>
 								<th>地址</th>
+								<th>電話</th>
 								<th>狀態</th>
 								<th>出貨日期</th>
 								<th>查詢</th>
@@ -51,7 +65,8 @@
 							</tr>
 						</thead>
 						<tbody>
-						<c:forEach var="proOrder" items="${listProOrder}">
+						<h4><%@ include file="page1.file" %></h4> 
+						<c:forEach var="proOrder" items="${list} begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<tr>
 								<td>${proOrder.ord_No } </td>
 								<td>${proOrder.ord_Consignee }</td>
@@ -79,7 +94,7 @@
          							    <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               							<input type="hidden" name="action"  value="updateProOrderUp">
               							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-              							<input type="hidden" name="ord_No"  value="${proOrder.ord_No }">
+              							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
               							<input type="hidden" name="ord_Shipinfo"  value="${proOrder.ord_Shipinfo}">
              							<button type="submit" class="btn btn-danger" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button>
           								</form></div>
@@ -89,7 +104,7 @@
 							
 						
 						</c:forEach>
-							
+						<%@include file="page2.file" %>	
 						</tbody>
 					</table>
 

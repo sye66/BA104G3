@@ -364,7 +364,6 @@ System.out.println("自增主鍵值= " + next_Ord_No +"(剛新增成功的訂單
 			//在同時新增清單
 			ProOrdListService proOrdListSvc = new ProOrdListService();
 			for(ProCartVO proCartVO:list){
-System.out.println(list.size());	
 				String ord_No = next_Ord_No;
 				String pro_No = proCartVO.getProCar_No();
 				Integer ordPro_Count = proCartVO.getProCar_Quantity();
@@ -372,9 +371,11 @@ System.out.println(list.size());
 System.out.println(next_Ord_No +" "+pro_No+" "+ordPro_Count+" "+ordPor_Price);					
 				proOrdListSvc.addProOrdList(ord_No, pro_No, ordPro_Count, ordPor_Price,con);
 			}
-System.out.println("同時新增完成");			
+System.out.println("同時新增完成");	
+
 			con.commit();
 			con.setAutoCommit(true);
+			
 			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "

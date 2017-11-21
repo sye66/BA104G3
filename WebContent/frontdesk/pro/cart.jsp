@@ -161,12 +161,13 @@ window.onscroll = function() {
 
 <%if (buylist != null && (buylist.size() > 0)) {%>
 	<%
+	int i=0;
 	 Integer totalPrice=0;	
 	 for (int index = 0; index < buylist.size(); index++) {
-		 
+		 i++;
 		 ProCartVO order = buylist.get(index);
 	%>
-	<table class="cartPro">	
+	<table class="cartPro" id="tab">	
 		<tr>
 			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
@@ -174,16 +175,16 @@ window.onscroll = function() {
 			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
 			<td width="100"><div align="center"><b><%=order.getProCar_Name()%></b></div></td>
 		
-			<td width="100"><div align="center" id="proPrice"><b><%=order.getProCar_Price()%>點</b></div></td>
+			<td width="100"><div align="center" id="proPrice"><span class="price"><%=order.getProCar_Price()%></span>點</div></td>
 			<td width="100">
 				<div align="center">
-					<button type="button" id="backPro"  style="width: 30px;">-</button>
-					<input type="text" id="proCount" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 35px;text-align:center">	
-					<button type="button" id="addPro"  style="width: 30px;">+</button>
+					<button type="button" class="min" style="width: 30px;">-</button>
+					<input type="text" class="text_box" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 30px;text-align:center">	
+					<button type="button"  class="add"  style="width: 30px;">+</button>
 				</div>
 			</td>
 			<td width="100">
-				<div>&nbsp;<span style="color:red;"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
+				<div>&nbsp;<span style="color:red;" id="minPrice"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
         	<td width="100"><div align="center">
            <form name="deleteForm"  action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
@@ -198,7 +199,7 @@ window.onscroll = function() {
 	<div class="container">
 		<div class="row">           
 			<div class="col-xs-12 col-sm-3 col-sm-offset-3"><h3>共&nbsp;<span style="color:red;"><%=buylist.size()%></span>&nbsp;項商品</h3></div>
-			<div class="col-xs-12 col-sm-4"><h2>總計:&nbsp;<span style="color:red;"><%=totalPrice%></span>&nbsp;點</h2></div>
+			<div class="col-xs-12 col-sm-4"><h2>總計:&nbsp;<span style="color:red;" id="total"><%=totalPrice%></span>&nbsp;點</h2></div>
 <!-- 			<div class="col-xs-12 col-sm-2"> -->
 		</div>
 	</div>
@@ -249,34 +250,51 @@ window.onscroll = function() {
 
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#backPro").click(function() {
-			var proCount = $("#proCount").val() * 1;
-			if (proCount > 1) {
-				$("#proCount").val(proCount - 1);
-// 				var pCount =$("#proCount").val() * 1;
-// 				var pPrice =$("#proPrice").html() * 1;
-// 				$("#totlPrice").html(pCount*pPrice);
-			}
-			
-			
-		});
-
-		$("#addPro").click(function() {
-			var proCount = $("#proCount").val() * 1;
-			if (proCount < 10) {
-				$("#proCount").val(proCount + 1);
-// 				var pCount =$("#proCount").val() * 1;
-// 				var pPrice =$("#proPrice").html() * 1;
-// 				$("#totlPrice").html(pCount*pPrice);
-			}
-			
-		});
-	});
-
-	
+// $(function(){   
+// 	$(".add").click(function(){  
+// 	        var t = $(this).parent().find('input[class*=text_box]'); 
+	        
+// 	        var c = $(this).parent().find('span[id*=minPrice]').text; 
+// 	        t.val(parseInt(t.val())+1); 
+// 	        alert(c);
+	        
+// 	        setTotal();  
+// 	    })  
+	  
+// 	    $(".min").click(function(){  
+// 	        var t = $(this).parent().find("input[class*=text_box]");  
+// 	        t.val(parseInt(t.val())-1);  
+// 	        if(parseInt(t.val())<0){  
+// 	            t.val(0);  
+// 	        }  
+// 	        setTotal()  
+// 	    })  
+	      
+// 	    function setTotal(){  
+// 	        var sum = 0;  
+// 	        $("#tab td").each(function(){  
+	          
+// 	        var num = parseInt($(this).find("input[class*=text_box]").val()); 
+// 	        var price = parseInt($(this).find("span[class*=price]").text());  
+// 	        price=price*1;
+// 	        console.log("num="+num+!isNaN(num));
+// 	        console.log("price="+price+!isNaN(price));
+// 	        console.log("===================");
+// 	        	if(isNaN(num)){
+//         			num=1;	
+//         		}
+// 	        	if(isNaN(price)){
+// 	        		price=1;
+// 	        	}
+// 	        	sum += num*price;
+	        
+// 	        })  
+// 	        $("#total").html(sum.toFixed(0));  
+// 	    }  
+// 	    setTotal();  
+	  
+// 	})   
 </script>
-
 <br><br>
 </body>
 </html>

@@ -41,7 +41,7 @@
 	window.onscroll = function() {
 		if ($(document).scrollTop() > 200)//这个60是距离顶部高度
 		{
-			$("#ontopDiv").addClass('float');//
+			$("#ontopDiv").addClass('float');
 		} else {
 			$("#ontopDiv").removeClass('float');
 		}

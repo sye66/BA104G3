@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mem.model.MemService;
 import com.mem.model.MemVO;
 import com.pro.shoppingcart.ProCartVO;
 import com.proorder.model.ProOrderService;
@@ -63,16 +64,6 @@ System.out.println("建立訂單 會員編號: "+mem_No);
 				String  ord_Shipinfo = new String("未出貨");
 				java.sql.Date ord_Ship_Date	=new java.sql.Date(System.currentTimeMillis());	
 				
-System.out.println("取完資料 "+mem_No+" "
-				           +ord_Consignee+" "
-				           +ord_Price+" "
-		                   +ord_Phone+" "
-		                   +ord_Address+" "
-				           +ord_Date+" "
-		                   +ord_Shipinfo+" "
-		                   +ord_Ship_Date );				
-				
-				
 				
 				ProOrderVO proOrderVO = new ProOrderVO();
 				proOrderVO.setMem_No(mem_No);
@@ -105,9 +96,26 @@ System.out.println("set完資料 "
 System.out.println("開始新增訂單+明細");				
 				ProOrderService proOrderSvc = new ProOrderService();
 				proOrderSvc.addProOrd_OrdList(proOrderVO, list);
+				Integer sum = 0;
+				for(ProCartVO p :list){
+					sum+= (p.getProCar_Price())*(p.getProCar_Quantity());
+				}
+				
+System.out.println("扣除會員點數: "+sum);				
+				MemService memSvc = new MemService();
+				MemVO memVO=memSvc.getOneMem(mem_No);
+				Integer mem_Point =memVO.getMem_Point();
+System.out.println("會員點數: "+mem_Point);
+				mem_Point = mem_Point-sum;
+System.out.println("扣完後會員點數: "+mem_Point);
+				memSvc.updateMemPoint(mem_No, mem_Point);
+				 memVO =(MemVO)memSvc.getOneMem(mem_No);
+				session.setAttribute("memVO",memVO);
+				
 //				清除購物車內容
 System.out.println("清購物車");				
 				session.removeAttribute("shoppingcart");
+
 				/***************************
 				 * 3.新增完成,準備轉交
 				 ***********/
