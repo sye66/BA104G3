@@ -11,9 +11,11 @@
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
 
-	String arti_No = (String) session.getAttribute("arti_No");
-	String mem_No = (String) session.getAttribute("mem_No");
+    MemVO memVO =(MemVO) session.getAttribute("memVO");
+    String mem_No = memVO.getMem_No();
 	session.setAttribute("mem_No",mem_No);
+	
+	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
@@ -26,7 +28,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />

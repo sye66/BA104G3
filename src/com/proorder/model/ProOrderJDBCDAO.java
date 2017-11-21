@@ -20,7 +20,8 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 	private static final String UPDATE_ORDER = "UPDATE PRO_ORDER SET ORD_CONSIGNEE= ?,ORD_ADDRESS= ?,ORD_PHONE= ?,ORD_SHIPINFO= ?,ORD_SHIP_DATE= ? WHERE ORD_NO=?";
 	private static final String DELETE = "DELETE FROM PRO_ORDER WHERE ORD_NO = ?";
 	private static final String GET_ONE_BY_NO = "SELECT * FROM PRO_ORDER WHERE ORD_NO=?";
-	private static final String INSERT_PROORDER = "INSERT INTO PRO_ORDER (ORD_NO,MEM_NO,ORD_DATE,ORD_PRICE,ORD_CONSIGNEE,ORD_ADDRESS,ORD_PHONE,ORD_SHIPINFO,ORD_SHIP_DATE) VALUES (TO_CHAR(SYSDATE,'YYYYmmdd')||'-'||LPAD(TO_CHAR(PRO_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?)";
+	private static final String INSERT_PROORDER = "INSERT INTO PRO_ORDER  VALUES (TO_CHAR(SYSDATE,'YYYYmmdd')||'-'||LPAD(TO_CHAR(PRO_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?)";
+//	private static final String INSERT_PROORDER = "INSERT INTO PRO_ORDER (ORD_NO,MEM_NO,ORD_DATE,ORD_PRICE,ORD_CONSIGNEE,ORD_ADDRESS,ORD_PHONE) VALUES (TO_CHAR(SYSDATE,'YYYYmmdd')||'-'||LPAD(TO_CHAR(PRO_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
 	private static final String GET_PROORDER_BY_MEM_NO = "SELECT * FROM PRO_ORDER WHERE MEM_NO=? ORDER BY ORD_NO";
 	private static final String UPDATE_BY_ORDER_NO = "UPDATE PRO_ORDER SET ORD_SHIPINFO= ? WHERE ORD_NO=?";
 	
@@ -41,7 +42,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 			
 			pst.setString(1,proOrderVO.getMem_No());
 			pst.setDate(2,proOrderVO.getOrd_Date());
-			pst.setDouble(3,proOrderVO.getOrd_Price());
+			pst.setInt(3,proOrderVO.getOrd_Price());
 			pst.setString(4,proOrderVO.getOrd_Consignee());
 			pst.setString(5,proOrderVO.getOrd_Address());
 			pst.setString(6,proOrderVO.getOrd_Phone());
@@ -323,21 +324,25 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 	
 	@Override
 	public void insertProOrder_ProOrdList(ProOrderVO proOrderVO , List<ProCartVO> list) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url,use,pwd);
-		
-			//先新增訂單
-			String proOrder [] = {"ord_No"};
-			pstmt = con.prepareStatement(INSERT_PROORDER,proOrder);
+System.out.println("先新增訂單");
+
 			con.setAutoCommit(false);
+//先新增訂單
+			String cols[] = {"ORD_NO"};
+		   
 			
+			pstmt = con.prepareStatement(INSERT_PROORDER,cols);
+
 			pstmt.setString(1,proOrderVO.getMem_No());
 			pstmt.setDate(2,proOrderVO.getOrd_Date());
-			pstmt.setDouble(3,proOrderVO.getOrd_Price());
+			pstmt.setInt(3,proOrderVO.getOrd_Price());
 			pstmt.setString(4,proOrderVO.getOrd_Consignee());
 			pstmt.setString(5,proOrderVO.getOrd_Address());
 			pstmt.setString(6,proOrderVO.getOrd_Phone());
@@ -345,7 +350,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 			pstmt.setDate(8,proOrderVO.getOrd_Ship_Date());
 			
 			pstmt.executeUpdate();
-			
+System.out.println("新增訂單完成");			
 			//掘取對應的自增主鍵值
 			String next_Ord_No = null;
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -374,7 +379,7 @@ System.out.println("同時新增完成");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
 					+ e.getMessage());
-		} catch (SQLException se) {
+		} catch (Exception se) {
 			if (con != null) {
 				try {
 					// 3●設定於當有exception發生時之catch區塊內
@@ -386,8 +391,9 @@ System.out.println("同時新增完成");
 							+ excep.getMessage());
 				}
 			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+			se.printStackTrace();
 			// Clean up JDBC resources
 		}finally {
 			if (pstmt != null) {
@@ -589,31 +595,31 @@ System.out.println("同時新增完成");
 		//新增訂單和明細
 		
 		//模擬購物車內商品
-//		ProCartVO proCartVO = new ProCartVO();
-//		proCartVO.setProCar_No("P000005");
-//		proCartVO.setProCar_Name("XXX");
-//		proCartVO.setProCar_Info("XXXXX");
-//		proCartVO.setProCar_Price(100.0);
-//		proCartVO.setProCar_Quantity(100);
-//
-//		List<ProCartVO> list = new Vector<ProCartVO>();
-//		list.add(proCartVO);
-//		
+		ProCartVO proCartVO = new ProCartVO();
+		proCartVO.setProCar_No("P000005");
+		proCartVO.setProCar_Name("XXX");
+		proCartVO.setProCar_Info("XXXXX");
+		proCartVO.setProCar_Price(100);
+		proCartVO.setProCar_Quantity(100);
+
+		List<ProCartVO> list = new Vector<ProCartVO>();
+		list.add(proCartVO);
+		
 		
 		//新增訂單
-//		ProOrderVO proOrderVO6 = new ProOrderVO();	
-//		proOrderVO6.setMem_No("M000001");
-//		proOrderVO6.setOrd_Date(java.sql.Date.valueOf("2017-11-12"));
-//		proOrderVO6.setOrd_Price(500.0);
-//		proOrderVO6.setOrd_Consignee("小天2");
-//		proOrderVO6.setOrd_Address("桃園桃園桃園桃園桃園桃園");
-//		proOrderVO6.setOrd_Phone("0953711015");
-//		proOrderVO6.setOrd_Shipinfo("未出貨");
-//		proOrderVO6.setOrd_Ship_Date(null);
-//		
-//		ProOrderJDBCDAO p6 = new ProOrderJDBCDAO();
-//		p6.insertProOrder_ProOrdList(proOrderVO6,list);
-//	
+		ProOrderVO proOrderVO6 = new ProOrderVO();	
+		proOrderVO6.setMem_No("M000001");
+		proOrderVO6.setOrd_Date(java.sql.Date.valueOf("2017-11-12"));
+		proOrderVO6.setOrd_Price(500);
+		proOrderVO6.setOrd_Consignee("小天2");
+		proOrderVO6.setOrd_Address("桃園桃園桃園桃園桃園桃園");
+		proOrderVO6.setOrd_Phone("0953-711015");
+		proOrderVO6.setOrd_Shipinfo("未出貨");
+		proOrderVO6.setOrd_Ship_Date(null);
+		
+		ProOrderJDBCDAO p6 = new ProOrderJDBCDAO();
+		p6.insertProOrder_ProOrdList(proOrderVO6,list);
+	
 		
 		
 		//查會員所有訂單

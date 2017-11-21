@@ -275,6 +275,11 @@ public class Stored_HistoryServlet extends HttpServlet{
 				mem_Point = mem_Point_old + stored_Cost;
 				
 				memVO.setMem_Point(mem_Point);
+				String cn = req.getParameter("card_number");
+				String fn = req.getParameter("full_name");
+				String my = req.getParameter("mmyy");
+				
+				
 				
 				
 				System.out.println("mem_Point "+mem_Point);
@@ -286,6 +291,9 @@ public class Stored_HistoryServlet extends HttpServlet{
 				System.out.println("stored_Cost " + stored_Cost);
 				
 				if (!errorMsgs.isEmpty()){
+					req.setAttribute("card_number", cn);
+					req.setAttribute("full_name", fn);
+					req.setAttribute("mmyy", my);
 					req.setAttribute("storedVO", storedVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
 					failureView.forward(req, res);
@@ -307,6 +315,12 @@ public class Stored_HistoryServlet extends HttpServlet{
 				memVO= memSvc.recharge(memVO);
 				
 				System.out.println("memVO " + memVO);
+				
+				req.setAttribute("card_number", cn);
+				req.setAttribute("full_name", fn);
+				req.setAttribute("mmyy", my);
+				
+				
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("memVO", memVO);

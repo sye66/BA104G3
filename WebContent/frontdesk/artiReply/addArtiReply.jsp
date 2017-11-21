@@ -25,35 +25,7 @@
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
 </style>
 
 </head>
@@ -61,14 +33,6 @@
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
-<table id="table-1">
-	<tr><td>
-		 <h3>回覆文章新增 - AddArtiReply.jsp</h3></td><td>
-		 <h4><a href="select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-
-<h3>資料新增:</h3>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">

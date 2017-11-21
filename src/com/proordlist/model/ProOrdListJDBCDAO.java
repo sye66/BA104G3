@@ -29,15 +29,16 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 			con.setAutoCommit(false);
 System.out.println("開始新增清單");			
 			pst.setString(1,proOrdListVO.getOrd_No());
+System.out.println();			
 			pst.setString(2,proOrdListVO.getPro_No());
 			pst.setInt(3,proOrdListVO.getOrdPro_Count());
-			pst.setDouble(4,proOrdListVO.getOrdPro_Price());
+			pst.setInt(4,proOrdListVO.getOrdPro_Price());
 			
 System.out.println("清單 訂單編號"+proOrdListVO.getOrd_No());				
 		
 			pst.executeUpdate();
-			con.commit();
-			con.setAutoCommit(true);
+			
+			
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "

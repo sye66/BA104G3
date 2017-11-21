@@ -17,6 +17,32 @@
     <res-auth>Container</res-auth>
   </resource-ref>
   
+  
+  <!--註冊導回首頁的濾器 -->
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.tool.controller.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+<!--     <url-pattern>/frontdesk/pro/cart.jsp</url-pattern> -->
+    <url-pattern>/frontdesk/proOrder/addProOrder.jsp</url-pattern>
+    
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+<!--註冊導回首頁的濾器 -->  
+  
+  
+  
+  
+  
+  
+  
   <servlet>
     <servlet-name>SkillServlet</servlet-name>
     <servlet-class>com.skill.controller.SkillServlet</servlet-class>

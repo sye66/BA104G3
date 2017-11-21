@@ -7,7 +7,7 @@
 
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 <%  MemVO memVO = (MemVO) request.getAttribute("memVO");  %>
-<%  memVO = (MemVO) request.getSession().getAttribute("memVO"); %>
+<%   memVO = (MemVO) request.getSession().getAttribute("memVO");%>
 <!-- MemServlet.java(Controller), 存入req的memVO物件 -->
 
 
@@ -80,21 +80,16 @@
 		<th>照片</th>
 		<th>會員編號</th>
 		<th style="width:10%">姓名</th>
-		<th style="width:10%">暱稱</th>
+		<th>暱稱</th>
 		<th>生日</th>
-		<th style="width:5%">性別</th>
+		<th>性別</th>
 		<th>E-mail</th>
+		<th>詳細</th>
 
-		<th>自我介紹</th>
-		<th>認證號碼</th>
-		<th>帳號狀態</th>
-		<th>完成任務數</th>
-		<th>可否被搜尋</th>
-		<th>剩餘積分</th>
 	</tr>
 		<tr>
 			<td><img id="img" src="<%=request.getContextPath()%>/mem/memShowImage.do?mem_No=${memVO.mem_No}"></td>
-			<td>${memVO.mem_No}</td>
+			<td>${MemSvc.getOneMem(memVO.mem_No).mem_No}</td>
 			<td>${memVO.mem_Name}</td>
 			<td>${memVO.mem_Id}</td>
 			<td>${memVO.mem_Bday}</td>
@@ -107,26 +102,9 @@
 			<c:if test="${memVO.mem_Gend==3}">
 			<td>不想說</td>
 			</c:if>
-			
 			<td>${memVO.mem_Email}</td>
-			<td>${memVO.mem_Intro}</td>
-			<td>${memVO.mem_Code}</td>
-			
-			<c:if test="${memVO.mem_State==0}">
-			<td>尚未驗證</td>
-			</c:if>
-			<c:if test="${memVO.mem_State==1}">
-			<td>一般會員</td>
-			</c:if>
-			
-			<td>${memVO.mission_Count}</td>
-			<c:if test="${memVO.mem_Search==0}">
-			<td>否</td>
-			</c:if>
-			<c:if test="${memVO.mem_Search==1}">
-			<td>可</td>
-			</c:if>
-			<td>${memVO.mem_Point}</td>
+			<td><a href="<%=request.getContextPath()%>/backdesk/mem/listOneMem.jsp">
+				<input value="詳細" type="submit" class="btn btn-success btn-block btn-lg" tabindex="7"></a></td>
 			
 		</tr>
 </table>

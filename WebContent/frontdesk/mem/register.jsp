@@ -92,45 +92,45 @@
 		</div>
 			
 			<div class="form-group">E-mail
-            <input type="email" name="mem_Email" size="36" placeholder="請輸入e-mail EX:aaa123@gmail.com" class="form-control input-lg" tabindex="3"
+            <input type="email" id="mem_Email" name="mem_Email" size="36" placeholder="請輸入e-mail EX:aaa123@gmail.com" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Email()%>" />
     			
 			</div>
 		
             <div class="form-group">密碼
-            <input type="password" name="mem_Pw" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
+            <input type="password" id="mem_Pw" name="mem_Pw" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
             id="inputPassword1" pattern="[A-Za-z0-9]{6,16}" maxlength='16' title='由英文或數字所組成的6~16字元' 
             onchange="$('#inputPassword2').attr('pattern',$(this).val())" required />
     			
 			</div>
 			
 			<div class="form-group">再次確認密碼
-            <input type="password" name="mem_Pw_reg" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
+            <input type="password" id="mem_Pw_reg" name="mem_Pw_reg" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
             id="inputPassword2" title='與密碼不符' required />
     			
 			</div>
 			
 			<div class="form-group">姓名
-            <input type="TEXT" name="mem_Name" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" id="mem_Name" name="mem_Name" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
     			
 			</div>
 			
 			<div class="form-group">暱稱
-            <input type="TEXT" name="mem_Id" size="36" placeholder="請輸入中文或英文暱稱" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" id="mem_Id" name="mem_Id" size="36" placeholder="請輸入中文或英文暱稱" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Id()%>" />
     			
 			</div>
 			
 			
 			<div class="form-group">市話號碼
-            <input type="TEXT" name="mem_Tel" size="36" placeholder="EX:03-3345678" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" id="mem_Tel" name="mem_Tel" size="36" placeholder="EX:03-3345678" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Tel()%>" />
 			
 			</div>
 			
 			<div class="form-group">手機號碼
-            <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978-978978" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" id="mem_Pho" name="mem_Pho" size="36" placeholder="EX:0978-978978" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Pho()%>" />
 			
 			</div>
@@ -147,7 +147,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 			<div id="bday_right"class="form-group">生日
-            <input type="TEXT" name="mem_Bday" size="36" id="f_date1" class="form-control input-lg" tabindex="3"/>
+            <input type="TEXT" id="mem_Bday" name="mem_Bday" size="36" id="f_date1" class="form-control input-lg" tabindex="3"/>
     		</div>	
 			</div>
 			</div>
@@ -160,7 +160,7 @@
 				String Area = request.getParameter("Area2");
 				String ZIP = request.getParameter("ZIP"); 			%>
 			<div class="form-group">通訊地址
-            <input type="TEXT" name="mem_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" id="mem_Address" name="mem_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
 			
 			</div>
@@ -198,14 +198,14 @@
 			</div>
 			
 			
-			<div class="form-group">關於我<input name="mem_Intro" type="text" value="<%= (memVO==null)? "": memVO.getMem_Intro()%>" placeholder="請輸入10個中文字以上" class="form-control input-lg" tabindex="3">
+			<div class="form-group">關於我<input id="mem_Intro" name="mem_Intro" type="text" value="<%= (memVO==null)? "": memVO.getMem_Intro()%>" placeholder="請輸入10個中文字以上" class="form-control input-lg" tabindex="3">
 <%--             <textarea style="width:100%" name="mem_Intro" rows="4" cols="100" placeholder="請輸入10個中文字以上" class="form-control input-lg" tabindex="3" required ></textarea>  --%>
 			</div>
 			
 			<div class="row">
 				<div class="col-xs-3 col-sm-3 col-md-3">
 					<span class="button-checkbox">
-						<button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>
+						<button type="button" class="btn aa" data-color="info" tabindex="7">I Agree</button>
                         <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
 					</span>
 				</div>
@@ -218,38 +218,37 @@
 			<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
 				<input type="hidden" name="action" value="registerNew">
-				<input type="submit" class="btn btn-success btn-block btn-lg" tabindex="7">
+				<input type="submit" class="btn btn-success btn-block btn-lg" tabindex="7" value="Register">
 				</div>
 				</div>
+				
+				<input type="button" id="bb" value="Mageic_Button">
 				
 </FORM>
 		</div>
 	</div>
 </div>
 		
-<!-- Modal -->
-<div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
-			</div>
-			<div class="modal-body">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<!-- <!-- Modal --> -->
+<!-- <div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+<!-- 	<div class="modal-dialog"> -->
+<!-- 		<div class="modal-content"> -->
+<!-- 			<div class="modal-header"> -->
+<!-- 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 				<h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4> -->
+<!-- 			</div> -->
+<!-- 			<div class="modal-body"> -->
+<!-- 				<p>Ｑ4、在這個平台有什麼需要注意的嗎　？</p> -->
+<!-- 				<p>Ａ4、本平台僅提供會員們可以交流的環境，若會員在此發生什麼違反法律的事情，本平台一概不負任何責任，也請會員們不要輕易以身試法，謝謝!</p> -->
+			
+<!-- 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p> -->
+<!-- 			</div> -->
+<!-- 			<div class="modal-footer"> -->
+<!-- 				<button type="button" class="btn btn-primary" data-dismiss="modal" id="faq">I Agree</button> -->
+<!-- 			</div> -->
+<!-- 		</div>/.modal-content -->
+<!-- 	</div>/.modal-dialog -->
+<!-- </div>/.modal -->
 
 
 
@@ -326,7 +325,25 @@
 				$('#Area2').val(areaname);
 			});
 		
-		<%= ZIP %>
+
+
+		$('#bb').click(function(){
+			mem_Intro
+			$('#mem_Email').val("kkk@gmail.com");				
+			$('#mem_Pw').val("A123123");
+			$('#mem_Pw_reg').val("A123123");
+			$('#mem_Name').val("阿群");
+			$('#mem_Id').val("高雄陳柏霖");
+			$('#mem_Tel').val("07-3345678");
+			$('#mem_Pho').val("0978-449449");
+			$('#mem_Bday').val("mem_Bday");
+			$('#mem_Address').val("桃園市中壢區中大路300號1樓之1");
+			$('#mem_Intro').val("大家好我是高雄陳柏霖，看到這個平台感覺可以藉由幫助他人認是更多朋友，請多指教	");
+
+		})
+				$('.aa').click(function(){
+					swal('<p>Ｑ4、在這個平台有什麼需要注意的嗎　？</p><p>Ａ4、本平台僅提供會員們可以交流的環境，若會員在此發生什麼違反法律的事情，本平台一概不負任何責任，也請會員們不要輕易以身試法，謝謝!</p><br>')
+					});
 </script>
 
 

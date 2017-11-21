@@ -14,8 +14,12 @@
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
+    
+    String mem_No = (String) session.getAttribute("arti_No");
+	session.setAttribute("mem_No",mem_No);
+    
 	String arti_No = (String) session.getAttribute("arti_No");
-	String mem_No = (String) session.getAttribute("mem_No");
+	session.setAttribute("arti_No",arti_No);
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 
@@ -115,7 +119,7 @@ div {
                                   <div class="widget-main padding-6">
                                   <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-	                              <p>${artiFormVO.mem_No}&mem_${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
+	                              <p>${artiFormVO.mem_No}&${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
                                   </div>
                                </div>
                                 <div class="widget-toolbar">
