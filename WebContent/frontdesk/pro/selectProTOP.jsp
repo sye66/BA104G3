@@ -151,12 +151,15 @@ int count3 = 0;
 			<span class="sr-only">unread messages</span>					
 			<!--購物車-->
 			<!--清單 -->
-			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="<%=request.getContextPath()%>/pro/proOrderServlet.do?action=getListProOrder ">
-				<img alt="清單" src="<%=request.getContextPath()%>/res/images/pro_icons/top03.gif"
-					 style="height: 35px;"></a></span>
-			<span class="badge"><%=count3%></span>
-			<!--清單 -->
+			<%if(session.getAttribute("memVO")!=null){%>
+				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="<%=request.getContextPath()%>/pro/proOrderServlet.do?action=getListProOrder ">
+					<img alt="清單" src="<%=request.getContextPath()%>/res/images/pro_icons/top03.gif"
+						 style="height: 35px;"></a></span>
+				<span class="badge"><%=count3%></span>
+				<!--清單 -->
+			<% 	} %>
+			
 			<!--通知 -->				
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="

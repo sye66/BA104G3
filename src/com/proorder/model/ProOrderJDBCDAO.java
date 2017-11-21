@@ -490,7 +490,8 @@ System.out.println("同時新增完成");
 			con = DriverManager.getConnection(url, use, pwd);
 			pst = con.prepareStatement(UPDATE_BY_ORDER_NO);
 			con.setAutoCommit(false);
-			
+System.out.println(proOrderVO.getOrd_Shipinfo());			
+System.out.println(proOrderVO.getOrd_No());			
 			
 			pst.setString(1,proOrderVO.getOrd_Shipinfo());
 			pst.setString(2,proOrderVO.getOrd_No());
@@ -557,16 +558,16 @@ System.out.println("同時新增完成");
 //		p1.insert(p1VO);
 //		
 		//修改
-//		ProOrderJDBCDAO p4 = new ProOrderJDBCDAO();
-//		ProOrderVO p4VO = new ProOrderVO();
-//		
+		ProOrderJDBCDAO p4 = new ProOrderJDBCDAO();
+		ProOrderVO p4VO = new ProOrderVO();
 //		p4VO.setOrd_Consignee("ggg");
 //		p4VO.setOrd_Address("桃園fffff桃園桃園桃園桃園桃園");
 //		p4VO.setOrd_Phone("ttttffff");
-//		p4VO.setOrd_Shipinfo("fgggffff");
-//		p4VO.setOrd_Ship_Date(java.sql.Date.valueOf("2017-10-30"));
-//		p4VO.setOrd_No("20171026-000003");
+		p4VO.setOrd_Shipinfo("已取消");
+		p4VO.setOrd_Ship_Date(java.sql.Date.valueOf("2017-10-30"));
+		p4VO.setOrd_No("20171121-000004");
 //		p4.update(p4VO);
+		p4.updateOrderUp(p4VO);
 		
 		
 		
@@ -592,36 +593,36 @@ System.out.println("同時新增完成");
 //				+" "+p5VO.getOrd_Price()+" "+p5VO.getOrd_Consignee()
 //				+" "+p5VO.getOrd_Address()+" "+p5VO.getOrd_Phone()
 //				+" "+p5VO.getOrd_Shipinfo()+" "+p5VO.getOrd_Ship_Date());
-		
+//		
 		//新增訂單和明細
 		
 		//模擬購物車內商品
-		ProCartVO proCartVO = new ProCartVO();
-		proCartVO.setProCar_No("P000005");
-		proCartVO.setProCar_Name("XXX");
-		proCartVO.setProCar_Info("XXXXX");
-		proCartVO.setProCar_Price(100);
-		proCartVO.setProCar_Quantity(100);
-
-		List<ProCartVO> list = new Vector<ProCartVO>();
-		list.add(proCartVO);
-		
+//		ProCartVO proCartVO = new ProCartVO();
+//		proCartVO.setProCar_No("P000005");
+//		proCartVO.setProCar_Name("XXX");
+//		proCartVO.setProCar_Info("XXXXX");
+//		proCartVO.setProCar_Price(100);
+//		proCartVO.setProCar_Quantity(100);
+//
+//		List<ProCartVO> list = new Vector<ProCartVO>();
+//		list.add(proCartVO);
+//		
 		
 		//新增訂單
-		ProOrderVO proOrderVO6 = new ProOrderVO();	
-		proOrderVO6.setMem_No("M000001");
-		proOrderVO6.setOrd_Date(java.sql.Date.valueOf("2017-11-12"));
-		proOrderVO6.setOrd_Price(500);
-		proOrderVO6.setOrd_Consignee("小天2");
-		proOrderVO6.setOrd_Address("桃園桃園桃園桃園桃園桃園");
-		proOrderVO6.setOrd_Phone("0953-711015");
-		proOrderVO6.setOrd_Shipinfo("未出貨");
-		proOrderVO6.setOrd_Ship_Date(null);
-		
-		ProOrderJDBCDAO p6 = new ProOrderJDBCDAO();
-		p6.insertProOrder_ProOrdList(proOrderVO6,list);
-	
-		
+//		ProOrderVO proOrderVO6 = new ProOrderVO();	
+//		proOrderVO6.setMem_No("M000001");
+//		proOrderVO6.setOrd_Date(java.sql.Date.valueOf("2017-11-12"));
+//		proOrderVO6.setOrd_Price(500);
+//		proOrderVO6.setOrd_Consignee("小天2");
+//		proOrderVO6.setOrd_Address("桃園桃園桃園桃園桃園桃園");
+//		proOrderVO6.setOrd_Phone("0953-711015");
+//		proOrderVO6.setOrd_Shipinfo("未出貨");
+//		proOrderVO6.setOrd_Ship_Date(null);
+//		
+//		ProOrderJDBCDAO p6 = new ProOrderJDBCDAO();
+//		p6.insertProOrder_ProOrdList(proOrderVO6,list);
+//	
+//		
 		
 		//查會員所有訂單
 		ProOrderJDBCDAO p7 = new ProOrderJDBCDAO();

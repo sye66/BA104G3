@@ -66,7 +66,7 @@ public class ProOrderService {
 	public ProOrderVO updateProOrderUp(String ord_No,String ord_Shipinfo,Date ord_Ship_Date){
 		ProOrderVO proOrderVO = new ProOrderVO();
 		
-		proOrderVO.setMem_No(ord_No);
+		proOrderVO.setOrd_No(ord_No);
 		proOrderVO.setOrd_Shipinfo(ord_Shipinfo);
 		proOrderVO.setOrd_Ship_Date(ord_Ship_Date);
 		
