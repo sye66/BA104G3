@@ -87,4 +87,16 @@ public class AccuseCaseService {
 
 		return accuseCaseVO;
 	}
+	
+	public AccuseCaseVO updateAccuseCasebyemp(String accuse_No, String emp_No, Integer accuse_State) {
+
+		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
+
+		accuseCaseVO.setAccuse_No(accuse_No);
+		accuseCaseVO.setEmp_No(emp_No);
+		accuseCaseVO.setAccuse_State(accuse_State);
+		dao.update(accuseCaseVO);
+
+		return accuseCaseVO;
+	}
 }
