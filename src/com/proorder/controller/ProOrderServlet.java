@@ -62,7 +62,7 @@ System.out.println("建立訂單 會員編號: "+mem_No);
 				String ord_Address = new String(req.getParameter("ord_Address").trim());
 				java.sql.Date ord_Date = new java.sql.Date(System.currentTimeMillis());
 				String  ord_Shipinfo = new String("未出貨");
-				java.sql.Date ord_Ship_Date	=new java.sql.Date(System.currentTimeMillis());	
+				java.sql.Date ord_Ship_Date	= null;	
 				
 				
 				ProOrderVO proOrderVO = new ProOrderVO();
@@ -150,14 +150,24 @@ System.out.println("session取得的會員編號 "+mem_No);
 				/*************************** 2.開始查詢資料 *****************************************/
 				ProOrderService proOrderSvc = new ProOrderService();
 				
-				 List<ProOrderVO> listProOrder = proOrderSvc.listProOrder(mem_No);
+				 List<ProOrderVO> proOrderlist = proOrderSvc.listProOrder(mem_No);
 				
 
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				req.setAttribute("listProOrder", listProOrder);
-	System.out.println("訂單查完轉交");		              
+				 session.removeAttribute("proOrderlist");
+				 session.setAttribute("proOrderlist", proOrderlist);
+//				req.setAttribute("list", list);
+	System.out.println("訂單查完轉交");	
+	for(ProOrderVO pvo2:proOrderlist){
+		System.out.println(pvo2.getOrd_No()
+		+" "+pvo2.getOrd_Date()+" "+pvo2.getMem_No()
+		+" "+pvo2.getOrd_Price()+" "+pvo2.getOrd_Consignee()
+		+" "+pvo2.getOrd_Address()+" "+pvo2.getOrd_Phone()
+		+" "+pvo2.getOrd_Shipinfo()+" "+pvo2.getOrd_Ship_Date());
+	}
+	
 				String url = "/frontdesk/proOrder/listProOrder.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -176,6 +186,9 @@ System.out.println("session取得的會員編號 "+mem_No);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
 				String ord_No = req.getParameter("ord_No");
+				String whichPage = req.getParameter("whichPage");
+				String requestURL = req.getParameter("requestURL");
+				
 				String ord_Shipinfo = "已取消";
 				java.sql.Date ord_Ship_Date = new java.sql.Date(System.currentTimeMillis());
 System.out.println("訂單取消: "+ord_No);				
@@ -190,6 +203,9 @@ System.out.println("修改完成");
 				/***************************
 				 * 3.刪除完成,準備轉交(Send the Success view)
 				 ***********/
+System.out.println(whichPage);
+System.out.println(requestURL);
+
 				String url = "/pro/proOrderServlet.do?action=getListProOrder";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

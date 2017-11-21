@@ -253,11 +253,7 @@ window.onscroll = function() {
 // $(function(){   
 // 	$(".add").click(function(){  
 // 	        var t = $(this).parent().find('input[class*=text_box]'); 
-	        
-// 	        var c = $(this).parent().find('span[id*=minPrice]').text; 
 // 	        t.val(parseInt(t.val())+1); 
-// 	        alert(c);
-	        
 // 	        setTotal();  
 // 	    })  
 	  
