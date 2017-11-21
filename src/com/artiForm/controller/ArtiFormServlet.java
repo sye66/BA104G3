@@ -188,54 +188,6 @@ System.out.println(session.getAttribute(mem_No));
 //			}
 		}
 		
-		
-//		/******[ 取出ㄧ個要給收尋展示 ]******/
-//		if("GetOne_For_SearchDisplay".equals(action)){
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try{
-//				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				String arti_No = req.getParameter("arti_Title");
-//				if(arti_Title==null||(arti_Title.trim()).length()==0){
-//					errorMsgs.add(" 請選擇主題文章主題 !!! ");
-//				}
-//
-//				if(!errorMsgs.isEmpty()){
-//					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//
-//				/***************************2.開始查詢資料*****************************************/
-//				ArtiFormService artiFormSvc = new ArtiFormService ();
-//				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiSearchByTitle(arti_Title);
-//System.out.println("111"+arti_Title);
-//System.out.println("222"+req.getParameter("arti_Title"));
-//System.out.println(artiFormVO);
-//				if (artiFormVO==null){
-//					errorMsgs.add(" 查無資料 ");
-//				}
-//				
-//				if(!errorMsgs.isEmpty()){
-//					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;
-//				}
-//
-//				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-//				req.setAttribute("artiFormVO", artiFormVO);
-//				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);
-//				successView.forward(req, res);
-//
-//				/***************************其他可能的錯誤處理*************************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/select_page.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
 	
 		
 		/******[ 取出ㄧ個準備更新 ]******/
@@ -502,5 +454,6 @@ System.out.println(session.getAttribute(mem_No));
 			}
 		}
 
+		
 	}
 }
