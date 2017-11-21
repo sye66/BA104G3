@@ -9,14 +9,11 @@
 <%
     MemVO memVO = (MemVO) request.getAttribute("memVO");
 
-
     ArtiFormVO artiFormVO = new ArtiFormVO();
     ArtiFormService artiSvc = new ArtiFormService();
     
-    
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
-    
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
