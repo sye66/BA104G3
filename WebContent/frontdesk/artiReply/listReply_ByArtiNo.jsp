@@ -11,8 +11,7 @@
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
 
-    MemVO memVO =(MemVO) session.getAttribute("memVO");
-    String mem_No = memVO.getMem_No();
+    String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
 	
 	String arti_No = (String) session.getAttribute("arti_No");

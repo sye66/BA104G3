@@ -63,6 +63,9 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
@@ -149,15 +152,6 @@
                 <hr>
                 
                 <div class="widget-main padding-28">
-                 ${artiReplyVO41.arti_No}
-                          <p>您的回覆已新增，請確認要回
-                          <button class="btn btn-info"> <a href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"> 所有文章列表 </a></button>，或回
-                          
-                          <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" style="margin-bottom: 0px;">
-			              <input type="hidden" name="arti_No"  value="${artiReplyVO41.arti_No}">
-			              <input type="hidden" name="arti_Cls_No"  value="${artiReplyVO41.arti_Cls_No}">
-			              <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-                          <button class="btn btn-info" type="submit" name="action" value="jumpOne_For_Display"> 剛才瀏覽文章頁面 </a></button>，謝謝。</p>  
                           </div>
                         </div>     
 </body>

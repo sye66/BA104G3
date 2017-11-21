@@ -311,7 +311,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
@@ -321,7 +321,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if(!user.equals(mem_No)){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add(" = ___ = A 要本人才能修改喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
@@ -348,7 +348,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -517,7 +517,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listOneArtiReply_error.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
@@ -543,7 +543,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("artiReplyVO", artiReplyVO);
 
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiReply/listOneArtiReply_error.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -558,8 +558,8 @@ public class ArtiReplyServlet extends HttpServlet {
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("artiReplyVO41", artiReplyVO);
 				req.setAttribute("artiFormVO", artiFormVO);
-				session.setAttribute("arti_No", arti_No);
-				session.setAttribute("mem_No", mem_No);
+				req.getSession().setAttribute("arti_No", arti_No);
+				req.getSession().setAttribute("mem_No", mem_No);
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -568,7 +568,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiReply/listOneArtiReply_error.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -589,7 +589,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
@@ -598,7 +598,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				if(!user.equals(mem_No)){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
 					failuewView.forward(req, res);
 					return;
 				}
@@ -627,7 +627,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
 				failuewView.forward(req, res);
 			}
 		}

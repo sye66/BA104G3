@@ -78,7 +78,7 @@
 </c:if>
 
     <div class="widgetbox">
-        <div class="title"><h3>討論區文章回覆查詢 : <a href="/BA104G3/backdesk/artiReply/listAllArtiReply.jsp">List</a> all Article reply. </h3>
+        <div class="title"><h3>討論區文章回覆查詢 : <a href="/BA104G3/backdesk/artiReply/listAllArtiReply_back.jsp">List</a> all Article reply. </h3>
         </div>
                  <div class="widgetcontent userlistwidget nopadding">
                      <ul>
