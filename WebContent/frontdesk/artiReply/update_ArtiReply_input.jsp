@@ -11,7 +11,6 @@
     String mem_No = memVO.getMem_No();
 %>
 
-
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
