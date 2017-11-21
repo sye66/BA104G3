@@ -43,6 +43,9 @@ public class MemDAO implements MemDAO_interface{
 	private static final String RECHARGE=
 			"UPDATE MEM SET MEM_POINT=? WHERE MEM_NO=?";
 	
+	private static final String UPDATEBYEMP=
+			"UPDATE MEM SET MEM_STATE=? WHERE MEM_NO=?";
+	
 	private static final String INSERT_STMT=
 			"INSERT INTO mem (mem_No,mem_Pw,mem_Name,mem_Id,mem_Bday,"
 			+ "mem_Tel,mem_Pho,mem_Gend,mem_Email,mem_Pic,mem_Intro,mem_Code,"
@@ -350,7 +353,49 @@ public class MemDAO implements MemDAO_interface{
 	}
 		
 		
+		@Override
+		public void updateByEmp(MemVO memVO) {
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATEBYEMP);
+				
+				
+				pstmt.setInt(1, memVO.getMem_State());
+				pstmt.setString(2, memVO.getMem_No());
+				
+				pstmt.executeUpdate();
+				
+				
+				
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
 		
+	}
 		
 		
 		

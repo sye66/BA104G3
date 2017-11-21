@@ -27,6 +27,13 @@ public class MemService {
 
 		return memVO;
 	}
+	
+	public MemVO updateByEmp(MemVO memVO){
+
+		dao.updateByEmp(memVO);
+
+		return memVO;
+	}
 
 	public MemVO addMem(String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday, String mem_Tel, String mem_Pho,
 			Integer mem_Gend, String mem_Email, byte[] mem_Pic, String mem_Intro, Integer mem_Code, Integer mem_State,
@@ -118,6 +125,11 @@ public class MemService {
 		return memVO;
 
 	}
+	
+	
+	
+	
+	
 
 	public MemVO updateMem(String mem_No, String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday, String mem_Tel,
 			String mem_Pho, Integer mem_Gend, String mem_Email, byte[] mem_Pic, String mem_Intro, Integer mem_Code,

@@ -199,6 +199,15 @@ function getFocus() {
 		</div>
 
 
+<c:if test="${memSvc.getOneMem(memVO.mem_No).mem_State ==9}">
+<input type="hidden" id="auth">
+</c:if>
+
+
+
+
+
+
     <!-- Bootstrap core JavaScript -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery.js"></script>
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -224,11 +233,7 @@ function getFocus() {
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
-  
-  
-  
-  
-  
+ 
   </body>
 
 </html>

@@ -4,10 +4,12 @@
 <%@ page import="com.mem.model.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
+<jsp:useBean id="MemSvc" scope="session" class="com.mem.model.MemService"/>
 
 <%
 	MemService memSvc = new MemService();
+	request.getSession().getAttribute("memVO");
+	request.getAttribute("memVO");
 	List<MemVO> list = memSvc.getAll();
 	pageContext.setAttribute("list" , list);
 %>
@@ -27,6 +29,7 @@
     border: 3px ridge Gray;
     height: 80px;
     text-align: center;
+    
   }
   table#table-1 h4 {
     color: red;
@@ -47,8 +50,10 @@
 	margin-bottom: 5px;
 	
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
+  table, th, td,tr ,#bo{
+   border: 1px solid #0044BB;
+       text-align: center;
+     font-size:20px;
   }
   th, td {
     padding: 5px;
@@ -57,11 +62,13 @@
   }
   #img{width:150px;
 	heigth:150px}
+	#hh {
+	 height:100px}
 </style>
 
 </head>
 <body>
-<%-- 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" /> --%>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/backdeskMemLeft.jsp" flush="true" />
 	
 	
@@ -72,10 +79,10 @@
 
 <table id="table-1">
 	<tr><td>
-			<h3>所有會員資料 - listAllMem.jsp</h3>
-			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp""><img src="image/panda.png"
+			<h3>所有會員資料</h3>
+			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp""><img src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/logo.png"
 			width="60" height="80"
-			border="0">回首頁</a></h4>
+			border="0"><br>回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -92,20 +99,19 @@
 
 <table>
 	<tr>
-		<th>照片</th>
-		<th>會員編號</th>
-		<th>姓名</th>
-		<th>暱稱</th>
-		<th>生日</th>
-		<th>性別</th>
-		<th>E-mail</th>
+		<th id="bo">照片</th>
+		<th id="bo">會員編號</th>
+		<th id="bo" style="width:10%">姓名</th>
+		<th id="bo" style="width:10%">暱稱</th>
+		<th id="bo">生日</th>
+		<th id="bo" style="width:5%">性別</th>
+		<th id="bo">E-mail</th>
 
-		<th>自我介紹</th>
-		<th>帳號狀態</th>
-		<th>完成任務數量</th>
-		<th>是否能被搜尋</th>
-		<th>剩餘積分</th>
-		<th>資料修改</th>
+		<th id="bo">自我介紹</th>
+		<th id="bo">帳號狀態</th>
+		<th id="bo">完成任務數量</th>
+		<th id="bo">是否能被搜尋</th>
+		<th id="bo">剩餘積分</th>
 		
 	</tr>
 	<%@ include file="page1.file" %>
@@ -118,23 +124,41 @@
 			<td>${memVO.mem_Name}</td>
 			<td>${memVO.mem_Id}</td>
 			<td>${memVO.mem_Bday}</td>
-			<td>${memVO.mem_Gend}</td>
+			
+			<c:if test="${memVO.mem_Gend==1}">
+			<td>男</td>
+			</c:if>
+			<c:if test="${memVO.mem_Gend==2}">
+			<td>女</td>
+			</c:if>
+			<c:if test="${memVO.mem_Gend==3}">
+			<td>不想說</td>
+			</c:if>
+			
 			<td>${memVO.mem_Email}</td>
-
 			<td>${memVO.mem_Intro}</td>
-			<td>${memVO.mem_State}</td>
+			
+			<c:if test="${memVO.mem_State==0}">
+			<td>尚未驗證</td>
+			</c:if>
+			<c:if test="${memVO.mem_State==1}">
+			<td>一般會員</td>
+			</c:if>
+			<c:if test="${memVO.mem_State==9}">
+			<td>停權</td>
+			</c:if>
+			
 			<td>${memVO.mission_Count}</td>
-			<td>${memVO.mem_Address}</td>
-			<td>${memVO.mem_Search}</td>
+			
+			<c:if test="${memVO.mem_Search==0}">
+			<td>否</td>
+			</c:if>
+			<c:if test="${memVO.mem_Search==1}">
+			<td>可</td>
+			</c:if>
+			
 			<td>${memVO.mem_Point}</td>
 			
-			<td>
-				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" style="margin-bottom: 0px;">
-					<input type="submit" value="修改">
-					<input type="hidden" name="mem_No" value="${memVO.mem_No}">
-					<input type="hidden" name="action" value="getOne_For_Update" class="btn btn-success btn-block btn-lg">
-				</FORM>
-			</td>
 <!-- 			<td> -->
 <%-- 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" style="margin-bottom: 0px;"> --%>
 <!-- 					<input type="submit" value="刪除"> -->
@@ -145,11 +169,11 @@
 		</tr>
 	</c:forEach>
 </table>
-</div>
-</div>
-</div>
-<%@ include file="page2.file" %>
 
+<%@ include file="page2.file" %>
+</div>
+</div>
+</div>
 
 
 

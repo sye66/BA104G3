@@ -4,7 +4,11 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
-<%-- <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %> --%>
+<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
+
+
+
+<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -533,6 +537,16 @@
 
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
+    
+    
+    <c:if test="${memVO.mem_State ==9}">
+  <script>
+  swal('Oops !','你被停權囉！ 請至你的信箱收信' , 'error');
+   </script>
+   </c:if>
+    
+    
+    
   </body>
 
 </html>

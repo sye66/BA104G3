@@ -23,6 +23,7 @@
 	background-color: #CCCCFF;
     border: 2px solid black;
     text-align: center;
+    
   }
   table#table-1 h4 {
     color: red;
@@ -43,8 +44,10 @@
 	margin-top: 10%;
 	margin-bottom: 5px;
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
+  table, th, td ,#bo{
+   border: 1px solid #0044BB;
+       text-align: center;
+     font-size:20px;
   }
   th, td {
     padding: 5px;
@@ -57,7 +60,7 @@
 
 </head>
 <body>
-<%-- 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" /> --%>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/backdeskMemLeft.jsp" flush="true" />
 	
 	
@@ -68,29 +71,28 @@
 	
 <table id="table-1">
 	<tr><td>
-			<h3>所有會員資料 - listOneMem.jsp</h3>
-			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><img src="image/panda.png"
+			<h3>所有會員資料</h3>
+			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><img src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/logo.png"
 			width="60" height="80"
-			border="0">回首頁</a></h4>
+			border="0"><br>回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>照片</th>
-		<th>會員編號</th>
-		<th style="width:10%">姓名</th>
-		<th style="width:10%">暱稱</th>
-		<th>生日</th>
-		<th style="width:5%">性別</th>
-		<th>E-mail</th>
+		<th id="bo">照片</th>
+		<th id="bo">會員編號</th>
+		<th id="bo" style="width:10%">姓名</th>
+		<th id="bo" style="width:10%">暱稱</th>
+		<th id="bo">生日</th>
+		<th id="bo" style="width:5%">性別</th>
+		<th id="bo">E-mail</th>
 
-		<th>自我介紹</th>
-		<th>認證號碼</th>
-		<th>帳號狀態</th>
-		<th>完成任務數</th>
-		<th>可否被搜尋</th>
-		<th>剩餘積分</th>
+		<th id="bo">自我介紹</th>
+		<th id="bo">帳號狀態</th>
+		<th id="bo">完成任務數</th>
+		<th id="bo">可否被搜尋</th>
+		<th id="bo">剩餘積分</th>
 	</tr>
 		<tr>
 			<td><img id="img" src="<%=request.getContextPath()%>/mem/memShowImage.do?mem_No=${memVO.mem_No}"></td>
@@ -110,7 +112,6 @@
 			
 			<td>${memVO.mem_Email}</td>
 			<td>${memVO.mem_Intro}</td>
-			<td>${memVO.mem_Code}</td>
 			
 			<c:if test="${memVO.mem_State==0}">
 			<td>尚未驗證</td>

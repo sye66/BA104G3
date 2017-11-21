@@ -4,7 +4,7 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
-<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
+<jsp:useBean id="MemSvc" scope="session" class="com.mem.model.MemService"/>
 
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <% request.getAttribute("updateSuccess"); %>
@@ -41,10 +41,54 @@
 <%-- 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/register.css"> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/component/datetimepicker/jquery.datetimepicker.css" /> --%>
 <%-- <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/register.css" /> --%> 
+<style>
+  table#table-1 {
+	width: 98%;
+	background-color: #CCCCFF;
+	margin-top: 5px;
+	margin-bottom: 10px;
+    border: 3px ridge Gray;
+    height: 40px;
+    text-align: center;
+    
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
 
+<style>
+  table {
+	width: 98%;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+  }
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
+    text-align: center;
+     font-size:20px;
+  } 
+  th, td {
+    padding: 5px;
+    text-align: center;
+    height:200px;
+  }
+  #img{width:150px;
+	heigth:150px}
+</style>
 <style>
 #img_pic,#old_pic{width:150px;
 	heigth:200px}
+	#hh {
+	 height:100px}
 </style>
 
   </head>
@@ -53,7 +97,7 @@
 <!-- 會員資料修改====================================================================== -->
 
 
-<%-- 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" /> --%>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/backdeskMemLeft.jsp" flush="true" />
 	
 	
@@ -61,73 +105,76 @@
 			<div class="row">
 				
 				<div class="col-xs-12 col-sm-8 col-sm-offset-1" >
+
+<table id="table-1">
+	<tr><td id="hh">
+			<h3>會員修改資料</h3>
+			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp""><img src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/logo.png"
+			width="60" height="80"
+			border="0"><br>回首頁</a></h4>
+	</td></tr>
+</table>
            
 
 
 <div class="row">
     <div class="col-xs-12 col-sm-9 col-md-9 col-sm-offset-1 col-md-offset-1">
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" name="form1" enctype="multipart/form-data">
-			<h2> <small>會員修改資料</small></h2>
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" name="form1" >
 			<hr class="colorgraph">
-			
-			<div class=" ordering-image wow bounceIn" data-wow-delay="0.4s" id="preview">修改（新增）個人照片 :
-			<img id="img_pic" <%-- src="<%=request.getContextPath()%>/mem/images/nopic.jpg" alt="your image" width="150" height="200"--%> /> 
-			<span class="btn btn-block btn-large file-input-container">
-				 <input id="mem_Pic" name="mem_Pic" size="30" type="file" value="上傳照片" onchange="previewFile();"/>
-			</span>
-		</div>
 		
-			<div class="form-group">原本圖片 :
+			<div class="form-group">個人圖片 :
 <%-- 		<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?action=mem_Pic&mem_No=${memVO.mem_No}"> --%>
 			<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
 			</div>
 			
+			<%/*如果使用disabled 會連傳送值都會取消掉，使用readonly是唯讀,但是可以傳值 */%>
+			
 			<div class="form-group">會員編號
 			<input type="text" name="mem_No" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_No()%>" disabled  class="form-control input-lg" tabindex="3"/>
+			value="<%=memVO.getMem_No()%>" readonly  class="form-control input-lg" tabindex="3"/>
 			
 			<div class="form-group">E-mail
-            <input type="TEXT" name="mem_Email" size="36" disabled  class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="mem_Email" size="36" readonly  class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Email()%>" />
     			
 			</div>
 		
 			
 			<div class="form-group">姓名
-            <input type="TEXT" name="mem_Name" size="36" disabled  class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="mem_Name" size="36" readonly  class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
     			
 			</div>
 			
 			<div class="form-group">暱稱
-            <input type="TEXT" name="mem_Id" size="36" disabled  class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="mem_Id" size="36" readonly  class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Id()%>" />
     			
 			</div>
 			
 			<c:if test="${memVO.mem_Gend==1}">
 			<div class="form-group">性別
-			<input type="text" name="mem_Gend" size="36" disabled class="form-control input-lg" tabindex="3"
+			<input type="text" name="mem_Gend" size="36" readonly class="form-control input-lg" tabindex="3"
 			value="男">
 			</div>
 			</c:if>
 			<c:if test="${memVO.mem_Gend==2}">
 			<div class="form-group">性別
-			<input type="text" name="mem_Gend" size="36" disabled class="form-control input-lg" tabindex="3"
+			<input type="text" name="mem_Gend" size="36" readonly class="form-control input-lg" tabindex="3"
 			value="女">
 			</div>
 			</c:if>
 			<c:if test="${memVO.mem_Gend==3}">
 			<div class="form-group">性別
-			<input type="text" name="mem_Gend" size="36" disabled class="form-control input-lg" tabindex="3"
+			<input type="text" name="mem_Gend" size="36" readonly class="form-control input-lg" tabindex="3"
 			value="不想說">
 			</div>
 			</c:if>
 			
 			<c:if test="${memVO.mem_State==0}">
 			<div class="form-group">會員狀態
-			<select size="1" name="mem_State" value="<%= (memVO==null)? "": memVO.getMem_Gend()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
-			<option value="0">尚未驗證</option>
+			<select size="1" name="mem_State" value="<%= (memVO==null)? "": memVO.getMem_State()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
+			<option value="0" selected>尚未驗證</option>
 			<option value="1">一般會員</option>
 			<option value="9">停權</option>
 			</select>
@@ -135,10 +182,19 @@
 			</c:if>
 			<c:if test="${memVO.mem_State==1}">
 			<div class="form-group">會員狀態
-			<select size="1" name="mem_State" value="<%= (memVO==null)? "": memVO.getMem_Gend()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
+			<select size="1" name="mem_State" value="<%= (memVO==null)? "": memVO.getMem_State()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
+			<option value="0">尚未驗證</option>
+			<option value="1" selected>一般會員</option>
+			<option value="9">停權</option>
+			</select>
+			</div>
+			</c:if>
+				<c:if test="${memVO.mem_State==9}">
+			<div class="form-group">會員狀態
+			<select size="1" name="mem_State" value="<%= (memVO==null)? "": memVO.getMem_State()%>" id="estadocivil" class="form-control input-lg" tabindex="3">
 			<option value="0">尚未驗證</option>
 			<option value="1">一般會員</option>
-			<option value="9">停權</option>
+			<option value="9" selected>停權</option>
 			</select>
 			</div>
 			</c:if>
@@ -147,43 +203,12 @@
 			
 			
 			
-			<input type="hidden" name="mem_Pw" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Pw()%>" />
-			<input type="hidden" name="mem_Tel" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Tel()%>" />
-			<input type="hidden" name="mem_Pho" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Pho()%>" />
-			<input type="hidden" name="mem_Bday" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Bday()%>" />
-			<input type="hidden" name="mem_Address" size="36"
-			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
-			<input type="hidden" name="mem_Search" size="36"
-			value="<%= (memVO==null)? "": memVO.getMem_Search()%>" />
-			<input type="hidden" name="mem_Intro" size="36"
-			value="<%= (memVO==null)? "": memVO.getMem_Intro()%>" />
 			
-			
-			<input type="hidden" name="mem_Date" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Date()%>" />
-			<input type="hidden" name="mem_Code" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Code()%>" />
-			<input type="hidden" name="mem_State" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_State()%>" />
-			<input type="hidden" name="mem_Gps_Lat" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Gps_Lat()%>" />
-			<input type="hidden" name="mem_Gps_Lng" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Gps_Lng()%>" />
-			<input type="hidden" name="mem_Ip" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Ip()%>" />
-			<input type="hidden" name="mission_Count" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMission_Count()%>" />
-			<input type="hidden" name="mem_Point" size="36" 
-			value="<%= (memVO==null)? "" : memVO.getMem_Point()%>" />
 			
 			<hr class="colorgraph">
 			<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
-				<input type="hidden" name="action" value="updateByMem">
+				<input type="hidden" name="action" value="updateByEmp">
 				<input type="submit" class="btn btn-success btn-block btn-lg" tabindex="7">
 				</div>
 				</div>
