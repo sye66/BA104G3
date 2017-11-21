@@ -27,7 +27,7 @@
         <div class="panel input-area">
             <input id="userName" class="text-field" type="text" placeholder="使用者名稱"/>		
        
-<!--        		onkeydown="if (event.keyCode == 13) sendMessage(); 是按enter 也可以送出發言 -->
+<!--         		onkeydown="if (event.keyCode == 13) sendMessage(); 是按enter 也可以送出發言 -->
         
             <input id="message"  class="text-field" type="text" placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"/>
        
