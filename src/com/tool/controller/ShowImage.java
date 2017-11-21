@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ad.model.AdService;
+import com.ad.model.AdVO;
 import com.artiForm.model.ArtiFormService;
 import com.artiForm.model.ArtiFormVO;
 import com.mem.model.MemService;
@@ -63,9 +65,8 @@ public class ShowImage extends HttpServlet {
 			ArtiFormService artiFormSvc = new ArtiFormService();
 			
 			try{
-				System.out.println("*222222222*");
+
 				ArtiFormVO artiFormVO =  artiFormSvc.getOneArtiForm(arti_No);
-				System.out.println("*111111111*");
 				InputStream in = new ByteArrayInputStream(artiFormVO.getArti_Pic());
 				byte[] buffer = new byte[in.available()];
 				int len = 0;
@@ -95,6 +96,34 @@ public class ShowImage extends HttpServlet {
 
 				MemVO memVO =  memSvc.getOneMem(mem_No);
 				InputStream in = new ByteArrayInputStream(memVO.getMem_Pic());
+				byte[] buffer = new byte[in.available()];
+				int len = 0;
+				
+				try{
+					while((len=in.read(buffer))!=-1){
+						out.write(buffer,0,len);
+						out.close();
+					}
+				} catch(IOException ie){
+					ie.printStackTrace();
+				}
+			} catch (Exception e){
+				FileInputStream in = new FileInputStream(getServletContext().getRealPath("/res/images/arti_ref/XXX.jpg"));
+				byte [] arti_Pic = new byte[in.available()];
+				in.read(arti_Pic);
+				out.write(arti_Pic);
+				in.close();
+			}
+		}
+		
+		if("ad_Pic".equals(action)){
+			String ad_No = req.getParameter("ad_No");
+			AdService adSvc = new AdService();
+			
+			try{
+
+				AdVO adVO =  adSvc.getOneAd(ad_No);
+				InputStream in = new ByteArrayInputStream(adVO.getAd_Pic());
 				byte[] buffer = new byte[in.available()];
 				int len = 0;
 				

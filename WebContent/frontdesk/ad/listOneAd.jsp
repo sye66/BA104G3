@@ -6,7 +6,6 @@
 <%@ page import="com.ad.model.*"%>
 
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
-
 <%
   AdService adSvc = new AdService();
   Set<AdVO> set = adSvc.getAllAd();
@@ -31,7 +30,7 @@
 </style>
 
 </head>
-<body bgcolor='white'>
+<body bgcolor='blue'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
@@ -43,20 +42,27 @@
 	</td></tr>
 </table>
 
-<%@ include file="/frontdesk/page1.file" %>                        
-	<c:forEach var="adVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
 
+<div class="container">
 <div id="carousel-id" class="carousel slide" data-ride="carousel">
 		    <!-- 幻燈片小圓點區 -->
 		    <ol class="carousel-indicators">
-		        <li data-target="#carousel-id" data-slide-to="0" class=""></li>
-		        <li data-target="#carousel-id" data-slide-to="1" class=""></li>
-		        <li data-target="#carousel-id" data-slide-to="2" class="active"></li>
+		    <c:forEach var="adVO" items="${adSvc.getAllAd(adVO.ad_No)}" varStatus="p">
+		     <c:if test="${p.index == 0 }">
+		        <li data-target="#carousel-id" data-slide-to="${p.index}" class="active"></li>
+		        </c:if>
+		        <c:if test="${p.index != 0 }">
+		        <li data-target="#carousel-id" data-slide-to="${p.index}" class=""></li>
+		        </c:if>
+		        </c:forEach>
 		    </ol>
 		    <!-- 幻燈片主圖區 -->
 		    <div class="carousel-inner">
-		        <div class="item">
-		            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
+		    <c:forEach var="adVO" items="${adSvc.getAllAd(adVO.ad_No)}" varStatus="p">
+		    <c:if test="${p.index == 0 }">
+		        <div class="item active">
+		            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}"
+	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
 		            <div class="container">
 		                <div class="carousel-caption">
 		                    <h1>CSS可樂好喝超爽快</h1>
@@ -65,6 +71,8 @@
 		                </div>
 		            </div>
 		        </div>
+		     </c:if>
+		     <c:if test="${p.index != 0 }">
 		        <div class="item">
 		            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
 		            <div class="container">
@@ -75,25 +83,16 @@
 		                </div>
 		            </div>
 		        </div>
-		        <div class="item active">
-		            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
-		            <div class="container">
-		                <div class="carousel-caption">
-		                    <h1>我是標題喔～自己改文案吧</h1>
-		                    <p>我是內文喔，你可以把字打在這裡呦</p>
-		                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
-		                </div>
-		            </div>
-		        </div>
+		    </c:if>
+			</c:forEach>
 		    </div>
 		    <!-- 上下頁控制區 -->
 		    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 		    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 
-                    </c:forEach>
 
- <%@ include file="/backdesk/page2.file" %> 
+
 
 	<div class="col-xs-12 col-sm-11 widget-container-span">
                 <div class="widget-box">
@@ -167,6 +166,9 @@
                         </div>
                     </div>
                 </div>
+                </div>
   
 </body>
+
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </html>
