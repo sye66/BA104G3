@@ -3,14 +3,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
     ArtiFormVO artiFormVO = new ArtiFormVO();
     ArtiFormService artiSvc = new ArtiFormService();
+    
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
-    
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
@@ -174,7 +175,7 @@ div> .timeline-body{
     	    <script>
          function presses${s.index}(){
         	 console.log('${artiFormVO.arti_No}');
-        	 document.open("/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&action=jumpOne_For_Display", "" ,"height=250,width=850,left=65,top=157,resizable=yes,scrollbars=yes");
+        	 document.open("/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${MemVO.mem_No}&action=jumpOne_For_Display", "" ,"height=250,width=850,left=65,top=157,resizable=yes,scrollbars=yes");
          }
         </script>
         

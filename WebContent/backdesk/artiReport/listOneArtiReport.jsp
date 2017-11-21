@@ -1,12 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.artiClass.model.*"%>
+<%@ page import="com.artiReply.model.*"%>
 <%@ page import="com.artiReport.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
 ArtiReportService artiReportSvc = new ArtiReportService();
-ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportSet"); 
+ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportVO"); 
 %>
 <html>
 <head>

@@ -153,7 +153,14 @@ public class GetMissionService {
 	public List<GetMissionVO> successGetMission(String takecase_Mem_No){
 		return dao.successGetMission(takecase_Mem_No);
 	}
-
+	
+	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Statuts){
+		return dao.findByMem(issuer_Mem_No, mission_Statuts);
+	}
+	public List<GetMissionVO> findByMem(String issuer_Mem_No) {
+		return dao.findByMem(issuer_Mem_No);
+	}
+	
 	/**
 	 * @author Sander
 	 * @param mission_No

@@ -23,7 +23,7 @@
 <head>
 <title>文章資料 - listOneArtiFrom_Test.jsp</title>
 	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
-	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
+	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/report.min.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -118,7 +118,7 @@ div {
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
                                   <h4> 系統訊息 : </h4><br>
-                                     <font size="4"> 要本人才能修改或刪除喔~~~ </font>
+                                     <font size="4"> = ___ = A 要本人才能刪除或修改喔~ </font>
                                   </div>
                                </div>
                            </div>

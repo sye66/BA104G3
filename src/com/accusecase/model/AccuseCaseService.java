@@ -27,7 +27,7 @@ public class AccuseCaseService {
 	}
 
 	public AccuseCaseVO updateAccuseCase(String accuse_No, String mission_No,String accuser_No,String emp_No, java.sql.Date accuse_Date,
-			java.sql.Date closed_Case_Date, String accuse_Detail, Integer accuse_State) {
+			java.sql.Date close_Case_Date, String accuse_Detail, Integer accuse_State) {
 
 		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 
@@ -36,7 +36,7 @@ public class AccuseCaseService {
 		accuseCaseVO.setAccuser_No(accuser_No);
 		accuseCaseVO.setEmp_No(emp_No);
 		accuseCaseVO.setAccuse_Date(accuse_Date);
-		accuseCaseVO.setClosed_Case_Date(closed_Case_Date);
+		accuseCaseVO.setClose_Case_Date(close_Case_Date);
 		accuseCaseVO.setAccuse_Detail(accuse_Detail);
 		accuseCaseVO.setAccuse_State(accuse_State);
 		dao.update(accuseCaseVO);
@@ -74,5 +74,17 @@ public class AccuseCaseService {
 	}
 	public List<AccuseCaseVO> getCaseBymission(String mission_No){
 		return dao.getCaseBymission(mission_No);
+	}
+	
+	public AccuseCaseVO updateAccuseCaseState(String accuse_No, Integer accuse_State) {
+
+		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
+
+		accuseCaseVO.setAccuse_No(accuse_No);
+		
+		accuseCaseVO.setAccuse_State(accuse_State);
+		dao.update(accuseCaseVO);
+
+		return accuseCaseVO;
 	}
 }

@@ -90,7 +90,7 @@
 	<tr>
 		<td>文章標題:<font color=red><b>*</b></font></td>
 		<td><input type="hidden" />
-			${artiFormSvc.getOneartiForm(artiReplyVO.arti_No).arti_Title }
+			${artiFormSvc.getOneArtiForm(artiReplyVO.arti_No).arti_Title }
 		</td>
 	</tr>
 	

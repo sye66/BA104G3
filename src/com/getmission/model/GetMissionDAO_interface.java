@@ -14,4 +14,6 @@ public interface GetMissionDAO_interface {
           public List<GetMissionVO> getAll(Map<String, String[]> map); 
           public List<GetMissionVO> findIssuerCase(String issuer_Mem_No);
           public List<GetMissionVO> successGetMission(String takecase_Mem_No);
+          public List<GetMissionVO> findByMem(String mem_No);
+          public List<GetMissionVO> findByMem(String mem_No, Integer mission_Status);
 }

@@ -190,6 +190,7 @@ System.out.println("REPORT-DAO-G1-444");
 				artiReportVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 			}
+System.out.println(report_No);
 System.out.println("REPORT-DAO-G1-555");
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());
