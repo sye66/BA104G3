@@ -1,6 +1,7 @@
 package com.proordlist.contoller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,9 +11,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pro.model.ProService;
 import com.pro.model.ProVO;
+import com.proordlist.model.ProOrdListService;
+import com.proordlist.model.ProOrdListVO;
 
 //@WebServlet("/ProOrdListServlet.do")
 public class ProOrdListServlet extends HttpServlet {
@@ -39,6 +43,7 @@ public class ProOrdListServlet extends HttpServlet {
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String ord_No =req.getParameter("ord_No");
+System.out.println("查詢清單 訂單編號: "+ord_No);				
 					if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
 					failureView.forward(req, res);
@@ -46,13 +51,13 @@ public class ProOrdListServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始查詢資料 *****************************************/
-//				ProService proSvc = new ProService();
-				
-//				 ProVO proVO = proSvc.getOnePro(pro_No);
-//				if (proVO == null) {
-//					errorMsgs.add("查無資料");
-//				}
-				// Send the use back to the form, if there were errors
+					ProOrdListService proOrdListSvc = new ProOrdListService();
+					List<ProOrdListVO> proOrdList = new ArrayList<ProOrdListVO>();
+					proOrdList = (List<ProOrdListVO>) proOrdListSvc.getOneProOrdListVO(ord_No);
+					for(ProOrdListVO p :proOrdList){
+						System.out.println(p.getOrd_No()+" "+p.getPro_No()
+						+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
+					}
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
 					failureView.forward(req, res);
@@ -62,7 +67,8 @@ public class ProOrdListServlet extends HttpServlet {
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-//				req.setAttribute("proVO", proVO);
+				HttpSession session = req.getSession(); 
+				session.setAttribute("proOrdList", proOrdList);
 				String url  = "/frontdesk/proOrder/getOneOrderList.jsp";
 				
 				
@@ -72,7 +78,7 @@ public class ProOrdListServlet extends HttpServlet {
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/pro/showProIndex.jsp");
 				failureView.forward(req, res);
 			}
 		}
