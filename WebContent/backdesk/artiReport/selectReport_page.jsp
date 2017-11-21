@@ -92,7 +92,7 @@
                                   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
                                   <b> 請輸入檢舉編號 (如 REP0007001):</b>
                                   <input type="text" name="report_No">
-                                  <button class="btn btn-primary" type="submit" name="action" value="getOneReport_For_Display"> 送出查詢 </button>
+                                  <button class="btn btn-primary" type="submit" name="action" value="getOneReportFMback_For_Display"> 送出查詢 </button>
                                   </FORM>
                                   </div><!--info-->
                         </li>

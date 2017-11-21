@@ -80,18 +80,16 @@ div> .timeline-body{
                   </div>
 
                     
-                    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
-                        <a class="sidebar-toggler" href="#">
-                            <i class="fa fa-arrows-h"></i>111
-                        </a>
+
                         <a class="refresh" id="refresh-toggler" href="">
-                            <i class="glyphicon glyphicon-refresh"></i>222
+                            <i ></i>222
                         </a>
-                        <a class="fullscreen" id="fullscreen-toggler" href="#">
-                            <i class="glyphicon glyphicon-fullscreen"></i>333
+                        <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
+                            <i>POST </i>
+                            
                         </a>
                     </div>
                     <!--Header Buttons End-->

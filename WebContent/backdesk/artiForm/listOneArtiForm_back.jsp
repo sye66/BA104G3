@@ -109,6 +109,9 @@ button{
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+
 <h4></h4>
 <table id="table-1">
 	<tr><td>
