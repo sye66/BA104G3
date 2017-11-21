@@ -62,7 +62,7 @@ String str = "AU000002";
 							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
 								class="icon icon-flatscreen"></span>首頁</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>會員管理</a></li>
-						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
 					

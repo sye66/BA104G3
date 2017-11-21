@@ -24,13 +24,13 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	private static final String INSERT_STMT = 
 		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, sysdate, ?,?)";
 	private static final String GET_ALL_STMT = 
-		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd') accuse_date,to_char(closed_case_date,'yyyy-mm-dd') closed_case_date,accuse_detail,accuse_state FROM accuse_case order by accuse_no";
+		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd') accuse_date,to_char(close_case_date,'yyyy-mm-dd') close_case_date,accuse_detail,accuse_state FROM accuse_case order by accuse_no";
 	private static final String GET_ONE_STMT = 
-		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd') accuse_date,to_char(closed_case_date,'yyyy-mm-dd') closed_case_date,accuse_detail,accuse_state FROM accuse_case where accuse_no = ?";
+		"SELECT * FROM accuse_case where accuse_no = ?";
 	private static final String DELETE = 
 		"DELETE FROM accuse_case where accuse_no = ?";
 	private static final String UPDATE = 
-		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), closed_case_date= nvl(?,closed_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
+		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), close_case_date= nvl(?,closed_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
 
 	private static final String GET_ONE_ACCUSECASE =
 			"select *from accuse_case where mission_No = ? and accuser_No = ?";
@@ -96,7 +96,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
 			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-			pstmt.setDate(5, accuseCaseVO.getClosed_Case_Date());
+			pstmt.setDate(5, accuseCaseVO.getClose_Case_Date());
 			pstmt.setString(6, accuseCaseVO.getAccuse_Detail());
 			pstmt.setInt(7, accuseCaseVO.getAccuse_State());
 			pstmt.setString(8, accuseCaseVO.getAccuse_No());
@@ -191,7 +191,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
 				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getDate("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 			}
@@ -250,7 +250,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
 				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getDate("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 				list.add(accuseCaseVO); // Store the row in the list
@@ -311,7 +311,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
 				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getDate("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 				list.add(accuseCaseVO); // Store the row in the list
@@ -374,7 +374,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
 				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getDate("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 			}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.accusecase.model.*;
+import com.emp.model.*;
 import com.getmission.model.*;
 
 public class AccusecaseServlet extends HttpServlet {
@@ -116,7 +117,7 @@ public class AccusecaseServlet extends HttpServlet {
 				res.sendRedirect("/BA104G3/loginTest.jsp");
 				return;
 			}
-//			try {
+			try {
 				String mission_No = (String) req.getParameter("mission_No");
 				GetMissionService GetMissionSvc = new GetMissionService();
 				GetMissionVO getMissionVO = new GetMissionVO();
@@ -151,11 +152,11 @@ public class AccusecaseServlet extends HttpServlet {
 				}
 
 				if (errorMsgs.size() != 0) {
-//					obj.put("errormessage", errorMsgs);
+					obj.put("errormessage", errorMsgs);
 
 				} else {
 					String value = "消除檢舉成功~";
-//					obj.put("message", value);
+					obj.put("message", value);
 
 				}
 				out.write(obj.toString());
@@ -170,16 +171,59 @@ public class AccusecaseServlet extends HttpServlet {
 				successView.forward(req, res);
 				out.flush();
 				out.close();
-//			} catch (Exception e) {
-//				System.out.println(e);
-//				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
-//				req.setAttribute("errorMsgs", errorMsgs);
-//				RequestDispatcher failureView = req.getRequestDispatcher("");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e) {
+				System.out.println(e);
+				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
+				req.setAttribute("errorMsgs", errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("");
+				failureView.forward(req, res);
+			}
 
 		}
 		
+		
+		if ("manageaccuse".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			EmpVO empVO = (EmpVO) req.getSession().getAttribute("empVO");
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			if (empVO.getEmp_No() == null) {
+				res.sendRedirect("/BA104G3/loginTest.jsp");
+				return;
+			}
+			try {
+				String accuse_No = (String) req.getParameter("accuse_No");
+				Integer accuse_State = new Integer(req.getParameter("accuse_State"));
+				GetMissionService GetMissionSvc = new GetMissionService();
+				GetMissionVO getMissionVO = new GetMissionVO();
+				AccuseCaseService AccuseCaseSvc = new AccuseCaseService();
+				AccuseCaseVO accuseVO = new AccuseCaseVO();
+				
+				
+				
+				accuseVO = AccuseCaseSvc.updateAccuseCaseState(accuse_No, accuse_State);
+				if(accuse_State == 2){
+					getMissionVO = GetMissionSvc.takeMission(accuseVO.getMission_No(), 9);
+				}else if(accuse_State == 3){
+					if(GetMissionSvc.getOneMission(accuseVO.getMission_No()).getMission_State() ==72  ){
+						getMissionVO = GetMissionSvc.takeMission(accuseVO.getMission_No(), 9);
+					}else{
+						
+					}
+					
+				}
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
+				req.setAttribute("errorMsgs", errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("");
+				failureView.forward(req, res);
+			}
+
+		}
 	}
 
 }

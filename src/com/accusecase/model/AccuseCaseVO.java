@@ -7,7 +7,7 @@ public class AccuseCaseVO implements java.io.Serializable{
 	private String accuser_No;
 	private String emp_No;
 	private Date accuse_Date;
-	private Date closed_Case_Date;
+	private Date close_Case_Date;
 	private String accuse_Detail;
 	private Integer accuse_State;
 	
@@ -41,11 +41,11 @@ public class AccuseCaseVO implements java.io.Serializable{
 	public void setAccuse_Date(Date accuse_Date) {
 		this.accuse_Date = accuse_Date;
 	}
-	public Date getClosed_Case_Date() {
-		return closed_Case_Date;
+	public Date getClose_Case_Date() {
+		return close_Case_Date;
 	}
-	public void setClosed_Case_Date(Date closed_Case_Date) {
-		this.closed_Case_Date = closed_Case_Date;
+	public void setClose_Case_Date(Date close_Case_Date) {
+		this.close_Case_Date = close_Case_Date;
 	}
 	public String getAccuse_Detail() {
 		return accuse_Detail;

@@ -38,11 +38,9 @@
 	<!-- 標籤面板：內容區 -->
 		<div role="tabpanel" class="tab-pane active " id="tab1">
 			<div class="list-group">
-				<a href="<%=request.getContextPath()%>/backdesk/pro/addPro.jsp" class="list-group-item">&nbsp;&nbsp;新增商品</a> 
-				<a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp" class="list-group-item">&nbsp;&nbsp;查詢/修改商品</a> 
-				<a href="<%=request.getContextPath()%>/backdesk/proClass/addProClass.jsp" class="list-group-item">&nbsp;&nbsp;新增商品分類</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;查詢/修改訂單</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;訂單審核</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/pro/addPro.jsp" class="list-group-item">&nbsp;&nbsp;檢舉任務管理</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp" class="list-group-item">&nbsp;&nbsp;爭議事件處理</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/proClass/addProClass.jsp" class="list-group-item">&nbsp;&nbsp;官方任務管理</a> 
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->
