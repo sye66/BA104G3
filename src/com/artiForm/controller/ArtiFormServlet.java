@@ -340,6 +340,96 @@ public class ArtiFormServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
+		/******[ 更新 ]******/
+		if("giveOneLike".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String reqestURL = req.getParameter("reqestURL");
+			
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			HttpSession session = req.getSession();
+			session.setMaxInactiveInterval(300*60*60*24);
+			
+			String arti_No = req.getParameter("arti_No");
+			String mem_No = req.getParameter("mem_No_A");
+			String mem_No_M = req.getParameter("mem_No_M");
+			
+			if(req.getSession().getAttribute("mem_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
+			
+			if(mem_No.equals(mem_No_M)){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add(" = ___ = A 本網站對這麼厚臉皮的行為......@@ 只有私底下默許，實行窒礙難行喔~~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_Like.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
+
+			String arti_Title = req.getParameter("arti_Title");
+			Integer arti_Like = (new Integer(req.getParameter("arti_Like"))+1);
+			String describe = req.getParameter("describe");
+			
+			if (describe == null||describe.trim().length()==0){
+				errorMsgs.add(" 內容敘述請勿空白 ");
+			}
+			
+			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
+			Timestamp arti_Time = nowTime;
+
+			byte[] arti_Pic = null;
+			try{
+				Part photo = req.getPart("arti_Pic");
+				InputStream in = photo.getInputStream();
+				arti_Pic = new byte[in.available()];
+				in.read(arti_Pic);
+				in.close();
+			} catch (FileNotFoundException fe){
+				fe.printStackTrace();
+			}
+
+			Integer arti_Cls_No = new Integer (req.getParameter("arti_Cls_No").trim());
+			String arti_Status = "有讚喔";
+			
+			if (arti_Status == null||arti_Status.trim().length()==0){
+				errorMsgs.add(" 狀態請勿空白 ");
+			}
+			
+			ArtiFormVO artiFormVO = new ArtiFormVO();
+			
+			artiFormVO.setArti_No(arti_No);
+			artiFormVO.setMem_No(mem_No);
+			artiFormVO.setArti_Title(arti_Title);
+			artiFormVO.setArti_Like(arti_Like);
+			artiFormVO.setDescribe(describe);
+			artiFormVO.setArti_Time(arti_Time);
+			artiFormVO.setArti_Pic(arti_Pic);
+			artiFormVO.setArti_Cls_No(arti_Cls_No);
+			artiFormVO.setArti_Status(arti_Status);
+
+			if (!errorMsgs.isEmpty()){
+				req.setAttribute("artiFormVO",artiFormVO);
+
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/update_ArtiForm_input.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			
+			/***************************2.開始修改資料*****************************************/
+			ArtiFormService artiFormSvc = new ArtiFormService();
+			artiFormVO = artiFormSvc.updateArtiForm(arti_No, mem_No, arti_Title, arti_Like, describe, arti_Time, arti_Pic, arti_Cls_No, arti_Status);
+
+			/***************************3.修改完成,準備轉交(Send the Success view)*************/
+			req.setAttribute("artiFormVO",artiFormVO);
+			String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+			successView.forward(req, res);
+		}
+		
 		if ("insertArti".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs",errorMsgs);
