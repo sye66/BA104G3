@@ -10,7 +10,6 @@
 
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
-
     String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
 	
@@ -32,36 +31,7 @@
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
-  table#table-2 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-2 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
 </style>
 
 </head>

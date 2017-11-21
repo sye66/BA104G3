@@ -132,52 +132,7 @@ public class ArtiReplyServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-			
-//		if("getReplyByArtiNo_For_Display".equals(action)){
-//			List<String> errorMsgs = new LinkedList<String>();
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-////			try{
-//				HttpSession session = req.getSession();
-//				Map<String, String[]> map = (Map<String, String[]>) session.getAttribute("map");
-//				
-//				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				if(req.getParameter("whichPage")==null){
-//					HashMap<String, String[]> map1 = (HashMap<String, String[]>) req.getParameterMap();
-//					HashMap<String, String[]> map2 = new HashMap<String, String[]>();
-//					map2 = (HashMap<String, String[]>) map1.clone();
-//					session.setAttribute("map", map2);
-//					map = (HashMap<String, String[]>)req.getParameterMap();
-//				}
-//
-//				/***************************2.開始查詢資料*****************************************/
-//				ArtiReplyService artiReplySvc = new ArtiReplyService ();
-//				List<ArtiReplyVO> artiReplyVO = artiReplySvc.findReplyByArtiNo(map);
-//	
-////				if (artiReplyVO==null){
-////					errorMsgs.add(" 查無資料 ");
-////				}
-////				
-////				if(!errorMsgs.isEmpty()){
-////					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
-////					failureView.forward(req, res);
-////					return;
-////				}
-//				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-//				req.setAttribute("artiReplyVO", artiReplyVO);
-//				String url = "/backdesk/artiReply/listOneArtiReply.jsp";
-//				
-//				RequestDispatcher successView = req.getRequestDispatcher(url);
-//				successView.forward(req, res);
-//				
-//				/***************************其他可能的錯誤處理*************************************/
-////			} catch (Exception e){
-////				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
-////				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
-////				failureView.forward(req, res);
-////			}
-//		}
-		
+
 		/******[ 依文章編號取出 ]******/
 		if ("listReply_ByArtiNo".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
@@ -513,8 +468,9 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 
 				String mem_No = req.getParameter("mem_No").trim();
-				
+				System.out.println(session.getAttribute("mem_No"));
 				if(req.getSession().getAttribute("mem_No")==null){
+				System.out.println("inserReply");
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");

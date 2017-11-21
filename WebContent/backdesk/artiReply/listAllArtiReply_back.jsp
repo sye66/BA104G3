@@ -55,11 +55,11 @@
 </head>
 <body bgcolor='white'>
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+
+<h4>此頁練習採用 EL 的寫法取值:</h4>
+<table id="table-1">
 
 	<tr><td>
 		 <h3>所有回覆文張列表 - listAllArtiReply.jsp</h3>

@@ -10,10 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
+
 <style>
-  body{
-    margin-left: 20px;
-  }
+
     table#table-1 {
     box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
     border-radius: 20px;
@@ -25,21 +24,15 @@
     margin : 20px;
     margin-left : 20px;
   }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
   
   h3{
     width: 80%;
     height: 25px;  
     margin : 20px;
   }
+  
+  body{margin:40px;}
+
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -92,7 +85,7 @@
                                   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
                                   <b> 請輸入檢舉編號 (如 REP0007001):</b>
                                   <input type="text" name="report_No">
-                                  <button class="btn btn-primary" type="submit" name="action" value="getOneReport_For_Display"> 送出查詢 </button>
+                                  <button class="btn btn-primary" type="submit" name="action" value="getOneReportFMback_For_Display"> 送出查詢 </button>
                                   </FORM>
                                   </div><!--info-->
                         </li>

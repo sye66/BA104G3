@@ -12,7 +12,7 @@
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();
-    ArtiReportVO artiReportVO = new ArtiReportVO();
+    ArtiReportVO artiReportVO = new ArtiReportVO(); 
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 <%
@@ -109,6 +109,9 @@ button{
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+
 <h4></h4>
 <table id="table-1">
 	<tr><td>
@@ -120,7 +123,7 @@ button{
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> ${artiFormVO.arti_Title} </h5>

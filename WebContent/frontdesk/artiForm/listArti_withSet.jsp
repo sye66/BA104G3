@@ -8,11 +8,10 @@
 
 <%
   ArtiFormVO artiFormVO = new ArtiFormVO();
-
   ArtiFormService artiFormSvc = new ArtiFormService();
+  
   Set<ArtiFormVO> set= (Set<ArtiFormVO>) request.getAttribute("artiFormSet");
   pageContext.setAttribute("set",set);
-  
 %>
 
 <html>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.accusecase.model.*;
+import com.casecandidate.model.*;
 import com.emp.model.*;
 import com.getmission.model.*;
 
@@ -188,38 +189,62 @@ public class AccusecaseServlet extends HttpServlet {
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
 
 			if (empVO.getEmp_No() == null) {
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+				res.sendRedirect("/BA104G3/backdesk/index.jsp");
 				return;
 			}
 			try {
 				String accuse_No = (String) req.getParameter("accuse_No");
+				String mission_No = (String)req.getParameter("mission_No");
 				Integer accuse_State = new Integer(req.getParameter("accuse_State"));
 				GetMissionService GetMissionSvc = new GetMissionService();
 				GetMissionVO getMissionVO = new GetMissionVO();
 				AccuseCaseService AccuseCaseSvc = new AccuseCaseService();
 				AccuseCaseVO accuseVO = new AccuseCaseVO();
+				CaseCandidateService caseCandidateService = new CaseCandidateService();
 				
-				
-				
-				accuseVO = AccuseCaseSvc.updateAccuseCaseState(accuse_No, accuse_State);
 				if(accuse_State == 2){
-					getMissionVO = GetMissionSvc.takeMission(accuseVO.getMission_No(), 9);
-				}else if(accuse_State == 3){
-					if(GetMissionSvc.getOneMission(accuseVO.getMission_No()).getMission_State() ==72  ){
-						getMissionVO = GetMissionSvc.takeMission(accuseVO.getMission_No(), 9);
-					}else{
-						
+					if(caseCandidateService.getCandidate(mission_No)==null){
+						getMissionVO = GetMissionSvc.takeMission(mission_No, 9);
+						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+					}else if(caseCandidateService.getCandidate(mission_No)!=null){
+						getMissionVO = GetMissionSvc.takeMission(mission_No, 9);
+						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+						caseCandidateService.deleteOneCase(mission_No);
 					}
 					
+				}else if(accuse_State == 3){
+					if(GetMissionSvc.getOneMission(mission_No).getMission_State() ==72 ){
+						getMissionVO = GetMissionSvc.takeMission(mission_No, 2);
+						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+					}else if(GetMissionSvc.getOneMission(mission_No).getMission_State() ==7){
+						getMissionVO = GetMissionSvc.takeMission(mission_No, 1);
+						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+					}
+					
+				}else{
+					errorMsgs.add("檢舉還未處理喔");
+					req.setAttribute("errorMsgs", errorMsgs);
+					RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+					failureView.forward(req, res);
+					return;
 				}
-				
+				getMissionVO = GetMissionSvc.getOneMission(mission_No);
+				accuseVO = AccuseCaseSvc.getOneAccuseCase(accuse_No);
+				req.setAttribute("accuseVO", accuseVO);
+				req.setAttribute("getMissionVO", getMissionVO);
+				req.setAttribute("errorMsgs", errorMsgs);
+				req.setAttribute("empVO", empVO);
+				String url = "/backdesk/missionManage/missionManage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				successView.forward(req, res);
 			} catch (Exception e) {
 				System.out.println(e);
 				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
 				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher("");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 

@@ -171,7 +171,8 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-				
+					<div class="css_issuemissionbutton">一般任務</div>
+					<div class="">緊急任務</div>
 				</div>
 			</div>
 		</div>

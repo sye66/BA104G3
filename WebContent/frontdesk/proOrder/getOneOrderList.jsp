@@ -2,50 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.proorder.model.*"%>
-<%-- <%@ page import="javax.servlet.http.HttpSession"%> --%>
 <%@ page import="com.mem.model.*"%><html>
-<%@page import="java.util.*"%>
-
-
+<%@page import="java.util.*"%><html>
 <head>
-<title>訂單查詢</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
-<script src="https://code.jquery.com/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style>
-
-</style>
-
-
-	
+<title>清單</title>
 </head>
 <body>
-
-<%
-	
-	 
-	
-		List<ProOrderVO> list = (List<ProOrderVO>) session.getAttribute("proOrderlist");
-		
-		pageContext.setAttribute("list",list);
-	
-%>
-
-<div class="col-xs-12 col-sm-12 ">
-<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
-<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/>  --%>
-</div>
-<!-- 商城TOP -->
-<div class="col-xs-12 col-sm-12 ">
-<%-- <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	 --%>
-</div>
-
-<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-					<h3>訂單查詢:</h3>
-					<table class="table table-hover">
+	<table class="table table-hover">
 				
 						<caption></caption>
 						<thead>
@@ -62,8 +25,8 @@
 							</tr>
 						</thead>
 						<tbody>
-						<%@ include file="page1.file" %> 
-						<c:forEach var="proOrder" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+						
+						<c:forEach var="proOrder" items="${list}">
 							<tr>
 								<td>${proOrder.ord_No } </td>
 								<td>${proOrder.ord_Consignee }</td>
@@ -108,12 +71,5 @@
 						
 						</tbody>
 					</table>
-<%@include file="page2.file" %>	
-
-
-				</div>		
-			</div>
-		</div>
-
 </body>
 </html>

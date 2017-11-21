@@ -7,11 +7,16 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+    MemVO memVO = (MemVO) request.getAttribute("memVO");
+
+
     ArtiFormVO artiFormVO = new ArtiFormVO();
     ArtiFormService artiSvc = new ArtiFormService();
     
+    
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
+    
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
@@ -78,20 +83,17 @@ div> .timeline-body{
                         </h1>
                       </div>
                   </div>
-
-                    
-                    
+    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
-                        <a class="sidebar-toggler" href="#">
-                            <i class="fa fa-arrows-h"></i>111
-                        </a>
+
                         <a class="refresh" id="refresh-toggler" href="">
-                            <i class="glyphicon glyphicon-refresh"></i>222
+                            <i ></i>222
                         </a>
-                        <a class="fullscreen" id="fullscreen-toggler" href="#">
-                            <i class="glyphicon glyphicon-fullscreen"></i>333
+                        <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
+                            <i>POST </i>
+                            
                         </a>
                     </div>
                     <!--Header Buttons End-->
@@ -124,10 +126,13 @@ div> .timeline-body{
                                 <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
 			                    <td>${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}</td>
                             </div>
+                            
                             <div class="timeline-panel bordered-top-3 bordered-azure">
                                 <div class="timeline-header bordered-bottom bordered-blue">
                                     <span class="timeline-title">
-                                        <td><a href="javascript:presses${s.index}()">${artiFormVO.arti_No}</a></td>
+                                    
+                                        <td> <a href="/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${memVO.mem_No}&action=jumpOne_For_Display">
+                                        ${artiFormVO.arti_No}</a></td>
                                         <td> ${artiFormVO.arti_Status} </td>
                                     </span>
 
@@ -172,13 +177,6 @@ div> .timeline-body{
 
     </script>
     
-    	    <script>
-         function presses${s.index}(){
-        	 console.log('${artiFormVO.arti_No}');
-        	 document.open("/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${MemVO.mem_No}&action=jumpOne_For_Display", "" ,"height=250,width=850,left=65,top=157,resizable=yes,scrollbars=yes");
-         }
-        </script>
-        
 </body>
 
         

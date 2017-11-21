@@ -20,36 +20,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
 </style>
 
 </head>
@@ -90,7 +61,7 @@
                         <th> 檢舉時間 </th>
                         <th> 類別 </th>
                         <th> 檢舉狀態 </th>
-                        <th colspan="2"> 後台管理 </th>
+                        <th colspan="3"> 後台管理 </th>
                     </tr>
                  </thead>
     <%@ include file="/backdesk/page1.file" %> 
@@ -108,6 +79,27 @@
                               <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
 			                  <td>${artiClassSvc.getOneClass(artiReportVO.arti_Cls_No).arti_Cls_Name }</td>
                              <td> ${artiReportVO.report_Status} </td>
+                             
+                             <td>
+			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
+			                 <button class="btn btn-warning" type="submit" name="action" value="getOneReport_For_Display"> 檢舉狀態變更 </button>
+ 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
+			                 </FORM>
+		                     </td>
+		                     
+		                      <td>
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看文章 </button>
+ 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
+			                 </FORM>
+			                 </td>
+                             
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
@@ -117,16 +109,7 @@
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 			                 </td>
-			                 
-                             <td>
-			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
-			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看檢舉 </button>
- 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			                 </FORM>
-		                     </td>
+
                          </tr>
                      </tbody>
                      </c:forEach>

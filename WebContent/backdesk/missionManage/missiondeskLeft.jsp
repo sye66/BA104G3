@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/style.pro.default.css" type="text/css" />
 
 <style>
-#tab1 .list-group a{
+#tabbbb .list-group a{
     		color: #000;
     		font-size: 20px;
     		font-family: Microsoft JhengHe;
@@ -23,11 +23,11 @@
 	padding:0;
 }
 
-#tab1 .list-group  a:hover {
+#tabbbb .list-group  a:hover {
 	color:#f90;
 	background-color: #34445e;	
 }
-#tab1 .list-group  a:focus {
+#tabbbb .list-group  a:focus {
 	color: #FB9337;
 	background-color: #34445e;
 }
@@ -36,11 +36,11 @@
 <body>
 <div class="col-xs-12 col-sm-2  left01" >
 	<!-- 標籤面板：內容區 -->
-		<div role="tabpanel" class="tab-pane active " id="tab1">
+		<div role="tabpanel" class="tab-pane active " id="tabbbb">
 			<div class="list-group">
-				<a href="<%=request.getContextPath()%>/backdesk/pro/addPro.jsp" class="list-group-item">&nbsp;&nbsp;檢舉任務管理</a> 
-				<a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp" class="list-group-item">&nbsp;&nbsp;爭議事件處理</a> 
-				<a href="<%=request.getContextPath()%>/backdesk/proClass/addProClass.jsp" class="list-group-item">&nbsp;&nbsp;官方任務管理</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp" class="list-group-item">&nbsp;&nbsp;檢舉任務管理</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;爭議事件處理</a> 
+				<a href="#" class="list-group-item">&nbsp;&nbsp;官方任務管理</a> 
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->

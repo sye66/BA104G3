@@ -30,7 +30,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	private static final String DELETE = 
 		"DELETE FROM accuse_case where accuse_no = ?";
 	private static final String UPDATE = 
-		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), close_case_date= nvl(?,closed_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
+		"UPDATE accuse_case set mission_no= nvl(?,mission_no), accuser_no= nvl(?,accuser_no), emp_no= nvl(?,emp_no), accuse_date= nvl(?,accuse_date), close_case_date= nvl(?,close_case_date), accuse_detail= nvl(?,accuse_detail), accuse_state= nvl(?,accuse_state) where accuse_no = ?";
 
 	private static final String GET_ONE_ACCUSECASE =
 			"select *from accuse_case where mission_No = ? and accuser_No = ?";

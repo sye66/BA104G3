@@ -15,7 +15,7 @@
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
     
-    String mem_No = (String) session.getAttribute("men_No");
+    String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
     
 	String arti_No = (String) session.getAttribute("arti_No");
@@ -242,7 +242,7 @@ div {
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
                  <button class="btn btn-warning" type="submit" name="action" value="insertReport"> 檢舉文章</button>
-		         </FORM>
+		         
 		        </div>
 		    </div>
                                     
@@ -252,12 +252,12 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="45"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
+                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="45"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      
                      </div>
                  </div>
              </div>
-                                          
+                    </FORM>                      
              </div>
          </div>
      </div>

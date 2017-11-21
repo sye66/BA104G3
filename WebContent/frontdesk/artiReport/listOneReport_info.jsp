@@ -11,10 +11,8 @@
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
-    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
-
-    ArtiReplyVO artiReplyVO =new ArtiReplyVO();
-    ArtiReportVO artiReportVO = new ArtiReportVO();
+    ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportVO"); 
+    ArtiReplyVO artiReplyVO = new ArtiReplyVO();
     
 	String arti_No = (String) session.getAttribute("arti_No");
 	String mem_No = (String) session.getAttribute("mem_No");
@@ -25,7 +23,7 @@
 <head>
 <title>文章資料 - listOneArtiFrom_Test.jsp</title>
 	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
-	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
+	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/report.min.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -62,7 +60,7 @@ div {
 <h4></h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>文章資料 - ListOneArtiFrom_ERROR.jsp    ${ arti_No}</h3>
+		 <h3>文章資料 - ListOneArtiReport.jsp    ${ arti_No}</h3>
 		 <h4><a href="/BA104G3/frontdesk/artiForm/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -120,7 +118,9 @@ div {
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
                                   <h4> 系統訊息 : </h4><br>
-                                     <font size="4"> @@ 要麻煩請你先登入喔~~~ </font>
+                                     <font size="4"> 您的意見已經送出囉~~~</font><br>
+                                     <font size="4"> 請靜候管理員處理回覆......</font><br>
+                                     <font size="4"> ^_______________________^</font><br>
                                   </div>
                                </div>
                            </div>
