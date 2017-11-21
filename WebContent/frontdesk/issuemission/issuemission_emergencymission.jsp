@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
-
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>工具人緊急動員</title>
+<html lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		
+		<title>工具人聽候差遣</title>
 		
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/component/JQueryUI/jquery-ui.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -20,7 +22,9 @@
 	        width: 100%;
 	       }
 	    </style>
-</head>	<body>
+
+	</head>
+	<body>
 		<%-- Banner --%>
 		<div class="container">
 			<div class="row">
@@ -31,14 +35,16 @@
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
-				<form>
+				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do">
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+						<%-- 發案人會員編號 --%>
+						<input type="hidden" name="issuer_Mem_No" value="M000010">
 						<%-- 任務類別 --%>
 							<div class="form-group">
-								<label for="missionCategory">
+								<label for="mission_Category">
 									想要甚麼樣的工具人
 								</label>
-								<select class="form-control" name="missionCategory">
+								<select class="form-control" name="mission_Category">
 									<option value="修繕">需要很會修東西的</option>
 									<option value="教育">博學多聞能教我的</option>
 									<option value="交友">長的不錯交個朋友</option>
@@ -47,27 +53,27 @@
 							</div>
 						<%-- 任務名稱 --%>
 							<div class="form-group">
-								<label for="missionName">
+								<label for="mission_Name">
 									任務名稱
 								</label>
-								<input type="text" name="missionName" id="missionName" placeholder="請輸入任務名稱" class="form-control">
+								<input type="text" name="mission_Name" id="mission_Name" placeholder="請輸入任務名稱" class="form-control">
 							</div>
 						<%-- 任務敘述 --%>
 							<div class="form-group">
-								<label for="missionDes">
+								<label for="mission_Des">
 									說說關於你的任務
 								</label>
-								<textarea class="form-control" name="missionDes" id="missionDes" rows="3"></textarea>
+								<textarea class="form-control" name="mission_Des" id="mission_Des" rows="3"></textarea>
 							</div>
 						<%-- 任務發布時間 --%>
 							<div class="form-group col-sm-6">
 								<label>
 									任務發布時間
 								</label>
-									<input type="text" name="missionreleastime" id="missionreleastime" class="form-control">
+									<input type="text" name="mission_Release_Time" id="mission_Release_Time" class="form-control">
 								<script type="text/javascript">
 									$(function(){
-										$('#missionreleastime').datepicker({
+										$('#mission_Release_Time').datepicker({
 											dateFormat: 'yy-mm-dd'
 										});
 									});
@@ -78,10 +84,10 @@
 								<label>
 									任務截止時間
 								</label>
-									<input type="text" name="missionduetime" id="missionduetime" class="form-control">
+									<input type="text" name="mission_Due_Time" id="mission_Due_Time" class="form-control">
 								<script type="text/javascript">
 									$(function(){
-										$('#missionduetime').datepicker({
+										$('#mission_Due_Time').datepicker({
 											dateFormat: 'yy-mm-dd'
 										});
 									});
@@ -89,8 +95,8 @@
 							</div>
 						<%-- 報酬 --%>
 							<div class="form-group">
-								<label for="missionPay">積分花費</label>
-								<input type="number" name="missionPay" id="missionPay" class="form-control is-invalid" value=50>
+								<label for="mission_Pay">積分花費</label>
+								<input type="number" name="mission_Pay" id="mission_Pay" class="form-control is-invalid" value=50>
 						 	    <div class="invalid-feedback">
 	        						一般任務固定消費50點積分
 	      						</div>
@@ -154,15 +160,14 @@
 						    </script>
 						 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
 
-						<div style="text-align: center; height: 200px; width: 100%;">
-							<button class="btn btn-primary" type="submit" style="margin-top: 30px">發出任務</button>		
+						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
+								<input type="hidden" name="action" value="issue_Emergency_Mission">
+								<input type="submit" name="發出任務">
 						</div>
-
+						
 					</div>
 				</form>
 			</div>
 		</div>
-
-
 	</body>
 </html>
