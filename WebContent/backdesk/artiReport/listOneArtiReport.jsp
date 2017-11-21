@@ -44,7 +44,7 @@
 </table>
 
 
-	<div class="col-xs-12 col-sm-11 widget-container-span">
+	<div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> ${artiReportSet.mem_No} </h5>

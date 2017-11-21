@@ -468,8 +468,9 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 
 				String mem_No = req.getParameter("mem_No").trim();
-				
+				System.out.println(session.getAttribute("mem_No"));
 				if(req.getSession().getAttribute("mem_No")==null){
+				System.out.println("inserReply");
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");

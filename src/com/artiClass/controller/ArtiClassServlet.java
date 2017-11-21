@@ -32,18 +32,20 @@ public class ArtiClassServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
+				HttpSession session = req.getSession();
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
-
+System.out.println(arti_Cls_No);
 				/*************************** 2.開始查詢資料 ****************************************/
 				ArtiClassService artiClassSvc = new ArtiClassService();
 				Set<ArtiFormVO> set = artiClassSvc.getArti_NoByArti_Cls_No(arti_Cls_No);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("listArti_ByClassNo", set);    // 資料庫取出的set物件,存入request
+				session.setAttribute("arti_Cls_No",arti_Cls_No);
 
 				String url = null;
 				if ("listArti_ByClass_No_A".equals(action))
-					url = "/backdesk/artiClass/listArti_ByClassNo.jsp";        // 成功轉交 artiClass/listArti_ByClassNo.jsp
+					url = "/backdesk/artiClass/listArti_ByClassNo_back.jsp";        // 成功轉交 artiClass/listArti_ByClassNo.jsp
 				else if ("listArti_ByClass_No_B".equals(action))
 					url = "/backdesk/artiClass/listAllClass.jsp";              // 成功轉交 artiClass/listAllClass.jsp
 				RequestDispatcher successView = req.getRequestDispatcher(url);

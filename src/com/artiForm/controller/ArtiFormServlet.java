@@ -40,7 +40,7 @@ public class ArtiFormServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				HttpSession session = req.getSession();
 				String mem_No =req.getParameter("mem_No");
-						
+				
 				String str = req.getParameter("arti_No");
 				if(str==null||(str.trim()).length()==0){
 					errorMsgs.add(" 請輸入主題文章編號 !!! ");
@@ -77,7 +77,8 @@ public class ArtiFormServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-
+System.out.println(arti_No);
+System.out.println(mem_No);
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 //				session.setAttribute("artiReplyVO", artiReplyVO);
 				req.getSession().setAttribute("artiFormVO", artiFormVO);
@@ -85,11 +86,11 @@ public class ArtiFormServlet extends HttpServlet {
 //				req.setAttribute("mem_No", mem_No);
 //	            req.getSession().setAttribute("arti_No", arti_No);
 				req.getSession().setAttribute("mem_No", mem_No);
-System.out.println(session.getAttribute(mem_No));
+System.out.println(session.getAttribute("mem_No"));
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-
+return;
 				/***************************其他可能的錯誤處理*************************************/
 //			} catch (Exception e){
 //				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());

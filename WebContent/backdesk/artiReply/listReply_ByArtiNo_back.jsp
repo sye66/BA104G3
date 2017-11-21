@@ -79,7 +79,7 @@ ${arti_No}
 </c:if>
 
 <c:forEach var="artiReplyVO" items="${artiReplySvc1.findReplyByArtiNo(arti_No)}" >
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> ${artiReplyVO.mem_No} </h5>
@@ -154,10 +154,6 @@ ${arti_No}
 	</c:forEach>
 
 </html>
-
-<br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
 
 </body>
 </html>
