@@ -892,20 +892,70 @@ public class GetMissionServlet extends HttpServlet {
 		 * @author Sander
 		 */
 		// 任務類別
-		// 任務名稱
-		// 任務敘述
-		// 任務發布時間
-		java.sql.Date startDate = Date.valueOf((req.getParameter("missionreleasetime")));
-		// 任務截止時間
-		java.util.Date endDate = Date.valueOf((req.getParameter("missionduetime")));
-		System.out.println(req.getParameter("missionreleasetime"));
-		if ("issueNormalMission".equals(action)) {
+		if ("issue_Normal_Mission".equals(action)) {
+			
+			// Value Receiving Test
+			System.out.println("got post from issuemission");
+			
+			// 錯誤處理
 			List<String> errorMsg = new LinkedList<>();
 			req.setAttribute("errorMsg", errorMsg);
-			System.out.println("got post from issuemission");
-			if (startDate.after(endDate)) {
-				System.out.println("ERROR here");
+			GetMissionVO getMissionVO = new GetMissionVO();
+			
+			try {				
+				// 任務類別
+				String mission_Category = req.getParameter("mission_Category");
+				// 任務名稱
+				String mission_Name = req.getParameter("mission_Name");
+				// 任務敘述
+				String  mission_Des = req.getParameter("mission_Des");
+				// 發案人會員編號
+				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
+				// 任務發布時間
+				java.sql.Date mission_Release_Time = Date.valueOf((req.getParameter("mission_Release_Time")));
+				// 任務截止時間
+				java.sql.Date mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time")));
+				// 任務積分報酬
+				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				// GPS-LAT
+				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
+				// GPS-LNG
+				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
+				
+				// Value Receiving testing
+				System.out.println(mission_Release_Time);
+				System.out.println(mission_Due_Time);
+				
+				
+				if (mission_Release_Time.after(mission_Due_Time)) {
+					errorMsg.add("你是要做時光機逆");
+				}
+				if (!errorMsg.isEmpty()) {
+					for (String string : errorMsg) {
+						System.out.println(string);
+					}
+					req.setAttribute("getMissionVO", getMissionVO);
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+					inputError.forward(req, res);
+					return;
+				}
+				
+				/**********準備寫入與轉向**********/
+				// 任務開始時間  - null
+				// 任務結束時間 - null
+				GetMissionService getMissionService = new GetMissionService();
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,mission_Release_Time,mission_Due_Time, null, null,1,1,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
+				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
+				successView.forward(req, res);
+				
+			} catch (Exception e) {
+				errorMsg.add(e.getMessage());
+				System.out.println(e.getMessage());
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+				inputError.forward(req, res);
 			}
+			
 		}
 	}
 	

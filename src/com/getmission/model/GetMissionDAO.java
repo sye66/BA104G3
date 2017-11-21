@@ -25,10 +25,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO mission (mission_no,mission_category,mission_name,mission_des,issuer_mem_no,takecase_mem_no,"
-			+ "mission_release_time,mission_due_time,mission_start_time,mission_end_time,"
-			+ "mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng) "
-			+ "'MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission order by mission_no";
 	private static final String GET_ONE_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission where mission_no = ?";
 	private static final String DELETE = "DELETE FROM mission where mission_no = ?";
