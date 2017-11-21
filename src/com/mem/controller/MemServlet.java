@@ -562,6 +562,10 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				
+				
+				
+				
+				
 				String City = req.getParameter("City2");
 				String Area = req.getParameter("Area2");
 				String ZIP = req.getParameter("ZIP");
@@ -664,7 +668,62 @@ System.out.println("STEP3");
 		
 		
 		
-		
+		if ("updateByEmp".equals(action)){// 來自update_emp_input.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				
+				String mem_No = req.getParameter("mem_No").trim();
+				System.out.println(mem_No);
+				
+				Integer mem_State = new Integer (req.getParameter("mem_State"));
+				
+				
+				
+				
+				
+				MemVO memVO = new MemVO();
+				
+				memVO.setMem_No(mem_No);
+				memVO.setMem_State(mem_State);
+//				
+				
+				
+				if (!errorMsgs.isEmpty()){
+					req.setAttribute("memVO", memVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskUpdateListAllMem.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+System.out.println("STEP1");				
+				/***************************2.開始新增資料***************************************/
+				MemService memSvc = new MemService();
+				memVO = memSvc.updateByEmp(memVO);
+				
+System.out.println("STEP2");				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("memVO", memVO);
+				req.setAttribute("memVO", memVO);
+				System.out.println("mem_State +" +mem_State );
+				String updateSuccess = "ok";
+				req.setAttribute("updateSuccess", updateSuccess);
+				String url = "/backdesk/mem/backdeskUpdateListAllMem.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+System.out.println("STEP3");
+				
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e){
+				e.printStackTrace();
+				errorMsgs.add("修改資料失敗 :" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskUpdateListAllMem.jsp");
+				failureView.forward(req, res);
+			}
+		}
 		
 		
 		

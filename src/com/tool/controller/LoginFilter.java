@@ -26,14 +26,14 @@ public class LoginFilter implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object action =  session.getAttribute("memVO");
+		MemVO memVO = (MemVO) session.getAttribute("memVO");
 System.out.println(session.getAttribute("memVO"));
-		if (action == null) {
+		if (memVO.getMem_State() == null || memVO.getMem_State() == 9) {
 			session.setAttribute("location", req.getRequestURI());
 			res.sendRedirect(req.getContextPath() + "/lib/publicfile/include/file/index.jsp");
 			return;
 		} else {
-			chain.doFilter(request, response);
+			 chain.doFilter(request, response);
 		}
 	}
 }

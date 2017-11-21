@@ -42,16 +42,15 @@
 		<div id="top" class="container">
 			<div class="row">
 				
-				<div class="col-xs-12 col-sm-9">
+				<div class="col-xs-12 col-sm-9 col-sm-offset-1">
 
 
 <table id="table-1">
 	<tr><td><h3>工具人後台會員中心</h3></td></tr>
 </table>
 
-<p>這裡是首頁</p>
 
-<h3>資料查詢 : </h3>
+<h1>資料查詢 : </h1>
 
 <%-- 錯誤處理 --%>
 
@@ -64,14 +63,14 @@
 	</ul>
 </c:if>
 
-<ul>
-	<li><a href='listAllMem.jsp'>List</a> 所有會員 <br><br></li>
+<ul><br><br>
+	<li><h1><a href='listAllMem.jsp'>List</a> 所有會員 <br><br></h1></li>
 	
 </ul>
 
 
 <h3>會員資料單筆查詢</h3>
-
+<br>
 <ul>
 	<li>
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do">
@@ -81,7 +80,7 @@
 			<input type="submit" value="送出">
 		</FORM>
 	</li>
-	
+<br>	
 	<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/>
 	
 	<li>
@@ -96,7 +95,7 @@
 			<input type="submit" value="送出">
 		</FORM>
 	</li>
-	
+<br>	
 	<li>
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do">
 			<b>選擇會員姓名</b>

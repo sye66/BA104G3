@@ -23,6 +23,7 @@
 	background-color: #CCCCFF;
     border: 2px solid black;
     text-align: center;
+    
   }
   table#table-1 h4 {
     color: red;
@@ -40,11 +41,10 @@
 	width: 98%;
 	background-color: white;
 	    font-size:20px;
-	margin-top: 10%;
 	margin-bottom: 5px;
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
   }
   th, td {
     padding: 5px;
@@ -53,11 +53,12 @@
   }
   #img{width:150px;
 	heigth:200px}
+	
 </style>
 
 </head>
 <body>
-<%-- 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" /> --%>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/backdeskMemLeft.jsp" flush="true" />
 	
 	
@@ -68,23 +69,23 @@
 	
 <table id="table-1">
 	<tr><td>
-			<h3>所有會員資料 - listOneMem.jsp</h3>
-			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><img src="image/panda.png"
+			<h3>所有會員資料</h3>
+			<h4><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><img src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/logo.png"
 			width="60" height="80"
-			border="0">回首頁</a></h4>
+			border="0"><br>回首頁</a></h4>
 	</td></tr>
 </table>
 
 <table>
 	<tr>
-		<th>照片</th>
-		<th>會員編號</th>
-		<th style="width:10%">姓名</th>
-		<th>暱稱</th>
-		<th>生日</th>
-		<th>性別</th>
-		<th>E-mail</th>
-		<th>詳細</th>
+		<th id="bo">照片</th>
+		<th id="bo">會員編號</th>
+		<th id="bo" style="width:10%">姓名</th>
+		<th id="bo">暱稱</th>
+		<th id="bo">生日</th>
+		<th id="bo">性別</th>
+		<th id="bo">E-mail</th>
+		<th id="bo">詳細</th>
 
 	</tr>
 		<tr>

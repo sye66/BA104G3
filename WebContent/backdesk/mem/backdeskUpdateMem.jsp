@@ -7,7 +7,7 @@
 
 </head>
 <body>
-<%-- 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" /> --%>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/backdeskMemLeft.jsp" flush="true" />
 	<jsp:include page="/backdesk/mem/select_page.jsp" flush="true" />
 </body>

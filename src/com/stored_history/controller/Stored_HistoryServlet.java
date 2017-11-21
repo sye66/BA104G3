@@ -295,7 +295,7 @@ public class Stored_HistoryServlet extends HttpServlet{
 					req.setAttribute("full_name", fn);
 					req.setAttribute("mmyy", my);
 					req.setAttribute("storedVO", storedVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/rechage_credit.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -325,11 +325,11 @@ public class Stored_HistoryServlet extends HttpServlet{
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("memVO", memVO);
 				req.getSession().setAttribute("storedVO", storedVO);
-//				String url = "/frontdesk/stored_history/stored_historyRecharge.jsp";
-				String location = req.getParameter("reuestURL");
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+//				String location = req.getParameter("reuestURL");
 				String success ="ok";
 				req.setAttribute("success", success);
-				RequestDispatcher successView = req.getRequestDispatcher(location);
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res); 
 				
 				
