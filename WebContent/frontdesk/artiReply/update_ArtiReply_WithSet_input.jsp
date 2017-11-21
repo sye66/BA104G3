@@ -4,7 +4,6 @@
 
 <%
     ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplyVO41"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-
 %>
 
 

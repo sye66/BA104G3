@@ -8,6 +8,7 @@
   ArtiReportService artiReportSvc = new ArtiReportService();
   Set<ArtiReportVO> set= (Set<ArtiReportVO>) request.getAttribute("artiReportSet");
   pageContext.setAttribute("set",set);
+  
 %>
 
 <html>

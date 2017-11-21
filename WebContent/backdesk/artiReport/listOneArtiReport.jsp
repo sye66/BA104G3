@@ -10,7 +10,6 @@
 <%
   ArtiReportService artiReportSvc = new ArtiReportService();
   ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportSet"); 
-  
  %>
 
 

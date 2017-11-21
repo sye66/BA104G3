@@ -9,8 +9,7 @@
 
 <%
   ArtiReplyService artiReplySvc = new ArtiReplyService();
-  ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplySet"); 
-  
+  ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplySet");  
  %>
 
 

@@ -6,7 +6,8 @@
 <%
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplyVO41"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
-	String arti_No = (String) session.getAttribute("arti_No");
+
+    String arti_No = (String) session.getAttribute("arti_No");
 	MemVO memVO =(MemVO) session.getAttribute("memVO");
     String mem_No = memVO.getMem_No();
 %>

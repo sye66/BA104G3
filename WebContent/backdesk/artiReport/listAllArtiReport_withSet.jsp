@@ -9,6 +9,7 @@
   ArtiReportService artiReportSvc = new ArtiReportService();
   Set<ArtiReportVO> set= (Set<ArtiReportVO>) request.getAttribute("artiReportSet");
   pageContext.setAttribute("set",set);
+  
 %>
 <jsp:useBean id="artiReportDAO" scope="page" class="com.artiReport.model.ArtiReportDAO" />
 

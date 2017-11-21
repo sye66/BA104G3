@@ -10,7 +10,6 @@
 
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
-
     String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
 	

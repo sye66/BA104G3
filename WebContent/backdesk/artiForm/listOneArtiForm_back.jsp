@@ -13,6 +13,7 @@
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
+    
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 <%
