@@ -49,7 +49,7 @@
   }
   table, th, td {
     border: 1px solid #CCCCFF;
-  }
+  } 
   th, td {
     padding: 5px;
     text-align: center;

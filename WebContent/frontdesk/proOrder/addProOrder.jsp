@@ -99,7 +99,7 @@ text-align:center;
 
 <br>
 			<div class="form-group"><h3>姓名</h3>
-            <input type="TEXT" name="mem_Name" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="ord_Consignee" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
     		</div>
 									
@@ -120,16 +120,20 @@ text-align:center;
 
 
 			<div class="form-group"><h3>通訊地址</h3>
-            <input type="TEXT" name="mem_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
+            <input type="TEXT" name="ord_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
 			
 			</div>
 			
 <%----------------地址 -------------------------------------------%>
 		
+	
 			
-			<button type="submit" class="btn btn-success" style="font-size:26px;">確認送出訂單</button>
 			<input type="hidden" name="mem_No" value="<%=memVO.getMem_No()%>">
+<%-- 			<input type="hidden" name="ord_Price" value="${totalPrice}"> --%>
+			<input type="hidden" name="ord_Price" value="${totalPrice}">
+			<input type="hidden" name="action" value="insert">
+			<button type="submit" class="btn btn-success" style="font-size:26px;width:450px;">確認送出訂單</button>
 			</FORM>			
 	
 			
@@ -159,14 +163,16 @@ text-align:center;
 			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
 			<td width="100"><div align="center"><b><%=order.getProCar_Name()%></b></div></td>
 		
-			<td width="100"><div align="center" id="proPrice"><b>$<%=order.getProCar_Price()%></b></div></td>
+			<td width="100"><div align="center" id="proPrice">&nbsp;<span style="color:red;"><%=order.getProCar_Price()%></span>&nbsp;點
+			</div></td>
 			<td width="100">
 				<div align="center">
 					<%=order.getProCar_Quantity()%>	
 				</div>
 			</td>
 			<td width="100" class="price">
-				<div align="center"><b id="totlPrice">$<%=order.getProCar_Price()*order.getProCar_Quantity()%></b></div>
+			
+				<div align="center">&nbsp;<span style="color:red;"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
 			
 			
@@ -179,7 +185,8 @@ text-align:center;
 			
     		</td>
     		<td width="200" colspan="3">
-    			<h3 class="totalPrice2">總計:$<%=totalPrice %></h3>
+    		
+    			<h3 class="totalPrice2">總計:&nbsp;<span style="color:red;">${totalPrice}</span>&nbsp;點</h3>
     		</td>
     	</tr>
     	

@@ -77,16 +77,17 @@ int count3 = 0;
 		count3 = listProOrder.size();
 		
 	}
-	}	
-	
-	ProService proSvc = new ProService();
-	List<ProVO> list = proSvc.getAll();
 	@SuppressWarnings("unchecked")
 	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 	
 	if(buylist != null && (buylist.size() > 0)){
 		count = buylist.size();
 	}
+  }	
+	
+	ProService proSvc = new ProService();
+	List<ProVO> list = proSvc.getAll();
+	
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
 

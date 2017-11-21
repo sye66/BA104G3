@@ -170,7 +170,7 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				String mem_Pho = req.getParameter("mem_Pho");
-				String mem_Pho_reg = "^09[0-9]{2}-[0-9]{6}$";
+				String mem_Pho_reg = "^09[0-9-]{2,3}[0-9]{6}$";
 				if (mem_Pho == null || mem_Pho.trim().length() == 0){
 					errorMsgs.add("手機號碼: 請勿空白");
 				}else if(!mem_Pho.trim().matches(mem_Pho_reg)) {
@@ -522,7 +522,7 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				String mem_Pho = req.getParameter("mem_Pho");
-				String mem_Pho_reg = "^09[0-9]{2}-[0-9]{6}$";
+				String mem_Pho_reg = "^09[0-9-]{2,3}[0-9]{6}$";
 				if (mem_Pho == null || mem_Pho.trim().length() == 0){
 					errorMsgs.add("手機號碼: 請勿空白");
 				}else if(!mem_Pho.trim().matches(mem_Pho_reg)) {
@@ -685,12 +685,14 @@ System.out.println("STEP3");
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("mem_No");
+				String str_reg = "^M[0-9]{6}$";
 				if(str == null || (str.trim()).length() == 0){
 					errorMsgs.add("請輸入會員編號");
-				}
+				}else if(!str.trim().matches(str_reg))
+					errorMsgs.add("請輸入正確會員編號");
 				
 				if (!errorMsgs.isEmpty()){
-					RequestDispatcher failureView = req.getRequestDispatcher("/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskMemIndex.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -703,7 +705,7 @@ System.out.println("STEP3");
 				}
 				
 				if (!errorMsgs.isEmpty()){
-					RequestDispatcher failureView = req.getRequestDispatcher("/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskMemIndex.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -716,7 +718,7 @@ System.out.println("STEP3");
 				}
 				
 				if (!errorMsgs.isEmpty()){
-					RequestDispatcher failureView = req.getRequestDispatcher("/mem/select_page.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskMemIndex.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -724,7 +726,8 @@ System.out.println("STEP3");
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				
 				req.setAttribute("memVO", memVO);
-				String url = "/mem/listOneMem.jsp";
+				req.getSession().setAttribute("memVO", memVO);
+				String url = "/backdesk/mem/backdeskSimple_listOneMem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -732,7 +735,7 @@ System.out.println("STEP3");
 				
 			} catch (Exception e){
 				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView =req.getRequestDispatcher("/mem/select_page.jsp");
+				RequestDispatcher failureView =req.getRequestDispatcher("/backdesk/mem/backdeskMemIndex.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -753,9 +756,9 @@ System.out.println("STEP3");
 				MemVO memVO = memSvc.getOneMem(mem_No);
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				
+				req.getSession().setAttribute("memVO", memVO);
 				req.setAttribute("memVO", memVO);
-				String url = "/mem/update_mem_input.jsp";
+				String url = "/backdesk/mem/backdeskSimpleUpdate_mem.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -763,7 +766,7 @@ System.out.println("STEP3");
 				
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/mem/listAllMem.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/mem/backdeskUpdateListAllMem.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -814,7 +817,7 @@ System.out.println("STEP3");
 				}
 				
 				String mem_Pho = req.getParameter("mem_Pho");
-				String mem_Pho_reg = "^09[0-9]{2}-[0-9]{6}$";
+				String mem_Pho_reg = "^09[0-9-]{2,3}[0-9]{6}$";
 				if (mem_Pho == null || mem_Pho.trim().length() == 0){
 					errorMsgs.add("手機號碼: 請勿空白");
 				}else if(!mem_Pho.trim().matches(mem_Pho_reg)) {
@@ -1040,7 +1043,7 @@ System.out.println("STEP3");
 				
 				
 				String mem_Pho = req.getParameter("mem_Pho");
-				String mem_Pho_reg = "^09[0-9]{2}-[0-9]{6}$";
+				String mem_Pho_reg = "^09[0-9-]{2,3}[0-9]{6}$";
 				if (mem_Pho == null || mem_Pho.trim().length() == 0){
 					errorMsgs.add("手機號碼: 請勿空白");
 				}else if(!mem_Pho.trim().matches(mem_Pho_reg)) {

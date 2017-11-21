@@ -41,16 +41,10 @@
 }
 th , td { 
 text-align:center; 
-/* 	border-bottom:3px orange double; */
-/* 	border-right: 3px orange double; */
+
 } 
-.totalPrice2{
-/* 	margin-left:500px; */
-	color:red;
-}
-.price{
-	color:red;
-} 
+
+
 </style>
 
 <script>
@@ -138,9 +132,12 @@ window.onscroll = function() {
 				
 				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
 				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+				<td style="width:100px;"></td>
+				<td><h3>您目前擁有積分共:&nbsp;<span style="color:red;font-size:36px;"><%=memVO.getMem_Point()%></span>&nbsp;點</h3></td>
 			</tr>
 		</table>
 		<br>
+		
 	</div>
 
 
@@ -177,7 +174,7 @@ window.onscroll = function() {
 			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
 			<td width="100"><div align="center"><b><%=order.getProCar_Name()%></b></div></td>
 		
-			<td width="100"><div align="center" id="proPrice"><b>$<%=order.getProCar_Price()%></b></div></td>
+			<td width="100"><div align="center" id="proPrice"><b><%=order.getProCar_Price()%>點</b></div></td>
 			<td width="100">
 				<div align="center">
 					<button type="button" id="backPro"  style="width: 30px;">-</button>
@@ -185,8 +182,8 @@ window.onscroll = function() {
 					<button type="button" id="addPro"  style="width: 30px;">+</button>
 				</div>
 			</td>
-			<td width="100" class="price">
-				<div align="center"><b id="totlPrice">$<%=order.getProCar_Price()*order.getProCar_Quantity()%></b></div>
+			<td width="100">
+				<div>&nbsp;<span style="color:red;"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
         	<td width="100"><div align="center">
            <form name="deleteForm"  action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
@@ -199,14 +196,19 @@ window.onscroll = function() {
 </table>	
 	<%totalPrice=totalPrice+(int)(order.getProCar_Price()*order.getProCar_Quantity()); }%>
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-3 col-sm-offset-3"><h1 class="" >共<%=buylist.size()%>項商品</h1></div>
-			<div class="col-xs-12 col-sm-4"><h1 class="totalPrice2" >總計:$<%=totalPrice %></h1></div>
+		<div class="row">           
+			<div class="col-xs-12 col-sm-3 col-sm-offset-3"><h3>共&nbsp;<span style="color:red;"><%=buylist.size()%></span>&nbsp;項商品</h3></div>
+			<div class="col-xs-12 col-sm-4"><h2>總計:&nbsp;<span style="color:red;"><%=totalPrice%></span>&nbsp;點</h2></div>
 <!-- 			<div class="col-xs-12 col-sm-2"> -->
 		</div>
 	</div>
-	
-	
+		<%if(memVO.getMem_Point()<totalPrice){%>
+			<form name="checkoutForm" action="<%=request.getContextPath()%>/frontdesk/stored_history/rechage_credit.jsp" method="POST" style="margin-bottom: 0px;">
+              
+              <button type="submit" class="btn btn-danger" style="width:100%;height:60px;font-size:30px">請儲值</button>
+          </form>
+		<%}else{ %>
+			
 	
 
           <form name="checkoutForm" action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
@@ -214,8 +216,9 @@ window.onscroll = function() {
               <button type="submit" class="btn btn-warning" style="width:100%;height:60px;font-size:30px">付款結帳</button>
         
           </form>
+          <%} %>
 <% }else{%>
-	<H1 Style="text-align:center;background-color:#FFFFBB;">尚無商品</H1>
+	<H1 Style="text-align:center;background-color:#FFFFBB;">尚無商品<a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">快到商城購物</a></H1>
 <% }%>
 <!-- 					</table> -->
 				</div>

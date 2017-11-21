@@ -29,15 +29,24 @@
 </style>
 
 
+<style type="text/css">
+	#top{margin-top: auto;
+		 margin-left: auto}
+</style>
 
 </head>
 <body>
 
 
+		
+		<div id="top" class="container">
+			<div class="row">
+				
+				<div class="col-xs-12 col-sm-9">
 
 
 <table id="table-1">
-	<tr><td><h3>工具人會員中心</h3></td></tr>
+	<tr><td><h3>工具人後台會員中心</h3></td></tr>
 </table>
 
 <p>這裡是首頁</p>
@@ -76,7 +85,7 @@
 	<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService"/>
 	
 	<li>
-		<FORM METHOD="post" action="mem.do">
+		<FORM METHOD="post" action="<%=request.getContextPath()%>/mem/mem.do">
 			<b>選擇會員編號 :</b>
 			<select size="1" name="mem_No">
 				<c:forEach var="memVO" items="${memSvc.all}">
@@ -89,7 +98,7 @@
 	</li>
 	
 	<li>
-		<FORM METHOD="post" ACTION="mem.do">
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do">
 			<b>選擇會員姓名</b>
 			<select size="1" name="mem_No">
 				<c:forEach var="memVO" items="${memSvc.all}">
@@ -102,7 +111,9 @@
 </ul>
 
 
-
+	</div>
+			</div>
+		</div>
 
 
 </body>
