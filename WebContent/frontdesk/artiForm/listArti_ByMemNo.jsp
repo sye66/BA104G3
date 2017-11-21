@@ -4,42 +4,33 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.mem.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    MemVO memVO = (MemVO) request.getAttribute("memVO");
+    ArtiFormService artiFormSvc = new ArtiFormService();
+    String mem_No = (String) session.getAttribute("mem_No");
+	session.setAttribute("mem_No",mem_No);
 
-
-    ArtiFormVO artiFormVO = new ArtiFormVO();
-    ArtiFormService artiSvc = new ArtiFormService();
-    
-    
-    Set<ArtiFormVO> set = artiSvc.getAll();
+    Set<ArtiFormVO> set = ( Set<ArtiFormVO>) artiFormSvc.findArtiByMemNo(mem_No);
     pageContext.setAttribute("set",set);
-    
 %>
 
-<jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
-
 <html>
-<head>
-<title>所有文章資料 - listAllArtiForm.jsp</title>
+<head><title> 分類文章 - listArti_ByMemNo.jsp   ${arti_No} </title>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
-div> .timeline-body{
-    float: left;
-}
-  
+
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body bgcolor='white'>
-
+${arti_No}
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
 
@@ -90,7 +81,7 @@ div> .timeline-body{
                         <a class="sidebar-toggler" href="#">
                             <i></i>111
                         </a>
-                        <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
+                        <a class="refresh" id="refresh-toggler" href="">
                             <i>Personal</i>
                         </a>
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">

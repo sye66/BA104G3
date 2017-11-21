@@ -36,7 +36,7 @@ public class ArtiFormServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try{
+			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				HttpSession session = req.getSession();
 				String mem_No =req.getParameter("mem_No");
@@ -77,8 +77,7 @@ public class ArtiFormServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-System.out.println(arti_No);
-System.out.println(mem_No);
+				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 //				session.setAttribute("artiReplyVO", artiReplyVO);
 				req.getSession().setAttribute("artiFormVO", artiFormVO);
@@ -86,17 +85,17 @@ System.out.println(mem_No);
 //				req.setAttribute("mem_No", mem_No);
 //	            req.getSession().setAttribute("arti_No", arti_No);
 				req.getSession().setAttribute("mem_No", mem_No);
-System.out.println(session.getAttribute("mem_No"));
+
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-return;
+                return;
 				/***************************其他可能的錯誤處理*************************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		/******[ 後台取出ㄧ個展示 ]******/
@@ -172,6 +171,40 @@ return;
 				/***************************2.開始查詢資料****************************************/
 				ArtiFormService artiFormSvc = new ArtiFormService();
 				Set<ArtiFormVO> artiFormVO = artiFormSvc.getAllArti4Serach(describe);
+
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("artiFormSet", artiFormVO);
+//				session.setAttribute("describe", describe);
+				String url = "/frontdesk/artiForm/listArti_withSet.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理**********************************/
+//			} catch (Exception e){
+//				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+//				failureView.forward(req, res);
+//			}
+		}
+		
+		/******[ 依文章編號取出 ]******/
+		if ("listArti_ByMemNo".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+//			try{
+				/***************************1.接收請求參數****************************************/
+				HttpSession session = req.getSession();
+				String mem_No = req.getParameter("mem_No");
+
+				if(mem_No==null||(mem_No.trim()).length()==0){
+					errorMsgs.add(" 你還沒有登入喔~~~ ");
+				}
+
+				/***************************2.開始查詢資料****************************************/
+				ArtiFormService artiFormSvc = new ArtiFormService();
+				Set<ArtiFormVO> artiFormVO = artiFormSvc.findArtiByMemNo(mem_No);
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("artiFormSet", artiFormVO);
