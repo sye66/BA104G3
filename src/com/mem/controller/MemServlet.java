@@ -674,17 +674,35 @@ System.out.println("STEP3");
 			
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				
+				MemVO memVO = new MemVO();
 				String mem_No = req.getParameter("mem_No").trim();
 				System.out.println(mem_No);
 				
 				Integer mem_State = new Integer (req.getParameter("mem_State"));
 				
 				
+				/***************************mail區塊 1***************************************/
+				
+				String to = "kiz7386@gmail.com";
+			      
+			    String subject = "密碼通知";
+			      
+			    String ch_name = memVO.getMem_Id();
+//			    String passRandom = "111";
+			    String messageText =  ch_name + " 你好 " +  "\n" +
+			    					 " 由於您在討論區或發表任務內容，發佈了有關不雅或腥羶色的圖片或字眼，經查證後予以停權 三 天，並刪除相關發佈資訊。"
+			    					 + "煩請避免相關行為，如果查證繼續發生，將給予更嚴重的處理。以上!"; 
+			    
+//			    Integer mem_Code = Integer.valueOf(passRandom);
+			    
+				/***************************mail區塊 1***************************************/
 				
 				
 				
-				MemVO memVO = new MemVO();
+				
+				
+				
+				
 				
 				memVO.setMem_No(mem_No);
 				memVO.setMem_State(mem_State);
@@ -703,8 +721,23 @@ System.out.println("STEP1");
 				MemService memSvc = new MemService();
 				memVO = memSvc.updateByEmp(memVO);
 				
+				
 System.out.println("STEP2");				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+
+
+				/***************************mail區塊 2***************************************/
+				if(memVO.getMem_State()==9){
+					System.out.println("memVO.getMem_State() + " +memVO.getMem_State());
+				
+				MailService mailService1 = new MailService();
+				mailService1.sendMail(to, subject, messageText);
+				}
+				/***************************mail區塊 2***************************************/
+
+
+
+
 				req.getSession().setAttribute("memVO", memVO);
 				req.setAttribute("memVO", memVO);
 				System.out.println("mem_State +" +mem_State );
