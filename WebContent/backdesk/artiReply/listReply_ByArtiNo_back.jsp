@@ -11,7 +11,6 @@
 	String arti_No = (String) session.getAttribute("arti_No");
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);
-    
 %>
 
 <html>

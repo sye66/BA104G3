@@ -12,6 +12,7 @@
     
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
+    
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />

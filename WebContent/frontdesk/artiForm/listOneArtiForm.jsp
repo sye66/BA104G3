@@ -20,7 +20,6 @@
     
 	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
-	
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 

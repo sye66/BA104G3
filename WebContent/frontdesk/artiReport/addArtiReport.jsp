@@ -4,7 +4,6 @@
 
 <%
   ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportVO");
-
 %>
 
 

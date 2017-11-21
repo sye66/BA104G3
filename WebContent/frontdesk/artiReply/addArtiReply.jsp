@@ -8,8 +8,7 @@
 <jsp:useBean id="artiReplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%
     ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplyVO");
-    String arti_No = (String) session.getAttribute("arti_No");
-    
+    String arti_No = (String) session.getAttribute("arti_No");    
 %>
 
 

@@ -9,7 +9,6 @@
     ArtiReplyService artiReplySvc = new ArtiReplyService();
     Set<ArtiReplyVO> set = artiReplySvc.getAllReply();
     pageContext.setAttribute("set",set);
-    
 %>
 <jsp:useBean id="artiReplyDAO" scope="page" class="com.artiReply.model.ArtiReplyDAO" />
 <html>

@@ -4,7 +4,6 @@
 
 <%
   ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
-
 %>
 
 

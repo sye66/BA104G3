@@ -15,6 +15,7 @@
 
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
+    
 	String arti_No = (String) session.getAttribute("arti_No");
 	String mem_No = (String) session.getAttribute("mem_No");
 %>

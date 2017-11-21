@@ -12,8 +12,7 @@
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();
-    ArtiReportVO artiReportVO = new ArtiReportVO();
-    
+    ArtiReportVO artiReportVO = new ArtiReportVO(); 
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 <%

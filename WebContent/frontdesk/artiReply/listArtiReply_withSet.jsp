@@ -8,7 +8,6 @@
 
 <%
   ArtiReplyService artiReplySvc = new ArtiReplyService();
-
   Set<ArtiReplyVO> set= (Set<ArtiReplyVO>) request.getAttribute("artiReplySet");
   pageContext.setAttribute("set",set);
 %>
@@ -26,49 +25,6 @@
 <title>文章回覆資料 - listArtiReply_withSet (REVISED).jsp </title>
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: auto;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-
-.popoverexample .popover{
-    position:relative;
-    display:block;
-    width:auto;
-    margin:20px
-}
-
-}
-button{
-  float: left;
-  margin : 30 px;
-}
 
 </style>
 </head>
