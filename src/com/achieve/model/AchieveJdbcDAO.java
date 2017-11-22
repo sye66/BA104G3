@@ -29,7 +29,8 @@ public class AchieveJdbcDAO implements AchieveDAO_interface{
 			"UPDATE ACHIEVE set ACH_NO=?, ACH_NAME=?,ACH_PICTURE=?, ACH_EXPLAIN=? where ACH_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM ACHIEVE where ACH_NO = ?";
-	
+	private static final String GETTHREE =
+			"select ach_name, ach_picture, ach_explain from achieve where ach_no= ?";
 	
 
 	
@@ -325,6 +326,14 @@ public class AchieveJdbcDAO implements AchieveDAO_interface{
 					System.out.println();
 				}
 			}
+
+	@Override
+	public List<AchieveVO> getThree(String ach_No) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
 

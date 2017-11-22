@@ -13,7 +13,7 @@ public class CompService {
 		dao = new CompDAO();
 	}
 	
-	public CompVO addEmp(String emp_No, String auth_No) {
+	public CompVO addEmpComp(String emp_No, String auth_No) {
 
 		CompVO compVO = new CompVO();
 

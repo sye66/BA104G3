@@ -122,9 +122,8 @@ System.out.println(empVO.getEmp_No());
 		
 		if ("logout".equals(action)){
 			req.getSession().invalidate();
-			
-	
-			String url = "/backdesk.jsp";
+
+			String url = "/index.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			

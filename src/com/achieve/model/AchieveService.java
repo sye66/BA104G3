@@ -46,4 +46,7 @@ public class AchieveService {
 	public void deleteAchieve(String ach_No) {
 		dao.delete(ach_No);
 	}
+	public List<AchieveVO> getThree(String ach_No){
+		return dao.getThree(ach_No);
+	}
 }

@@ -35,4 +35,8 @@ public class Ach_DetailService {
 		dao.delete(mem_No);
 	}
 	
+	public List<Ach_DetailVO> getPersonal(String mem_No){
+		return dao.getPersonal(mem_No);
+	}
+	
 }

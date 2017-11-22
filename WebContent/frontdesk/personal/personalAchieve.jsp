@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.achieve.model.*"%>
+<%@ page import="com.ach_detail.model.*"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
 
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
-      <%request.getSession().setAttribute("memVO" ,memVO); %>
+<% 
+	MemVO memVO = (MemVO) session.getAttribute("memVO");
+	String mem_No = memVO.getMem_No();
+	Ach_DetailService achdSvc = new Ach_DetailService();
+	List<Ach_DetailVO> list = achdSvc.getPersonal(mem_No);
+	pageContext.setAttribute("list",list);
+
+%>
+
+<%--       <%request.getSession().setAttribute("memVO" ,memVO); %> --%>
       
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +24,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	
 	
 	<div class="container">
@@ -33,7 +49,7 @@
  				    	</tr>
  				    	<tr>
  				    		<td>
- 				    			<a href="personalMissionHistory.jsp"><span class="icon icon-pencil"></span>歷史任務</a>
+ 				    			<a href="<%=request.getContextPath()%>/frontdesk/personal/personalMissionHistory.jsp"><span class="icon icon-pencil"></span>歷史查詢</a>
  				    		</td>
  				    	</tr>
  				    	<tr>
@@ -48,58 +64,53 @@
  				    	</tr>
  				    	<tr>
  				    		<td>
- 				    			<form METHOD="post">
- 				    			<a href="<%=request.getContextPath()%>/personal/personal.do"><span class="icon icon-pencil"></span>成就查詢</a>
- 				    			<input type="hidden" name="action" value="personalachieve">
- 				    			</form>
+ 				    			<a href="<%=request.getContextPath()%>/frontdesk/personal/personalAchieve.jsp"><span class="icon icon-pencil"></span>成就查詢</a>
  				    		</td>
  				    	</tr>
  				    </table>				
  				  </div>
  				</div>
  			</div>
+ 			
  			<div class="col-xs-12 col-sm-8">
- 				<div class="panel panel-default">
+ 				<div class="panel panel-info">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">標題</h3>
 					  </div>
 					  <div class="panel-body">
-					    <table>
+					    <table class="table table-hover">
+					    	<!-- <caption>我是表格標題</caption> -->
+					    	<thead>
+					    		<tr>
+					    			<th>會員編號</th>
+					    			<th>成就標題</th>
+					    			<th>成就時間</th>
+					    		</tr>
+					    	</thead>
+					    	<tbody>
+							<c:forEach var="ach_DetailVO" items="${list}">
 							<tr>
-								<th>會員編號</th>
-								<th>成就編號</th>
-								<th>成就名稱</th>
-								<th>成就圖片</th>
-								<th>成就說明</th>
-
-								
+								<td>${ach_DetailVO.mem_No}&nbsp;&nbsp;</td>
+								<td>${ach_DetailVO.ach_No}&nbsp;&nbsp;</td>
+								<td>${ach_DetailVO.ach_Time}</td>
 							</tr>
-							<tr align='center' valign='middle'>
-<%-- 								<td><%=empVO.getEmp_No()%></td> --%>
-<%-- 								<td><%=empVO.getEmp_Name()%></td> --%>
-<%-- 								<td><%=empVO.getEmp_Mail()%></td> --%>
-<%-- 								<td><%=empVO.getEmp_Job()%></td> --%>
-<%-- 								<td><%=empVO.getEmp_Phone()%></td> --%>
-							</tr>
-							
+							</c:forEach>
+							</tbody>
+							<div class="panel-body">
+										<form method="post"
+											action="<%=request.getContextPath()%>/ach_detail/ach_detail.do">
+											<button class="btn btn-warning" type="submit" name="action"
+												value="achieve_Detail">成就細節</button>
+										</form>
+									</div>
 						</table>	
 					  </div>
 				</div>
  			</div>
 		</div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	
-	<footer>
-		<div class="cli-xs-12 col-sm-12 footer">
-		
-		</div>
-	</footer>
+	
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </body>
 </html>

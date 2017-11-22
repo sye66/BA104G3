@@ -14,7 +14,6 @@ String str = "AU000002";
 		CompService compSvc = new CompService();
 		list = compSvc.getAllAuthNo(emp_No);
 // 		pageContext.setAttribute("list",list);
-	
 	}
 
 %>
@@ -61,13 +60,10 @@ String str = "AU000002";
 						<li><a
 							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
 								class="icon icon-flatscreen"></span>首頁</a></li>
-<<<<<<< HEAD
+
 						<li><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><span class="icon icon-pencil"></span>會員管理</a></li>
-						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
-=======
-						<li><a href="#"><span class="icon icon-pencil"></span>會員管理</a></li>
 						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
+
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
 					
@@ -86,12 +82,7 @@ String str = "AU000002";
 			</div>
 		</div>
 		
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/decideempcomp/decideempcomp.do">
-		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="送出新增">
-		</FORM>
-	
-
+		
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

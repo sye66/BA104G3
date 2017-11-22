@@ -18,7 +18,7 @@ public class CompJdbcDAO implements CompDAO_interface{
 	String passwd = "123456";
 	
 	private static final String INSERT = 
-			"INSERT INTO COMP(AUTH_NO)VALUES(?)";
+			"INSERT INTO COMP(EMP_NO,AUTH_NO)VALUES(?,?)";
 	private static final String GET_ALL = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP order by EMP_NO";
 	private static final String GET_ONE = 
@@ -42,8 +42,9 @@ public class CompJdbcDAO implements CompDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT);
-
-			pstmt.setString(1, compVO.getAuth_No());
+			
+			pstmt.setString(1, compVO.getEmp_No());
+			pstmt.setString(2, compVO.getAuth_No());
 
 			pstmt.executeUpdate();
 
@@ -288,9 +289,12 @@ public class CompJdbcDAO implements CompDAO_interface{
 	public static void main(String[] args) {
 			CompJdbcDAO dao = new CompJdbcDAO();
 			
-//			CompVO compVO = new CompVO();
-//			compVO.setAuth_No("AU000001");
-//			compVO.setEmp_No("E000001");
+			CompVO compVO = new CompVO();
+			compVO.setEmp_No("E000016");
+			compVO.setAuth_No("AU000003");
+			compVO.setAuth_No("AU000002");
+			compVO.setAuth_No("AU000001");
+			
 //			
 //			CompVO compVO2 = new CompVO();
 //			compVO2.setAuth_No("AU000002");

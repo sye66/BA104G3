@@ -42,7 +42,7 @@ public class Ach_DetailServlet extends HttpServlet {
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("mem_No");
-System.out.println(str+"11111111111111");
+
 //				session.setAttribute("mem_No", str);
 				
 				if (str == null || (str.trim()).length() == 0) {
@@ -71,11 +71,15 @@ System.out.println(str+"11111111111111");
 				}
 				
 				/***************************2.開始查詢資料*****************************************/
-System.out.println(mem_No);
+
 				Ach_DetailService ach_DetailSvc = new Ach_DetailService();
-				Ach_DetailVO ach_DetailVO = ach_DetailSvc.getOneAch_Detail(mem_No);
-System.out.println(mem_No+"333333333333");
-				if (ach_DetailVO == null) {
+				List<Ach_DetailVO> list = ach_DetailSvc.getPersonal(mem_No);
+				
+//				Ach_DetailService ach_DetailSvc = new Ach_DetailService();
+//				Ach_DetailVO ach_detailVO = ach_DetailSvc.getOneAch_Detail(mem_No);	
+		
+
+				if (list == null) {
 					errorMsgs.add("查無資料");
 				}
 				// Send the use back to the form, if there were errors
@@ -87,8 +91,8 @@ System.out.println(mem_No+"333333333333");
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-System.out.println(mem_No+"22222222222222222");
-				req.setAttribute("ach_DetailVO", ach_DetailVO); 
+
+				req.setAttribute("list", list);			
 				String url = "/frontdesk/ach_detail/listOneAch_Detail.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
@@ -165,6 +169,28 @@ System.out.println(mem_No+"22222222222222222");
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/frontdesk/ach_detail/selectAch_Detail_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
+		
+		if("achieve_Detail".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			String requestURL = req.getParameter("requestURL");
+			
+ 			String mem_No = (String) req.getSession().getAttribute("memVO");
+ 			try{
+ 				Ach_DetailService achdSvc = new Ach_DetailService();
+ 				List<Ach_DetailVO> ach_detailVO = achdSvc.getPersonal(mem_No);
+ 				AchieveService achieveSvc = new AchieveService();
+ 				List<AchieveVO> list = null;
+ 				for(int i = 0; i < ach_detailVO.size();i++){
+ 					list.add();
+ 				}
+ 				achieveSvc.getThree(ach_No);
+ 			}catch (Exception e) {
+				errorMsgs.add("資料取出時失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			}
 		}
