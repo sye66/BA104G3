@@ -9,12 +9,13 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
+import com.businessrefinery.barcode.QRCode;
 import com.disputecase.model.DisputeCaseService;
 import com.disputecase.model.DisputeCaseVO;
 import com.getmission.model.GetMissionService;
@@ -22,7 +23,6 @@ import com.getmission.model.GetMissionVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 
-import oracle.net.aso.n;
 
 
 
@@ -161,8 +161,28 @@ public class DisputeCaseServlet extends HttpServlet {
 					mission_Pay = 50;
 				}
 				MemService memService = new MemService();
-				
 				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getIssuer_Mem_No(),mission_Pay);
+				
+				// 嘗試加入QRcode
+				response.setContentType("image/jpeg");
+				System.out.println("寫QRCODE中");
+				try {
+				    // new QRcode物件
+				    QRCode barcode = new QRCode();
+				    // 填入要轉碼的資訊
+				    barcode.setCode("https://www.google.com");
+				    // 設定大小，15~20效果不錯
+				    barcode.setModuleSize(15);
+				    // 解析度
+				    barcode.setResolution(144);
+				    // 傳入byte陣列
+				    byte[] barcodeByteArr = barcode.drawImage2Bytes();
+				    request.setAttribute("barcodeByteArr", barcodeByteArr);
+				    System.out.println("寫完囉");
+				} catch (Exception e) {
+				    throw new ServletException(e);
+				}
+				
 				
 				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
 				ReplyDoneView.forward(request, response);
