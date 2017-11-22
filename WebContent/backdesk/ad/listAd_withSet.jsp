@@ -5,11 +5,11 @@
 <%@ page import="com.ad.model.*"%>
 
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
-
+<jsp:useBean id="adSvc" scope="page" class="com.ad.model.AdService" />
 <%
-  AdService adSvc = new AdService();
+  AdVO adVO = new AdVO();
+
   Set<AdVO> set= (Set<AdVO>) request.getAttribute("adSet");
-  String ad_Fty_No = (String) adSvc.
   pageContext.setAttribute("set",set);
 %>
 
@@ -61,15 +61,14 @@
 <br>
 <hr>
 	<%@ include file="/frontdesk/page1.file" %> 
-	<c:forEach var="artiReplyVO" items="${set}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-	
+	<c:forEach var="adVO" items="${set}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	<br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" name="form1" enctype="multipart/form-data">
 
 <div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter"> ${adVO.ad_No} </h5>
+                        <h5 class="bigger lighter">${adVO.ad_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
@@ -132,7 +131,7 @@
                             <div class="btn-group">
                             <div>
                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
-			                <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
+			                <input type="hidden" name="ad_No"  value="${adSet.ad_No}">
 			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                <button class="btn btn-danger" type="submit" name="action" value="deleteAd">刪除廣告</button>
                             </FORM>
