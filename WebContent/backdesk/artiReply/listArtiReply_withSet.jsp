@@ -1,16 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.artiForm.model.*"%>
-<%@ page import="com.artiClass.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*"%>
 <%@ page import="com.artiReply.model.*"%>
-<%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.mem.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  ArtiReportService artiReportSvc = new ArtiReportService();
-  ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportSet"); 
- %>
+  ArtiReplyService artiReplySvc = new ArtiReplyService();
+  Set<ArtiReplyVO> set= (Set<ArtiReplyVO>) request.getAttribute("artiReplySet");
+  pageContext.setAttribute("set",set);
+%>
 
 <html>
 <head>
@@ -24,46 +24,62 @@
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 
-<title>文章檢舉資料 - listOneArtiReply.jsp</title>
+<title>文章回覆資料(後台) - listArtiReply_withSet (REVISED).jsp </title>
 
 <style>
+
     a{
    font-size: 24px;
    color: #F00;
   }
+  
 </style>
-
 </head>
 <body bgcolor='white'>
 
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
-
-
-<div class="title">
-        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的檢舉   // <a href="/BA104G3/backdesk/artiReply/listAllArtiReport.jsp">List</a> all Article Reply.  
-         <br/>
+	
+	
+	    <div class="widgetbox">
+        <div class="title">
+        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的所有回覆   // <a href="/BA104G3/backdesk/artiReply/listAllArtiReply_back.jsp">List</a> all Article Reply.  
+        </div>
         </div>
 
 
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+<br>
+<hr>
+	<%@ include file="/frontdesk/page1.file" %> 
+	<c:forEach var="artiReplyVO" items="${set}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
+	
+	<br>
 	<div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter"> ${artiReportSet.mem_No} </h5>
+                        <h5 class="bigger lighter"> ${artiReplyVO.mem_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                            <div class="" style="">${artiClassSvc.getOneClass(artiReportSet.arti_Cls_No).arti_Cls_Name }</div>
+                                <div class="" style="">${artiReplyVO.arti_Cls_No}</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style="">${artiReportSet.arti_No}</div>
+                                <div class="" style="">${artiReplyVO.arti_No}</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style="">${artiReportSet.report_No}</div>
+                                <div class="" style="">${artiReplyVO.reply_No}</div>
                             </div>
                         </div>
                     </div>
@@ -74,45 +90,49 @@
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
                                             <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
-	                     style="height:100px;width:120px;"/>
+    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiReplyVO.mem_No}&mem_${memSvc.getOneMem(artiReplyVO.mem_No).mem_pic}"
+	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
     </div>
                                     </div>
                                     </div>
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
-                                        <i class="icon-remove bigger-110"></i>
-                                        <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService" />
-                                        ${artiFormSvc.getOneArtiForm(artiReportSet.arti_No).arti_Title}
+                                        <i class="icon-remove bigger-110"></i>Reject
                                     </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="widget-main padding-16">
-                            ${artiReportSet.report_Desc}
+                            ${artiReplyVO.reply_Desc}
                         </div>
                     </div>
                     <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter">${artiReportSet.report_Time}</h5>
+                        <h5 class="bigger lighter">${artiReplyVO.reply_Time}</h5>
                         <div class="widget-toolbar">
                             <div class="btn-group">
                             <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
-                                <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+                                <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+                                <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReport_For_Update">修改檢舉</button>
+			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
+ 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
+			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                    </FORM>
                             </div>
                             </div>
                             <div class="btn-group">
                             <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			                    <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
+			                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
 			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReport">刪除檢舉</button>
+			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
+			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
+ 			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
  			                    </FORM>  
                             </div>
                             </div>
@@ -120,10 +140,16 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                
-                <div class="widget-main padding-28">
-                          </div>
-                        </div>     
+    
+	<tr>	
+		<td></td>
+		<td></td>
+		<jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
+			<td>${artiClassSvc.getOneClass(artiReplyVO.arti_Cls_No).arti_Cls_Name }</td>
+	</tr>
+
+	</c:forEach>
+
+ <%@ include file="/backdesk/page2.file" %> 
 </body>
 </html>

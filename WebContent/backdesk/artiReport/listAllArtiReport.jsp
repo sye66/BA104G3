@@ -20,7 +20,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 <style>
-
+    a{
+   font-size: 24px;
+   color: #F00;
+  }
 </style>
 
 </head>
@@ -32,11 +35,6 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-	<tr><td>
-		 <h3>所有檢舉文張列表 - listAllArtiReport.jsp</h3>
-		 <h4><a href="selectReport_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [Article Report HOME] </a></h4>
-	</td></tr>
-</table>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -49,7 +47,7 @@
 </c:if>
 
 <div class="widgetbox">
-    <div class="title"><h3> 所有檢舉文章列表 : </h3></div>
+    <div class="title"><h3> 這裡是討論區文章所有回覆列表 -- LIST ALL : </h3></div>
         <div class="widgetcontent padding0 statement">
             <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
 
@@ -61,7 +59,7 @@
                         <th> 檢舉時間 </th>
                         <th> 類別 </th>
                         <th> 檢舉狀態 </th>
-                        <th colspan="3"> 後台管理 </th>
+                        <th > 後台管理 </th>
                     </tr>
                  </thead>
     <%@ include file="/backdesk/page1.file" %> 
@@ -80,32 +78,13 @@
 			                  <td>${artiClassSvc.getOneClass(artiReportVO.arti_Cls_No).arti_Cls_Name }</td>
                              <td> ${artiReportVO.report_Status} </td>
                              
-                             <td>
-			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
-			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-warning" type="submit" name="action" value="getOneReport_For_Display"> 檢舉狀態變更 </button>
- 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			                 </FORM>
-		                     </td>
 		                     
 		                      <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看文章 </button>
- 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			                 </FORM>
-			                 </td>
-                             
-                             <td>
-                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
-			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-danger" type="submit" name="action" value="deleteReportFMBack"> 刪除檢舉 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看檢舉 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 			                 </td>
@@ -116,6 +95,8 @@
                  </table>
              </div><!--widgetcontent-->
          </div><!--widgetbox-->
+         <hr>
+         <br>
  <%@ include file="/backdesk/page2.file" %> 
 
 	   

@@ -80,7 +80,8 @@
 </c:if>
 
 <div class="widgetbox">
-        <div class="title"><h3>討論區檢舉文章查詢 : <a href="/BA104G3/backdesk/artiReport/listAllArtiReport.jsp">List</a> all Article report. </h3>
+        <div class="title"><h3>討論區廣告查詢 : <a href="/BA104G3/backdesk/ad/listAllAd.jsp">List</a> all AD.
+         /                 <a href="/BA104G3/backdesk/ad/addAd.jsp">Add</a> a new AD.</h3><br/>
         </div>
                  <div class="widgetcontent userlistwidget nopadding">
                      <ul>
@@ -88,53 +89,32 @@
                          <li>
                              <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
                                   <div class="info">
-                                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
-                                  <b> 請輸入檢舉編號 (如 REP0007001):</b>
-                                  <input type="text" name="report_No">
-                                  <button class="btn btn-primary" type="submit" name="action" value="getOneReportFMback_For_Display"> 送出查詢 </button>
+                                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
+                                  <b> 請輸入廣告編號 (如 AD0007001):</b>
+                                  <input type="text" name="ad_No">
+                                  <button class="btn btn-primary" type="submit" name="action" value="getOneAd_For_Display"> 送出查詢 </button>
                                   </FORM>
                                   </div><!--info-->
                         </li>
                         <li>
                             <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
                                 <div class="info">
-                                 <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService" />
+                                 <jsp:useBean id="adSvc" scope="page" class="com.ad.model.AdService" />
                                  
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do " enctype="multipart/form-data">
-                                <b>選擇被檢舉的文章編號 :</b>
-                                <select size="1" name="arti_No">
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do " enctype="multipart/form-data">
+                                <b>選擇廣告商名稱 :</b>
+                                <select size="1" name="ad_No">
                                 
-                                <c:forEach var="artiFromVO" items="${artiFormSvc.all}" > 
-
-                                <option value="${artiFromVO.arti_No}"${(artiFormVO.arti_No==artiReportVO.arti_No)?'selected':'' }>${artiFromVO.arti_Title}
+                                <c:forEach var="adVO" items="${adSvc.all}" > 
+                                <option value="${adVO.adNo}">${adVO.ad_Fty_No}
                                 </c:forEach>
  
                                 </select>
-                               <button class="btn btn-primary" type="submit" name="action" value="listReport_ByArtiNo"> 送出查詢 </button>
+                               <button class="btn btn-primary" type="submit" name="action" value="listAd_ByFtyNo"> 送出查詢 </button>
                                </FORM>
                                 </div><!--info-->
                         </li>
-                            <li>
-                                <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
-                                    <div class="info">
-                                       <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                                       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
-                                       <b><font color=orange> 選擇檢舉的文章分類 : </font></b>
-                                       <select size="1" name="arti_Cls_No">
-                                       <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-                                       <option value="${artiClassVO.arti_Cls_No}"${(artiReportVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' }>${artiClassVO.arti_Cls_Name}
-                                       </c:forEach>   
-                                       </select>
-                                        <button class="btn btn-primary" type="submit" name="action" value="listReport_ByArtiClsNo"> 送出查詢 </button>
-                                       </FORM>
-                                    </div><!--info-->
-                            </li>
-                            <li>
-                                <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
-                                    <div class="info">
-                                    <li><a href="/BA104G3/frontdesk/artiReport/addArtiReport.jsp">Add</a> a new Article report.<br></li>
-                                    </div><!--info-->
-                            </li>
+
                         </ul>
                     </div><!--widgetcontent-->
     </div><!--widgetbox-->

@@ -20,7 +20,7 @@
 				<a href="/BA104G3/backdesk/artiForm/select_page.jsp" class="list-group-item">&nbsp;&nbsp;討論區文章管理</a> 
 				<a href="/BA104G3/backdesk/artiReply/selectReply_page.jsp" class="list-group-item">&nbsp;&nbsp;討論區文章回覆管理</a> 
 				<a href="/BA104G3/backdesk/artiReport/selectReport_page.jsp" class="list-group-item">&nbsp;&nbsp;討論區文章檢舉管理</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;討論區廣告管理</a> 
+				<a href="/BA104G3/backdesk/ad/selectAd_page.jsp" class="list-group-item">&nbsp;&nbsp;討論區廣告管理</a> 
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->
