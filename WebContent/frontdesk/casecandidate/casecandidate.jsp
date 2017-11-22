@@ -33,6 +33,11 @@
 		<![endif]-->
 </head>
 <body>
+
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
+<div class="container">
 	<div class="col-xs-12 col-sm-4">
 
 		
@@ -56,10 +61,10 @@
 				<h3 class="panel-title">目前所發佈任務</h3>
 			</div>
 			<div class="panel-body">
-				<td>${mem_No}</td>
-				<td>---------------${memSvc.getOneMem(mem_No).mem_Name } 你好</td>
-
 				<table class="table">
+				<tr><td>${memVO.mem_No}</td>
+				<td>---------------${memSvc.getOneMem(memVO.mem_No).mem_Name } 你好</td>
+</tr>
 					<tr>
 						<td>任務編號</td>
 						<td>任務名</td>
@@ -67,7 +72,7 @@
 						<td></td>
 					</tr>
 					<c:forEach var="caseVO"
-						items="${getMissionSvc.findIssuerCase(mem_No)}" varStatus="i"
+						items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="i"
 						step="1">
 
 						<tr>
@@ -77,8 +82,7 @@
 							<td></td>
 						</tr>
 
-						<c:if
-							test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() !=0}">
+						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() !=0}">
 
 							<c:forEach var="caseCandidateVO"
 								items="${caseCandidateSvc.getCandidate(caseVO.mission_No)}"
@@ -123,7 +127,7 @@
 												<p>----${getMissionSvc.getOneMission(caseVO.mission_No).mission_Name }</p>
 												<h4>任務種類:</h4>
 												<p>----${getMissionSvc.getOneMission(caseVO.mission_No).mission_Category }</p>
-												<p>${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Name}</p>
+												<p>${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Id}</p>
 											</div>
 											<div class="modal-footer">
 
@@ -176,13 +180,12 @@
 				</table>
 			</div>
 
-
+</div></div>
 		</div>
-
-
+</div>
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 		<script src="https://code.jquery.com/jquery.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

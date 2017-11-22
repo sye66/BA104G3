@@ -9,12 +9,13 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
+import com.businessrefinery.barcode.QRCode;
 import com.disputecase.model.DisputeCaseService;
 import com.disputecase.model.DisputeCaseVO;
 import com.getmission.model.GetMissionService;
@@ -22,7 +23,6 @@ import com.getmission.model.GetMissionVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 
-import oracle.net.aso.n;
 
 
 
@@ -161,9 +161,7 @@ public class DisputeCaseServlet extends HttpServlet {
 					mission_Pay = 50;
 				}
 				MemService memService = new MemService();
-				
 				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getIssuer_Mem_No(),mission_Pay);
-				
 				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
 				ReplyDoneView.forward(request, response);
 			} catch (Exception e) {

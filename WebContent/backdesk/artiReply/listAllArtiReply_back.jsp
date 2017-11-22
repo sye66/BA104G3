@@ -20,36 +20,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
+  body{margin:40px;}
+  
+    a{
+   font-size: 24px;
+   color: #F00;
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
+
 </style>
 
 </head>
@@ -58,14 +36,6 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-
-	<tr><td>
-		 <h3>所有回覆文張列表 - listAllArtiReply.jsp</h3>
-		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [Article Reply HOME] </a></h4>
-	</td></tr>
-</table>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -78,7 +48,11 @@
 </c:if>
 
 <div class="widgetbox">
-    <div class="title"><h3> 所有文章回覆列表 : </h3></div>
+
+        <div class="title">
+        <h3> 這裡是討論區文章所有回覆列表 -- LIST ALL : </h3><br/>
+        </div>
+
         <div class="widgetcontent padding0 statement">
             <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
 
@@ -122,7 +96,7 @@
 			                 <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReply_For_Display"> 查看回覆 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReplyFMback_For_Display"> 查看回覆 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>
@@ -132,7 +106,10 @@
                  </table>
              </div><!--widgetcontent-->
          </div><!--widgetbox-->
+          <hr>
+ <br>
  <%@ include file="/backdesk/page2.file" %> 
+
 
 </body>
 </html>

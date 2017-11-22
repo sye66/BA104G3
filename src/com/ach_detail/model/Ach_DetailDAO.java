@@ -34,6 +34,8 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 			"SELECT MEM_NO,ACH_NO,ACH_TIME FROM ACH_DETAIL where MEM_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM ACH_DETAIL where MEM_NO = ?";
+	private static final String GETPERSONAL =
+			"select mem_no,ach_no,TO_CHAR(ACH_TIME,'YYYY-MM-DD') ACH_TIME from ach_detail where mem_no=?";
 	
 	@Override
 	public void insert(Ach_DetailVO ach_detailVO) {
@@ -226,5 +228,63 @@ public class Ach_DetailDAO implements Ach_DetailDAO_interface{
 			}
 		}
 
+	}
+
+
+	@Override
+	public List<Ach_DetailVO> getPersonal(String mem_No) {
+		List<Ach_DetailVO> list = new ArrayList<Ach_DetailVO>();
+		Ach_DetailVO ach_DetailVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GETPERSONAL);
+
+			pstmt.setString(1, mem_No);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
+				ach_DetailVO = new Ach_DetailVO();
+				ach_DetailVO.setMem_No(rs.getString("mem_No"));
+				ach_DetailVO.setAch_No(rs.getString("ach_No"));
+				ach_DetailVO.setAch_Time(rs.getDate("ach_Time"));
+				list.add(ach_DetailVO);
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

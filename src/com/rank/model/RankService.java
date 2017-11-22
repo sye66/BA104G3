@@ -41,4 +41,28 @@ public class RankService {
 	public void deleteRank(String mem_No) {
 		dao.delete(mem_No);
 	}
+	
+	public List<RankVO> getWNRank(){
+		return dao.getWNRank();
+	}
+	
+	public List<RankVO> getMNRank(){
+		return dao.getMNRank();
+	}
+	
+	public List<RankVO> getSNRank(){
+		return dao.getSNRank();
+	}
+	
+	public List<RankVO> getWCRank(){
+		return dao.getWCRank();
+	}
+	
+	public List<RankVO> getMCRank(){
+		return dao.getMCRank();
+	}
+	
+	public List<RankVO> getSCRank(){
+		return dao.getSCRank();
+	}
 }

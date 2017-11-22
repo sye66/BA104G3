@@ -21,6 +21,30 @@ public class CaseCandidateVO implements java.io.Serializable{
 	public void setCandidate_Mem_No(String candidate_Mem_No) {
 		this.candidate_Mem_No = candidate_Mem_No;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((candidate_Mem_No == null) ? 0 : candidate_Mem_No.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CaseCandidateVO other = (CaseCandidateVO) obj;
+		if (candidate_Mem_No == null) {
+			if (other.candidate_Mem_No != null)
+				return false;
+		} else if (!candidate_Mem_No.equals(other.candidate_Mem_No))
+			return false;
+		return true;
+	}
 	public String getMission_No() {
 		return mission_No;
 	}

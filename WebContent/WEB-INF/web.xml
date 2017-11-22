@@ -9,33 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
-<!--   webSocket -->
-   <context-param>
+  <context-param>
     <param-name>org.apache.tomcat.websocket.textBufferSize</param-name>
     <param-value>307200</param-value>
   </context-param>
-  
-  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/BA104G3</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
-  
-  
-  <!--註冊導回首頁的濾器 -->
   <filter>
     <filter-name>loginFilter</filter-name>
     <filter-class>com.tool.controller.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>loginFilter</filter-name>
-<!--     <url-pattern>/frontdesk/pro/showProIndex.jsp</url-pattern> -->
     <url-pattern>/frontdesk/mem/memCenter.jsp</url-pattern>
     <url-pattern>/frontdesk/pro/showProIndex.jsp</url-pattern>
-    
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
@@ -43,14 +34,22 @@
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
   
-<!--註冊導回首頁的濾器 -->  
-  
-  
-  
-  
-  
-  
-  
+  <servlet>
+  	<servlet-name>QRcodeAccept</servlet-name>
+  	<servlet-class>com.getmission.controller.QRcodeAccept</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>QRcodeAccept</servlet-name>
+  	<url-pattern>/qrcodeaccept/qrcodeaccept.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>QRcode</servlet-name>
+    <servlet-class>com.getmission.controller.QRcode</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QRcode</servlet-name>
+    <url-pattern>/qrcode/qrcode.do</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>SkillServlet</servlet-name>
     <servlet-class>com.skill.controller.SkillServlet</servlet-class>
@@ -131,7 +130,6 @@
     <servlet-name>RelationServlet</servlet-name>
     <url-pattern>/relation/relation.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>Follow_tmServlet</servlet-name>
     <servlet-class>com.follow_tool_man.controller.Follow_tmServlet</servlet-class>
@@ -140,9 +138,6 @@
     <servlet-name>Follow_tmServlet</servlet-name>
     <url-pattern>/follow_tool_man/follow_tool_man.do</url-pattern>
   </servlet-mapping>
-<!--   兆哥 -->
-  
-  
   <servlet>
     <servlet-name>ShowImage</servlet-name>
     <servlet-class>com.tool.controller.ShowImage</servlet-class>
@@ -151,7 +146,6 @@
     <servlet-name>ShowImage</servlet-name>
     <url-pattern>/tool/showimage.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>MapKey</servlet-name>
     <servlet-class>com.tool.controller.MapKey</servlet-class>
@@ -161,7 +155,6 @@
     <servlet-name>MapKey</servlet-name>
     <url-pattern>/tool/MapKey.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ProServlet</servlet-name>
     <servlet-class>com.pro.controller.ProServlet</servlet-class>
@@ -170,7 +163,6 @@
     <servlet-name>ProServlet</servlet-name>
     <url-pattern>/pro/pro.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ProClassServlet</servlet-name>
     <servlet-class>com.proclass.controller.ProClassServlet</servlet-class>
@@ -179,7 +171,6 @@
     <servlet-name>ProClassServlet</servlet-name>
     <url-pattern>/pro/proClass.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ProOrderServlet</servlet-name>
     <servlet-class>com.proorder.controller.ProOrderServlet</servlet-class>
@@ -188,7 +179,6 @@
     <servlet-name>ProOrderServlet</servlet-name>
     <url-pattern>/pro/proOrderServlet.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ShoppingCartServlet</servlet-name>
     <servlet-class>com.pro.shoppingcart.ShoppingCartServlet</servlet-class>
@@ -197,7 +187,6 @@
     <servlet-name>ShoppingCartServlet</servlet-name>
     <url-pattern>/pro/shoppingCartServlet.do</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ProOrdListServlet</servlet-name>
     <servlet-class>com.proordlist.contoller.ProOrdListServlet</servlet-class>
@@ -206,7 +195,6 @@
     <servlet-name>ProOrdListServlet</servlet-name>
     <url-pattern>/pro/proOrdListServlet.do</url-pattern>
   </servlet-mapping>
- 
   <servlet>
     <servlet-name>ProTrackServlet</servlet-name>
     <servlet-class>com.protrack.contoller.ProTrackServlet</servlet-class>
@@ -215,13 +203,7 @@
     <servlet-name>ProTrackServlet</servlet-name>
     <url-pattern>/pro/proTrackServlet.do</url-pattern>
   </servlet-mapping>
-  
- 
- <!--   兆哥 --> 
- 
-<!--  家駿 -->
-  
-   <servlet>
+  <servlet>
     <servlet-name>EmpServlet</servlet-name>
     <servlet-class>com.emp.controller.EmpServlet</servlet-class>
   </servlet>
@@ -285,15 +267,7 @@
     <servlet-name>LoginHandler</servlet-name>
     <url-pattern>/loginhandler/loginhandler.do</url-pattern>
   </servlet-mapping>
-  <!-- 	<filter> -->
-<!-- 		<filter-name>LoginHandler</filter-name> -->
-<!-- 		<filter-class>com.emp.controller.LoginHandler</filter-class> -->
-<!-- 	</filter> -->
-<!-- 	<filter-mapping> -->
-<!-- 		<filter-name>LoginHandler</filter-name> -->
-<!-- 		<url-pattern>/emp/*</url-pattern> -->
-<!-- 	</filter-mapping> -->
-<servlet>
+  <servlet>
     <servlet-name>DecideEmpComp</servlet-name>
     <servlet-class>com.emp.controller.DecideEmpComp</servlet-class>
   </servlet>
@@ -309,10 +283,6 @@
     <servlet-name>CompServlet</servlet-name>
     <url-pattern>/comp/comp.do</url-pattern>
   </servlet-mapping>
-  
-  
-  <!--  家駿 -->
-  
   <servlet>
     <servlet-name>ArtiFormServlet</servlet-name>
     <servlet-class>com.artiForm.controller.ArtiFormServlet</servlet-class>
@@ -345,9 +315,14 @@
     <servlet-name>ArtiReportServlet</servlet-name>
     <url-pattern>/artiReport/artiReport.do</url-pattern>
   </servlet-mapping>
-  
-  
-  <!-- 鴨子 -->
+  <servlet>
+    <servlet-name>AdServlet</servlet-name>
+    <servlet-class>com.ad.controller.AdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdServlet</servlet-name>
+    <url-pattern>/ad/ad.do</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetMissionServlet</servlet-name>
     <servlet-class>com.getmission.controller.GetMissionServlet</servlet-class>

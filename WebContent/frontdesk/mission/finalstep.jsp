@@ -32,7 +32,9 @@
 		<![endif]-->
 </head>
 <body>
-
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
 
 <div class="panel panel-info">
   <div class="panel-heading">
@@ -69,6 +71,6 @@
 <button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
 
 </form>
-
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

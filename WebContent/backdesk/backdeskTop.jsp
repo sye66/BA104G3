@@ -7,14 +7,18 @@
 <%
 String emp_No=null;
 List<CompVO> list = null;
-String str = "AU000002";
+String str1 = "AU000001";
+String str2 = "AU000002";
+String str3 = "AU000003";
+String str4 = "AU000004";
+String str5 = "AU000005";
+String str6 = "AU000006";
 	EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 	if(session.getAttribute("empVO")!=null){
 		emp_No = empVO.getEmp_No();
 		CompService compSvc = new CompService();
 		list = compSvc.getAllAuthNo(emp_No);
 // 		pageContext.setAttribute("list",list);
-	
 	}
 
 %>
@@ -61,37 +65,60 @@ String str = "AU000002";
 						<li><a
 							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
 								class="icon icon-flatscreen"></span>首頁</a></li>
-<<<<<<< HEAD
+<%-- 						<%for(CompVO a: list){ --%>
+<!-- //   							if((a.getAuth_No()).contains(str1)){  -->
+<%--  						%>  --%>
 						<li><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><span class="icon icon-pencil"></span>會員管理</a></li>
-						<li><a href="#"><span class="icon icon-pencil"></span>任務管理</a></li>
-=======
-						<li><a href="#"><span class="icon icon-pencil"></span>會員管理</a></li>
-						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
-						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
-						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
-					
-<%-- 						<%for(CompVO c: list){ --%>
-<!--  							if((c.getAuth_No()).contains(str)){ -->
-<%-- 						%> --%>
-							<li>	<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
-								
-<%-- 						<%	} --%>
+<%-- 						<%	}  --%>
 							
-<%-- 							} %> --%>
-						
+<%--  							} %> --%>
+ 							
+<%--  						<%for(CompVO b: list){ --%>
+<!-- //   							if((b.getAuth_No()).contains(str3)){  -->
+<%--  						%>  --%>
+						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
+<%-- 						<%	}  --%>
+							
+<%--  							} %> --%>
+ 							
+<%-- 						<%for(CompVO c: list){ --%>
+<!-- //   							if((c.getAuth_No()).contains(str5)){  -->
+<%--  						%>  --%>
+						<li><a href="<%=request.getContextPath()%>/backdesk/artiForm/select_page.jsp"><span class="icon icon-pencil"></span>討論區管理</a></li>
+<%-- 						<%	}  --%>
+							
+<%--  							} %> --%>
+ 							
+<%--  						<%for(CompVO d: list){ --%>
+<!--    							if((d.getAuth_No()).contains(str4)){  -->
+<%--  						%>  --%>
+						<li><a href="<%=request.getContextPath()%>/backdesk/schedule/Schedule.jsp"><span class="icon icon-pencil"></span>排程器管理</a></li>
+<%-- 						<%	}  --%>
+							
+<%--  							} %> --%>
+ 							
+<%-- 						<%for(CompVO e: list){ --%>
+<!-- //   							if((e.getAuth_No()).contains(str2)){  -->
+<%--  						%>  --%>
+						<li><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
+								
+<%--  						<%	}  --%>
+							
+<%--  							} %> --%>
+ 							 
+<%-- 						<%for(CompVO f: list){ --%>
+<!-- //   							if((f.getAuth_No()).contains(str6)){  -->
+<%--  						%> --%>
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
+<%-- 						<%	}  --%>
+							
+<%--  							} %> --%>
 					</ul>
 				</div><!--header-->
 			</div>
 		</div>
 		
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/decideempcomp/decideempcomp.do">
-		<input type="hidden" name="action" value="insert">
-		<input type="submit" value="送出新增">
-		</FORM>
-	
-
+		
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

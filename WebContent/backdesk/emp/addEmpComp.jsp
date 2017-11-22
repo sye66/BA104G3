@@ -85,7 +85,6 @@
        <td>
        		<b>選擇給予權限:</b><br>
        		<c:forEach var="authVO" items="${authSvc.all}" > 
-	          
 	          <input type="checkbox" name="auth_No" value="${authVO.auth_No}">${authVO.auth_Name}<br>
 	          
 	         </c:forEach>

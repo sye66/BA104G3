@@ -36,6 +36,8 @@ public class AchieveDAO implements AchieveDAO_interface{
 			"UPDATE ACHIEVE set ACH_NAME=?, ACH_PICTURE=?,ACH_EXPLAIN=? where ACH_NO = ?";
 	private static final String DELETE = 
 			"DELETE FROM ACHIEVE where ACH_NO = ?";
+	private static final String GETTHREE =
+			"select ach_name, ach_picture, ach_explain from achieve where ach_no= ?";
 	
 	
 	
@@ -269,5 +271,60 @@ public class AchieveDAO implements AchieveDAO_interface{
 			}
 		}
 
+	}
+
+	@Override
+	public List<AchieveVO> getThree(String ach_No) {
+		List<AchieveVO> list = new ArrayList<AchieveVO>();
+		AchieveVO achieveVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GETTHREE);
+			pstmt.setString(1, ach_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO �]�٬� Domain objects
+				achieveVO = new AchieveVO();
+				achieveVO.setAch_Name(rs.getString("ach_Name"));
+				achieveVO.setAch_Picture(rs.getBytes("ach_Picture"));
+				achieveVO.setAch_Explain(rs.getString("ach_Explain"));
+				list.add(achieveVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 }

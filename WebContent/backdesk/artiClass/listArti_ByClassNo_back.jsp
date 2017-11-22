@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
   table#table-2 {
 	background-color: #CCCCFF;
@@ -49,6 +50,9 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+	
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-2">
 	<tr><td>

@@ -9,14 +9,11 @@
 <%
     MemVO memVO = (MemVO) request.getAttribute("memVO");
 
-
     ArtiFormVO artiFormVO = new ArtiFormVO();
     ArtiFormService artiSvc = new ArtiFormService();
     
-    
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
-    
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
@@ -87,20 +84,18 @@ div> .timeline-body{
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
-
-                        <a class="refresh" id="refresh-toggler" href="">
-                            <i ></i>222
+                        <a class="sidebar-toggler" href="#">
+                            <i></i>111
                         </a>
-                        <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
-                            <i>POST </i>
-                            
+                        <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
+                            <i>Personal</i>
+                        </a>
+                        <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
+                            <i> POST </i>
                         </a>
                     </div>
-                    <!--Header Buttons End-->
-                </div>
-
-                <!-- /Page Header -->
-                <!-- Page Body -->
+                        
+                    </div>
                 
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
@@ -154,6 +149,9 @@ div> .timeline-body{
 
                     </ul>
                 </div>
+                    </c:forEach>
+
+ <%@ include file="/backdesk/page2.file" %> 
       
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
@@ -177,12 +175,6 @@ div> .timeline-body{
 
     </script>
     
-</body>
-
-        
-    </c:forEach>
-</table>
- <%@ include file="/backdesk/page2.file" %> 
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />

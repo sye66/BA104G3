@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.ach_detail.model.*"%>
-<%Ach_DetailVO ach_DetailVO = (Ach_DetailVO) request.getAttribute("ach_DetailVO");
-	String mem_No = (String) session.getAttribute("session");
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	List<Ach_DetailVO> list = (List<Ach_DetailVO>) request.getAttribute("list");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,14 +64,18 @@
 		<th>成就編號</th>
 		<th>成就時間</th>
 		
+		
+		
 	</tr>
-	<c:forEach var="ach_DetailVO" items="${ach_DetailSvc.getOneAch_Detail(mem_No)}">
+	
+	<c:forEach var="ach_DetailVO" items="${list}">
 	<tr align='center' valign='middle'>
 		<td><%=ach_DetailVO.getMem_No()%></td>
 		<td><%=ach_DetailVO.getAch_No()%></td>
 		<td><%=ach_DetailVO.getAch_Time()%></td>
-	</tr>
+		</tr>
 	</c:forEach>
+	
 </table>
 
 </body>

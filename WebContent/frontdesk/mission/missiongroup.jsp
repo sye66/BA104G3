@@ -28,7 +28,9 @@
 
 </head>
 <body>
-
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
 ${memSvc.getOneMem(mem_No).mem_Name} 你好
 
 
@@ -79,7 +81,7 @@ ${memSvc.getOneMem(mem_No).mem_Name} 你好
 </c:if>
 
 <input type="hidden" id=" " >
-
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 </body>
 
 

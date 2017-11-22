@@ -10,4 +10,5 @@ public interface Ach_DetailDAO_interface {
 	public void delete(String mem_No);
     public Ach_DetailVO findByPrimaryKey(String mem_No);
     public List<Ach_DetailVO> getAll();
+    public List<Ach_DetailVO> getPersonal(String mem_No);
 }

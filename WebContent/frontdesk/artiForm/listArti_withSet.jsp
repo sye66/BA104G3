@@ -14,6 +14,7 @@
   pageContext.setAttribute("set",set);
 %>
 
+<jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
 <html>
 <head>
 <title>所有文章資料 - listAllArtiForm.jsp</title>
@@ -59,7 +60,7 @@ div> .timeline-body{
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 ${artiFormVO.describe}</h1>
+                        <h1>所有文章列表</h1>
                     </div>
                 </div>
                     
@@ -82,13 +83,13 @@ div> .timeline-body{
                     
                     <div class="header-buttons">
                         <a class="sidebar-toggler" href="#">
-                            <i class="fa fa-arrows-h"></i>111
+                            <i></i>111
                         </a>
-                        <a class="refresh" id="refresh-toggler" href="">
-                            <i class="glyphicon glyphicon-refresh"></i>222
+                        <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
+                            <i>Personal</i>
                         </a>
-                        <a class="fullscreen" id="fullscreen-toggler" href="#">
-                            <i class="glyphicon glyphicon-fullscreen"></i>333
+                        <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
+                            <i> POST </i>
                         </a>
                     </div>
                     <!--Header Buttons End-->

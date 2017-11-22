@@ -26,8 +26,8 @@ public class AccuseCaseService {
 		return accuseCaseVO;
 	}
 
-	public AccuseCaseVO updateAccuseCase(String accuse_No, String mission_No,String accuser_No,String emp_No, java.sql.Date accuse_Date,
-			java.sql.Date close_Case_Date, String accuse_Detail, Integer accuse_State) {
+	public AccuseCaseVO updateAccuseCase(String accuse_No, String mission_No,String accuser_No,String emp_No, java.sql.Timestamp accuse_Date,
+			java.sql.Timestamp close_Case_Date, String accuse_Detail, Integer accuse_State) {
 
 		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 

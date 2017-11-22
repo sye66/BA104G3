@@ -15,6 +15,7 @@ import com.casecandidate.model.CaseCandidateService;
 import com.casecandidate.model.CaseCandidateVO;
 import com.getmission.model.GetMissionService;
 import com.getmission.model.GetMissionVO;
+import com.mem.model.MemVO;
 
 public class CaseCandidateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,10 +47,10 @@ public class CaseCandidateServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -67,9 +68,10 @@ public class CaseCandidateServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢 *****************************************/
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
-			CaseCandidateVo = caseCandidateSvc.addCaseCandidate(mem_No, mission_No, 1);
+			CaseCandidateVo = caseCandidateSvc.addCaseCandidate(memVO.getMem_No(), mission_No, 1);
 
 			req.setAttribute("CaseCandidateVo", CaseCandidateVo);
+			req.setAttribute("errorMsgs", errorMsgs);
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmission_success.jsp");
 			failureView.forward(req, res);
 			return; // 程式中斷

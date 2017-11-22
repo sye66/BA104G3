@@ -10,6 +10,7 @@ public interface AchieveDAO_interface {
     public void delete(String ach_No);
     public AchieveVO findByPrimaryKey(String ach_No);
     public List<AchieveVO> getAll();
+    public List<AchieveVO> getThree(String ach_No);
     
    
 }

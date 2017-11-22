@@ -23,12 +23,14 @@
 <html>
 <head>
 <title>文章資料 - listOneArtiFrom_Test.jsp</title>
-	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
-	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <style>
 div {
@@ -36,74 +38,11 @@ div {
   word-break:normal;
 }
 
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
+  a{
+   font-size: 24px;
+   color: #F00;
   }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
 
-<style>
-  table {
-	width: 900px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
-  
-  body{margin:40px;}
-  
-  .btn-circle {
-  width: auto;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-  margin : 30 px;
-}
-
-.btn-circle.btn-lg {
-  width: auto;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-  border-radius: 25px;
-  margin : 30 px;
-}
-
-.btn-circle.btn-xl {
-  width: autox;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 200px;
-  margin : 30 px;
-}
-button{
-  float: left;
-  margin : 30 px;
-}
-  
 </style>
 
 </head>
@@ -113,12 +52,14 @@ button{
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
 <h4></h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>文章資料 - ListOneArtiFrom_改版.jsp    ${ arti_No}</h3>
-		 <h4><a href="/BA104G3/frontdesk/artiForm/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+
+    <div class="widgetbox">
+        <div class="title">
+        <h3> 這裡是討論區文章資料查詢 -- 列出文章跟回覆   // <a href="/BA104G3/backdesk/artiForm/listAllArtiForm_back.jsp">List</a> all Article.  
+                           //                 <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">Add</a> a new Article.</h3><br/>
+        </div>
+        </div>
+
 <hr>
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">

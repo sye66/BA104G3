@@ -77,7 +77,8 @@
 								<td>${proOrder.ord_Ship_Date }</td>
 								</c:if>
 								<td>
-									<a href=""><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 30px;">
+									<a href="<%=request.getContextPath()%>/pro/proOrdListServlet.do?action=getOneOrdList&ord_No=${proOrder.ord_No}">
+									<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 30px;">
 									</a>
 								</td>
 								
@@ -114,6 +115,6 @@
 				</div>		
 			</div>
 		</div>
-
+<jsp:include page="/frontdesk/proOrder/getOneOrderList.jsp" flush="true" />
 </body>
 </html>

@@ -81,6 +81,8 @@ public class LoginHandler extends HttpServlet {
 				EmpVO empVO = empSvc.getOneEmp(emp_No);
 
 				String pwd = empVO.getEmp_Pwd();
+System.out.println(pwd+"55555555555555555555555555");
+System.out.println(emp_Pwd+"77777777777777777777777777");
 
 				if (empVO == null || !pwd.equals(emp_Pwd) ) {
 					errorMsgs.add("查無資料password is wrong");
@@ -121,10 +123,10 @@ System.out.println(empVO.getEmp_No());
 		}
 		
 		if ("logout".equals(action)){
-			req.getSession().invalidate();
+			req.getSession().removeAttribute("empVO");;
 			
-	
-			String url = "/backdesk.jsp";
+
+			String url = "/index.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			

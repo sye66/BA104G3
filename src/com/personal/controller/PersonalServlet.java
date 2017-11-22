@@ -21,6 +21,7 @@ import com.achieve.model.AchieveVO;
 import com.mem.model.*;
 import com.getmission.model.*;
 import com.ach_detail.model.*;
+import com.getmission.model.*;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/PersonalServlet")
@@ -97,16 +98,23 @@ System.out.println(memVO);
 		}
 		
 		if("personalMissionHistory".equals(action)) {
-			System.out.println("121111111111111111111111");
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs",errorMsgs);
-System.out.println("121111111111111111111111");
+
 			try{
 				HttpSession session = req.getSession();
 				MemVO memVO = (MemVO) session.getAttribute("memVO");
 				String mem_No = memVO.getMem_No();
 System.out.println(mem_No);
-System.out.println("22222222222222222222");
+
+				GetMissionService gmSvc = new GetMissionService();
+				List<GetMissionVO> getmissionVO = gmSvc.findIssuerCase(mem_No);
+				
+				for(GetMissionVO c : getmissionVO){
+					System.out.println(c.getIssuer_Mem_No());
+					System.out.println(c.getMission_No());
+				}
 
 				if (memVO == null) {
 					errorMsgs.add("查無資料");
@@ -119,8 +127,8 @@ System.out.println("22222222222222222222");
 					return;
 				}
 				
-				session.setAttribute("memVO", memVO);
-				String url = "/frontdesk/personal/PersonalMissionHistory.jsp";
+				session.setAttribute("getmissionVO", getmissionVO);
+				String url = "/frontdesk/personal/personalMissionHistory.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 				
@@ -140,6 +148,7 @@ System.out.println("22222222222222222222");
 			
 			try{
 				HttpSession session = req.getSession();
+				System.out.println("111111111111111111111");
 				MemVO memVO = (MemVO) session.getAttribute("memVO");
 				String mem_No = memVO.getMem_No();
 				Ach_DetailService ach_detailSvc = new Ach_DetailService();

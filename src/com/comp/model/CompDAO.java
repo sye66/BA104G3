@@ -26,7 +26,7 @@ public class CompDAO implements CompDAO_interface{
 	}
 	
 	private static final String INSERT = 
-			"INSERT INTO COMP(AUTH_NO)VALUES(?)";
+			"INSERT INTO COMP(EMP_NO,AUTH_NO)VALUES(?,?)";
 	private static final String GET_ALL = 
 			"SELECT EMP_NO,AUTH_NO FROM COMP order by EMP_NO";
 	private static final String GET_ONE = 
