@@ -7,7 +7,12 @@
 <%
 String emp_No=null;
 List<CompVO> list = null;
-String str = "AU000002";
+String str1 = "AU000001";
+String str2 = "AU000002";
+String str3 = "AU000003";
+String str4 = "AU000004";
+String str5 = "AU000005";
+String str6 = "AU000006";
 	EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 	if(session.getAttribute("empVO")!=null){
 		emp_No = empVO.getEmp_No();
@@ -60,23 +65,49 @@ String str = "AU000002";
 						<li><a
 							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
 								class="icon icon-flatscreen"></span>首頁</a></li>
-
+						<%for(CompVO a: list){
+  							if((a.getAuth_No()).contains(str1)){ 
+ 						%> 
 						<li><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><span class="icon icon-pencil"></span>會員管理</a></li>
+						<%	} 
+							
+ 							} %>
+ 						<%for(CompVO b: list){
+  							if((b.getAuth_No()).contains(str3)){ 
+ 						%> 
 						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
-
+						<%	} 
+							
+ 							} %>
+						<%for(CompVO c: list){
+  							if((c.getAuth_No()).contains(str1)){ 
+ 						%> 
 						<li><a href="#"><span class="icon icon-pencil"></span>討論區管理</a></li>
+						<%	} 
+							
+ 							} %>
+ 						<%for(CompVO d: list){
+  							if((d.getAuth_No()).contains(str1)){ 
+ 						%> 
 						<li><a href="#"><span class="icon icon-pencil"></span>排程器管理</a></li>
-					
-<%-- 						<%for(CompVO c: list){ --%>
-<!--  							if((c.getAuth_No()).contains(str)){ -->
-<%-- 						%> --%>
+						<%	} 
+							
+ 							} %>
+						<%for(CompVO e: list){
+  							if((e.getAuth_No()).contains(str2)){ 
+ 						%> 
 							<li>	<a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
 								
-<%-- 						<%	} --%>
+ 						<%	} 
 							
-<%-- 							} %> --%>
-						
+ 							} %> 
+						<%for(CompVO f: list){
+  							if((f.getAuth_No()).contains(str6)){ 
+ 						%>
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
+						<%	} 
+							
+ 							} %>
 					</ul>
 				</div><!--header-->
 			</div>
