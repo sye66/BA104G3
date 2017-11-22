@@ -70,7 +70,7 @@ public class AdServlet extends HttpServlet {
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("adVO", adVO);
-				String url = "/backdesk/ad/listOneAd.jsp";
+				String url = "/backdesk/ad/listOneAd_back.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
@@ -90,7 +90,7 @@ public class AdServlet extends HttpServlet {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("ad_No");
 				if(str==null||(str.trim()).length()==0){
-					errorMsgs.add(" 請輸入回覆文章編號 !!! ");
+					errorMsgs.add(" 請輸入廣告編號 !!! ");
 				}
 				
 				if(!errorMsgs.isEmpty()){
@@ -139,46 +139,51 @@ public class AdServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try{
+//			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String ad_No = req.getParameter("ad_No");
-				if(ad_No==null||(ad_No.trim()).length()==0){
-					errorMsgs.add(" 請輸入回覆文章分類編號 !!! ");
+			    HttpSession session = req.getSession();
+				String ad_Fty_No = req.getParameter("ad_Fty_No");
+				if(ad_Fty_No==null||(ad_Fty_No.trim()).length()==0){
+					errorMsgs.add(" 請輸入廣告商編號 !!! ");
 				}
-
+System.out.println(ad_Fty_No);
 				if(!errorMsgs.isEmpty()){
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+System.out.println("AD-Server-111");
 				/***************************2.開始查詢資料*****************************************/
 				AdService adSvc = new AdService ();
 				Set<AdVO> adVO = adSvc.findAdByFtyNo(ad_Fty_No);
-
+System.out.println(ad_Fty_No);
+System.out.println("AD-Server-222");
 				if (adVO==null){
-					errorMsgs.add(" 查無分類回覆資料 ");
+					errorMsgs.add(" 查無此廠商廣告資料 ");
 				}
-
+System.out.println("AD-Server-333");
 				if(!errorMsgs.isEmpty()){
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-
+System.out.println("AD-Server-444");
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("adVO", adVO);
-				String url = "/backdesk/ad/listOneAd.jsp";
-				
+				req.setAttribute("adSet", adVO);
+				String url = "/backdesk/ad/listAd_withSet.jsp";
+System.out.println(adVO.size());
+System.out.println(adVO);
+System.out.println(req.getAttribute(ad_Fty_No));
+System.out.println("AD-Server-555");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理*************************************/
-			} catch (Exception e){
-				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		if ("listAD_ByCompositeQuery".equals(action)) { // 來自select_page.jsp的複合查詢請求

@@ -2,20 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
-<%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.ad.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    ArtiFormService artiSvc = new ArtiFormService();
-    Set<ArtiFormVO> set = artiSvc.getAll();
+    AdService adSvc = new AdService();
+    Set<AdVO> set = adSvc.getAllAd();
     pageContext.setAttribute("set",set);    
 %>
 
-<jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
+<jsp:useBean id="adDAO" scope="page" class="com.ad.model.AdDAO" />
 
 <html>
 <head>
-<title>所有文章資料 - listAllArtiForm.jsp</title>
+<title>所有廣告資料 - listAllAD.jsp</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -54,7 +54,7 @@
 <div class="widgetbox">
 
         <div class="title">
-        <h3> 這裡是討論區文章資料查詢 -- LIST ALL :   //      <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">Add</a> a new Article.</h3><br/>
+        <h3> 這裡是討論區廣告資料查詢 -- LIST ALL :   //      <a href="/BA104G3/backdesk/ad/addAd.jsp">Add</a> a new AD.</h3><br/>
         </div>
 
         <div class="widgetcontent padding0 statement">
@@ -62,45 +62,43 @@
 
                 <thead>
                     <tr>
-                        <th> 文章編號 </th>
-                        <th> 會員名稱 </th>
-                        <th> 人氣 </th>
-                        <th> 文章標題 </th>
-                        <th> 發文時間 </th>
-                        <th> 類別 </th>
-                        <th> 狀態 </th>
+                        <th> 廣告編號 </th>
+                        <th> 廣告標題 </th>
+                        <th> 廣告商編號 </th>
+                        <th> 廣告商名稱 </th>
+                        <th> 廣告開始時間 </th>
+                        <th> 廣告結束時間 </th>
                         <th colspan="2"> 後台管理 </th>
                     </tr>
                  </thead>
                  <%@ include file="/backdesk/page1.file" %> 
-	             <c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
+	             <c:forEach var="adVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
 	
                  <tbody>
                      <tr>
-                         <td>${artiFormVO.arti_No} </td>
-                             <td> ${artiFormVO.mem_No} </td>
-                             <td> ${artiFormVO.arti_Like} </td>
-                             <td> ${artiFormVO.arti_Title} </td>
-                             <td> <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> </td>
-                             <td> ${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name} </td>
-                             <td> ${artiFormVO.arti_Status} </td>
-                             
+                         <td>${adVO.ad_No} </td>
+                         <td> ${adVO.ad_Desc} </td>
+                         <td> ${adVO.ad_Fty_No} </td>
+                         <td> ${adVO.ad_Fty_Name} </td>
+                         <td> <fmt:formatDate value="${adVO.ad_Start}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> </td>
+                         <td> <fmt:formatDate value="${adVO.ad_End}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> </td>
+
                              <td>
-                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="arti_No"  value="${adVO.ad_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-danger" type="submit" name="action" value="deleteArtiFMBack"> 刪除文章 </button>
+			                 <button class="btn btn-danger" type="submit" name="action" value="deleteAdFMBack"> 刪除廣告 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 			                 </td>
 			                 
                              <td>
-			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneArti_For_Back"> 查看文章 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneAd_For_Display"> 查看廣告 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>
