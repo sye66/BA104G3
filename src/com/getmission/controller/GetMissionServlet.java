@@ -257,8 +257,8 @@ public class GetMissionServlet extends HttpServlet {
 			long now = System.currentTimeMillis();
 			java.sql.Timestamp timeStamp = new Timestamp(now);
 			long endTime = now + 1000 * 60 * 60 * 24 * 5L;
-			java.sql.Date mission_Start_Time = new java.sql.Date(timeStamp.getTime());
-			java.sql.Date mission_End_Time = new java.sql.Date(new Timestamp(endTime).getTime());
+			java.sql.Timestamp mission_Start_Time = new java.sql.Timestamp(timeStamp.getTime());
+			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(new Timestamp(endTime).getTime());
 			Integer mission_State = null;
 			if (getMissionVO.getMission_State() == 2) {
 				mission_State = 3;
@@ -914,7 +914,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 發案人會員編號
 				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
 				// 任務截止時間
-				java.sql.Date mission_Due_Time;
+				Timestamp mission_Due_Time;
 				// 任務模式
 				Integer mission_Pattern = 2;
 				// 任務積分報酬
@@ -939,9 +939,9 @@ public class GetMissionServlet extends HttpServlet {
 				}
 				// 日期驗證 - 格式
 				try {
-					mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time").trim()));
+					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
 				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new Date(System.currentTimeMillis());
+					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsg.add("日期格式不對!");
 				}
 				// 日期驗證 - 值
@@ -997,7 +997,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 發案人會員編號
 				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
 				// 任務截止時間
-				java.sql.Date mission_Due_Time;
+				Timestamp mission_Due_Time;
 				// 任務模式
 				Integer mission_Pattern = 1;
 				// 任務積分報酬
@@ -1008,7 +1008,7 @@ public class GetMissionServlet extends HttpServlet {
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
-				Date date = new Date(System.currentTimeMillis());
+				Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
 				
 				/**********驗證開始**********/
 				if (misssion_Pay < 50.00) {
@@ -1022,9 +1022,9 @@ public class GetMissionServlet extends HttpServlet {
 				}
 				// 日期驗證 - 格式
 				try {
-					mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time").trim()));
+					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
 				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new Date(System.currentTimeMillis());
+					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
 					errorMsg.add("日期格式不對!");
 				}
 				// 日期驗證 - 值

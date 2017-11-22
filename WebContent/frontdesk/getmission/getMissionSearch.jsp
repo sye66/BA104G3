@@ -43,59 +43,42 @@
 </head>
 <body>
 
-	<%@ include file="/frontdesk/header.jsp"%>
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 col-sm-4">
-			
-		</div>
-		<div class="col-xs-12 col-sm-8">
-			
-		</div>
-	</div>
-</div>
+	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
+	
+
 
 	<!-- map ====================================================================================-->
 
 	<div class="container">
 		<div class="row">
 
-			<div class="input-group container">
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
-					<div class="input-group">
+			<div class="input-group ">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
 						
-						<div class="input-group container">
 						<div class="row">
-						<div class="col-xs-12 col-sm-2">
 						 <select id="mission_Category" name="mission_Category">
-								<option value="-1">任務分類</option>
+								<option value="">任務分類</option>
 								<option value="教育">教育</option>
 								<option value="修繕">修繕</option>
 								<option value="其他">其他</option>
 								<option value="交友">交友</option>
 								<option value="官方">官方</option>
 						</select>
-						</div>
 						
-								<div class="col-xs-12 col-sm-10">
-								<input type="text" class="form-control" id="search-mission"
+								<input type="text" class="form-control input-lg" id="search-mission"
 									name="mission_Name" placeholder="Search for Mission...">
 									
 								<span class="input-group-btn">
-
-									<button class="btn btn-success btn-secondary" type="summit"
+									<button class="btn btn-success btn-secondary" type="submit"
 										name="action" value="listmission_ByCompositeQuery">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</span>
-								</div>
 						</div>
-					</div>
-</div>
-				</form>
+				</FORM>
 
-				<div id="map"></div>
 			</div>
 
 		</div>
@@ -115,16 +98,23 @@
 
 
 	<br>
-
-
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
 <div class="container">
 		<div class="row">
 
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "missiongroup">
 	
 <button class="btn btn-success" type="submit" name="action" value="missiongroup">會員任務管理</button>
+<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
 
 </form>
+
+
+
+</div>
+</div>
 	<!-- button ====================================================================================-->
 
 
@@ -148,13 +138,13 @@
 
 
 		<div class="col-xs-12 col-sm-6">
-
+<div class="container">
+	
 			<div class="row">
 
 				<div class="col-xs-12 col-sm-4">
 
-					<div class="row">
-
+					<!-- <div class="row"> -->
 						<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
 						<img
 							src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
@@ -167,7 +157,7 @@
 						<div class="user text-center">
 							<p>USER PICTURE</p>
 						</div>
-					</div>
+					<!-- </div> -->
 
 				</div>
 
@@ -175,12 +165,12 @@
 					<div class="panel panel-default row">
 						<div class="panel-heading">
 							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
-							<p>${getMissionVO.mission_No}</p>
+							<p>${getMissionVO.mission_No }</p>
 							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 
-							<p>1.任務方向:${getMissionVO.mission_Category}</p>
+							<p>1.任務方向:${getMissionVO.mission_Category }</p>
 
-							<p>2.報酬是:${getMissionVO.mission_Pay} 積分</p>
+							<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
 						</div>
 						<table>
 							<tr>
@@ -200,20 +190,23 @@
 									</div>
 								</td>
 
+							
+
+
 								<td>
 									<div class="panel-body">
 
 										<form method="post"
 											action="<%=request.getContextPath()%>/getmission/getmission.do"
 											name="getmission2">
-											<a href='#modal-id-mission${s.index} ' data-toggle="modal"><button
+											<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
 													class="btn btn-info">我要接案</button></a> <input type="hidden"
 												name="mission_No" value="${getMissionVO.mission_No}">
 										</form>
 									</div>
 								</td>
 
-								<div class="modal fade" id="modal-id-mission${s.index}">
+								<div class="modal fade" id="modal-mission-id${s.index}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -235,9 +228,9 @@
 													<button class="btn btn-info" type="submit" name="action"
 														value="take_mission">確認接案</button>
 													<input type="hidden" name="mission_No"
-														value="${getMissionVO.mission_No}"> <input
-														type="hidden" name="mission_State"
-														value="${getMissionVO.mission_State}">
+														value="${getMissionVO.mission_No}"> 
+													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
+													<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
 												</form>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">關閉</button>
@@ -252,7 +245,7 @@
 				</div>
 
 			</div>
-
+</div>
 		</div>
 
 		<c:if test="${s.index%2==1 }">
@@ -277,8 +270,37 @@
 
 
 
+	<!-- <hr color="#996400"> -->
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-	<%@ include file="/frontdesk/footer.jsp"%>
+
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+
 
 
 

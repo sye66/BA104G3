@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="missionImagesSvc" scope="page"
 	class="com.missionimages.model.MissionImagesService" />
 <jsp:useBean id="getMissionSvc" scope="page"
@@ -14,7 +14,8 @@
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	List<GetMissionVO> list = getMissionService.getAll();
-	String mem_No = (String) session.getAttribute("mem_No");
+	CaseCandidateVO missionmem = new CaseCandidateVO();
+	
 %>
 
 <html lang="">
@@ -24,9 +25,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Title Page</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel=stylesheet type="text/css" href="css/map.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/map.css">
 <script type="text/javascript" src="js/*"></script>
 <script src="js/map.js"></script>
@@ -36,6 +35,10 @@
 		<![endif]-->
 
 <style type="text/css">
+
+
+
+
 @media screen and (min-width: 768px) {
 	.pic {
 		
@@ -45,55 +48,42 @@
 </head>
 <body>
 
-	<%@ include file="/frontdesk/header.jsp"%>
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-4"></div>
-			<div class="col-xs-12 col-sm-8"></div>
-		</div>
-	</div>
+	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
+	
+
 
 	<!-- map ====================================================================================-->
 
 	<div class="container">
 		<div class="row">
 
-			<div class="input-group container">
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
-					<div class="input-group">
-
-						<div class="input-group container">
-							<div class="row">
-								<div class="col-xs-12 col-sm-2">
-									<select id="mission_Category" name="mission_Category">
-										<option value="-1">任務分類</option>
-										<option value="教育">教育</option>
-										<option value="修繕">修繕</option>
-										<option value="其他">其他</option>
-										<option value="交友">交友</option>
-										<option value="官方">官方</option>
-									</select>
-								</div>
-
-								<div class="col-xs-12 col-sm-10">
-									<input type="text" class="form-control" id="search-mission"
-										name="mission_Name" placeholder="Search for Mission...">
-
-									<span class="input-group-btn">
-
-										<button class="btn btn-success btn-secondary" type="summit"
-											name="action" value="listmission_ByCompositeQuery">
-											<i class="glyphicon glyphicon-search"></i>
-										</button>
-									</span>
-								</div>
-							</div>
+			<div class="input-group ">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
+						
+						<div class="row">
+						 <select id="mission_Category" name="mission_Category">
+								<option value="">任務分類</option>
+								<option value="教育">教育</option>
+								<option value="修繕">修繕</option>
+								<option value="其他">其他</option>
+								<option value="交友">交友</option>
+								<option value="官方">官方</option>
+						</select>
+						
+								<input type="text" class="form-control input-lg" id="search-mission"
+									name="mission_Name" placeholder="Search for Mission...">
+									
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-secondary" type="submit"
+										name="action" value="listmission_ByCompositeQuery">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</span>
 						</div>
-					</div>
-				</form>
+				</FORM>
 
-				<div id="map"></div>
 			</div>
 
 		</div>
@@ -113,23 +103,23 @@
 
 
 	<br>
-
-	<div class="container">
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
+<div class="container">
 		<div class="row">
 
-			<form method="post"
-				action="<%=request.getContextPath()%>/getmission/getmission.do"
-				name="missiongroup">
+<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "missiongroup">
+	
+<button class="btn btn-success" type="submit" name="action" value="missiongroup">會員任務管理</button>
+<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
 
-				<button class="btn btn-success" type="submit" name="action"
-					value="missiongroup">會員任務管理</button>
-
-			</form>
+</form>
 
 
 
-		</div>
-	</div>
+</div>
+</div>
 	<!-- button ====================================================================================-->
 
 
@@ -153,28 +143,26 @@
 
 
 		<div class="col-xs-12 col-sm-6">
-
+<div class="container">
+	
 			<div class="row">
 
 				<div class="col-xs-12 col-sm-4">
 
-					<div class="row">
-						<c:if
-							test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
-							<img
-								src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
-								class="img-responsive pic center">
-						</c:if>
-						<c:if
-							test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
-							<img
-								src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
-								class="img-responsive pic center">
-						</c:if>
+					<!-- <div class="row"> -->
+						<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
+						<img
+							src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
+							class="img-responsive pic center">
+							</c:if>
+							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
+							<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
+							class="img-responsive pic center">
+							</c:if>
 						<div class="user text-center">
 							<p>USER PICTURE</p>
 						</div>
-					</div>
+					<!-- </div> -->
 
 				</div>
 
@@ -207,77 +195,63 @@
 									</div>
 								</td>
 
+							<% 
+							missionmem.setCandidate_Mem_No(memVO.getMem_No());
+							pageContext.setAttribute("missionmem" ,missionmem);
+							
+							%>
 
-
-								<c:if
-									test="${mem_No != getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No  && !CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)}">
-									<td>
-										<div class="panel-body">
-
-											<form method="post"
-												action="<%=request.getContextPath()%>/getmission/getmission.do"
-												name="getmission2">
-												<a href='#modal-id-mission${s.index} ' data-toggle="modal"><button
-														class="btn btn-info">我要接案</button></a> <input type="hidden"
-													name="mission_No" value="${getMissionVO.mission_No}">
-											</form>
-										</div>
-									</td>
+								<td>
+								<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}">
+									<div class="panel-body">
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
+											<a href='#modal-mission-id${s.index} ' data-toggle="modal">
+											<button class="btn btn-info">我要接案</button></a> 
+											<input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
+										</form>
+									</div>
 								</c:if>
+								</td>
 
-									<div class="modal fade" id="modal-id-mission${s.index}">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal"
-														aria-hidden="true">&times;</button>
-													<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
-												</div>
-												<div class="modal-body">
-													<h4>任務名稱:</h4>
-													<p>----${getMissionVO.mission_Name}</p>
-													<h4>任務種類:</h4>
-													<p>----${getMissionVO.mission_Category}</p>
-												</div>
-												<div class="modal-footer">
+								<div class="modal fade" id="modal-mission-id${s.index}">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+												<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
+											</div>
+											<div class="modal-body">
+												<h4>任務名稱:</h4>
+												<p>----${getMissionVO.mission_Name}</p>
+												<h4>任務種類:</h4>
+												<p>----${getMissionVO.mission_Category}</p>
+											</div>
+											<div class="modal-footer">
 
-													<form method="post"
-														action="<%=request.getContextPath()%>/getmission/getmission.do"
-														name="getmission2">
-														<button class="btn btn-info" type="submit" name="action"
-															value="take_mission">確認接案</button>
-														<input type="hidden" name="mission_No"
-															value="${getMissionVO.mission_No}"> <input
-															type="hidden" name="mission_State"
-															value="${getMissionVO.mission_State}">
-														<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/missionDetaillogin.jsp">
-													</form>
-													<button type="button" class="btn btn-default"
-														data-dismiss="modal">關閉</button>
-												</div>
+												<form method="post"
+													action="<%=request.getContextPath()%>/getmission/getmission.do"
+													name="getmission2">
+													<button class="btn btn-info" type="submit" name="action"
+														value="take_mission">確認接案</button>
+													<input type="hidden" name="mission_No"
+														value="${getMissionVO.mission_No}"> 
+													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
+													<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
+												</form>
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">關閉</button>
 											</div>
 										</div>
 									</div>
-
-
-
-
-								<c:if
-									test="${CaseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(mem_No)}">
-									<td><button class="btn btn-default" disabled>等待中...</button></td>
-								</c:if>
-								<c:if
-									test="${mem_No == getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No} ">
-									<td><button class="btn btn-default" disabled>等待別人接案...</button></td>
-								</c:if>
-
+								</div>
 							</tr>
 						</table>
 					</div>
 				</div>
 
 			</div>
-
+</div>
 		</div>
 
 		<c:if test="${s.index%2==1 }">
@@ -331,12 +305,16 @@
 	<br>
 
 
-	<%@ include file="/frontdesk/footer.jsp"%>
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 </body>
+<style><link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel=stylesheet type="text/css" href="css/map.css"></style>
 </html>

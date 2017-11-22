@@ -56,7 +56,7 @@
 
 	<div class="container">
 		<div class="row">
-<div class="col-xs-12 col-sm-10">
+
 			<div class="input-group ">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
 						
@@ -83,7 +83,7 @@
 				</FORM>
 
 			</div>
-</div>
+
 		</div>
 	</div>
 
