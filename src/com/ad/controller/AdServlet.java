@@ -156,7 +156,7 @@ System.out.println("AD-Server-111");
 				/***************************2.開始查詢資料*****************************************/
 				AdService adSvc = new AdService ();
 				Set<AdVO> adVO = adSvc.findAdByFtyNo(ad_Fty_No);
-System.out.println(ad_Fty_No);
+System.out.println(ad_Fty_No+"---1111");
 System.out.println("AD-Server-222");
 				if (adVO==null){
 					errorMsgs.add(" 查無此廠商廣告資料 ");
@@ -167,13 +167,16 @@ System.out.println("AD-Server-333");
 					failureView.forward(req, res);
 					return;
 				}
+System.out.println(ad_Fty_No+"---2222");
 System.out.println("AD-Server-444");
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+System.out.println(ad_Fty_No);
 				req.setAttribute("adSet", adVO);
+				req.setAttribute("ad_Fty_No", ad_Fty_No);
 				String url = "/backdesk/ad/listAd_withSet.jsp";
 System.out.println(adVO.size());
 System.out.println(adVO);
-System.out.println(req.getAttribute(ad_Fty_No));
+System.out.println(ad_Fty_No+"---333");
 System.out.println("AD-Server-555");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);

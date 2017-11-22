@@ -143,10 +143,30 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				String arti_No = req.getParameter("arti_No");
 				String arti_Cls_No = req.getParameter("arti_Cls_No");
+				
+				if(arti_No==null||(arti_No.trim()).length()==0){
+					errorMsgs.add(" 請輸入文章編號 !!! ");
+				}
+
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
 				/***************************2.開始查詢資料****************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				Set<ArtiReplyVO> artiReplyVO = artiReplySvc.findReplyByArtiNo(arti_No);
+				
+				if (artiReplyVO==null){
+					errorMsgs.add(" 查無此筆文章回覆資料 ");
+				}
+
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("artiReplySet", artiReplyVO);

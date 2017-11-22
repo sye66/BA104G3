@@ -26,7 +26,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 		private static final String UPDATE_AD = 
 			"UPDATE AD set AD_PIC=?, AD_DESC=?, AD_START=?, AD_END=?, AD_FTY_NO=?, AD_FTY_NAME=? where AD_NO =?";
 		private static final String GET_AD_BY_FTY_NO= 
-				"SELECT AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss')AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss')AD_END, AD_FTY_NAME FROM AD WHERE AD_FTY_NO = ? order by AD_NO";
+				"SELECT * FROM AD WHERE AD_FTY_NO = ? order by AD_NO";
 
 		
 		@Override

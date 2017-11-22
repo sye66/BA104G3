@@ -7,7 +7,7 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    MemVO memVO = (MemVO) request.getAttribute("memVO");
+    MemVO memVO = (MemVO) session.getAttribute("memVO");
 
     ArtiFormVO artiFormVO = new ArtiFormVO();
     ArtiFormService artiSvc = new ArtiFormService();
@@ -109,7 +109,7 @@ div> .timeline-body{
                                 </div>
                                 <div class="timeline-date">${artiFormVO.mem_No}</div>
                                 <div class="timeline-date">
-                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                 </div>
                                 <div class="timeline-time">

@@ -9,6 +9,7 @@
 <%
   AdService adSvc = new AdService();
   Set<AdVO> set= (Set<AdVO>) request.getAttribute("adSet");
+  String ad_Fty_No = (String) adSvc.
   pageContext.setAttribute("set",set);
 %>
 
@@ -24,7 +25,7 @@
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 
-<title>文章回覆資料(後台) - listAd_withSet (REVISED).jsp </title>
+<title>文章回覆資料(後台) - listAd_withSet (REVISED) </title>
 
 <style>
 

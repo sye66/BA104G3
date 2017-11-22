@@ -6,7 +6,7 @@
 <%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
-<jsp:useBean id="artiReplySvc1" scope="session" class="com.artiReply.model.ArtiReplyService" />
+<jsp:useBean id="artiReplySvc1" scope="page" class="com.artiReply.model.ArtiReplyService" />
 
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
@@ -16,7 +16,7 @@
 	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 
-    Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
+    Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>)artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);
 %>
 
