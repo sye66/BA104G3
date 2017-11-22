@@ -7,12 +7,13 @@
 
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 <%
-  AdService adSvc = new AdService();
-  Set<AdVO> set = adSvc.getAllAd();
-  pageContext.setAttribute("set",set);
+//   AdVO adVO = new AdVO();
+//   AdService adSvc = new AdService();
+//   Set<AdVO> set = adSvc.getAllAd();
+//   pageContext.setAttribute("set",set);
 
  %>
-<jsp:useBean id="adSvc1" scope="page" class="com.ad.model.AdService" />
+<jsp:useBean id="adSvc" scope="page" class="com.ad.model.AdService" />
 <html>
 <head>
 
@@ -32,6 +33,8 @@
 </head>
 <body bgcolor='blue'>
 
+
+
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
 <h4>此頁暫練習採用 Script 的寫法取值:</h4>
@@ -41,45 +44,49 @@
 		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章回覆首頁</a></h4>
 	</td></tr>
 </table>
-
+<br>
+----------------------------------------------------
+<%-- ${adSvc1.allAd}  here!!!! --%>
+<%-- ${adSvc.getAllAd(adVO.ad_No)} --%>
 
 <div class="container">
 <div id="carousel-id" class="carousel slide" data-ride="carousel">
 		    <!-- 幻燈片小圓點區 -->
 		    <ol class="carousel-indicators">
-		    <c:forEach var="adVO" items="${adSvc.getAllAd(adVO.ad_No)}" varStatus="p">
-		     <c:if test="${p.index == 0 }">
+		  <c:forEach var="adVO" items="${adSvc.allAd}" varStatus="p">
+		    <c:if test="${p.index == 0 }">
 		        <li data-target="#carousel-id" data-slide-to="${p.index}" class="active"></li>
-		        </c:if>
-		        <c:if test="${p.index != 0 }">
+		    </c:if>
+		    <c:if test="${p.index != 0 }">
 		        <li data-target="#carousel-id" data-slide-to="${p.index}" class=""></li>
-		        </c:if>
-		        </c:forEach>
+			</c:if>
+		  </c:forEach>
 		    </ol>
 		    <!-- 幻燈片主圖區 -->
 		    <div class="carousel-inner">
-		    <c:forEach var="adVO" items="${adSvc.getAllAd(adVO.ad_No)}" varStatus="p">
+		    <c:forEach var="adVO" items="${adSvc.allAd}" varStatus="p">
 		    <c:if test="${p.index == 0 }">
 		        <div class="item active">
-		            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}"
-	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+
+		            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}ad_${adSvc.getOneAd(adVO.ad_No).ad_Pic}"/>
 		            <div class="container">
 		                <div class="carousel-caption">
-		                    <h1>CSS可樂好喝超爽快</h1>
-		                    <p>你喝過了嗎？</p>
-		                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+		                    <h1>${adVO.ad_Fty_Name}</h1>
+		                    <p>${adVO.ad_Desc}</p>
+		                    <p><a class="btn btn-lg btn-primary" href="#" role="button"></a>${adVO.ad_No}</p>
 		                </div>
 		            </div>
 		        </div>
 		     </c:if>
 		     <c:if test="${p.index != 0 }">
 		        <div class="item">
-		            <img src="https://api.fnkr.net/testimg/2800x700/aaaaaa" alt="">
+		            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}"/>
 		            <div class="container">
 		                <div class="carousel-caption">
-		                    <h1>CSS可樂的外掛真方便</h1>
-		                    <p>你安裝了嗎？</p>
-		                    <p><a class="btn btn-lg btn-primary" href="#" role="button">更多</a></p>
+		                    <h1>${adVO.ad_Fty_Name}</h1>
+		                    <p>${adVO.ad_Desc}</p>
+		                    <p>${adSvc.getOneAd(adVO.ad_No).ad_Pic}</p>
+		                    <p><a class="btn btn-lg btn-primary" href="#" role="button">${adVO.ad_No}</a></p>
 		                </div>
 		            </div>
 		        </div>

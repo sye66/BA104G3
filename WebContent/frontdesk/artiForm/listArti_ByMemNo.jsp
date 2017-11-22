@@ -10,7 +10,7 @@
     String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
 
-    Set<ArtiFormVO> set = ( Set<ArtiFormVO>) artiFormSvc.findArtiByMemNo(mem_No);
+    Set<ArtiFormVO> set = artiFormSvc.findArtiByMemNo(mem_No);
     pageContext.setAttribute("set",set);
 %>
 
