@@ -37,11 +37,13 @@ img #show {heigth:100%}
 
 </head>
 <body>
- 
+ <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
  
 <c:if test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">
 	<script type="text/javascript">
-		swal(${memSvc.getOneMem(mem_No).mem_Id}，恭喜結案 ! 可喜可賀可喜可賀);
+		swal(${memSvc.getOneMem(memVO.mem_No).mem_Id}，恭喜結案 ! 可喜可賀可喜可賀);
 	</script>
 </c:if>
 
@@ -63,6 +65,6 @@ memVO.mem_Id = ${memSvc.getOneMem(mem_No).mem_Id}
                     <div class="row">
 			<div class="col-xs-12 col-sm-12"><img id="show" src="<%=request.getContextPath()%>/res/images/index/intelligence.png"></div>
 		</div>
-                    
+  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>                  
 </body>
 </html>

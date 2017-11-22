@@ -245,13 +245,18 @@ public class GetMissionServlet extends HttpServlet {
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
-				res.sendRedirect(requestURL);
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				failureView.forward(req, res);
+			
 				return;
 			}
 
 			String takecase_Mem_No = (String) req.getParameter("takecase_Mem_No").trim();
 			String mission_No = (String) req.getParameter("mission_No").trim();
 			GetMissionVO getMissionVO = new GetMissionVO();
+			AccuseCaseService accuseCaseService = new AccuseCaseService();
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -264,10 +269,8 @@ public class GetMissionServlet extends HttpServlet {
 			java.sql.Timestamp mission_Start_Time = new java.sql.Timestamp(timeStamp.getTime());
 			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(new Timestamp(endTime).getTime());
 			Integer mission_State = null;
-			if (getMissionVO.getMission_State() == 2) {
+			if (getMissionVO.getMission_State() == 2 || getMissionVO.getMission_State() == 72) {
 				mission_State = 3;
-			} else {
-				mission_State = 73;
 			}
 
 			// Send the use back to the form, if there were errors

@@ -32,7 +32,9 @@
 		<![endif]-->
 </head>
 <body>
-
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
 
 <div class="panel panel-info">
   <div class="panel-heading">

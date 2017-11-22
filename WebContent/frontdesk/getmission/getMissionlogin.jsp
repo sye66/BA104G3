@@ -184,9 +184,7 @@
 							<tr>
 								<td>
 									<div class="panel-body">
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission1">
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 											<button class="btn btn-warning" type="submit" name="action"
 												value="mission_Detail">任務細節</button>
 

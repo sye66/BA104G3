@@ -33,9 +33,13 @@
 		<![endif]-->
 </head>
 <body>
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
+<div class="container">
 	<div class="col-xs-12 col-sm-4">
 
-
+	</div>
 		<div class="col-xs-12 col-sm-8">
 			<div class="container">
 				<div class="row">
@@ -57,9 +61,11 @@
 					<h3 class="panel-title">目前接取所等待任務</h3>
 				</div>
 				<div class="panel-body">
-					<td>${mem_No}</td>
-					<td>---------------${memSvc.getOneMem(mem_No).mem_Name} 你好</td>
 					<table class="table">
+					<tr>
+					<td>${mem_No}</td>
+					<td>---------------${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好</td>
+					</tr>
 						<tr>
 							<td>任務編號</td>
 							<td>任務名</td>
@@ -67,14 +73,14 @@
 							<td>發案人</td>
 						</tr>
 						<c:forEach var="caseCandidateVO"
-							items="${caseCandidateSvc.getCase(mem_No)}" varStatus="m"
+							items="${caseCandidateSvc.getCase(memVO.mem_No)}" varStatus="m"
 							step="1">
 
 							<tr>
 								<td>${caseCandidateVO.mission_No}</td>
 								<td>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_Name }</td>
 								<td>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No }</td>
-								<td>${memSvc.getOneMem(getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No).mem_Name }</td>
+								<td>${memSvc.getOneMem(getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No).mem_Id }</td>
 								<td>
 									<div class="panel-body">
 										<form method="post"
@@ -91,16 +97,18 @@
 									</div>
 
 								</td>
-						</c:forEach>
 						</tr>
+						</c:forEach>
 					</table>
 				</div>
 
 
 			</div>
 
-
-
+</div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br>
+<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 			<script src="https://code.jquery.com/jquery.js"></script>
 			<script
 				src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
