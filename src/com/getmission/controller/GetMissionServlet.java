@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 
 import org.hibernate.hql.ast.SqlASTFactory;
 
+import com.accusecase.model.*;
 import com.casecandidate.model.CaseCandidateService;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
@@ -31,7 +32,7 @@ public class GetMissionServlet extends HttpServlet {
 		if ("listmission_ByCompositeQuery".equals(action)) { // 來自getMission.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
+			MemVO memVO =  (MemVO) req.getSession().getAttribute("memVO");
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -59,7 +60,7 @@ public class GetMissionServlet extends HttpServlet {
 			 ************/
 			req.setAttribute("listmission_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
 			RequestDispatcher successView = null;
-			if (mem_No == null) {
+			if (memVO == null) {
 				successView = req.getRequestDispatcher("/frontdesk/getmission/getMissionSearch.jsp"); // 成功轉交getMissionSearch.jsp
 			} else {
 				successView = req.getRequestDispatcher("/frontdesk/getmission/getMissionSearchlogin.jsp"); // 成功轉交getMissionSearchlogin.jsp
@@ -90,7 +91,7 @@ public class GetMissionServlet extends HttpServlet {
 																// 或 【
 																// /dept/listAllDept.jsp】
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
@@ -105,7 +106,7 @@ public class GetMissionServlet extends HttpServlet {
 				 ************/
 				req.setAttribute("getMissionVO", getMissionVO); // 資料庫取出的empVO物件,存入req
 				String url = null;
-				if (mem_No == null) {
+				if (memVO == null) {
 					url = "/frontdesk/getmission/missionDetail.jsp";
 				} else {
 					url = "/frontdesk/getmission/missionDetaillogin.jsp";
@@ -140,24 +141,25 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
-			Integer mission_State = new Integer(req.getParameter("mission_State").trim());
-
-			GetMissionVO getMissionVO = new GetMissionVO();
 			GetMissionService getMissionSvc = new GetMissionService();
+			GetMissionVO getMissionVO = new GetMissionVO();
+			Integer mission_State = getMissionSvc.getOneMission(mission_No).getMission_State();
+
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
+			
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != mem_No) {
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
 
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)) {
-					if (mission_State == 1 || mission_State == 2 || mission_State == 7) {
+				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
+					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
 						if (mission_State == 1 || mission_State == 2) {
 							getMissionVO.setMission_State(2);
 						} else {
@@ -192,6 +194,8 @@ public class GetMissionServlet extends HttpServlet {
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
 
 					req.setAttribute("getMissionVO", getMissionVO);
+					req.setAttribute("memVO", memVO);
+					req.setAttribute("errorMsgs", errorMsgs);
 
 					RequestDispatcher failureView = req.getRequestDispatcher("/casecandidate/casecandidate.do");
 					failureView.forward(req, res);
@@ -234,10 +238,10 @@ public class GetMissionServlet extends HttpServlet {
 																// 可能為【/getmission/getmission.jsp】
 																// 或
 																// 【/getmission/mission_Detail.jsp】
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-
-			if (mem_No == null) {
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -311,10 +315,11 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				req.setAttribute("errorMsgs", errorMsgs);
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -330,7 +335,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/missiongroup.jsp");
 			failureView.forward(req, res);
@@ -364,13 +369,8 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			// if (mem_No == null) {
-			//
-			// res.sendRedirect("/BA104G3/loginTest.jsp");
-			// return;
-			// }
-
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			
 			GetMissionVO getMissionVO = new GetMissionVO();
 
 			// Send the use back to the form, if there were errors
@@ -383,9 +383,9 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 			RequestDispatcher failureView = null;
-			if (mem_No == null) {
+			if (memVO == null) {
 				failureView = req.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
@@ -423,10 +423,10 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -442,7 +442,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/casecandidate/casecandidate.jsp");
 			failureView.forward(req, res);
@@ -476,13 +476,13 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
-
+			
 			GetMissionVO getMissionVO = new GetMissionVO();
 
 			// Send the use back to the form, if there were errors
@@ -495,7 +495,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/casecandidate/waitcase.jsp");
 			failureView.forward(req, res);
@@ -529,10 +529,10 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -548,7 +548,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/finalstep.jsp");
 			failureView.forward(req, res);
@@ -582,10 +582,10 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -596,9 +596,9 @@ public class GetMissionServlet extends HttpServlet {
 			GetMissionService getMissionSvc = new GetMissionService();
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != mem_No) {
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
 
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)) {
+				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
 					if (mission_State == 3 || mission_State == 73) {
 						if (mission_State == 3) {
 							getMissionVO.setMission_State(4);
@@ -634,7 +634,7 @@ public class GetMissionServlet extends HttpServlet {
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
 
 					req.setAttribute("getMissionVO", getMissionVO);
-
+					req.setAttribute("memVO", memVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/casecandidate/casecandidate.do");
 					failureView.forward(req, res);
 					return; // 程式中斷
@@ -682,10 +682,10 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -696,15 +696,14 @@ public class GetMissionServlet extends HttpServlet {
 			GetMissionService getMissionSvc = new GetMissionService();
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
 			MemService memSvc = new MemService();
-			MemVO memVO = new MemVO();
 			double mem_Point = memVO.getMem_Point();
 			double mission_Pay = getMissionVO.getMission_Pay();
 			int now = (int) (mem_Point + mission_Pay);
 			String takecase_Mem_No = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != mem_No) {
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
 
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)) {
+				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
 					if (mission_State == 4 || mission_State == 74) {
 						getMissionVO.setMission_State(5);
 						getMissionVO.setMission_No(mission_No);
@@ -784,14 +783,13 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
 			String mission_No = (String ) req.getSession().getAttribute("mission_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
-			
 			
 			MemService memSvc = new MemService();
 			GetMissionService getMissionSvc = new GetMissionService();
@@ -800,7 +798,7 @@ public class GetMissionServlet extends HttpServlet {
 		    String subject = "任務完成通知";
 		      
 		    String issuer_Name = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No()).getMem_Id();
-		    String mem_Id = memSvc.getOneMem(mem_No).getMem_Id();
+		    String mem_Id = memSvc.getOneMem(memVO.getMem_No()).getMem_Id();
 		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, " +mem_Id+
 		    					 "/n 已經完成囉~請快快去查驗吧~"; 
 		    
@@ -818,7 +816,7 @@ public class GetMissionServlet extends HttpServlet {
 			/*************************** 2. *****************************************/
 			MailService mailService = new MailService();
 		    mailService.sendMail(to, subject, messageText);
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmissionlogin.jsp");
 			failureView.forward(req, res);
@@ -853,10 +851,10 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
-			if (mem_No == null) {
-
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				res.sendRedirect(requestURL);
 				return;
 			}
 
@@ -872,7 +870,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 
-			req.setAttribute("mem_No", mem_No);
+			req.setAttribute("memVO", memVO);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 			failureView.forward(req, res);

@@ -213,14 +213,14 @@
 													<form method="post"
 														action="<%=request.getContextPath()%>/getmission/getmission.do"
 														name="getmission2">
-														<a href='#modal-id${s.index} ' data-toggle="modal"><button
+														<a href='#modal-id-mission${s.index} ' data-toggle="modal"><button
 																class="btn btn-info">我要接案</button></a> <input type="hidden"
 															name="mission_No" value="${getMissionVO.mission_No}">
 													</form>
 												</div>
 											</td>
 
-											<div class="modal fade" id="modal-id${s.index}">
+											<div class="modal fade" id="modal-id-mission${s.index}">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">

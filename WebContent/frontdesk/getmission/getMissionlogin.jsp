@@ -217,7 +217,7 @@
 											<form method="post"
 												action="<%=request.getContextPath()%>/getmission/getmission.do"
 												name="getmission2">
-												<a href='#modal-id${s.index} ' data-toggle="modal"><button
+												<a href='#modal-id-mission${s.index} ' data-toggle="modal"><button
 														class="btn btn-info">我要接案</button></a> <input type="hidden"
 													name="mission_No" value="${getMissionVO.mission_No}">
 											</form>
@@ -225,7 +225,7 @@
 									</td>
 								</c:if>
 
-									<div class="modal fade" id="modal-id${s.index}">
+									<div class="modal fade" id="modal-id-mission${s.index}">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -250,6 +250,7 @@
 															value="${getMissionVO.mission_No}"> <input
 															type="hidden" name="mission_State"
 															value="${getMissionVO.mission_State}">
+														<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/missionDetaillogin.jsp">
 													</form>
 													<button type="button" class="btn btn-default"
 														data-dismiss="modal">關閉</button>
