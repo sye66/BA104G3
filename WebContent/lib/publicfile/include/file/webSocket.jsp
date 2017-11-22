@@ -217,7 +217,7 @@ webSocket.onclose = function(event) {
 	    if (message === ""){
 	        alert ("訊息請勿空白!");
 	        inputMessage.focus();	
-	    }else{
+	    }else{ 
 	    	
 	    	// * 把使用者名稱 跟訊息 存成jsonObj 傳到 server端的 onMessage()
 	    	console.log('-------------------------'+userName)
