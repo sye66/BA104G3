@@ -4,43 +4,41 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.mem.model.*"%>
-<%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
-  ArtiFormVO artiFormVO = new ArtiFormVO();
-  ArtiFormService artiFormSvc = new ArtiFormService();
-  
-  Set<ArtiFormVO> set= (Set<ArtiFormVO>) request.getAttribute("artiFormSet");
-  pageContext.setAttribute("set",set);
+    ArtiFormService artiFormSvc = new ArtiFormService();
+    String mem_No = (String) session.getAttribute("mem_No");
+	session.setAttribute("mem_No",mem_No);
+
+    Set<ArtiFormVO> set = ( Set<ArtiFormVO>) artiFormSvc.findArtiByMemNo(mem_No);
+    pageContext.setAttribute("set",set);
 %>
 
-<jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
 <html>
-<head>
-<title>所有文章資料 - listAllArtiForm.jsp</title>
+<head><title> 分類文章 - listArti_ByMemNo.jsp   ${arti_No} </title>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
-div> .timeline-body{
-    float: left;
-}
-  
+
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body bgcolor='white'>
-
+${arti_No}
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
+
+<h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>文章回覆資料 - ListOneArtiReply_WithSet (REVISED)).jsp</h3>
-		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章回覆首頁</a></h4>
+		 <h3>@@</h3>
+		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
 	</td></tr>
 </table>
 
@@ -60,7 +58,7 @@ div> .timeline-body{
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表</h1>
+                        <h1>所有文章列表 </h1>
                     </div>
                 </div>
                     
@@ -68,35 +66,30 @@ div> .timeline-body{
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do"  name="form1" enctype="multipart/form-data">
-                         <input type="text" size="40" class="" placeholder="請輸入內文關鍵字">
-                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入內文關鍵字">
+                        <input type="hidden" name="describe"  value="${artiFormVO.describe}">
     			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                         <button class="btn btn-info" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
                         </FORM>
                         </h1>
                       </div>
                   </div>
-
-                    
-                    
+    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
                         <a class="sidebar-toggler" href="#">
                             <i></i>111
                         </a>
-                        <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
+                        <a class="refresh" id="refresh-toggler" href="">
                             <i>Personal</i>
                         </a>
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
                     </div>
-                    <!--Header Buttons End-->
-                </div>
-
-                <!-- /Page Header -->
-                <!-- Page Body -->
+                        
+                    </div>
                 
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
@@ -122,10 +115,13 @@ div> .timeline-body{
                                 <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
 			                    <td>${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}</td>
                             </div>
+                            
                             <div class="timeline-panel bordered-top-3 bordered-azure">
                                 <div class="timeline-header bordered-bottom bordered-blue">
                                     <span class="timeline-title">
-                                        <td><a href="javascript:presses${s.index}()">${artiFormVO.arti_No}</a></td>
+                                    
+                                        <td> <a href="/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${memVO.mem_No}&action=jumpOne_For_Display">
+                                        ${artiFormVO.arti_No}</a></td>
                                         <td> ${artiFormVO.arti_Status} </td>
                                     </span>
 
@@ -147,6 +143,9 @@ div> .timeline-body{
 
                     </ul>
                 </div>
+                    </c:forEach>
+
+ <%@ include file="/backdesk/page2.file" %> 
       
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
@@ -170,19 +169,6 @@ div> .timeline-body{
 
     </script>
     
-    	    <script>
-         function presses${s.index}(){
-        	 console.log('${artiFormVO.arti_No}');
-        	 document.open("/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&action=jumpOne_For_Display", "" ,"height=250,width=850,left=65,top=157,resizable=yes,scrollbars=yes");
-         }
-        </script>
-        
-</body>
-
-        
-    </c:forEach>
-</table>
- <%@ include file="/backdesk/page2.file" %> 
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />

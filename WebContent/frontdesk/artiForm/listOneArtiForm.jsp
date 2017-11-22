@@ -15,7 +15,7 @@
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
     
-    String mem_No = (String) session.getAttribute("men_No");
+    String mem_No = (String) session.getAttribute("mem_No");
 	session.setAttribute("mem_No",mem_No);
     
 	String arti_No = (String) session.getAttribute("arti_No");
@@ -143,10 +143,16 @@ div {
          <div class="widget-toolbar">
              <div class="" style="width:100px;">
                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-			    <input type="hidden" name="mem_No"  value="${artiFormVO.mem_No}">
-    			<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-                <button class="btn btn-link" type="submit" name="action" value="giveOneLike">讚ㄧ個! </button>
-		        </FORM>		
+                 <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+			     <input type="hidden" name="mem_No_A"  value="${artiFormVO.mem_No}">
+			     <input type="hidden" name="mem_No_M"  value="${memVO.mem_No}">
+			     <input type="hidden" name="arti_Title"  value="${artiFormVO.arti_Title}">
+			     <input type="hidden" name="arti_Like"  value="${artiFormVO.arti_Like}">
+			     <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+			     <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
+    			 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+                 <button class="btn btn-link" type="submit" name="action" value="giveOneLike">讚ㄧ個! </button>
+		         </FORM>		
 		    </div>
 		</div>
 		
@@ -242,7 +248,7 @@ div {
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
                  <button class="btn btn-warning" type="submit" name="action" value="insertReport"> 檢舉文章</button>
-		         </FORM>
+		         
 		        </div>
 		    </div>
                                     
@@ -252,12 +258,12 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="45"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
+                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="45"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      
                      </div>
                  </div>
              </div>
-                                          
+                    </FORM>                      
              </div>
          </div>
      </div>

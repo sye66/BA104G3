@@ -29,7 +29,6 @@ public class ProOrdListJDBCDAO implements ProOrdListDAO_interface{
 			con.setAutoCommit(false);
 System.out.println("開始新增清單");			
 			pst.setString(1,proOrdListVO.getOrd_No());
-System.out.println();			
 			pst.setString(2,proOrdListVO.getPro_No());
 			pst.setInt(3,proOrdListVO.getOrdPro_Count());
 			pst.setInt(4,proOrdListVO.getOrdPro_Price());

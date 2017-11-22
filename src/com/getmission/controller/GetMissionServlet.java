@@ -888,6 +888,7 @@ public class GetMissionServlet extends HttpServlet {
 		
 		/**
 		 * @author Sander
+		 * 新增一般任務，積分五十點。
 		 */
 		// 任務類別
 		if ("issue_Normal_Mission".equals(action)) {
@@ -909,29 +910,43 @@ public class GetMissionServlet extends HttpServlet {
 				String  mission_Des = req.getParameter("mission_Des");
 				// 發案人會員編號
 				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
-				// 任務發布時間
-				java.sql.Date mission_Release_Time = Date.valueOf((req.getParameter("mission_Release_Time")));
 				// 任務截止時間
-				java.sql.Date mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time")));
+				java.sql.Date mission_Due_Time;
+				// 任務模式
+				Integer mission_Pattern = 2;
 				// 任務積分報酬
 				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
 				// GPS-LAT
 				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
 				// GPS-LNG
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
+				// 任務開始時間 - null
+				// 任務結束時間 - null
+				Date date = new Date(System.currentTimeMillis());
 				
-				// Value Receiving testing
-				System.out.println(mission_Release_Time);
-				System.out.println(mission_Due_Time);
-				
-				
-				if (mission_Release_Time.after(mission_Due_Time)) {
-					errorMsg.add("你是要做時光機逆");
+				/**********驗證開始**********/
+				if (misssion_Pay != 50.00) {
+					errorMsg.add("HTML的READONLY就是叫你不要改啦");
 				}
+				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
+					errorMsg.add("安安請告知任務名稱喔");
+				}
+				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
+					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+				}
+				// 日期驗證 - 格式
+				try {
+					mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time").trim()));
+				} catch (IllegalArgumentException e) {
+					mission_Due_Time = new Date(System.currentTimeMillis());
+					errorMsg.add("日期格式不對!");
+				}
+				// 日期驗證 - 值
+				if (date.after(mission_Due_Time)) {
+					errorMsg.add("你是要工具人做時光機逆");
+				}
+				// 錯誤訊息傳回
 				if (!errorMsg.isEmpty()) {
-					for (String string : errorMsg) {
-						System.out.println(string);
-					}
 					req.setAttribute("getMissionVO", getMissionVO);
 					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 					inputError.forward(req, res);
@@ -939,10 +954,9 @@ public class GetMissionServlet extends HttpServlet {
 				}
 				
 				/**********準備寫入與轉向**********/
-				// 任務開始時間  - null
-				// 任務結束時間 - null
+
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,mission_Release_Time,mission_Due_Time, null, null,1,1,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
@@ -955,6 +969,93 @@ public class GetMissionServlet extends HttpServlet {
 			}
 			
 		}
+		/**
+		 * @author Sander
+		 * 新增緊急任務，積分無上限。
+		 */
+		// 任務類別
+		if ("issue_Emergency_Mission".equals(action)) {
+			
+			// Value Receiving Test
+			System.out.println("got post from Emergency");
+			
+			// 錯誤處理
+			List<String> errorMsg = new LinkedList<>();
+			req.setAttribute("errorMsg", errorMsg);
+			GetMissionVO getMissionVO = new GetMissionVO();
+			
+			try {				
+				// 任務類別
+				String mission_Category = req.getParameter("mission_Category");
+				// 任務名稱
+				String mission_Name = req.getParameter("mission_Name");
+				// 任務敘述
+				String  mission_Des = req.getParameter("mission_Des");
+				// 發案人會員編號
+				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
+				// 任務截止時間
+				java.sql.Date mission_Due_Time;
+				// 任務模式
+				Integer mission_Pattern = 1;
+				// 任務積分報酬
+				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				// GPS-LAT
+				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
+				// GPS-LNG
+				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
+				// 任務開始時間 - null
+				// 任務結束時間 - null
+				Date date = new Date(System.currentTimeMillis());
+				
+				/**********驗證開始**********/
+				if (misssion_Pay < 50.00) {
+					errorMsg.add("安安積分太少了吧");
+				}
+				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
+					errorMsg.add("安安請告知任務名稱喔");
+				}
+				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
+					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+				}
+				// 日期驗證 - 格式
+				try {
+					mission_Due_Time = Date.valueOf((req.getParameter("mission_Due_Time").trim()));
+				} catch (IllegalArgumentException e) {
+					mission_Due_Time = new Date(System.currentTimeMillis());
+					errorMsg.add("日期格式不對!");
+				}
+				// 日期驗證 - 值
+				if (date.after(mission_Due_Time)) {
+					errorMsg.add("你是要工具人做時光機逆");
+				}
+				// 錯誤訊息傳回
+				if (!errorMsg.isEmpty()) {
+					for (String string : errorMsg) {
+						System.out.println(errorMsg);
+					}
+					req.setAttribute("getMissionVO", getMissionVO);
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+					inputError.forward(req, res);
+					return;
+				}
+				
+				/**********準備寫入與轉向**********/
+
+				GetMissionService getMissionService = new GetMissionService();
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
+				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
+				successView.forward(req, res);
+				
+			} catch (Exception e) {
+				errorMsg.add(e.getMessage());
+				System.out.println(e.getMessage());
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+				inputError.forward(req, res);
+			}
+			
+		}
+		
 	}
 	
 

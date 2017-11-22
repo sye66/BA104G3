@@ -54,6 +54,9 @@
 </head>
 <body bgcolor='white'>
 
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
+
 <h4>此頁練習採用 EL 的寫法取值:</h4>
 <table id="table-1">
 	<tr><td>
@@ -108,7 +111,7 @@
 </table>
 
 <%if (request.getAttribute("listArti_ByClassNo")!=null){%>
-       <jsp:include page="listArti_ByClassNo.jsp" />
+       <jsp:include page="listArti_ByClassNo_back.jsp" />
 <%} %>
 
 </body>
