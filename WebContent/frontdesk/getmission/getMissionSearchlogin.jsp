@@ -3,15 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="missionImagesSvc" scope="page"
 	class="com.missionimages.model.MissionImagesService" />
 <jsp:useBean id="getMissionSvc" scope="page"
 	class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+<jsp:useBean id="caseCandidateSvc" scope="page"
+	class="com.casecandidate.model.CaseCandidateService" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	List<GetMissionVO> list = getMissionService.getAll();
+	CaseCandidateVO missionmem = new CaseCandidateVO();
 %>
 <jsp:useBean id="listmission_ByCompositeQuery" scope="request" type="java.util.List<GetMissionVO>" />
 
@@ -193,15 +196,29 @@
 							
 
 
+								<% 
+							missionmem.setCandidate_Mem_No(memVO.getMem_No());
+							pageContext.setAttribute("missionmem" ,missionmem);
+							
+							%>
 								<td>
 									<div class="panel-body">
-
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission2">
-											<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
-													class="btn btn-info">我要接案</button></a> <input type="hidden"
-												name="mission_No" value="${getMissionVO.mission_No}">
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
+											
+								<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
+								
+								<a href='#modal-mission-id${s.index} ' data-toggle="modal">
+								<button class="btn btn-info" >我要接案</button></a> 
+								
+								
+								</c:if>
+								
+								<c:if test="${!accept}">
+									<a  data-toggle="modal">
+									<button class="btn btn-info" style="visibility: hidden" >我要接案</button></a> 
+								</c:if>
+											
+											<input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
 										</form>
 									</div>
 								</td>
