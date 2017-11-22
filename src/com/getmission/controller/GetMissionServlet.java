@@ -318,8 +318,11 @@ public class GetMissionServlet extends HttpServlet {
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
-				req.setAttribute("errorMsgs", errorMsgs);
-				res.sendRedirect(requestURL);
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				failureView.forward(req, res);
+			
 				return;
 			}
 

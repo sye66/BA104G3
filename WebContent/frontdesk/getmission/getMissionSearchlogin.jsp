@@ -162,13 +162,13 @@
 									test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
 									<img
 										src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
-										class="pic center">
+										class="img-responsive pic center">
 								</c:if>
 								<c:if
 									test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
 									<img
 										src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
-										class="pic center">
+										class="img-responsive pic center">
 								</c:if>
 								<div class="user text-center">
 									<p>USER PICTURE</p>
@@ -271,7 +271,7 @@
 
 				</div>
 
-				<c:if test="${index%2==1 }">
+				<c:if test="${s.index%2==1 }">
 		</div>
 	</div>
 	</c:if>

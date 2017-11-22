@@ -14,7 +14,6 @@
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	List<GetMissionVO> list = getMissionService.getAll();
-	String errorMsgs = (String) session.getAttribute("errorMsgs");
 %>
 
 <html lang="">
@@ -24,7 +23,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Title Page</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/map.css">
 <script type="text/javascript" src="js/*"></script>
 <script src="js/map.js"></script>
@@ -34,6 +33,10 @@
 		<![endif]-->
 
 <style type="text/css">
+
+
+
+
 @media screen and (min-width: 768px) {
 	.pic {
 		
@@ -47,26 +50,16 @@
 	<br><br><br><br><br>
 	<br>
 	
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 col-sm-4">
-			
-		</div>
-		<div class="col-xs-12 col-sm-8">
-			
-		</div>
-	</div>
-</div>
+
 
 	<!-- map ====================================================================================-->
 
 	<div class="container">
 		<div class="row">
-
+<div class="col-xs-12 col-sm-10">
 			<div class="input-group ">
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
 						
-						<div class="input-group container">
 						<div class="row">
 						 <select id="mission_Category" name="mission_Category">
 								<option value="">任務分類</option>
@@ -77,7 +70,7 @@
 								<option value="官方">官方</option>
 						</select>
 						
-								<input type="text" class="form-control row-fluid" id="search-mission"
+								<input type="text" class="form-control input-lg" id="search-mission"
 									name="mission_Name" placeholder="Search for Mission...">
 									
 								<span class="input-group-btn">
@@ -87,12 +80,10 @@
 									</button>
 								</span>
 						</div>
-				</div>
-				</form>
+				</FORM>
 
-				<div id="map"></div>
 			</div>
-
+</div>
 		</div>
 	</div>
 
@@ -110,7 +101,9 @@
 
 
 	<br>
-
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
 <div class="container">
 		<div class="row">
 
@@ -154,20 +147,20 @@
 
 				<div class="col-xs-12 col-sm-4">
 
-					<div class="row">
+					<!-- <div class="row"> -->
 						<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
 						<img
 							src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
-							class="pic center">
+							class="img-responsive pic center">
 							</c:if>
 							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
 							<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
-							class="pic center">
+							class="img-responsive pic center">
 							</c:if>
 						<div class="user text-center">
 							<p>USER PICTURE</p>
 						</div>
-					</div>
+					<!-- </div> -->
 
 				</div>
 
@@ -258,7 +251,7 @@
 </div>
 		</div>
 
-		<c:if test="${index%2==1 }">
+		<c:if test="${s.index%2==1 }">
 
 			</div>
 			</div>
