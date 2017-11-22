@@ -162,28 +162,6 @@ public class DisputeCaseServlet extends HttpServlet {
 				}
 				MemService memService = new MemService();
 				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getIssuer_Mem_No(),mission_Pay);
-				
-				// 嘗試加入QRcode
-				response.setContentType("image/jpeg");
-				System.out.println("寫QRCODE中");
-				try {
-				    // new QRcode物件
-				    QRCode barcode = new QRCode();
-				    // 填入要轉碼的資訊
-				    barcode.setCode("https://www.google.com");
-				    // 設定大小，15~20效果不錯
-				    barcode.setModuleSize(15);
-				    // 解析度
-				    barcode.setResolution(144);
-				    // 傳入byte陣列
-				    byte[] barcodeByteArr = barcode.drawImage2Bytes();
-				    request.setAttribute("barcodeByteArr", barcodeByteArr);
-				    System.out.println("寫完囉");
-				} catch (Exception e) {
-				    throw new ServletException(e);
-				}
-				
-				
 				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
 				ReplyDoneView.forward(request, response);
 			} catch (Exception e) {
