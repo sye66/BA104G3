@@ -47,7 +47,18 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/profile_1.png"></a>
+      
+      <c:if test="${memVO.mem_State==0 || memVO.mem_State==9}">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        </a>
+        </c:if>
+      <c:if test="${memVO.mem_State==1}">
+        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=500')">
+        <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        </a>
+        </c:if>
+        
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
           <i class="fa fa-bars"></i>
@@ -79,7 +90,7 @@
             </li>
             </c:if>
 
-            
+<!--  開新分頁 target="_blank"   跳新視窗        onclick="window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');"> -->
             
             
            <li class="nav-item1">  <h3><a class="nav-link js-scroll-trigger" id="create-user"  >

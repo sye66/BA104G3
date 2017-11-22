@@ -27,12 +27,12 @@ public class LoginTest extends HttpServlet {
 		PrintWriter out = res.getWriter();
 
 		// 【取得使用者 帳號(account) 密碼(password)】
-		String mem_No = req.getParameter("mem_No");
+		String memVO = req.getParameter("memVO");
 		String password = req.getParameter("password");
 
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("mem_No", mem_No); // *工作1: 才在session內做已經登入過的標識
+		session.setAttribute("memVO", memVO); // *工作1: 才在session內做已經登入過的標識
 
 		try {
 			String location = (String) session.getAttribute("location");

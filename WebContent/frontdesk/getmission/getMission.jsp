@@ -14,6 +14,7 @@
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	List<GetMissionVO> list = getMissionService.getAll();
+	String errorMsgs = (String) session.getAttribute("errorMsgs");
 %>
 
 <html lang="">
@@ -63,38 +64,30 @@
 		<div class="row">
 
 			<div class="input-group ">
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
-					<div class="input-group">
+				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do">
 						
 						<div class="input-group container">
 						<div class="row">
-						<div class="col-xs-12 col-sm-2">
 						 <select id="mission_Category" name="mission_Category">
-								<option value="-1">任務分類</option>
+								<option value="">任務分類</option>
 								<option value="教育">教育</option>
 								<option value="修繕">修繕</option>
 								<option value="其他">其他</option>
 								<option value="交友">交友</option>
 								<option value="官方">官方</option>
 						</select>
-						</div>
 						
-								<div class="col-xs-12 col-sm-10">
-								<input type="text" class="form-control" id="search-mission"
+								<input type="text" class="form-control row-fluid" id="search-mission"
 									name="mission_Name" placeholder="Search for Mission...">
 									
 								<span class="input-group-btn">
-
-									<button class="btn btn-success btn-secondary" type="summit"
+									<button class="btn btn-success btn-secondary" type="submit"
 										name="action" value="listmission_ByCompositeQuery">
 										<i class="glyphicon glyphicon-search"></i>
 									</button>
 								</span>
-								</div>
 						</div>
-					</div>
-</div>
+				</div>
 				</form>
 
 				<div id="map"></div>
@@ -124,6 +117,7 @@
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "missiongroup">
 	
 <button class="btn btn-success" type="submit" name="action" value="missiongroup">會員任務管理</button>
+<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
 
 </form>
 
@@ -154,7 +148,8 @@
 
 
 		<div class="col-xs-12 col-sm-6">
-
+<div class="container">
+	
 			<div class="row">
 
 				<div class="col-xs-12 col-sm-4">
@@ -214,14 +209,14 @@
 										<form method="post"
 											action="<%=request.getContextPath()%>/getmission/getmission.do"
 											name="getmission2">
-											<a href='#modal-id${s.index} ' data-toggle="modal"><button
+											<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
 													class="btn btn-info">我要接案</button></a> <input type="hidden"
 												name="mission_No" value="${getMissionVO.mission_No}">
 										</form>
 									</div>
 								</td>
 
-								<div class="modal fade" id="modal-id${s.index}">
+								<div class="modal fade" id="modal-mission-id${s.index}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
@@ -243,9 +238,9 @@
 													<button class="btn btn-info" type="submit" name="action"
 														value="take_mission">確認接案</button>
 													<input type="hidden" name="mission_No"
-														value="${getMissionVO.mission_No}"> <input
-														type="hidden" name="mission_State"
-														value="${getMissionVO.mission_State}">
+														value="${getMissionVO.mission_No}"> 
+													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
+													<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
 												</form>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">關閉</button>
@@ -260,7 +255,7 @@
 				</div>
 
 			</div>
-
+</div>
 		</div>
 
 		<c:if test="${index%2==1 }">

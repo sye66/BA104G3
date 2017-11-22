@@ -342,7 +342,7 @@ public class AdDAO implements AdDAO_interface {
 			con = ds.getConnection();
 			String finalSQL = "select * from AD "
 		          + jdbcUtil_CompositeQuery_AD.get_WhereCondition(map)
-		          + "order by empno";
+		          + "order by ad_Fty_No";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = "+finalSQL);
 			rs = pstmt.executeQuery();

@@ -281,7 +281,7 @@ public class ArtiReportServlet extends HttpServlet {
 			req.setAttribute("errorMsgs",errorMsgs);
 			String requestURL = req.getParameter("requestURL");
 System.out.println("Report-server-111");
-			try{
+//			try{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
 				HttpSession session = req.getSession();
 System.out.println("Report-server-222");
@@ -309,29 +309,29 @@ System.out.println(user);
 					failuewView.forward(req, res);
 					return;
 				}
-System.out.println("Report-server-444");
+System.out.println(req.getParameter("arti_No"));
 				String arti_No = req.getParameter("arti_No").trim();			
 				String report_Desc = req.getParameter("report_Desc").trim();
-				
+System.out.println("Report-server-444******111");
 				if (report_Desc ==null||report_Desc.trim().length()==0){
 					errorMsgs.add(" 回覆內容敘述請勿空白 ");
 				}
-				
+System.out.println("Report-server-444******222");
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp report_Time = nowTime;
-				
+System.out.println("Report-server-444******333");
 				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
-				String report_Status = req.getParameter("report_Status");
-				
+				String report_Status = "待處理";
+System.out.println("Report-server-444******444");
 				ArtiReportVO artiReportVO = new ArtiReportVO();
-				
+System.out.println("Report-server-555");
 				artiReportVO.setMem_No(mem_No);
 				artiReportVO.setArti_No(arti_No);
 				artiReportVO.setReport_Desc (report_Desc );
 				artiReportVO.setReport_Time(report_Time);
 				artiReportVO.setArti_Cls_No(arti_Cls_No);
 				artiReportVO.setReport_Status(report_Status);
-System.out.println("Report-server-555");
+System.out.println("Report-server-666");
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("artiReportVO", artiReportVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
@@ -344,18 +344,18 @@ System.out.println("Report-server-666");
 				artiReportVO = artiReportSvc.addArtiReport(mem_No, arti_No,report_Desc,report_Time,arti_Cls_No,report_Status);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				req.setAttribute("artiReportVo", artiReportVO);
-				String url = "/backdesk/artiReport/listAllArtiReport.jsp";
+				req.setAttribute("artiReportVO", artiReportVO);
+				String url = "/frontdesk/artiReport/listOneReport_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 System.out.println("Report-server-777");
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				errorMsgs.add(e.getMessage());
-System.out.println("Report-server-888");
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add(e.getMessage());
+//System.out.println("Report-server-888");
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		

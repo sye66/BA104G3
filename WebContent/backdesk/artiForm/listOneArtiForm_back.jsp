@@ -123,7 +123,7 @@ button{
 
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="col-xs-8 col-sm-8 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter"> ${artiFormVO.arti_Title} </h5>

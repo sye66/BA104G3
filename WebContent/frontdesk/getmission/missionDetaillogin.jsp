@@ -106,7 +106,7 @@
 				<table>
 					<tr>
 						<div class="form-group">
-							<label for="aa" class="col-xs-12 col-sm-3 control-label">${memSvc.getOneMem(mem_No).mem_No}--${memSvc.getOneMem(mem_No).mem_Name}
+							<label for="aa" class="col-xs-12 col-sm-3 control-label">${memSvc.getOneMem(memVO.mem_No).mem_No}--${memSvc.getOneMem(memVO.mem_No).mem_Name}
 								你好 </label>
 							<div class="col-xs-12 col-sm-9">
 								<input type="text" name="aa" id="aa" placeholder="文字"
@@ -263,7 +263,7 @@
 									<form method="post"
 										action="<%=request.getContextPath()%>/getmission/getmission.do"
 										name="getmission2">
-										<a href='#modal-id' data-toggle="modal"><button
+										<a href='#modal-id-mission' data-toggle="modal"><button
 												class="btn-lg btn-warning">我要接案</button></a> <input
 											type="hidden" name="mission_No"
 											value="${getMissionVO.mission_No}">
@@ -283,7 +283,7 @@
 
 
 
-						<div class="modal fade" id="modal-id">
+						<div class="modal fade" id="modal-id-mission">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">

@@ -8,7 +8,7 @@
 </head>
 <body>
 <form method="post" action="LoginTest">
-	account :<input type="text" name="mem_No">
+	account :<input type="text" name="memVO">
 	password:<input type="password" name="password">
 	<input type="submit" name="login" value="login">
 </form>
