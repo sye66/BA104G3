@@ -14,7 +14,6 @@
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
 
-	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
 <!DOCTYPE html>
@@ -104,12 +103,10 @@
 											action="<%=request.getContextPath()%>/getmission/getmission.do"
 											name="getmission3">
 											<a href='#modal-id${i.index}-${m.index} ' data-toggle="modal"><button
-													class="btn btn-info" type="submit" name="action" value="checkmem">確認人選</button></a> 
+													class="btn btn-info" type="submit" name="action" value="chosemem">確認人選</button></a> 
 													
-													<input type="hidden"
-												name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
-												<input type="hidden"
-												name="mission_No" value="${caseVO.mission_No}">
+													<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
+												<input type="hidden" name="mission_No" value="${caseVO.mission_No}">
 										</form>
 									</div>
 								</td>
@@ -134,15 +131,11 @@
 												<form method="post"
 													action="<%=request.getContextPath()%>/getmission/getmission.do"
 													name="getmission3">
-													<button class="btn btn-warning" type="submit" name="action"
-														value="checkmem">就決定是你了~</button>
-													<input type="hidden" name="takecase_Mem_No"
-														value="${caseCandidateVO.candidate_Mem_No}"> 
-														<input type="hidden" name="mission_No"
-														value="${caseVO.mission_No}"> 
+													<button class="btn btn-warning" type="submit" name="action" value="chosemem">就決定是你了~</button>
+													<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+													<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 												</form>
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">關閉</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
 											</div>
 										</div>
 									</div>
@@ -167,7 +160,7 @@
 											value="mission_Detail">任務細節</button>
 
 										<input type="hidden" name="mission_No"
-											value="${caseCandidateVO.mission_No}"> <input
+											value="${caseVO.mission_No}"> <input
 											type="hidden" name="requestURL"
 											value="/frontdesk/getmission/getMission.jsp">
 									</form>

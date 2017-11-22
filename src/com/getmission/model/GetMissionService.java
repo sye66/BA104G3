@@ -157,9 +157,7 @@ public class GetMissionService {
 	public List<GetMissionVO> findByMem(String issuer_Mem_No, Integer mission_Statuts){
 		return dao.findByMem(issuer_Mem_No, mission_Statuts);
 	}
-	public List<GetMissionVO> findByMem(String issuer_Mem_No) {
-		return dao.findByMem(issuer_Mem_No);
-	}
+	
 	
 	/**
 	 * @author Sander

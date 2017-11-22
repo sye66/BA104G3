@@ -117,18 +117,18 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			} else {
 				pstmt.setNull(11, java.sql.Types.INTEGER);
 			}
-			if (getMissionVO.getMission_Pay() != null)
-				pstmt.setDouble(12, getMissionVO.getMission_Pay());
-			else
-				pstmt.setDouble(12, java.sql.Types.DOUBLE);
-			if (getMissionVO.getMission_Gps_Lat() != null)
-				pstmt.setDouble(13, getMissionVO.getMission_Gps_Lat());
-			else
-				pstmt.setDouble(13, java.sql.Types.DOUBLE);
-			if (getMissionVO.getMission_Gps_Lng() != null)
-				pstmt.setDouble(14, getMissionVO.getMission_Gps_Lng());
-			else
-				pstmt.setDouble(14, java.sql.Types.DOUBLE);
+			if (getMissionVO.getMission_Pay() != null){
+				pstmt.setDouble(12, getMissionVO.getMission_Pay());}
+			else{
+				pstmt.setNull(12, java.sql.Types.DOUBLE);}
+			if (getMissionVO.getMission_Gps_Lat() != null){
+				pstmt.setDouble(13, getMissionVO.getMission_Gps_Lat());}
+			else{
+				pstmt.setNull(13, java.sql.Types.DOUBLE);}
+			if (getMissionVO.getMission_Gps_Lng() != null){
+				pstmt.setDouble(14, getMissionVO.getMission_Gps_Lng());}
+			else{
+				pstmt.setNull(14, java.sql.Types.DOUBLE);}
 			pstmt.setString(15, getMissionVO.getMission_No());
 
 			pstmt.executeUpdate();

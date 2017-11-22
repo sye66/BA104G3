@@ -12,7 +12,6 @@
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
-	String mem_No = (String)session.getAttribute("mem_No"); 
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,7 +30,7 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br><br><br><br><br>
 	<br>
-${memSvc.getOneMem(mem_No).mem_Name} 你好
+${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 
 
 
@@ -54,29 +53,31 @@ ${memSvc.getOneMem(mem_No).mem_Name} 你好
 
 </form>
 
-<c:if test="${getMissionSvc.successGetMission(mem_No).size() != null  }">
-<c:forEach var="missionstate" items="${getMissionSvc.successGetMission(mem_No)}" varStatus="state" step="1">
-<c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4 ||missionstate.mission_State ==  73||missionstate.mission_State ==  74 }" var="alright">
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-	
-
-</form>
+<c:if test="${getMissionSvc.successGetMission(memVO.mem_No).size() != 0  }">
+<c:forEach var="missionstate" items="${getMissionSvc.successGetMission(memVO.mem_No)}" varStatus="state" step="1">
+<c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }" >
+<c:set var="alright" value="true"></c:set>
 </c:if>
+
 </c:forEach>
 <c:if test="${alright}">
-<button class="btn btn-danger" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
-</c:if>
-</c:if>
-
-<c:if test="${getMissionSvc.findIssuerCase(mem_No).size() != null  }">
-<c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(mem_No)}" varStatus="state2" step="1">
-<c:if test="${missionstate2.mission_State == 3 || missionstate2.mission_State == 4 ||missionstate2.mission_State == 73||missionstate2.mission_State == 74 } " var= "ok">
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+<button class="btn btn-danger" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
 </form>
 </c:if>
+</c:if>
+<c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
+<c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
+<c:if test="${missionstate2.mission_State == 3 || missionstate2.mission_State == 4 } " >
+<c:set var="ok" value="true"></c:set>
+</c:if>
 </c:forEach>
+${getMissionSvc.findIssuerCase(memVO.mem_No).mission_State}
+${ok}
 <c:if test="${ok}">
+<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 <button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
+</form>
 </c:if>
 </c:if>
 

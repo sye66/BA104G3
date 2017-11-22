@@ -85,7 +85,7 @@ public class CaseCandidateServlet extends HttpServlet {
 			// }
 		}
 
-		if ("checkmem".equals(action)) { // 來自getmission.jsp 或
+		if ("chosemem".equals(action)) { // 來自getmission.jsp 或
 												// mission_Detail的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -94,6 +94,7 @@ public class CaseCandidateServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 			GetMissionVO getMissionVO = (GetMissionVO) req.getAttribute("getMissionVO");
+			GetMissionService getMissionSvc = new GetMissionService();
 			String mission_No = getMissionVO.getMission_No();
 			// try {
 			/***************************
@@ -114,6 +115,7 @@ public class CaseCandidateServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢 *****************************************/
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			caseCandidateSvc.deleteOneCase(mission_No);
 			req.setAttribute("CaseCandidateVo", CaseCandidateVo);
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/casecandidate/casecandidate.jsp");

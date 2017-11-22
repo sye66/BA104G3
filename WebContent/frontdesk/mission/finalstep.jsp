@@ -44,7 +44,7 @@
     內容文字
   </div>
   <table class="table">
-    <c:forEach var="successGetMission" items="${getMissionSvc.successGetMission(mem_No)}"
+    <c:forEach var="successGetMission" items="${getMissionSvc.successGetMission(memVO.mem_No)}"
 								varStatus="m" step="1">
 
 <c:if test="${successGetMission.mission_State == 3||successGetMission.mission_State == 4 ||successGetMission.mission_State ==73 ||successGetMission.mission_State == 74}">

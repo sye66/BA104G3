@@ -230,7 +230,7 @@ public class GetMissionServlet extends HttpServlet {
 
 		}
 
-		if ("checkmem".equals(action)) { // 來自getmission.jsp 或
+		if ("chosemem".equals(action)) { // 來自getmission.jsp 或
 											// mission_Detail的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -247,7 +247,7 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher("/frontdesk/casecandidate/casecandidate.jsp");
 				failureView.forward(req, res);
 			
 				return;
@@ -256,7 +256,11 @@ public class GetMissionServlet extends HttpServlet {
 			String takecase_Mem_No = (String) req.getParameter("takecase_Mem_No").trim();
 			String mission_No = (String) req.getParameter("mission_No").trim();
 			GetMissionVO getMissionVO = new GetMissionVO();
+			GetMissionService getMissionSvc = new GetMissionService();
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			AccuseCaseService accuseCaseService = new AccuseCaseService();
+			List<AccuseCaseVO> accuseCaseList = accuseCaseService.getCaseBymission(mission_No);
+			
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -266,13 +270,16 @@ public class GetMissionServlet extends HttpServlet {
 			long now = System.currentTimeMillis();
 			java.sql.Timestamp timeStamp = new Timestamp(now);
 			long endTime = now + 1000 * 60 * 60 * 24 * 5L;
-			java.sql.Timestamp mission_Start_Time = new java.sql.Timestamp(timeStamp.getTime());
-			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(new Timestamp(endTime).getTime());
-			Integer mission_State = null;
+			java.sql.Timestamp mission_Start_Time = timeStamp;
+			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(endTime);
+			Integer mission_State = getMissionVO.getMission_State();
 			if (getMissionVO.getMission_State() == 2 || getMissionVO.getMission_State() == 72) {
 				mission_State = 3;
+				for(AccuseCaseVO  accuseCaseVO:accuseCaseList){
+					accuseCaseService.deleteAccuseCase(accuseCaseVO.getAccuse_No());
+				}
+				
 			}
-
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -280,11 +287,10 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			/*************************** 2.開始修改資料 *****************************************/
-			GetMissionService getMissionSvc = new GetMissionService();
 			getMissionVO = getMissionSvc.updateOneMission(mission_No, takecase_Mem_No, mission_Start_Time,
 					mission_End_Time, mission_State);
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			/***************************
 			 * 3.修改完成,準備轉交(Send the Success view)
 			 *************/
@@ -616,21 +622,18 @@ public class GetMissionServlet extends HttpServlet {
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
-			Integer mission_State = new Integer(req.getParameter("mission_State").trim());
-
-			GetMissionVO getMissionVO = new GetMissionVO();
 			GetMissionService getMissionSvc = new GetMissionService();
+			GetMissionVO getMissionVO = new GetMissionVO();
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
+			Integer mission_State = getMissionVO.getMission_State();
+			
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
 
 			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
 
 				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
-					if (mission_State == 3 || mission_State == 73) {
-						if (mission_State == 3) {
+					if (mission_State == 3 ) {
 							getMissionVO.setMission_State(4);
-						} else {
-							getMissionVO.setMission_State(74);
-						}
 						getMissionVO.setMission_No(mission_No);
 					} else if (mission_State == 6) {
 						errorMsgs.add("此任務已失效");
@@ -734,7 +737,7 @@ public class GetMissionServlet extends HttpServlet {
 			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
 
 				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
-					if (mission_State == 4 || mission_State == 74) {
+					if (mission_State == 4 ) {
 						getMissionVO.setMission_State(5);
 						getMissionVO.setMission_No(mission_No);
 					} else if (mission_State == 6) {
