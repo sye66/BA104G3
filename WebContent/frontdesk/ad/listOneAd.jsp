@@ -83,9 +83,8 @@
 		            <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}"/>
 		            <div class="container">
 		                <div class="carousel-caption">
-		                    <h1>${adVO.ad_Fty_Name}</h1>
+		                    <h1>${adVO.ad_Fty_Name}</h1><br>
 		                    <p>${adVO.ad_Desc}</p>
-		                    <p>${adSvc.getOneAd(adVO.ad_No).ad_Pic}</p>
 		                    <p><a class="btn btn-lg btn-primary" href="#" role="button">${adVO.ad_No}</a></p>
 		                </div>
 		            </div>

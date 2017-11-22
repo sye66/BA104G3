@@ -25,48 +25,20 @@
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
 <style>
-  table#table-2 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-2 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 800px;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-  }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
-    text-align: center;
-  }
+h3{
+    font-size: 48px;
+    color: #F00;
+}
 </style>
 
 </head>
 <body bgcolor='white'>
-${arti_No}
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-2">
-	<tr><td>
-		 <h3> 分標題列出回覆文章 - listReply_ByArtiNo.jsp ${arti_No }</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+
+<div class="widgetbox">
+        <div class="title">
+        <h3 > 這邊是回覆文章分隔線 </h3>
+        </div>
+        </div>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -106,8 +78,8 @@ ${arti_No}
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
                                             <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
-	                     style="height:100px;width:120px;"/>
+    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiReplyVO.mem_No}&mem_${memSvc.getOneMem(artiReplyVO.mem_No).mem_pic}"
+	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
     </div>
                                     </div>
                                     </div>

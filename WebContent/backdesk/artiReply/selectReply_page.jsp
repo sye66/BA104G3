@@ -30,6 +30,12 @@
   }
   
   body{margin:40px;}
+  
+    a{
+   font-size: 24px;
+   color: #F00;
+  }
+  
 
 </style>
 

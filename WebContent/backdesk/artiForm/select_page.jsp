@@ -40,6 +40,11 @@
   
   body{margin:40px;}
   
+  a{
+   font-size: 24px;
+   color: #F00;
+  }
+  
 </style>
 
 </head>
@@ -66,7 +71,9 @@
 </c:if>
 
     <div class="widgetbox">
-        <div class="title"><h3>討論區文章資料查詢 : <a href="/BA104G3/backdesk/artiForm/listAllArtiForm_back.jsp">List</a> all Article.  </h3>
+        <div class="title">
+        <h3>討論區文章資料查詢 : <a href="/BA104G3/backdesk/artiForm/listAllArtiForm_back.jsp">List</a> all Article.  
+                           /                 <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">Add</a> a new Article.</h3><br/>
         </div>
 
                  <div class="widgetcontent userlistwidget nopadding">
@@ -119,7 +126,7 @@
                         <li>
                              <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
                                   <div class="info">
-                                   <li><a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">Add</a> a new Article.</li><br/>
+                                   
                                   </div><!--info-->
                         </li>
                         <li>
