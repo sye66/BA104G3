@@ -1,8 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*"%>
+<%@ page import="com.emp.model.*"%>
 <%@ page import="com.ad.model.*"%>
 
 <%
-  AdVO adVO = (AdVO) request.getAttribute("adVO");
+  AdVO adVO = new AdVO();
 %>
 
 <html>
@@ -65,96 +69,143 @@ a{
 
 <hr>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" name="form1" enctype="multipart/form-data">
 
+<div class="container">
 <div class="col-xs-8 col-sm-8 widget-container-span">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" name="form1" enctype="multipart/form-data">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter"> ${adVO.ad_No} </h5>
+                        <h5 class="bigger lighter"> 
+                        <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" />
+                        <input type="hidden" name="emp_No" value="${emoVO.emp_No}">${empVO.emp_Name}
+                         </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-                                <jsp:useBean id="adSvc" scope="page" class="com.ad.model.AdService"/>
-                                ${adVO.ad_Fty_No}
+                                <input type="hidden" name="ad_No" size="45" value="${adVO.ad_No}">${adVO.ad_No}
                                 </div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style="">${adVO.ad_Fty_Name}</div>
+                            
                             </div>
                         </div>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style=""> </div>
+                                <div class="" style="">
+                                
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="widget-body">
                         <div class="widget-toolbox">
                             <div class="btn-toolbar">
                                 <div class="btn-group">
                                     <div class="widget-toolbar">
-                                        <div class="widget-main padding-6">
+                                    <div class="widget-main padding-6">
                                             <div class="pic">
-                        <img src="<%=request.getContextPath()%>/tool/showimage.do?action=ad_Pic&ad_No=${adVO.ad_No}"
-	                     style="height:250px;width:900px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-                              </div>
+                                            (請提供 1280 * 300 尺寸照片)<br>
+    <img id="theImage" src="<%=request.getContextPath()%>/image/XXX.jpg=${acVO.ad_No}"
+	                     style="height:150px;width:640px;"/>
+		                      <input type="file" name="ad_Pic" size="45" id="theBinaryFile" onchange="onLoadBinaryFile()"
+			 value="<%= (adVO==null)? "廣告的主題照片" : adVO.getAd_Pic()%>" />
     </div>
                                     </div>
                                     </div>
+                                    
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
-     
+
                                     </div>
                                     </div>
                                     
                                     <div class="widget-toolbar">
-                                    <div class="widget-main padding-6">
-                                      <p class="title"> 廣告標題 : ${adVO.ad_Desc} </p>
-                                      <p class="start"> 廣告開始時間 : ${adVO.ad_Start} </p>
-                                      <p class="end"> 廣告結束時間 : ${adVO.ad_End}</p>
+                                     <div class="widget-main padding-6">   
+                                    廠商編號 : <input type="text" name="ad_Fty_No"  value="${adVO.ad_Fty_No}">
+                                    <hr>
+                                    <div class="widget-main padding-6">   
+                                    廠商名稱 : <input type="text" name="ad_Fty_Name"  value="${adVO.ad_Fty_Name}">
+                                    <hr>
+                                    廣告標題 :
+                                    <input type="text" name="ad_Desc" size="45" value="${adVO.ad_Desc}">
                                     </div>
                                     </div>
-                                    
                                 </div>
                             </div>
-                        
+                        </div>
                         <div class="widget-main padding-16">
-                        <h4></h4><br>
-
+                         廣告開始 : <input type="text" name="ad_Start"  value="${adVO.ad_Start}">
+                         廣告結束 : <input type="text" name="ad_End"  value="${adVO.ad_End}">
                         </div>
                     </div>
-                    
                     <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter"></h5>
+                        <h5 class="bigger lighter">
+                        </h5>
                         <div class="widget-toolbar">
-                        
+
                             <div class="btn-group">
                             <div>
-                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
-			                <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
-			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                <button class="btn btn-danger" type="submit" name="action" value="deleteAd">刪除廣告</button>
-                            </FORM>
+ 
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
+<!--  			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">  -->
+			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                    <button class="btn btn-info" type="submit" name="action" value="insertAd">廣告新增</button>
+ 			                    </FORM>  
                             </div>
                             </div>
-                           
-                            <div class="btn-group">
-                            <div>
-                              
-                            </div>
-                            </div>
-                            
                             </div>
                         </div>
                     </div>
+                    </FORM>
                 </div>
-               
-		</FORM>
+</div>
+
 <hr>
 
+<script type="text/javascript">
+        function onLoadBinaryFile() {
+            var theFile = document.getElementById("theBinaryFile");
 
+            // 確定選取了一個二進位檔案，而非其他格式。
+            if (theFile.files.length != 0 && theFile.files[0].type.match(/image.*/)) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var theImg = document.getElementById("theImage");
+                    theImg.src = e.target.result;
+                };
+                reader.onerror = function (e) {
+                    alert("例外狀況，無法讀取二進位檔");
+                };
+
+                // 讀取二進位檔案。
+                reader.readAsDataURL(theFile.files[0]);
+            }
+            else {
+                alert("請選取一個二進位檔");
+            }
+        }
+    </script>
+    
 </body>
+
+<% 
+  java.sql.Timestamp arti_Time = null;
+  try {
+	  arti_Time = adVO.getAd_Start();
+   } catch (Exception e) {
+	  arti_Time = new java.sql.Timestamp(System.currentTimeMillis());
+   }
+%>
+
+<script>
+        $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: '<%=arti_Time%>', // value:   new Date(),
+        });
+</script>
 </html>

@@ -324,11 +324,11 @@ System.out.println("AD-Server-555");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs",errorMsgs);
 			String requestURL = req.getParameter("requestURL");
-			
-			try{
+System.out.println("AD-Server-111");
+//			try{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
 				String ad_No = req.getParameter("ad_No").trim();
-				
+System.out.println("AD-Server-222");
 				byte[] ad_Pic = null;
 				try{
 					Part photo = req.getPart("ad_Pic");
@@ -339,20 +339,20 @@ System.out.println("AD-Server-555");
 				} catch (FileNotFoundException fe){
 					fe.printStackTrace();
 				}
-				
-				String ad_Desc = req.getParameter("Desc_No").trim();
+System.out.println("AD-Server-333");
+				String ad_Desc = req.getParameter("ad_Desc").trim();
 				
 				if (ad_Desc == null||ad_Desc.trim().length()==0){
 					errorMsgs.add(" 回覆內容敘述請勿空白 ");
 				}
-				
+System.out.println("AD-Server-444");
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp ad_Start = nowTime;
 				Timestamp ad_End = new Timestamp(System.currentTimeMillis()+60*60*24*30*1000);
 				
-				String ad_Fty_No = req.getParameter("arti_Fty_No").trim();			
-				String ad_Fty_Name = req.getParameter("arti_Fty_Name").trim();
-				
+				String ad_Fty_No = req.getParameter("ad_Fty_No").trim();			
+				String ad_Fty_Name = req.getParameter("ad_Fty_Name").trim();
+System.out.println("AD-Server-555");
 				AdVO adVO = new AdVO();				
 				adVO.setAd_No(ad_No);
 				adVO.setAd_Pic(ad_Pic);
@@ -361,31 +361,32 @@ System.out.println("AD-Server-555");
 //				adVO.setAd_End(ad_End);
 				adVO.setAd_Fty_No(ad_Fty_No);
 				adVO.setAd_Fty_Name (ad_Fty_Name);
-
+System.out.println("AD-Server-666");
 				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("adVO", adVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/ad/addAd.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/ad/addAd.jsp");
 					failureView.forward(req, res);
 					return;
 				}
-				
+System.out.println("AD-Server-777");
 				/***************************2.開始新增資料***************************************/
 				AdService adSvc = new AdService();
 				adVO = adSvc.updateAd(ad_No,ad_Pic,ad_Desc,ad_Start,ad_End,ad_Fty_No,ad_Fty_Name);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("adVo", adVO);
-				String url = "/backdesk/ad/listAllAd.jsp";
+				String url = "/backdesk/ad/listAllAd_back.jsp";
+System.out.println("AD-Server-888");
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
-				
+System.out.println("AD-Server-999");
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/ad/addAd.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/ad/addAd.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		/******[ 刪除 ]******/

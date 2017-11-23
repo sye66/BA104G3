@@ -43,12 +43,12 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-
-
-
- ${artiFormVO.mem_No}
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" name="form1" enctype="multipart/form-data">
