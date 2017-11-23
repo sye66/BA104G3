@@ -80,7 +80,7 @@
 						<tbody>
 						<%@ include file="page1.file" %> 
 						<c:forEach var="proOrder" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-							<c:if test="${proOrder.ord_Shipinfo!='已取消' }">
+<%-- 							<c:if test="${proOrder.ord_Shipinfo!='已取消' }"> --%>
 							<tr>
 								<td>${proOrder.ord_No } </td>
 								<td>${proOrder.ord_Consignee }</td>
@@ -108,7 +108,7 @@
 									</form></div>
 								</td>
 								
-								<c:if test="${proOrder.ord_Shipinfo=='已出貨'}">
+								<c:if test="${proOrder.ord_Shipinfo=='已出貨'||proOrder.ord_Shipinfo=='已取消'}">
 								<td>
 								
 <%-- 								<button type="submit" class="btn btn-danger disabled"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button> --%>
@@ -123,14 +123,14 @@
               							<input type="hidden" name="action"  value="updateProOrderUp">
               							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
-<%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
+              							<input type="hidden" name="ord_Shipinfo" value="已取消">
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
              							<button type="submit" class="btn btn-danger" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button>
           								</form></div>
        								 </td>
 								</c:if>
 							</tr>
-							</c:if>
+<%-- 							</c:if> --%>
 						
 						</c:forEach>
 						
