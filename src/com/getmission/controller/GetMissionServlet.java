@@ -161,7 +161,7 @@ public class GetMissionServlet extends HttpServlet {
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
 			
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
+			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No()) ) {
 
 				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
