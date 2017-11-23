@@ -4,19 +4,25 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
 import java.sql.Date;
+import java.sql.Time;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
 
 import com.accusecase.model.*;
-import com.casecandidate.model.CaseCandidateService;
+import com.casecandidate.model.*;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
 import com.getmission.model.*;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+
+import sun.util.resources.cldr.aa.CalendarData_aa_ER;
 
 public class GetMissionServlet extends HttpServlet {
 
@@ -160,7 +166,7 @@ public class GetMissionServlet extends HttpServlet {
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
 			
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
+			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No()) ) {
 
 				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
@@ -230,7 +236,7 @@ public class GetMissionServlet extends HttpServlet {
 
 		}
 
-		if ("checkmem".equals(action)) { // 來自getmission.jsp 或
+		if ("chosemem".equals(action)) { // 來自getmission.jsp 或
 											// mission_Detail的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -247,7 +253,7 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher("/frontdesk/casecandidate/casecandidate.jsp");
 				failureView.forward(req, res);
 			
 				return;
@@ -256,7 +262,11 @@ public class GetMissionServlet extends HttpServlet {
 			String takecase_Mem_No = (String) req.getParameter("takecase_Mem_No").trim();
 			String mission_No = (String) req.getParameter("mission_No").trim();
 			GetMissionVO getMissionVO = new GetMissionVO();
+			GetMissionService getMissionSvc = new GetMissionService();
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			AccuseCaseService accuseCaseService = new AccuseCaseService();
+			List<AccuseCaseVO> accuseCaseList = accuseCaseService.getCaseBymission(mission_No);
+			
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -266,13 +276,16 @@ public class GetMissionServlet extends HttpServlet {
 			long now = System.currentTimeMillis();
 			java.sql.Timestamp timeStamp = new Timestamp(now);
 			long endTime = now + 1000 * 60 * 60 * 24 * 5L;
-			java.sql.Timestamp mission_Start_Time = new java.sql.Timestamp(timeStamp.getTime());
-			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(new Timestamp(endTime).getTime());
-			Integer mission_State = null;
+			java.sql.Timestamp mission_Start_Time = timeStamp;
+			java.sql.Timestamp mission_End_Time = new java.sql.Timestamp(endTime);
+			Integer mission_State = getMissionVO.getMission_State();
 			if (getMissionVO.getMission_State() == 2 || getMissionVO.getMission_State() == 72) {
 				mission_State = 3;
+				for(AccuseCaseVO  accuseCaseVO:accuseCaseList){
+					accuseCaseService.deleteAccuseCase(accuseCaseVO.getAccuse_No());
+				}
+				
 			}
-
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -280,11 +293,10 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			/*************************** 2.開始修改資料 *****************************************/
-			GetMissionService getMissionSvc = new GetMissionService();
 			getMissionVO = getMissionSvc.updateOneMission(mission_No, takecase_Mem_No, mission_Start_Time,
 					mission_End_Time, mission_State);
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			/***************************
 			 * 3.修改完成,準備轉交(Send the Success view)
 			 *************/
@@ -609,39 +621,34 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 				failureView.forward(req, res);
 			
 				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
-			Integer mission_State = new Integer(req.getParameter("mission_State").trim());
-
-			GetMissionVO getMissionVO = new GetMissionVO();
+			String takecase_Mem_No = req.getParameter("takecase_Mem_No").trim();
 			GetMissionService getMissionSvc = new GetMissionService();
-			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
+			GetMissionVO getMissionVO = new GetMissionVO();
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
+			Integer mission_State = getMissionVO.getMission_State(); //此任務的狀態
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No()) ) {
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
-
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
-					if (mission_State == 3 || mission_State == 73) {
-						if (mission_State == 3) {
-							getMissionVO.setMission_State(4);
-						} else {
-							getMissionVO.setMission_State(74);
-						}
+				if (getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No().equals(takecase_Mem_No) ) {
+					if (mission_State == 3 ) {
+						getMissionVO.setMission_State(4);
 						getMissionVO.setMission_No(mission_No);
-					} else if (mission_State == 6) {
+					} else if (mission_State == 9) {
 						errorMsgs.add("此任務已失效");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return;
 					} else {
 						errorMsgs.add("此任務已結案");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return;
 					}
@@ -650,7 +657,7 @@ public class GetMissionServlet extends HttpServlet {
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return; // 程式中斷
 					}
@@ -658,10 +665,10 @@ public class GetMissionServlet extends HttpServlet {
 					/*************************** 2.開始修改資料 *****************************************/
 
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
-
+System.out.println(getMissionVO.getMission_State());
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/casecandidate/casecandidate.do");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 
@@ -674,16 +681,16 @@ public class GetMissionServlet extends HttpServlet {
 					// failureView.forward(req, res);
 					// }
 				} else {
-					errorMsgs.add("請不要重覆接取相同任務~");
+					errorMsgs.add("哎~接案者不太對喔");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+							.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 			} else {
-				errorMsgs.add("不能接自己的任務喔~");
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				errorMsgs.add("不能玩別人的任務喔~");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk//mission/issuerfinalstep.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -713,40 +720,38 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			
 				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
-			Integer mission_State = new Integer(req.getParameter("mission_State").trim());
-
 			GetMissionVO getMissionVO = new GetMissionVO();
 			GetMissionService getMissionSvc = new GetMissionService();
-			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
+			Integer mission_State = getMissionSvc.getOneMission(mission_No).getMission_State();
+
 			MemService memSvc = new MemService();
-			double mem_Point = memVO.getMem_Point();
-			double mission_Pay = getMissionVO.getMission_Pay();
-			int now = (int) (mem_Point + mission_Pay);
 			String takecase_Mem_No = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
+			double takecasemem_Point = memSvc.getOneMem(takecase_Mem_No).getMem_Point();
+			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay();
+			int now = (int) (takecasemem_Point + mission_Pay);
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
-
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
-					if (mission_State == 4 || mission_State == 74) {
+				if (getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No().equals(takecase_Mem_No)) {
+					if (mission_State == 4 ) {
 						getMissionVO.setMission_State(5);
 						getMissionVO.setMission_No(mission_No);
 					} else if (mission_State == 6) {
 						errorMsgs.add("此任務已失效");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return;
 					} else {
 						errorMsgs.add("此任務已結案");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return;
 					}
@@ -755,7 +760,7 @@ public class GetMissionServlet extends HttpServlet {
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return; // 程式中斷
 					}
@@ -766,7 +771,7 @@ public class GetMissionServlet extends HttpServlet {
 					memVO = memSvc.updateMemPoint(takecase_Mem_No, now);
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/mission/mission_finalsuccess.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/mission_finalsuccess.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 
@@ -781,14 +786,14 @@ public class GetMissionServlet extends HttpServlet {
 				} else {
 					errorMsgs.add("請不要重覆接取相同任務~");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+							.getRequestDispatcher(requestURL);
 					failureView.forward(req, res);
 					return;
 				}
 
 			} else {
-				errorMsgs.add("不能接自己的任務喔~");
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				errorMsgs.add("不能處理自己的任務喔~");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 				return;
 			}
@@ -813,13 +818,13 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mission_No = (String ) req.getSession().getAttribute("mission_No");
+			String mission_No = (String ) req.getParameter("mission_No");
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			
 				return;
@@ -827,22 +832,23 @@ public class GetMissionServlet extends HttpServlet {
 			
 			MemService memSvc = new MemService();
 			GetMissionService getMissionSvc = new GetMissionService();
-			String to = "burnerzx@gmail.com";
+			String to = memVO.getMem_Email();
 		      
-		    String subject = "任務完成通知";
+		    String subject = "任務完成通知";//傳 mail
 		      
-		    String issuer_Name = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No()).getMem_Id();
-		    String mem_Id = memSvc.getOneMem(memVO.getMem_No()).getMem_Id();
-		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, " +mem_Id+
-		    					 "/n 已經完成囉~請快快去查驗吧~"; 
+		    String issuer_Name = memVO.getMem_Id();
+		    String takecase_Mem_No = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No()).getMem_Id();
+		    String mission_Name = getMissionSvc.getOneMission(mission_No).getMission_Name();
+		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, ["+mission_Name +"]~ \n" +takecase_Mem_No+
+		    					 " 已經完成囉~請快快去查驗吧~"; 
 		    
 
 			GetMissionVO getMissionVO = new GetMissionVO();
-
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -851,8 +857,9 @@ public class GetMissionServlet extends HttpServlet {
 			MailService mailService = new MailService();
 		    mailService.sendMail(to, subject, messageText);
 			req.setAttribute("memVO", memVO);
-
-			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmissionlogin.jsp");
+			req.setAttribute("getMissionVO", getMissionVO);
+			req.setAttribute("mailService", mailService);
+			RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 			failureView.forward(req, res);
 			return; // 程式中斷
 
@@ -953,7 +960,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務模式
 				Integer mission_Pattern = 2;
 				// 任務積分報酬
-				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				Double mission_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
 				// GPS-LAT
 				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
 				// GPS-LNG
@@ -963,7 +970,7 @@ public class GetMissionServlet extends HttpServlet {
 				Date date = new Date(System.currentTimeMillis());
 				
 				/**********驗證開始**********/
-				if (misssion_Pay != 50.00) {
+				if (mission_Pay != 50.00) {
 					errorMsg.add("HTML的READONLY就是叫你不要改啦");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
@@ -972,29 +979,38 @@ public class GetMissionServlet extends HttpServlet {
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
 					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
-				// 日期驗證 - 格式
-				try {
-					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
-				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsg.add("日期格式不對!");
-				}
-				// 日期驗證 - 值
-				if (date.after(mission_Due_Time)) {
-					errorMsg.add("你是要工具人做時光機逆");
-				}
 				// 錯誤訊息傳回
 				if (!errorMsg.isEmpty()) {
+					for (String string : errorMsg) {
+						System.out.println(string);
+					}
 					req.setAttribute("getMissionVO", getMissionVO);
 					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 					inputError.forward(req, res);
 					return;
 				}
-				
+				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+				MemService memService = new MemService();
+				MemVO memVO = memService.getOneMem(issuer_Mem_No);
+				if (memVO.getMem_Point() < mission_Pay) {
+					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					NotEnoughPoint.forward(req, res);
+				}
 				/**********準備寫入與轉向**********/
-
+				// 任務截止時間加工
+				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
+				Calendar calendar = Calendar.getInstance();
+				//以現在的時間點創建(任務建立時間點)
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				//加五天
+				calendar.add(calendar.DAY_OF_MONTH, 5);
+				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
+				System.out.println(mission_Due_Time);
+				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
@@ -1036,17 +1052,17 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務模式
 				Integer mission_Pattern = 1;
 				// 任務積分報酬
-				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				Double mission_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
 				// GPS-LAT
 				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
 				// GPS-LNG
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
-				Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
+				System.out.println(mission_Pay);
 				
 				/**********驗證開始**********/
-				if (misssion_Pay < 50.00) {
+				if (mission_Pay < 50.00) {
 					errorMsg.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
@@ -1055,32 +1071,41 @@ public class GetMissionServlet extends HttpServlet {
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
 					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
-				// 日期驗證 - 格式
-				try {
-					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
-				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsg.add("日期格式不對!");
-				}
-				// 日期驗證 - 值
-				if (date.after(mission_Due_Time)) {
-					errorMsg.add("你是要工具人做時光機逆");
-				}
+
 				// 錯誤訊息傳回
 				if (!errorMsg.isEmpty()) {
 					for (String string : errorMsg) {
 						System.out.println(errorMsg);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
-					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 					inputError.forward(req, res);
 					return;
 				}
 				
-				/**********準備寫入與轉向**********/
+				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+				MemService memService = new MemService();
+				MemVO memVO = memService.getOneMem(issuer_Mem_No);
+				if (memVO.getMem_Point() < mission_Pay) {
+					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					NotEnoughPoint.forward(req, res);
+				}
 
+				/**********準備寫入與轉向**********/
+				// 任務截止時間加工
+				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
+				Calendar calendar = Calendar.getInstance();
+				//以現在的時間點創建(任務建立時間點)
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				//加五天
+				calendar.add(calendar.DAY_OF_MONTH, 5);
+				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
+				System.out.println(mission_Due_Time);
+				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
@@ -1088,7 +1113,7 @@ public class GetMissionServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsg.add(e.getMessage());
 				System.out.println(e.getMessage());
-				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
 			}
 			

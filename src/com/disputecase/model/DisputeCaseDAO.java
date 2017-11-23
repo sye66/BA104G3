@@ -1,6 +1,7 @@
 package com.disputecase.model;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +44,7 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
 	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
 	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
+	private static final String GET_COUNT_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS = ?";
 
 	private static DataSource ds = null;
 	static {
@@ -445,6 +447,43 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 			}
 		}
 		return listDisputeCaseMem;
+	}
+
+	
+	@Override
+	public Integer getCountByStatus(Integer dispute_Case_Status) {
+		Integer totalCount = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			System.out.println("---------------------------------------");
+			con = ds.getConnection();			
+			pstmt = con.prepareStatement(GET_COUNT_BY_STATUS);
+			pstmt.setInt(1, dispute_Case_Status);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				totalCount += 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {					
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalCount;
 	}
 
 

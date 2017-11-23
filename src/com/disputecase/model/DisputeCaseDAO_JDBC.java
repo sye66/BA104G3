@@ -9,6 +9,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.infinispan.loaders.modifications.Prepare;
+
+import com.sun.crypto.provider.RSACipher;
+
 public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 	private static final String DRIVER = "oracle.jdbc.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -45,6 +49,7 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 	private static final String GET_CASE_BY_MEM = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_MEM_NO =?";
 	private static final String GET_CASE_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS =?";
 	private static final String GET_CASE_BY_STATUS_EMP = "SELECT * FROM DISPUTE_CASE WHERE (DISPUTE_CASE_STATUS =? AND EMP_NO=?)";
+	private static final String GET_COUNT_BY_STATUS = "SELECT * FROM DISPUTE_CASE WHERE DISPUTE_CASE_STATUS = ?";
 
 	@Override
 	public void insert(DisputeCaseVO disputeCaseVO) {
@@ -478,34 +483,71 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 		return listDisputeCaseMem;
 	}
 
+	@Override
+	public Integer getCountByStatus(Integer dispute_Case_Status) {
+		Integer totalCount = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			Class.forName(DRIVER);
+			con = DriverManager.getConnection(URL, USR, PSW);
+			pstmt = con.prepareStatement(GET_COUNT_BY_STATUS);
+			pstmt.setInt(1, dispute_Case_Status);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				totalCount += 1;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {					
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return totalCount;
+	}
 	
 	public static void main(String[] args) {
 		DisputeCaseDAO_interface dao = new DisputeCaseDAO_JDBC();
-		DisputeCaseVO insertDisputeCase = new DisputeCaseVO();
-		DisputeCaseVO updateDisputeCase = new DisputeCaseVO();
-		DisputeCaseVO getOneDisputeCase = new DisputeCaseVO();
-		List<DisputeCaseVO> getAllDisputeCase = new ArrayList<>();
-		java.util.Date date = new java.util.Date();
-		Timestamp timestamp = new Timestamp(date.getTime());
-		
-		insertDisputeCase.setMission_No("MISSION000000022");
-		insertDisputeCase.setDispute_Mem_No("M000011");
-		insertDisputeCase.setEmp_No("E000009");
-		insertDisputeCase.setIssue_Datetime(timestamp);
-		insertDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:11.000000001"));
-		insertDisputeCase.setDispute_Case_Status(1);
-		dao.insert(insertDisputeCase);
-		
-		updateDisputeCase.setDispute_Case_No("DIS000005");
-		updateDisputeCase.setMission_No("MISSION000000028");
-		updateDisputeCase.setDispute_Mem_No("M000008");
-		updateDisputeCase.setIssue_Datetime(timestamp);
-		updateDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
-		updateDisputeCase.setDispute_Case_Status(2);
+//		DisputeCaseVO insertDisputeCase = new DisputeCaseVO();
+//		DisputeCaseVO updateDisputeCase = new DisputeCaseVO();
+//		DisputeCaseVO getOneDisputeCase = new DisputeCaseVO();
+//		List<DisputeCaseVO> getAllDisputeCase = new ArrayList<>();
+//		java.util.Date date = new java.util.Date();
+//		Timestamp timestamp = new Timestamp(date.getTime());
+//		
+//		insertDisputeCase.setMission_No("MISSION000000022");
+//		insertDisputeCase.setDispute_Mem_No("M000011");
+//		insertDisputeCase.setEmp_No("E000009");
+//		insertDisputeCase.setIssue_Datetime(timestamp);
+//		insertDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:11.000000001"));
+//		insertDisputeCase.setDispute_Case_Status(1);
+//		dao.insert(insertDisputeCase);
+//		
+//		updateDisputeCase.setDispute_Case_No("DIS000005");
+//		updateDisputeCase.setMission_No("MISSION000000028");
+//		updateDisputeCase.setDispute_Mem_No("M000008");
+//		updateDisputeCase.setIssue_Datetime(timestamp);
+//		updateDisputeCase.setClose_Datetime(Timestamp.valueOf("2017-11-30 11:11:30.000000001"));
+//		updateDisputeCase.setDispute_Case_Status(2);
 //		updateDisputeCase.setDispute_Content("1");
 //		updateDisputeCase.setDispute_Attachment(null);
 //		updateDisputeCase.setDispute_Reply("3");
-		dao.update(updateDisputeCase);
+//		dao.update(updateDisputeCase);
 //		
 //		dao.delete("DIS000003");
 //		
@@ -524,7 +566,10 @@ public class DisputeCaseDAO_JDBC implements DisputeCaseDAO_interface{
 //			System.out.println(disputeCaseVO.getEmp_No());
 //		}
 		
-		
+		Integer i = dao.getCountByStatus(1);
+		System.out.println(i);
 	}
+
+
 
 }

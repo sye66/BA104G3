@@ -1,9 +1,11 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.disputecase.model.DisputeCaseVO"%>
 <%@page import="com.disputecase.model.DisputeCaseService"%>
 <%@page import="java.util.*"%>
 <%@page import="com.getmission.model.*"%>
 <%@page import="com.getmission.controller.*"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.getmission.model.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
 GetMissionService getMissionService = new GetMissionService();
@@ -11,6 +13,7 @@ DisputeCaseService disputeCaseService = new DisputeCaseService();
 List<GetMissionVO> listUserMissionPending = getMissionService.findByMem("M000002",1);
 List<GetMissionVO> listUserMission = getMissionService.findByMem("M000002",1);
 List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem("M000011");
+SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 %>
 <!DOCTYPE html>
 <html>
@@ -154,7 +157,7 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 						        		<tr>
 						        			<td><p><%=getMissionVO.getMission_No() %></p></td>
 						        			<td><p><%=getMissionVO.getMission_Name() %></p></td>
-						        			<td><p><%=getMissionVO.getMission_Release_Time() %></p></td>
+						        			<td><p><%=simpleDateFormat.format(getMissionVO.getMission_Release_Time())%></p></td>
 						        		</tr>
 						        		<%}%>
 						        	</tbody>
@@ -171,8 +174,8 @@ List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-					<div class="css_issuemissionbutton">一般任務</div>
-					<div class="">緊急任務</div>
+					<a href="issuemission_normalmission.jsp"><div class="css_issuemissionbutton">一般任務</div></a>
+					<a href="issuemission_emergencymission.jsp"><div class="css_issuemissionbutton">緊急任務</div></a>
 				</div>
 			</div>
 		</div>

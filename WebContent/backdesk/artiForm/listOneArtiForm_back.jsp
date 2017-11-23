@@ -107,7 +107,7 @@ div {
                                     </div>
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
-                        <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                        <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                     </div>
                                     </div>

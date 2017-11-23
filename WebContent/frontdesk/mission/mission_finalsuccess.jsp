@@ -23,8 +23,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/getmission/getmissionlogin.jsp"> </span> 
-<span style="font-size:24px;">3秒之後自動跳轉到首頁</span> 
+<span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp"> </span> 
+<span style="font-size:24px;">3秒之後自動跳轉到首頁</span> 															
 <title>
 	<c:if test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">，恭喜結案 ! 可喜可賀可喜可賀 </c:if>
 	
@@ -47,9 +47,9 @@ img #show {heigth:100%}
 	</script>
 </c:if>
 
-memVO.mem_Id = ${memSvc.getOneMem(mem_No).mem_Id}
+memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
 
-
+<div>3秒之後自動跳轉到首頁</div>
 
 
 

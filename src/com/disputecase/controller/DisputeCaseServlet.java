@@ -2,6 +2,7 @@ package com.disputecase.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Authenticator.RequestorType;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.LinkedList;
@@ -25,16 +26,20 @@ import com.mem.model.MemVO;
 
 
 
-
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
-
-
-
 public class DisputeCaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	//FrontDesk
+	private static final String ISSUE_CASE 			= "/frontdesk/disputeCase/issueDisputeCase.jsp";
+    private static final String ISSUE_CASE_SUCCESS 	= "/frontdesk/disputeCase/issueSuccess.jsp";
+    private static final String ISSUE_CASE_FAILED 	= "/frontdesk/disputeCase/issueDisputeCaseFail.jsp";
+    //BackDesk
+    private static final String CASE_MANAGE 	= "/backdesk/disputeCase/disputecase_Manage.jsp";
+    private static final String GET_RESULT 		= "/backdesk/disputecase/disputecase_Result.jsp";
+    private static final String CASE_REPLY		= "/backdesk/disputecase/disputecase_Reply.jsp";
+    private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_ReplySent.jsp";
+	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -42,12 +47,59 @@ public class DisputeCaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-	
+		DisputeCaseService disputeCaseService = new DisputeCaseService();
+		
+		/**
+		 * @author
+		 * @hidden search_Dispute_Case
+		 * 查詢爭議案件
+		 */
+		if ("get_One_Dispute_Case".equals(action)) {
+			List<String> errorMsg = new LinkedList<>();
+			request.setAttribute("errorMsg", errorMsg);
+			try {
+				/********** 接收請求參數 - 文字 **********/
+				String dispute_Case_No = request.getParameter("dispute_Case_No");
+				DisputeCaseVO disputeCaseVO  = disputeCaseService.getOneDisputeCase(dispute_Case_No);
+				
+				System.out.println(dispute_Case_No);				
+				/**********錯誤驗證與處理**********/
+				if (dispute_Case_No == null||(dispute_Case_No.trim()).length() == 0) {
+					errorMsg.add("請輸入案件編號");
+				}
+				if (disputeCaseVO == null) {
+					errorMsg.add("無此案件!");
+					RequestDispatcher failview = request.getRequestDispatcher(CASE_MANAGE);
+					failview.forward(request, response);
+				}
+				if (disputeCaseVO.getDispute_Case_Status() != 1) {
+					RequestDispatcher notAvailable = request.getRequestDispatcher(ISSUE_CASE_FAILED);
+					notAvailable.forward(request, response);
+				}
+				if (!errorMsg.isEmpty()) {
+					RequestDispatcher failview = request.getRequestDispatcher(CASE_MANAGE);
+					for (String string : errorMsg) {
+						System.out.println(string);
+					}
+					failview.forward(request, response);
+				}
+				
+				/**********準備寫入與轉向**********/
+				
+				request.setAttribute("disputeCaseVO", disputeCaseVO);
+				RequestDispatcher successView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Result.jsp");
+				successView.forward(request, response);
+			} catch (Exception e) {
+				errorMsg.add(e.getMessage());
+				RequestDispatcher failview = request.getRequestDispatcher(CASE_MANAGE);
+				failview.forward(request, response);
+			}
+		}
 		
 		/**
 		 * @author Sander
 		 * @hidden issue_Dispute_Case
-		 * 只需驗證爭議案件內容不為空即可，圖片可為空值
+		 * 驗證爭議案件內容不為空，圖片可為空值
 		 */
 		
 		if ("issue_Dispute_Case".equals(action)) {
@@ -70,13 +122,12 @@ public class DisputeCaseServlet extends HttpServlet {
 				}
 				
 				/**********錯誤驗證與處理**********/
-				
 				if (disputeContent == null && (disputeContent.trim()).length() == 0) {
-					errorMsg.add("輸入錯誤");
+					errorMsg.add("請輸入內文");
 					System.out.println("輸入錯誤");
 				}
 				if (!errorMsg.isEmpty()) {
-					RequestDispatcher failureView = request.getRequestDispatcher("/frontdesk/disputeCase/issueDisputeCase.jsp");
+					RequestDispatcher failureView = request.getRequestDispatcher(ISSUE_CASE);
 					failureView.forward(request, response);
 					System.out.println("轉向");
 					return; // Program interrupt.
@@ -90,15 +141,14 @@ public class DisputeCaseServlet extends HttpServlet {
 				disputeCaseVO.setDispute_Attachment(byteArrPic);
 				Date date = new Date();
 				Timestamp timestamp = new Timestamp(date.getTime());
-				DisputeCaseService disputeCaseService = new DisputeCaseService();
-				// TODO 新增爭議案件要有會員的SESSION
+								// TODO 新增爭議案件要有會員的SESSION
 				disputeCaseService.addDisputeCase(null, "MISSION000000027", "M000007", null, timestamp, null, 1, disputeContent, byteArrPic, null);
 				System.out.println("新增爭議案件: "); // TODO 在console加上爭議案件編號
-				RequestDispatcher issueDoneView = request.getRequestDispatcher("/frontdesk/disputeCase/issueSuccess.jsp");
+				RequestDispatcher issueDoneView = request.getRequestDispatcher(ISSUE_CASE_SUCCESS);
 				issueDoneView.forward(request, response);
 			} catch (Exception e) {
 				errorMsg.add("無法取得資料" + e.getMessage());
-				RequestDispatcher failureView = request.getRequestDispatcher("/frontdesk/disputeCase/issueDisputeCase.jsp");
+				RequestDispatcher failureView = request.getRequestDispatcher(ISSUE_CASE);
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}
@@ -127,13 +177,14 @@ public class DisputeCaseServlet extends HttpServlet {
 				
 				/**********錯誤驗證與處理**********/
 				
-				// 無錯誤驗證，直接抓出原本VO開始寫入值
+				if (disputeCaseNo == null||(disputeCaseNo.trim()).length() == 0) {
+					errorMsg.add("請輸入案件編號");
+				}
 				
 				/**********準備寫入與轉向**********/
 				
 				// 抓原本VO出來
 				
-				DisputeCaseService disputeCaseService = new DisputeCaseService();
 				DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(disputeCaseNo);
 				
 				// 1. 寫入回覆存入資料庫
@@ -162,17 +213,22 @@ public class DisputeCaseServlet extends HttpServlet {
 				}
 				MemService memService = new MemService();
 				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getIssuer_Mem_No(),mission_Pay);
-				RequestDispatcher ReplyDoneView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp");
+				RequestDispatcher ReplyDoneView = request.getRequestDispatcher(CASE_REPLY_SENT);
 				ReplyDoneView.forward(request, response);
 			} catch (Exception e) {
 				errorMsg.add("無法取得資料" + e.getMessage());
 				// TODO ADD DISPATCH PAGE
-				RequestDispatcher failureView = request.getRequestDispatcher("/backdesk/disputecase/disputecase_Success.jsp"); 
+				RequestDispatcher failureView = request.getRequestDispatcher(CASE_REPLY); 
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}
 		}
 		
+		/**
+		 * @author Sander
+		 * @hidden delete_Dispute_Case
+		 * 刪除案件，只要呼叫service就可以 
+		 */
 		if ("delete_Dispute_Case".equals(action)) {
 			List<String> errorMsg = new LinkedList<>();
 			request.setAttribute("errorMsg", errorMsg);
@@ -183,19 +239,20 @@ public class DisputeCaseServlet extends HttpServlet {
 				
 				/**********錯誤驗證與處理**********/
 				
-				// 無錯誤驗證，直接刪除
+				if (disputeCaseNo == null||(disputeCaseNo.trim()).length() == 0) {
+					errorMsg.add("請輸入案件編號");
+				}
 				
 				/**********準備寫入與轉向**********/
 
-				DisputeCaseService disputeCaseService = new DisputeCaseService();
 				disputeCaseService.deleteDisputeCase(disputeCaseNo);
 				System.out.println("刪除爭議案件: " + disputeCaseNo);
-				RequestDispatcher issueDoneView = request.getRequestDispatcher("/backdesk/disputeCase/disputecase_manage.jsp");
+				RequestDispatcher issueDoneView = request.getRequestDispatcher(CASE_MANAGE);
 				issueDoneView.forward(request, response);
 			} catch (Exception e) {
 				errorMsg.add("無法取得資料" + e.getMessage());
 				// TODO ADD DISPATCH PAGE
-				RequestDispatcher failureView = request.getRequestDispatcher("/backdesk/disputeCase/disputecase_manage.jsp"); 
+				RequestDispatcher failureView = request.getRequestDispatcher(CASE_MANAGE); 
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}

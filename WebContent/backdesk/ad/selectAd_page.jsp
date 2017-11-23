@@ -80,7 +80,7 @@
 </c:if>
 
 <div class="widgetbox">
-        <div class="title"><h3>討論區廣告查詢 : <a href="/BA104G3/backdesk/ad/listAllAd.jsp">List</a> all AD.
+        <div class="title"><h3>討論區廣告查詢 : <a href="/BA104G3/backdesk/ad/listAllAd_back.jsp">List</a> all AD.
          /                 <a href="/BA104G3/backdesk/ad/addAd.jsp">Add</a> a new AD.</h3><br/>
         </div>
                  <div class="widgetcontent userlistwidget nopadding">
@@ -90,7 +90,7 @@
                              <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
                                   <div class="info">
                                   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
-                                  <b> 請輸入廣告編號 (如 AD0007001):</b>
+                                  <b> 請輸入廣告編號 (如 AD00000001):</b>
                                   <input type="text" name="ad_No">
                                   <button class="btn btn-primary" type="submit" name="action" value="getOneAd_For_Display"> 送出查詢 </button>
                                   </FORM>
@@ -103,13 +103,12 @@
                                  
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do " enctype="multipart/form-data">
                                 <b>選擇廣告商名稱 :</b>
-                                <select size="1" name="ad_No">
-                                
-                                <c:forEach var="adVO" items="${adSvc.all}" > 
-                                <option value="${adVO.adNo}">${adVO.ad_Fty_No}
+                                <select size="1" name="ad_Fty_No">
+                                <c:forEach var="adVO" items="${adSvc.allAd}" > 
+                                <option value="${adVO.ad_Fty_No}">${adVO.ad_Fty_Name}
                                 </c:forEach>
- 
                                 </select>
+                                <input type="hidden" name="ad_Fty_No">
                                <button class="btn btn-primary" type="submit" name="action" value="listAd_ByFtyNo"> 送出查詢 </button>
                                </FORM>
                                 </div><!--info-->

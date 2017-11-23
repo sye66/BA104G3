@@ -45,7 +45,6 @@
 	</td></tr>
 </table>
 <br>
-----------------------------------------------------
 <%-- ${adSvc1.allAd}  here!!!! --%>
 <%-- ${adSvc.getAllAd(adVO.ad_No)} --%>
 
@@ -96,81 +95,14 @@
 		    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
 		    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
+<hr>
+<br>
 
 
 
-
-	<div class="col-xs-12 col-sm-11 widget-container-span">
-                <div class="widget-box">
-                    <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter"> ${adVO.ad_No} </h5>
-                        <div class="widget-toolbar">
-                            <div class="" style="width:100px;">
-                            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                            <div class="" style="">${adVO.ad_Desc}</div>
-                            </div>
-                        </div>
-                        <div class="widget-toolbar">
-                            <div class="" style="width:100px;">
-                                <div class="" style="">${adVO.ad_Star}</div>
-                            </div>
-                        </div>
-                        <div class="widget-toolbar">
-                            <div class="" style="width:100px;">
-                                <div class="" style="">${adVO.ad_End}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="widget-body">
-                        <div class="widget-toolbox">
-                            <div class="btn-toolbar">
-                                <div class="btn-group">
-                                    <div class="widget-toolbar">
-                                    <div class="widget-main padding-6">
-                                            <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
-	                     style="height:100px;width:120px;"/>
-    </div>
-                                    </div>
-                                    </div>
-                                    <div class="widget-toolbar">
-                                    <div class="widget-main padding-6">
-                                        <i class="icon-remove bigger-110"></i>
-                                        <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService" />
-                                        ${adVO.ad_Fty_No}
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="widget-main padding-16">
-                            ${adVO.ad_Fty_Name}
-                        </div>
-                    </div>
-                    <div class="widget-header header-color-dark">
-                        <h5 class="bigger lighter">111111111111111111111111</h5>
-                        <div class="widget-toolbar">
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="reply_No"  value="${adVO.ad_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReply_For_Update">修改回覆</button>
-			                    </FORM>
-                            </div>
-                            </div>
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
-			                    <input type="hidden" name="reply_No"  value="${adVO.ad_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
- 			                    </FORM>  
-                            </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+	
+                    
+                    
                 </div>
                 </div>
   

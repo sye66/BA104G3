@@ -19,8 +19,8 @@
 textarea {
 	outline: none;
 	padding: 0.4em;
-	width: 75%;
-	margin: 1em 4.6em;
+	width: 100%;
+	
 	font-weight: 600;
 	font-size: 16px;
 	border: 1px solid #1186ec;
@@ -40,16 +40,16 @@ textarea {
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/pro/proBackLeft.jsp" flush="true" />
 	
-	<div class="col-xs-12 col-sm-6 col-sm-offset-1">
-	<br>
-	<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">新增商品</li>
-  		</ol>
-	</nav>
-	</div>
+<!-- 	<div class="col-xs-12 col-sm-6 col-sm-offset-1"> -->
+<!-- 	<br> -->
+<!-- 	<nav aria-label="breadcrumb" role="navigation"> -->
+<!--   		<ol class="breadcrumb"> -->
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li> --%>
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li> --%>
+<!--     		<li class="breadcrumb-item active" aria-current="page">新增商品</li> -->
+<!--   		</ol> -->
+<!-- 	</nav> -->
+<!-- 	</div> -->
 <div class="col-xs-12 col-sm-5 col-sm-offset-2">
 		<br>
 		<h1>添加新的商品</h1>

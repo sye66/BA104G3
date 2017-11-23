@@ -14,7 +14,6 @@
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
 
-	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
 <!DOCTYPE html>
@@ -56,55 +55,45 @@
 
 
 			</div>
-			<div class="panel panel-info">
+			<h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前接取所等待任務</h2>
+			<c:forEach var="caseCandidateVO" items="${caseCandidateSvc.getCase(memVO.mem_No)}" varStatus="m" step="1">
+			<div class="panel panel-warning">
 				<div class="panel-heading">
-					<h3 class="panel-title">目前接取所等待任務</h3>
+					<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
+						<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">任務細節</button>
+						<input type="hidden" name="mission_No" value="${caseVO.mission_No}">
+						<input type="hidden" name="requestURL" value="/frontdesk/casecandidate/waitcase.jsp">
+					</form>
+
+					<h3 class="panel-title">${caseCandidateVO.mission_No} 任務>>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_Name } </h3>
 				</div>
 				<div class="panel-body">
 					<table class="table">
-					<tr>
-					<td>${mem_No}</td>
-					<td>---------------${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好</td>
-					</tr>
+					
 						<tr>
-							<td>任務編號</td>
-							<td>任務名</td>
+							
 							<td>發案人編號</td>
 							<td>發案人</td>
 						</tr>
-						<c:forEach var="caseCandidateVO"
-							items="${caseCandidateSvc.getCase(memVO.mem_No)}" varStatus="m"
-							step="1">
+						
 
 							<tr>
-								<td>${caseCandidateVO.mission_No}</td>
-								<td>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_Name }</td>
+								
 								<td>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No }</td>
 								<td>${memSvc.getOneMem(getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No).mem_Id }</td>
-								<td>
-									<div class="panel-body">
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission1">
-											<button class="btn btn-warning" type="submit" name="action"
-												value="mission_Detail">任務細節</button>
-
-											<input type="hidden" name="mission_No"
-												value="${caseCandidateVO.mission_No}"> <input
-												type="hidden" name="requestURL"
-												value="/frontdesk/getmission/getMission.jsp">
-										</form>
-									</div>
-
-								</td>
+								<td><form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
+										<button class="btn-lg btn-success" type="submit" name="action" value="chatting">和他聊天~</button>
+										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
+										</form></td>
 						</tr>
-						</c:forEach>
+						
 					</table>
 				</div>
 
 
 			</div>
-
+</c:forEach>
 </div>
 </div>
 <br><br><br><br><br><br><br><br><br><br><br>

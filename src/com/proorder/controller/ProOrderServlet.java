@@ -185,13 +185,15 @@ System.out.println("session取得的會員編號 "+mem_No);
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
 				/*************************** 1.接收請求參數 ***************************************/
+				String ord_Shipinfo = req.getParameter("ord_Shipinfo");
 				String ord_No = req.getParameter("ord_No");
-				String whichPage = req.getParameter("whichPage");
 				String requestURL = req.getParameter("requestURL");
 				
-				String ord_Shipinfo = "已取消";
+				 
 				java.sql.Date ord_Ship_Date = new java.sql.Date(System.currentTimeMillis());
-System.out.println("訂單取消: "+ord_No);				
+System.out.println("UP訂單: "+ord_No);				
+System.out.println("ord_Shipinfo: "+ord_Shipinfo);				
+System.out.println("ord_Ship_Date: "+ord_Ship_Date);				
 			
 				
 				/*************************** 2.開始修改資料 ***************************************/
@@ -203,10 +205,14 @@ System.out.println("修改完成");
 				/***************************
 				 * 3.刪除完成,準備轉交(Send the Success view)
 				 ***********/
-System.out.println(whichPage);
-System.out.println(requestURL);
 
-				String url = "/pro/proOrderServlet.do?action=getListProOrder";
+				String url = null;
+				 if(requestURL.equals("/BA104G3/backdesk/proOrder/listProOrder_B2.jsp")){
+					url  = "/backdesk/proOrder/listProOrder_B2.jsp";
+				}else{
+					url  = "/pro/proOrderServlet.do?action=getListProOrder";
+				}
+System.out.println("修改完返回 URL: " + url);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

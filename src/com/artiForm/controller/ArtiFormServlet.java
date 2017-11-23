@@ -188,7 +188,7 @@ public class ArtiFormServlet extends HttpServlet {
 //			}
 		}
 		
-		/******[ 依文章編號取出 ]******/
+		/******[ 依會員編號取出 ]******/
 		if ("listArti_ByMemNo".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);

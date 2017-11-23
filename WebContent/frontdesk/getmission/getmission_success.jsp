@@ -39,11 +39,11 @@ img #show {heigth:100%}
  
 <c:if test="${CaseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(mem_No)}">
 	<script type="text/javascript">
-		swal(${memSvc.getOneMem(mem_No).mem_Id}，恭喜接案成功 ! 請等待發案方回復);
+		swal(${memSvc.getOneMem(memVO.mem_No).mem_Id}，恭喜接案成功 ! 請等待發案方回復);
 	</script>
 </c:if>
 
-memVO.mem_Id = ${memSvc.getOneMem(mem_No).mem_Id}
+memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
 
 
 

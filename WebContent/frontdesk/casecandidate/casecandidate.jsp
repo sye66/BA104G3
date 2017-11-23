@@ -14,7 +14,6 @@
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
 
-	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
 <!DOCTYPE html>
@@ -42,7 +41,7 @@
 
 		
 		</div>
-		<div class="col-xs-12 col-sm-8">
+<div class="col-xs-12 col-sm-8">
 <div class="container">
 			<div class="row">
 
@@ -51,36 +50,27 @@
 					name="missiongroup">
 
 					<button class="btn btn-success" type="submit" name="action"
-						value="missiongroup">我的任務管理</button>
+						value="missiongroup"  align="right">我的任務管理</button>
 
 				</form>
 			</div>
 
+<h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前所發佈任務</h2>
+<c:forEach var="caseVO" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="i" step="1">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<h3 class="panel-title">目前所發佈任務</h3>
+				
+				
+				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
+					<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">任務細節</button>
+					<input type="hidden" name="mission_No" value="${caseVO.mission_No}">
+					<input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
+				</form>
+				<h3 class="panel-title">${caseVO.mission_No} 任務 >>>>${getMissionSvc.getOneMission(caseVO.mission_No).mission_Name }</h3>
 			</div>
+			
 			<div class="panel-body">
-				<table class="table">
-				<tr><td>${memVO.mem_No}</td>
-				<td>---------------${memSvc.getOneMem(memVO.mem_No).mem_Name } 你好</td>
-</tr>
-					<tr>
-						<td>任務編號</td>
-						<td>任務名</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<c:forEach var="caseVO"
-						items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="i"
-						step="1">
-
-						<tr>
-							<td>${caseVO.mission_No}</td>
-							<td>${getMissionSvc.getOneMission(caseVO.mission_No).mission_Name }</td>
-							<td></td>
-							<td></td>
-						</tr>
+				<table class="table" >
 
 						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() !=0}">
 
@@ -90,98 +80,75 @@
 
 								<tr>
 
-									<td>接案人編號:${caseCandidateVO.candidate_Mem_No}</td>
-									<td>接案人
-										:${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Name }</td>
+									<td><h3>接案人編號:${caseCandidateVO.candidate_Mem_No}</h3></td>
+									<td><h3>接案人:${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Name }</h3></td>
 									
 									
 									<!-- decide who -->
 
 									<td>
 									<div class="panel-body">
-
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission3">
-											<a href='#modal-id${i.index}-${m.index} ' data-toggle="modal"><button
-													class="btn btn-info" type="submit" name="action" value="checkmem">確認人選</button></a> 
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
+											<a href='#modal-id${i.index}-${m.index} ' data-toggle="modal"><button class="btn-lg btn-info" type="submit" name="action" value="chosemem">確認人選</button></a> 
 													
-													<input type="hidden"
-												name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
-												<input type="hidden"
-												name="mission_No" value="${caseVO.mission_No}">
+											<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
+											<input type="hidden" name="mission_No" value="${caseVO.mission_No}">
 										</form>
 									</div>
-								</td>
+									</td>
 
 								<div class="modal fade" id="modal-id${i.index}-${m.index}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">&times;</button>
 												<h4 class="modal-title">任務編號:${caseVO.mission_No}</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												
 											</div>
 											<div class="modal-body">
 												<h4>任務名稱:</h4>
 												<p>----${getMissionSvc.getOneMission(caseVO.mission_No).mission_Name }</p>
 												<h4>任務種類:</h4>
 												<p>----${getMissionSvc.getOneMission(caseVO.mission_No).mission_Category }</p>
-												<p>${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Id}</p>
+												<p>接案人為>>${memSvc.getOneMem(caseCandidateVO.candidate_Mem_No).mem_Id}</p>
 											</div>
 											<div class="modal-footer">
 
-												<form method="post"
-													action="<%=request.getContextPath()%>/getmission/getmission.do"
-													name="getmission3">
-													<button class="btn btn-warning" type="submit" name="action"
-														value="checkmem">就決定是你了~</button>
-													<input type="hidden" name="takecase_Mem_No"
-														value="${caseCandidateVO.candidate_Mem_No}"> 
-														<input type="hidden" name="mission_No"
-														value="${caseVO.mission_No}"> 
+												<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
+													<button class="btn btn-warning" type="submit" name="action" value="chosemem">就決定是你了~</button>
+													<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+													<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 												</form>
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">關閉</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
 											</div>
 										</div>
 									</div>
 								</div>
-
+								<td>
+									<div class="panel-body">
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
+										<button class="btn-lg btn-success" type="submit" name="action" value="chatting">和他聊天~</button>
+										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
+										</form>
+									</div>
+								</td>
 								</tr>
 							</c:forEach>
 						</c:if>
-						<c:if
-							test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0}">
-
-							<td>目前無人接取</td>
+						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0}">
+							<td><h4>目前無人接取</h4></td>
 							<td></td>
 						</c:if>
-						<tr>
-							<td>
-								<div class="panel-body">
-									<form method="post"
-										action="<%=request.getContextPath()%>/getmission/getmission.do"
-										name="getmission1">
-										<button class="btn btn-warning" type="submit" name="action"
-											value="mission_Detail">任務細節</button>
-
-										<input type="hidden" name="mission_No"
-											value="${caseCandidateVO.mission_No}"> <input
-											type="hidden" name="requestURL"
-											value="/frontdesk/getmission/getMission.jsp">
-									</form>
-								</div>
-
-							</td>
-							
-						</tr>
-					</c:forEach>
+						
+					
 				</table>
 			</div>
 
-</div></div>
-		</div>
+</div>
+</c:forEach>
+</div>
+</div>
 </div>
 <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
