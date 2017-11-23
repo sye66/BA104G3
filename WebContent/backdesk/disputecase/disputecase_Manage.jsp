@@ -26,10 +26,12 @@
 	
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/disputecase/backdeskLeft_DisputeCase.jsp" flush="true" />
+	<div class="container">
 	
+
 	<%-- 列出所有爭議案件 --%>
 	<%-- include的file占了兩col，寫9個別靠到邊界 --%>
-	<div class="col-lg-3 col-md-6">
+	<div class="col-xs-12 col-sm-4">
 	    <div class="panel panel-primary">
 	        <div class="panel-heading">
 	            <div class="row">
@@ -51,7 +53,7 @@
 	        </a>
 	    </div>
 	</div>
-	<div class="col-lg-3 col-md-6">
+	<div class="col-xs-12 col-sm-4">
 	    <div class="panel panel-primary">
 	        <div class="panel-heading">
 	            <div class="row">
@@ -73,7 +75,7 @@
 	        </a>
 	    </div>
 	</div>
-		<div class="col-lg-3 col-md-6">
+	<div class="col-xs-12 col-sm-4">
 	    <div class="panel panel-primary">
 	        <div class="panel-heading">
 	            <div class="row">
@@ -95,7 +97,24 @@
 	        </a>
 	    </div>
 	</div>
-	<div class="col-xs-12 col-sm-9">
+	<div class="col-xs-12 col-sm-12">
+		<div class="row">
+			<h2>單一爭議案件查詢</h2>
+			<form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
+			    <div class="form-group">
+					<div class="col-xs-12 col-sm-10">
+			            <%-- <label for="get_One_Dispute_Case">查詢單一爭議案件</label> --%>
+			            <input type="text" name="dispute_Case_No" id="dispute_Case_No" placeholder="請輸入爭議案件編號" class="form-control">
+			            <input type="hidden" name="action" value="get_One_Dispute_Case">
+			    	</div>
+					<div class="col-xs-12 col-sm-2">
+					    <input type="submit" value="送出查詢" class="btn btn-primary">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12">
         <table class="table table-hover">
             <h2>爭議案件 - 待處理</h2>
             <thead>
@@ -139,6 +158,7 @@
               	
             </tbody>
     	</table>
+	</div>
 	</div>
 </body>
 </html>

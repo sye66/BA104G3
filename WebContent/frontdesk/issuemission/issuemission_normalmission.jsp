@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -31,7 +32,15 @@
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2"></div>
 			</div>
 		</div>
-
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font color='red'>請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">

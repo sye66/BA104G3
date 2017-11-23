@@ -11,4 +11,5 @@ public interface DisputeCaseDAO_interface {
 	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status);
 	public List<DisputeCaseVO> findByStatus(Integer dispute_Case_Status, String emp_No);
 	public List<DisputeCaseVO> getAll();
+	public Integer getCountByStatus(Integer dispute_Case_Status);
 }

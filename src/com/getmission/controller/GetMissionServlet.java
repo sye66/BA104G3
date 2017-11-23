@@ -4,8 +4,11 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
 import java.sql.Date;
+import java.sql.Time;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
@@ -18,6 +21,8 @@ import com.getmission.model.*;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+
+import sun.util.resources.cldr.aa.CalendarData_aa_ER;
 
 public class GetMissionServlet extends HttpServlet {
 
@@ -974,19 +979,11 @@ System.out.println(getMissionVO.getMission_State());
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
 					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
-				// 日期驗證 - 格式
-				try {
-					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
-				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsg.add("日期格式不對!");
-				}
-				// 日期驗證 - 值
-				if (date.after(mission_Due_Time)) {
-					errorMsg.add("你是要工具人做時光機逆");
-				}
 				// 錯誤訊息傳回
 				if (!errorMsg.isEmpty()) {
+					for (String string : errorMsg) {
+						System.out.println(string);
+					}
 					req.setAttribute("getMissionVO", getMissionVO);
 					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 					inputError.forward(req, res);
@@ -1000,9 +997,20 @@ System.out.println(getMissionVO.getMission_State());
 					NotEnoughPoint.forward(req, res);
 				}
 				/**********準備寫入與轉向**********/
-
+				// 任務截止時間加工
+				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
+				Calendar calendar = Calendar.getInstance();
+				//以現在的時間點創建(任務建立時間點)
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				//加五天
+				calendar.add(calendar.DAY_OF_MONTH, 5);
+				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
+				System.out.println(mission_Due_Time);
+				
 				GetMissionService getMissionService = new GetMissionService();
 				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				memService.DecreaseMemPoint(issuer_Mem_No, Integer.parseInt(misssion_Pay.toString()));
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
@@ -1044,17 +1052,17 @@ System.out.println(getMissionVO.getMission_State());
 				// 任務模式
 				Integer mission_Pattern = 1;
 				// 任務積分報酬
-				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				Double mission_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
 				// GPS-LAT
 				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
 				// GPS-LNG
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
-				Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
+				System.out.println(mission_Pay);
 				
 				/**********驗證開始**********/
-				if (misssion_Pay < 50.00) {
+				if (mission_Pay < 50.00) {
 					errorMsg.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
@@ -1063,24 +1071,14 @@ System.out.println(getMissionVO.getMission_State());
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
 					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
-				// 日期驗證 - 格式
-				try {
-					mission_Due_Time = Timestamp.valueOf((req.getParameter("mission_Due_Time").trim()));
-				} catch (IllegalArgumentException e) {
-					mission_Due_Time = new java.sql.Timestamp(System.currentTimeMillis());
-					errorMsg.add("日期格式不對!");
-				}
-				// 日期驗證 - 值
-				if (date.after(mission_Due_Time)) {
-					errorMsg.add("你是要工具人做時光機逆");
-				}
+
 				// 錯誤訊息傳回
 				if (!errorMsg.isEmpty()) {
 					for (String string : errorMsg) {
 						System.out.println(errorMsg);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
-					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 					inputError.forward(req, res);
 					return;
 				}
@@ -1088,15 +1086,26 @@ System.out.println(getMissionVO.getMission_State());
 				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
 				MemService memService = new MemService();
 				MemVO memVO = memService.getOneMem(issuer_Mem_No);
-				if (memVO.getMem_Point() < misssion_Pay) {
+				if (memVO.getMem_Point() < mission_Pay) {
 					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
 					NotEnoughPoint.forward(req, res);
 				}
 
 				/**********準備寫入與轉向**********/
-
+				// 任務截止時間加工
+				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
+				Calendar calendar = Calendar.getInstance();
+				//以現在的時間點創建(任務建立時間點)
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				//加五天
+				calendar.add(calendar.DAY_OF_MONTH, 5);
+				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
+				System.out.println(mission_Due_Time);
+				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
@@ -1104,7 +1113,7 @@ System.out.println(getMissionVO.getMission_State());
 			} catch (Exception e) {
 				errorMsg.add(e.getMessage());
 				System.out.println(e.getMessage());
-				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
 			}
 			
