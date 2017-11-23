@@ -11,6 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.pro.model.ProService;
@@ -71,18 +72,22 @@ System.out.println("前台進入商品編號: "+pro_No);
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				req.setAttribute("proVO", proVO);
+				HttpSession session = req.getSession();
+				session.setAttribute("proVO", proVO);
 				String url = null;
 				if("getOne_For_Display_F".equals(action)){
 					
-					url = "/frontdesk/pro/selectOnePro.jsp";
+					url = req.getContextPath()+"/frontdesk/pro/selectOnePro.jsp";
+					res.sendRedirect(url);//用重導 防止重複加入
+					
 				}else {
 					url = "/backdesk/pro/listOnePro.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url);
+					successView.forward(req, res);
 				}
 				
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
-
+				 
+				
 				/*************************** 其他可能的錯誤處理 *************************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());

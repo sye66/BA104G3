@@ -7,6 +7,12 @@
 <%@ page import="com.mem.model.*" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 
+<%
+	ProVO proVO = (ProVO) session.getAttribute("ProVO");	
+	if(session.getAttribute("ProVO")!=null){
+		pageContext.setAttribute("ProVO",proVO);
+	}
+%>
 	
 <html>
 <head>
@@ -14,9 +20,6 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- ajax未完成 -->
-<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
-<script src="frontdesk/pro/jquery.fly.min.js" ></script>
 
   
 <style type="text/css">
@@ -80,75 +83,7 @@
 	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
-</style>
 
-
-
-<script>
-// $(function() {
-// 	var offset = $("#end").offset();
-// 	$(".addcar").click(function(event){
-// 		var addcar = $(this);
-// 		var img = addcar.parent().find('img').attr('src');
-// 		var flyer = $('<img class="u-flyer" src="'+img+'">');
-// 		flyer.fly({
-// 			start: {
-// 				left: event.pageX,
-// 				top: event.pageY
-// 			},
-// 			end: {
-// 				left: offset.left+10,
-// 				top: offset.top+10,
-// 				width: 0,
-// 				height: 0
-// 			},
-// 			onEnd: function(){
-// 				$("#msg").show().animate({width: '250px'}, 200).fadeOut(1000);
-// 				this.destory();
-				
-// 				var pro_No =  $("input[name='pro_No']").value();
-// 				console.log("pro_No "+pro_No);
-// 				$.ajax({
-// 		            type: "POST",
-<%-- 		            url: "<%=request.getContextPath()%>/pro/pro.do?", --%>
-// 		            data: proString($(this).val(), pro_No),
-// 		            dataType: "json",
-		            
-// 		            success: function(data) {
-// 		            	alert("OK");
-// 		            },
-// 		            error: function(jqXHR) {
-		            	
-		            	
-// 		                alert("發生錯誤: " + jqXHR.status);
-// 		            }
-// 		        })
-// // 				addcar.css("cursor","default").removeClass('orange').unbind('click');
-// 		        function proString(getOne_For_Display_F,pro_No){
-// 					var queryString= {"action":"getOne_For_Display_F", "detail_time_no":detail_time_no, "cartypename":cartypename};
-// 					return queryString;
-			
-//     	 		};
-// 			}
-// 		});
-		
-// 	});
-	
-// });
-</script>
-
-<!-- <div class="m-sidebar">  -->
-<!--     <div class="cart">  -->
-<!--         <i id="end"></i>  -->
-<!--         <span>購物車</span>  -->
-<!--     </div>  -->
-<!-- </div>  -->
-<!-- <div id="msg">已成功加入購物車！</div>  -->
-<!-- ajax -->
-
-
-
-<style>
 .proTable {
 	margin: 20px;
 	padding: 0px;
@@ -208,6 +143,7 @@
 	font-size: 16px;
 }
 </style>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#backPro").click(function() {
@@ -229,7 +165,7 @@
 	window.onscroll = function() {
 		if ($(document).scrollTop() > 60)//这个60是距离顶部高度
 		{
-			$("#ontopDiv").addClass('float');//
+			$("#ontopDiv").addClass('float');
 		} else {
 			$("#ontopDiv").removeClass('float');
 		}
@@ -237,8 +173,28 @@
 </script>
 
 
+
+
+
+
+
+
+
+
+
+
 </head>
 <body>
+<!-- 購物車動畫	 -->
+<div class="m-sidebar"> 
+    <div class="cart"> 
+        <i id="end"></i> 
+        <span>購物車</span> 
+    </div> 
+</div> 
+<div id="msg">已成功加入購物車！</div> 	
+<!-- 購物車動畫	 -->	
+	
 	
 <div class="col-xs-12 col-sm-12 ">
 <%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/> --%>
@@ -325,7 +281,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 										list2.add(p.getPro_No());
 									}
 								
-								ProVO proVO = (ProVO) request.getAttribute("proVO");
+								proVO = (ProVO) session.getAttribute("proVO");
 								String pro_No = proVO.getPro_No();
 
 								if (!list2.contains(pro_No)){
@@ -368,7 +324,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 
 
-									<button type="submit" class="btn btn-warning"
+									<button type="submit" class="btn btn-warning addcar" 
 										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;">放入購物車</button>
 									<input type="hidden" name="proCar_No" value="${proVO.pro_No}">
 									<input type="hidden" name="proCar_Name" value="${proVO.pro_Name}"> 
@@ -401,6 +357,65 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 	</div>
 	<!--中6結束 -->
 	<div class="col-xs-12 col-sm-3"><!--空 --></div>
-</div>	
+</div>
+<!-- ajax未完成 -->
+<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script src="frontdesk/pro/jquery.fly.min.js" ></script>
+
+<script>
+$(function() {
+	var offset = $("#end").offset();
+	$(".addcar").click(function(event){
+		
+		var addcar = $(this);
+		var img = addcar.parent().find('img').attr('src');
+		var flyer = $('<img class="u-flyer" src="'+img+'">');
+		flyer.fly({
+			start: {
+				left: event.pageX,
+				top: event.pageY
+			},
+			end: {
+				left: offset.left+10,
+				top: offset.top+10,
+				width: 0,
+				height: 0
+			},
+			onEnd: function(){
+				$("#msg").show().animate({width: '250px'}, 200).fadeOut(1000);
+				this.destory();
+				
+// 				var pro_No =  $("input[name='pro_No']").value();
+// 				console.log("pro_No "+pro_No);
+// 				$.ajax({
+// 		            type: "POST",
+<%-- 		            url: "<%=request.getContextPath()%>/pro/pro.do?", --%>
+// 		            data: proString($(this).val(), pro_No),
+// 		            dataType: "json",
+		            
+// 		            success: function(data) {
+// 		            	alert("OK");
+// 		            },
+// 		            error: function(jqXHR) {
+		            	
+		            	
+// 		                alert("發生錯誤: " + jqXHR.status);
+// 		            }
+		        })
+				addcar.css("cursor","default").removeClass('orange').unbind('click');
+		        function proString(getOne_For_Display_F,pro_No){
+					var queryString= {"action":"getOne_For_Display_F", "detail_time_no":detail_time_no, "cartypename":cartypename};
+					return queryString;
+			
+    	 		};
+			}
+		});
+		
+	});
+	
+});
+</script>
+
+	
 </body>
 </html>
