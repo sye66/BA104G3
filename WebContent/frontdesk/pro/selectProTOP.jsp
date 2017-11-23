@@ -74,9 +74,9 @@ int count3 = 0;
 	ProOrderService proOrderSvc = new ProOrderService();
 	List<ProOrderVO> listProOrder = proOrderSvc.listProOrder(mem_No);
 	if(listProOrder != null && (listProOrder.size() > 0)){
-		count3 = listProOrder.size();
-		
+				count3=listProOrder.size();
 	}
+	
 	@SuppressWarnings("unchecked")
 	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 	
@@ -153,6 +153,7 @@ int count3 = 0;
 			<!--清單 -->
 			<%if(session.getAttribute("memVO")!=null){%>
 				<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<a href="<%=request.getContextPath()%>/pro/proOrderServlet.do?action=getListProOrder ">
 					<img alt="清單" src="<%=request.getContextPath()%>/res/images/pro_icons/top03.gif"
 						 style="height: 35px;"></a></span>
@@ -167,7 +168,7 @@ int count3 = 0;
 				">
 				<img alt="通知" src="<%=request.getContextPath()%>/res/images/pro_icons/1183340.gif"
 					 style="height: 40px;"></a></span>
-			<span class="badge" >10</span>
+			<span class="badge" ><%=count2%></span>
 			<!--通知 -->									
 		</div>
 		<!-- d2  結束-->
