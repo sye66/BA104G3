@@ -74,34 +74,6 @@
 								</label>
 								<textarea class="form-control" name="mission_Des" id="mission_Des" rows="3"></textarea>
 							</div>
-						<%-- 任務發布時間 --%>
-							<div class="form-group col-sm-6">
-								<label>
-									任務發布時間
-								</label>
-									<input type="text" name="mission_Release_Time" id="mission_Release_Time" class="form-control">
-								<script type="text/javascript">
-									$(function(){
-										$('#mission_Release_Time').datepicker({
-											dateFormat: 'yy-mm-dd'
-										});
-									});
-								</script>
-							</div>
-						<%-- 任務截止時間 --%>
-							<div class="form-group col-sm-6">
-								<label>
-									任務截止時間
-								</label>
-									<input type="text" name="mission_Due_Time" id="mission_Due_Time" class="form-control">
-								<script type="text/javascript">
-									$(function(){
-										$('#mission_Due_Time').datepicker({
-											dateFormat: 'yy-mm-dd'
-										});
-									});
-								</script>
-							</div>
 						<%-- 報酬 --%>
 							<div class="form-group">
 								<label for="mission_Pay">積分花費</label>

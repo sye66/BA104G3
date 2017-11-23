@@ -24,8 +24,6 @@
 					<option value="${disputeCaseVO.dispute_Case_No}">${disputeCaseVO.dispute_Case_No}</option>
 				</c:forEach>
 			</select>
-			
-			
 		</form>
 		
 		<script src="https://code.jquery.com/jquery.js"></script>

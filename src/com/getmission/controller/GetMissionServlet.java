@@ -960,7 +960,7 @@ System.out.println(getMissionVO.getMission_State());
 				// 任務模式
 				Integer mission_Pattern = 2;
 				// 任務積分報酬
-				Double misssion_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				Double mission_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
 				// GPS-LAT
 				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
 				// GPS-LNG
@@ -970,7 +970,7 @@ System.out.println(getMissionVO.getMission_State());
 				Date date = new Date(System.currentTimeMillis());
 				
 				/**********驗證開始**********/
-				if (misssion_Pay != 50.00) {
+				if (mission_Pay != 50.00) {
 					errorMsg.add("HTML的READONLY就是叫你不要改啦");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
@@ -992,7 +992,7 @@ System.out.println(getMissionVO.getMission_State());
 				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
 				MemService memService = new MemService();
 				MemVO memVO = memService.getOneMem(issuer_Mem_No);
-				if (memVO.getMem_Point() < misssion_Pay) {
+				if (memVO.getMem_Point() < mission_Pay) {
 					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
 					NotEnoughPoint.forward(req, res);
 				}
@@ -1009,8 +1009,8 @@ System.out.println(getMissionVO.getMission_State());
 				System.out.println(mission_Due_Time);
 				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,misssion_Pay,mission_Gps_Lat,mission_Gps_Lng);
-				memService.DecreaseMemPoint(issuer_Mem_No, Integer.parseInt(misssion_Pay.toString()));
+				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
