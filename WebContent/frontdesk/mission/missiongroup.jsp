@@ -30,6 +30,9 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br><br><br><br><br>
 	<br>
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
 ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 
 

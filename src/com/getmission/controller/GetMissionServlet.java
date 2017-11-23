@@ -11,7 +11,7 @@ import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
 
 import com.accusecase.model.*;
-import com.casecandidate.model.CaseCandidateService;
+import com.casecandidate.model.*;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
 import com.getmission.model.*;
@@ -616,36 +616,34 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 				failureView.forward(req, res);
 			
 				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
+			String takecase_Mem_No = req.getParameter("takecase_Mem_No").trim();
 			GetMissionService getMissionSvc = new GetMissionService();
 			GetMissionVO getMissionVO = new GetMissionVO();
 			getMissionVO = getMissionSvc.getOneMission(mission_No);
-			Integer mission_State = getMissionVO.getMission_State();
-			
-			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
+			Integer mission_State = getMissionVO.getMission_State(); //此任務的狀態
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No()) ) {
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
-
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
+				if (getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No().equals(takecase_Mem_No) ) {
 					if (mission_State == 3 ) {
-							getMissionVO.setMission_State(4);
+						getMissionVO.setMission_State(4);
 						getMissionVO.setMission_No(mission_No);
-					} else if (mission_State == 6) {
+					} else if (mission_State == 9) {
 						errorMsgs.add("此任務已失效");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return;
 					} else {
 						errorMsgs.add("此任務已結案");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return;
 					}
@@ -654,7 +652,7 @@ public class GetMissionServlet extends HttpServlet {
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 						failureView.forward(req, res);
 						return; // 程式中斷
 					}
@@ -662,10 +660,10 @@ public class GetMissionServlet extends HttpServlet {
 					/*************************** 2.開始修改資料 *****************************************/
 
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
-
+System.out.println(getMissionVO.getMission_State());
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/casecandidate/casecandidate.do");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 
@@ -678,16 +676,16 @@ public class GetMissionServlet extends HttpServlet {
 					// failureView.forward(req, res);
 					// }
 				} else {
-					errorMsgs.add("請不要重覆接取相同任務~");
+					errorMsgs.add("哎~接案者不太對喔");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+							.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 			} else {
-				errorMsgs.add("不能接自己的任務喔~");
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				errorMsgs.add("不能玩別人的任務喔~");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk//mission/issuerfinalstep.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -717,40 +715,39 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			
 				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
-			Integer mission_State = new Integer(req.getParameter("mission_State").trim());
-
 			GetMissionVO getMissionVO = new GetMissionVO();
 			GetMissionService getMissionSvc = new GetMissionService();
-			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
+			Integer mission_State = getMissionSvc.getOneMission(mission_No).getMission_State();
+
 			MemService memSvc = new MemService();
 			double mem_Point = memVO.getMem_Point();
-			double mission_Pay = getMissionVO.getMission_Pay();
+			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay();
 			int now = (int) (mem_Point + mission_Pay);
 			String takecase_Mem_No = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
 
-			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No() != memVO.getMem_No()) {
+			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
 
-				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
+				if (getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No().equals(takecase_Mem_No)) {
 					if (mission_State == 4 ) {
 						getMissionVO.setMission_State(5);
 						getMissionVO.setMission_No(mission_No);
 					} else if (mission_State == 6) {
 						errorMsgs.add("此任務已失效");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return;
 					} else {
 						errorMsgs.add("此任務已結案");
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return;
 					}
@@ -759,7 +756,7 @@ public class GetMissionServlet extends HttpServlet {
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
 						RequestDispatcher failureView = req
-								.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+								.getRequestDispatcher(requestURL);
 						failureView.forward(req, res);
 						return; // 程式中斷
 					}
@@ -817,13 +814,13 @@ public class GetMissionServlet extends HttpServlet {
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
 
-			String mission_No = (String ) req.getSession().getAttribute("mission_No");
+			String mission_No = (String ) req.getParameter("mission_No");
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+						.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 			
 				return;
@@ -835,18 +832,19 @@ public class GetMissionServlet extends HttpServlet {
 		      
 		    String subject = "任務完成通知";
 		      
-		    String issuer_Name = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No()).getMem_Id();
-		    String mem_Id = memSvc.getOneMem(memVO.getMem_No()).getMem_Id();
-		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, " +mem_Id+
-		    					 "/n 已經完成囉~請快快去查驗吧~"; 
+		    String issuer_Name = memVO.getMem_Id();
+		    String takecase_Mem_No = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No()).getMem_Id();
+		    String mission_Name = getMissionSvc.getOneMission(mission_No).getMission_Name();
+		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, ["+mission_Name +"]~ \n" +takecase_Mem_No+
+		    					 " 已經完成囉~請快快去查驗吧~"; 
 		    
 
 			GetMissionVO getMissionVO = new GetMissionVO();
-
+			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -855,8 +853,9 @@ public class GetMissionServlet extends HttpServlet {
 			MailService mailService = new MailService();
 		    mailService.sendMail(to, subject, messageText);
 			req.setAttribute("memVO", memVO);
-
-			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmissionlogin.jsp");
+			req.setAttribute("getMissionVO", getMissionVO);
+			req.setAttribute("mailService", mailService);
+			RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 			failureView.forward(req, res);
 			return; // 程式中斷
 
