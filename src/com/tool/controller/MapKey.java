@@ -29,6 +29,7 @@ System.out.println("MapKey已執行");
 		
 		context.setAttribute("mapPro_display", mapPro_display);
 		context.setAttribute("mapPro_display2", mapPro_display2);
+		
 //		ProMainClassMap = new ProDAO().find_distinct_ProMainClass();
 //		context.setAttribute("ProMainClassMap", ProMainClassMap);
 	}
