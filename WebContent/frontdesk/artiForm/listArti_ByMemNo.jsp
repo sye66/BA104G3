@@ -5,12 +5,18 @@
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.mem.model.*"%>
 
-<%
-    ArtiFormService artiFormSvc = new ArtiFormService();
-    String mem_No = (String) session.getAttribute("mem_No");
-	session.setAttribute("mem_No",mem_No);
+<jsp:useBean id="artiFormSvc1" scope="session" class="com.artiForm.model.ArtiFormService" />
+<jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
 
-    Set<ArtiFormVO> set = artiFormSvc.findArtiByMemNo(mem_No);
+<%
+    ArtiFormVO artiFormVO = new ArtiFormVO();
+    ArtiFormService artiSvc = new ArtiFormService();
+    
+    MemVO memVO = (MemVO) session.getAttribute("memVO");
+    String mem_No = memVO.getMem_No();
+	request.setAttribute("mem_No",mem_No);
+
+    Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No);
     pageContext.setAttribute("set",set);
 %>
 
@@ -74,7 +80,7 @@ ${arti_No}
                         </h1>
                       </div>
                   </div>
-    
+
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
@@ -103,7 +109,7 @@ ${arti_No}
                                 </div>
                                 <div class="timeline-date">${artiFormVO.mem_No}</div>
                                 <div class="timeline-date">
-                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                 </div>
                                 <div class="timeline-time">
