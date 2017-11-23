@@ -27,7 +27,7 @@ body {
 	line-height: 21px;
 }
 
-input, select, textarea, button {
+input, select,  button {
 	font-size: 12px;
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 	outline: none;
@@ -643,9 +643,7 @@ h4 {
 	margin-bottom: 5px;
 }
 
-#tavle01 tr th, td {
-	border: 1px solid #0044BB;
-}
+
 
 #tavle01 tr th, td {
 	padding: 2px;
@@ -659,9 +657,9 @@ h4 {
 textarea {
 	outline: none;
 	padding: 0.4em;
-	width: 45%;
-	margin: 1em 4.6em;
-	font-weight: 600;
+	
+	
+	
 	font-size: 16px;
 	border: 1px solid #1186ec;
 }

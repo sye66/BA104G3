@@ -36,5 +36,6 @@ System.out.println("MapKey已執行");
 	public void destroy() {
 		mapPro_display = null;
 		mapPro_display2 = null;
+System.out.println("MapKey已清空");
 	}
 }

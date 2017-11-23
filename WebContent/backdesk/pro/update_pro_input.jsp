@@ -40,13 +40,13 @@
 	
 	<div class="col-xs-12 col-sm-6 col-sm-offset-1">
 	
-	<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/proBackIndex.jsp">商城管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">新增商品</li>
-  		</ol>
-	</nav>
+<!-- 	<nav aria-label="breadcrumb" role="navigation"> -->
+<!--   		<ol class="breadcrumb"> -->
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li> --%>
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/proBackIndex.jsp">商城管理</a></li> --%>
+<!--     		<li class="breadcrumb-item active" aria-current="page">新增商品</li> -->
+<!--   		</ol> -->
+<!-- 	</nav> -->
 	
 	<br>
 	<h3>資料修改:</h3>
@@ -63,12 +63,12 @@
 	
 	</div>
 	
-<div class="col-xs-12 col-sm-5 col-sm-offset-2">	
+<div class="col-xs-12 col-sm-3 col-sm-offset-2">	
 	<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do"
 		enctype="multipart/form-data" name="form1">
-		<table border="0">
+		<table >
 			<tr>
-				<td>商品編號:</font></td>
+				<td>商品編號:</td>
 				<td>${proVO.pro_No}</td>
 			</tr>
 			
@@ -128,14 +128,12 @@
 				</select>
 				</td>
 			</tr>
-			<tr><th>商品說明:</th></tr>
-		</table>
-		
-				
+			<tr><td>商品說明:</td>
+				<td>
 					<textarea id="pro_info" name="pro_Info" cols="50" rows="6" required>${proVO.pro_Info}</textarea>
-				
-			
-
+				</td>
+			</tr>
+</table>
 
 		<br> <input type="hidden" name="action" value="update">
 		 	 <input type="hidden" name="requestURL"  value="<%=request.getParameter("requestURL")%>">

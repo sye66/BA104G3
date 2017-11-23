@@ -47,8 +47,8 @@ public class ProOrdListServlet extends HttpServlet {
 				String whichPage = req.getParameter("whichPage");
 			
 System.out.println("查詢清單 訂單編號: "+ord_No);
-System.out.println(requestURL);
-System.out.println(whichPage);
+System.out.println("requestURL: "+requestURL);
+System.out.println("whichPage: "+whichPage);
 					if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
 					failureView.forward(req, res);
@@ -72,11 +72,16 @@ System.out.println(whichPage);
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
-				HttpSession session = req.getSession(); 
+				String	url = null;
+//				HttpSession session = req.getSession(); 
 				req.setAttribute("oneOrdList", oneOrdList);
-//				String url  = "/frontdesk/proOrder/getOneOrderList.jsp";
-				String url  = "/frontdesk/proOrder/listProOrder.jsp";
-				
+				if(requestURL.equals("/BA104G3/backdesk/proOrder/listProOrder_B.jsp")){
+					url  = "/backdesk/proOrder/listProOrder_B.jsp";
+				}else{
+					url  = "/frontdesk/proOrder/listProOrder.jsp";
+				}
+				 
+				System.out.println("url: "+url);
 				
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
