@@ -58,7 +58,6 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 <c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }" >
 <c:set var="alright" value="true"></c:set>
 </c:if>
-
 </c:forEach>
 <c:if test="${alright}">
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
@@ -68,12 +67,10 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 </c:if>
 <c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
 <c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
-<c:if test="${missionstate2.mission_State == 3 || missionstate2.mission_State == 4 } " >
+<c:if test="${missionstate2.mission_State == 3 ||missionstate2.mission_State == 4 }" >
 <c:set var="ok" value="true"></c:set>
 </c:if>
 </c:forEach>
-${getMissionSvc.findIssuerCase(memVO.mem_No).mission_State}
-${ok}
 <c:if test="${ok}">
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 <button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
