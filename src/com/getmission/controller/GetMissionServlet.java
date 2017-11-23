@@ -7,6 +7,7 @@ import java.sql.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
 
 import com.accusecase.model.*;
@@ -992,7 +993,13 @@ System.out.println(getMissionVO.getMission_State());
 					inputError.forward(req, res);
 					return;
 				}
-				
+				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+				MemService memService = new MemService();
+				MemVO memVO = memService.getOneMem(issuer_Mem_No);
+				if (memVO.getMem_Point() < misssion_Pay) {
+					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					NotEnoughPoint.forward(req, res);
+				}
 				/**********準備寫入與轉向**********/
 
 				GetMissionService getMissionService = new GetMissionService();
@@ -1079,6 +1086,14 @@ System.out.println(getMissionVO.getMission_State());
 					return;
 				}
 				
+				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+				MemService memService = new MemService();
+				MemVO memVO = memService.getOneMem(issuer_Mem_No);
+				if (memVO.getMem_Point() < misssion_Pay) {
+					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					NotEnoughPoint.forward(req, res);
+				}
+
 				/**********準備寫入與轉向**********/
 
 				GetMissionService getMissionService = new GetMissionService();
