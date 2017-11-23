@@ -441,7 +441,12 @@ System.out.println("同時新增完成");
 				proOrderVO.setOrd_Phone(res.getString("ord_Phone"));
 				proOrderVO.setOrd_Shipinfo(res.getString("ord_Shipinfo"));
 				proOrderVO.setOrd_Ship_Date(res.getDate("ord_Ship_Date"));
-				list.add(proOrderVO);
+				System.out.println();
+				if(!proOrderVO.getOrd_Shipinfo().equals("已取消")){
+					list.add(proOrderVO);
+				}
+				
+				
 				
 			}
 			

@@ -32,7 +32,7 @@ public class ProOrdListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+			
 		if ("getOneOrdList".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -43,7 +43,12 @@ public class ProOrdListServlet extends HttpServlet {
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 **********************/
 				String ord_No =req.getParameter("ord_No");
-System.out.println("查詢清單 訂單編號: "+ord_No);				
+				String requestURL = req.getParameter("requestURL");
+				String whichPage = req.getParameter("whichPage");
+			
+System.out.println("查詢清單 訂單編號: "+ord_No);
+System.out.println(requestURL);
+System.out.println(whichPage);
 					if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
 					failureView.forward(req, res);
@@ -52,9 +57,9 @@ System.out.println("查詢清單 訂單編號: "+ord_No);
 
 				/*************************** 2.開始查詢資料 *****************************************/
 					ProOrdListService proOrdListSvc = new ProOrdListService();
-					List<ProOrdListVO> proOrdList = new ArrayList<ProOrdListVO>();
-					proOrdList = (List<ProOrdListVO>) proOrdListSvc.getOneProOrdListVO(ord_No);
-					for(ProOrdListVO p :proOrdList){
+					List<ProOrdListVO> oneOrdList = new ArrayList<ProOrdListVO>();
+					oneOrdList = (List<ProOrdListVO>) proOrdListSvc.getOneProOrdListVO(ord_No);
+					for(ProOrdListVO p :oneOrdList){
 						System.out.println(p.getOrd_No()+" "+p.getPro_No()
 						+" "+p.getOrdPro_Count()+" "+p.getOrdPro_Price());
 					}
@@ -68,8 +73,9 @@ System.out.println("查詢清單 訂單編號: "+ord_No);
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 *************/
 				HttpSession session = req.getSession(); 
-				session.setAttribute("proOrdList", proOrdList);
-				String url  = "/frontdesk/proOrder/getOneOrderList.jsp";
+				req.setAttribute("oneOrdList", oneOrdList);
+//				String url  = "/frontdesk/proOrder/getOneOrderList.jsp";
+				String url  = "/frontdesk/proOrder/listProOrder.jsp";
 				
 				
 				RequestDispatcher successView = req.getRequestDispatcher(url);
