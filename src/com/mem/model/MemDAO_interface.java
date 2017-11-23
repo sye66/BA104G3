@@ -12,6 +12,7 @@ public interface MemDAO_interface {
 	public void delete(String mem_No);
 	public MemVO findByPrimaryKey(String mem_No);
 	public MemVO findByMemEmail(String mem_Email);
+	public MemVO findByMemId(String mem_Id);
 	public List<MemVO> getAll();
 	public List<MemVO> getAllForFriend(String mem_No);
 	public void register(MemVO memVO);
@@ -19,5 +20,6 @@ public interface MemDAO_interface {
 	public void recharge(MemVO memVO);
 	public void updateMemPoint(MemVO memVO);
 	public void updateByEmp(MemVO memVO);
+	
 //	public void select(MemVO memVO); 
 }

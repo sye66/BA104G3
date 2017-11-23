@@ -3,34 +3,16 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
-<%@ page import="com.relation.model.*" %>
+
+<jsp:useBean id="MemSvc" scope="session" class="com.mem.model.MemService"/>
+
 <%-- <c:if test="${not empty login_memVO.mem_Id}"><% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %></c:if> --%>
+<% MemService memSvc = new MemService();%>
+<%MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
+  
 
-<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
-<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
-
-
-<% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
-   MemVO memVO1 = (MemVO)request.getSession().getAttribute("memVO");
-   
 %>
 <%request.getAttribute("updateSuccess");%>
-        
-<%
-RelationService relationSvc = new RelationService();
-
- String related_Mem_No = request.getParameter("relationVO");
-if(related_Mem_No ==null){
-	
-	related_Mem_No= memVO.getMem_No();
-	System.out.println("related_Mem_No ++++ " +related_Mem_No);
-}
- 
-List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
-pageContext.setAttribute("relationVO", relationVO);
-System.out.println("relationVO ++++ " +relationVO);
-%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -136,11 +118,6 @@ System.out.println("relationVO ++++ " +relationVO);
             <input type="submit" id="sendMessage" class="button" value="送出" onclick="sendMessage();"/>
 		    <input type="button" id="connect"     class="button" value="連線" onclick="connect();"/>
 		    <input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/>
-<!-- 		    <select type="button" id="roomNo"  class="button" value="房間號碼" onclick="sendRoomNo();"> -->
-<!-- 		    <option value="1001">AAAAAA</option> -->
-<%-- 			<option value="${memVO.mem_No}">BBBBB</option> --%>
-<!-- 			<option value="3">其他</option> -->
-<!-- 		    </select> -->
 	    </div>
 	    </div>
     </body>
@@ -155,8 +132,7 @@ System.out.println("relationVO ++++ " +relationVO);
     var context = '<%=request.getContextPath() %>';
     var memname = "${memVO.mem_Id}";
     
-    var MyPoint = "/MyEchoServer/"+memname+"/"+memno;		// 對照server 哪個Server / 使用者名稱 / 房號
-    alert(MyPoint);
+    var MyPoint = "/MyEchoServer/peter/309";		// 對照server 哪個Server / 使用者名稱 / 房號
     var host = window.location.host;
     var path = window.location.pathname;
     var webCtx = path.substring(0, path.indexOf('/', 1));

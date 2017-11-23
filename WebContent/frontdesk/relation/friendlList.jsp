@@ -135,9 +135,10 @@ System.out.println("relationVO + " +relationVO);
 		
 		<tr align="center">
 		<th>圖片</th>
-		<th>申請好友</th>
+		<th>好友姓名</th>
 		<th>性別</th>
 		<th>完成任務數</th>
+		<th>聊天視窗</th>
 		</tr>
 			
 		<%@ include file="page1.file" %>
@@ -162,7 +163,11 @@ System.out.println("relationVO + " +relationVO);
 			<input type="hidden" name="action" value="update">
 			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
 				</h2></c:if></c:if>
-			
+				
+				
+			<td><input type="subbmit" class="btn btn-success btn-block btn-lg" value="申請聊天" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')"></td>
+<!-- 			   <input type="hidden" name="action" value="updateByMem"> -->
+			   
 			   
         	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
         

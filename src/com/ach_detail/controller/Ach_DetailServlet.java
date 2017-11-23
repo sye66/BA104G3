@@ -184,10 +184,10 @@ public class Ach_DetailServlet extends HttpServlet {
  				List<Ach_DetailVO> ach_detailVO = achdSvc.getPersonal(mem_No);
  				AchieveService achieveSvc = new AchieveService();
  				List<AchieveVO> list = null;
- 				for(int i = 0; i < ach_detailVO.size();i++){
- 					list.add();
- 				}
- 				achieveSvc.getThree(ach_No);
+// 				for(int i = 0; i < ach_detailVO.size();i++){
+// 					list.add();
+// 				}
+// 				achieveSvc.getThree(ach_No);
  			}catch (Exception e) {
 				errorMsgs.add("資料取出時失敗:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);

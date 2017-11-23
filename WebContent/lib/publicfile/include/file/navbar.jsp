@@ -54,7 +54,7 @@
         </a>
         </c:if>
       <c:if test="${memVO.mem_State==1}">
-        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=500')">
+        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')">
         <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         </c:if>
