@@ -233,7 +233,7 @@
 													<input type="hidden" name="mission_No"
 														value="${getMissionVO.mission_No}"> 
 													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
-													<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
+													<input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
 												</form>
 												<button type="button" class="btn btn-default"
 													data-dismiss="modal">關閉</button>

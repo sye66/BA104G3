@@ -41,7 +41,12 @@
     <h3 class="panel-title">任務進行式</h3>
   </div>
   <div class="panel-body">
-    內容文字
+    <c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
+<c:if test="${not empty mailService}" var="sendmail">
+<div>信件寄送成功~!!!!!!!等待發案人回應吧</div>
+</c:if>
   </div>
   <table class="table">
     <c:forEach var="successGetMission" items="${getMissionSvc.successGetMission(memVO.mem_No)}"
@@ -55,8 +60,12 @@
 <td>${memSvc.getOneMem(successGetMission.issuer_Mem_No).mem_Id}</td>
 <td>
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-<c:if test="${successGetMission.mission_State == 4 ||successGetMission.mission_State == 74}">	
+<c:if test="${successGetMission.mission_State == 4 ||successGetMission.mission_State == 74}">
+<c:if test="${!sendmail}">
 <button class="btn btn-danger" type="submit" name="action" value="finishwork">完成任務交付</button>
+<input type="hidden" name="mission_No" value="${successGetMission.mission_No}">
+<input type="hidden" name="requestURL" value="/frontdesk/mission/finalstep.jsp">
+</c:if>
 </c:if>
 </form>
 </td>

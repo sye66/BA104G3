@@ -23,8 +23,7 @@ public class ProOrderJDBCDAO implements ProOrderDAO_interface{
 	private static final String INSERT_PROORDER = "INSERT INTO PRO_ORDER  VALUES (TO_CHAR(SYSDATE,'YYYYmmdd')||'-'||LPAD(TO_CHAR(PRO_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?,?)";
 //	private static final String INSERT_PROORDER = "INSERT INTO PRO_ORDER (ORD_NO,MEM_NO,ORD_DATE,ORD_PRICE,ORD_CONSIGNEE,ORD_ADDRESS,ORD_PHONE) VALUES (TO_CHAR(SYSDATE,'YYYYmmdd')||'-'||LPAD(TO_CHAR(PRO_ORDER_SEQ.NEXTVAL),6,'0'),?,?,?,?,?,?,?)";
 	private static final String GET_PROORDER_BY_MEM_NO = "SELECT * FROM PRO_ORDER WHERE MEM_NO=? ORDER BY ORD_NO";
-	private static final String UPDATE_BY_ORDER_NO = "UPDATE PRO_ORDER SET ORD_SHIPINFO= ? WHERE ORD_NO=?";
-	
+	private static final String UPDATE_BY_ORDER_NO = "UPDATE PRO_ORDER SET ORD_SHIPINFO= ? , ORD_SHIP_DATE= ? WHERE ORD_NO=?";
 //	private static final String GET_PROORDER_BY_MEM_NO = "SELECT ORD_NO,ORD_DATE,ORD_PRICE,ORD_CONSIGNEE,ORD_ADDRESS,ORD_PHONE,ORD_SHIPINFO,Ord_Ship_Date FROM PRO_ORDER WHERE MEM_NO=? ORDER BY ORD_NO";
 	
 	
@@ -441,7 +440,12 @@ System.out.println("同時新增完成");
 				proOrderVO.setOrd_Phone(res.getString("ord_Phone"));
 				proOrderVO.setOrd_Shipinfo(res.getString("ord_Shipinfo"));
 				proOrderVO.setOrd_Ship_Date(res.getDate("ord_Ship_Date"));
-				list.add(proOrderVO);
+				System.out.println();
+				if(!proOrderVO.getOrd_Shipinfo().equals("已取消")){
+					list.add(proOrderVO);
+				}
+				
+				
 				
 			}
 			
@@ -490,11 +494,12 @@ System.out.println("同時新增完成");
 			con = DriverManager.getConnection(url, use, pwd);
 			pst = con.prepareStatement(UPDATE_BY_ORDER_NO);
 			con.setAutoCommit(false);
-System.out.println(proOrderVO.getOrd_Shipinfo());			
-System.out.println(proOrderVO.getOrd_No());			
+		
 			
 			pst.setString(1,proOrderVO.getOrd_Shipinfo());
-			pst.setString(2,proOrderVO.getOrd_No());
+			pst.setDate(2,proOrderVO.getOrd_Ship_Date());
+			pst.setString(3,proOrderVO.getOrd_No());
+			
 			
 			pst.executeUpdate();
 			con.commit();

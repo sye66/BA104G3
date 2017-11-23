@@ -30,6 +30,9 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br><br><br><br><br>
 	<br>
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
 ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 
 
@@ -58,7 +61,6 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 <c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }" >
 <c:set var="alright" value="true"></c:set>
 </c:if>
-
 </c:forEach>
 <c:if test="${alright}">
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
@@ -68,12 +70,10 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 </c:if>
 <c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
 <c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
-<c:if test="${missionstate2.mission_State == 3 || missionstate2.mission_State == 4 } " >
+<c:if test="${missionstate2.mission_State == 3 ||missionstate2.mission_State == 4 }" >
 <c:set var="ok" value="true"></c:set>
 </c:if>
 </c:forEach>
-${getMissionSvc.findIssuerCase(memVO.mem_No).mission_State}
-${ok}
 <c:if test="${ok}">
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 <button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
@@ -89,77 +89,7 @@ ${ok}
 
 <script>
     
-    var MyPoint = "/MyEchoServer/peter/309";
-    var host = window.location.host;
-    var path = window.location.pathname;
-    var webCtx = path.substring(0, path.indexOf('/', 1));
-    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-    
-	var statusOutput = document.getElementById("statusOutput");
-	var webSocket;
-	
-	function connect() {
-		// 建立 websocket 物件
-		webSocket = new WebSocket(endPointURL);
-		
-		webSocket.onopen = function(event) {
-			updateStatus("WebSocket 成功連線");
-			document.getElementById('sendMessage').disabled = false;
-			document.getElementById('connect').disabled = true;
-			document.getElementById('disconnect').disabled = false;
-		};
-
-		webSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-	        var jsonObj = JSON.parse(event.data);
-	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-	        messagesArea.value = messagesArea.value + message;
-	        messagesArea.scrollTop = messagesArea.scrollHeight;
-		};
-
-		webSocket.onclose = function(event) {
-			updateStatus("WebSocket 已離線");
-		};
-	}
-	
-	
-	var inputUserName = document.getElementById("userName");
-	inputUserName.focus();
-	
-	function sendMessage() {
-	    var userName = inputUserName.value.trim();
-	    if (userName === ""){
-	        alert ("使用者名稱請勿空白!");
-	        inputUserName.focus();	
-			return;
-	    }
-	    
-	    var inputMessage = document.getElementById("message");
-	    var message = inputMessage.value.trim();
-	    
-	    if (message === ""){
-	        alert ("訊息請勿空白!");
-	        inputMessage.focus();	
-	    }else{
-	        var jsonObj = {"userName" : userName, "message" : message};
-	        webSocket.send(JSON.stringify(jsonObj));
-	        inputMessage.value = "";
-	        inputMessage.focus();
-	    }
-	}
-
-	
-	function disconnect () {
-		webSocket.close();
-		document.getElementById('sendMessage').disabled = true;
-		document.getElementById('connect').disabled = false;
-		document.getElementById('disconnect').disabled = true;
-	}
-
-	
-	function updateStatus(newStatus) {
-		statusOutput.innerHTML = newStatus;
-	}
+ 
     
 </script>
 </html>

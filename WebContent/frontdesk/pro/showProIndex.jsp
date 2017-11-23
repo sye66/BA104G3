@@ -20,6 +20,7 @@
 <!-- TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include> --%>
 </div>
 <!-- 商城TOP -->
 <div class="col-xs-12 col-sm-12 ">

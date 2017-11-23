@@ -1,7 +1,9 @@
+<%@page import="javax.naming.Context"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.proorder.model.*"%>
+<%@ page import="com.proordlist.model.*"%>
 <%-- <%@ page import="javax.servlet.http.HttpSession"%> --%>
 <%@ page import="com.mem.model.*"%><html>
 <%@page import="java.util.*"%>
@@ -14,10 +16,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-.breadcrumb li, .breadcrumb li a {
-	color: #f90;
-	font-size: 16px;
-}
+
 </style>
 
 
@@ -26,42 +25,35 @@
 <body>
 
 <%
-	
-	 
-	
-		List<ProOrderVO> list = (List<ProOrderVO>) session.getAttribute("proOrderlist");
-		
+
+		ProOrderService proOrderSvc = new ProOrderService();
+		List<ProOrderVO> list =(List<ProOrderVO>) proOrderSvc.getAll();;
 		pageContext.setAttribute("list",list);
 	
+// 		ProOrdListService proOrdListSvc = new ProOrdListService();
+// 		List<ProOrdListVO> list2 = (List<ProOrdListVO>) proOrdListSvc.getAll();
+// 		pageContext.setAttribute("list2",list2);
+		
+// 		ServletContext context = getServletContext();
+// 		Map<String, String> mapPro_display2 = (Map<String, String>) context.getAttribute("mapPro_display2");
+// 		pageContext.setAttribute("mapPro_display2",mapPro_display2);
+// 		String up = mapPro_display2.get("up");
+// 		System.out.println(up);
 %>
 
-<div class="col-xs-12 col-sm-12 ">
-<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
-<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"/>  --%>
-</div>
-<!-- 商城TOP -->
-<div class="col-xs-12 col-sm-12 ">
-<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
-</div>
-<!--麵包屑 -->
-		<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 
-			<br>
-			<ol class="breadcrumb">
-				<li><a href="<%=request.getContextPath()%>">首頁</a></li>
-				<li><a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">積分商城</a></li>
-				<li class="active">個人訂單
-				</li>
+<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+<jsp:include page="/backdesk/pro/proBackLeft.jsp" flush="true" />
 
-			</ol>
 
-		</div>
-		<!--麵包屑 結束-->
+									
+
 <!-- <div class="container"> -->
-			<div class="col-xs-12 col-sm-12">
-				<div class="col-xs-12 col-sm-6 col-sm-offset-2">
+		
+				<div class="col-xs-12 col-sm-8 ">
+					<br>
 					<h3>訂單查詢:</h3>
-					<table class="table table-hover">
+					<table class="table table-hover" >
 				
 						<caption></caption>
 						<thead>
@@ -80,7 +72,7 @@
 						<tbody>
 						<%@ include file="page1.file" %> 
 						<c:forEach var="proOrder" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-<%-- 							<c:if test="${proOrder.ord_Shipinfo!='已取消' }"> --%>
+							
 							<tr>
 								<td>${proOrder.ord_No } </td>
 								<td>${proOrder.ord_Consignee }</td>
@@ -102,20 +94,15 @@
               							<input type="hidden" name="action"  value="getOneOrdList">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
 <%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
-              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/pro/proOrderServlet.do?action=getListProOrder">
+              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B.jsp">
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
              							<button type="submit" class="btn btn-light" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 20px;"></button>
 									</form></div>
 								</td>
 								
-								<c:if test="${proOrder.ord_Shipinfo=='已出貨'||proOrder.ord_Shipinfo=='已取消'}">
-								<td>
 								
-<%-- 								<button type="submit" class="btn btn-danger disabled"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button> --%>
-          						</td>
-								</c:if>
 								
-								<c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+								<c:if test="${proOrder.ord_Shipinfo=='未出貨'}">
 									
 									<td width="100">
 										<div align="center">
@@ -123,14 +110,16 @@
               							<input type="hidden" name="action"  value="updateProOrderUp">
               							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
-              							<input type="hidden" name="ord_Shipinfo" value="已取消">
+              							<input type="hidden" name="ord_Shipinfo"  value="已出貨">
+<%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
-             							<button type="submit" class="btn btn-danger" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 25px;">取消</button>
+             							<button type="submit" class="btn btn-warning" id="xx">出貨</button>
           								</form></div>
        								 </td>
 								</c:if>
+								
 							</tr>
-<%-- 							</c:if> --%>
+							
 						
 						</c:forEach>
 						
@@ -147,7 +136,7 @@
 <%if (request.getAttribute("oneOrdList")!=null){%>
        <jsp:include page="/frontdesk/proOrder/getOneOrderList.jsp" />
 <%} %>
-</div>	</div>		
+</div>		
 <%-- <jsp:include page="/frontdesk/proOrder/getOneOrderList.jsp" flush="true" /> --%>
 </body>
 </html>
