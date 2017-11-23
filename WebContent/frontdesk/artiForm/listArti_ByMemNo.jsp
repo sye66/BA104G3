@@ -13,10 +13,10 @@
     ArtiFormService artiSvc = new ArtiFormService();
     
     MemVO memVO = (MemVO) session.getAttribute("memVO");
-    String mem_No = memVO.getMem_No();
-	request.setAttribute("mem_No",mem_No);
+    String mem_No_main = memVO.getMem_No();
+	request.setAttribute("mem_No",mem_No_main);
 
-    Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No);
+    Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
     pageContext.setAttribute("set",set);
 %>
 
@@ -47,6 +47,8 @@ ${arti_No}
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
 	</td></tr>
 </table>
+
+<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
