@@ -9,6 +9,7 @@
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
 <%@ page import="com.accusecase.model.*"%>
+<%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
 <jsp:useBean id="accusecaseSvc" scope="page"
@@ -16,8 +17,8 @@
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
-	String mem_No = (String) session.getAttribute("mem_No");
 	AccuseCaseVO accusecaseVO = (AccuseCaseVO) request.getAttribute("accusecaseVO");
+	CaseCandidateVO missionmem = new CaseCandidateVO();
 %>
 
 <!DOCTYPE html>
@@ -41,7 +42,10 @@
 		<![endif]-->
 <style type="text/css">
 #carousel-id {
-	height: 500px;
+	height: 300px;
+}
+.carousel-inner{
+	
 }
 </style>
 </head>
@@ -59,15 +63,10 @@
 	<br>
 	<br>
 	<br>
-	<br><br>
 	<br>
 	<br>
 	<br>
-	<br><br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 
 
 
@@ -172,20 +171,10 @@
 											varStatus="p">
 
 											<c:if test="${p.index == 0 }">
-												<div class="item active">
-													<img
-														src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
-														alt="">
-													<div class="container">
-														<div class="carousel-caption">
-															<h1>CSS可樂好喝超爽快</h1>
-															<p>你喝過了嗎？</p>
-															<p>
-																<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-																	up today</a>
-															</p>
-														</div>
-													</div>
+												<div class="item active" >
+													<img src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
+														class="img-responsive" style="max-height: 350px;">
+													
 												</div>
 											</c:if>
 											<c:if test="${p.index != 0 }">
@@ -195,12 +184,7 @@
 														alt="">
 													<div class="container">
 														<div class="carousel-caption">
-															<h1>CSS可樂好喝超爽快</h1>
-															<p>你喝過了嗎？</p>
-															<p>
-																<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-																	up today</a>
-															</p>
+															
 														</div>
 													</div>
 												</div>
@@ -228,7 +212,7 @@
 								<h4>任務狀態:</h4>
 								<p>----${getMissionVO.mission_State}</p>
 								<h4>發案人:</h4>
-								<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+								<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 							</div>
 					</tr>
 					</div>
@@ -240,7 +224,7 @@
 									<h3 class="panel-title">任務細節</h3>
 								</div>
 								<div class="panel-body">
-									<p>----發案人${mission_No.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+									<p>----發案人${mission_No.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 
 									<p>----${getMissionVO.mission_Des}</p>
 									<p>----${getMissionVO.mission_Release_Time}</p>
@@ -253,10 +237,15 @@
 
 						</div>
 					</tr>
+					
+					<% 
+							missionmem.setCandidate_Mem_No(memVO.getMem_No());
+							pageContext.setAttribute("missionmem" ,missionmem);
+							
+							%>
 					<tr>
 
-						<c:if
-							test="${mem_No != getMissionVO.issuer_Mem_No  && !CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)}">
+						<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
 							<td>
 								<div class="panel-body">
 
@@ -271,10 +260,12 @@
 								</div>
 							</td>
 						</c:if>
+						<c:if test="${!accept}">
+									<a  data-toggle="modal">
+									<button class="btn btn-info" style="visibility: hidden" >我要接案</button></a> 
+						</c:if>
 
-
-						<c:if
-							test="${CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)}">
+						<c:if test="${CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)}">
 							<td><button class="btn btn-default" disabled>等待中...</button></td>
 						</c:if>
 						<c:if test="${mem_No == getMissionVO.issuer_Mem_No} ">
@@ -353,53 +344,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-12">
-		<jsp:include page="/lib/publicfile/include/file/footer.jsp"
-			flush="true"></jsp:include>
-	</div>
+		<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-		
-
-function setBstModalMaxHeight(element) {
-  this.$element          = $(element);
-  this.$modalContent     = this.$element.find('.modal-content');
-  var $window            = $(window);
-  var $modalContentOH    = this.$modalContent.outerHeight();
-  var $modalContentIH    = this.$modalContent.innerHeight();
-  var _modalBorderWidth   = $modalContentOH - $modalContentIH;
-  var _modalDialogMargin  = $window.width() < 768 ? 20 : 60;
-  var _modalContentHeight = $window.height() - (_modalDialogMargin + _modalBorderWidth);
-  var _modalHeaderHeight  = this.$element.find('.modal-header').outerHeight() || 0;
-  var _modalFooterHeight  = this.$element.find('.modal-footer').outerHeight() || 0;
-  var _modalMaxHeight     = _modalContentHeight - (_modalHeaderHeight + _modalFooterHeight);
-
-  this.$modalContent.css({
-      'overflow': 'hidden'
-  });
-  
-  this.$element
-    .find('.modal-body').css({
-      'max-height': _modalMaxHeight,
-      'overflow-y': 'auto'
-  });
-}
-
-$('.modal').on('show.bs.modal', function() {
-  $(this).show();
-  setBstModalMaxHeight(this);
-});
-
-$(window).resize(function() {
-  if ($('.modal.in').length != 0) {
-    setBstModalMaxHeight($('.modal.in'));
-  }
-});
-
 
 	</script>
 </body>
