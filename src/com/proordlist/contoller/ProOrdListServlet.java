@@ -77,6 +77,8 @@ System.out.println("whichPage: "+whichPage);
 				req.setAttribute("oneOrdList", oneOrdList);
 				if(requestURL.equals("/BA104G3/backdesk/proOrder/listProOrder_B.jsp")){
 					url  = "/backdesk/proOrder/listProOrder_B.jsp";
+				}else if(requestURL.equals("/BA104G3/backdesk/proOrder/listProOrder_B2.jsp")){
+					url  = "/backdesk/proOrder/listProOrder_B2.jsp";
 				}else{
 					url  = "/frontdesk/proOrder/listProOrder.jsp";
 				}

@@ -99,7 +99,7 @@
                                  <option value="${artiFromVO.arti_No}" >${artiFromVO.arti_Title}
                                 </c:forEach>   
                                 </select>
- <!--                               <input type="hidden" name="arti_No" value="${artiFormVO.arti_No}"> -->
+                                <input type="hidden" name="arti_No" value="${artiFormVO.arti_No}">
                                 <button class="btn btn-primary" type="submit" name="action" value="getOneArti_For_Back"> 送出查詢 </button>
                                 </FORM>
                                 

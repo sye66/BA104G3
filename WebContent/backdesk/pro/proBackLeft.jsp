@@ -42,7 +42,7 @@
 				<a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp" class="list-group-item">&nbsp;&nbsp;查詢/修改商品</a> 
 				<a href="<%=request.getContextPath()%>/backdesk/proClass/addProClass.jsp" class="list-group-item">&nbsp;&nbsp;新增商品分類</a> 
 				<a href="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B.jsp" class="list-group-item">&nbsp;&nbsp;查詢/修改訂單</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;訂單審核</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B2.jsp" class="list-group-item">&nbsp;&nbsp;訂單審核</a> 
 			</div>
 	</div><!--rol -->
  	</div><!--2 -->

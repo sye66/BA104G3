@@ -5,12 +5,18 @@
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.mem.model.*"%>
 
-<%
-    ArtiFormService artiFormSvc = new ArtiFormService();
-    String mem_No = (String) session.getAttribute("mem_No");
-	session.setAttribute("mem_No",mem_No);
+<jsp:useBean id="artiFormSvc1" scope="session" class="com.artiForm.model.ArtiFormService" />
+<jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
 
-    Set<ArtiFormVO> set = artiFormSvc.findArtiByMemNo(mem_No);
+<%
+    ArtiFormVO artiFormVO = new ArtiFormVO();
+    ArtiFormService artiSvc = new ArtiFormService();
+    
+    MemVO memVO = (MemVO) session.getAttribute("memVO");
+    String mem_No_main = memVO.getMem_No();
+	request.setAttribute("mem_No",mem_No_main);
+
+    Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
     pageContext.setAttribute("set",set);
 %>
 
@@ -41,6 +47,8 @@ ${arti_No}
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
 	</td></tr>
 </table>
+
+<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -74,7 +82,7 @@ ${arti_No}
                         </h1>
                       </div>
                   </div>
-    
+
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
@@ -103,7 +111,7 @@ ${arti_No}
                                 </div>
                                 <div class="timeline-date">${artiFormVO.mem_No}</div>
                                 <div class="timeline-date">
-                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                 </div>
                                 <div class="timeline-time">

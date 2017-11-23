@@ -27,7 +27,13 @@
 <%
 
 		ProOrderService proOrderSvc = new ProOrderService();
-		List<ProOrderVO> list =(List<ProOrderVO>) proOrderSvc.getAll();;
+		List<ProOrderVO> proOrderList =(List<ProOrderVO>) proOrderSvc.getAll();
+		List<ProOrderVO> list = new ArrayList<ProOrderVO>();
+		for(ProOrderVO p:proOrderList){
+			if((p.getOrd_Shipinfo()).equals("未出貨")){
+				list.add(p);
+			}
+		}
 		pageContext.setAttribute("list",list);
 	
 // 		ProOrdListService proOrdListSvc = new ProOrdListService();
@@ -52,7 +58,7 @@
 		
 				<div class="col-xs-12 col-sm-8 ">
 					<br>
-					<h3>訂單查詢:</h3>
+					<h3>訂單審核:</h3>
 					<table class="table table-hover" >
 				
 						<caption></caption>
@@ -72,19 +78,14 @@
 						<tbody>
 						<%@ include file="page1.file" %> 
 						<c:forEach var="proOrder" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-							
 							<tr>
 								<td>${proOrder.ord_No } </td>
 								<td>${proOrder.ord_Consignee }</td>
 								<td>${proOrder.ord_Address }</td>
 								<td>${proOrder.ord_Phone }</td>
 								<td>${proOrder.ord_Shipinfo }</td>
-								<c:if test="${proOrder.ord_Shipinfo!='已出貨' }">
-								<td>無</td>	
-								</c:if>
-								<c:if test="${proOrder.ord_Shipinfo=='已出貨' }">
 								<td>${proOrder.ord_Ship_Date }</td>
-								</c:if>
+								
 								<td>
 <%-- 									<a href="<%=request.getContextPath()%>/pro/proOrdListServlet.do?action=getOneOrdList&ord_No=${proOrder.ord_No}"> --%>
 <%-- 									<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 30px;"> --%>
@@ -94,7 +95,7 @@
               							<input type="hidden" name="action"  value="getOneOrdList">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
 <%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
-              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B.jsp">
+              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B2.jsp">
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
              							<button type="submit" class="btn btn-light" id="xx"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 20px;"></button>
 									</form></div>
@@ -102,25 +103,23 @@
 								
 								
 								
-								<c:if test="${proOrder.ord_Shipinfo=='未出貨'}">
+							
 									
 									<td width="100">
 										<div align="center">
          							    <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               							<input type="hidden" name="action"  value="updateProOrderUp">
-              							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B2.jsp">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
               							<input type="hidden" name="ord_Shipinfo"  value="已出貨">
-<%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
-             							<button type="submit" class="btn btn-warning" id="xx">出貨</button>
+             							<button type="submit" class="btn btn-warning" >出貨</button>
           								</form></div>
        								 </td>
-								</c:if>
+							
 								
 							</tr>
 							
-						
 						</c:forEach>
 						
 						</tbody>
