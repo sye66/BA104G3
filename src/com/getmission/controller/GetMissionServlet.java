@@ -727,12 +727,11 @@ System.out.println(getMissionVO.getMission_State());
 			Integer mission_State = getMissionSvc.getOneMission(mission_No).getMission_State();
 
 			MemService memSvc = new MemService();
-			double mem_Point = memVO.getMem_Point();
-			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay();
-			int now = (int) (mem_Point + mission_Pay);
 			String takecase_Mem_No = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
-
-			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
+			double takecasemem_Point = memSvc.getOneMem(takecase_Mem_No).getMem_Point();
+			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay();
+			int now = (int) (takecasemem_Point + mission_Pay);
+			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
 
 				if (getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No().equals(takecase_Mem_No)) {
 					if (mission_State == 4 ) {
@@ -767,7 +766,7 @@ System.out.println(getMissionVO.getMission_State());
 					memVO = memSvc.updateMemPoint(takecase_Mem_No, now);
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/mission/mission_finalsuccess.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/mission_finalsuccess.jsp");
 					failureView.forward(req, res);
 					return; // 程式中斷
 
@@ -782,14 +781,14 @@ System.out.println(getMissionVO.getMission_State());
 				} else {
 					errorMsgs.add("請不要重覆接取相同任務~");
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+							.getRequestDispatcher(requestURL);
 					failureView.forward(req, res);
 					return;
 				}
 
 			} else {
-				errorMsgs.add("不能接自己的任務喔~");
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+				errorMsgs.add("不能處理自己的任務喔~");
+				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
 				return;
 			}
@@ -828,9 +827,9 @@ System.out.println(getMissionVO.getMission_State());
 			
 			MemService memSvc = new MemService();
 			GetMissionService getMissionSvc = new GetMissionService();
-			String to = "burnerzx@gmail.com";
+			String to = memVO.getMem_Email();
 		      
-		    String subject = "任務完成通知";
+		    String subject = "任務完成通知";//傳 mail
 		      
 		    String issuer_Name = memVO.getMem_Id();
 		    String takecase_Mem_No = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No()).getMem_Id();
