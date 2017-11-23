@@ -34,7 +34,6 @@ public class ShoppingCartServlet extends HttpServlet {
 		List<ProCartVO> buylist = (Vector<ProCartVO>) session.getAttribute("shoppingcart");
 		String action = req.getParameter("action");
 		String requestURL = req.getParameter("requestURL");
-		String mem_No =	req.getParameter("mem_No");					  
 System.out.println("購物車來源網頁: "+ requestURL);
 
 
@@ -62,7 +61,7 @@ System.out.println("購物車增加商品");
 						buylist.add(proCartVO);
 					}
 				}
-			}else if (action.equals("addPro2")) { //從最愛加入 購物車商品
+			}else if ("addPro2".equals(action)) { //從最愛加入 購物車商品
 System.out.println("從清單 放商品 到購物車");
 				ProCartVO proCartVO = getProCartVO2(req);
 				if (buylist == null) {
@@ -82,9 +81,9 @@ System.out.println("從清單 放商品 到購物車");
 			session.setAttribute("shoppingcart", buylist);
 			String url = null;
 			
-			if(requestURL.equals("/frontdesk/pro/cart.jsp")){
+			if("/frontdesk/pro/cart.jsp".equals(requestURL)){
 				url = "/frontdesk/pro/cart.jsp";
-				System.out.println("刪除購物車商品 回購物車 url: "+url);	
+System.out.println("刪除購物車商品 回購物車 url: "+url);	
 			}else{
 					
 				url = "/frontdesk/pro/showProIndex.jsp";

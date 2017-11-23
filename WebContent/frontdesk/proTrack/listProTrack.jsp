@@ -53,12 +53,13 @@ System.out.println("session取得的會員編號 "+mem_No);
 	
 %>
 <%
+
 	ProService proSvc = new ProService();
 	ProVO proVO = null;
 	if (listProTrack != null && (listProTrack.size() > 0)) {%>
 	<%
-	 for (int index = 0; index < listProTrack.size(); index++) {
-		 ProTrackVO proTrackVO = listProTrack.get(index);
+	 for (int index2 = 0; index2 < listProTrack.size(); index2++) {
+		 ProTrackVO proTrackVO = listProTrack.get(index2);
 		 String pro_No = proTrackVO.getPro_No();
 		 proVO= proSvc.getOnePro(pro_No);
 		 //算折扣價
@@ -76,22 +77,23 @@ System.out.println("session取得的會員編號 "+mem_No);
 		
 		<td width="100"><div align="center">
 		<form METHOD="post"   ACTION="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" >
-			<button type="submit" class="btn btn-warning" style="width: 100px;font-size:16px;">放入購物車</button>
-			<input type="hidden" name="proCar_No"  value="<%=pro_No%>">
-			<input type="hidden" name="mem_No"  value="<%=mem_No%>">
-			<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			<input type="hidden" name="action"	value="addPro2">	
+			
+			<input type="hidden" class="proCar_No"  value="<%=pro_No%>">
+			<input type="hidden" class="mem_No"  value="<%=mem_No%>">
+			<input type="hidden" class="requestURL" value="<%=request.getServletPath()%>">
+			<input type="hidden" class="action"	value="addPro2">	
+			<button type="button" class="btn btn-warning add2" style="width: 100px;font-size:16px;">放入購物車</button>
 		</form></div>
 		</td>
 		
 		
         <td width="100"><div align="center">
           <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proTrackServlet.do" method="POST" >
-              <input type="hidden" name="action"  value="deleteProTrack">
-              <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-              <input type="hidden" name="pro_No"  value="<%=pro_No%>">
-              <input type="hidden" name="mem_No" value="<%=mem_No%>">
-              <button type="submit" class="btn btn-danger"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 20px;">移除</button>
+              <input type="hidden" class="action" name="action"  value="deleteProTrack">
+              <input type="hidden" class="requestURL" value="<%=request.getServletPath()%>">
+              <input type="hidden" class="pro_No"  value="<%=pro_No%>">
+              <input type="hidden" class="mem_No" value="<%=mem_No%>">
+              <button type="button" class="btn btn-danger deletBtn2"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png" style="height: 20px;">移除</button>
           </form></div>
         </td>
 	</tr>
@@ -103,7 +105,97 @@ System.out.println("session取得的會員編號 "+mem_No);
 <% }else{%>
 	<H1 Style="text-align:center;">尚無商品</H1>
 <% }%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $( ".deletBtn2" ).on( "click", function( event ) {
+         var $item = $( this );         
+         swal({
+      title: 'Are you sure?',
+      text: "確定刪除商品嗎?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger'      
+    }).then(function () {
+     	
+    	var action = $item.parent().find("input.action").val();
+    	var requestURL = $item.parent().find("input.requestURL").val();
+    	var pro_No = $item.parent().find("input.pro_No").val();
+    	var mem_No = $item.parent().find("input.mem_No").val();
+     $.ajax({
+      type:"POST",
+      url:'<%=request.getContextPath()%>/pro/proTrackServlet.do',
+      data: "&action="+action+"&requestURL="+requestURL+"&pro_No="+pro_No+"&mem_No="+mem_No,
+//      dataType: "json",
+      dataType: "text",
+//       cache: true,           // 預設值為 true 防止快取
+//       async: false,           // 預設值為 true 非同步
+      success:function(response){
+       swal(
+        'Sucess!',
+        '已刪除此商品追蹤',
+        'success'
+       )
+       setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
+      }, // success end        
+      error:function(xhr, ajaxOptions, thrownError){
+       swal(
+         'Oops...',
+         '出錯瞜!',
+         'error'
+       )
+      } // error end
+     }) //.ajax end 
+    }); //then end
+         
+       }); //click end
+ });//document ready end
 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $( ".add2" ).on( "click", function( event ) {
+         var $item = $( this );         
+         swal(
+        	 'Sucess!',
+             '已放入購物車',
+             'success'      
+           ).then(function () {
+     	
+    	var action = $item.parent().find("input.action").val();
+    	var requestURL = $item.parent().find("input.requestURL").val();
+    	var proCar_No = $item.parent().find("input.proCar_No").val();
+    	var mem_No = $item.parent().find("input.mem_No").val();
+     $.ajax({
+      type:"POST",
+      url:'<%=request.getContextPath()%>/pro/shoppingCartServlet.do',
+      data: "&action="+action+"&requestURL="+requestURL+"&proCar_No="+proCar_No+"&mem_No="+mem_No,
+//      dataType: "json",
+      dataType: "text",
+//       cache: true,           // 預設值為 true 防止快取
+//       async: false,           // 預設值為 true 非同步
+      success:function(response){
+       
+       setTimeout(function(){location.reload()}, 500) ;   //重新刷新              
+      }, // success end        
+      error:function(xhr, ajaxOptions, thrownError){
+       swal(
+         'Oops...',
+         '出錯瞜!',
+         'error'
+       )
+      } // error end
+     }) //.ajax end 
+    }); //then end
+   }); //click end
+ });//document ready end
+
+</script>
 </body>
 </html>
