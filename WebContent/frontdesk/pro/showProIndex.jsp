@@ -370,56 +370,7 @@
 	</div>
 	<!-- 右2結束 -->
 <div class="col-xs-12 col-sm-12">
-	<footer class="text-center">
-      <div class="footer-above">
-        <div class="container">
-          <div class="row">
-            <div class="footer-col col-md-4">
-              <h2>Location</h2>
-              <p>桃園市平鎮區
-                <br>中央路300號</p>
-              <br><br>
-              <h2>Contact us</h2>
-              <p>03-3345678</p>
-            </div>
-            <div class="footer-col col-md-4">
-              <h3>Around the Web</h3>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="">
-                    <i class="fa fa-fw fa-facebook"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="">
-                    <i class="fa fa-fw fa-google-plus"></i>
-                  </a>
-                </li>
-                <li class="list-inline-item">
-                  <a class="btn-social btn-outline" href="">
-                    <i class="fa fa-fw fa-twitter"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="footer-col col-md-4">
-              <h3>QR code</h3>
-              <p>
-                <img src="<%=request.getContextPath()%>/lib/publicfile/include/img/QRcode/static_qr_code_100.jpg"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-below">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              Copyright &copy; POTM 2017
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+	
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top d-lg-none">
@@ -428,7 +379,7 @@
       </a>
     </div>
 
-<%-- 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include> --%>
+	<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
 </div>	
 </body>
 </html>

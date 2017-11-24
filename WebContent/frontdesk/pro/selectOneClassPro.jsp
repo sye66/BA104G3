@@ -73,9 +73,16 @@
 	font-size: 16px;
 	text-decoration: line-through;
 }
+.cartPro2{ 
+	width:918px;
+	border-bottom:3px #FFBA3B solid;
+	border-left:1px #CCC solid;
+	border-right:1px #CCC solid;
+	background-color: #DEFFFF;
+	
+}
 
 
-/* 跳窗 */
 
  
 
@@ -237,7 +244,7 @@
 <%-- 					<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No} ">   --%>
 					<c:if test="${proVO.pro_Status=='上架'}">
 						<p data-toggle="modal" data-target="#$(proVO.pro_No}">
-							<div class="col-xs-12 col-sm-3 proDiv">
+							<div class="col-xs-12 col-sm-4 proDiv">
 								<div class="card" style="width: 100%;">
 									
 									<div class="imgCont">

@@ -9,6 +9,8 @@
 <%@ page import="com.proorder.model.*"%>
 <html>
 <head>
+<title>購物車</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 <style>
@@ -58,7 +60,7 @@ window.onscroll = function() {
 	}
 </script>
 </head>
-<body>
+<body style="background-color: #ffc">
 <% 
 	int count = 0;
 	int count2 = 0;
@@ -133,7 +135,7 @@ window.onscroll = function() {
 				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
 				<td style="font-size:20px;text-align:center;height:24px;width:110px;">完成訂購</td>
 				<td style="width:100px;"></td>
-				<td><h3>您目前擁有積分共:&nbsp;<span style="color:red;font-size:36px;"><%=memVO.getMem_Point()%></span>&nbsp;點</h3></td>
+				<td><h3>您目前擁有積分共:&nbsp;<span style="color:red;font-size:36px;" id="haveMoney"><%=memVO.getMem_Point()%></span>&nbsp;點</h3></td>
 			</tr>
 		</table>
 		<br>
@@ -167,7 +169,7 @@ window.onscroll = function() {
 		 i++;
 		 ProCartVO order = buylist.get(index);
 	%>
-	<table class="cartPro" id="tab">	
+	<table class="cartPro" id="tab001">	
 		<tr>
 			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
@@ -183,17 +185,19 @@ window.onscroll = function() {
 				<div align="center">
 					<button type="button" class="min" style="width: 30px;">-</button>
 					<input type="text" class="text_box" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 30px;text-align:center">	
+					<input   type="hidden" class="pro_No"  value="<%=order.getProCar_No()%>">
 					<button type="button"  class="add"  style="width: 30px;">+</button>
 				</div>	
 			</td>
 			<td width="100">
-				<div>&nbsp;<span style="color:red;" id="minPrice"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
+				<div>&nbsp;<span style="color:red;" class="minPrice" id="minPrice"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
 			
         	<td width="100"><div align="center">
            <form name="deleteForm"  action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
               <input type="hidden" name="action"  value="deletePro">
               <input type="hidden" class="del" name="del" value="<%= index %>">
+               
               <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               <button type="button" class="btn btn-danger deletBtn" value="<%= index %>"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button>
 <%--               <button type="submit" class="btn btn-danger "><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button> --%>
@@ -208,21 +212,19 @@ window.onscroll = function() {
 <!-- 			<div class="col-xs-12 col-sm-2"> -->
 		</div>
 	</div>
-		<%if(memVO.getMem_Point()<totalPrice){%>
 			<form name="checkoutForm" action="<%=request.getContextPath()%>/frontdesk/stored_history/rechage_credit.jsp" method="POST" style="margin-bottom: 0px;">
               
-              <button type="submit" class="btn btn-danger" style="width:100%;height:60px;font-size:30px">請儲值</button>
+              <button id="noMoney" type="submit" class="btn btn-danger" style="width:100%;height:60px;font-size:30px;display:none;">請儲值</button>
           </form>
-		<%}else{ %>
 			
 	
 
           <form name="checkoutForm" action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
-              <input type="hidden" name="action"  value="checkOut"> 
-              <button type="submit" class="btn btn-warning" style="width:100%;height:60px;font-size:30px">付款結帳</button>
+              <input   type="hidden" name="action"  value="checkOut"> 
+             
+              <button id="checkOut" type="submit" class="btn btn-warning" style="width:100%;height:60px;font-size:30px;display:none;">付款結帳</button>
         
           </form>
-          <%} %>
 <% }else{%>
 	<H1 Style="text-align:center;background-color:#FFFFBB;">尚無商品<a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">快到商城購物</a></H1>
 <% }%>
@@ -255,56 +257,91 @@ window.onscroll = function() {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
 <script type="text/javascript">
-$(function(){   
+$(function(){
+	var qun = 0;
+	var pro_No = "";
 	$(".add").click(function(){  
-	        var t = $(this).parent().find('input.text_box'); 
-	        t.val(parseInt(t.val())+1); 
-	        minTotal();
-	        setTotal();  
+		var t = $(this).parent().find('input.text_box'); 
+        t.val(parseInt(t.val())+1);
+       
+        qun = parseInt(t.val());
+        
+        pro_No = $(this).parent().find("input.pro_No").val();
+        
+    	var price = $(this).parent().parent().parent().find("span.price0001").text();
+    	var minPrice =$(this).parent().parent().parent().find("span.minPrice");	  
+    	var sum = t.val()*price;	
+    		minPrice.text(sum);
+    		setTotal();
 	    })  
 	  
 	    $(".min").click(function(){  
-	        var t = $(this).parent().find("input.text_box");  
+	    	var  t = $(this).parent().find("input.text_box");  
 	        t.val(parseInt(t.val())-1);  
-	        if(parseInt(t.val())<0){  
-	            t.val(0);  
-	        }  
-	        minTotal();
-	        setTotal()  
-	    })  
-	     function minTotal(){  
-		 var sum = 0;  
-		 var num =$(this).parent().find("input.text_box").val();
-			var price = $(this).parent().parent().parent().find("span.price0001").text(); 
-		  alert(num);       
-		  alert(price);      
-		        
-		  })
-		
-	}  
-	    function setTotal(){  
-	        var sum = 0;  
-	        $("#tab td").each(function(){  
-	          
-	        var num = parseInt($(this).find("input[class*=text_box]").val()); 
-	        var price = parseInt($(this).find("span[class*=price]").text());  
-	        price=price*1;
-	        console.log("num="+num+!isNaN(num));
-	        console.log("price="+price+!isNaN(price));
-	        console.log("===================");
-	        	if(isNaN(num)){
-        			num=1;	
-        		}
-	        	if(isNaN(price)){
-	        		price=1;
-	        	}
-	        	sum += num*price;
+	        if(parseInt(t.val())<1){  
+	            t.val(1);  
+	        }
 	        
-	        })  
-	        $("#total").html(sum.toFixed(0));  
-	    }  
-	    setTotal();  
-	  
+	        qun = parseInt(t.val()-1);
+	        if(qun<1){  
+	            qun=1;  
+	        }
+	        
+	        pro_No = $(this).parent().find("input.pro_No").val();
+	        
+	        var price = $(this).parent().parent().parent().find("span.price0001").text();
+		    var minPrice =$(this).parent().parent().parent().find("span.minPrice");	  
+		    var sum = t.val()*price;	
+		    	minPrice.text(sum);	
+		    	setTotal();
+	    })  
+	    function setTotal(){  
+        var sum = 0;  
+        var haveMoney = $("#haveMoney").text(); 
+         $("#tab001 tr td ").each(function(){  
+          
+        var a =  $(this).find("span[class*=minPrice]").text();
+        if(!isNaN(parseInt(a))){
+        	  sum += parseInt(a);
+        }
+       
+        if(sum>haveMoney){
+        	$("#noMoney").css('display', 'initial');
+        	$("#checkOut").css('display', 'none');
+        }
+        if(sum<=haveMoney){
+        	$("#checkOut").css('display', 'initial');
+        	$("#noMoney").css('display', 'none');
+        	
+        }
+        
+        })  
+        $("#total").html(sum.toFixed(0));
+         
+        if(!pro_No==""){
+     	
+         $.ajax({
+             type:"POST",
+             url:'<%=request.getContextPath()%>/pro/shoppingCartServlet.do',
+             data:"&action="+'changePro'+"&pro_No="+pro_No+"&qun="+qun, 
+//             dataType: "json",
+             dataType: "text",
+//              cache: true,           // 預設值為 true 防止快取
+//              async: false,           // 預設值為 true 非同步
+             success:function(response){
+             
+             }, // success end        
+             error:function(xhr, ajaxOptions, thrownError){
+              swal(
+                'Oops...',
+                '出錯瞜!',
+                'error'
+              )
+             } // error end
+            }) //.ajax end 
+        }//if 
+    }  
+    setTotal();  
 	}) 
 </script>
 
@@ -357,5 +394,9 @@ $(document).ready(function(){
 
 
 <br><br>
+
+<div class="col-xs-12 col-sm-12">
+		<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
+</div>	
 </body>
 </html>
