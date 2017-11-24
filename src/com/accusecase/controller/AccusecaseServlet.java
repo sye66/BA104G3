@@ -58,22 +58,20 @@ public class AccusecaseServlet extends HttpServlet {
 					
 					return;
 			}
-			try {
+//			try {
 				String mission_No = (String) req.getParameter("mission_No");
 				String accuse_Detail = (String) req.getParameter("accuse_Detail");
 				GetMissionService GetMissionSvc = new GetMissionService();
 				GetMissionVO getMissionVO = new GetMissionVO();
-				if (GetMissionSvc.getOneMission(mission_No) == null) {
-				}
 				Integer mission_State = GetMissionSvc.getOneMission(mission_No).getMission_State();
 				AccuseCaseService accuseCaseSevc = new AccuseCaseService();
 				AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
-
 				if (!issuer_No.equals(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
-						
+						System.out.println("111111");
 						if(mission_State == 1 || mission_State == 7){
+							System.out.println("22222222");
 							mission_State = 7;
 						}else{
 							mission_State = 72;
@@ -91,33 +89,31 @@ public class AccusecaseServlet extends HttpServlet {
 				}
 
 				if (errorMsgs.size() != 0) {
-					obj.put("errormessage", errorMsgs);
+//					obj.put("errormessage", errorMsgs);
 
 				} else {
 					String value = "檢舉成功~";
-					obj.put("message", value);
+//					obj.put("message", value);
 
 				}
 				out.write(obj.toString());
-				
 				getMissionVO = GetMissionSvc.getOneMission(mission_No);
 				req.setAttribute("getMissionVO", getMissionVO);
 				req.setAttribute("accuseCaseVO", accuseCaseVO);
-				req.setAttribute("mem_No", memVO.getMem_No());
 				req.setAttribute("errorMsgs", errorMsgs);
 				String url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);
 				out.flush();
 				out.close();
-			} catch (Exception e) {
-				System.out.println(e);
-				errorMsgs.add("檢舉失敗:" + e.getMessage());
-				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher("");
-				failureView.forward(req, res);
-				return;
-			}
+//			} catch (Exception e) {
+//				System.out.println(e);
+//				errorMsgs.add("檢舉失敗:" + e.getMessage());
+//				req.setAttribute("errorMsgs", errorMsgs);
+//				RequestDispatcher failureView = req.getRequestDispatcher("");
+//				failureView.forward(req, res);
+//				return;
+//			}
 
 		}
 		
@@ -157,7 +153,6 @@ public class AccusecaseServlet extends HttpServlet {
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
 				if (!issuer_No.equals(memVO.getMem_No()) ) {
 					if ( mission_State == 7 || mission_State == 72) {
-						System.out.println("2222");
 						if(mission_State == 7 ){
 							mission_State = 1;
 						}else if(mission_State == 72 && accuseCaseSevc.getCaseBymission(mission_No)==null){
@@ -193,7 +188,6 @@ public class AccusecaseServlet extends HttpServlet {
 				getMissionVO = GetMissionSvc.getOneMission(mission_No);
 				req.setAttribute("getMissionVO", getMissionVO);
 				req.setAttribute("accuseCaseVO", accuseCaseVO);
-				req.setAttribute("mem_No", memVO.getMem_No());
 				req.setAttribute("errorMsgs", errorMsgs);
 				String url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
