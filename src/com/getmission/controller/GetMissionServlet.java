@@ -308,11 +308,11 @@ public class GetMissionServlet extends HttpServlet {
 			/**
 			 * @author Sander
 			 * 簡訊功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 * 
 			 */
 			String[] tel = {takeCase_MemVO.getMem_Pho()};
 			TelMessage telMessage = new TelMessage();
 			telMessage.sendMessage(tel, messageText);
-			
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
