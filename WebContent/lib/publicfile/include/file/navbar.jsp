@@ -69,10 +69,10 @@
             
            
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
+              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
             </li>
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
+              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
              <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>

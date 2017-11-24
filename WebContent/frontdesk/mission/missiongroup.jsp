@@ -30,56 +30,70 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br><br><br><br><br>
 	<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-3">
 <c:if test="${not empty errorMsgs}">
 <div>${errorMsgs}</div>
 </c:if>
 ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
+		
+			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+				
+			<button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
+
+			</form>
+
+			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+				
+			<button class="btn btn-info" type="submit" name="action" value="mymission">我的案子</button>
+
+			</form>
 
 
+			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+				
+			<button class="btn btn-info" type="submit" name="action" value="missionwait">目前接案等待</button>
 
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-	
-<button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
+			</form>
 
-</form>
+			<c:if test="${getMissionSvc.successGetMission(memVO.mem_No).size() != 0  }">
+			<c:forEach var="missionstate" items="${getMissionSvc.successGetMission(memVO.mem_No)}" varStatus="state" step="1">
+			<c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }" >
+			<c:set var="alright" value="true"></c:set>
+			</c:if>
+			</c:forEach>
+			<c:if test="${alright}">
+			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+			<button class="btn btn-danger" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
+			</form>
+			</c:if>
+			</c:if>
+			<c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
+			<c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
+			<c:if test="${missionstate2.mission_State == 3 ||missionstate2.mission_State == 4 }" >
+			<c:set var="ok" value="true"></c:set>
+			</c:if>
+			</c:forEach>
+			<c:if test="${ok}">
+			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
+			<button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
+			</form>
+			</c:if>
+			</c:if>
 
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-	
-<button class="btn btn-info" type="submit" name="action" value="mymission">我的案子</button>
 
-</form>
+		</div>
+		<div class="col-xs-12 col-sm-9">
+			
 
 
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-	
-<button class="btn btn-info" type="submit" name="action" value="missionwait">目前接案等待</button>
+		</div>
+	</div>
+</div>
 
-</form>
 
-<c:if test="${getMissionSvc.successGetMission(memVO.mem_No).size() != 0  }">
-<c:forEach var="missionstate" items="${getMissionSvc.successGetMission(memVO.mem_No)}" varStatus="state" step="1">
-<c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }" >
-<c:set var="alright" value="true"></c:set>
-</c:if>
-</c:forEach>
-<c:if test="${alright}">
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-<button class="btn btn-danger" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
-</form>
-</c:if>
-</c:if>
-<c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
-<c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
-<c:if test="${missionstate2.mission_State == 3 ||missionstate2.mission_State == 4 }" >
-<c:set var="ok" value="true"></c:set>
-</c:if>
-</c:forEach>
-<c:if test="${ok}">
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-<button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
-</form>
-</c:if>
-</c:if>
 
 <input type="hidden" id=" " >
 <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
@@ -88,7 +102,29 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 
 
 <script>
-    
+function getInfo(){	
+	  var xhr = new XMLHttpRequest();
+	  //設定好回呼函數 
+	  xhr.onreadystatechange = function (){
+	    if( xhr.readyState == 4 ){
+	      if(xhr.status == 200){
+	        document.getElementById("showPanel").innerHTML = 
+	        xhr.responseText;
+	      }else{
+	        alert( xhr.status);
+	      }//xhr.status == 200
+	    }//xhr.readyState == 4
+	  }//onreadystatechange
+	  
+	  //建立好Post連接
+	  var url = "PostResponseText.jsp";
+	  xhr.open("post", url , true);
+
+	  xhr.setRequestHeader("content-type" , "application/x-www-form-urlencoded");
+	  //送出請求
+	  var date_info = "memId=" + document.getElementById("memId").value;
+	  xhr.send( date_info );
+	}//function 
  
     
 </script>

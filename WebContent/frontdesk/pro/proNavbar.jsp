@@ -490,13 +490,13 @@
 							<li class="nav-item">
 								<h3>
 									<a class="nav-link js-scroll-trigger"
-										href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i
+										href="#contact"><i
 										class="glyphicon glyphicon-send"></i> 發案區 </a>
 								</h3>
 							</li>
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger" href="#contact"><i
+									<a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i
 										class="glyphicon glyphicon-screenshot"></i> 接案區 </a>
 								</h3>
 							</li>
