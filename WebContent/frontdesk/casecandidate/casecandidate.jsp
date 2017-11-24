@@ -127,8 +127,8 @@
 								</div>
 								<td>
 									<div class="panel-body">
-										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
-										<button class="btn-lg btn-success" type="submit" name="action" value="chatting">和他聊天~</button>
+										<form method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No}" name="getmission3">
+										<button onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No} ', 'Yahoo', config='height=500,width=550')" class="btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
 										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
 										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 										</form>
