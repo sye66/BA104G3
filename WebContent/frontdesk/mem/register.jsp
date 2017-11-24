@@ -147,7 +147,7 @@
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-6">
 			<div id="bday_right"class="form-group">生日
-            <input type="TEXT" id="mem_Bday" name="mem_Bday" size="36" id="f_date1" class="form-control input-lg" tabindex="3"/>
+            <input type="TEXT" name="mem_Bday" size="36" id="f_date1" class="mem_Bday form-control input-lg" tabindex="3"/>
     		</div>	
 			</div>
 			</div>
@@ -336,7 +336,7 @@
 			$('#mem_Id').val("高雄陳柏霖");
 			$('#mem_Tel').val("07-3345678");
 			$('#mem_Pho').val("0978-449449");
-			$('#mem_Bday').val("mem_Bday");
+			$('.mem_Bday').val("1988-08-06");
 			$('#mem_Address').val("桃園市中壢區中大路300號1樓之1");
 			$('#mem_Intro').val("大家好我是高雄陳柏霖，看到這個平台感覺可以藉由幫助他人認是更多朋友，請多指教	");
 

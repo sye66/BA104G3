@@ -223,11 +223,23 @@ public class Stored_HistoryServlet extends HttpServlet{
 		} //update end
 		
 		if ("insert".equals(action)){// 來自addStored.jsp的請求
+			
+			//防止按F5重新送出
+			String finish = req.getParameter("finish");
+			System.out.println(finish);
+			if(finish == null){
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				return;
+			}
+				
 			System.out.println("stored_Date2 :"  );
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("stored_Date0 :"  );		
-//			try{
+			System.out.println("stored_Date0 :"  );
+			
+			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 //				String stored_no = new String(req.getParameter("stored_no").trim());
 				System.out.println("stored_Date2 :"  );
@@ -235,7 +247,6 @@ public class Stored_HistoryServlet extends HttpServlet{
 				if (mem_No == null || mem_No.trim().length() ==0 ){
 					errorMsgs.add("請輸入會員編號");
 				}
-				System.out.println("stored_Date3 :"  );
 				
 				
 				Timestamp stored_Date = new Timestamp(System.currentTimeMillis());
@@ -245,14 +256,18 @@ public class Stored_HistoryServlet extends HttpServlet{
 				Integer stored_Type;
 				try{
 					stored_Type = new Integer(req.getParameter("stored_Type").trim());
-//					String stored_Type_reg = "^(1-3){1}$";
 				} catch (NumberFormatException e){
-					errorMsgs.add("請修改正確付款方式  (1.點數卡 ;2.信用卡 ;3.線上第三方支付");
+					errorMsgs.add("請修改正確付款方式  (1.點數卡 ;2.信用卡");
 					stored_Type = null;
 				}
 				
 				Integer stored_Cost = new Integer(req.getParameter("stored_Cost").trim());
-				
+				try{
+				if(stored_Cost < 1 || stored_Cost > 10000000)
+					errorMsgs.add("請輸入正確金額");
+				}catch (NumberFormatException e){
+					errorMsgs.add("請勿輸入數字以外的字母或符號");
+				}	
 				StoredVO storedVO = new StoredVO();
 				
 				
@@ -275,11 +290,51 @@ public class Stored_HistoryServlet extends HttpServlet{
 				mem_Point = mem_Point_old + stored_Cost;
 				
 				memVO.setMem_Point(mem_Point);
-				String cn = req.getParameter("card_number");
+				
+				
+				String cn1 = req.getParameter("card_number1");
+				String cn2 = req.getParameter("card_number2");
+				String cn3 = req.getParameter("card_number3");
+				String cn4 = req.getParameter("card_number4");
+				String cn_reg = "^[0-9]{4}$";
+				if (cn1 == null || cn1.trim().length() ==0 )
+					errorMsgs.add("請輸入信用卡號碼");
+					if (cn2 == null || cn2.trim().length() ==0 )
+						errorMsgs.add("請輸入信用卡號碼");
+						if (cn3 == null || cn3.trim().length() ==0 )
+							errorMsgs.add("請輸入信用卡號碼");
+							if (cn4 == null || cn4.trim().length() ==0 )
+								errorMsgs.add("請輸入信用卡號碼");
+				else if(!cn1.trim().matches(cn_reg) ||!cn2.trim().matches(cn_reg) ||!cn3.trim().matches(cn_reg) ||!cn4.trim().matches(cn_reg)){
+					errorMsgs.add("請輸入正確信用卡號碼");
+				}
+				
 				String fn = req.getParameter("full_name");
-				String my = req.getParameter("mmyy");
+				String fn_reg = "^[a-zA-Z-]{2,10}[a-zA-Z-]{2,10}[a-zA-Z-]{2,10}$";
+				if (fn == null || fn.trim().length() ==0 ){
+					errorMsgs.add("請輸入姓名");
+					System.out.println("fn +"+ fn);
+				}else if(!fn.trim().matches(fn_reg)){
+					errorMsgs.add("請輸入正確姓名");
+					System.out.println("fn +"+ fn);
+				}
 				
+				String mm = req.getParameter("mm");
+				String mm_reg = "^([0?][1-9]|1[012])$";
+				if (mm == null || mm.trim().length() ==0 ){
+					errorMsgs.add("請輸入信用卡有效日期");
+				} else if(!mm.trim().matches(mm_reg)){
+					errorMsgs.add("請輸入正確信用卡號碼");
+				}
+				String yy = req.getParameter("yy");
+				String yy_reg = "^([1?][7-9]|[2?][0-9])$";
+				if (yy == null || yy.trim().length() ==0 ){
+					errorMsgs.add("請輸入信用卡有效日期");
+				}else if(!yy.trim().matches(yy_reg)){
+					errorMsgs.add("請輸入正確信用卡號碼");
+				}
 				
+				req.removeAttribute(finish);	//防止按F5重新送出
 				
 				
 				System.out.println("mem_Point "+mem_Point);
@@ -291,9 +346,13 @@ public class Stored_HistoryServlet extends HttpServlet{
 				System.out.println("stored_Cost " + stored_Cost);
 				
 				if (!errorMsgs.isEmpty()){
-					req.setAttribute("card_number", cn);
+					req.setAttribute("card_number1", cn1);
+					req.setAttribute("card_number2", cn2);
+					req.setAttribute("card_number3", cn3);
+					req.setAttribute("card_number4", cn4);
 					req.setAttribute("full_name", fn);
-					req.setAttribute("mmyy", my);
+					req.setAttribute("mm", mm);
+					req.setAttribute("yy", yy);
 					req.setAttribute("storedVO", storedVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/rechage_credit.jsp");
 					failureView.forward(req, res);
@@ -316,11 +375,15 @@ public class Stored_HistoryServlet extends HttpServlet{
 				
 				System.out.println("memVO " + memVO);
 				
-				req.setAttribute("card_number", cn);
+				req.setAttribute("card_number1", cn1);
+				req.setAttribute("card_number2", cn2);
+				req.setAttribute("card_number3", cn3);
+				req.setAttribute("card_number4", cn4);
 				req.setAttribute("full_name", fn);
-				req.setAttribute("mmyy", my);
+				req.setAttribute("mm", mm);
+				req.setAttribute("yy", yy);
 				
-				
+			
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.getSession().setAttribute("memVO", memVO);
@@ -332,14 +395,14 @@ public class Stored_HistoryServlet extends HttpServlet{
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res); 
 				
-				
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add("修改資料失敗 :" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge.jsp");
-//				failureView.forward(req, res);
-//			}
-		} //insert end
+			} catch (Exception e){
+				errorMsgs.add("輸入資料失敗 :" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/rechage_credit.jsp");
+				failureView.forward(req, res);
+			}
+		} 
+		//insert end
 		
 		if("delete".equals(action)){
 			List<String> errorMsgs =new LinkedList<String>();
