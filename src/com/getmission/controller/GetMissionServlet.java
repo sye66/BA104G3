@@ -21,6 +21,7 @@ import com.getmission.model.*;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.tool.controller.TelMessage;
 
 import sun.util.resources.cldr.aa.CalendarData_aa_ER;
 
@@ -303,6 +304,14 @@ public class GetMissionServlet extends HttpServlet {
 			// 驗證碼
 			String messageText = String.format("您的接案任務驗證碼為: %s%s", mission_No,takeCase_MemVO.getMem_No());
 			mailService.sendMail(to, subject, messageText);
+			
+			/**
+			 * @author Sander
+			 * 簡訊功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 */
+			String[] tel = {takeCase_MemVO.getMem_Pho()};
+			TelMessage telMessage = new TelMessage();
+			telMessage.sendMessage(tel, messageText);
 			
 			// try {
 			/***************************
