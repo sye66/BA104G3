@@ -16,6 +16,7 @@ import com.ach_detail.model.Ach_DetailService;
 import com.ach_detail.model.Ach_DetailVO;
 import com.achieve.model.AchieveService;
 import com.achieve.model.AchieveVO;
+import com.mem.model.MemVO;
 
 
 @WebServlet("/Ach_DetailServlet")
@@ -174,23 +175,28 @@ public class Ach_DetailServlet extends HttpServlet {
 		}
 		
 		if("achieve_Detail".equals(action)){
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			String requestURL = req.getParameter("requestURL");
 			
- 			String mem_No = (String) req.getSession().getAttribute("memVO");
  			try{
+ 				List<AchieveVO> achieveVO = null ;
+ 				MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+ 				String mem_No = memVO.getMem_No();
  				Ach_DetailService achdSvc = new Ach_DetailService();
  				List<Ach_DetailVO> ach_detailVO = achdSvc.getPersonal(mem_No);
+ 				
  				AchieveService achieveSvc = new AchieveService();
- 				List<AchieveVO> list = null;
- 				for(int i = 0; i < ach_detailVO.size();i++){
- 					list.add();
+ 				for(int i =0;i < ach_detailVO.size();i++){
+ 					achieveVO = achieveSvc.getThree(ach_detailVO.get(i).getAch_No());
  				}
- 				achieveSvc.getThree(ach_No);
+ 				
+ 				req.setAttribute("achieveVO", achieveVO);
+		
+ 				
  			}catch (Exception e) {
-				errorMsgs.add("資料取出時失敗:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+				String url = "/frontdesk/personal/PersonalPage.jsp";
+				RequestDispatcher failureView = req.getRequestDispatcher(url);
 				failureView.forward(req, res);
 			}
 		}

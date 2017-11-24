@@ -3,6 +3,7 @@ package com.mem.model;
 import java.util.*;
 
 import com.relation.model.RelationVO;
+import com.rank.model.RankVO;
 
 public interface MemDAO_interface {
 	public MemVO loginMem(String mem_Email);
@@ -19,5 +20,6 @@ public interface MemDAO_interface {
 	public void recharge(MemVO memVO);
 	public void updateMemPoint(MemVO memVO);
 	public void updateByEmp(MemVO memVO);
-//	public void select(MemVO memVO); 
+//	public void select(MemVO memVO);
+	
 }

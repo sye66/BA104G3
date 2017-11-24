@@ -12,6 +12,8 @@
 	Ach_DetailService achdSvc = new Ach_DetailService();
 	List<Ach_DetailVO> list = achdSvc.getPersonal(mem_No);
 	pageContext.setAttribute("list",list);
+	AchieveService achieveSvc = new AchieveService();
+	List<Achieve> list = achieveSvc.getThree(ach_No); 
 
 %>
 
@@ -54,12 +56,8 @@
  				    	</tr>
  				    	<tr>
  				    		<td>
- 				    			<a href="#"><span class="icon icon-pencil"></span>技能修改</a>
- 				    		</td>
- 				    	</tr>
- 				    	<tr>
- 				    		<td>
- 				    			<a href="#"><span class="icon icon-pencil"></span>更換頭像</a>
+ 				    			<a href="<%=request.getContextPath()%>/frontdesk/mem/memUpdateFile.jsp"><span class="icon icon-pencil">
+ 				    			</span>修改個人資料</a>
  				    		</td>
  				    	</tr>
  				    	<tr>
@@ -97,13 +95,14 @@
 							</c:forEach>
 							</tbody>
 							<div class="panel-body">
-										<form method="post"
-											action="<%=request.getContextPath()%>/ach_detail/ach_detail.do">
-											<button class="btn btn-warning" type="submit" name="action"
-												value="achieve_Detail">成就細節</button>
-										</form>
-									</div>
-						</table>	
+								<form method="post"
+									action="<%=request.getContextPath()%>/ach_detail/ach_detail.do">
+									<button class="btn btn-warning" type="submit" name="action"
+										value="achieve_Detail">成就細節</button>
+								</form>
+							</div>
+						</table>
+							
 					  </div>
 				</div>
  			</div>

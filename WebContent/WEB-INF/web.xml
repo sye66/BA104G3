@@ -275,6 +275,14 @@
     <url-pattern>/comp/comp.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>RankServlet</servlet-name>
+    <servlet-class>com.rank.controller.RankServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RankServlet</servlet-name>
+    <url-pattern>/rank/rank.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ArtiFormServlet</servlet-name>
     <servlet-class>com.artiForm.controller.ArtiFormServlet</servlet-class>
   </servlet>

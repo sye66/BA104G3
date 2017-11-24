@@ -15,7 +15,7 @@
 	<div class="col-xs-12 col-sm-2  left01" >
 	
 	<!-- 標籤面板：內容區 -->
-		<div role="" class="tab-pane active " id="tab1">
+		<div role="" class="tab-pane active ">
 			<div class="list-group">
 				<a href="<%=request.getContextPath()%>/backdesk/schedule/Schedule.jsp" class="list-group-item">&nbsp;&nbsp;排程管理</a> 
 			</div>

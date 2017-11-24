@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%Integer count = 1;%>
+<%Integer count2 = 1;%>
+<%Integer count3 = 1;%>
+<%Integer count4 = 1;%>
+<%Integer count5 = 1;%>
+<%Integer count6 = 1;%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,17 +77,37 @@
 		    </ul>
 		
 		    <!-- 標籤面板：內容區 -->
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
 		    <div class="tab-content">
-		        <div class="col-xs-12 col-sm-6 role="tabpanel" class="tab-pane active" id="tab1">
-		        	<%
-		        		for(int i=0;i<10;i++){%>
-		        			第<%=count++%>名<br>
-		        			
-		        		<%}%>
+		        <div role="tabpanel" class="tab-pane active" id="tab1">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count++%>名&nbsp;&nbsp;
+						        請頒發一周數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewarda" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward">
 		        </div>
-		        <div role="tabpanel" class="tab-pane" id="tab2">頭條標籤的內容</div>
-		        <div role="tabpanel" class="tab-pane" id="tab3">最新標籤的內容</div>
+		        <div role="tabpanel" class="tab-pane" id="tab2">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count2++%>名&nbsp;&nbsp;
+						        請頒發一月數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardb" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward2">
+		        </div>
+		        <div role="tabpanel" class="tab-pane" id="tab3">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count3++%>名&nbsp;&nbsp;
+						        請頒發一季數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardc" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward3">
+		        </div>
 		    </div>
+		    </FORM>
 		</div>
 		</div>
 		<div class="col-xs-12 col-sm-6">
@@ -101,11 +126,37 @@
 		    </ul>
 		
 		    <!-- 標籤面板：內容區 -->
+		    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
 		    <div class="tab-content">
-		        <div role="tabpanel" class="tab-pane active" id="tab4">熱門標籤的內容</div>
-		        <div role="tabpanel" class="tab-pane" id="tab5">頭條標籤的內容</div>
-		        <div role="tabpanel" class="tab-pane" id="tab6">最新標籤的內容</div>
+		        <div role="tabpanel" class="tab-pane active" id="tab4">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count4++%>名&nbsp;&nbsp;
+						        請頒發一周積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardd" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward4">
+		        </div>
+		        <div role="tabpanel" class="tab-pane" id="tab5">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count5++%>名&nbsp;&nbsp;
+						        請頒發一月積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewarde" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward5">
+		        </div>
+		        <div role="tabpanel" class="tab-pane" id="tab6">
+		        	<%for(int i=0;i<10;i++){%>
+		        		第<%=count6++%>名&nbsp;&nbsp;
+						        請頒發一季積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardf" size="5px">&nbsp;點   
+		        		<br>
+		        	<%}%>
+		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
+					<input type="hidden" name="action" value="payReward6">
+		        </div>
 		    </div>
+		    </FORM>
 		</div>
 		</div>
 	</div>

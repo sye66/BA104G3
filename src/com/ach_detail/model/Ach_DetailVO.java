@@ -1,11 +1,13 @@
 package com.ach_detail.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Ach_DetailVO {
 	private String mem_No;
 	private String ach_No;
 	private Date ach_Time;
+	private List<String> allAch_No;
 	
 	public String getMem_No() {
 		return mem_No;
@@ -16,6 +18,11 @@ public class Ach_DetailVO {
 	public String getAch_No() {
 		return ach_No;
 	}
+	
+	public List<String> getAllAch_No(){
+		return allAch_No;
+	}
+	
 	public void setAch_No(String ach_No) {
 		this.ach_No = ach_No;
 	}

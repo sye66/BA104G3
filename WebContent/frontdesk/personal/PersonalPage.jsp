@@ -54,11 +54,6 @@
  				    	</tr>
  				    	<tr>
  				    		<td>
- 				    			<a href="#"><span class="icon icon-pencil"></span>技能修改</a>
- 				    		</td>
- 				    	</tr>
- 				    	<tr>
- 				    		<td>
  				    			<a href="<%=request.getContextPath()%>/frontdesk/mem/memUpdateFile.jsp"><span class="icon icon-pencil">
  				    			</span>修改個人資料</a>
  				    		</td>

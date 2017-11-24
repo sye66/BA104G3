@@ -43,7 +43,7 @@
   		<ol class="breadcrumb">
     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">員工管理</li>
+    		<li class="breadcrumb-item active" aria-current="page">員工授權</li>
   		</ol>
 	</nav>
 	</div>
