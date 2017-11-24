@@ -21,10 +21,10 @@ public class MemService {
 		return dao.loginMem(mem_Email);
 	}
 	
-	public MemVO findByMemId(String mem_Id) {
-		
-		return dao.findByMemId(mem_Id);
-	}
+//	public MemVO findByMemId(String mem_Id) {
+//		
+//		return dao.findByMemId(mem_Id);
+//	}
 	
 
 	public MemVO recharge(MemVO memVO) {

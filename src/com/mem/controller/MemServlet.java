@@ -128,6 +128,17 @@ public class MemServlet extends HttpServlet{
 		
 		
 		if ("registerNew".equals(action)){// 來自addMem.jsp的請求
+			
+			//防止按F5重新送出
+//			String finish = req.getParameter("finish");
+//			System.out.println(finish);
+//			if(finish == null){
+//				String url = "/frontdesk/mem/register_success.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, res);
+//				return;
+//			}
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
@@ -320,7 +331,7 @@ public class MemServlet extends HttpServlet{
 				/***************************mail區塊 1***************************************/
 				
 				
-				
+//			    req.removeAttribute(finish);	//防止按F5重新送出
 
 				memVO.setMem_Pw(mem_Pw);
 				memVO.setMem_Name(mem_Name);
