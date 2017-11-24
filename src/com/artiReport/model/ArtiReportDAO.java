@@ -42,7 +42,7 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  ARTI_CLS_NO=?, REPORT_STATUS=? where REPORT_NO =?";
 	
 	private static final String UPDATE_ARTI_STATUS = 
-			"UPDATE ARTI_FORM set ARTI_STATUS='有檢舉' where ARTI_NO =?";
+			"UPDATE ARTI_FORM set ARTI_STATUS='有檢舉未處理' where ARTI_NO =?";
 
 	@Override
 	public void insertReport(ArtiReportVO artiReportVO) {

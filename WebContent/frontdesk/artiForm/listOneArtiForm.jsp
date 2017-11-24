@@ -41,6 +41,7 @@
 div {
   word-wrap:break-word;
   word-break:normal;
+  style="font-family:Microsoft JhengHei;
 }
 
   table#table-1 {
@@ -66,13 +67,7 @@ div {
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-   
+   <br><br><br><br><br><br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-12 widget-container-center">
@@ -99,7 +94,7 @@ div {
              </div>
              <div class="widget-toolbar">
                  <div class="" style="width:100px;">
-                     <div class="" style="">${artiFormVO.arti_Like}</div>
+                     <div class="" style=""> 目前人氣 : ${artiFormVO.arti_Like}</div>
                  </div>
              </div>
          </div>
@@ -119,13 +114,14 @@ div {
                                   <div class="widget-main padding-6">
                                   <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-	                              <p>${artiFormVO.mem_No}&${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
+	                               <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+	                              <p >${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
                                   </div>
                                </div>
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <h4>詳細內文 : </h4><br>
-                                   <font size="4">${artiFormVO.describe}</font>
+                                  <h4 style="font-family:Microsoft JhengHei;">詳細內文 : </h4><br>
+                                   <font size="4" style="font-family:Microsoft JhengHei;">${artiFormVO.describe}</font>
                                   </div>
                                </div>
                            </div>

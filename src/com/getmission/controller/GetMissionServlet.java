@@ -21,6 +21,7 @@ import com.getmission.model.*;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.tool.controller.TelMessage;
 
 import sun.util.resources.cldr.aa.CalendarData_aa_ER;
 
@@ -256,6 +257,7 @@ public class GetMissionServlet extends HttpServlet {
 																// 可能為【/getmission/getmission.jsp】
 																// 或
 																// 【/getmission/mission_Detail.jsp】
+			// 發案人的MemVO
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
@@ -263,7 +265,6 @@ public class GetMissionServlet extends HttpServlet {
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
-			
 				return;
 			}else if (memVO.getMem_State() == 0) {
 					errorMsgs.add("請驗證再來喔");
@@ -271,7 +272,6 @@ public class GetMissionServlet extends HttpServlet {
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 					failureView.forward(req, res);
-					
 					return;
 			}
 
@@ -282,6 +282,36 @@ public class GetMissionServlet extends HttpServlet {
 			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			AccuseCaseService accuseCaseService = new AccuseCaseService();
 			List<AccuseCaseVO> accuseCaseList = accuseCaseService.getCaseBymission(mission_No);
+			
+			
+			/**
+			 * @author Sander
+			 * 送信功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 * @param to 			對方email位置
+			 * @param subject 		主題
+			 * @param messageText	內容
+			 * 驗證碼為任務編號 + 發案人編號
+			 */
+			
+			MemService memService = new MemService();
+			MemVO takeCase_MemVO = memService.getOneMem(takecase_Mem_No);
+			MailService mailService = new MailService();
+			// 接案人的email
+			String to = takeCase_MemVO.getMem_Email();
+			// 主旨:接案人姓名 + 任務編號
+			String subject = String.format("恭喜%s! 您已成為任務編號:%s 之接案人!", takeCase_MemVO.getMem_Name(),
+											mission_No);
+			// 驗證碼
+			String messageText = String.format("您的接案任務驗證碼為: %s%s", mission_No,takeCase_MemVO.getMem_No());
+			mailService.sendMail(to, subject, messageText);
+			
+			/**
+			 * @author Sander
+			 * 簡訊功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 */
+			String[] tel = {takeCase_MemVO.getMem_Pho()};
+			TelMessage telMessage = new TelMessage();
+			telMessage.sendMessage(tel, messageText);
 			
 			// try {
 			/***************************

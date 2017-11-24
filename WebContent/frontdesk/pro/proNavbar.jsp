@@ -473,9 +473,8 @@
 			<nav class="navbar navbar-expand-lg navbar-light fixed-top "
 				id="mainNav" style="height: 100px;">
 				<div class="container">
-					<a class="navbar-brand js-scroll-trigger"
-						href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp"><img
-						src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/profile_1.png"></a>
+					 <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"
 						aria-controls="navbarResponsive" aria-expanded="false"
