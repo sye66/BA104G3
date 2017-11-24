@@ -1115,11 +1115,7 @@ System.out.println(getMissionVO.getMission_State());
 				System.out.println(e.getMessage());
 				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
-			}
-			
-		}
-		
+			}	
+		}	
 	}
-	
-
 }

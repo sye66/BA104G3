@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="">
 
@@ -9,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Title Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
-
+	<meta http-equiv="refresh" content="3; URL=<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp">
+	</head>
+	
     <body>
         <h1 class="text-center">任務新增成功!</h1>
+        <a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp">Check here</a>
         <script src="https://code.jquery.com/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
