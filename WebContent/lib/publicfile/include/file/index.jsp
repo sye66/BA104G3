@@ -113,7 +113,7 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_5.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1 style="font-size:100px">想完成小時後學樂器的夢嗎?</h1>
+                    <h1 style="font-size:100px">想完成小時後學樂器的夢嗎?</h1> 
                     <p>也許你可以把你拿手的專長與他人教學互長!</p>
 <!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p> -->
                 </div>
