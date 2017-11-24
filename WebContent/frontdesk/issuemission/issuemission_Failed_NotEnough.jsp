@@ -16,8 +16,9 @@
 	<body>
 		
 		<h1 class="text-center">積分不足</h1>
+		<p>騷年，看來你需要 <a href="<%=request.getContextPath()%>/frontdesk/stored_history/stored_historyRecharge_PointCard.jsp">課金大神</a>的幫助啊</p>
 		
-		
+		<p>老子是最瞧不起課金戰士，<a href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">我要自己賺</a></p>
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>

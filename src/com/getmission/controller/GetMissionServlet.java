@@ -995,6 +995,7 @@ System.out.println(getMissionVO.getMission_State());
 				if (memVO.getMem_Point() < mission_Pay) {
 					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
 					NotEnoughPoint.forward(req, res);
+					return;
 				}
 				/**********準備寫入與轉向**********/
 				// 任務截止時間加工
@@ -1059,7 +1060,6 @@ System.out.println(getMissionVO.getMission_State());
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
-				System.out.println(mission_Pay);
 				
 				/**********驗證開始**********/
 				if (mission_Pay < 50.00) {
@@ -1089,6 +1089,7 @@ System.out.println(getMissionVO.getMission_State());
 				if (memVO.getMem_Point() < mission_Pay) {
 					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
 					NotEnoughPoint.forward(req, res);
+					return;
 				}
 
 				/**********準備寫入與轉向**********/
