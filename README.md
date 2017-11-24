@@ -1,32 +1,39 @@
-# BA104G3ç•¢æ¥­å°ˆé¡Œ(é€²è¡Œä¸­)
+# BA104G3²¦·~±MÃD(¶i¦æ¤¤)
 
-## ä½œè€…ç¾¤ï¼š
-### çµ„é•·:
-- é™³æŸç‚˜	0908-118-882	[sanderxavalon@gmail.com]	(sanderxavalon@gmail.com)
-### çµ„å“¡:
-- æ¸¸å®¶é§¿	0972-219-693	[rec7931@gmail.com]	(rec7931@gmail.com)
-- å½­æˆå…†	0953-711-016	[a0953711016@gmail.com]	(a0953711016@gmail.com)
-- é™³æ™ºå‰	0919-898-794	[sye663248@gmail.com]	(sye663248@gmail.com)
-- æœ±å½¥éœ	0911-472-991	[lisachu8511@gmail.com]	(lisachu8511@gmail.com)
-- é»ƒæ™ºç¾¤	0979-498-988	[kiz7386@gmail.com]	(kiz7386@gmail.com)
-- è¨±å‹é©Š	0958-429-898	[burnerzx@gmail.com]	(burnerzx@gmail.com)
+## §@ªÌ¸s¡G
+### ²Õªø:
+- ³¯¬fÍQ	[0908-118-882]	[sanderxavalon@gmail.com]
 
-## æœ¬å°ˆæ¡ˆä½¿ç”¨æŠ€è¡“èˆ‡å·¥å…·
+### ²Õ­û:
+- ´å®aÂ@	[0972-219-693]	[rec7931@gmail.com]
+- ´^¦¨¥ü	[0953-711-016]	[a0953711016@gmail.com]
+- ³¯´¼°¶	[0919-898-794]	[sye663248@gmail.com]
+- ¦¶«ÛÀR	[0911-472-991]	[lisachu8511@gmail.com]
+- ¶À´¼¸s	[0979-498-988]	[kiz7386@gmail.com]
+- ³\³Ó÷~	[0958-429-898]	[burnerzx@gmail.com]
 
-### å‰ç«¯æŠ€è¡“
+
+
+## ¥»±M®×¨Ï¥Î§Ş³N»P¤u¨ã
+
+### «eºİ§Ş³N
 - [x] HTML
 - [x] CSS
 - [x] Javascript
 - [x] Jquery
 - [x] AJAX
-### å¾Œç«¯æŠ€è¡“
+
+### «áºİ§Ş³N
 - [x] JAVA
 - [x] JDBC
 - [x] Servlet
 - [x] JSP
-### ä¼ºæœå™¨
+
+### ¦øªA¾¹
 - [x] Tomcat
-### è³‡æ–™åº«
+
+### ¸ê®Æ®w
 - [x] Oracle
-### ç‰ˆæœ¬æ§åˆ¶
+
+### ª©¥»±±¨î
 - [x] GIT
