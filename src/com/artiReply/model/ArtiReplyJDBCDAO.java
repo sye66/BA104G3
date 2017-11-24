@@ -32,6 +32,9 @@ public class ArtiReplyJDBCDAO implements ArtiReplyDAO_interface {
 	private static final String UPDATE_REPLY = 
 			"UPDATE ARTI_REPLY set MEM_NO=?, ARTI_NO=?, REPLY_DESC=?, REPLY_TIME=?, ARTI_CLS_NO=? where REPLY_NO =?";
 
+	private static final String UPDATE_ARTI_STATUS = 
+			"UPDATE ARTI_FORM set ARTI_STATUS='有留言' where ARTI_NO =?";
+	
 	
 	public void insertReply (ArtiReplyVO artiReplyVO){
 		Connection con = null;
@@ -47,20 +50,30 @@ public class ArtiReplyJDBCDAO implements ArtiReplyDAO_interface {
 			pstmt.setString(3, artiReplyVO.getReply_Desc());
 			pstmt.setTimestamp(4, artiReplyVO.getReply_Time());
 			pstmt.setInt(5, artiReplyVO.getArti_Cls_No());
-
+			pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(UPDATE_ARTI_STATUS);
+			pstmt.setString(1, artiReplyVO.getArti_No());
 			pstmt.executeUpdate();
 			con.commit();
-			con.setAutoCommit(true);
+			
 
 		} catch (ClassNotFoundException ce){
 			throw new RuntimeException("Couldn't load database driver." + ce.getMessage());
 		} catch (SQLException se){
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			throw new RuntimeException ("A database error occured." + se.getMessage());
 		} catch (Exception e){
 			e.printStackTrace(System.err);
 		} finally {
 			if(pstmt !=null){
 				try{
+					con.setAutoCommit(true);
 					pstmt.close();
 				} catch (SQLException se){
 					se.printStackTrace(System.err);

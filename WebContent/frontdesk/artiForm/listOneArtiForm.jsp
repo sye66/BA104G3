@@ -10,8 +10,11 @@
 <jsp:useBean id="artireplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
+   MemVO memVO = (MemVO)session.getAttribute("memVO");
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
-    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
+    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
+
+   
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
     
@@ -142,10 +145,7 @@ div {
                  <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			     <input type="hidden" name="mem_No_A"  value="${artiFormVO.mem_No}">
 			     <input type="hidden" name="mem_No_M"  value="${memVO.mem_No}">
-			     <input type="hidden" name="arti_Title"  value="${artiFormVO.arti_Title}">
 			     <input type="hidden" name="arti_Like"  value="${artiFormVO.arti_Like}">
-			     <input type="hidden" name="describe"  value="${artiFormVO.describe}">
-			     <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
     			 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                  <button class="btn btn-link" type="submit" name="action" value="giveOneLike">讚ㄧ個! </button>
 		         </FORM>		

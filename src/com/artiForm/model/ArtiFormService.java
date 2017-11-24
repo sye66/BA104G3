@@ -64,16 +64,17 @@ public class ArtiFormService {
 	}
 	
 	public ArtiFormVO getOneArtiSearchByTitle(String arti_Title){
+		
 		return dao.findArtiSearchByTitle(arti_Title);
 	}
 	
-	public Set<ArtiFormVO> getAll(){
-		return dao.getAllArti();
+	public void updateArti_Like(String arti_No, Integer arti_Like, String arti_Status) {
+		dao.updateArti_Like(arti_No, arti_Like, arti_Status);
 	}
 
-	public ArtiFormVO updateArti_pic(ArtiFormVO arti_Pic) {
-        dao.updateArti(arti_Pic);
-		return arti_Pic;
+	
+	public Set<ArtiFormVO> getAll(){
+		return dao.getAllArti();
 	}
 
 	public Set<ArtiReplyVO> findReplyByArtiNo(String arti_No){
@@ -88,8 +89,6 @@ public class ArtiFormService {
 		return dao.findArtiByMemNo(mem_No);
 	}
 
-
-	
 //	public List<ArtiReplyVO> findReplyByArtiClsNo (Map<String, String[]> map){
 //		return dao.findReplyByArtiClsNo(map);
 //	}

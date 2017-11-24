@@ -41,6 +41,8 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 	private static final String UPDATE_REPORT = 
 			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  ARTI_CLS_NO=?, REPORT_STATUS=? where REPORT_NO =?";
 	
+	private static final String UPDATE_ARTI_STATUS = 
+			"UPDATE ARTI_FORM set ARTI_STATUS='有檢舉' where ARTI_NO =?";
 
 	@Override
 	public void insertReport(ArtiReportVO artiReportVO) {
@@ -57,18 +59,27 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 			pstmt.setTimestamp(4, artiReportVO.getReport_Time());
 			pstmt.setInt(5, artiReportVO.getArti_Cls_No());
 			pstmt.setString(6, artiReportVO.getReport_Status());
+			pstmt.executeUpdate();
 			
+			pstmt = con.prepareStatement(UPDATE_ARTI_STATUS);
+			pstmt.setString(1, artiReportVO.getArti_No());
 			pstmt.executeUpdate();
 			con.commit();
-			con.setAutoCommit(true);
 			
 		} catch (SQLException se){
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			throw new RuntimeException ("A database error occured."+se.getMessage() );
 		} catch (Exception e ){
 			e.printStackTrace(System.err);
 		} finally {
 			if(pstmt!=null){
 				try{
+					con.setAutoCommit(true);
 					pstmt.close();
 				} catch (SQLException se){
 					se.printStackTrace(System.err);

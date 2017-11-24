@@ -46,37 +46,46 @@ public class ArtiReplyDAO implements ArtiReplyDAO_interface {
 	private static final String UPDATE_REPLY = 
 			"UPDATE ARTI_REPLY set MEM_NO=?, ARTI_NO=?, REPLY_DESC=?, REPLY_TIME=?, ARTI_CLS_NO=? where REPLY_NO =?";
 	
+	private static final String UPDATE_ARTI_STATUS = 
+			"UPDATE ARTI_FORM set ARTI_STATUS='有留言' where ARTI_NO =?";
 
 	@Override
 	public void insertReply(ArtiReplyVO artiReplyVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-System.out.println("addReply-DAO-111");
+
 		try{
 			con = ds.getConnection();
+			con.setAutoCommit(false);
 			pstmt = con.prepareStatement(INSERT_REPLY);
-System.out.println("addReply-DAO-222");
+
 			pstmt.setString(1, artiReplyVO.getMem_No());
-System.out.println("addReply-DAO-333");
 			pstmt.setString(2, artiReplyVO.getArti_No());
-System.out.println("addReply-DAO-444");
 			pstmt.setString(3, artiReplyVO.getReply_Desc());
-System.out.println("addReply-DAO-555");
 			pstmt.setTimestamp(4, artiReplyVO.getReply_Time());
-System.out.println("addReply-DAO-666");
 			pstmt.setInt(5, artiReplyVO.getArti_Cls_No());
-System.out.println("addReply-DAO-777");
+			pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(UPDATE_ARTI_STATUS);
+			pstmt.setString(1, artiReplyVO.getArti_No());
 			pstmt.executeUpdate();
 			con.commit();
-			con.setAutoCommit(true);
-System.out.println("addReply-DAO-888");
+		
 		} catch (SQLException se){
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			throw new RuntimeException ("A database error occured." + se.getMessage());
+			
 		} catch (Exception e){
 			e.printStackTrace(System.err);
 		} finally {
 			if(pstmt !=null){
 				try{
+					con.setAutoCommit(true);
 					pstmt.close();
 				} catch (SQLException se){
 					se.printStackTrace(System.err);

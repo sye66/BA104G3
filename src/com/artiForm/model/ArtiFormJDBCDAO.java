@@ -33,6 +33,9 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 	private static final String UPDATE = 
 			"UPDATE ARTI_FORM set MEM_NO=?, ARTI_TITLE=?, ARTI_LIKE=?, DESCRIBE=?, ARTI_TIME=?, ARTI_PIC=?, ARTI_CLS_NO=?, ARTI_STATUS=? where ARTI_NO =?";
 	
+	private static final String UPDATE_LIKE = 
+			"UPDATE ARTI_FORM set ARTI_LIKE=?, ARTI_STATUS=? where ARTI_NO =?";
+	
 	private static final String GET_ONE_ARTI_SEARCH_BY_TITLE =
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM where ARTI_TITLE = ?";
 	
@@ -132,6 +135,48 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void updateArti_Like(String arti_No, Integer arti_Like, String arti_Status) {
+		ArtiFormVO artiFormVO =  null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid,passwd);
+			pstmt =  con.prepareStatement(UPDATE_LIKE);
+						
+			pstmt.setInt(1, arti_Like);
+			pstmt.setString(2, arti_Status);
+			pstmt.setString(3, arti_No);
+			pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException se){
+			throw new RuntimeException("A database err occured." + se.getMessage());
+		} catch (Exception e){
+			e.printStackTrace(System.err);
+		} finally {
+			if(pstmt!=null){
+				try{
+					pstmt.close();
+				} catch(SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con!=null){
+				try{
+					
+				} catch(Exception e){
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
 	}
 	
 	public void deleteArti (String arti_No){
