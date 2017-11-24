@@ -76,7 +76,28 @@ System.out.println("從清單 放商品 到購物車");
 						buylist.add(proCartVO);
 					}
 				}
+			}else if ("changePro".equals(action)) { 
+System.out.println("購物車改變商品數量");
+				String pro_No = req.getParameter("pro_No");
+				Integer qun =new Integer( req.getParameter("qun"));
+System.out.println(pro_No);
+System.out.println(qun);
+
+				ProCartVO proCartVO = changePro(pro_No , qun);
+				if (buylist == null) {
+					buylist = new Vector<ProCartVO>();
+					buylist.add(proCartVO);
+				} else {
+					if (buylist.contains(proCartVO)) {
+						ProCartVO innerProCartVO = buylist.get(buylist.indexOf(proCartVO));
+						innerProCartVO.setProCar_Quantity(
+								 proCartVO.getProCar_Quantity());
+					} else {
+						buylist.add(proCartVO);
+					}
+				}
 			}
+
 
 			session.setAttribute("shoppingcart", buylist);
 			String url = null;
@@ -142,6 +163,25 @@ System.out.println("購物車結帳單項商品價格: "+proCartVO.getProCar_Pri
 		return proCartVO;
 	}
 	
+	private ProCartVO changePro(String pro_No ,Integer qun) {
+
+		
+		
+		ProService proSvc = new ProService();
+		ProVO proVO = proSvc.getOnePro(pro_No);
+		//折扣價
+		Integer price =(Integer) (proVO.getPro_Price()*proVO.getPro_Discount()/100);
+		
+		ProCartVO proCartVO = new ProCartVO();
+		
+		proCartVO.setProCar_No(proVO.getPro_No());
+		proCartVO.setProCar_Name(proVO.getPro_Name());
+		proCartVO.setProCar_Info(proVO.getPro_Info());
+		proCartVO.setProCar_Price(new Integer(price));
+		proCartVO.setProCar_Quantity(new Integer(qun));
+		
+		return proCartVO;
+	}
 	private ProCartVO getProCartVO2(HttpServletRequest req) {
 
 		String pro_No = req.getParameter("proCar_No");
@@ -165,5 +205,5 @@ System.out.println("購物車結帳單項商品價格: "+proCartVO.getProCar_Pri
 		
 		return proCartVO;
 	}
-
+	
 }

@@ -22,7 +22,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyy-mm-dd hh:mm:ss')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0'), ?, ?, ?, sysdate, ?,?)";
+		"INSERT INTO accuse_case (accuse_no,mission_no,accuser_no,emp_no,accuse_date,accuse_detail,accuse_state) VALUES (to_char(sysdate,'yyyy-mm-dd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),7,'0'), ?, ?, ?, sysdate, ?,?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT accuse_no,mission_no,accuser_no,emp_no,to_char(accuse_date,'yyyy-mm-dd hh:mm:ss') accuse_date,to_char(close_case_date,'yyyy-mm-dd hh:mm:ss') close_case_date,accuse_detail,accuse_state FROM accuse_case order by accuse_no";
 	private static final String GET_ONE_STMT = 
@@ -50,8 +50,8 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(1, accuseCaseVO.getMission_No());
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
-//			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-//			pstmt.setDate(4, accuseCaseVO.getClosed_Case_Date());
+//			pstmt.setTimestamp(4, accuseCaseVO.getAccuse_Date());
+//			pstmt.setTimestamp(4, accuseCaseVO.getClose_Case_Date());
 			pstmt.setString(4, accuseCaseVO.getAccuse_Detail());
 			pstmt.setInt(5, accuseCaseVO.getAccuse_State());
 

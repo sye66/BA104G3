@@ -87,9 +87,8 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
 				
 				<button type="submit" name="action" class="btn btn-danger" value="accusecase">確認送出檢舉</button>
-				<input type="hidden" name="mission_No"
-											value="${getMissionVO.mission_No}"> <input
-											type="hidden" name="mem_No" value="${mem_No}">
+				<input type="hidden" name="mission_No" value="${getMissionVO.mission_No}"> 
+				<input type="hidden" name="mem_No" value="${memVO.mem_No}">
 				</div>
 			</form>
 		</div>
@@ -97,7 +96,9 @@
 </div>
 
 
-
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
 	
 	<div class="container-fluid">
 		<div class="row">
@@ -116,7 +117,7 @@
 						<td>
 							<div class="panel-body">
 								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
+									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action=""
 										name="getmission3">
@@ -124,12 +125,12 @@
 											value="accusecase">檢舉任務</button></a>
 										<input type="hidden" name="mission_No"
 											value="${getMissionVO.mission_No}"> <input
-											type="hidden" name="mem_No" value="${mem_No}">
+											type="hidden" name="mem_No" value="${memVO.mem_No}">
 									</form>
 								</c:if>
 
 								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != mem_No}">
+									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 										name="getmission3">
@@ -137,7 +138,7 @@
 											value="cancelaccusecase">取消檢舉任務</button>
 										<input type="hidden" name="mission_No"
 											value="${getMissionVO.mission_No}"> <input
-											type="hidden" name="mem_No" value="${mem_No}">
+											type="hidden" name="mem_No" value="${memVO.mem_No}">
 									</form>
 								</c:if>
 							</div>

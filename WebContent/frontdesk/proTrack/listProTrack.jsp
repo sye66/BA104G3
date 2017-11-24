@@ -37,7 +37,15 @@ th  {
 </head>
 <body>
 
-			
+<!-- TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include> --%>
+</div>
+<!-- 商城TOP -->
+<div class="col-xs-12 col-sm-12 ">
+<jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
+</div>			
 
 
 <% 
@@ -73,7 +81,7 @@ System.out.println("session取得的會員編號 "+mem_No);
 		<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=proVO.getPro_No()%>" alt="Card image cap"></td>
 		<td width="100"><div align="center"><b><%=proVO.getPro_Name()%></b></div></td>
 		
-		<td width="100"><div align="center"><b>$<%=price%></b></div></td>
+		<td width="100"><div align="center"><b><%=price%></b>點</div></td>
 		
 		<td width="100"><div align="center">
 		<form METHOD="post"   ACTION="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" >

@@ -65,7 +65,6 @@
 	<c:forEach var="proVO" items="${list}">
 	<div class="allPro">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
-<!-- 		目前上架是寫死的 -->
 		<c:if test="${proVO.pro_Status=='上架'}" >
 			<div class="col-xs-12 col-sm-4 ">
 		     	<div class="card" style="width:100%;">
