@@ -73,4 +73,7 @@ public class DisputeCaseService {
 	public List<DisputeCaseVO> getDisputeCaseByStatus(Integer dispute_Case_Status, String emp_No){
 		return dao.findByStatus(dispute_Case_Status, emp_No);
 	}
+	public Integer getDisputeCaseCountByStatus(Integer dispute_Case_Status) {
+		return dao.getCountByStatus(dispute_Case_Status);
+	}
 }

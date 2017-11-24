@@ -28,7 +28,7 @@ public class QRcode extends HttpServlet {
 	    // new QRcode物件
 	    QRCode barcode = new QRCode();
 	    // 填入要轉碼的資訊
-	    barcode.setCode("https://www.google.com");
+	    barcode.setCode(request.getScheme() +"://"+ request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "?encodingmsg=helloworld");
 	    // 設定大小，15~20效果不錯
 	    barcode.setModuleSize(15);
 	    // 解析度

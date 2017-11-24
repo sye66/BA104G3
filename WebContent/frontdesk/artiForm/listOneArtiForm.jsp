@@ -62,16 +62,12 @@ div {
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-
-<h4></h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>文章資料 - ListOneArtiFrom_改版.jsp    ${ arti_No}</h3>
-		 <h4><a href="/BA104G3/frontdesk/artiForm/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-<hr>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
 <div class="col-xs-12 col-sm-11 widget-container-span">

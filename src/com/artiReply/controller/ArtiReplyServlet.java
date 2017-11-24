@@ -121,7 +121,7 @@ public class ArtiReplyServlet extends HttpServlet {
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("artiReplyVO41", artiReplyVO);
-				String url = "/frontdesk/artiReply/listOneArtiReply.jsp";
+				String url = "/backdesk/artiReply/listOneArtiReply.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
@@ -143,16 +143,36 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				String arti_No = req.getParameter("arti_No");
 				String arti_Cls_No = req.getParameter("arti_Cls_No");
+				
+				if(arti_No==null||(arti_No.trim()).length()==0){
+					errorMsgs.add(" 請輸入文章編號 !!! ");
+				}
+
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
 				/***************************2.開始查詢資料****************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				Set<ArtiReplyVO> artiReplyVO = artiReplySvc.findReplyByArtiNo(arti_No);
+				
+				if (artiReplyVO==null){
+					errorMsgs.add(" 查無此筆文章回覆資料 ");
+				}
+
+				if(!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+					failureView.forward(req, res);
+					return;
+				}
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("artiReplySet", artiReplyVO);
 				session.setAttribute("arti_No", arti_No);
 				session.setAttribute("arti_Cls_No", arti_Cls_No);
-				String url = "/frontdesk/artiReply/listArtiReply_withSet.jsp";
+				String url = "/backdesk/artiReply/listArtiReply_withSet.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -181,7 +201,7 @@ public class ArtiReplyServlet extends HttpServlet {
 
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("artiReplySet", artiReplyVO);
-				String url = "/frontdesk/artiReply/listArtiReply_withSet.jsp";
+				String url = "/backdesk/artiReply/listArtiReply_withSet.jsp";
 
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -323,7 +343,7 @@ public class ArtiReplyServlet extends HttpServlet {
 			if(req.getSession().getAttribute("mem_No")==null){
 				String contextPath = getServletContext().getContextPath();
 				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_error.jsp");
 				failuewView.forward(req, res);
 				return;
 			}
@@ -332,7 +352,7 @@ public class ArtiReplyServlet extends HttpServlet {
 			if(!user.equals(mem_No)){
 				String contextPath = getServletContext().getContextPath();
 				errorMsgs.add(" = ___ = A 要本人才能更新喔~");
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_errorjsp");
 				failuewView.forward(req, res);
 				return;
 			}
@@ -402,7 +422,7 @@ public class ArtiReplyServlet extends HttpServlet {
 			if(req.getSession().getAttribute("mem_No")==null){
 				String contextPath = getServletContext().getContextPath();
 				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listOneArtiReply_error.jsp");
 				failuewView.forward(req, res);
 				return;
 			}
@@ -411,7 +431,7 @@ public class ArtiReplyServlet extends HttpServlet {
 			if(!user.equals(mem_No)){
 				String contextPath = getServletContext().getContextPath();
 				errorMsgs.add(" = ___ = A 要本人才能更新喔~");
-				RequestDispatcher failuewView = req.getRequestDispatcher("/rontdesk/artiReply/listArtiReply_withSet_test.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReply/listOneArtiReply_error.jsp");
 				failuewView.forward(req, res);
 				return;
 			}

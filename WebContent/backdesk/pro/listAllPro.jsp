@@ -26,30 +26,30 @@
     <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/pro/proBackLeft.jsp" flush="true" />
 	
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<br>
-		<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">商品查詢</li>
-  		</ol>
-		</nav>
-	</div>
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
+<!-- 	<div class="col-xs-12 col-sm-8 col-sm-offset-1"> -->
+<!-- 		<br> -->
+<!-- 		<nav aria-label="breadcrumb" role="navigation"> -->
+<!--   		<ol class="breadcrumb"> -->
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li> --%>
+<%--     		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li> --%>
+<!--     		<li class="breadcrumb-item active" aria-current="page">商品查詢</li> -->
+<!--   		</ol> -->
+<!-- 		</nav> -->
+<!-- 	</div> -->
+	<div class="col-xs-12 col-sm-9 ">
 	<br>
 	<table id="tavle01" >
 	<tr>
 		<th>商品照片</th>
-		<th>商品編號</th>
-		<th>商品名稱</th>
-		<th>商品價格</th>
-		<th>商品說明</th>
-		<th>商品分類</th>
-		<th>商品狀態</th>
-		<th>商品折扣</th>
-		<th>商品折扣開始日期</th>
-		<th>商品折扣結束日期</th>
+		<th style="width:100px;">商品編號</th>
+		<th style="width:100px;">商品名稱</th>
+		<th style="width:100px;">商品價格</th>
+		<th style="width:100px;">商品說明</th>
+		<th style="width:100px;">商品分類</th>
+		<th style="width:100px;">商品狀態</th>
+		<th style="width:100px;">商品折扣</th>
+		<th style="width:100px;">商品折扣開始日期</th>
+		<th style="width:100px;">商品折扣結束日期</th>
 		<th colspan="2">商品異動</th>
 	</tr>
 	<h4><%@ include file="page1.file" %></h4> 
@@ -57,7 +57,7 @@
 	<c:forEach var="proVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		
 		<tr>
-			<td><img width="150" height="150" 
+			<td><img width="100" height="100" 
 			src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" /></td>
 			<td>${proVO.pro_No}</td>
 			<td>${proVO.pro_Name}</td>

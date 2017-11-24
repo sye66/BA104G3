@@ -167,6 +167,8 @@
 				</div>
 
 				<div class="col-xs-12 col-sm-8">
+				
+				
 					<div class="panel panel-default row">
 						<div class="panel-heading">
 							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
@@ -177,13 +179,12 @@
 
 							<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
 						</div>
+					
 						<table>
 							<tr>
 								<td>
 									<div class="panel-body">
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission1">
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 											<button class="btn btn-warning" type="submit" name="action"
 												value="mission_Detail">任務細節</button>
 
@@ -202,15 +203,25 @@
 							%>
 
 								<td>
-								<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}">
 									<div class="panel-body">
 										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
-											<a href='#modal-mission-id${s.index} ' data-toggle="modal">
-											<button class="btn btn-info">我要接案</button></a> 
+											
+								<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
+								
+								<a href='#modal-mission-id${s.index} ' data-toggle="modal">
+								<button class="btn btn-info" >我要接案</button></a> 
+								
+								
+								</c:if>
+								
+								<c:if test="${!accept}">
+									<a  data-toggle="modal">
+									<button class="btn btn-info" style="visibility: hidden" >我要接案</button></a> 
+								</c:if>
+											
 											<input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
 										</form>
 									</div>
-								</c:if>
 								</td>
 
 								<div class="modal fade" id="modal-mission-id${s.index}">
@@ -248,6 +259,9 @@
 							</tr>
 						</table>
 					</div>
+					
+					
+					
 				</div>
 
 			</div>

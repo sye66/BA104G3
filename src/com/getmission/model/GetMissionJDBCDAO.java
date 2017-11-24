@@ -17,7 +17,7 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 	String userid = "BA104G3";
 	String passwd = "123456";         
 
-	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),6,'0'), ?, ?, ?, ?, ?, sysdate, sysdate +5 , ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay FROM mission order by mission_no";
 	private static final String GET_ONE_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd') mission_end_time,mission_state,mission_pattern,mission_pay FROM mission where mission_no = ?";
 	private static final String DELETE = "DELETE FROM mission where mission_no = ?";
@@ -42,14 +42,13 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 			pstmt.setString(3, getMissionVO.getMission_Des());
 			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
 			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
-			pstmt.setTimestamp(6, getMissionVO.getMission_Due_Time());
-			pstmt.setTimestamp(7, getMissionVO.getMission_Start_Time());
-			pstmt.setTimestamp(8, getMissionVO.getMission_End_Time());
-			pstmt.setInt(9, getMissionVO.getMission_State());
-			pstmt.setInt(10, getMissionVO.getMission_Pattern());
-			pstmt.setDouble(11, getMissionVO.getMission_Pay());
-			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lat());
-			pstmt.setDouble(13, getMissionVO.getMission_Gps_Lng());
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
 			pstmt.executeUpdate();
 			// Handle any SQL errors
 		} catch (SQLException se) {

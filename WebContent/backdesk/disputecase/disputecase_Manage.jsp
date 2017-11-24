@@ -19,16 +19,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/lib/publicfile/include/vendor/font-awesome/css/font-awesome.css">
 <title>Insert title here</title>
 </head>
 <body>
 	
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/disputecase/backdeskLeft_DisputeCase.jsp" flush="true" />
+	<div class="container">
 	
+
 	<%-- 列出所有爭議案件 --%>
 	<%-- include的file占了兩col，寫9個別靠到邊界 --%>
-	<div class="col-lg-3 col-md-6">
+	<div class="col-xs-12 col-sm-4">
 	    <div class="panel panel-primary">
 	        <div class="panel-heading">
 	            <div class="row">
@@ -50,7 +53,68 @@
 	        </a>
 	    </div>
 	</div>
-	<div class="col-xs-12 col-sm-9">
+	<div class="col-xs-12 col-sm-4">
+	    <div class="panel panel-primary">
+	        <div class="panel-heading">
+	            <div class="row">
+	                <div class="col-xs-3">
+	                    <i class="fa fa-comments fa-5x"></i>
+	                </div>
+	                <div class="col-xs-9 text-right">
+	                    <div class="huge">26</div>
+	                    <div>New Comments!</div>
+	                </div>
+	            </div>
+	        </div>
+	        <a href="#">
+	            <div class="panel-footer">
+	                <span class="pull-left">View Details</span>
+	                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                <div class="clearfix"></div>
+	            </div>
+	        </a>
+	    </div>
+	</div>
+	<div class="col-xs-12 col-sm-4">
+	    <div class="panel panel-primary">
+	        <div class="panel-heading">
+	            <div class="row">
+	                <div class="col-xs-3">
+	                    <i class="fa fa-comments fa-5x"></i>
+	                </div>
+	                <div class="col-xs-9 text-right">
+	                    <div class="huge">26</div>
+	                    <div>New Comments!</div>
+	                </div>
+	            </div>
+	        </div>
+	        <a href="#">
+	            <div class="panel-footer">
+	                <span class="pull-left">View Details</span>
+	                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                <div class="clearfix"></div>
+	            </div>
+	        </a>
+	    </div>
+	</div>
+	<div class="col-xs-12 col-sm-12">
+		<div class="row">
+			<h2>單一爭議案件查詢</h2>
+			<form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
+			    <div class="form-group">
+					<div class="col-xs-12 col-sm-10">
+			            <%-- <label for="get_One_Dispute_Case">查詢單一爭議案件</label> --%>
+			            <input type="text" name="dispute_Case_No" id="dispute_Case_No" placeholder="請輸入爭議案件編號" class="form-control">
+			            <input type="hidden" name="action" value="get_One_Dispute_Case">
+			    	</div>
+					<div class="col-xs-12 col-sm-2">
+					    <input type="submit" value="送出查詢" class="btn btn-primary">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-12">
         <table class="table table-hover">
             <h2>爭議案件 - 待處理</h2>
             <thead>
@@ -79,7 +143,7 @@
                         <td>
 							<form method="post" action="disputecase_Reply.jsp">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-								<input type="submit" class="btn btn-info"value="回覆此案鍵">
+								<input type="submit" class="btn btn-info"value="回覆此案件">
 							</form>
 						</td>
 						<td>
@@ -94,6 +158,7 @@
               	
             </tbody>
     	</table>
+	</div>
 	</div>
 </body>
 </html>

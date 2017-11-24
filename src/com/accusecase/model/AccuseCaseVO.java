@@ -1,13 +1,14 @@
 package com.accusecase.model;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class AccuseCaseVO implements java.io.Serializable{
 	private String accuse_No;
 	private String mission_No;
 	private String accuser_No;
 	private String emp_No;
-	private Date accuse_Date;
-	private Date close_Case_Date;
+	private Timestamp accuse_Date;
+	private Timestamp close_Case_Date;
 	private String accuse_Detail;
 	private Integer accuse_State;
 	
@@ -35,16 +36,16 @@ public class AccuseCaseVO implements java.io.Serializable{
 	public void setEmp_No(String emp_No) {
 		this.emp_No = emp_No;
 	}
-	public Date getAccuse_Date() {
+	public Timestamp getAccuse_Date() {
 		return accuse_Date;
 	}
-	public void setAccuse_Date(Date accuse_Date) {
+	public void setAccuse_Date(Timestamp accuse_Date) {
 		this.accuse_Date = accuse_Date;
 	}
-	public Date getClose_Case_Date() {
+	public Timestamp getClose_Case_Date() {
 		return close_Case_Date;
 	}
-	public void setClose_Case_Date(Date close_Case_Date) {
+	public void setClose_Case_Date(Timestamp close_Case_Date) {
 		this.close_Case_Date = close_Case_Date;
 	}
 	public String getAccuse_Detail() {

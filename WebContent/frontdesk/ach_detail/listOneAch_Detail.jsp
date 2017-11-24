@@ -68,13 +68,13 @@
 		
 	</tr>
 	
-	<c:forEach var="ach_DetailVO" items="${list}">
-	<tr align='center' valign='middle'>
-		<td><%=ach_DetailVO.getMem_No()%></td>
-		<td><%=ach_DetailVO.getAch_No()%></td>
-		<td><%=ach_DetailVO.getAch_Time()%></td>
-		</tr>
-	</c:forEach>
+<%-- 	<c:forEach var="ach_DetailVO" items="${list}"> --%>
+<!-- 	<tr align='center' valign='middle'> -->
+<%-- 		<td><%=ach_DetailVO.getMem_No()%></td> --%>
+<%-- 		<td><%=ach_DetailVO.getAch_No()%></td> --%>
+<%-- 		<td><%=ach_DetailVO.getAch_Time()%></td> --%>
+<!-- 		</tr> -->
+<%-- 	</c:forEach> --%>
 	
 </table>
 

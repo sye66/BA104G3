@@ -22,11 +22,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
 
 <title>文章檢舉資料 - listOneArtiReply.jsp</title>
 
 <style>
-
+    a{
+   font-size: 24px;
+   color: #F00;
+  }
 </style>
 
 </head>
@@ -35,13 +39,11 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>文章檢舉資料 - ListOneArtiReply.jsp</h3>
-		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章檢舉首頁</a></h4>
-	</td></tr>
-</table>
+
+<div class="title">
+        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的檢舉   // <a href="/BA104G3/backdesk/artiReply/listAllArtiReport.jsp">List</a> all Article Reply.  
+         <br/>
+        </div>
 
 
 	<div class="col-xs-8 col-sm-8 widget-container-span">

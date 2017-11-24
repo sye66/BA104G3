@@ -48,13 +48,13 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
       
-      <c:if test="${memVO.mem_State==0 || memVO.mem_State==9}">
+      <c:if test="${memVO.mem_State==null || memVO.mem_State==0 || memVO.mem_State==9}">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         </c:if>
       <c:if test="${memVO.mem_State==1}">
-        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=500')">
+        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')">
         <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         </c:if>

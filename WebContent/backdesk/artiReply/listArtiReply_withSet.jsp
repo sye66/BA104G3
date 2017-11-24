@@ -22,10 +22,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/reply.min.css" />
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
+
 <title>文章回覆資料(後台) - listArtiReply_withSet (REVISED).jsp </title>
 
 <style>
 
+    a{
+   font-size: 24px;
+   color: #F00;
+  }
+  
 </style>
 </head>
 <body bgcolor='white'>
@@ -36,17 +43,10 @@
 	
 	    <div class="widgetbox">
         <div class="title">
-        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的所有回覆   // <a href="">List</a> all Article Reply.  
+        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的所有回覆   // <a href="/BA104G3/backdesk/artiReply/listAllArtiReply_back.jsp">List</a> all Article Reply.  
         </div>
         </div>
 
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>文章回覆資料 - ListOneArtiReply_WithSet (REVISED)).jsp 111222333 </h3>
-		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章回覆首頁</a></h4>
-	</td></tr>
-</table>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -90,7 +90,7 @@
                                     <div class="widget-toolbar">
                                     <div class="widget-main padding-6">
                                             <div class="pic">
-    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiReplyVO.mem_No}&mem_${memSvc.getOneMem(artiReplyVO.mem_No).mem_pic}"
+    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiReplyVO.mem_No}&mem_${memSvc.getOneMem(artiReplyVO.mem_No).mem_Pic}"
 	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
     </div>
                                     </div>

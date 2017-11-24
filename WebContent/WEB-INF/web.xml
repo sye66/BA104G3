@@ -33,6 +33,15 @@
     <dispatcher>ERROR</dispatcher>
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
+  
+  <servlet>
+  	<servlet-name>QRcodeAccept</servlet-name>
+  	<servlet-class>com.getmission.controller.QRcodeAccept</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>QRcodeAccept</servlet-name>
+  	<url-pattern>/qrcodeaccept/qrcodeaccept.do</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>QRcode</servlet-name>
     <servlet-class>com.getmission.controller.QRcode</servlet-class>

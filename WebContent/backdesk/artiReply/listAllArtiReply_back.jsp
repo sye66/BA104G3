@@ -96,7 +96,7 @@
 			                 <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReply_For_Display"> 查看回覆 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReplyFMback_For_Display"> 查看回覆 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>

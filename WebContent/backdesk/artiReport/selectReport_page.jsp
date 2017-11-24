@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <html>
 <head>
 <title>IBM Article: Home</title>
@@ -32,6 +33,11 @@
   }
   
   body{margin:40px;}
+  
+      a{
+   font-size: 24px;
+   color: #F00;
+  }
 
 </style>
 
@@ -93,12 +99,16 @@
                             <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
                                 <div class="info">
                                  <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService" />
+                                 
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do " enctype="multipart/form-data">
                                 <b>選擇被檢舉的文章編號 :</b>
                                 <select size="1" name="arti_No">
+                                
                                 <c:forEach var="artiFromVO" items="${artiFormSvc.all}" > 
+
                                 <option value="${artiFromVO.arti_No}"${(artiFormVO.arti_No==artiReportVO.arti_No)?'selected':'' }>${artiFromVO.arti_Title}
-                                </c:forEach>   
+                                </c:forEach>
+ 
                                 </select>
                                <button class="btn btn-primary" type="submit" name="action" value="listReport_ByArtiNo"> 送出查詢 </button>
                                </FORM>

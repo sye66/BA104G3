@@ -55,6 +55,7 @@ public class AdService {
 		return dao.findByPrimaryKey(ad_No);
 	}
 	
+	
 	public Set<AdVO> getAllAd(){
 		return dao.getAllAd();
 	}

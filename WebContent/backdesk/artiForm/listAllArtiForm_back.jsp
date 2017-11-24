@@ -100,7 +100,7 @@
 			                 <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneArti_For_Display"> 查看文章 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneArti_For_Back"> 查看文章 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>

@@ -6,7 +6,7 @@
 <%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
-<jsp:useBean id="artiReplySvc1" scope="session" class="com.artiReply.model.ArtiReplyService" />
+<jsp:useBean id="artiReplySvc1" scope="page" class="com.artiReply.model.ArtiReplyService" />
 
 <%
     ArtiReplyService artiReplySvc = new ArtiReplyService();
@@ -16,7 +16,7 @@
 	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 
-    Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
+    Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>)artiReplySvc.findReplyByArtiNo(arti_No);
     pageContext.setAttribute("set",set);
 %>
 
@@ -36,14 +36,8 @@
 
 </head>
 <body bgcolor='white'>
-${arti_No}
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-2">
-	<tr><td>
-		 <h3> 分標題列出回覆文章 - listReply_ByArtiNo.jsp ${arti_No } </h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+
+<hr>
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -55,6 +49,7 @@ ${arti_No}
 	</ul>
 </c:if>
 
+<div class="container">
 <c:forEach var="artiReplyVO" items="${artiReplySvc1.findReplyByArtiNo(arti_No)}" >
 <div class="col-xs-12 col-sm-11 widget-container-span">
                 <div class="widget-box">
@@ -145,14 +140,11 @@ ${arti_No}
                         
                     </div>
                     </div>
-
 	</c:forEach>
-
+</div>
 </html>
 
-<br>本網頁的路徑:<br><b>
-   <font color=blue>request.getServletPath():</font> <%=request.getServletPath()%><br>
-   <font color=blue>request.getRequestURI(): </font> <%=request.getRequestURI()%> </b>
+<br> </b>
 
 </body>
 </html>

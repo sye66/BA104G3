@@ -122,16 +122,16 @@ window.onscroll = function() {
 <div class="col-xs-12 col-sm-12 " >
 		<table>
 			<tr>
-				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
-				<td style="font-size:20px;text-align:center;height:24px;">購物車明細&nbsp;&nbsp;</td>
-				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
+				<td>&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi(1).png"></td>
+				<td style="font-size:20px;text-align:center;height:24px;width:110px;">購物車明細</td>
+				<td>&nbsp;&nbsp;<img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
 				
 				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/004-number-1.png"></td>
-				<td style="font-size:20px;text-align:center;height:24px;">填寫訂單&nbsp;&nbsp;</td>
+				<td style="font-size:20px;text-align:center;height:24px;width:110px;">填寫訂單&nbsp;&nbsp;</td>
 				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrows.png">&nbsp;&nbsp;</td>
 				
 				<td><img src="<%=request.getContextPath()%>/res/images/pro_icons/006-number-2.png"></td>
-				<td style="font-size:20px;text-align:center;height:24px;">完成訂購</td>
+				<td style="font-size:20px;text-align:center;height:24px;width:110px;">完成訂購</td>
 				<td style="width:100px;"></td>
 				<td><h3>您目前擁有積分共:&nbsp;<span style="color:red;font-size:36px;"><%=memVO.getMem_Point()%></span>&nbsp;點</h3></td>
 			</tr>
@@ -172,26 +172,31 @@ window.onscroll = function() {
 			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
 		<tr height="30" >
-			<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
-			<td width="100"><div align="center"><b><%=order.getProCar_Name()%></b></div></td>
 		
-			<td width="100"><div align="center" id="proPrice"><span class="price"><%=order.getProCar_Price()%></span>點</div></td>
+			<td width="120">
+				<img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
+			<td width="100">
+				<div align="center"><b><%=order.getProCar_Name()%></b></div></td>
+			<td width="100">
+				<div align="center" id="proPrice"><span class="price0001"><%=order.getProCar_Price()%></span>點</div></td>
 			<td width="100">
 				<div align="center">
 					<button type="button" class="min" style="width: 30px;">-</button>
 					<input type="text" class="text_box" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 30px;text-align:center">	
 					<button type="button"  class="add"  style="width: 30px;">+</button>
-				</div>
+				</div>	
 			</td>
 			<td width="100">
 				<div>&nbsp;<span style="color:red;" id="minPrice"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
+			
         	<td width="100"><div align="center">
            <form name="deleteForm"  action="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" method="POST" style="margin-bottom: 0px;">
               <input type="hidden" name="action"  value="deletePro">
-              <input type="hidden" name="del" value="<%= index %>">
+              <input type="hidden" class="del" name="del" value="<%= index %>">
               <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-              <button type="submit" class="btn btn-danger"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button>
+              <button type="button" class="btn btn-danger deletBtn" value="<%= index %>"><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button>
+<%--               <button type="submit" class="btn btn-danger "><img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/trash.png">移除</button> --%>
           </form></div></td>
 	</tr>
 </table>	
@@ -248,49 +253,109 @@ window.onscroll = function() {
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
+<script type="text/javascript">
+$(function(){   
+	$(".add").click(function(){  
+	        var t = $(this).parent().find('input.text_box'); 
+	        t.val(parseInt(t.val())+1); 
+	        minTotal();
+	        setTotal();  
+	    })  
+	  
+	    $(".min").click(function(){  
+	        var t = $(this).parent().find("input.text_box");  
+	        t.val(parseInt(t.val())-1);  
+	        if(parseInt(t.val())<0){  
+	            t.val(0);  
+	        }  
+	        minTotal();
+	        setTotal()  
+	    })  
+	     function minTotal(){  
+		 var sum = 0;  
+		 var num =$(this).parent().find("input.text_box").val();
+			var price = $(this).parent().parent().parent().find("span.price0001").text(); 
+		  alert(num);       
+		  alert(price);      
+		        
+		  })
+		
+	}  
+	    function setTotal(){  
+	        var sum = 0;  
+	        $("#tab td").each(function(){  
+	          
+	        var num = parseInt($(this).find("input[class*=text_box]").val()); 
+	        var price = parseInt($(this).find("span[class*=price]").text());  
+	        price=price*1;
+	        console.log("num="+num+!isNaN(num));
+	        console.log("price="+price+!isNaN(price));
+	        console.log("===================");
+	        	if(isNaN(num)){
+        			num=1;	
+        		}
+	        	if(isNaN(price)){
+	        		price=1;
+	        	}
+	        	sum += num*price;
+	        
+	        })  
+	        $("#total").html(sum.toFixed(0));  
+	    }  
+	    setTotal();  
+	  
+	}) 
+</script>
 
 <script type="text/javascript">
-// $(function(){   
-// 	$(".add").click(function(){  
-// 	        var t = $(this).parent().find('input[class*=text_box]'); 
-// 	        t.val(parseInt(t.val())+1); 
-// 	        setTotal();  
-// 	    })  
-	  
-// 	    $(".min").click(function(){  
-// 	        var t = $(this).parent().find("input[class*=text_box]");  
-// 	        t.val(parseInt(t.val())-1);  
-// 	        if(parseInt(t.val())<0){  
-// 	            t.val(0);  
-// 	        }  
-// 	        setTotal()  
-// 	    })  
-	      
-// 	    function setTotal(){  
-// 	        var sum = 0;  
-// 	        $("#tab td").each(function(){  
-	          
-// 	        var num = parseInt($(this).find("input[class*=text_box]").val()); 
-// 	        var price = parseInt($(this).find("span[class*=price]").text());  
-// 	        price=price*1;
-// 	        console.log("num="+num+!isNaN(num));
-// 	        console.log("price="+price+!isNaN(price));
-// 	        console.log("===================");
-// 	        	if(isNaN(num)){
-//         			num=1;	
-//         		}
-// 	        	if(isNaN(price)){
-// 	        		price=1;
-// 	        	}
-// 	        	sum += num*price;
-	        
-// 	        })  
-// 	        $("#total").html(sum.toFixed(0));  
-// 	    }  
-// 	    setTotal();  
-	  
-// 	})   
+$(document).ready(function(){
+  $( ".deletBtn" ).on( "click", function( event ) {
+         var $item = $( this );         
+         swal({
+      title: 'Are you sure?',
+      text: "確定刪除商品嗎?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger'      
+    }).then(function () {
+     $.ajax({
+      type:"POST",
+      url:'<%=request.getContextPath()%>/pro/shoppingCartServlet.do?action=deletePro&del='+$item.val(),
+//       data: $( "#formSchdule" ).serialize(),
+//      dataType: "json",
+      dataType: "text",
+//       cache: true,           // 預設值為 true 防止快取
+//       async: false,           // 預設值為 true 非同步
+      success:function(response){
+       swal(
+        'Sucess!',
+        '已刪除此商品',
+        'success'
+       )
+       setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
+      }, // success end        
+      error:function(xhr, ajaxOptions, thrownError){
+       swal(
+         'Oops...',
+         '出錯瞜!',
+         'error'
+       )
+      } // error end
+     }) //.ajax end 
+    }); //then end
+         
+       }); //click end
+ });//document ready end
+
 </script>
+
+
+
 <br><br>
 </body>
 </html>

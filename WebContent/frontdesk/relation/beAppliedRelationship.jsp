@@ -134,7 +134,7 @@ pageContext.setAttribute("relationVO", relationVO);
 		
 		<tr align="center">
 		<th>圖片</th>
-		<th>申請好友</th>
+		<th>申請人</th>
 		<th>性別</th>
 		<th>是否接受</th>
 		</tr>

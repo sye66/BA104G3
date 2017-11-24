@@ -13,7 +13,6 @@
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
 
-	String mem_No = (String) session.getAttribute("mem_No");
 %>
 
 <!DOCTYPE html>
@@ -32,20 +31,24 @@
 		<![endif]-->
 </head>
 <body>
-
+<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
+	<br><br><br><br><br>
+	<br>
 
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title">標題</h3>
+    <h3 class="panel-title">任務完成小面板兒</h3>
   </div>
   <div class="panel-body">
-    內容文字
+<c:if test="${not empty errorMsgs}">
+<div>${errorMsgs}</div>
+</c:if>
   </div>
   <table class="table">
-    <c:forEach var="issuerMission" items="${getMissionSvc.findIssuerCase(mem_No)}"
+    <c:forEach var="issuerMission" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}"
 								varStatus="m" step="1">
 
-<c:if test="${issuerMission.mission_State == 3||issuerMission.mission_State == 4 ||issuerMission.mission_State == 73 ||issuerMission.mission_State == 74}">
+<c:if test="${issuerMission.mission_State == 3||issuerMission.mission_State == 4 }">
 <tr>
 <td>${issuerMission.mission_No}</td>
 <td>${issuerMission.mission_Name}</td>
@@ -53,13 +56,16 @@
 <td>${memSvc.getOneMem(issuerMission.takecase_Mem_No).mem_Id}</td>
 <td>
 <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-<c:if test="${successGetMission.mission_State == 3 || successGetMission.mission_State == 73}">	
+<c:if test="${issuerMission.mission_State == 3 }">	
 <button class="btn btn-warning" type="submit" name="action" value="checkmem">接案人身分確認</button>
 </c:if>
-<c:if test="${successGetMission.mission_State == 4 ||successGetMission.mission_State == 74}">	
+<c:if test="${issuerMission.mission_State == 4 }">	
 <button class="btn btn-danger" type="submit" name="action" value="givepay">完成報酬交付</button>
 <button class="btn btn-danger" type="submit" name="action" value="haveproblem">案件爭議訴求</button>
 </c:if>
+<input type="hidden" name="mission_No" value="${issuerMission.mission_No}">
+<input type="hidden" name="takecase_Mem_No" value="${issuerMission.takecase_Mem_No}">
+<input type="hidden" name="requestURL" value="/frontdesk/mission/issuerfinalstep.jsp">
 </form>
 </td>
 </tr>

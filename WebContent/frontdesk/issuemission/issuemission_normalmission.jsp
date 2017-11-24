@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -31,7 +32,15 @@
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2"></div>
 			</div>
 		</div>
-
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font color='red'>請修正以下錯誤:</font>
+			<ul>
+				<c:forEach var="message" items="${errorMsgs}">
+					<li style="color:red">${message}</li>
+				</c:forEach>
+			</ul>
+		</c:if>
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
@@ -64,34 +73,6 @@
 									說說關於你的任務
 								</label>
 								<textarea class="form-control" name="mission_Des" id="mission_Des" rows="3"></textarea>
-							</div>
-						<%-- 任務發布時間 --%>
-							<div class="form-group col-sm-6">
-								<label>
-									任務發布時間
-								</label>
-									<input type="text" name="mission_Release_Time" id="mission_Release_Time" class="form-control">
-								<script type="text/javascript">
-									$(function(){
-										$('#mission_Release_Time').datepicker({
-											dateFormat: 'yy-mm-dd'
-										});
-									});
-								</script>
-							</div>
-						<%-- 任務截止時間 --%>
-							<div class="form-group col-sm-6">
-								<label>
-									任務截止時間
-								</label>
-									<input type="text" name="mission_Due_Time" id="mission_Due_Time" class="form-control">
-								<script type="text/javascript">
-									$(function(){
-										$('#mission_Due_Time').datepicker({
-											dateFormat: 'yy-mm-dd'
-										});
-									});
-								</script>
 							</div>
 						<%-- 報酬 --%>
 							<div class="form-group">
