@@ -16,7 +16,7 @@
 	
 <html>
 <head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -28,7 +28,7 @@
 	margin: 20px;
 	padding: 0px;
 	height: 450px;
-	width: 450px;
+	width: 550px;
 }
 
 .proName {
@@ -46,15 +46,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 300px;
+	max-width: 250px;
 }
 
 .proDiv {
-	width: 650px;
+	width: 680px;
 	border: 3px orange double;
 	margin: 20px;
 	padding: 0px;
-	height: 550px;
+	height: 600px;
 }
 
 .proDiscount {
@@ -63,7 +63,7 @@
 }
 
 #ontopDiv {
-	top: 0;
+/* 	top: 0; */
 	width: 100%;
 	height: 60px;
 	background-color: #ffffff;
@@ -73,7 +73,7 @@
 
 .float {
 	position: fixed;
-	top: 0;
+/* 	top: 0; */
 	box-shadow: 4px 4px 12px 4px rgba(20%, 20%, 40%, 0.5);
 	z-index: 100;
 }
@@ -102,14 +102,14 @@
 	});
 </script>
 <script>
-	window.onscroll = function() {
-		if ($(document).scrollTop() > 60)//这个60是距离顶部高度
-		{
-			$("#ontopDiv").addClass('float');
-		} else {
-			$("#ontopDiv").removeClass('float');
-		}
-	}
+// 	window.onscroll = function() {
+// 		if ($(document).scrollTop() > 200)//这个60是距离顶部高度
+// 		{
+// 			$("#ontopDiv").addClass('float');
+// 		} else {
+// 			$("#ontopDiv").removeClass('float');
+// 		}
+// 	}
 </script>
 
 
@@ -137,11 +137,14 @@
 	
 	
 <!-- TOP -->
+<div class="row">
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
 <%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include> --%>
 </div>
+</div>
 <!-- 商城TOP -->
+
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
 </div>
@@ -227,7 +230,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 							%>
 
 
-							<td style="padding-left: 130px; padding-top: 13px;">
+							<td style="padding-left: 50px; padding-top: 13px;">
 							<FORM METHOD="post" style="height: 42px; width: 180px;" ACTION="<%=request.getContextPath()%>/pro/proTrackServlet.do">
 									<button type="submit" class="btn btn-Secondary"  style="width: 180px; margin-top: 5px; font-size: 20px;">加入追蹤清單</button>
 									<input type="hidden" name="pro_No" value="${proVO.pro_No}" >
@@ -238,7 +241,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 							<%}else{%>
 							
-							<td style="padding-left: 130px; padding-top: 13px;">
+							<td style="padding-left: 100px; padding-top: 13px;">
 								<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
 								style="width: 50px;">已加入追蹤</td>
 
@@ -355,7 +358,7 @@ $(function() {
 </script>
 
 <div class="col-xs-12 col-sm-12">
-	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+	<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
 </div>	
 </body>
 </html>

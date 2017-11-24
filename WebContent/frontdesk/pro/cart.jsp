@@ -60,7 +60,7 @@ window.onscroll = function() {
 	}
 </script>
 </head>
-<body style="background-color: #ffc">
+<body >
 <% 
 	int count = 0;
 	int count2 = 0;
@@ -282,7 +282,7 @@ $(function(){
 	            t.val(1);  
 	        }
 	        
-	        qun = parseInt(t.val()-1);
+	        qun = parseInt(t.val());
 	        if(qun<1){  
 	            qun=1;  
 	        }
@@ -332,11 +332,11 @@ $(function(){
              
              }, // success end        
              error:function(xhr, ajaxOptions, thrownError){
-              swal(
-                'Oops...',
-                '出錯瞜!',
-                'error'
-              )
+//               swal(
+//                 'Oops...',
+//                 '出錯瞜!',
+//                 'error'
+//               )
              } // error end
             }) //.ajax end 
         }//if 
@@ -393,9 +393,10 @@ $(document).ready(function(){
 
 
 
-<br><br>
+
 
 <div class="col-xs-12 col-sm-12">
+<br><br><br><br>
 		<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
 </div>	
 </body>
