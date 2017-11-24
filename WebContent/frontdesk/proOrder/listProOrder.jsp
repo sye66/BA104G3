@@ -148,6 +148,8 @@
        <jsp:include page="/frontdesk/proOrder/getOneOrderList.jsp" />
 <%} %>
 </div>	</div>		
-<%-- <jsp:include page="/frontdesk/proOrder/getOneOrderList.jsp" flush="true" /> --%>
+<div class="col-xs-12 col-sm-12">
+		<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
+</div>
 </body>
 </html>
