@@ -54,8 +54,6 @@ div> .timeline-body{
 	</ul>
 </c:if>
 
-
-
 <div class="page-header position-relative">
 
                 <div class="title">
@@ -97,10 +95,10 @@ div> .timeline-body{
 
                 <!-- /Page Header -->
                 <!-- Page Body -->
-                
+<div class="container" style="font-size: 18px; text-align: center;">                
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-                        
+</div>                        
                 <div class="page-body">
                     <ul class="timeline">
                         <li>
@@ -179,10 +177,10 @@ div> .timeline-body{
         
 </body>
 
-        
-    </c:forEach>
-</table>
+</c:forEach>
+<div class="container" style="font-size: 18px; text-align: center;">    
  <%@ include file="/backdesk/page2.file" %> 
+ </div>
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />

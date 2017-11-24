@@ -51,7 +51,7 @@
 
 <div class="container">
 <c:forEach var="artiReplyVO" items="${artiReplySvc1.findReplyByArtiNo(arti_No)}" >
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                     
@@ -143,8 +143,6 @@
 	</c:forEach>
 </div>
 </html>
-
 <br> </b>
-
 </body>
 </html>

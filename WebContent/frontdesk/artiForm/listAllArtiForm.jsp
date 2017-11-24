@@ -15,7 +15,7 @@
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
 %>
-
+<jsp:useBean id="MemService" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
 
 <html>
@@ -38,11 +38,7 @@ div> .timeline-body{
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-<br>
-<br>
-<br>
-<br>
-<br>
+<br><br><br><br><br>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -82,19 +78,21 @@ div> .timeline-body{
                         <a class="sidebar-toggler" href="#">
                             <i></i>111
                         </a>
+                        <c:if test="${memVO.mem_State == 1}">
                         <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
                         </a>
+                            </c:if>
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
                     </div>
                         
                     </div>
-                
+<div class="container" style="font-size: 18px; text-align: center;">       
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-                        
+   </div>                     
                 <div class="page-body">
                     <ul class="timeline">
                         <li>
@@ -141,13 +139,13 @@ div> .timeline-body{
                                 </div>
                             </div>
                         </li>
-
                     </ul>
-                </div>
+                </div> 
                     </c:forEach>
-
+<div class="container" style="font-size: 18px; text-align: center;">    
  <%@ include file="/backdesk/page2.file" %> 
-      
+ </div>        
+     
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

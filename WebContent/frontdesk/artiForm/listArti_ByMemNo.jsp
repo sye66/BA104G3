@@ -13,10 +13,10 @@
     ArtiFormService artiSvc = new ArtiFormService();
     
     MemVO memVO = (MemVO) session.getAttribute("memVO");
-    String mem_No_main = memVO.getMem_No();
-	request.setAttribute("mem_No",mem_No_main);
+	String mem_No_main = memVO.getMem_No();
+ 	request.setAttribute("mem_No",mem_No_main);
 
-    Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
+ 	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
     pageContext.setAttribute("set",set);
 %>
 
@@ -38,16 +38,7 @@
 <body bgcolor='white'>
 ${arti_No}
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>@@</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
-	</td></tr>
-</table>
-
+<br><br><br><br><br>
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <%-- 錯誤表列 --%>
@@ -98,10 +89,10 @@ ${arti_No}
                     </div>
                         
                     </div>
-                
+<div class="container" style="font-size: 18px; text-align: center;">                 
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-                        
+</div>                        
                 <div class="page-body">
                     <ul class="timeline">
                         <li>
@@ -152,9 +143,9 @@ ${arti_No}
                     </ul>
                 </div>
                     </c:forEach>
-
+<div class="container" style="font-size: 18px; text-align: center;"> 
  <%@ include file="/backdesk/page2.file" %> 
-      
+</div>      
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

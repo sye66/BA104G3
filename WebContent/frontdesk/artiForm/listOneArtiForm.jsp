@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
 <style>
 div {
   word-wrap:break-word;
@@ -68,9 +68,10 @@ div {
 <br>
 <br>
 <br>
+   
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
-
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="container">
+<div class="col-xs-12 col-sm-12 widget-container-center">
     <div class="widget-box">
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">${artiFormVO.arti_Title}</h5>
@@ -98,7 +99,6 @@ div {
                  </div>
              </div>
          </div>
-         
         
          <div class="widget-body">
              <div class="widget-toolbox">
@@ -152,6 +152,17 @@ div {
 		    </div>
 		</div>
 		
+        <div class="widget-toolbar">
+            <div class="" style="width:100px;">
+                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
+			    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+			    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			    <button class="btn btn-danger" type="submit" name="action" value="deleteArti">刪除文章</button>
+                </FORM>
+             </div>
+		</div>
+		
 		<div class="widget-toolbar">
             <div class="" style="width:100px;">
                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
@@ -162,70 +173,47 @@ div {
 		       </FORM>
 		    </div>
 		</div>
-		
-		<div class="widget-toolbar">
-            <div class="" style="width:100px;">
-                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
-			    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-			    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			    <button class="btn btn-danger" type="submit" name="action" value="deleteArti">刪除文章</button>
-                </FORM>
-             </div>
-		</div>
-</FORM>
-
-		<div class="widget-toolbar">
-            <div class="" style="width:100px;">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >
-		        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-		        <input type="hidden" name="mem_No"  value="${artiFormVO.mem_No}">
-                <button class="btn btn-info" type="submit" name="action" value="listReply_ByArtiNo"> 查看回覆</button>
-                </FORM>
-		    </div>
-		</div>
            </div>
        </div>
    </div>
+   </div>
 <hr>	
 
+<div class="container">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >     
 <div class="widget-body">
     <div class="widget-toolbox">
             <div class="btn-group">             
                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${memVO.mem_No}"
 	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-                                    
+           
     <div class="widget-toolbar">
-        <div class="widget-main padding-6">                   
-                                    
+        <div class="widget-main padding-6">                                     
  		    <div class="widget-toolbar">
                 <div class="" style="width:100px;">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >
 		        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		        <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
                 <button class="btn btn-primary" type="submit" name="action" value="insertReply"> 回覆文章</button>
-                
 		        </div>
-		    </div>
-                                    
+		    </div>                     
         </div>
     </div>
-                                    
+                                   
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic"> 
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="45"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
+                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
                      </div>
                  </div>
-             </div>
-                                          
+             </div>     
              </div>
          </div>
-</FORM>
 </div>
-<hr>
+</FORM>
 
+<hr>
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
 <div class="widget-body">
     <div class="widget-toolbox">
         <div class="btn-toolbar">
@@ -235,11 +223,9 @@ div {
 	                     style="height: 120px;width: 150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
                                     
     <div class="widget-toolbar">
-        <div class="widget-main padding-6">
-                                    
+        <div class="widget-main padding-6">                      
              <div class="widget-toolbar">
                  <div class="" style="width:100px;">
-		         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
 		         <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
@@ -254,19 +240,19 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="45"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
-                     
+                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      </div>
                  </div>
              </div>
-                    </FORM>                      
+                                         
              </div>
          </div>
      </div>
-     </FORM>
 </div>
+</FORM>
 <hr>
-
+</FORM> 
+</div>
 	<jsp:include page="/frontdesk/artiReply/listReply_ByArtiNo.jsp" flush="true" />
 
 </body>

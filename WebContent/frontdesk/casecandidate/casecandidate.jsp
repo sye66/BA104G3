@@ -57,6 +57,7 @@
 
 <h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前所發佈任務</h2>
 <c:forEach var="caseVO" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="i" step="1">
+<c:if test="${caseVO.mission_State == 1 || caseVO.mission_State == 2 || caseVO.mission_State == 3 || caseVO.mission_State == 4 || caseVO.mission_State == 7 ||caseVO.mission_State == 72 }">
 		<div class="panel panel-info">
 			<div class="panel-heading">
 				
@@ -146,6 +147,7 @@
 			</div>
 
 </div>
+</c:if>
 </c:forEach>
 </div>
 </div>

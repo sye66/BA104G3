@@ -27,6 +27,18 @@
 <title>文章回覆資料 - listOneArtiReply.jsp</title>
 
 <style>
+.carousel-caption >p{
+  font-weight:bolder;
+  color: #00F0F0;
+  font-size: 28px;
+  font-family:Microsoft JhengHei;
+}
+
+.carousel-caption >h1{
+  color: #FFFF0F;
+  font-size: 36px;
+  font-family:Microsoft JhengHei;
+}
  
 </style>
 
@@ -86,8 +98,8 @@
 		</div>
 <hr>
     
-                </div>
-                </div>
+</div>
+</div>
   
 </body>
 
