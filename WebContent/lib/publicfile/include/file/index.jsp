@@ -46,6 +46,7 @@
 <!-- navbar====================================================================== -->
 
 
+
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include>
 <br><br><br><br><br><br>
 
@@ -72,9 +73,9 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_1.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>CSS可樂好喝超爽快</h1>
-                    <p>你喝過了嗎？</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+                    <h1 style="font-size:100px">家裡狗狗怎樣都教不會嗎?</h1>
+                    <p>這邊除了可以找到你的狗友們，更能找到訓練專家!</p>
+<!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p> -->
                 </div>
             </div>
         </div>
@@ -82,9 +83,9 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_2.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>CSS可樂的外掛真方便</h1>
-                    <p>你安裝了嗎？</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">更多</a></p>
+                    <h1 style="font-size:100px">最棒的下午茶蛋糕在哪裡?</h1>
+                    <p>自己動手做，喜歡烘培的朋友們趕快來交流!</p>
+<!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">更多</a></p> -->
                 </div>
             </div>
         </div>
@@ -92,9 +93,9 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_3.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>我是標題喔～自己改文案吧</h1>
-                    <p>我是內文喔，你可以把字打在這裡呦</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+                    <h1 style="font-size:100px">想要找獨家私房菜嗎?</h1>
+                    <p style="font-size:20px">這裡不僅能找到同好饕友，更有獨家手路菜等你發掘!</p>
+<!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p> -->
                 </div>
             </div>
         </div>
@@ -102,9 +103,9 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_4.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>我是標題喔～自己改文案吧</h1>
-                    <p>我是內文喔，你可以把字打在這裡呦</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+                    <h1 style="font-size:100px">找不到好口碑婚攝、商攝嗎?</h1>
+                    <p>專家都在這，想學攝影或找同好更不能錯過!</p>
+<!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p> -->
                 </div>
             </div>
         </div>
@@ -112,9 +113,9 @@
             <img id="caro" src="<%=request.getContextPath() %>/res/images/mem/index/carousel/carousel_5.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>我是標題喔～自己改文案吧</h1>
-                    <p>我是內文喔，你可以把字打在這裡呦</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p>
+                    <h1 style="font-size:100px">想完成小時後學樂器的夢嗎?</h1>
+                    <p>也許你可以把你拿手的專長與他人教學互長!</p>
+<!--                     <p><a class="btn btn-lg btn-primary" href="#" role="button">詳細內容</a></p> -->
                 </div>
             </div>
         </div>
@@ -153,7 +154,7 @@
  <!-- Portfolio Grid Section -->
     <section id="portfolio">
       <div class="container">
-        <h2 class="text-center">Portfolio</h2>
+        <h2 class="text-center">POTM</h2>
         <hr class="star-primary">
         <div class="row">
           <div class="col-sm-4 portfolio-item">
@@ -163,7 +164,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/cabin.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_1.png" alt="">
             </a>
           </div>
           <div class="col-sm-4 portfolio-item">
@@ -173,7 +174,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/cake.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_2.png" alt="">
             </a>
           </div>
           <div class="col-sm-4 portfolio-item">
@@ -183,7 +184,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/circus.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_3.png" alt="">
             </a>
           </div>
           <div class="col-sm-4 portfolio-item">
@@ -193,7 +194,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/game.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_4.png" alt="">
             </a>
           </div>
           <div class="col-sm-4 portfolio-item">
@@ -203,7 +204,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/safe.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_5.png" alt="">
             </a>
           </div>
           <div class="col-sm-4 portfolio-item">
@@ -213,7 +214,7 @@
                   <i class="fa fa-search-plus fa-3x"></i>
                 </div>
               </div>
-              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/submarine.png" alt="">
+              <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_6.png" alt="">
             </a>
           </div>
         </div>
@@ -249,23 +250,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/cabin.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_1.png" alt="">
+                  <p>原本以為稍微漏水沒關係，完全沒想到，一年後會釀成這般悲劇??找不到信任的修繕人員嗎?這個平台能找到讓你安心的服務</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">POTM</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">June 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>
@@ -293,23 +293,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/cake.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_2.png" alt="">
+                  <p>進行配對邀約時，我們只會提供一份簡易版本讓對方評估是否選擇約會，不會公開在任何公用空間。簡易資料內容只包含基本條件，而姓名、照片、電話等個人資料都不會提供，請您放心。</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">POTM</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">Junes 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>
@@ -337,23 +336,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/circus.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_3.png" alt="">
+                  <p>相信大多數人都有學習過彈鋼琴的經驗，其實在彈奏這種鍵盤樂器時，可是要同時考慮旋律、節奏、和聲等複數以上的要素，因此可以自然養成對音樂要求整體平衡的能力。這裡一定能找到你的良師益友</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">POTM</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">June 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>
@@ -381,23 +379,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/game.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_4.png" alt="">
+                  <p>在只有景觀窗的情況下，每一次的拍攝都要非常精準，才能捕捉到瞬間的美，如果一個閃神，眼前所見的景色就會產生不同的變化。歡迎好攝之友來交流!</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">Start Bootstrap</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">June 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>
@@ -425,23 +422,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/safe.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_5.png" alt="">
+                  <p>延伸提供的實體交友服務，擁有另外獨立的顧客資料庫。我們安排更多的機會，讓我們的會員參與各種類型的互動；同時也致力於一對一配對約會，依據每位會員需求，提供最完善的服務。</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">POTM</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">June 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>
@@ -469,23 +465,22 @@
                 <div class="modal-body">
                   <h2>Project Title</h2>
                   <hr class="star-primary">
-                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/submarine.png" alt="">
-                  <p>Use this area of the page to describe your project. The icon above is part of a free icon set by
-                    <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                  <img class="img-fluid img-centered" src="<%=request.getContextPath()%>/lib/publicfile/include/img/portfolio/indexPhoto_6.png" alt="">
+                  <p>每週固定安排各式新奇有趣的主題活動，包括手作輕食、品酒教學、遊艇派對、兩性講座等有趣特別的活動，滿足種不同興趣喜好或樂於嘗試的會員。</p>
                   <ul class="list-inline item-details">
                     <li>Client:
                       <strong>
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>
+                        <a href="#">POTM</a>
                       </strong>
                     </li>
                     <li>Date:
                       <strong>
-                        <a href="http://startbootstrap.com">April 2014</a>
+                        <a href="#">June 2017</a>
                       </strong>
                     </li>
                     <li>Service:
                       <strong>
-                        <a href="http://startbootstrap.com">Web Development</a>
+                        <a href="#">Web Development</a>
                       </strong>
                     </li>
                   </ul>

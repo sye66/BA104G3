@@ -104,6 +104,8 @@
 				</c:if>
 				</a></h3>
 <%--               <h1><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio　</a></h1> --%>
+
+<%-- 					<li><jsp:include page="/index.html" flush="true"></jsp:include></li> --%>
             </li>
           </ul>
        </div>

@@ -196,7 +196,7 @@ webSocket.onmessage = function(event) {
 // 		        					//保持視窗一直在最下面,以方便顯示內容
 // 		        messagesArea1.scrollTop = messagesArea1.scrollHeight;
 //  			}
-	        
+	           
 	        
 // 	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
 	        
@@ -217,7 +217,7 @@ webSocket.onmessage = function(event) {
 			console.log("11sadasd11111userName +"+ memno)
 	        if(memname === jsonObj.userName){
 	        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+userName+':'+message+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-	            console.log("endPointURL +" +endPointURL);
+	        	 console.log("endPointURL +" +endPointURL);
 			console.log("1111111userName +"+ userName)
 			} else {
 	        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+'</span><span>  </span></div>');
