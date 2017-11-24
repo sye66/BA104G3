@@ -48,8 +48,9 @@
 				<label for="aa" class="col-xs-12 col-sm-3 control-label">${memSvc.getOneMem(memVO.mem_No).mem_No}--${memSvc.getOneMem(memVO.mem_No).mem_Name}
 					你好 </label>
 				<div class="col-xs-12 col-sm-9">
-					<input type="text" name="aa" id="aa" placeholder="文字"
-						class="form-control">
+					<c:if test="${not empty errorMsgs}">
+					<div>${errorMsgs}</div>
+					</c:if>
 				</div>
 			</div>
 			</td>

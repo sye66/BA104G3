@@ -491,24 +491,32 @@ COMMIT;
 
 --接案候選人 CASE_CANDIDATE FAKE DATA--
 
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000001','MISSION000000001',1);
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000002','MISSION000000001',1);
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000004','MISSION000000004',1);
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000003','MISSION000000002',1);
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000004','MISSION000000005',1);
-INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO,ISSUER_INVITING)
-VALUES('M000002','MISSION000000006',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000001','M000001',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000001','M000002',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000001','M000003',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000002','M000002',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000002','M000003',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000002','M000013',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000002','M000018',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000004','M000004',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000005','M000004',1);
+INSERT INTO CASE_CANDIDATE( MISSION_NO,CANDIDATE_MEM_NO ,ISSUER_INVITING)
+VALUES('MISSION000000006','M000017',1);
 COMMIT;
 
 --檢舉案件 ACCUSE_CASE--
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
-VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),9,'0') ,'MISSION000000004','M000003','E000004',  sysdate,'這根本跟修繕無關',1);
+VALUES(to_char(sysdate,'yyyymmdd')||'ACC'||LPAD(to_char(ACCUSE_SEQ.NEXTVAL),7,'0') ,'MISSION000000004','M000003','E000004',  sysdate,'這根本跟修繕無關',1);
 
 
 INSERT INTO ACCUSE_CASE(ACCUSE_NO, MISSION_NO ,ACCUSER_NO ,EMP_NO ,ACCUSE_DATE  , ACCUSE_DETAIL,ACCUSE_STATE)
@@ -746,7 +754,7 @@ INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000006','【問題】為啥跟女生去看電影 對方沒有主動說要合照',11,'是不是她不在意我們一起出來的時光==  我拿我的手機合照完也沒跟我要照片  心寒了',TO_date('2014-03-15 16:09:11','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX6.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000007','【其他】有改圖高手嗎?(特粉不要入來)',18,'我覺得一般版嬰靈戰車的梗用太多，變得不有趣了  所以有人能把嬰靈戰車，P圖P得帥氣或可愛一點嗎?  我想日後出現的嬰靈圖有點新鮮感與好笑度   加點氣流及裝飾給嬰靈，讓他變得帥氣點及可愛點也行  例如 : 冰火版嬰靈戰車、暗黑屬性嬰靈戰車、聖誕版嬰靈戰車  本人為報答你的改圖，能力所限只能給你一個GP，抱歉，拜託了~',TO_date('2014-03-26 10:23:38','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX7.jpg'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000008','【問題】你們支持台獨還是反對台獨啊?',6,'如題 有點好奇 場外大部分的想法是什麼???',TO_date('2015-04-26 15:10:38','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX8.jpg'),4,'ㄧ般'); 
-INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000009','【情報】民調：52％民眾不滿意蔡總統兩岸政策',25,'2017-10-23 10:35  〔記者楊淳卉／台北報導〕針對總統蔡英文在兩岸關係的表現，台灣民意基金會今公布最新民調顯示，高達民眾52%不滿意，遠高於滿意的36.4%。至於蔡總統領導國家的方式，43.7%民眾贊同，37.3%不贊同，贊同者和最近一個月相比小跌2.7%，不贊同者上升0.9%。  民調報告分析，比較2016年8月起的長期民調趨勢觀察，蔡總統處理兩岸關係表現，持續未獲得台灣多數民意肯定，若長期維持這樣的狀態，不但總統聲望難拉抬，也將減少和中共周旋的籌碼，不利台灣開展對己有利的兩岸關係。  台灣民意基金會董事長游盈隆表示，從8次的全國性調查，蔡總統的兩岸政策，僅在2016年8月上任100天時獲得過半數民意支持，但去年11月至今，不滿意者卻都高於滿意者；蔡總統在兩岸關係上，不能僅停在「兩岸維持現狀」的基調，沒有其他創意表現，國安體系和海陸兩會要好好重新檢討。  游盈隆也指出，從民調來看，統獨兩方對蔡總統處理都不滿意。  前民進黨立委簡錫堦，若從族群來解讀，蔡總統自稱是客家女兒，但客家人不滿意蔡總統兩岸政策者超過五成，原住民反對者更高達84.3%，遠高於外省族群的不滿意者，連河洛人也不滿意蔡總統；從李明哲、劉曉波案來看，蔡總統對兩岸懦弱、不敢發聲。  此次民調由台灣民意基金會委託山水民意公司進行調查，訪問對象為全國20歲以上成年人，以全國住宅電話用戶為抽樣架構，以系統抽樣加尾數兩碼隨機抽樣。訪問日期為2017年10月16日至10月17日，有效樣本1068人，在95%信心水準下，抽樣誤差正負3%。',TO_date('2015-11-29 21:22:39','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX9.png'),4,'ㄧ般'); 
+INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000009','【情報】民調：52％民眾不滿意蔡總統兩岸政策',25,'2017-10-23 10:35  〔記者楊淳卉／台北報導〕針對總統蔡英文在兩岸關係的表現，台灣民意基金會今公布最新民調顯示，高達民眾52%不滿意，遠高於滿意的36.4%。至於蔡總統領導國家的方式，43.7%民眾贊同，37.3%不贊同，贊同者和最近一個月相比小跌2.7%，不贊同者上升0.9%。  民調報告分析，比較2016年8月起的長期民調趨勢觀察，蔡總統處理兩岸關係表現，持續未獲得台灣多數民意肯定，若長期維持這樣的狀態，不但總統聲望難拉抬，也將減少和中共周旋的籌碼，不利台灣開展對己有利的兩岸關係。  台灣民意基金會董事長游盈隆表示，從8次的全國性調查，蔡總統的兩岸政策，僅在2016年8月上任100天時獲得過半數民意支持，但去年11月至今，不滿意者卻都高於滿意者；蔡總統在兩岸關係上，不能僅停在「兩岸維持現狀」的基調，沒有其他創意表現，國安體系和海陸兩會要好好重新檢討。  游盈隆也指出，從民調來看，統獨兩方對蔡總統處理都不滿意。  前民進黨立委簡錫?，若從族群來解讀，蔡總統自稱是客家女兒，但客家人不滿意蔡總統兩岸政策者超過五成，原住民反對者更高達84.3%，遠高於外省族群的不滿意者，連河洛人也不滿意蔡總統；從李明哲、劉曉波案來看，蔡總統對兩岸懦弱、不敢發聲。  此次民調由台灣民意基金會委託山水民意公司進行調查，訪問對象為全國20歲以上成年人，以全國住宅電話用戶為抽樣架構，以系統抽樣加尾數兩碼隨機抽樣。訪問日期為2017年10月16日至10月17日，有效樣本1068人，在95%信心水準下，抽樣誤差正負3%。',TO_date('2015-11-29 21:22:39','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX9.png'),4,'ㄧ般'); 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000010','【閒聊】有天乃哥穿越時空 回到三國時代',14,'乃哥變成蜀國的一位士兵  某天 劉備對全體將士說  此局乃是我和孔明先生精心的佈署 不齊全的地方還請提出改善  乃哥當場爆氣對劉備罵  姦汝娘的x  劉備大怒下令抓起來......  乃哥下場大家自行想像吧',TO_date('2016-01-15 10:15:28','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX10.jpg'),4,'ㄧ般'); 
 
 INSERT INTO ARTI_FORM VALUES ('AR'||LPAD(to_char(ARTI_FORM_SEQUENCE.NEXTVAL),8,'0'),'M000011','【心得】最近有點討論度 關於FB上的詐騙集團賣礦卡',2,'最近板上有一些相關文章 就是FB最近很夯的 詐騙販賣  然後很多人心動 什麼的 問看看是否是真詐騙 反正不囉嗦 還是要有勇者  我也訂一隻來玩 反正是貨到付款 然後 似乎是統一在今天11/8號  全部出貨 以下是收到貨的圖 確實是詐騙集團!!!請有疑問的朋友  不要真的付錢下去 問題一 大小不符 1080TI 可沒那麼小  我沒用卡尺量 反正大小不對就是試了  問題二 重量過輕   幹你... 裡面根本是衛生紙重量  之前也有訂的朋友 記得不要收貨  看板上似乎很多人會怕 然後裝死 說 我不是本人  其實不用怕 這樣反而最造成人家困擾 給人家簽拒收就好 後面都沒他的事了   雖然沒打算付錢 可是該有的道德還是要負責  快遞員來的時候 我直接說是我本人  我就跟快遞員說 : 我要拒收 這個是詐騙集團的 可以借我拍照嗎?  快遞員很爽快答應: 他說 對阿 這應該是詐騙的  哪裡來的顯卡重量跟衛生紙一樣 而且也不知道是誰送的!  然後劈哩啪啦聊兩句就請他幫我簽拒收  以上分享 如果有人真的付錢 歡迎來留言哭哭 我會不吝嗇給GP  ',TO_date('2016-02-25 20:13:14','YYYY-MM-DD HH24:MI:SS'),load_blob('XXX11.jpg'),4,'ㄧ般'); 
