@@ -156,6 +156,14 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
@@ -253,10 +261,18 @@ public class GetMissionServlet extends HttpServlet {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/casecandidate/casecandidate.jsp");
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			String takecase_Mem_No = (String) req.getParameter("takecase_Mem_No").trim();
@@ -343,6 +359,14 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			GetMissionVO getMissionVO = new GetMissionVO();
@@ -454,6 +478,14 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			GetMissionVO getMissionVO = new GetMissionVO();
@@ -511,6 +543,14 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 			
 			GetMissionVO getMissionVO = new GetMissionVO();
@@ -568,6 +608,14 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			GetMissionVO getMissionVO = new GetMissionVO();
@@ -720,10 +768,18 @@ System.out.println(getMissionVO.getMission_State());
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher(requestURL);
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
@@ -824,10 +880,18 @@ System.out.println(getMissionVO.getMission_State());
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
 				RequestDispatcher failureView = req
-						.getRequestDispatcher(requestURL);
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 			
 			MemService memSvc = new MemService();
@@ -901,6 +965,14 @@ System.out.println(getMissionVO.getMission_State());
 				failureView.forward(req, res);
 			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 
 			GetMissionVO getMissionVO = new GetMissionVO();

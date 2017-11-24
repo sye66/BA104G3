@@ -18,6 +18,7 @@ import com.accusecase.model.*;
 import com.casecandidate.model.*;
 import com.emp.model.*;
 import com.getmission.model.*;
+import com.mem.model.MemVO;
 
 public class AccusecaseServlet extends HttpServlet {
 
@@ -35,14 +36,27 @@ public class AccusecaseServlet extends HttpServlet {
 
 		if ("accusecase".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			if (mem_No == null) {
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				failureView.forward(req, res);
+			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 			try {
 				String mission_No = (String) req.getParameter("mission_No");
@@ -56,7 +70,7 @@ public class AccusecaseServlet extends HttpServlet {
 				AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
 
-				if (issuer_No != mem_No) {
+				if (!issuer_No.equals(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
 						
 						if(mission_State == 1 || mission_State == 7){
@@ -65,7 +79,7 @@ public class AccusecaseServlet extends HttpServlet {
 							mission_State = 72;
 						}
 						getMissionVO = GetMissionSvc.takeMission(mission_No, mission_State);
-						accuseCaseVO = accuseCaseSevc.addAccuseCase(mission_No, mem_No, null, accuse_Detail, 1);
+						accuseCaseVO = accuseCaseSevc.addAccuseCase(mission_No, memVO.getMem_No(), null, accuse_Detail, 1);
 					} else if (mission_State == 3 || mission_State == 4) {
 						errorMsgs.add("這任務已經有人接案囉,不能檢舉,如有問題請反應後台管理員,謝謝。");
 					} else {
@@ -89,7 +103,7 @@ public class AccusecaseServlet extends HttpServlet {
 				getMissionVO = GetMissionSvc.getOneMission(mission_No);
 				req.setAttribute("getMissionVO", getMissionVO);
 				req.setAttribute("accuseCaseVO", accuseCaseVO);
-				req.setAttribute("mem_No", mem_No);
+				req.setAttribute("mem_No", memVO.getMem_No());
 				req.setAttribute("errorMsgs", errorMsgs);
 				String url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
@@ -102,6 +116,7 @@ public class AccusecaseServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req.getRequestDispatcher("");
 				failureView.forward(req, res);
+				return;
 			}
 
 		}
@@ -109,14 +124,27 @@ public class AccusecaseServlet extends HttpServlet {
 		
 		if ("cancelaccusecase".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			String mem_No = (String) req.getSession().getAttribute("mem_No");
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			if (mem_No == null) {
-				res.sendRedirect("/BA104G3/loginTest.jsp");
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
+			if (memVO == null) {
+				errorMsgs.add("請登入再來喔");
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				failureView.forward(req, res);
+			
 				return;
+			}else if (memVO.getMem_State() == 0) {
+					errorMsgs.add("請驗證再來喔");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+					failureView.forward(req, res);
+					
+					return;
 			}
 			try {
 				String mission_No = (String) req.getParameter("mission_No");
@@ -127,7 +155,7 @@ public class AccusecaseServlet extends HttpServlet {
 				AccuseCaseService accuseCaseSevc = new AccuseCaseService();
 				AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
-				if (issuer_No != mem_No) {
+				if (!issuer_No.equals(memVO.getMem_No()) ) {
 					if ( mission_State == 7 || mission_State == 72) {
 						System.out.println("2222");
 						if(mission_State == 7 ){
@@ -138,7 +166,7 @@ public class AccusecaseServlet extends HttpServlet {
 							mission_State = 72;
 						}
 						getMissionVO = GetMissionSvc.takeMission(mission_No, mission_State);
-						String accuse_No = accuseCaseSevc.getOneAccuseCaseBymissionAndmem(mission_No, mem_No).getAccuse_No();
+						String accuse_No = accuseCaseSevc.getOneAccuseCaseBymissionAndmem(mission_No, memVO.getMem_No()).getAccuse_No();
 						System.out.println();
 						accuseCaseSevc.deleteAccuseCase(accuse_No);
 					}else if(mission_State == 1 || mission_State == 2){
@@ -165,7 +193,7 @@ public class AccusecaseServlet extends HttpServlet {
 				getMissionVO = GetMissionSvc.getOneMission(mission_No);
 				req.setAttribute("getMissionVO", getMissionVO);
 				req.setAttribute("accuseCaseVO", accuseCaseVO);
-				req.setAttribute("mem_No", mem_No);
+				req.setAttribute("mem_No", memVO.getMem_No());
 				req.setAttribute("errorMsgs", errorMsgs);
 				String url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
@@ -178,6 +206,7 @@ public class AccusecaseServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req.getRequestDispatcher("");
 				failureView.forward(req, res);
+				return;
 			}
 
 		}
@@ -238,14 +267,16 @@ public class AccusecaseServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 				req.setAttribute("empVO", empVO);
 				String url = "/backdesk/missionManage/missionManage.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 				successView.forward(req, res);
+				return;
 			} catch (Exception e) {
 				System.out.println(e);
 				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
 				req.setAttribute("errorMsgs", errorMsgs);
 				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
 				failureView.forward(req, res);
+				return;
 			}
 
 		}

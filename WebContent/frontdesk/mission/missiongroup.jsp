@@ -41,20 +41,20 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 		
 			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 				
-			<button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
+			<button class="btn btn-info index" type="submit" name="action" value="missionindex">任務首頁</button>
 
 			</form>
 
 			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 				
-			<button class="btn btn-info" type="submit" name="action" value="mymission">我的案子</button>
+			<button class="btn btn-info pushdiv" type="submit" name="action" value="mymission">我的案子</button>
 
 			</form>
 
 
 			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
 				
-			<button class="btn btn-info" type="submit" name="action" value="missionwait">目前接案等待</button>
+			<button class="btn btn-info pushdiv" type="submit" name="action" value="missionwait">目前接案等待</button>
 
 			</form>
 
@@ -66,7 +66,7 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 			</c:forEach>
 			<c:if test="${alright}">
 			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-			<button class="btn btn-danger" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
+			<button class="btn btn-danger pushdiv" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
 			</form>
 			</c:if>
 			</c:if>
@@ -78,7 +78,7 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 			</c:forEach>
 			<c:if test="${ok}">
 			<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-			<button class="btn btn-warning" type="submit" name="action" value="missiondone">任務結案</button>
+			<button class="btn btn-warning pushdiv" type="submit" name="action" value="missiondone">任務結案</button>
 			</form>
 			</c:if>
 			</c:if>
@@ -87,7 +87,7 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 		</div>
 		<div class="col-xs-12 col-sm-9">
 			
-
+<div class="showMissionBoard"></div>
 
 		</div>
 	</div>
@@ -102,29 +102,30 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 
 
 <script>
-function getInfo(){	
-	  var xhr = new XMLHttpRequest();
-	  //設定好回呼函數 
-	  xhr.onreadystatechange = function (){
-	    if( xhr.readyState == 4 ){
-	      if(xhr.status == 200){
-	        document.getElementById("showPanel").innerHTML = 
-	        xhr.responseText;
-	      }else{
-	        alert( xhr.status);
-	      }//xhr.status == 200
-	    }//xhr.readyState == 4
-	  }//onreadystatechange
-	  
-	  //建立好Post連接
-	  var url = "PostResponseText.jsp";
-	  xhr.open("post", url , true);
-
-	  xhr.setRequestHeader("content-type" , "application/x-www-form-urlencoded");
-	  //送出請求
-	  var date_info = "memId=" + document.getElementById("memId").value;
-	  xhr.send( date_info );
-	}//function 
+$(document).ready(function(){
+		 $('.pushdiv').click(function(){
+			 $.ajax({
+				 type: "Post",
+				 url: "<%=request.getContextPath()%>/getmission/getmission.do",
+				 data: {action:name.val()},
+				 dataType: "json",
+				 success: function (data){
+					clearSelect();
+					$.each(data, function(i, item){
+						$('.showMissionBoard').append("<option value='"+item.classId+"'>"+item.className+"</option>");
+					});
+// 					$(data).each(function(i, item){
+// 						$('#class').append("<option value='"+item.classId+"'>"+item.className+"</option>");
+// 					});
+// 					jQuery.each(data, function(i, item){
+// 						$('#class').append("<option value='"+item.classId+"'>"+item.className+"</option>");
+// 					});
+			     },
+	             error: function(){alert("AJAX-grade發生錯誤囉!")}
+	         })
+		 })
+		
+	})
  
     
 </script>
