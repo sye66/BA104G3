@@ -136,7 +136,7 @@
   <!-- Header -->
     <header class="masthead">
       <div class="container">
-        <img class="img-fluid" src="<%=request.getContextPath()%>/lib/publicfile/include/img/panda.jpg" alt="">
+        <img class="img-fluid" src="<%=request.getContextPath()%>/res/images/index/teamwork.png" alt="">
         <div class="intro-text">
           <span class="name">Start Bootstrap</span>
           <hr class="star-light">
