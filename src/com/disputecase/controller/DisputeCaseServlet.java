@@ -100,6 +100,7 @@ public class DisputeCaseServlet extends HttpServlet {
 		 * @author Sander
 		 * @hidden issue_Dispute_Case
 		 * 驗證爭議案件內容不為空，圖片可為空值
+		 * 呼叫GetMissionService.missionDisputeCase 啟動爭議案件程序
 		 */
 		
 		if ("issue_Dispute_Case".equals(action)) {
@@ -141,9 +142,13 @@ public class DisputeCaseServlet extends HttpServlet {
 				disputeCaseVO.setDispute_Attachment(byteArrPic);
 				Date date = new Date();
 				Timestamp timestamp = new Timestamp(date.getTime());
-								// TODO 新增爭議案件要有會員的SESSION
+				// TODO 轉換任務狀態要有會員的SESSION
+				GetMissionService getMissionService = new GetMissionService();
+				getMissionService.missionFinish("MISSION000000027");
+				// TODO 新增爭議案件要有會員的SESSION
 				disputeCaseService.addDisputeCase(null, "MISSION000000027", "M000007", null, timestamp, null, 1, disputeContent, byteArrPic, null);
 				System.out.println("新增爭議案件: "); // TODO 在console加上爭議案件編號
+				
 				RequestDispatcher issueDoneView = request.getRequestDispatcher(ISSUE_CASE_SUCCESS);
 				issueDoneView.forward(request, response);
 			} catch (Exception e) {

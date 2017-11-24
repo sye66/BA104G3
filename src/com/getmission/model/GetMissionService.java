@@ -172,10 +172,54 @@ public class GetMissionService {
 	 */
 	public GetMissionVO updateOneMissionStatus(String mission_No, Integer mission_Status) {
 		GetMissionVO getMissionVO = dao.findByPrimaryKey(mission_No);
-		getMissionVO.setMission_State(5);
+		getMissionVO.setMission_State(mission_Status);
 		dao.update(getMissionVO);
-		
+		return getMissionVO;
+	}
+	/**
+	 * @author Sander
+	 * @param mission_No
+	 * @return GetMissionVO
+	 * 任務"開始"，傳入任務編號會找出該VO並設定狀態4，並裝入現在時間。
+	 */
+	public GetMissionVO missionStart(String mission_No) {
+		// 找出任務VO
+		GetMissionVO getMissionVO = dao.findByPrimaryKey(mission_No);
+		// 狀態:身分確認
+		getMissionVO.setMission_State(4);
+		// 取得現在時間
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		getMissionVO.setMission_Start_Time(timestamp);
+		dao.update(getMissionVO);
+		return getMissionVO;
+	}
+	/**
+	 * @author Sander
+	 * @param mission_No
+	 * @return GetMissionVO
+	 * 任務"結束"，傳入任務編號會找出該VO並設定狀態5，並裝入現在時間。
+	 */
+	public GetMissionVO missionFinish(String mission_No) {
+		// 找出任務VO
+		GetMissionVO getMissionVO = dao.findByPrimaryKey(mission_No);
+		// 狀態:已完成
+		getMissionVO.setMission_State(5);
+		// 取得現在時間
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		getMissionVO.setMission_End_Time(timestamp);
+		dao.update(getMissionVO);
 		return getMissionVO;
 	}
 	
+	public GetMissionVO missionDisputeCase(String mission_No) {
+		// 找出任務VO
+		GetMissionVO getMissionVO = dao.findByPrimaryKey(mission_No);
+		// 狀態:已完成
+		getMissionVO.setMission_State(8);
+		// 取得現在時間
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		getMissionVO.setMission_End_Time(timestamp);
+		dao.update(getMissionVO);
+		return getMissionVO;
+	}
 }
