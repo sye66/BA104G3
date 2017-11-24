@@ -6,7 +6,7 @@
 <%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="artiFormSvc1" scope="session" class="com.artiForm.model.ArtiFormService" />
-<jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
+<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
     ArtiFormVO artiFormVO = new ArtiFormVO();

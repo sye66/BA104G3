@@ -38,16 +38,11 @@ div> .timeline-body{
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-
-
-<h4>此頁練習採用 EL 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>@@</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [HOME] </a></h4>
-	</td></tr>
-</table>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -58,7 +53,7 @@ div> .timeline-body{
 	</ul>
 </c:if>
 
-
+<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <div class="page-header position-relative">
 

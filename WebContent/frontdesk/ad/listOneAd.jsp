@@ -33,17 +33,6 @@
 </head>
 <body bgcolor='blue'>
 
-
-
-<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-
-<h4>此頁暫練習採用 Script 的寫法取值:</h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>廣告 - ListOneAD.jsp</h3>
-		 <h4><a href="selectReply_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回文章回覆首頁</a></h4>
-	</td></tr>
-</table>
 <br>
 <%-- ${adSvc1.allAd}  here!!!! --%>
 <%-- ${adSvc.getAllAd(adVO.ad_No)} --%>
@@ -96,17 +85,11 @@
 		    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 <hr>
-<br>
-
-
-
-	
-                    
-                    
+    
                 </div>
                 </div>
   
 </body>
 
- <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
+
 </html>
