@@ -54,8 +54,6 @@ div> .timeline-body{
 	</ul>
 </c:if>
 
-
-
 <div class="page-header position-relative">
 
                 <div class="title">

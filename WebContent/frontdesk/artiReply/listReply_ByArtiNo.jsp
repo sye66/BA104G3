@@ -143,8 +143,6 @@
 	</c:forEach>
 </div>
 </html>
-
 <br> </b>
-
 </body>
 </html>

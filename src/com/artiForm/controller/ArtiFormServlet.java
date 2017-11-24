@@ -159,7 +159,7 @@ public class ArtiFormServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-//			try{
+			try{
 				/***************************1.接收請求參數****************************************/
 				HttpSession session = req.getSession();
 				String describe = req.getParameter("describe");
@@ -181,11 +181,11 @@ public class ArtiFormServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		/******[ 依會員編號取出 ]******/
@@ -193,7 +193,7 @@ public class ArtiFormServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-//			try{
+			try{
 				/***************************1.接收請求參數****************************************/
 				HttpSession session = req.getSession();
 				String mem_No = req.getParameter("mem_No");
@@ -215,11 +215,11 @@ public class ArtiFormServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 	

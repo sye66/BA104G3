@@ -98,8 +98,8 @@
 		</div>
 <hr>
     
-                </div>
-                </div>
+</div>
+</div>
   
 </body>
 

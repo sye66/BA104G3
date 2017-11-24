@@ -38,13 +38,7 @@
 <body bgcolor='white'>
 ${arti_No}
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
+<br><br><br><br><br>
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <%-- 錯誤表列 --%>
