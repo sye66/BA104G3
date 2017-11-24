@@ -142,7 +142,8 @@ public class ArtiReplyDAO implements ArtiReplyDAO_interface {
 		}
 		
 	}
-	
+
+
 	public void updateArtiReplyFMSet(ArtiReplyVO artiReplyVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

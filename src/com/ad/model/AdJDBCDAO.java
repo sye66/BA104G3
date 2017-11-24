@@ -28,7 +28,6 @@ public class AdJDBCDAO implements AdDAO_interface {
 		private static final String GET_AD_BY_FTY_NO= 
 				"SELECT * FROM AD WHERE AD_FTY_NO = ? order by AD_NO";
 
-		
 		@Override
 		public void insertAd(AdVO adVO) {
 			Connection con = null;

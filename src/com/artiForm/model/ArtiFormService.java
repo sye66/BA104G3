@@ -72,7 +72,6 @@ public class ArtiFormService {
 		dao.updateArti_Like(arti_No, arti_Like, arti_Status);
 	}
 
-	
 	public Set<ArtiFormVO> getAll(){
 		return dao.getAllArti();
 	}

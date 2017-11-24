@@ -161,8 +161,6 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 			pstmt.setString(3, arti_No);
 			pstmt.executeUpdate();
 			
-		
-			
 		} catch (SQLException se){
 			throw new RuntimeException("A database err occured." + se.getMessage());
 		} catch (Exception e){

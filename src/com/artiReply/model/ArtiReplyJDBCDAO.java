@@ -57,7 +57,6 @@ public class ArtiReplyJDBCDAO implements ArtiReplyDAO_interface {
 			pstmt.executeUpdate();
 			con.commit();
 			
-
 		} catch (ClassNotFoundException ce){
 			throw new RuntimeException("Couldn't load database driver." + ce.getMessage());
 		} catch (SQLException se){

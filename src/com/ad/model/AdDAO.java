@@ -26,6 +26,7 @@ public class AdDAO implements AdDAO_interface {
 		}
 	}
 	
+	
     private static final String INSERT_AD= 
 		"INSERT INTO AD (AD_NO,AD_PIC,AD_DESC,AD_START,AD_END,AD_FTY_NO,AD_FTY_NAME) VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),?,?,?,?,?,?)";
 	private static final String GET_ALL_AD = 

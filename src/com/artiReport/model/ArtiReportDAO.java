@@ -95,6 +95,7 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 		}
 	}
 
+	
 	@Override
 	public void updateReport(ArtiReportVO artiReportVO) {
 		Connection con = null;

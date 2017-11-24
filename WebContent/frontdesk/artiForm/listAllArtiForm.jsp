@@ -166,8 +166,8 @@ div> .timeline-body{
         ga('create', 'UA-52103994-1', 'auto');
         ga('send', 'pageview');
 
+        
     </script>
-    
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
