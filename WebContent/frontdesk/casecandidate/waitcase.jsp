@@ -57,11 +57,12 @@
 			</div>
 			<h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前接取所等待任務</h2>
 			<c:forEach var="caseCandidateVO" items="${caseCandidateSvc.getCase(memVO.mem_No)}" varStatus="m" step="1">
+			<c:if test="${getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==1 || getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==2 || getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==3 || getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==4 || getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==7 ||getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==72}">
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 						<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">任務細節</button>
-						<input type="hidden" name="mission_No" value="${caseVO.mission_No}">
+						<input type="hidden" name="mission_No" value="${caseCandidateVO.mission_No}">
 						<input type="hidden" name="requestURL" value="/frontdesk/casecandidate/waitcase.jsp">
 					</form>
 
@@ -93,6 +94,7 @@
 
 
 			</div>
+			</c:if>
 </c:forEach>
 </div>
 </div>
