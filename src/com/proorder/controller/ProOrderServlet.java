@@ -17,6 +17,8 @@ import com.mem.model.MemVO;
 import com.pro.shoppingcart.ProCartVO;
 import com.proorder.model.ProOrderService;
 import com.proorder.model.ProOrderVO;
+import com.tool.controller.ProOrderEmail;
+import com.tool.controller.TelMessage;
 
 
 
@@ -33,6 +35,7 @@ public class ProOrderServlet extends HttpServlet {
 System.out.println("訂單 action: "+action);		
 		
 		if ("insert".equals(action)) { 
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			try {
@@ -97,8 +100,13 @@ System.out.println("開始新增訂單+明細");
 				ProOrderService proOrderSvc = new ProOrderService();
 				proOrderSvc.addProOrd_OrdList(proOrderVO, list);
 				Integer sum = 0;
+				String proEmailText ="";
 				for(ProCartVO p :list){
 					sum+= (p.getProCar_Price())*(p.getProCar_Quantity());
+					proEmailText +="商品:"+p.getProCar_Name()+"  單價:"+p.getProCar_Price()
+					+"  數量:"+p.getProCar_Quantity()+"  小計:"+p.getProCar_Price()*p.getProCar_Quantity()
+					+"\n";
+							
 				}
 				
 System.out.println("扣除會員點數: "+sum);				
@@ -112,6 +120,21 @@ System.out.println("扣完後會員點數: "+mem_Point);
 				 memVO =(MemVO)memSvc.getOneMem(mem_No);
 				session.setAttribute("memVO",memVO);
 				
+System.out.println("發送Email: ");
+				ProOrderEmail email = new ProOrderEmail();	
+				String to = memVO.getMem_Email();
+//				String to = "eatkaikai@gmail.com";
+				String subject = "工具人商城消費通知";
+				
+				String messageText = memVO.getMem_Name()+"先生/小姐 您好!"+"\n"+"您於工具人商城購買"+"\n"
+						+proEmailText+"\n"+"總消費為: "+sum+" 積分";
+				email.sendMail(to, subject, messageText);
+				
+System.out.println("發送電話簡訊: ");
+				String[] tel = {memVO.getMem_Pho()};
+System.out.println(tel[0]);				
+				TelMessage telMessage = new TelMessage();
+				telMessage.sendMessage(tel, messageText);
 //				清除購物車內容
 System.out.println("清購物車");				
 				session.removeAttribute("shoppingcart");

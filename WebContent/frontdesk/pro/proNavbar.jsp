@@ -25,7 +25,7 @@
 	href="<%=request.getContextPath()%>/lib/css/index/index.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="<%=request.getContextPath()%>/lib/publicfile/include/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<%--     <link href="<%=request.getContextPath()%>/lib/publicfile/include/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --%>
 
 <style>
 .navbar {
@@ -473,9 +473,8 @@
 			<nav class="navbar navbar-expand-lg navbar-light fixed-top "
 				id="mainNav" style="height: 100px;">
 				<div class="container">
-					<a class="navbar-brand js-scroll-trigger"
-						href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp"><img
-						src="<%=request.getContextPath()%>/lib/publicfile/include/img/logo/profile_1.png"></a>
+					 <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"
 						aria-controls="navbarResponsive" aria-expanded="false"
