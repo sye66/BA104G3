@@ -113,7 +113,7 @@
 		<th>儲值方式</th>
 		</tr>
 			
-		<%@ include file="/frontdesk/stored_history/page1.file" %>
+		<%@ include file="/frontdesk/stored_history/page1.file" %>　<br><br><h2><font>目前持有積分：${memVO.mem_Point} 分</font></h2>
 		<c:forEach var="storedVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			
 		<tr>

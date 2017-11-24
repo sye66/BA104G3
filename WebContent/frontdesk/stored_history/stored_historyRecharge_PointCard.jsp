@@ -9,7 +9,12 @@
 
 <jsp:useBean id="StoredSvc" scope="page" class="com.stored_history.model.StoredService"/>
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
-<% StoredVO storedVO = (StoredVO)request.getSession().getAttribute("storedVO"); %>
+<% StoredVO storedVO = (StoredVO)request.getSession().getAttribute("storedVO"); 
+String finish = "finish";
+// request.setAttribute("finish", finish);
+session.setAttribute("finish", finish);		//防止按F5重新送出
+System.out.println("finish + " + finish);
+%>
 
 
 <head>
@@ -75,9 +80,10 @@
 <jsp:include page="/frontdesk/mem/memPageLeft.jsp" flush="true"></jsp:include>
 
 	<div id="container">
+		<div><img style="margin-left:-30px" id="image" src="<%=request.getContextPath()%>/res/images/stored_history/pointCard.jpg" /></div>
 	    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-2">
-		    			<img id="image1" src="<%=request.getContextPath()%>/res/images/stored_history/postive.png" />
-		   				<img id="image2" src="<%=request.getContextPath()%>/res/images/stored_history/negitive.png" />
+		    		
+<%-- 		   				<img id="image2" src="<%=request.getContextPath()%>/res/images/stored_history/negitive.png" /> --%>
 					</div>
 
 
@@ -86,33 +92,38 @@
     		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do?reuestURL=<%=request.getServletPath()%>" name="form1">
     		<script>
     		</script>
-    					<input type="hidden" name="action" value="insert">
+    					
+    					<input type="hidden" name="action" value="insert1">
     					 <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
 							value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
-    					<input type="hidden" name="stored_Type" size="36" class="form-control input-lg" tabindex="3" value="2">
+    					<input type="hidden" name="stored_Type" size="36" class="form-control input-lg" tabindex="3" value="1">
     					<input type="hidden" name="stored_Date" size="36" class="form-control input-lg" tabindex="3"
 							value="<%= (storedVO==null)? "": storedVO.getStored_Date()%>" />
     					<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"
 							value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
-    					<div class="small-6 ">請輸入儲值金額
-                            <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="" >
-                        </div><br>
-                        <div class="small-6 ">
+    					<br><br><br>
+                        <div class="small-6 ">請輸入點卡序號：
                             <input type="text" name="card_number" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
                         </div><br>
                         <div class="small-6 ">
-                           <input type="text" name="full_name" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
-                        </div><br>
-                        <div class="small-3 ">
-                         <input type="text" name="mmyy" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="MM/YY"  >
-                        </div><br>
+                          	<div class="col-xs-6 col-sm-6 col-md-6">
+						<div class="form-group">性別
+						<select size="1" name="stored_Cost" id="estadocivil" class="form-control input-lg" tabindex="3">
+						
+						<option value="50">50點</option>
+						<option value="100">100點</option>
+						<option value="150">150點</option>
+						<option value="300">300點</option>
+						<option value="500">500點</option>
+						<option value="1000">1000點</option>
+						<option value="3000">3000點</option>
+						<option value="5000">5000點</option>
+						</select>
+						</div>
+						</div>
 
-                        <div class="small-3 ">
-                         <input type="text" id="switch" name="cvc" size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
-                        </div><br>
-
-                        <div class="small-6 ">
-                            <input type="submit" value="Submit" class="button btn-defult">
+                        <br><br><div class="small-6 ">
+                            <input type="submit" value="確認送出" class="button btn-susccess">
                         </div>
                         
                         

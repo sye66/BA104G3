@@ -100,7 +100,7 @@ String finish = "finish";
     					<input type="hidden" name="action" value="insert">
     					 <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
-    					<input type="hidden" name="stored_Type" size="36" class="form-control input-lg" tabindex="3" value="1">
+    					<input type="hidden" name="stored_Type" size="36" class="form-control input-lg" tabindex="3" value="2">
     					<input type="hidden" name="stored_Date" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (storedVO==null)? "": storedVO.getStored_Date()%>" />
     					<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"

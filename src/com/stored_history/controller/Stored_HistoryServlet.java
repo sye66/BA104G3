@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
@@ -225,7 +226,8 @@ public class Stored_HistoryServlet extends HttpServlet{
 		if ("insert".equals(action)){// 來自addStored.jsp的請求
 			
 			//防止按F5重新送出
-			String finish = req.getParameter("finish");
+			HttpSession session = req.getSession();
+			String finish =(String) session.getAttribute("finish");
 			System.out.println(finish);
 			if(finish == null){
 				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
@@ -334,7 +336,7 @@ public class Stored_HistoryServlet extends HttpServlet{
 					errorMsgs.add("請輸入正確信用卡號碼");
 				}
 				
-				req.removeAttribute(finish);	//防止按F5重新送出
+				session.removeAttribute("finish");	//防止按F5重新送出
 				
 				
 				System.out.println("mem_Point "+mem_Point);
@@ -399,6 +401,136 @@ public class Stored_HistoryServlet extends HttpServlet{
 			} catch (Exception e){
 				errorMsgs.add("輸入資料失敗 :" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/rechage_credit.jsp");
+				failureView.forward(req, res);
+			}
+		} 
+		//insert end
+		if ("insert1".equals(action)){// 來自addStored.jsp的請求
+			
+			//防止按F5重新送出
+			HttpSession session = req.getSession();
+			String finish =(String) session.getAttribute("finish");
+			System.out.println(finish);
+			if(finish == null){
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				return;
+			}
+			
+			System.out.println("stored_Date2 :"  );
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("stored_Date0 :"  );
+			
+			try{
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+//				String stored_no = new String(req.getParameter("stored_no").trim());
+				System.out.println("stored_Date2 :"  );
+				String mem_No = new String(req.getParameter("mem_No").trim());
+				if (mem_No == null || mem_No.trim().length() ==0 ){
+					errorMsgs.add("請輸入會員編號");
+				}
+				
+				
+				Timestamp stored_Date = new Timestamp(System.currentTimeMillis());
+				
+				System.out.println("stored_Date3 :" +stored_Date );
+				
+				Integer stored_Type;
+				try{
+					stored_Type = new Integer(req.getParameter("stored_Type").trim());
+				} catch (NumberFormatException e){
+					errorMsgs.add("請修改正確付款方式  (1.點數卡 ;2.信用卡");
+					stored_Type = null;
+				}
+				
+				Integer stored_Cost = new Integer(req.getParameter("stored_Cost").trim());
+				try{
+					if(stored_Cost < 1 || stored_Cost > 10000000)
+						errorMsgs.add("請輸入正確金額");
+				}catch (NumberFormatException e){
+					errorMsgs.add("請勿輸入數字以外的字母或符號");
+				}	
+				StoredVO storedVO = new StoredVO();
+				
+				
+				Integer mem_Point = null;
+				
+				
+//				storedVO.setStored_No(stored_no);
+				storedVO.setMem_No(mem_No);
+				storedVO.setStored_Date(stored_Date);
+				storedVO.setStored_Type(stored_Type);
+				storedVO.setStored_Cost(stored_Cost);
+				
+				MemService memSvc = new MemService();
+				
+				MemVO memVO =memSvc.getOneMem(mem_No);
+				
+				
+				Integer mem_Point_old = memVO.getMem_Point();
+				
+				mem_Point = mem_Point_old + stored_Cost;
+				
+				memVO.setMem_Point(mem_Point);
+				
+				
+				
+				
+				session.removeAttribute("finish");	//防止按F5重新送出
+				
+				
+				System.out.println("mem_Point "+mem_Point);
+				
+				System.out.println("mem_No " + mem_No);
+				System.out.println("mem_pw " + memVO.getMem_Address());
+				System.out.println("stored_Date " + stored_Date);
+				System.out.println("stored_Type " + stored_Type);
+				System.out.println("stored_Cost " + stored_Cost);
+				
+				if (!errorMsgs.isEmpty()){
+					
+					req.setAttribute("storedVO", storedVO);
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge_PointCard.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				/***************************2.開始新增資料***************************************/
+				StoredService storedSvc = new StoredService();
+				storedVO = storedSvc.addStored(storedVO);
+				
+				System.out.println("storedVO.getStored_Date() " +storedVO.getStored_Date());
+				
+				System.out.println("storedVO " + storedVO);
+				
+				
+				
+				System.out.println("memSvc " + memVO.getMem_Point());
+				
+				memVO= memSvc.recharge(memVO);
+				
+				System.out.println("memVO " + memVO);
+				
+				
+				
+				
+				
+				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				req.getSession().setAttribute("memVO", memVO);
+				req.getSession().setAttribute("storedVO", storedVO);
+				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+//				String location = req.getParameter("reuestURL");
+				String success ="ok";
+				req.setAttribute("success", success);
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res); 
+				
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e){
+				errorMsgs.add("輸入資料失敗 :" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/stored_history/stored_historyRecharge_PointCard.jsp");
 				failureView.forward(req, res);
 			}
 		} 
