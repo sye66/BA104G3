@@ -654,4 +654,10 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 //			System.out.println();
 //		}
 	}
+
+	@Override
+	public List<GetMissionVO> getAllValidMission() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

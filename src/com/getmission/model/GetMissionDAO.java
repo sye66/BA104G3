@@ -41,6 +41,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 	private static final String GET_MEM_MISSION_WITH_STATUS_STMT = "SELECT * FROM MISSION WHERE (issuer_mem_no=? and mission_state=?)";
 	private static final String GET_MEM_MISSION_ALL_STATUS_STMT = "SELECT * FROM MISSION WHERE issuer_mem_no=?";
 	
+	private static final String GET_ALL_VALID_MISSION = "SELECT * FROM MISSION WHERE MISSION_STATE =1 OR MISSION_STATE =2 OR MISSION_STATE =7 OR  MISSION_STATE =72 ORDER BY MISSION_RELEASE_TIME DESC";
 	@Override
 	public void insert(GetMissionVO getMissionVO) {
 
@@ -329,6 +330,73 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<GetMissionVO> getAllValidMission() {
+		List<GetMissionVO> list = new ArrayList<GetMissionVO>();
+		GetMissionVO getMissionVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_VALID_MISSION);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為Domain objects
+				getMissionVO = new GetMissionVO();
+
+				getMissionVO.setMission_No(rs.getString("mission_no"));
+				getMissionVO.setMission_Category(rs.getString("mission_category"));
+				getMissionVO.setMission_Name(rs.getString("mission_name"));
+				getMissionVO.setMission_Des(rs.getString("mission_des"));
+				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+				getMissionVO.setMission_Release_Time(rs.getTimestamp("mission_release_time"));
+				getMissionVO.setMission_Due_Time(rs.getTimestamp("mission_due_time"));
+				getMissionVO.setMission_Start_Time(rs.getTimestamp("mission_start_time"));
+				getMissionVO.setMission_End_Time(rs.getTimestamp("mission_end_time"));
+				getMissionVO.setMission_State(rs.getInt("mission_state"));
+				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+				getMissionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
+				getMissionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
+				list.add(getMissionVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
 
 	@Override
 	public List<GetMissionVO> getOkAll() {
@@ -449,8 +517,8 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		try {
 
 			con = ds.getConnection();
-			String finalSQL = "select * from mission " + jdbcUtil_CompositeQuery_Mission.get_WhereCondition(map)
-					+ "order by mission_No";
+			String finalSQL = "select * from(  SELECT * FROM MISSION WHERE MISSION_STATE =1 OR MISSION_STATE =2 OR MISSION_STATE =7 OR  MISSION_STATE =72 ) " + jdbcUtil_CompositeQuery_Mission.get_WhereCondition(map)
+					+ "order by MISSION_RELEASE_TIME DESC";
 			pstmt = con.prepareStatement(finalSQL);
 			System.out.println("●●finalSQL(by DAO) = " + finalSQL);
 			rs = pstmt.executeQuery();

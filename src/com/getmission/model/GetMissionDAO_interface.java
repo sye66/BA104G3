@@ -9,6 +9,7 @@ public interface GetMissionDAO_interface {
           public void takeMission(GetMissionVO getMissionVO);
           public GetMissionVO findByPrimaryKey(String mission_No);
           public List<GetMissionVO> getAll();
+          public List<GetMissionVO> getAllValidMission();//拿可接全部任務
           public List<GetMissionVO> getOkAll();
           //萬用複合查詢(傳入參數型態Map)(回傳 List)
           public List<GetMissionVO> getAll(Map<String, String[]> map); 

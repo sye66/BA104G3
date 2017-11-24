@@ -130,6 +130,10 @@ public class GetMissionService {
 		return dao.getAll();
 	}
 	
+	public List<GetMissionVO> getAllValidMission(){
+		return dao.getAllValidMission();
+	}
+	
 	public List<GetMissionVO> getOkAll(){
 		return dao.getOkAll();
 	}

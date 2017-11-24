@@ -11,7 +11,7 @@
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
-	List<GetMissionVO> list = getMissionService.getAll();
+	List<GetMissionVO> list = getMissionService.getAllValidMission();
 %>
 <jsp:useBean id="listmission_ByCompositeQuery" scope="request" type="java.util.List<GetMissionVO>" />
 

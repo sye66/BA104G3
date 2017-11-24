@@ -13,7 +13,7 @@
 	class="com.casecandidate.model.CaseCandidateService" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
-	List<GetMissionVO> list = getMissionService.getAll();
+	List<GetMissionVO> list = getMissionService.getAllValidMission();
 	CaseCandidateVO missionmem = new CaseCandidateVO();
 	
 %>
@@ -130,7 +130,7 @@
 	</div>
 
 	<c:set var="index" value="${1*1}" />
-	<c:forEach var="getMissionVO" items="${getMissionSvc.all}"
+	<c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission}"
 		begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"
 		varStatus="s" step="1">
 
