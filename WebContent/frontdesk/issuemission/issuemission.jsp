@@ -43,6 +43,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
        }
        p{
         style="color:black;"
+        font-size:20px;
         }
     </style>
 </head>
@@ -51,9 +52,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
            
 <body>
 	<!-- includefile -->
-		<div>
-			<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
-		</div>
+		<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<!-- MissionControlPanel -->
 	<br>
 	<br>
