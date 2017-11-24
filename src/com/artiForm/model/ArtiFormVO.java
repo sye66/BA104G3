@@ -14,8 +14,7 @@ public class ArtiFormVO implements Serializable {
 	private byte[] arti_Pic;
 	private Integer arti_Cls_No;
 	private String arti_Status;
-	
-	
+		
 	public String getArti_No() {
 		return arti_No;
 	}
