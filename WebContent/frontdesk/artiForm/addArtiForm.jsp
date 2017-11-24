@@ -22,6 +22,7 @@
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
+<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 	<title>CKFinder - Sample - CKEditor Integration</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,32 +37,9 @@
 <body>
 
 <div class="container">
-<div class="widget-body">
-<hr>
-                  </div>                    
-         </div>
-
-<div class="container">
-<div class="widget-body">
-             <div class="widget-toolbox">
-                 <div class="btn-toolbar">
-                     <div class="btn-group">
-                         <div class="widget-toolbar">
-                             <div class="widget-main padding-6">
-                              <i class="icon-ok bigger-110"></i>
-                              	<h1 class="samples">TOOLMAN - Article Area</h1>
-
-                              </div>
-                          </div>
-                          
-                           </div>
-                       </div>
-                  </div>                    
-         </div>
-
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
-<div class="col-xs-12 col-sm-11 widget-container-span">
+<div class="col-xs-12 col-sm-12 widget-container-span">
     <div class="widget-box">
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">
@@ -155,8 +133,6 @@
            </div>
        </div>
    </div>
-<hr />	
-	
 </FORM>
 </div>
 	<script src="//cdn.ckeditor.com/4.5.6/standard-all/ckeditor.js"></script>

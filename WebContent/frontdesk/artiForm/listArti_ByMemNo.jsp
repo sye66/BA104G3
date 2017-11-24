@@ -6,7 +6,6 @@
 <%@ page import="com.mem.model.*"%>
 
 <jsp:useBean id="artiFormSvc1" scope="session" class="com.artiForm.model.ArtiFormService" />
-<jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
     ArtiFormVO artiFormVO = new ArtiFormVO();
@@ -38,8 +37,7 @@
 <body bgcolor='white'>
 ${arti_No}
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-<br><br><br><br><br>
-<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
+
 
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -50,8 +48,8 @@ ${arti_No}
 		</c:forEach>
 	</ul>
 </c:if>
-
-
+<br><br><br><br><br>
+<jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <div class="page-header position-relative">
 
@@ -73,26 +71,28 @@ ${arti_No}
                         </h1>
                       </div>
                   </div>
-
+    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
                         <a class="sidebar-toggler" href="#">
                             <i></i>111
                         </a>
-                        <a class="refresh" id="refresh-toggler" href="">
+                        <c:if test="${memVO.mem_State == 1}">
+                        <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
                         </a>
+                            </c:if>
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
                     </div>
                         
                     </div>
-<div class="container" style="font-size: 18px; text-align: center;">                 
+<div class="container" style="font-size: 18px; text-align: center;">       
 <%@ include file="/frontdesk/page1.file" %>                        
 	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-</div>                        
+   </div>                     
                 <div class="page-body">
                     <ul class="timeline">
                         <li>
@@ -100,10 +100,12 @@ ${arti_No}
                                 <div class="timeline-time">
                                     <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
                                 </div>
-                                <div class="timeline-date">${artiFormVO.mem_No}</div>
+                                <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+                                <div class="timeline-date" style="font-size:24px; font-family:Microsoft JhengHei;">${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</div>
                                 <div class="timeline-date">
                                 <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
-	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     style="height:100px;width:120px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+
                                 </div>
                                 <div class="timeline-time">
                                 <p></p>
@@ -119,7 +121,7 @@ ${arti_No}
                                 <div class="timeline-header bordered-bottom bordered-blue">
                                     <span class="timeline-title">
                                     
-                                        <td> <a href="/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${memVO.mem_No}&action=jumpOne_For_Display">
+                                        <td style="font-size: 48px"> <a href="/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${memVO.mem_No}&action=jumpOne_For_Display">
                                         ${artiFormVO.arti_No}</a></td>
                                         <td> ${artiFormVO.arti_Status} </td>
                                     </span>
@@ -127,25 +129,29 @@ ${arti_No}
                                 </div>
                                 <div class="timeline-body">
                                 <div class="">
-                                    <p> ${artiFormVO.arti_Title}</p>
-                                    <p> ${artiFormVO.arti_Like} </p>
+                                    <p style="font-family:Microsoft JhengHei;"> ${artiFormVO.arti_Title}</p>
                                 </div>                                
                             </div>
                             
                             <div class="timeline-body">
-                                
+                            <p> 目前文章人氣 : ${artiFormVO.arti_Like} </p><br>
                                     <img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
-	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     style="height:150px;width:180px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     
                                 </div>
+                           <div class="timeline-body">
+                                 
+                                </div>
+                                
                             </div>
                         </li>
-
                     </ul>
-                </div>
+                </div> 
                     </c:forEach>
-<div class="container" style="font-size: 18px; text-align: center;"> 
+<div class="container" style="font-size: 18px; text-align: center;">    
  <%@ include file="/backdesk/page2.file" %> 
-</div>      
+ </div>        
+     
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -166,8 +172,8 @@ ${arti_No}
         ga('create', 'UA-52103994-1', 'auto');
         ga('send', 'pageview');
 
+        
     </script>
-    
 </body>
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />

@@ -130,7 +130,7 @@
                                         </div>
                                     </div>
                                     <div class="widget-toolbar">
-                                        <font size="3"> ${artiReplyVO.reply_Desc} </font>                        
+                                        <font size="3" style="font-family:Microsoft JhengHei;"> ${artiReplyVO.reply_Desc} </font>                        
                                     </div>
          
                                     </div>

@@ -45,10 +45,9 @@
 </head>
 <body bgcolor='blue'>
 
-<br>
 <%-- ${adSvc1.allAd}  here!!!! --%>
 <%-- ${adSvc.getAllAd(adVO.ad_No)} --%>
-
+<br><br><br><br><br><br>
 <div class="container">
 <div id="carousel-id" class="carousel slide" data-ride="carousel">
 		    <!-- 幻燈片小圓點區 -->
@@ -97,11 +96,6 @@
 		    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 <hr>
-    
 </div>
-</div>
-  
 </body>
-
-
 </html>

@@ -15,7 +15,7 @@
     Set<ArtiFormVO> set = artiSvc.getAll();
     pageContext.setAttribute("set",set);
 %>
-<jsp:useBean id="MemService" scope="page" class="com.mem.model.MemService" />
+
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
 
 <html>
@@ -36,9 +36,7 @@ div> .timeline-body{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body bgcolor='white'>
-
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-<br><br><br><br><br>
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -100,10 +98,12 @@ div> .timeline-body{
                                 <div class="timeline-time">
                                     <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
                                 </div>
-                                <div class="timeline-date">${artiFormVO.mem_No}</div>
+                                <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+                                <div class="timeline-date" style="font-size:24px; font-family:Microsoft JhengHei;">${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</div>
                                 <div class="timeline-date">
                                 <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
-	                     style="height:60px;width:80px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     style="height:100px;width:120px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+
                                 </div>
                                 <div class="timeline-time">
                                 <p></p>
@@ -127,16 +127,20 @@ div> .timeline-body{
                                 </div>
                                 <div class="timeline-body">
                                 <div class="">
-                                    <p> ${artiFormVO.arti_Title}</p>
-                                    <p> ${artiFormVO.arti_Like} </p>
+                                    <p style="font-family:Microsoft JhengHei;"> ${artiFormVO.arti_Title}</p>
                                 </div>                                
                             </div>
                             
                             <div class="timeline-body">
-                                
+                            <p> 目前文章人氣 : ${artiFormVO.arti_Like} </p><br>
                                     <img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
-	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     style="height:150px;width:180px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+	                     
                                 </div>
+                           <div class="timeline-body">
+                                 
+                                </div>
+                                
                             </div>
                         </li>
                     </ul>
