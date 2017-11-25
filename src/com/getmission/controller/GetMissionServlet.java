@@ -1060,7 +1060,7 @@ public class GetMissionServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			System.out.println(jsonStr);
-			out.write(jsonStr);
+			out.write(obj.toString());
 			out.flush();
 			out.close();
 			

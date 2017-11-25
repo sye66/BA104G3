@@ -22,7 +22,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Title Page</title>
+<title>getMission</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
 <script src="<%=request.getContextPath()%>/lib/js/getmission/map.js"></script>
@@ -313,7 +313,7 @@
 		 $.ajax({
 			 type: "Post",
 			 url: <%=request.getContextPath()%>+"/getmission/getmission.do",
-			 data: {"action" : "getmissionmap"},
+			 data: {action : "getmissionmap"},
 			 dataType: "json",
 			 success: function (data){
 				  var map;
@@ -354,11 +354,11 @@
 			            callback(status, xhr.response);
 			          }
 			        };
-			        xhr.send();
+			        xhr.send(data);
 			      }
 
-			      function callback(err, data) {
-			        if (err !== null) {
+			      function callback(errorMsgs, data) {
+			        if (errorMsgs !== null) {
 			          alert('Something went wrong: ' + err);
 			        } else {
 					  searchResult = data;
