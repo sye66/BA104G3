@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>工具人會員中心</title>
+    <title>工具人出租</title>
 <style>
   table#table-1 {
 	width: 450px;

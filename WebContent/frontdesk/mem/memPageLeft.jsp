@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Insert title here</title>
+    <title>工具人出租</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/homepage.css">
 <%-- 		<script type="text/javascript" src="<%=request.getContextPath()%>/lib/js/mem/homepage.js"></script> --%>

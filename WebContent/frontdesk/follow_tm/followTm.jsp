@@ -20,7 +20,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
-<title>Insert title here</title>
+    <title>工具人出租</title>
 </head>
 <body>
 

@@ -87,7 +87,7 @@
 
 </style>
 
-<title>Insert title here</title>
+    <title>工具人出租</title>
 </head>
 <!-- 起點 : (1)     onload="connect(); 與 disconnect(); 都是連接到本html的websocket.onopen -->
     <body onload="connect();" onunload="disconnect();">

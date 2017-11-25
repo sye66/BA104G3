@@ -165,7 +165,7 @@ function getFocus() {
 					<!--神奇小按鈕 -->
 						<br>
 						<button type="button" onclick="aa0953711016()">神</button>
-						
+						<button type="button" id="M000001">M1</button>						
 						
                     <!--神奇小按鈕 -->
                     
@@ -187,6 +187,9 @@ function getFocus() {
 				var a=document.getElementById("login_password");  
 					a.value="A123456";	
 				}
+				
+				
+				
 			</script>
 		<!--神奇方法 -->
 		
@@ -259,6 +262,14 @@ function getFocus() {
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+ 	
+ 	<script type="text/javascript">
+ 	
+ 	$('#M000001').click(function(){
+		$('#login_username').val("aaa@gmail.com");
+		$('#login_password').val("A123456");
+	});
+ 	</script>
  
   </body>
 

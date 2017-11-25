@@ -28,7 +28,7 @@ String finish = "finish";
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/recharge/default.css">
-<title>Insert title here</title>
+    <title>工具人出租</title>
 </head>
 <body>
 
