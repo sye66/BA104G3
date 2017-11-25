@@ -63,8 +63,6 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8">
@@ -186,7 +184,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 	
 
 
-
+	<%@ include file="/lib/publicfile/include/file/footer.jsp"%>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

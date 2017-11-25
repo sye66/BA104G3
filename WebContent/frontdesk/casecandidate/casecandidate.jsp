@@ -136,6 +136,30 @@
 											<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 											</form>
 										</div>
+<<<<<<< HEAD
+									</div>
+								</div>
+								<td>
+									<div class="panel-body">
+										<form method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No}" name="getmission3">
+										<button onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No} ', 'Yahoo', config='height=500,width=550')" class="btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
+										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
+										</form>
+									</div>
+								</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0}">
+							<td><h4>目前無人接取</h4></td>
+							<td></td>
+						</c:if>
+						
+					
+				</table>
+			</div>
+=======
 									</td>
 									</tr>
 								</c:forEach>
@@ -146,6 +170,7 @@
 								</c:if>
 						</table>
 					</div>
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 
 		</div>
 		</c:if>

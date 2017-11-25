@@ -36,9 +36,7 @@
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 
-
-
-
+		
 
   </head>
 
@@ -164,8 +162,12 @@ function getFocus() {
                     </form>
                     <!-- End # Login Form -->
                     
-                    
-                    
+					<!--神奇小按鈕 -->
+						<br>
+						<button type="button" onclick="aa0953711016()">神</button>
+						
+						
+                    <!--神奇小按鈕 -->
                     
 					</div>
 					<div class="modal-footer">
@@ -175,7 +177,18 @@ function getFocus() {
 				</div>
 			</div>
 		</div>
-
+<!--神奇方法 -->
+			<script type="text/javascript">
+				function aa0953711016(){
+					
+				var v = document.getElementById("login_username");			
+					v.value="aa0953711016@gmail.com";
+						
+				var a=document.getElementById("login_password");  
+					a.value="A123456";	
+				}
+			</script>
+		<!--神奇方法 -->
 		
 		
 		

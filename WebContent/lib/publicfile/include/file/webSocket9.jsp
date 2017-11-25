@@ -10,29 +10,26 @@
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 
 
-
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
-   String memVO1 = request.getParameter("takecase_Mem_No");
-   String takecase_Mem_No = request.getParameter("takecase_Mem_No");
+   MemVO memVO1 = (MemVO)request.getSession().getAttribute("memVO");
    
-   System.out.println(memVO1);
-   System.out.println("takecase_Mem_No"+takecase_Mem_No);
 %>
+<%request.getAttribute("updateSuccess");%>
         
-<%/*
-// RelationService relationSvc = new RelationService();
+<%
+RelationService relationSvc = new RelationService();
 
-//  String related_Mem_No = request.getParameter("relationVO");
-// if(related_Mem_No ==null){
+ String related_Mem_No = request.getParameter("relationVO");
+if(related_Mem_No ==null){
 	
-// 	related_Mem_No= memVO.getMem_No();
-// 	System.out.println("related_Mem_No ++++ " +related_Mem_No);
-// }
+	related_Mem_No= memVO.getMem_No();
+	System.out.println("related_Mem_No ++++ " +related_Mem_No);
+}
  
-// List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
-// pageContext.setAttribute("relationVO", relationVO);
-// System.out.println("relationVO ++++ " +relationVO);
-*/%>
+List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
+pageContext.setAttribute("relationVO", relationVO);
+System.out.println("relationVO ++++ " +relationVO);
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -164,7 +161,7 @@
     var path = window.location.pathname;
     var webCtx = path.substring(0, path.indexOf('/', 1));
     var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-    console.log("endPointURL +" +endPointURL);
+    
 	var statusOutput = document.getElementById("statusOutput");
 	var webSocket;
 	
@@ -220,7 +217,7 @@ webSocket.onmessage = function(event) {
 			console.log("11sadasd11111userName +"+ memno)
 	        if(memname === jsonObj.userName){
 	        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+userName+':'+message+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-	            console.log("endPointURL +" +endPointURL);
+	        	
 			console.log("1111111userName +"+ userName)
 			} else {
 	        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+'</span><span>  </span></div>');

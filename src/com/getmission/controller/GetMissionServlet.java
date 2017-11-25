@@ -18,6 +18,8 @@ import com.casecandidate.model.*;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
 import com.getmission.model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
@@ -308,11 +310,11 @@ public class GetMissionServlet extends HttpServlet {
 			/**
 			 * @author Sander
 			 * 簡訊功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 * 
 			 */
 			String[] tel = {takeCase_MemVO.getMem_Pho()};
 			TelMessage telMessage = new TelMessage();
 			telMessage.sendMessage(tel, messageText);
-			
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -375,6 +377,15 @@ public class GetMissionServlet extends HttpServlet {
 																// 或
 																// 【/getmission/mission_Detail.jsp】
 
+			
+			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			String jsonStr = "";
+			
+			GetMissionService getMissionSvc = new GetMissionService();
+			List<GetMissionVO> list = getMissionSvc.getAllValidMission();
+			jsonStr = gson.toJson(list);
+			
+			System.out.println(jsonStr);
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -743,7 +754,6 @@ public class GetMissionServlet extends HttpServlet {
 					/*************************** 2.開始修改資料 *****************************************/
 
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
-System.out.println(getMissionVO.getMission_State());
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
