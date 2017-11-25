@@ -98,7 +98,8 @@
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-1">
 
 <%-- <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do" name="form1"> --%>
-
+			
+			<input type="hidden" id="success" name="success" value="${success}">
             <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
 			
@@ -152,12 +153,12 @@
 			
 <script>
 		var successOk = "ok";
-		var success = $('#success').val();
+		var success = $("[name='success']").val();
 		if(successOk == success){
 			swal({
-				  position: 'top-right',
+				  position: 'center',
 				  type: 'success',
-				  title: '恭喜你修改成功 !',
+				  title: '恭喜你儲值成功 !',
 				  showConfirmButton: false,
 				  timer: 1500
 				})
