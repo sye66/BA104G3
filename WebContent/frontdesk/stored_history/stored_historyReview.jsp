@@ -115,13 +115,19 @@
 		</tr>
 			
 		<%@ include file="/frontdesk/stored_history/page1.file" %>　<br><br><h2><font>目前持有積分：${memVO.mem_Point} 分</font></h2>
+				<div><h3><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/pro/cart.jsp">
+				<img style="width:60px; height:60px;"alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/cart01.gif">點我回商城</a></h3></div>
 		<c:forEach var="storedVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			
 		<tr>
 			<td>${storedVO.stored_Date}</td>
 			<td>${storedVO.stored_Cost}</td>
-			<td>${storedVO.stored_Type}</td>
-			
+		<c:if test="${storedVO.stored_Type ==1}">
+			<td>點數卡</td>
+		</c:if>
+		<c:if test="${storedVO.stored_Type ==2}">
+			<td>信用卡</td>
+		</c:if>
 		</tr>	
 		</c:forEach>
 		</table>
