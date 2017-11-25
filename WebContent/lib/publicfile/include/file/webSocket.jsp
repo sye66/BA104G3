@@ -268,7 +268,7 @@ webSocket.onmessage = function(event) {
 	        	       $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+':'+userName+':'+message+':'+nowdate+':'+status+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
 	        	    }else{
 	        		   $('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+status+':'+'</span><span>  </span></div>');
-	        	    }
+	        	     }
 	        }
 			console.log('test')			
 			
