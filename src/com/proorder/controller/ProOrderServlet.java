@@ -131,7 +131,8 @@ System.out.println("發送Email: ");
 				email.sendMail(to, subject, messageText);
 				
 System.out.println("發送電話簡訊: ");
-				String[] tel = {memVO.getMem_Pho()};
+				String t = 	(memVO.getMem_Pho()).replaceAll("-","");
+				String[] tel = {t};
 System.out.println(tel[0]);				
 				TelMessage telMessage = new TelMessage();
 				telMessage.sendMessage(tel, messageText);
