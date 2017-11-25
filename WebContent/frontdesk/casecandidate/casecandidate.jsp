@@ -136,7 +136,6 @@
 											<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 											</form>
 										</div>
-<<<<<<< HEAD
 									</div>
 								</div>
 								<td>
@@ -159,7 +158,7 @@
 					
 				</table>
 			</div>
-=======
+
 									</td>
 									</tr>
 								</c:forEach>
@@ -170,11 +169,10 @@
 								</c:if>
 						</table>
 					</div>
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
+
 
 		</div>
-		</c:if>
-		</c:forEach>
+	
 		</div>
 		</div>
 </div>
