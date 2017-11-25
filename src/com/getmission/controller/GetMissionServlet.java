@@ -12,6 +12,8 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.accusecase.model.*;
 import com.casecandidate.model.*;
@@ -36,7 +38,11 @@ public class GetMissionServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		res.setContentType("");
 		String action = req.getParameter("action");
+		PrintWriter out = res.getWriter();
+		JSONObject obj = new JSONObject();
 
 		if ("listmission_ByCompositeQuery".equals(action)) { // 來自getMission.jsp的請求
 
@@ -377,15 +383,6 @@ public class GetMissionServlet extends HttpServlet {
 																// 或
 																// 【/getmission/mission_Detail.jsp】
 
-			
-			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-			String jsonStr = "";
-			
-			GetMissionService getMissionSvc = new GetMissionService();
-			List<GetMissionVO> list = getMissionSvc.getAllValidMission();
-			jsonStr = gson.toJson(list);
-			
-			System.out.println(jsonStr);
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -1041,6 +1038,32 @@ public class GetMissionServlet extends HttpServlet {
 			// .getRequestDispatcher("/frontdesk/getmission/getmission.jsp");
 			// failureView.forward(req, res);
 			// }
+		}
+		
+		//map 的 jasn 
+		if("getmissionmap".equals(action)){
+			List<String> errorMsg = new LinkedList<>();
+			req.setAttribute("errorMsg", errorMsg);
+			System.out.println("getmission");
+			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			String jsonStr = "";
+			
+			GetMissionService getMissionSvc = new GetMissionService();
+			List<GetMissionVO> list = getMissionSvc.getAllValidMission();
+			jsonStr = gson.toJson(list);
+			
+			System.out.println(jsonStr);
+			try {
+				
+				obj.put("jsonStr", jsonStr);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			System.out.println(jsonStr);
+			out.write(jsonStr);
+			out.flush();
+			out.close();
+			
 		}
 		
 		/**

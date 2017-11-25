@@ -309,100 +309,112 @@
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script>
-      var map;
-      var markers = [];
-      var searchResult;
-      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-      var getmission = <%=request.getContextPath()%>+"/getmission/getmission.do";
-      function initMap() {
-        var myLatlng = {lat: 24.969, lng: 121.192};
+		$(document).ready(function(){
+		 $.ajax({
+			 type: "Post",
+			 url: <%=request.getContextPath()%>+"/getmission/getmission.do",
+			 data: {"action" : "getmissionmap"},
+			 dataType: "json",
+			 success: function (data){
+				  var map;
+			      var markers = [];
+			      var searchResult;
+			      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+			      function initMap() {
+			        var myLatlng = {lat: 24.969, lng: 121.192};
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatlng,
-          zoom: 14
-        });
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Click to zoom'
-        });
+			        map = new google.maps.Map(document.getElementById('map'), {
+			          center: myLatlng,
+			          zoom: 14
+			        });
+			        var marker = new google.maps.Marker({
+			          position: myLatlng,
+			          map: map,
+			          title: 'Click to zoom'
+			        });
 
-        // 擷取及時公車資訊
-        getJSON(getmission, callback);
-      
-        map.addListener('center_changed', function() {
-        	deleteMarkers();
-        	getJSON(getmission, callback);
-        });
-      }
-          
-      function getJSON(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.responseType = 'json';
-        xhr.onload = function() {
-          var status = xhr.status;
-          if (status === 200) {
-            callback(null, xhr.response);
-          } else {
-            callback(status, xhr.response);
-          }
-        };
-        xhr.send();
-      }
+			        // 擷取及時公車資訊
+			        getJSON(data, callback);
+			      
+			        map.addListener('center_changed', function() {
+			        	deleteMarkers();
+			        	getJSON(data, callback);
+			        });
+			      }
+			          
+			      function getJSON(url, callback) {
+			        var xhr = new XMLHttpRequest();
+			        xhr.open('Post', url, true);
+			        xhr.responseType = 'json';
+			        xhr.onload = function() {
+			          var status = xhr.status;
+			          if (status === 200) {
+			            callback(null, xhr.response);
+			          } else {
+			            callback(status, xhr.response);
+			          }
+			        };
+			        xhr.send();
+			      }
 
-      function callback(err, data) {
-        if (err !== null) {
-          alert('Something went wrong: ' + err);
-        } else {
-		  searchResult = data;
-          console.log(data[0]);
-          $("#place").empty();
-          var index = 1;
-          for(var i = 0; i < data.length; i++){
-            var plateNumb = data[i].PlateNumb;
-            var routeName = data[i].RouteName.Zh_tw;
-            var operatorID = data[i].OperatorID;
-            var busPosition = data[i].BusPosition;
-            var latLng = new google.maps.LatLng(busPosition.PositionLat, busPosition.PositionLon);
-          	if(map.getBounds().contains(latLng)){
-          		addMarker(latLng, data[i]);
-          		$("#place").append("<tr><td>"+index+"</td><td>"+routeName+"</td><td>"+plateNumb+"</td><td>"+operatorID+"</td><td>"+busPosition.PositionLat+"</td><td>"+busPosition.PositionLon+"</td></tr>");
-          		index++;
-          	}
-          }
-        }
-      }
+			      function callback(err, data) {
+			        if (err !== null) {
+			          alert('Something went wrong: ' + err);
+			        } else {
+					  searchResult = data;
+			          console.log(data[0]);
+			          $("#place").empty();
+			          var index = 1;
+			          for(var i = 0; i < data.length; i++){
+			            var mission_No = data[i].mission_No;
+			            var mission_Name = data[i].mission_Name;
+			            var issuer_Mem_No = data[i].issuer_Mem_No;
+			            var mission_Category = data[i].mission_Category;
+			            var latLng = new google.maps.LatLng(mission_Gps_Lat, mission_Gps_Lng);
+			          	if(map.getBounds().contains(latLng)){
+			          		addMarker(latLng, data[i]);
+// 			          		$("#place").append("<tr><td>"+index+"</td><td>"+mission_No+"</td><td>"+mission_Name+"</td><td>"+issuer_Mem_No+"</td><td>"+mission_Category+"</td><td>"+mission_Gps_Lat+"</td><td>"+mission_Gps_Lng+"</td></tr>");
+			          		index++;
+			          	}
+			          }
+			        }
+			      }
+			      
+			      // Adds a marker to the map and push to the array.
+			      function addMarker(latLng, result) {
+			        var marker = new google.maps.Marker({
+			          position: latLng,
+			          map: map,
+			          icon: iconBase + 'bus_maps.png'
+			        });
+			        markers.push(marker);
+			        var infowindow = new google.maps.InfoWindow({
+			            content: "<h2>"+result.mission_Category.Zh_tw+"</h2><div><p><b>任務編號: </b>"+result.mission_No+"</p><p><b>任務名: </b>"+result.mission_Name+"</p><p><b>位置: </b>{"+result.mission_Gps_Lat+","+result.mission_Gps_Lng+"}</p></div>"
+			        });
+			        marker.addListener('click', function() {
+			            infowindow.open(map, marker);
+			        });
+			      }
+			      
+			      // Deletes all markers in the array by removing references to them.
+			      function deleteMarkers() {
+			    	setMapOnAll(null);
+			        markers = [];
+			      }
+			      
+			      // Sets the map on all markers in the array.
+			      function setMapOnAll(map) {
+			        for (var i = 0; i < markers.length; i++) {
+			          markers[i].setMap(map);
+			        }
+			      }
+//				
+		     },
+             error: function(){alert("AJAX-grade發生錯誤囉!")}
+         })
+		
       
-      // Adds a marker to the map and push to the array.
-      function addMarker(latLng, result) {
-        var marker = new google.maps.Marker({
-          position: latLng,
-          map: map,
-          icon: iconBase + 'bus_maps.png'
-        });
-        markers.push(marker);
-        var infowindow = new google.maps.InfoWindow({
-            content: "<h2>"+result.RouteName.Zh_tw+"</h2><div><p><b>車號: </b>"+result.PlateNumb+"</p><p><b>司機: </b>"+result.OperatorID+"</p><p><b>位置: </b>{"+result.BusPosition.PositionLat+","+result.BusPosition.PositionLon+"}</p></div>"
-        });
-        marker.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
-      }
-      
-      // Deletes all markers in the array by removing references to them.
-      function deleteMarkers() {
-    	setMapOnAll(null);
-        markers = [];
-      }
-      
-      // Sets the map on all markers in the array.
-      function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-        }
-      }
-
+		})
       // window.onload = initMap;  //測試用
     </script>
 </body>
