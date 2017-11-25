@@ -98,7 +98,7 @@
                     </div>
                 </div>                
                 <!-- 退回modal -->
-                <a href='#modal-id2' data-toggle="modal" class="btn btn-primary">退回此案件</a>
+                <a href='#modal-id2' data-toggle="modal" class="btn btn-warning">退回此案件</a>
                 <div class="modal fade" id="modal-id2">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -115,7 +115,7 @@
                                     <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
                                     <input type="hidden" name="dispute_Case_No" value="<%=disputeCaseNo%>">
                                     <input type="hidden" name="action" value="reject_Dispute_Case">
-                                    <input type="submit" class="btn btn-primary" value="退回">
+                                    <input type="submit" class="btn btn-warning" value="退回">
                                 </div>
                             </form>
                         </div>

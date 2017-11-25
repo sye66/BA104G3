@@ -147,7 +147,7 @@
 						</td>
 						<td>
                             <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
-								<input type="hidden" name="action" value="reply_Dispute_Case">
+								<input type="hidden" name="action" value="delete_Dispute_Case">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
                             	<input type="submit" class="btn btn-danger" value="刪除此案件">
                             </form>

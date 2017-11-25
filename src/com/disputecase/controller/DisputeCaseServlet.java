@@ -34,7 +34,7 @@ public class DisputeCaseServlet extends HttpServlet {
     private static final String ISSUE_CASE_SUCCESS 	= "/frontdesk/disputeCase/issueSuccess.jsp";
     private static final String ISSUE_CASE_FAILED 	= "/frontdesk/disputeCase/issueDisputeCaseFail.jsp";
     //BackDesk
-    private static final String CASE_MANAGE 	= "/backdesk/disputeCase/disputecase_Manage.jsp";
+    private static final String CASE_MANAGE 	= "/backdesk/disputecase/disputecase_Manage.jsp";
     private static final String GET_RESULT 		= "/backdesk/disputecase/disputecase_Result.jsp";
     private static final String CASE_REPLY		= "/backdesk/disputecase/disputecase_Reply.jsp";
     private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_ReplySent.jsp";
@@ -100,6 +100,7 @@ public class DisputeCaseServlet extends HttpServlet {
 		/**
 		 * @author Sander
 		 * @hidden issue_Dispute_Case
+		 * 新增爭議案件
 		 * 驗證爭議案件內容不為空，圖片可為空值
 		 * 呼叫GetMissionService.missionDisputeCase 啟動爭議案件程序
 		 */
