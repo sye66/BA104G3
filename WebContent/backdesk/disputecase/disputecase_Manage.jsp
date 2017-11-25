@@ -13,7 +13,6 @@
 	List<DisputeCaseVO> listAllHandlingCase = disputeCaseService.getDisputeCaseByStatus(2);
 	List<DisputeCaseVO> listAllClosedCase = disputeCaseService.getDisputeCaseByStatus(3);
 	List<DisputeCaseVO> listAllRejectCase = disputeCaseService.getDisputeCaseByStatus(4);
-
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 %>
 <html>
@@ -143,14 +142,14 @@
                         <td>
 							<form method="post" action="disputecase_Reply.jsp">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-								<input type="submit" class="btn btn-info"value="回覆此案件">
+								<input type="submit" class="btn btn-info" value="回覆此案件">
 							</form>
 						</td>
 						<td>
                             <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
 								<input type="hidden" name="action" value="reply_Dispute_Case">
 								<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-                            	<input type="submit" class="btn btn-danger"value="刪除此案件">
+                            	<input type="submit" class="btn btn-danger" value="刪除此案件">
                             </form>
                         </td>
                     </tr>

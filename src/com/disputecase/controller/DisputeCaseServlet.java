@@ -38,6 +38,7 @@ public class DisputeCaseServlet extends HttpServlet {
     private static final String GET_RESULT 		= "/backdesk/disputecase/disputecase_Result.jsp";
     private static final String CASE_REPLY		= "/backdesk/disputecase/disputecase_Reply.jsp";
     private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_ReplySent.jsp";
+    private static final String TEST_FAILED 	= "/backdesk/disputecase/disputecase_Fail_Closed.jsp";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -187,9 +188,7 @@ public class DisputeCaseServlet extends HttpServlet {
 				}
 				
 				/**********準備寫入與轉向**********/
-				
 				// 抓原本VO出來
-				
 				DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(disputeCaseNo);
 				
 				// 1. 寫入回覆存入資料庫
@@ -223,11 +222,83 @@ public class DisputeCaseServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsg.add("無法取得資料" + e.getMessage());
 				// TODO ADD DISPATCH PAGE
-				RequestDispatcher failureView = request.getRequestDispatcher(CASE_REPLY); 
+				for (String string : errorMsg) {
+					System.out.println(string);
+				}
+				RequestDispatcher failureView = request.getRequestDispatcher(TEST_FAILED); 
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}
 		}
+		
+		/**
+		 * @author Sander
+		 * @hidden reject_Dispute_Case
+		 * 拒絕爭議案件，要做幾件事情:
+		 * 1. 寫入回覆存入資料庫
+		 * 2. 寫入結案時間存入資料庫
+		 * 3. 改變爭議案件狀態
+		 * 4. 改變任務狀態
+		 * 5. 積分不退發案人
+		 * 6. 積分給接案人
+		 */
+		
+		if ("reject_Dispute_Case".equals(action)) {
+			List<String> errorMsg = new LinkedList<>();
+			request.setAttribute("errorMsg", errorMsg);
+			try {
+				/********** 接收請求參數 - 文字 **********/
+				String disputeCaseNo = request.getParameter("dispute_Case_No");
+				String dispute_Reject = request.getParameter("dispute_Reject");
+				/**********錯誤驗證與處理**********/
+				
+				if (disputeCaseNo == null||(disputeCaseNo.trim()).length() == 0) {
+					errorMsg.add("請輸入案件編號");
+				}
+				
+				/**********準備寫入與轉向**********/
+				// 抓原本VO出來
+				DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(disputeCaseNo);
+				// 1. 寫入回覆存入資料庫
+				// 2. 寫入結案時間存入資料庫
+				// 3. 改變爭議案件狀態 - 退回爭議案件(4)		
+				Date date = new Date();
+				Timestamp timestamp = new Timestamp(date.getTime());
+				disputeCaseService.replyDisputeCase(disputeCaseNo, timestamp, 4, dispute_Reject);		
+				System.out.println("爭議案件退回: " + disputeCaseNo);
+				
+				// 4. 改變任務狀態 (5)
+				GetMissionService getMissionService = new GetMissionService();
+				String mission_No = disputeCaseVO.getMission_No();
+				getMissionService.updateOneMissionStatus(mission_No, 5);
+				System.out.println("狀態改變 - 任務: " + mission_No);
+				
+				// 5. 發積分給接案人
+				GetMissionVO getMissionVO = getMissionService.getOneMission(mission_No);
+				Integer mission_Pay = 0;
+				try {
+					mission_Pay = Integer.parseInt((getMissionVO.getMission_Pay()).toString());
+				} catch (NumberFormatException e) {
+					System.out.println("數字格式錯誤，使用預設值50");
+					mission_Pay = 50;
+				}
+				MemService memService = new MemService();
+				MemVO memVO = memService.IncreaseMemPoint(getMissionVO.getTakecase_Mem_No(),mission_Pay);
+				// 轉到結案頁面
+				RequestDispatcher ReplyDoneView = request.getRequestDispatcher(CASE_REPLY_SENT);
+				ReplyDoneView.forward(request, response);
+			} catch (Exception e) {
+				errorMsg.add("無法取得資料" + e.getMessage());
+				// TODO ADD DISPATCH PAGE
+				for (String string : errorMsg) {
+					System.out.println(string);
+				}
+				RequestDispatcher failureView = request.getRequestDispatcher(TEST_FAILED); 
+				failureView.forward(request, response);
+				System.out.println("轉向" + e.getMessage());
+			}
+		}
+		
 		
 		/**
 		 * @author Sander
