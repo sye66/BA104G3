@@ -5,7 +5,7 @@
 
 
 <c:forEach var="RelationVO" items="${RelationSvc.all}">
-	${RelationVO.mem_No}<br>
+	${RelationVO.mem_No}<br> 
 	${RelationVO.related_Mem_No}<br>
 	${RelationVO.relation_Status}<br>
 </c:forEach>
