@@ -58,7 +58,7 @@ public class AccusecaseServlet extends HttpServlet {
 					
 					return;
 			}
-//			try {
+			try {
 				String mission_No = (String) req.getParameter("mission_No");
 				String accuse_Detail = (String) req.getParameter("accuse_Detail");
 				GetMissionService GetMissionSvc = new GetMissionService();
@@ -89,11 +89,11 @@ public class AccusecaseServlet extends HttpServlet {
 				}
 
 				if (errorMsgs.size() != 0) {
-//					obj.put("errormessage", errorMsgs);
+					obj.put("errormessage", errorMsgs);
 
 				} else {
 					String value = "檢舉成功~";
-//					obj.put("message", value);
+					obj.put("message", value);
 
 				}
 				out.write(obj.toString());
@@ -106,14 +106,14 @@ public class AccusecaseServlet extends HttpServlet {
 				successView.forward(req, res);
 				out.flush();
 				out.close();
-//			} catch (Exception e) {
-//				System.out.println(e);
-//				errorMsgs.add("檢舉失敗:" + e.getMessage());
-//				req.setAttribute("errorMsgs", errorMsgs);
-//				RequestDispatcher failureView = req.getRequestDispatcher("");
-//				failureView.forward(req, res);
-//				return;
-//			}
+			} catch (Exception e) {
+				System.out.println(e);
+				errorMsgs.add("檢舉失敗:" + e.getMessage());
+				req.setAttribute("errorMsgs", errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("");
+				failureView.forward(req, res);
+				return;
+			}
 
 		}
 		
