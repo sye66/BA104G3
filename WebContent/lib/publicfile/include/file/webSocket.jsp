@@ -152,7 +152,7 @@
 <script>
     
     //把EL跟JSP的內容存成變數,方便跟JS溝通
-    
+     
     
 	var memno = '${memVO.mem_No}';
     var context = '<%=request.getContextPath() %>';
