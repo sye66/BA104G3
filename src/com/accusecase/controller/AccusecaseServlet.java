@@ -69,9 +69,7 @@ public class AccusecaseServlet extends HttpServlet {
 				String issuer_No = GetMissionSvc.getOneMission(mission_No).getIssuer_Mem_No();
 				if (!issuer_No.equals(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
-						System.out.println("111111");
 						if(mission_State == 1 || mission_State == 7){
-							System.out.println("22222222");
 							mission_State = 7;
 						}else{
 							mission_State = 72;
