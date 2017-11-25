@@ -133,122 +133,98 @@
 		varStatus="s" step="1">
 
 		<c:set var="index" value="${index + 1}" />
-
+		<%-- 有兩個就加上CR --%>
 		<c:if test="${s.index%2==0  }">
 			<div class="container">
 				<div class="row">
 		</c:if>
-
-
 		<div class="col-xs-12 col-sm-6">
-<div class="container">
-	
-			<div class="row">
-
-				<div class="col-xs-12 col-sm-4">
-
-					<!-- <div class="row"> -->
-						<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
-						<img
-							src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
-							class="img-responsive pic center">
+			<div class="container">
+				<div class="row">
+					<%-- 左側圖片顯示 --%>
+						<div class="col-xs-12 col-sm-4">
+							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
+								<img src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}" class="img-responsive pic center">
 							</c:if>
 							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
-							<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
-							class="img-responsive pic center">
+								<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg" class="img-responsive pic center">
 							</c:if>
-						<div class="user text-center">
-							<p>USER PICTURE</p>
+							<div class="user text-center">
+								<p>USER PICTURE</p>
+							</div>
 						</div>
-					<!-- </div> -->
-
-				</div>
-
-				<div class="col-xs-12 col-sm-8">
-					<div class="panel panel-default row">
-						<div class="panel-heading">
-							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
-							<p>${getMissionVO.mission_No }</p>
-							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
-
-							<p>1.任務方向:${getMissionVO.mission_Category }</p>
-
-							<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
-						</div>
-						<table>
-							<tr>
-								<td>
-									<div class="panel-body">
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission1">
-											<button class="btn btn-warning" type="submit" name="action"
-												value="mission_Detail">任務細節</button>
-
-											<input type="hidden" name="mission_No"
-												value="${getMissionVO.mission_No}"> <input
-												type="hidden" name="requestURL"
-												value="/frontdesk/getmission/getMission.jsp">
-										</form>
-									</div>
-								</td>
-
-							
-
-
-								<td>
-									<div class="panel-body">
-
-										<form method="post"
-											action="<%=request.getContextPath()%>/getmission/getmission.do"
-											name="getmission2">
-											<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
-													class="btn btn-info">我要接案</button></a> <input type="hidden"
-												name="mission_No" value="${getMissionVO.mission_No}">
-										</form>
-									</div>
-								</td>
-
-								<div class="modal fade" id="modal-mission-id${s.index}">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">&times;</button>
-												<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
-											</div>
-											<div class="modal-body">
-												<h4>任務名稱:</h4>
-												<p>----${getMissionVO.mission_Name}</p>
-												<h4>任務種類:</h4>
-												<p>----${getMissionVO.mission_Category}</p>
-											</div>
-											<div class="modal-footer">
-
-												<form method="post"
-													action="<%=request.getContextPath()%>/getmission/getmission.do"
-													name="getmission2">
-													<button class="btn btn-info" type="submit" name="action"
-														value="take_mission">確認接案</button>
-													<input type="hidden" name="mission_No"
-														value="${getMissionVO.mission_No}"> 
-													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
-													<input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
-												</form>
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">關閉</button>
-											</div>
-										</div>
-									</div>
+					<%-- 右側資訊顯示 --%>
+						<div class="col-xs-12 col-sm-8">
+							<div class="panel panel-default row">
+								<div class="panel-heading">
+									<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
+									<p>${getMissionVO.mission_No }</p>
+									<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+									<p>1.任務方向:${getMissionVO.mission_Category }</p>
+									<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
 								</div>
+								<%-- 右側的Table --%>
+									<table>
+										<tr>
+											<td>
+												<div class="panel-body">
+													<form method="post"
+														action="<%=request.getContextPath()%>/getmission/getmission.do"
+														name="getmission1">
+														<button class="btn btn-warning" type="submit" name="action"
+															value="mission_Detail">任務細節</button>
 
-							</tr>
-						</table>
-					</div>
+														<input type="hidden" name="mission_No"
+															value="${getMissionVO.mission_No}"> <input
+															type="hidden" name="requestURL"
+															value="/frontdesk/getmission/getMission.jsp">
+													</form>
+												</div>
+											</td>
+											<td>
+												<div class="panel-body">
+
+													<form method="post"
+														action="<%=request.getContextPath()%>/getmission/getmission.do"
+														name="getmission2">
+														<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
+																class="btn btn-info">我要接案</button></a> <input type="hidden"
+															name="mission_No" value="${getMissionVO.mission_No}">
+													</form>
+												</div>
+											</td>
+											<%-- modal開始 --%>
+												<div class="modal fade" id="modal-mission-id${s.index}">
+												    <div class="modal-dialog">
+												        <div class="modal-content">
+												            <div class="modal-header">
+												                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												                <h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
+												            </div>
+												            <div class="modal-body">
+												                <h4>任務名稱:</h4>
+												                <p>----${getMissionVO.mission_Name}</p>
+												                <h4>任務種類:</h4>
+												                <p>----${getMissionVO.mission_Category}</p>
+												            </div>
+												            <div class="modal-footer">
+												                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
+												                    <button class="btn btn-info" type="submit" name="action" value="take_mission">確認接案</button>
+												                    <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
+												                    <input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
+												                    <input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
+												                </form>
+												                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+												            </div>
+												        </div>
+												    </div>
+												</div>
+										</tr>
+									</table>
+							</div>
+						</div>
 				</div>
-
 			</div>
-</div>
 		</div>
 
 		<c:if test="${s.index%2==1 }">
