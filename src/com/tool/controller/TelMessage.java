@@ -23,7 +23,7 @@ public class TelMessage {
 		           mysms.close_conn();
 		           return ;
 		      }
-
+     
 		      //傳送文字簡訊
 		      //如需同時傳送多筆簡訊，請多次呼叫send_message()即可。
 		    for(int i=0 ; i<tel.length ; i++){  

@@ -77,7 +77,7 @@
 	list-style: none;
 	border:2px;
 	border-color: red;
-
+  
 }
 /* 字大小 */
 .navbar-nav .nav-link {

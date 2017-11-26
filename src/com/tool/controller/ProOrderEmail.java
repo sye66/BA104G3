@@ -98,7 +98,7 @@ public class ProOrderEmail implements Runnable{
 			     e.printStackTrace();
 		     }
 		   }
-		
+		 
 		
 		public static void main (String args[]){
 			for(int i=0;i<10;i++){
@@ -110,7 +110,7 @@ public class ProOrderEmail implements Runnable{
 			      String ch_name = "俊豪先生";
 			      String passRandom = "這個月欠款9487元,請盡速繳納!";
 			      String messageText = "Hello! " + ch_name + "  : " + passRandom + "\n" +" (已經啟用)"; 
-			       
+			         
 			      ProOrderEmail mailService = new ProOrderEmail();
 			      mailService.sendMail(to, subject, messageText);
 			      Thread thread = new Thread(mailService);

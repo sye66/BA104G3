@@ -125,7 +125,7 @@ System.out.println("發送電話簡訊: ");
 				String telMessageText = memVO.getMem_Name()+" 先生/小姐 您好!"+"\n"+"您於工具人商城購買商品"+"\n"
 						+"總消費為: "+sum+" 積分"+"\n"+"商品將於1~3日後送出!";
 				String[] tel = {t};
-System.out.println(tel[0]);				
+System.out.println(tel[0]);				     
 				TelMessage telMessage = new TelMessage();
 				telMessage.sendMessage(tel, telMessageText);				
 				
