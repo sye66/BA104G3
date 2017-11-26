@@ -3,9 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReply.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
     ArtiReplyService artiReplySvc = new ArtiReplyService();
     Set<ArtiReplyVO> set = artiReplySvc.getAllReply();
     pageContext.setAttribute("set",set);
@@ -86,6 +89,7 @@
 			                 <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <button class="btn btn-danger" type="submit" name="action" value="deleteReplyFMBack"> 刪除回覆 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>

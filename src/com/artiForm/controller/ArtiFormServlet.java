@@ -356,13 +356,13 @@ public class ArtiFormServlet extends HttpServlet {
 			System.out.print(arti_No  );
 			System.out.print(mem_No);
 			System.out.print(mem_No_M);
-//			if(req.getSession().getAttribute("mem_No")==null){
-//				String contextPath = getServletContext().getContextPath();
-//				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
-//				failuewView.forward(req, res);
-//				return;
-//			}
+			if(req.getSession().getAttribute("mem_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
 			
 			if(mem_No.equals(mem_No_M)){
 				String contextPath = getServletContext().getContextPath();
@@ -538,6 +538,15 @@ public class ArtiFormServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				String arti_No = req.getParameter("arti_No");
 				
+				String emp_No = req.getParameter("emp_No");
+				if(req.getSession().getAttribute("emp_No")==null){
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add("@@ 要麻煩請你先登入喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+					failuewView.forward(req, res);
+					return;
+				}
+				
 				/***************************2.開始刪除資料***************************************/
 				ArtiFormService artiFormSvc = new ArtiFormService();
 				artiFormSvc.deleteArtiForm(arti_No);
@@ -549,8 +558,8 @@ public class ArtiFormServlet extends HttpServlet {
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
-				errorMsgs.add(" 刪除資料失敗 : " + e.getMessage());
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listAllArtiForm.jsp");
+				errorMsgs.add(" 刪除資料失敗 : 回覆文章還沒刪除喔~~~ " + e.getMessage());
+				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/select_page.jsp");
 				failuewView.forward(req, res);
 			}
 		}
