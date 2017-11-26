@@ -222,6 +222,35 @@ public class ArtiFormServlet extends HttpServlet {
 			}
 		}
 		
+		/******[ 依分類取出 ]******/
+		if ("listArti_ByClass_No_A".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				/***************************1.接收請求參數****************************************/
+				HttpSession session = req.getSession();
+				Integer arti_Cls_No = new Integer(req.getParameter("arti_Cls_No"));
+
+				/***************************2.開始查詢資料****************************************/
+				ArtiFormService artiFormSvc = new ArtiFormService();
+				Set<ArtiFormVO> artiFormVO = artiFormSvc.findArtiByArtiClsNo(arti_Cls_No);
+
+				/***************************3.查詢完成,準備轉交(Send the Success view)************/
+				req.setAttribute("artiFormSet", artiFormVO);
+//				session.setAttribute("describe", describe);
+				String url = "/backdesk/artiClass/listArti_ByClassNo_back.jsp";
+
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e){
+				errorMsgs.add(" 無法取得要修改的資料 : " +e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReply/selectReply_page.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	
 		
 		/******[ 取出ㄧ個準備更新 ]******/

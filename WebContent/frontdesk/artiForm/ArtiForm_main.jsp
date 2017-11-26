@@ -118,10 +118,14 @@ div> .timeline-body{
                         </a>
                     </div>
                     </div>
+<div>
+
+</div>
             
 <div class="page-body">
-<div class="video-container">
+<img src="/BA104G3/res/images/arti_ref/cow.png">
 
+<div class="video-container">
         <iframe class="embed-responsive" frameborder="0" allowfullscreen="1" 
                         title="Youtube viedo player" width="50%" height="50%" 
                         src="https://www.youtube.com/embed/jSwV3IpNF2U?playlist=ehjOL_bqzSc&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 

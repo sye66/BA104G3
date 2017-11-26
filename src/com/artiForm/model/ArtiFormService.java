@@ -88,7 +88,8 @@ public class ArtiFormService {
 		return dao.findArtiByMemNo(mem_No);
 	}
 
-//	public List<ArtiReplyVO> findReplyByArtiClsNo (Map<String, String[]> map){
-//		return dao.findReplyByArtiClsNo(map);
-//	}
+	public Set<ArtiFormVO> findArtiByArtiClsNo(Integer arti_Cls_No){
+		return dao.findArtiByArtiClsNo(arti_Cls_No);
+	}
+	
 }

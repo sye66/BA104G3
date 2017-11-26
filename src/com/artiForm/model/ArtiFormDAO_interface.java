@@ -17,6 +17,6 @@ public interface ArtiFormDAO_interface {
 	public Set<ArtiReplyVO> findReplyByArtiNo(String arti_No);
 	public Set<ArtiFormVO> getAllArti4Serach(String describe);
 	public Set<ArtiFormVO> findArtiByMemNo(String mem_No);
+	public Set<ArtiFormVO> findArtiByArtiClsNo(Integer arti_Cls_No);
 
-	
 }
