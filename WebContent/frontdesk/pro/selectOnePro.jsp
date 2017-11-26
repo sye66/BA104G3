@@ -86,8 +86,8 @@
 .m-sidebar{
 	position: fixed;
 	top: 200px;
-	right: 0;
-	background: #000;
+	right: 100px;
+/* 	background: #000; */
 	z-index: 3;
 	width: 35px;
 	height: 50%;
@@ -104,7 +104,7 @@
 	font-size:20px; 
 	text-align:center; 
 	color:#fff; 
-	background:#360; 
+	background:	#97CBFF; 
 	display:none
 }
 .u-flyer{
@@ -276,7 +276,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 									ACTION="<%=request.getContextPath()%>/pro/shoppingCartServlet.do">
 
 									<button type="button" id="backPro" style="width: 30px;">-</button>
-									<input type="text" id="proCount" name="proCar_Quantity"
+									<input type="text" class="proCar_Quantity" id="proCount" name="proCar_Quantity"
 										value="1" style="width: 30px; text-align: center">
 									<button type="button" id="addPro" style="width: 30px;">+</button>
 
@@ -287,14 +287,13 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 									<button type="button" class="btn btn-warning addcar" 
 										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;border-radius: 5px;">放入購物車</button>
 									
-									<input type="hidden" name="proCar_No" value="${proVO.pro_No}">
-									<input type="hidden" name="proCar_Name" value="${proVO.pro_Name}"> 
-									<input type="hidden" name="proCar_Info" value="${proVO.pro_Info}"> 
-									<input type="hidden" name="proCar_Price" value="${dsPrice}">
-									<input type="hidden" name="mem_NO" value="${memVO.mem_No}">
-									
-									<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>"> 
-									<input type="hidden" name="action" value="addPro">
+									<input type="hidden" class="proCar_No" name="proCar_No" value="${proVO.pro_No}">
+									<input type="hidden" class="proCar_Name" name="proCar_Name" value="${proVO.pro_Name}"> 
+									<input type="hidden" class="proCar_Info" name="proCar_Info" value="${proVO.pro_Info}"> 
+									<input type="hidden" class="proCar_Price" name="proCar_Price" value="${dsPrice}">
+									<input type="hidden" class="mem_NO" name="mem_NO" value="${memVO.mem_No}">
+									<input type="hidden" class="requestURL" name="requestURL" value="<%=request.getServletPath()%>"> 
+									<input type="hidden" class="action" name="action" value="addPro">
 								</form>
 							<td>
 							
@@ -319,9 +318,10 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 	<!--中6結束 -->
 	<div class="col-xs-12 col-sm-3"><!--空 --></div>
 </div>
-<!-- ajax未完成 -->
+
 <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/frontdesk/pro/jquery.fly.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
 
 <script>
 
@@ -331,32 +331,73 @@ $(function() {
 		var addcar = $(this);
 		var img = $(".proDiv").find('img').attr('src');
 		var flyer = $('<img class="u-flyer" src="'+img+'">');
-		flyer.fly({
-			start: {
-				left: event.pageX-300,
-				top: event.pageY-250,
-			},
-			end: {
-				left: offset.left+10,
-				top: offset.top+10,
-				width: 0,
-				height: 0
-			},
-			onEnd: function(){
-				$("#msg").show().animate({width: '250px'}, 200).fadeOut(1000);
-// 				addcar.css("cursor","default").removeClass('orange').unbind('click');
-				this.destory();
-			}
+			flyer.fly({
+				start: {
+					left: event.pageX-300,
+					top: event.pageY-250,
+				},
+				end: {
+					left: offset.left+10,
+					top: offset.top+10,
+// 					left: offset.left-770,
+// 					top: offset.top-80,
+					width: 0,
+					height: 0
+				},
+				onEnd: function(){
+					$("#msg").show().animate({width: '250px'}, 200).fadeOut(1000);
+// 					addcar.css("cursor","default").removeClass('orange').unbind('click');
+					this.destory();
+				}
+			});
+			
+			var action = addcar.parent().find("input.action").val();
+	    	var proCar_No = addcar.parent().find("input.proCar_No").val();
+	    	var proCar_Name = addcar.parent().find("input.proCar_Name").val();
+	    	var proCar_Info = addcar.parent().find("input.proCar_Info").val();
+	    	var proCar_Price = addcar.parent().find("input.proCar_Price").val();
+	    	var requestURL = addcar.parent().find("input.requestURL").val();
+	    	var proCar_Quantity = addcar.parent().find("input.proCar_Quantity").val();
+	     	var mem_NO = addcar.parent().find("input.mem_NO").val();
+	    		
+	     $.ajax({
+	      type:"POST",
+	      url:'<%=request.getContextPath()%>/pro/shoppingCartServlet.do',
+	      data:"&action="+action+"&requestURL="+requestURL
+	      	   +"&proCar_No="+proCar_No+"&proCar_Name="+proCar_Name+"&proCar_Info="+proCar_Info
+	      	   +"&proCar_Price="+proCar_Price+"&proCar_Quantity="+proCar_Quantity,
+//		      dataType: "json",
+	      dataType: "text",
+//	       cache: true,           // 預設值為 true 防止快取
+//	       async: false,           // 預設值為 true 非同步
+	      success:function(response){
+	    	  
+	       setTimeout(function(){location.reload()}, 2000) ;   //重新刷新              
+	      }, // success end        
+	      error:function(xhr, ajaxOptions, thrownError){
+	       swal(
+	         'Oops...',
+	         '出錯瞜!',
+	         'error'
+	       )
+	      } // error end
+	     }) //.ajax end 
+			
+			
+			
+			
+			
+		     	
+		    	
+		   
 		});
-	});
-  
-});
+   });
 </script>
 <!-- 購物車動畫	 -->
 <div class="m-sidebar"> 
     <div class="cart"> 
         <i id="end"></i> 
-        <span>購物車</span> 
+        <img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/1208499.gif"> 
     </div> 
 </div> 
 <div id="msg">已成功加入購物車！</div> 	

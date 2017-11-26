@@ -7,7 +7,7 @@ import java.util.Map;
 public class ProService {
 	private ProDAO_interface dao;
 	public ProService(){
-		dao = new ProJDBCDAO();
+		dao = new ProDAO();
 	}
 
 	
