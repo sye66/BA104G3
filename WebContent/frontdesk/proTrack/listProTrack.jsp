@@ -129,7 +129,7 @@ $(document).ready(function(){
      $.ajax({
       type:"POST",
       url:'<%=request.getContextPath()%>/pro/proTrackServlet.do',
-      data: "&action="+action+"&requestURL="+requestURL+"&pro_No="+pro_No+"&mem_No="+mem_No,
+      data:"&action="+action+"&requestURL="+requestURL+"&pro_No="+pro_No+"&mem_No="+mem_No,
 //      dataType: "json",
       dataType: "text",
 //       cache: true,           // 預設值為 true 防止快取

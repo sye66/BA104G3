@@ -222,4 +222,45 @@ public class GetMissionService {
 		dao.update(getMissionVO);
 		return getMissionVO;
 	}
+
+	public String addMissionReturnKey(
+			
+			String mission_Category,
+			String mission_Name,
+			String mission_Des,
+			String issuer_Mem_No,
+			String takecase_Mem_No,
+			Timestamp mission_Release_Time,
+			Timestamp mission_Due_Time,
+			Timestamp mission_Start_Time,
+			Timestamp mission_End_Time,
+			Integer mission_State,
+			Integer mission_Pattern,
+			Double mission_Pay,
+			Double mission_Gps_Lat,
+			Double mission_Gps_Lng) {
+
+		GetMissionVO getMissionVO = new GetMissionVO();
+
+		
+		getMissionVO.setMission_Category(mission_Category);
+		getMissionVO.setMission_Name(mission_Name);
+		getMissionVO.setMission_Des(mission_Des);
+		getMissionVO.setIssuer_Mem_No(issuer_Mem_No);
+		getMissionVO.setTakecase_Mem_No(takecase_Mem_No);
+		getMissionVO.setMission_Release_Time(mission_Release_Time);
+		getMissionVO.setMission_Due_Time(mission_Due_Time);
+		getMissionVO.setMission_Start_Time(mission_Start_Time);
+		getMissionVO.setMission_End_Time(mission_End_Time);
+		getMissionVO.setMission_State(mission_State);
+		getMissionVO.setMission_Pattern(mission_Pattern);
+		getMissionVO.setMission_Pay(mission_Pay);
+		getMissionVO.setMission_Gps_Lat(mission_Gps_Lat);
+		getMissionVO.setMission_Gps_Lng(mission_Gps_Lng);
+		
+		String key = dao.insertReturnKey(getMissionVO);
+
+		return key;
+	}
+
 }

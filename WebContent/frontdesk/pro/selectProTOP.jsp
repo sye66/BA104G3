@@ -90,14 +90,14 @@ int count3 = 0;
 	
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
-
+<title>工具人出租</title>
 </head>
 <body>
 <div class="row">
 <!--搜尋12 -->
 <div class="col-xs-12 col-sm-12 " id="ontopDiv">
 		<!--搜尋 -->
-		<div class="col-xs-12 col-sm-4 col-sm-offset-3">
+		<div class="col-xs-12 col-sm-4 col-sm-offset-2">
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/pro.do" name="form1">
 				<table >
 					<tr style="font-size:20px;text-align:center;">

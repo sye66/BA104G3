@@ -2,8 +2,6 @@ package com.getmission.model;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-import oracle.sql.DATE;
-import oracle.sql.TIMESTAMP;
 
 public class GetMissionVO implements java.io.Serializable{
 	private String mission_No;

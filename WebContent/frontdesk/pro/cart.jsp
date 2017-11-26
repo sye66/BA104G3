@@ -9,7 +9,7 @@
 <%@ page import="com.proorder.model.*"%>
 <html>
 <head>
-<title>購物車</title>
+<title>工具人出租</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 

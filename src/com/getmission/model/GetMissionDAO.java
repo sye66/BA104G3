@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.emp.model.EmpVO;
+import com.sun.javafx.binding.StringFormatter;
 
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Mission;
 
@@ -25,7 +26,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, sysdate, sysdate+5, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd hh:mm:ss') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd hh:mm:ss') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd hh:mm:ss') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd hh:mm:ss') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission order by mission_release_time desc";
 	private static final String GET_ONE_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd hh:mm:ss') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd hh:mm:ss') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd hh:mm:ss') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd hh:mm:ss') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission where mission_no = ?";
 	private static final String DELETE = "DELETE FROM mission where mission_no = ?";
@@ -58,15 +59,13 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			pstmt.setString(3, getMissionVO.getMission_Des());
 			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
 			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
-			pstmt.setTimestamp(6, getMissionVO.getMission_Due_Time());
-			pstmt.setTimestamp(7, getMissionVO.getMission_Start_Time());
-			pstmt.setTimestamp(8, getMissionVO.getMission_End_Time());
-			pstmt.setInt(9, getMissionVO.getMission_State());
-			pstmt.setInt(10, getMissionVO.getMission_Pattern());
-			pstmt.setDouble(11, getMissionVO.getMission_Pay());
-			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lat());
-			pstmt.setDouble(13, getMissionVO.getMission_Gps_Lng());
-
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -272,7 +271,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 
 			con = ds.getConnection();
@@ -829,6 +828,62 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		return listMemMission;
 	}
 	
+	/**
+	 * @author Sander
+	 * 新增後回傳主鍵
+	 */
 	
+	public String insertReturnKey(GetMissionVO getMissionVO) {
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String key = null;
+		String[] col = {"MISSION_NO"};
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT,col);
+
+			pstmt.setString(1, getMissionVO.getMission_Category());
+			pstmt.setString(2, getMissionVO.getMission_Name());
+			pstmt.setString(3, getMissionVO.getMission_Des());
+			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
+			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
+			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				key = rs.getString(1);
+			} else {
+				return null;
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return key;
+	}
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,12 +9,17 @@
 	class="com.missionimages.model.MissionImagesService" />
 <jsp:useBean id="getMissionSvc" scope="page"
 	class="com.getmission.model.GetMissionService" />
+	<jsp:useBean id="getMissionVO" scope="page"
+	class="com.getmission.model.GetMissionVO" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
+
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	List<GetMissionVO> list = getMissionService.getAllValidMission();
+	
+	pageContext.setAttribute("list", list);
 %>
 
 <html lang="">
@@ -25,8 +31,8 @@
 <title>getMission</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
-<script src="<%=request.getContextPath()%>/lib/js/getmission/map.js"></script>
-<script type="text/javascript" src="js/*"></script>
+<%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/map.js"></script> --%>
+<!-- <script type="text/javascript" src="js/*"></script> -->
 <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -91,13 +97,7 @@
 
 
 
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI0AqzghxJv55TD4xLnlng-4hZ57jt2JQ&libraries=places&callback=initMapCustom">
-		$('.selectpicker').selectpicker({
-			style : 'btn-info',
-			size : 4
-		});
-	</script>
+	
 
 
 	<br>
@@ -133,98 +133,122 @@
 		varStatus="s" step="1">
 
 		<c:set var="index" value="${index + 1}" />
-		<%-- 有兩個就加上CR --%>
+
 		<c:if test="${s.index%2==0  }">
 			<div class="container">
 				<div class="row">
 		</c:if>
+
+
 		<div class="col-xs-12 col-sm-6">
-			<div class="container">
-				<div class="row">
-					<%-- 左側圖片顯示 --%>
-						<div class="col-xs-12 col-sm-4">
-							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
-								<img src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}" class="img-responsive pic center">
+<div class="container">
+	
+			<div class="row">
+
+				<div class="col-xs-12 col-sm-4">
+
+					<!-- <div class="row"> -->
+						<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() !=0 }">
+						<img
+							src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesSvc.getMissionpho(getMissionVO.mission_No).get(0).image_No}"
+							class="img-responsive pic center">
 							</c:if>
 							<c:if test="${missionImagesSvc.getMissionpho(getMissionVO.mission_No).size() ==0}">
-								<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg" class="img-responsive pic center">
+							<img src="<%=request.getContextPath()%>/res/images/getmission/panda.jpg"
+							class="img-responsive pic center">
 							</c:if>
-							<div class="user text-center">
-								<p>USER PICTURE</p>
-							</div>
+						<div class="user text-center">
+							<p>USER PICTURE</p>
 						</div>
-					<%-- 右側資訊顯示 --%>
-						<div class="col-xs-12 col-sm-8">
-							<div class="panel panel-default row">
-								<div class="panel-heading">
-									<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
-									<p>${getMissionVO.mission_No }</p>
-									<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
-									<p>1.任務方向:${getMissionVO.mission_Category }</p>
-									<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
-								</div>
-								<%-- 右側的Table --%>
-									<table>
-										<tr>
-											<td>
-												<div class="panel-body">
-													<form method="post"
-														action="<%=request.getContextPath()%>/getmission/getmission.do"
-														name="getmission1">
-														<button class="btn btn-warning" type="submit" name="action"
-															value="mission_Detail">任務細節</button>
+					<!-- </div> -->
 
-														<input type="hidden" name="mission_No"
-															value="${getMissionVO.mission_No}"> <input
-															type="hidden" name="requestURL"
-															value="/frontdesk/getmission/getMission.jsp">
-													</form>
-												</div>
-											</td>
-											<td>
-												<div class="panel-body">
-
-													<form method="post"
-														action="<%=request.getContextPath()%>/getmission/getmission.do"
-														name="getmission2">
-														<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
-																class="btn btn-info">我要接案</button></a> <input type="hidden"
-															name="mission_No" value="${getMissionVO.mission_No}">
-													</form>
-												</div>
-											</td>
-											<%-- modal開始 --%>
-												<div class="modal fade" id="modal-mission-id${s.index}">
-												    <div class="modal-dialog">
-												        <div class="modal-content">
-												            <div class="modal-header">
-												                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-												                <h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
-												            </div>
-												            <div class="modal-body">
-												                <h4>任務名稱:</h4>
-												                <p>----${getMissionVO.mission_Name}</p>
-												                <h4>任務種類:</h4>
-												                <p>----${getMissionVO.mission_Category}</p>
-												            </div>
-												            <div class="modal-footer">
-												                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
-												                    <button class="btn btn-info" type="submit" name="action" value="take_mission">確認接案</button>
-												                    <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
-												                    <input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
-												                    <input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
-												                </form>
-												                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-												            </div>
-												        </div>
-												    </div>
-												</div>
-										</tr>
-									</table>
-							</div>
-						</div>
 				</div>
+
+				<div class="col-xs-12 col-sm-8">
+					<div class="panel panel-default row">
+						<div class="panel-heading">
+							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
+							<p>${getMissionVO.mission_No }</p>
+							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+
+							<p>1.任務方向:${getMissionVO.mission_Category }</p>
+
+							<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
+						</div>
+						<table>
+							<tr>
+								<td>
+									<div class="panel-body">
+										<form method="post"
+											action="<%=request.getContextPath()%>/getmission/getmission.do"
+											name="getmission1">
+											<button class="btn btn-warning" type="submit" name="action"
+												value="mission_Detail">任務細節</button>
+
+											<input type="hidden" name="mission_No"
+												value="${getMissionVO.mission_No}"> <input
+												type="hidden" name="requestURL"
+												value="/frontdesk/getmission/getMission.jsp">
+										</form>
+									</div>
+								</td>
+
+							
+
+
+								<td>
+									<div class="panel-body">
+
+										<form method="post"
+											action="<%=request.getContextPath()%>/getmission/getmission.do"
+											name="getmission2">
+											<a href='#modal-mission-id${s.index} ' data-toggle="modal"><button
+													class="btn btn-info">我要接案</button></a> <input type="hidden"
+												name="mission_No" value="${getMissionVO.mission_No}">
+										</form>
+									</div>
+								</td>
+
+								<div class="modal fade" id="modal-mission-id${s.index}">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+												<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
+											</div>
+											<div class="modal-body">
+												<h4>任務名稱:</h4>
+												<p>----${getMissionVO.mission_Name}</p>
+												<h4>任務種類:</h4>
+												<p>----${getMissionVO.mission_Category}</p>
+											</div>
+											<div class="modal-footer">
+
+												<form method="post"
+													action="<%=request.getContextPath()%>/getmission/getmission.do"
+													name="getmission2">
+													<button class="btn btn-info" type="submit" name="action"
+														value="take_mission">確認接案</button>
+													<input type="hidden" name="mission_No"
+														value="${getMissionVO.mission_No}"> 
+													<input type="hidden" name="mission_State" value="${getMissionVO.mission_State}">
+													<input type="hidden" name="requestURL" value="/frontdesk/getmission/getMission.jsp">
+												</form>
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">關閉</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</tr>
+						</table>
+					</div>
+				</div>
+
 			</div>
+</div>
 		</div>
 
 		<c:if test="${s.index%2==1 }">
@@ -284,117 +308,103 @@
 
 	<script src="https://code.jquery.com/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script>
-		$(document).ready(function(){
-		 $.ajax({
-			 type: "Post",
-			 url: <%=request.getContextPath()%>+"/getmission/getmission.do",
-			 data: {action : "getmissionmap"},
-			 dataType: "json",
-			 success: function (data){
-				  var map;
-			      var markers = [];
-			      var searchResult;
-			      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-			      function initMap() {
-			        var myLatlng = {lat: 24.969, lng: 121.192};
+		 <script>
 
-			        map = new google.maps.Map(document.getElementById('map'), {
-			          center: myLatlng,
-			          zoom: 14
-			        });
-			        var marker = new google.maps.Marker({
-			          position: myLatlng,
-			          map: map,
-			          title: 'Click to zoom'
-			        });
 
-			        // 擷取及時公車資訊
-			        getJSON(data, callback);
-			      
-			        map.addListener('center_changed', function() {
-			        	deleteMarkers();
-			        	getJSON(data, callback);
-			        });
-			      }
-			          
-			      function getJSON(url, callback) {
-			        var xhr = new XMLHttpRequest();
-			        xhr.open('Post', url, true);
-			        xhr.responseType = 'json';
-			        xhr.onload = function() {
-			          var status = xhr.status;
-			          if (status === 200) {
-			            callback(null, xhr.response);
-			          } else {
-			            callback(status, xhr.response);
-			          }
-			        };
-			        xhr.send(data);
-			      }
+       // The following example creates complex markers to indicate beaches near
+      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+      // to the base of the flagpole.
 
-			      function callback(errorMsgs, data) {
-			        if (errorMsgs !== null) {
-			          alert('Something went wrong: ' + err);
-			        } else {
-					  searchResult = data;
-			          console.log(data[0]);
-			          $("#place").empty();
-			          var index = 1;
-			          for(var i = 0; i < data.length; i++){
-			            var mission_No = data[i].mission_No;
-			            var mission_Name = data[i].mission_Name;
-			            var issuer_Mem_No = data[i].issuer_Mem_No;
-			            var mission_Category = data[i].mission_Category;
-			            var latLng = new google.maps.LatLng(mission_Gps_Lat, mission_Gps_Lng);
-			          	if(map.getBounds().contains(latLng)){
-			          		addMarker(latLng, data[i]);
-// 			          		$("#place").append("<tr><td>"+index+"</td><td>"+mission_No+"</td><td>"+mission_Name+"</td><td>"+issuer_Mem_No+"</td><td>"+mission_Category+"</td><td>"+mission_Gps_Lat+"</td><td>"+mission_Gps_Lng+"</td></tr>");
-			          		index++;
-			          	}
-			          }
-			        }
-			      }
-			      
-			      // Adds a marker to the map and push to the array.
-			      function addMarker(latLng, result) {
-			        var marker = new google.maps.Marker({
-			          position: latLng,
-			          map: map,
-			          icon: iconBase + 'bus_maps.png'
-			        });
-			        markers.push(marker);
-			        var infowindow = new google.maps.InfoWindow({
-			            content: "<h2>"+result.mission_Category.Zh_tw+"</h2><div><p><b>任務編號: </b>"+result.mission_No+"</p><p><b>任務名: </b>"+result.mission_Name+"</p><p><b>位置: </b>{"+result.mission_Gps_Lat+","+result.mission_Gps_Lng+"}</p></div>"
-			        });
-			        marker.addListener('click', function() {
-			            infowindow.open(map, marker);
-			        });
-			      }
-			      
-			      // Deletes all markers in the array by removing references to them.
-			      function deleteMarkers() {
-			    	setMapOnAll(null);
-			        markers = [];
-			      }
-			      
-			      // Sets the map on all markers in the array.
-			      function setMapOnAll(map) {
-			        for (var i = 0; i < markers.length; i++) {
-			          markers[i].setMap(map);
-			        }
-			      }
-//				
-		     },
-             error: function(){alert("AJAX-grade發生錯誤囉!")}
-         })
-		
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: 24.9722, lng: 121.2054}
+        });
+
+        setMarkers(map);
+      }
+
+      // Data for the markers consisting of a name, a LatLng and a zIndex for the
+      // order in which these markers should display on top of each other.
+//       var allmission = [];
+//       for(GetMissionVO vo : list){
+//     	  allmission.push(vo.mission_Name,mission_Category, vo.mission_Gps_Lat,mission_Gps_Lng)
+//     	  console.log(allmission)
+//       }
       
-		})
-      // window.onload = initMap;  //測試用
+      
+      var allmission = [ 
+    	  <c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
+    		['${getMissionVO.mission_Name}','${getMissionVO.mission_Category}' ,${getMissionVO.mission_Gps_Lat} , ${getMissionVO.mission_Gps_Lng}]
+  		
+  		<c:if test = "${!s.last}">
+  		,
+  		</c:if>
+	</c:forEach>   
+    	          
+   
+   ];
+      
+      
+//       var beaches = [
+//         ['Bondi Beach', -33.890542, 151.274856, 4],
+//         ['Coogee Beach', -33.923036, 151.259052, 5],
+//         ['Cronulla Beach', -34.028249, 151.157507, 3],
+//         ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+//         ['Maroubra Beach', -33.950198, 151.259302, 1]
+//       ];
+
+      function setMarkers(map) {
+        // Adds markers to the map.
+
+        // Marker sizes are expressed as a Size of X,Y where the origin of the image
+        // (0,0) is located in the top left of the image.
+
+        // Origins, anchor positions and coordinates of the marker increase in the X
+        // direction to the right and in the Y direction down.
+        var image = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          // This marker is 20 pixels wide by 32 pixels high.
+          size: new google.maps.Size(20, 32),
+          // The origin for this image is (0, 0).
+          origin: new google.maps.Point(0, 0),
+          // The anchor for this image is the base of the flagpole at (0, 32).
+          anchor: new google.maps.Point(0, 32)
+        };
+        // Shapes define the clickable region of the icon. The type defines an HTML
+        // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+        // The final coordinate closes the poly by connecting to the first coordinate.
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        for (var i = 0; i < allmission.length; i++) {
+          var mission = allmission[i];
+          var marker = new google.maps.Marker({
+            position: {lat: mission[2], lng: mission[3]},
+            map: map,
+            icon: image,
+            shape: shape,
+            title: mission[0]
+          });
+        }
+        
+//         for (var i = 0; i < beaches.length; i++) {
+//             var beach = beaches[i];
+//             var marker = new google.maps.Marker({
+//               position: {lat: beach[1], lng: beach[2]},
+//               map: map,
+//               icon: image,
+//               shape: shape,
+//               title: beach[0]
+//             });
+//           }
+      }
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI0AqzghxJv55TD4xLnlng-4hZ57jt2JQ&libraries=places&callback=initMap">
+			
+	</script>
 </body>
 <style><link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel=stylesheet type="text/css" href="css/map.css"></style>
-</html>

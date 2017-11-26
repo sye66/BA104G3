@@ -415,5 +415,31 @@ System.out.println("AD-Server-999");
 				failuewView.forward(req, res);
 			}
 		}
+		
+		if ("get_Music".equals(action)){
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				/***************************1.接收請求參數***************************************/
+				String iframe = req.getParameter("iframe");
+			    
+
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
+				//${requestScope.value} 
+				
+				req.setAttribute("iframe", iframe);
+				String url = "/backdesk/ad/music.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理**********************************/
+			} catch (Exception e){
+				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
+				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
+				failuewView.forward(req, res);
+			}
+		}
+		
 	}
 }

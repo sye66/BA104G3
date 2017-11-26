@@ -18,7 +18,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 %>
 <style type="text/css">
 	.userimg{
-		width: 100px
+		height: 100px
 	}
 </style>
 
@@ -52,6 +52,9 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         style="color:black;"
         font-size:20px;
         }
+       .userimg{
+       	width: 100%;
+       }
     </style>
 </head>
 
@@ -192,7 +195,7 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 	<hr>
     <!-- =============================================================== -->
 	
-	<%-- 所有任務條件 --%>
+	<%-- 第三層 - 接案人 --%>
 		<%-- 分頁開始點 --%>
 		<div class="container">
 			<div class="row">
@@ -203,33 +206,41 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		<%int i=0;%>
 		<c:forEach var="memVO" items="${memService.getAll()}" begin="1" varStatus="StepCount" step="1">
 		<%-- 如果超過兩個加上Container&Row (Start)--%>
-			<c:if test="${StepCount.index/2==0}">
-				<div class="Container">
-					<div class="Row">
-			</c:if>
-			<%-- 開始寫入本體 --%>
-			<div class="col-xs-12 col-sm-6">
-				<%-- 會員照片 --%>
-					<div class="col-xs-12 col-sm-4">
-						<%-- <img class="userimg" src ="<%=request.getContextPath()%>/mem/mem.do?action=get_Mem_pic&request_From_Issue=<%=memVO.getMem_No()%>"> --%>
+					<c:if test="${StepCount.index/2==0}">
+						<div class="Container">
+							<div class="Row">
+					</c:if>
+					<%-- 開始寫入本體 --%>
+					<div class="col-xs-12 col-sm-6">
+						<div class="container">
+							<div class="row">
+						<%-- 會員照片 --%>
+							<div class="col-xs-12 col-sm-2">
+								<img class="userimg" src ="<%=request.getContextPath()%>/mem/mem.do?action=get_Mem_pic&request_From_Issue=${memVO.mem_No}">
+							</div>
+						<%-- 會員資訊 --%>
+							<div class="col-xs-12 col-sm-10">
+							    <div class="panel panel-primary">
+							        <div class="panel-heading">
+							            <h3 class="panel-title">${memVO.mem_Id}</h3>
+							        </div>
+							        <div class="panel-body">
+							        	${memVO.mem_Intro}
+							        	<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post">
+							        		<input type="hidden" name="takecase_Mem_No" value="${memVO.mem_No}">
+							        		<input type="submit" value="直接發案" class="btn btn-info">
+							        	</form>
+							        </div>
+							    </div>
+							</div>
+							</div>
+						</div>
 					</div>
-				<%-- 會員資訊 --%>
-					<div class="col-xs-12 col-sm-8">
-					    <div class="panel panel-danger">
-					        <div class="panel-heading">
-					            <h3 class="panel-title">${memVO.mem_Id}</h3>
-					        </div>
-					        <div class="panel-body">
-					        	${memVO.mem_Intro}
-					        </div>
-					    </div>
-					</div>
-			</div>
+					<%-- ----- --%>
 		</c:forEach>
 
 
-
-
+	<hr>
 	<!-- =============================================================== -->
 
 	<%@ include file="/lib/publicfile/include/file/footer.jsp"%>

@@ -3,6 +3,7 @@
 <%@ page import="com.artiClass.model.*"%>
 <%@ page import="com.artiReply.model.*"%>
 <%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
@@ -10,6 +11,8 @@
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO(); 
@@ -136,6 +139,7 @@ div {
                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
 			                <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                <button class="btn btn-danger" type="submit" name="action" value="deleteArtiFMBack">刪除文章</button>
                             </FORM>
                             </div>
