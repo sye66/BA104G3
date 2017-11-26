@@ -36,7 +36,7 @@ public class ArtiReportServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-//			try{
+			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String str = req.getParameter("report_No");
 				if(str==null||(str.trim()).length()==0){
@@ -56,14 +56,14 @@ public class ArtiReportServlet extends HttpServlet {
 					errorMsgs.add(" 回覆文章編號格式不正確 ");
 				}
 
-//				String emp_No = req.getParameter("emp_No");
-//				if(req.getSession().getAttribute("emp_No")==null){
-//					String contextPath = getServletContext().getContextPath();
-//					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-//					failuewView.forward(req, res);
-//					return;
-//				}
+				String emp_No = req.getParameter("emp_No");
+				if(req.getSession().getAttribute("emp_No")==null){
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add("@@ 要麻煩請你先登入喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+					failuewView.forward(req, res);
+					return;
+				}
 				
 				/***************************2.開始查詢資料*****************************************/
 				ArtiReportService artiReportSvc = new ArtiReportService ();
@@ -87,11 +87,11 @@ public class ArtiReportServlet extends HttpServlet {
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReport/selectReport_page.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(" 無法取得資料 : "+ e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/artiReport/selectReport_page.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		

@@ -5,9 +5,12 @@
 <%@ page import="com.artiClass.model.*"%>
 <%@ page import="com.artiReply.model.*"%>
 <%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
   ArtiReportService artiReportSvc = new ArtiReportService();
   ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportSet"); 
  %>
@@ -101,8 +104,9 @@
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
                                 <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
                                 <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+                                <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReport_For_Update">修改檢舉</button>
+ 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReport_For_Update">檢舉回覆</button>
 			                    </FORM>
                             </div>
                             </div>
@@ -111,6 +115,7 @@
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
 			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReport">刪除檢舉</button>
  			                    </FORM>  
