@@ -26,7 +26,7 @@
   <filter-mapping>
     <filter-name>loginFilter</filter-name>
     <url-pattern>/frontdesk/mem/memCenter.jsp</url-pattern>
-    <url-pattern>/frontdesk/pro/showProIndex.jsp</url-pattern>
+<!--     <url-pattern>/frontdesk/pro/showProIndex.jsp</url-pattern> -->
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>
