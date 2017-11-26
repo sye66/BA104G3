@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.emp.model.EmpVO;
+import com.sun.javafx.binding.StringFormatter;
 
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Mission;
 
@@ -58,15 +59,13 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			pstmt.setString(3, getMissionVO.getMission_Des());
 			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
 			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
-			pstmt.setTimestamp(6, getMissionVO.getMission_Due_Time());
-			pstmt.setTimestamp(7, getMissionVO.getMission_Start_Time());
-			pstmt.setTimestamp(8, getMissionVO.getMission_End_Time());
-			pstmt.setInt(9, getMissionVO.getMission_State());
-			pstmt.setInt(10, getMissionVO.getMission_Pattern());
-			pstmt.setDouble(11, getMissionVO.getMission_Pay());
-			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lat());
-			pstmt.setDouble(13, getMissionVO.getMission_Gps_Lng());
-
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
 			pstmt.executeUpdate();
 
 			// Handle any SQL errors
@@ -829,6 +828,61 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		return listMemMission;
 	}
 	
+	/**
+	 * @author Sander
+	 * 新增後回傳主鍵
+	 */
 	
+	public String insertReturnKey(GetMissionVO getMissionVO) {
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(INSERT_STMT,1);
+
+			pstmt.setString(1, getMissionVO.getMission_Category());
+			pstmt.setString(2, getMissionVO.getMission_Name());
+			pstmt.setString(3, getMissionVO.getMission_Des());
+			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
+			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
+			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				String key = rs.getString(1);
+				return key;
+			} else {
+				return null;
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+	}
 }

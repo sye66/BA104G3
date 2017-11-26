@@ -572,6 +572,59 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		return listMemMission;
 	}
 	
+	public String insertReturnKey(GetMissionVO getMissionVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String key = null;
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(INSERT_STMT,1);
+
+			pstmt.setString(1, getMissionVO.getMission_Category());
+			pstmt.setString(2, getMissionVO.getMission_Name());
+			pstmt.setString(3, getMissionVO.getMission_Des());
+			pstmt.setString(4, getMissionVO.getIssuer_Mem_No());
+			pstmt.setString(5, getMissionVO.getTakecase_Mem_No());
+			pstmt.setTimestamp(6, getMissionVO.getMission_Start_Time());
+			pstmt.setTimestamp(7, getMissionVO.getMission_End_Time());
+			pstmt.setInt(8, getMissionVO.getMission_State());
+			pstmt.setInt(9, getMissionVO.getMission_Pattern());
+			pstmt.setDouble(10, getMissionVO.getMission_Pay());
+			pstmt.setDouble(11, getMissionVO.getMission_Gps_Lat());
+			pstmt.setDouble(12, getMissionVO.getMission_Gps_Lng());
+			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				key = rs.getString(1);
+			} else {
+				return null;
+			}
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return key;
+	}
 	
 	public static void main(String[] args) {
 
@@ -584,17 +637,17 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		getMissionVO1.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
 		getMissionVO1.setIssuer_Mem_No("M000004");
 		getMissionVO1.setTakecase_Mem_No("M000003");
-//		getMissionVO1.setMission_Release_Time(java.sql.Date.valueOf("2017-10-27"));
-		getMissionVO1.setMission_Due_Time(java.sql.Timestamp.valueOf("2017-11-01"));
-		getMissionVO1.setMission_Start_Time(java.sql.Timestamp.valueOf("2017-10-28"));
-		getMissionVO1.setMission_End_Time(java.sql.Timestamp.valueOf("2017-10-31"));
+		getMissionVO1.setMission_Release_Time(Timestamp.valueOf("2017-10-27 11:11:11.0000000"));
+//		getMissionVO1.setMission_Due_Time(java.sql.Timestamp.valueOf("2017-11-01"));
+//		getMissionVO1.setMission_Start_Time(java.sql.Timestamp.valueOf("2017-10-28"));
+//		getMissionVO1.setMission_End_Time(java.sql.Timestamp.valueOf("2017-10-31"));
 		getMissionVO1.setMission_State(1);
 		getMissionVO1.setMission_Pattern(1);
 		getMissionVO1.setMission_Pay(100.00);
 		getMissionVO1.setMission_Gps_Lat(100.00);
 		getMissionVO1.setMission_Gps_Lng(100.00);
-		dao.insert(getMissionVO1);
-		System.out.println("新增成功...");
+		String key = dao.insertReturnKey(getMissionVO1);
+		System.out.println("新增成功..." + key);
 
 		// 修改
 
