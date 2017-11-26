@@ -51,14 +51,8 @@
 			</div>
 			<h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前所發佈任務</h2>
 			<c:forEach var="caseVO" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="i" step="1">
-			<c:if test="${	caseVO.mission_State == 1 ||
-						 	caseVO.mission_State == 2 || 
-						 	caseVO.mission_State == 3 || 
-						 	caseVO.mission_State == 4 || 
-						 	caseVO.mission_State == 7 ||
-						 	caseVO.mission_State == 72 
-						 }">
-				<div class="panel panel-info">
+			<c:if test="${	caseVO.mission_State == 1 || caseVO.mission_State == 2 ||  caseVO.mission_State == 3 ||  caseVO.mission_State == 4 ||  caseVO.mission_State == 7 || caseVO.mission_State == 72}">
+				<div class="panel panel-info"></div>
 					<div class="panel-heading">
 						<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 							<%-- 備用 --%>
@@ -136,23 +130,38 @@
 											<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 											</form>
 										</div>
-									</td>
-									</tr>
-								</c:forEach>
+									</div>
+								</div>
+								<td>
+									<div class="panel-body">
+										<form method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No}" name="getmission3">
+										<button onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No} ', 'Yahoo', config='height=500,width=550')" class="btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
+										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
+										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
+										</form>
+									</div>
+								</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0}">
+							<td><h4>目前無人接取</h4></td>
+							<td></td>
+						</c:if>
+						
+					
+							</table>
+							</div>
+
+									
 							</c:if>
-								<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0}">
-									<td><h4>目前無人接取</h4></td>
-									<td></td>
-								</c:if>
-						</table>
+								</c:forEach>
+								
 					</div>
 
-		</div>
-		</c:if>
-		</c:forEach>
-		</div>
-		</div>
-</div>
+
+		</div></div>
+
 <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 		<script src="https://code.jquery.com/jquery.js"></script>

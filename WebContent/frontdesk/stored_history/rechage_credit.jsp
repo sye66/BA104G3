@@ -28,7 +28,7 @@ String finish = "finish";
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/recharge/default.css">
-<title>Insert title here</title>
+    <title>工具人出租</title>
 </head>
 <body>
 
@@ -96,7 +96,7 @@ String finish = "finish";
 
     		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do?reuestURL=<%=request.getServletPath()%>" name="form1">
     		
-    		
+    					<input type="hidden" name="success" value="ok">
     					<input type="hidden" name="action" value="insert">
     					 <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
@@ -106,30 +106,47 @@ String finish = "finish";
     					<input type="hidden" name="mem_point" size="36" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
     					<div class="small-6 ">請輸入儲值金額
-                                 <input type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="最大金額 1000000" >
+                                 <input id="cost" type="text" name="stored_Cost" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="最大金額 1000000" >
                         </div><br>
                         <div class="small-6 ">請輸入信用卡號碼<br>
-                            <input style="height:50px" type="text" name="card_number1" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
-                            <input style="height:50px" type="text" name="card_number2" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
-                            <input style="height:50px" type="text" name="card_number3" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
-                            <input style="height:50px" type="text" name="card_number4" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">
+                            <input id="cn1" style="height:50px" type="text" name="card_number1" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
+                            <input id="cn2" style="height:50px" type="text" name="card_number2" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
+                            <input id="cn3" style="height:50px" type="text" name="card_number3" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">　-　
+                            <input id="cn4" style="height:50px" type="text" name="card_number4" onblur="checkCreditCard(this)" size="4" maxlength="4"  placeholder="XXXX" tabindex="3">
                         </div><br>
                         <div class="small-6 ">請輸入姓名
-                           <input type="text" name="full_name"  size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
+                           <input id="name" type="text" name="full_name"  size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="Full name"  >
                         </div><br>
                         <div class="small-3 ">請輸入有效日期<br>
-                         <input type="text" name="mm"  min="01" max="12" size="2" maxlength="2" tabindex="3" value=""  placeholder="MM"  >　/　
-                          <input type="text" name="yy" class="tt1"  min="17" max="27" size="2" maxlength="2" tabindex="3" value=""  placeholder="YY"  >
+                         <input id="vm" type="text" name="mm"  min="01" max="12" size="2" maxlength="2" tabindex="3" value=""  placeholder="MM"  >　/　
+                          <input id="vy" type="text" name="yy" class="tt1"  min="17" max="27" size="2" maxlength="2" tabindex="3" value=""  placeholder="YY"  >
                         </div><br>
 
                         <div class="small-3 ">請輸入背面卡號
-                         <input type="text" id="switch" name="cvc"  size="36" class="form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
+                         <input type="text" id="switch" name="cvc"  size="36" class="bcn form-control input-lg" tabindex="3" value=""  placeholder="CVC"  >
                         </div><br>
 
                         <div class="small-6 ">
                             <input type="submit" value="Submit" class="button btn-defult" tabindex="3">
                         </div>
+                        <div>
+                        	<input type="button" id="magic" value="magic">
+                        </div>
+                        <script>
+                        $('#magic').click(function(){
+                        	$('#cost').val(100000);
+                        	$('#cn1').val("0001");
+                        	$('#cn2').val("4492");
+                        	$('#cn3').val("0781");
+                        	$('#cn4').val("7386");
+                        	$('#name').val("Chen-Bo-Lin");
+                        	$('#vm').val(11);
+                        	$('#vy').val(21);
+                        	$('.bcn').val("055722");
+                        	
+                        })
                         
+                        </script>
                         
                       
    				</FORM>

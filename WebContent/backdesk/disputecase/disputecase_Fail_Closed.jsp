@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <h1 class="text-center">哈囉～哩後！</h1>
+        <h1 class="text-center">失敗囉</h1>
         <script src="https://code.jquery.com/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>

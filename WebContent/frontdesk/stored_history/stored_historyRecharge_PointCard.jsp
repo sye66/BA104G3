@@ -22,7 +22,7 @@ System.out.println("finish + " + finish);
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 		<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/recharge/default.css">
-<title>Insert title here</title>
+    <title>工具人出租</title>
 </head>
 <body>
 
@@ -92,7 +92,7 @@ System.out.println("finish + " + finish);
     		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/stored_history/stored_history.do?reuestURL=<%=request.getServletPath()%>" name="form1">
     		<script>
     		</script>
-    					
+    					<input type="hidden" name="success" value="ok">
     					<input type="hidden" name="action" value="insert1">
     					 <input type="hidden" name="mem_No" size="36" class="form-control input-lg" tabindex="3"
 							value="<%= (memVO==null)? "": memVO.getMem_No()%>" />
@@ -103,11 +103,11 @@ System.out.println("finish + " + finish);
 							value="<%= (memVO==null)? "": memVO.getMem_Point()%>" />
     					<br><br><br>
                         <div class="small-6 ">請輸入點卡序號：
-                            <input type="text" name="card_number" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="Card number" >
+                            <input id="sn" type="text" name="card_number" size="36" class="form-control input-lg" tabindex="3" value="" placeholder="請輸入序號(14、20或21碼英數字組合)" >
                         </div><br>
                         <div class="small-6 ">
                           	<div class="col-xs-6 col-sm-6 col-md-6">
-						<div class="form-group">性別
+						<div class="form-group">選擇你的點數卡:
 						<select size="1" name="stored_Cost" id="estadocivil" class="form-control input-lg" tabindex="3">
 						
 						<option value="50">50點</option>
@@ -124,6 +124,7 @@ System.out.println("finish + " + finish);
 
                         <br><br><div class="small-6 ">
                             <input type="submit" value="確認送出" class="button btn-susccess">
+                       <br><br><div></div><input type="button" id="Magic" value="Magic"></div>
                         </div>
                         
                         
@@ -174,6 +175,12 @@ System.out.println("finish + " + finish);
                     			}, 500);
                         	})
                         });
-                        </script>
+                        
+                        $('#Magic').click(function(){
+                        	$('#sn').val("32r0O68q1P6xE5zO74sL9");
+                        })
+                        
+   
+</script>
 
 </html>

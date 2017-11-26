@@ -10,6 +10,7 @@
 
 
 </style>
+    <title>工具人出租</title>
 </head>
 <body>
 	<div class="col-xs-12 col-sm-2  left01" >

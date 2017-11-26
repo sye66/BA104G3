@@ -24,13 +24,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Title Page</title>
+<title>getmissionSerchlogin</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel=stylesheet type="text/css" href="css/map.css">
-<link rel="stylesheet" href="css/map.css">
+
 <script type="text/javascript" src="js/*"></script>
-<script src="js/map.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
+<script src="<%=request.getContextPath()%>/lib/js/getmission/map.js"></script>
 <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -83,7 +83,7 @@
 				</FORM>
 
 			</div>
-
+<div id="map"></div>
 		</div>
 	</div>
 

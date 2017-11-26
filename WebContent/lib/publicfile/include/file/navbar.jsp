@@ -36,9 +36,7 @@
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/login_mem.css">
 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/index/index.css">
 
-
-
-
+		
 
   </head>
 
@@ -72,7 +70,14 @@
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
             </li>
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
+              <h3>
+              <c:if test="${memVO ==null }" var= "login">
+              <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
+              </c:if>
+              <c:if test="${!login}">
+              <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp">
+              </c:if>
+              <i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
              <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>
@@ -164,8 +169,12 @@ function getFocus() {
                     </form>
                     <!-- End # Login Form -->
                     
-                    
-                    
+					<!--神奇小按鈕 -->
+						<br>
+						<button type="button" onclick="aa0953711016()">神</button>
+						<button type="button" id="M000001">M1</button>						
+						
+                    <!--神奇小按鈕 -->
                     
 					</div>
 					<div class="modal-footer">
@@ -175,7 +184,21 @@ function getFocus() {
 				</div>
 			</div>
 		</div>
-
+<!--神奇方法 -->
+			<script type="text/javascript">
+				function aa0953711016(){
+					
+				var v = document.getElementById("login_username");			
+					v.value="aa0953711016@gmail.com";
+						
+				var a=document.getElementById("login_password");  
+					a.value="A123456";	
+				}
+				
+				
+				
+			</script>
+		<!--神奇方法 -->
 		
 		
 		
@@ -246,6 +269,14 @@ function getFocus() {
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
+ 	
+ 	<script type="text/javascript">
+ 	
+ 	$('#M000001').click(function(){
+		$('#login_username').val("aaa@gmail.com");
+		$('#login_password').val("A123456");
+	});
+ 	</script>
  
   </body>
 

@@ -236,10 +236,8 @@ public class Stored_HistoryServlet extends HttpServlet{
 				return;
 			}
 				
-			System.out.println("stored_Date2 :"  );
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-			System.out.println("stored_Date0 :"  );
 			
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
@@ -392,9 +390,10 @@ public class Stored_HistoryServlet extends HttpServlet{
 				req.getSession().setAttribute("storedVO", storedVO);
 				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
 //				String location = req.getParameter("reuestURL");
-				String success ="ok";
+				String success = req.getParameter("success");
 				req.setAttribute("success", success);
 				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				req.removeAttribute(success);	//不需要加也可以消除sweetalert , 因為前面"finish"就先擋下來了
 				successView.forward(req, res); 
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -417,6 +416,14 @@ public class Stored_HistoryServlet extends HttpServlet{
 				successView.forward(req, res);
 				return;
 			}
+//			String success =(String) req.getParameter("success");
+//			System.out.println("success+"+success);
+//			if(success == null){
+//				String url = "/frontdesk/stored_history/stored_historyReview.jsp";
+//				RequestDispatcher successView = req.getRequestDispatcher(url);
+//				successView.forward(req, res);
+//				return;
+//			}
 			
 			System.out.println("stored_Date2 :"  );
 			List<String> errorMsgs = new LinkedList<String>();
@@ -524,7 +531,10 @@ public class Stored_HistoryServlet extends HttpServlet{
 //				String location = req.getParameter("reuestURL");
 				String success ="ok";
 				req.setAttribute("success", success);
+				
 				RequestDispatcher successView = req.getRequestDispatcher(url);
+				
+				
 				successView.forward(req, res); 
 				
 				/***************************其他可能的錯誤處理**********************************/

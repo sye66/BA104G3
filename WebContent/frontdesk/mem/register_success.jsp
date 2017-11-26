@@ -12,16 +12,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp"> </span> 
-<span style="font-size:24px;">3秒之後自動跳轉到首頁</span> 
+
 <title>
-	<c:if test="${memVO.mem_State == 0}">，恭喜'註冊'成功 ! </c:if>
-	<c:if test="${memVO.mem_State == 1}">，恭喜'認證'成功 ! </c:if>
+	<c:if test="${memVO.mem_State == 0}">恭喜'註冊'成功 ! </c:if>
+	<c:if test="${memVO.mem_State == 1}">恭喜'認證'成功 ! </c:if>
 </title>
 <style>
 img #show {heigth:100%}
 </style>
 <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
 <link href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.css" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
 <body>
@@ -33,7 +34,6 @@ img #show {heigth:100%}
 	</script>
 </c:if>
 
-memVO.mem_Id = ${memVO.mem_Id}
 
 <c:if test="${memVO.mem_State == 1}">
 	<script type="text/javascript">
@@ -48,12 +48,12 @@ memVO.mem_Id = ${memVO.mem_Id}
 	 <form id="login-form" method="post" action="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
                     	<div>
                     		<input type="hidden" name="action" value="register">
-                    		<button type="submit" class="btn btn-success btn-lg btn-block">按我直接回首頁</button>
+                    		<div style="text-align:center"><span style="font-size:24px;">3秒之後自動跳轉到首頁</span> <button type="submit" class="btn btn-success btn-lg btn-block">按我直接回首頁</button></div>
                     	</div>
                     </form>
                     
                     <div class="row">
-			<div class="col-xs-12 col-sm-12"><img id="show" src="<%=request.getContextPath()%>/res/images/index/intelligence.png"></div>
+			<div class="col-xs-12 col-sm-12"><img id="show" src="<%=request.getContextPath()%>/lib/publicfile/include/img/0.png"></div>
 		</div>
                     
 </body>

@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -1349,6 +1350,22 @@ System.out.println("STEP3");
 				RequestDispatcher failureView = req.getRequestDispatcher("/mem/listAllMem.jsp");
 				failureView.forward(req, res);
 			}
+		}
+		/**
+		 * @author Sander
+		 * @param get_Mem_pic
+		 * @param request_Mem_No
+		 * Get member's picture
+		 */
+		if ("get_Mem_pic".equals(action)) {
+			String mem_No = req.getParameter("request_From_Issue");
+			MemService memService = new MemService();
+			MemVO memVO = memService.getOneMem(mem_No);
+			byte[] mem_Pic = memVO.getMem_Pic();
+			
+			ServletOutputStream outputStream = res.getOutputStream();
+			outputStream.write(mem_Pic, 0, mem_Pic.length);
+			outputStream.close();
 		}
 	}	
 }

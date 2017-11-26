@@ -104,10 +104,12 @@ ${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好
 <script>
 $(document).ready(function(){
 		 $('.pushdiv').click(function(){
+var nameType = $('.pushdiv').attr('name');
+
 			 $.ajax({
 				 type: "Post",
 				 url: "<%=request.getContextPath()%>/getmission/getmission.do",
-				 data: {action:name.val()},
+				 data: {action:nameType},
 				 dataType: "json",
 				 success: function (data){
 					clearSelect();

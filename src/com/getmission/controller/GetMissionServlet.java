@@ -12,12 +12,16 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.accusecase.model.*;
 import com.casecandidate.model.*;
 import com.emp.model.EmpService;
 import com.emp.model.EmpVO;
 import com.getmission.model.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
@@ -34,7 +38,11 @@ public class GetMissionServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		res.setContentType("");
 		String action = req.getParameter("action");
+		PrintWriter out = res.getWriter();
+		JSONObject obj = new JSONObject();
 
 		if ("listmission_ByCompositeQuery".equals(action)) { // 來自getMission.jsp的請求
 
@@ -308,11 +316,11 @@ public class GetMissionServlet extends HttpServlet {
 			/**
 			 * @author Sander
 			 * 簡訊功能加入，當發案人確認接案人之後傳送密碼給接案人。
+			 * 
 			 */
 			String[] tel = {takeCase_MemVO.getMem_Pho()};
 			TelMessage telMessage = new TelMessage();
 			telMessage.sendMessage(tel, messageText);
-			
 			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -743,7 +751,6 @@ public class GetMissionServlet extends HttpServlet {
 					/*************************** 2.開始修改資料 *****************************************/
 
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
-System.out.println(getMissionVO.getMission_State());
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
@@ -1031,6 +1038,32 @@ System.out.println(getMissionVO.getMission_State());
 			// .getRequestDispatcher("/frontdesk/getmission/getmission.jsp");
 			// failureView.forward(req, res);
 			// }
+		}
+		
+		//map 的 jasn 
+		if("getmissionmap".equals(action)){
+			List<String> errorMsg = new LinkedList<>();
+			req.setAttribute("errorMsg", errorMsg);
+			System.out.println("getmission");
+			Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+			String jsonStr = "";
+			
+			GetMissionService getMissionSvc = new GetMissionService();
+			List<GetMissionVO> list = getMissionSvc.getAllValidMission();
+			jsonStr = gson.toJson(list);
+			
+			System.out.println(jsonStr);
+			try {
+				
+				obj.put("jsonStr", jsonStr);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			System.out.println(jsonStr);
+			out.write(obj.toString());
+			out.flush();
+			out.close();
+			
 		}
 		
 		/**
