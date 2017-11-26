@@ -90,7 +90,7 @@ int count3 = 0;
 	
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
-
+<title>工具人出租</title>
 </head>
 <body>
 <div class="row">

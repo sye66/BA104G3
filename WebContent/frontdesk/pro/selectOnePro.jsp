@@ -112,16 +112,7 @@
 // 	}
 </script>
 
-
-
-
-
-
-
-
-
-
-
+<title>工具人出租</title>
 
 </head>
 <body>
