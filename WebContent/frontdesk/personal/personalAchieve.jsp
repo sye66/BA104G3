@@ -12,8 +12,8 @@
 	Ach_DetailService achdSvc = new Ach_DetailService();
 	List<Ach_DetailVO> list = achdSvc.getPersonal(mem_No);
 	pageContext.setAttribute("list",list);
-	AchieveService achieveSvc = new AchieveService();
-	List<Achieve> list = achieveSvc.getThree(ach_No); 
+// 	AchieveService achieveSvc = new AchieveService();
+// 	List<Achieve> list = achieveSvc.getThree(ach_No); 
 
 %>
 

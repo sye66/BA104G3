@@ -38,24 +38,17 @@ public class RankServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
 		try{
-			String[] list = req.getParameterValues("rewarda");
-			for(int i =0;i<list.length;i++){
-				Integer point = Integer.valueOf(list[i]);
-				System.out.println(point);	
-			}
+			
 			
 			
 
 //			前10名
 			RankService rankSvc = new RankService();
 			List<RankVO> rankVO = rankSvc.getWNRank();
-			
-			for(RankVO good2 : rankVO){
-				System.out.println(good2.getMem_No());
-			}
+			MemService memSvc = new MemService();
 			
 			
-	
+			
 		}catch (Exception e) {
 			errorMsgs.add("無法取得資料:" + e.getMessage());
 			RequestDispatcher failureView = req

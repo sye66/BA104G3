@@ -82,7 +82,7 @@
 		        <div role="tabpanel" class="tab-pane active" id="tab1">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count++%>名&nbsp;&nbsp;
-						        請頒發一周數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewarda" size="5px">&nbsp;點   
+						        請頒發一周數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewarda<%=count%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -91,7 +91,7 @@
 		        <div role="tabpanel" class="tab-pane" id="tab2">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count2++%>名&nbsp;&nbsp;
-						        請頒發一月數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardb" size="5px">&nbsp;點   
+						        請頒發一月數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardb<%=count2%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -100,7 +100,7 @@
 		        <div role="tabpanel" class="tab-pane" id="tab3">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count3++%>名&nbsp;&nbsp;
-						        請頒發一季數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardc" size="5px">&nbsp;點   
+						        請頒發一季數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardc<%=count3%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -131,7 +131,7 @@
 		        <div role="tabpanel" class="tab-pane active" id="tab4">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count4++%>名&nbsp;&nbsp;
-						        請頒發一周積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardd" size="5px">&nbsp;點   
+						        請頒發一周積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardd<%=count4%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -140,7 +140,7 @@
 		        <div role="tabpanel" class="tab-pane" id="tab5">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count5++%>名&nbsp;&nbsp;
-						        請頒發一月積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewarde" size="5px">&nbsp;點   
+						        請頒發一月積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewarde<%=count5%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -149,7 +149,7 @@
 		        <div role="tabpanel" class="tab-pane" id="tab6">
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count6++%>名&nbsp;&nbsp;
-						        請頒發一季積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardf" size="5px">&nbsp;點   
+						        請頒發一季積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardf<%=count6%>" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
