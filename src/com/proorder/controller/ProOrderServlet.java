@@ -119,6 +119,15 @@ System.out.println("扣完後會員點數: "+mem_Point);
 				memSvc.updateMemPoint(mem_No, mem_Point);
 				 memVO =(MemVO)memSvc.getOneMem(mem_No);
 				session.setAttribute("memVO",memVO);
+
+System.out.println("發送電話簡訊: ");
+				String t = 	(memVO.getMem_Pho()).replaceAll("-","");
+				String telMessageText = memVO.getMem_Name()+" 先生/小姐 您好!"+"\n"+"您於工具人商城購買商品"+"\n"
+						+"總消費為: "+sum+" 積分"+"\n"+"商品將於1~3日後送出!";
+				String[] tel = {t};
+System.out.println(tel[0]);				
+				TelMessage telMessage = new TelMessage();
+				telMessage.sendMessage(tel, telMessageText);				
 				
 System.out.println("發送Email: ");
 				ProOrderEmail email = new ProOrderEmail();	
@@ -130,14 +139,7 @@ System.out.println("發送Email: ");
 						+proEmailText+"\n"+"總消費為: "+sum+" 積分";
 				email.sendMail(to, subject, messageText);
 				
-System.out.println("發送電話簡訊: ");
-				String t = 	(memVO.getMem_Pho()).replaceAll("-","");
-				String telMessageText = memVO.getMem_Name()+" 先生/小姐 您好!"+"\n"+"您於工具人商城購買商品"+"\n"
-						+"總消費為: "+sum+" 積分"+"\n"+"商品將於1~3日後送出!";
-				String[] tel = {t};
-System.out.println(tel[0]);				
-				TelMessage telMessage = new TelMessage();
-				telMessage.sendMessage(tel, telMessageText);
+
 //				清除購物車內容
 System.out.println("清購物車");				
 				session.removeAttribute("shoppingcart");
@@ -145,8 +147,9 @@ System.out.println("清購物車");
 				/***************************
 				 * 3.新增完成,準備轉交
 				 ***********/
-System.out.println("轉交");				
+				
 				String url = "/frontdesk/pro/showProIndex.jsp";
+System.out.println("轉交 "+url);				
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 

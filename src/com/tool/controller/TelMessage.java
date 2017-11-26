@@ -9,7 +9,7 @@ public class TelMessage {
 
 		      String user    = "85559671"; //帳號
 		      String passwd  = "2irioiai"; //密碼
-		      String messageBig5 = new String(message.getBytes(),"utf-8"); //簡訊內容
+		      String messageBig5 = new String(message.getBytes(),"big5"); //簡訊內容
 
 		      //----建立連線 and 檢查帳號密碼是否錯誤
 		      sock2air mysms = new sock2air();
@@ -31,6 +31,7 @@ public class TelMessage {
 		      if( ret_code == 0 ) {
 		           System.out.println("簡訊已送到簡訊中心!");
 		           System.out.println("MessageID="+mysms.get_message()); //取得MessageID
+		           System.out.println("messageBig5="+messageBig5);
 		      } else {
 		           System.out.println("簡訊傳送發生錯誤!");
 		           System.out.print("ret_code="+ret_code+",");
