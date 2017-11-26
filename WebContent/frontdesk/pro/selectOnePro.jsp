@@ -82,6 +82,40 @@
 	color: #f90;
 	font-size: 16px;
 }
+/* 購物車 */
+.m-sidebar{
+	position: fixed;
+	top: 200px;
+	right: 0;
+	background: #000;
+	z-index: 3;
+	width: 35px;
+	height: 50%;
+	font-size: 12px;
+	color: #fff;
+}
+#msg{
+	position:fixed; 
+	top:300px; right:35px; 
+	z-index:3; 
+	width:1px; 
+	height:52px; 
+	line-height:52px; 
+	font-size:20px; 
+	text-align:center; 
+	color:#fff; 
+	background:#360; 
+	display:none
+}
+.u-flyer{
+	display: block;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	position: fixed;
+	z-index: 9999;
+}
+/* 購物車 */
 </style>
 
 <script type="text/javascript">
@@ -116,15 +150,7 @@
 
 </head>
 <body>
-<!-- 購物車動畫	 -->
-<!-- <div class="m-sidebar">  -->
-<!--     <div class="cart">  -->
-<!--         <i id="end"></i>  -->
-<!--         <span>購物車</span>  -->
-<!--     </div>  -->
-<!-- </div>  -->
-<!-- <div id="msg">已成功加入購物車！</div> 	 -->
-<!-- 購物車動畫	 -->	
+
 	
 	
 <!-- TOP -->
@@ -144,7 +170,7 @@
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 	
 	<!--麵包屑 -->
-		<div class="col-xs-12 col-sm-10">
+		<div class="col-xs-12 col-sm-11">
 
 			<br>
 			<ol class="breadcrumb">
@@ -256,8 +282,11 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 
 
-									<button type="submit" class="btn btn-warning addcar" 
+<!-- 									<button type="submit" class="btn btn-warning addcar"  -->
+<!-- 										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;border-radius: 5px;">放入購物車</button> -->
+									<button type="button" class="btn btn-warning addcar" 
 										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;border-radius: 5px;">放入購物車</button>
+									
 									<input type="hidden" name="proCar_No" value="${proVO.pro_No}">
 									<input type="hidden" name="proCar_Name" value="${proVO.pro_Name}"> 
 									<input type="hidden" name="proCar_Info" value="${proVO.pro_Info}"> 
@@ -292,20 +321,20 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 </div>
 <!-- ajax未完成 -->
 <script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
-<script src="frontdesk/pro/jquery.fly.min.js" ></script>
+<script src="<%=request.getContextPath()%>/frontdesk/pro/jquery.fly.min.js" ></script>
 
 <script>
+
 $(function() {
 	var offset = $("#end").offset();
 	$(".addcar").click(function(event){
-		
 		var addcar = $(this);
-		var img = addcar.parent().find('img').attr('src');
+		var img = $(".proDiv").find('img').attr('src');
 		var flyer = $('<img class="u-flyer" src="'+img+'">');
 		flyer.fly({
 			start: {
-				left: event.pageX,
-				top: event.pageY
+				left: event.pageX-300,
+				top: event.pageY-250,
 			},
 			end: {
 				left: offset.left+10,
@@ -315,38 +344,23 @@ $(function() {
 			},
 			onEnd: function(){
 				$("#msg").show().animate({width: '250px'}, 200).fadeOut(1000);
+// 				addcar.css("cursor","default").removeClass('orange').unbind('click');
 				this.destory();
-				
-// 				var pro_No =  $("input[name='pro_No']").value();
-// 				console.log("pro_No "+pro_No);
-// 				$.ajax({
-// 		            type: "POST",
-<%-- 		            url: "<%=request.getContextPath()%>/pro/pro.do?", --%>
-//  		            data: proString($(this).val(), pro_No),
-// 		            dataType: "json",
-		            
-// 		            success: function(data) {
-// 		            	alert("OK");
-// 		            },
-// 		            error: function(jqXHR) {
-		            	
-		            	
-// 		                alert("發生錯誤: " + jqXHR.status);
-// 		            }
-		        })
-				addcar.css("cursor","default").removeClass('orange').unbind('click');
-		        function proString(getOne_For_Display_F,pro_No){
-					var queryString= {"action":"getOne_For_Display_F", "detail_time_no":detail_time_no, "cartypename":cartypename};
-					return queryString;
-			
-    	 		};
 			}
 		});
-		
 	});
-	
+  
 });
 </script>
+<!-- 購物車動畫	 -->
+<div class="m-sidebar"> 
+    <div class="cart"> 
+        <i id="end"></i> 
+        <span>購物車</span> 
+    </div> 
+</div> 
+<div id="msg">已成功加入購物車！</div> 	
+<!-- 購物車動畫		 -->
 
 <div class="col-xs-12 col-sm-12">
 	<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
