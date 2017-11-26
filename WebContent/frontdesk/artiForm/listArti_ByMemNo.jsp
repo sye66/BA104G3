@@ -144,8 +144,7 @@ ${arti_No}
 	                     style="height:150px;width:180px; box-shadow:3px 3px 12px gray;padding:3px;"/>
 	                     
                                 </div>
-                           <div class="timeline-body">
-                                 
+                           <div class="timeline-body">                               
                                 </div>
                                 
                             </div>

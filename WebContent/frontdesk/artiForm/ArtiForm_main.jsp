@@ -127,8 +127,7 @@ div> .timeline-body{
                         title="Youtube viedo player" width="50%" height="50%" 
                         src="https://www.youtube.com/embed/jSwV3IpNF2U?playlist=ehjOL_bqzSc&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
                         id="widget2" sytle="position: absolute; max-width:50% marging-left:-61px; margin-top:0px; width:600px; height:300px; webkitallowfullscreen mozallowfullscreen allowfullscreen;">
-        </iframe>
-              
+        </iframe>          
 </div>
 </div>
 

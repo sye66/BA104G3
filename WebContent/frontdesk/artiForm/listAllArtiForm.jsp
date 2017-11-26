@@ -69,7 +69,6 @@ div> .timeline-body{
                         </h1>
                       </div>
                   </div>
-    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">

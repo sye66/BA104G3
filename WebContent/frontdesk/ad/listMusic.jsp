@@ -138,7 +138,6 @@
         </div>
         </div>
 <hr>
-
         <div class="container" >
         <div class="video-container">
 		    <div class="auto-resizable-iframe">
