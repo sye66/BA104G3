@@ -129,16 +129,17 @@ System.out.println(tel[0]);
 				TelMessage telMessage = new TelMessage();
 				telMessage.sendMessage(tel, telMessageText);				
 				
-System.out.println("發送Email: ");
+System.out.println("發送Email ");
 				ProOrderEmail email = new ProOrderEmail();	
 				String to = memVO.getMem_Email();
-//				String to = "eatkaikai@gmail.com";
 				String subject = "工具人商城消費通知";
-				
 				String messageText = memVO.getMem_Name()+" 先生/小姐 您好!"+"\n"+"您於工具人商城購買"+"\n"
 						+proEmailText+"\n"+"總消費為: "+sum+" 積分";
 				email.sendMail(to, subject, messageText);
 				
+				//改成執行緒寫法
+			      Thread thread = new Thread(email);
+			      thread.start();
 
 //				清除購物車內容
 System.out.println("清購物車");				
