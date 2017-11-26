@@ -247,7 +247,7 @@ public class RelationDAO implements RelationDAO_interface{
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
+			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, mem_No);
 			pstmt.setString(2, related_Mem_No);
 			

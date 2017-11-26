@@ -135,13 +135,14 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 		
 		<tr align="center">
 		<th>圖片</th>
-		<th>申請好友</th>
+		<th>關注的會員</th>
 		<th>性別</th>
 		<th>完成任務數</th>
+		<th>刪除關注會員</th>
 		</tr>
 		<%@ include file="page1.file" %>	 
 		<c:forEach var="follow_tmVO" items="${follow_tmVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
-		 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do?reuestURL=<%=request.getServletPath()%>" name="form1">	
+		 <FORM>	
 		<tr>
 			<c:if test="${follow_tmVO.getFollow_Status()==0}">
 			<c:if test="${follow_tmVO.followed_Mem_No != memVO.mem_No and follow_tmVO.follower_Mem_No !=memVO.mem_No}">
@@ -161,18 +162,16 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 			<input type="hidden" name="action" value="update">
 			${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mission_Count}</td>
 				</h2></c:if></c:if>
-			
-			   
-        	<input type="hidden" id="updateSuccess" value="${updateSuccess}"/>
-        
-        	<input type="hidden" name="follower_Mem_No" value="${follow_tmVO.follower_Mem_No}">
+		</form>	
+		
+		<form METHOD="post" ACTION="<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do?" name="form1">
+			<input type="hidden" name="follower_Mem_No" value="${follow_tmVO.followed_Mem_No}">
         	<input type="hidden" name="followed_Mem_No" value="<%= (follow_tmVO==null)? "" : memVO.getMem_No()%>">
 			<input type="hidden" name="follow_Status" value=1 >
-			
-			
-			
+		<td><input style="width:50px" type="submit" class="btn btn-danger  btn-sm" value="刪除" ></td>
+			<input type="hidden" name="action" value="delete">	
+		</form>			
 		</tr>
-		</form>	
 		</c:forEach>
 </table>
 		<%@ include file="page2.file" %>

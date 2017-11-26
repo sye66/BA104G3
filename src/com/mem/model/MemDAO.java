@@ -37,10 +37,13 @@ public class MemDAO implements MemDAO_interface{
 	private static final String LOGIN_MEM=
 			"SELECT * FROM mem WHERE mem_Email=?";
 	
+	private static final String UPDATEPW=
+			"UPDATE MEM SET mem_Pw=? WHERE mem_Email=?";
+	
 	private static final String WEBSOCKET=
 			"SELECT * FROM mem WHERE mem_Id=?";
 	
-	private static final String Authentication=
+	private static final String AUTHENTICATION=
 			"UPDATE mem SET mem_State =?, mem_Id=?, mem_No=? WHERE mem_Email=?";
 	
 	private static final String RECHARGE=
@@ -274,7 +277,7 @@ public class MemDAO implements MemDAO_interface{
 			
 			try{
 				con = ds.getConnection();
-				pstmt = con.prepareStatement(Authentication);
+				pstmt = con.prepareStatement(AUTHENTICATION);
 				
 				pstmt.setInt(1, memVO.getMem_State());
 				pstmt.setString(2, memVO.getMem_Id());
@@ -354,6 +357,50 @@ public class MemDAO implements MemDAO_interface{
 		}
 		
 	}
+		
+		
+		@Override
+		public void updatePw(MemVO memVO) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			
+			
+			try {
+				con = ds.getConnection();
+				pstmt = con.prepareStatement(UPDATEPW);
+				
+				
+				pstmt.setString(1, memVO.getMem_Pw());
+				pstmt.setString(2, memVO.getMem_Email());
+				
+				pstmt.executeUpdate();
+				
+				
+				
+				
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if (pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+			if (con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		}
 		
 		
 		@Override
@@ -1035,6 +1082,10 @@ public class MemDAO implements MemDAO_interface{
 		}
 		
 	}
+
+
+
+		
 
 
 

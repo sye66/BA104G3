@@ -8,6 +8,13 @@ public class ChatRecordVO {
 	Timestamp chat_Datetime;
 	String chat_Content;
 	
+	public ChatRecordVO(){
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ChatRecordVO(String parameter) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getSender_Mem_No() {
 		return sender_Mem_No;
 	}

@@ -6,12 +6,16 @@
 <%@ page import="com.casecandidate.model.*" %>
 <%@ page import="com.relation.model.*" %>
 <%@ page import="com.getmission.model.*" %>
+<%@ page import="com.chatrecord.model.*" %>
+<%@ page import="java.sql.Timestamp"%>
+
 <%-- <c:if test="${not empty login_memVO.mem_Id}"><% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %></c:if> --%>
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
 <jsp:useBean id="CaseCandidateService" scope="page" class="com.casecandidate.model.CaseCandidateService"/>
 <jsp:useBean id="GetMissionService" scope="page" class="com.getmission.model.GetMissionService"/>
+<jsp:useBean id="ChatRecordService" scope="page" class="com.chatrecord.model.ChatRecordService"/>
 
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
 //    String memVO1 = request.getParameter("takecase_Mem_No");
@@ -26,11 +30,10 @@
    caseCandidateVO.setMission_No(mission_No);
    request.setAttribute("caseCandidateVO", caseCandidateVO);
    request.setAttribute("mission_No", mission_No);
-//    System.out.println("caseCandidateVO.getCandidate_Mem_No"+caseCandidateVO.getCandidate_Mem_No());
-//    System.out.println("caseCandidateVO.getCandidate_Mem_No"+caseCandidateVO.getCandidate_Mem_No());
+
+  
    
    
-//    System.out.println(caseCandidateVO.candidate_Mem_No);
 %>
         
 <%/*
@@ -154,6 +157,9 @@
 		    <input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/>
 			<input id="mem_Pic" name="mem_Pic" size="30" type="file" value="上傳照片" onchange="previewFile();"  multiple/>
 <%-- 			<img id="img_pic" src="<%=request.getContextPath()%>/mem/images/nopic.jpg" alt="your image" width="150" height="200" />  --%>
+
+			<form action="insert" id="save" method="post" >
+			</form>
 	    </div>
 	    </div>
     </body>
@@ -187,6 +193,8 @@
 <script>
     
     //把EL跟JSP的內容存成變數,方便跟JS溝通
+    
+    
     
     var missionNo = '${caseCandidateVO.mission_No}';
     var targetMemNo = '${caseCandidateVO.candidate_Mem_No}';
@@ -251,17 +259,18 @@ webSocket.onmessage = function(event) {
 // 			var JSON.data{userName : ""};
 			var userName = jsonObj.userName;
 	        var message = jsonObj.message;
-	        var url = jsonObj.src;
 		    var nowdate = jsonObj.time;
+		    
+	        var url = jsonObj.src;
 // 	        var status = jsonObj.status;
 	        	
 	        if(url !=null){
 	        
 			        if(memname != jsonObj.userName){
-			        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+':'+message+':'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-					console.log("1111111userName +"+ userName)
+			        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+					console.log("1111111userName +"+ userName);
 					} else {
-			        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+			        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+':'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
 					}
 	        }else{
 	        	    if(memname === jsonObj.userName){
@@ -331,7 +340,7 @@ webSocket.onclose = function(event) {
 	    var userName = inputUserName.value.trim();
 		
 	    console.log("${memVO.mem_Id}" == userName);
-	    
+	    console.log("senduserName"+ userName);
 	   
 	    if (userName === ""){
 	        alert ("使用者名稱請勿空白!");
@@ -364,10 +373,12 @@ webSocket.onclose = function(event) {
 	}
 	
 	function sendImg(url){
+		 var userName = inputUserName.value.trim();
 		var inputMessage = document.getElementById("message");
 	    var message = inputMessage.value.trim();
 	    var date = new Date();
-	    var nowdate = date.getHours()+":"+date.getMinutes()
+	    var nowdate = date.getHours()+":"+date.getMinutes();
+	    alert(userName);
 	    var jsonObj ={
 	    		"userName" : userName,
 	    		"src" : url,
@@ -386,9 +397,38 @@ webSocket.onclose = function(event) {
 	// (9) 把斷線的按扭打開 ,其他兩個關閉
 	function disconnect () {
 webSocket.close();
+		console.log("11111111111111111111");
 		document.getElementById('sendMessage').disabled = true;
 		document.getElementById('connect').disabled = false;
 		document.getElementById('disconnect').disabled = true;
+		var chatContent = $('#myPanel').text();
+		<%  ChatRecordService crSvc = new ChatRecordService();
+		    ChatRecordVO chatRecordVO = new ChatRecordVO();
+		    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
+		    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
+		    Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
+		    chatRecordVO.setChat_Datetime(chat_Datetime);
+		    Integer aaa = 11;
+		    
+		    System.out.println("adfasdf" +takecase_Mem_No);
+		   
+		    request.setAttribute("chatRecordVO", chatRecordVO);
+		   %>
+		   console.log("chatContent" + chatContent);
+		   var queryString= {"action":"insert","chatContent":chatContent, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>'};
+		
+		$.ajax({
+			 type: "POST",
+			 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do",
+			 data: queryString,
+			 dataType: "json",
+			 
+			 success: function (data){ },
+			 error: function(){alert("暫時不提供此時段派車服務")}
+			 
+       });
+		//$('#save').submit();
+		console.log("1111111111133333333111111111");
 	}
 
 	// (10)上方顯示的狀態改完顯示斷線

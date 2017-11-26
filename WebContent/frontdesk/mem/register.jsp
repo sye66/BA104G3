@@ -328,7 +328,7 @@
 
 
 		$('#bb').click(function(){
-			$('#mem_Email').val("kkk@gmail.com");				
+			$('#mem_Email').val("kiz7386@gmail.com");				
 			$('#mem_Pw').val("A123123");
 			$('#mem_Pw_reg').val("A123123");
 			$('#mem_Name').val("阿群");

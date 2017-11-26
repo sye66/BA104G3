@@ -41,10 +41,8 @@ public class RelationServlet extends HttpServlet{
 //			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String mem_No = req.getParameter("mem_No");
-				System.out.println("related_Mem_No + "+ mem_No);
 				String related_Mem_No = req.getParameter("related_Mem_No");
 				
-				System.out.println("related_Mem_No + "+ related_Mem_No);
 				
 				Integer relation_Status = 0;
 				/***************************2.開始查詢資料****************************************/
@@ -406,21 +404,28 @@ public class RelationServlet extends HttpServlet{
 			
 			try{
 				/***************************1.接收請求參數***************************************/
-				String stored_no = req.getParameter("stored_no");
+				String mem_No = req.getParameter("mem_No");
+				
+				String related_Mem_No = req.getParameter("related_Mem_No");
+				
+				RelationService relationSvc = new RelationService();				
+				RelationVO relationVO = relationSvc.getOneRelationVO(mem_No, related_Mem_No);
+				
 				
 				/***************************2.開始刪除資料***************************************/
-				StoredService storedSvc = new StoredService();
-				storedSvc.deleteStored(stored_no);
+				relationSvc.deleteRelationVO(related_Mem_No, mem_No);
+				relationSvc.deleteRelationVO(mem_No, related_Mem_No);
+				
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
-				String url = "/stored_history/listAllStored.jsp";
+				String url = "/frontdesk/relation/friendlList.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗 : "+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/stored_history/listAllStored.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/friendlList.jsp");
 				failureView.forward(req, res);
 			}
 		}// delete end\

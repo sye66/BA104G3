@@ -9,6 +9,7 @@ public interface MemDAO_interface {
 	public MemVO loginMem(String mem_Email);
 	public void insert(MemVO memVO);
 	public void update(MemVO memVO);
+	public void updatePw(MemVO memVO);
 	public void updateByMem(MemVO memVO);
 	public void delete(String mem_No);
 	public MemVO findByPrimaryKey(String mem_No);
