@@ -146,7 +146,6 @@ ${arti_No}
                                 </div>
                            <div class="timeline-body">                               
                                 </div>
-                                
                             </div>
                         </li>
                     </ul>

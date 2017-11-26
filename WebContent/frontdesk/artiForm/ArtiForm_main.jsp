@@ -17,7 +17,6 @@
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
-
 <html>
 <head>
 <title>所有文章資料 - listAllArtiForm.jsp</title>

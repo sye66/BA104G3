@@ -173,7 +173,6 @@ div> .timeline-body{
 
         ga('create', 'UA-52103994-1', 'auto');
         ga('send', 'pageview');
-
         
     </script>
 </body>
