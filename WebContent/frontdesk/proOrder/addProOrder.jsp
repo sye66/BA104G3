@@ -39,14 +39,18 @@ text-align:center;
 
 </head>
 <body>
-	<!-- TOP -->
+<!-- TOP -->
+<div class="row">
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
-</div>
+<%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include> --%>
+</div></div>
 <!-- 商城TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
 </div>
+
+
 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
 	<br>
 		<nav aria-label="breadcrumb" role="navigation">
@@ -133,7 +137,7 @@ text-align:center;
 <%-- 			<input type="hidden" name="ord_Price" value="${totalPrice}"> --%>
 			<input type="hidden" name="ord_Price" value="${totalPrice}">
 			<input type="hidden" name="action" value="insert">
-			<button type="submit" class="btn btn-success" style="font-size:26px;width:450px;">確認送出訂單</button>
+			<button type="submit" class="btn btn-success" style="font-size:26px;width:450px;border-radius: 5px;">確認送出訂單</button>
 			</FORM>			
 	
 			
@@ -186,7 +190,7 @@ text-align:center;
     		</td>
     		<td width="200" colspan="3">
     		
-    			<h3 class="totalPrice2">總計:&nbsp;<span style="color:red;">${totalPrice}</span>&nbsp;點</h3>
+    			<h3 >總計扣除:&nbsp;<span style="color:red;">${totalPrice}</span>&nbsp;點</h3>
     		</td>
     	</tr>
     	
@@ -197,6 +201,8 @@ text-align:center;
 </div>	  
 
 
-	
+<div class="col-xs-12 col-sm-12">
+	<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
+</div>		
 </body>
 </html>

@@ -126,12 +126,13 @@ System.out.println("發送Email: ");
 //				String to = "eatkaikai@gmail.com";
 				String subject = "工具人商城消費通知";
 				
-				String messageText = memVO.getMem_Name()+"先生/小姐 您好!"+"\n"+"您於工具人商城購買"+"\n"
+				String messageText = memVO.getMem_Name()+" 先生/小姐 您好!"+"\n"+"您於工具人商城購買"+"\n"
 						+proEmailText+"\n"+"總消費為: "+sum+" 積分";
 				email.sendMail(to, subject, messageText);
 				
 System.out.println("發送電話簡訊: ");
-				String[] tel = {memVO.getMem_Pho()};
+				String t = 	(memVO.getMem_Pho()).replaceAll("-","");
+				String[] tel = {t};
 System.out.println(tel[0]);				
 				TelMessage telMessage = new TelMessage();
 				telMessage.sendMessage(tel, messageText);
