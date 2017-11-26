@@ -38,7 +38,7 @@
 		<a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a>
 	</li>
 	<li>
-		<a href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp">忘記密碼</a>
+		<a href="<%=request.getContextPath()%>/frontdesk/mem/memUpdatePw.jsp">重設新密碼</a>
 	</li>
 	<!-- <li class="active">媽我上電視了</li> -->
 	</ol>
@@ -73,25 +73,30 @@
  <div class="col-xs-10 col-sm-8 col-xs-offset-2" >
             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/mem/mem.do" name="form1" enctype="multipart/form-data">
             
-            <h2> <small>會員資料確認</small></h2>
+            <h2> <small>會員修改新密碼</small></h2>
 			<hr class="colorgraph">
             
-            <div class="form-group">請輸入你的E-mail:
-            <input type="text" name="mem_Email" size="36" class="form-control input-lg" tabindex="3"
-			value="<%= (memVO==null)? "": memVO.getMem_Email()%>" />
+            <div class="form-group">請輸入你的臨時密碼:
+            <input type="text" name="mem_Pw" size="36" class="form-control input-lg" tabindex="3"
+			value="<%= (memVO==null)? "": memVO.getMem_Pw()%>" />
             </div>
-            <div class="form-group">請輸入你的生日:
-            <input type="text" name="mem_Bday" size="36" class="form-control input-lg" tabindex="3"
-			value="<%= (memVO==null)? "": memVO.getMem_Bday()%>" />
+            <div class="form-group">請輸入你的新密碼:
+            <input type="password" name="mem_Pw1" size="36" class="form-control input-lg" tabindex="3"
+			 />
+            </div>
+            <div class="form-group">請再次輸入你的新密碼:
+            <input type="password" name="mem_Pw2" size="36" class="form-control input-lg" tabindex="3"
+			 />
             </div>
             <div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-xs-offset-3">
-				<input type="hidden" name="action" value="forgetPw">
+				<input type="hidden" name="action" value="confirm">
 				<input type="submit" class="btn btn-success btn-block btn-lg" tabindex="7" value="送出">
 				</div>
 				</div>
-				<br>
-				<h5 style="text-align:left"><input type="button" id="bb" value="Mageic_Button"></h5><h5 style="text-align:right">※資料正確送出後，會將補發新的密碼至你的E-mail</h5>
+				
+<!-- 				<input type="button" id="bb" value="Mageic_Button"> -->
+            
             </FORM>
         </div>
 </div>
@@ -114,9 +119,12 @@
 
 </body>
 <script>
-$('#bb').click(function(){
-			$("[name='mem_Email']").val("kiz7386@gmail.com");				
-			$("[name='mem_Bday']").val("1988-08-06");
+$("[name='mem_Pw2']").blur(function(){
+			var pw1 = $("[name='mem_Pw1']").val();				
+			var pw2 = $("[name='mem_Pw2']").val();
+			if(pw1 != pw2){
+				swal('Oops !', '你輸入的新密碼不一致喔', 'error');
+			}
 
 					});
 </script>

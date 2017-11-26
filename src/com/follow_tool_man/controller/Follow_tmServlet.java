@@ -82,7 +82,38 @@ public class Follow_tmServlet extends HttpServlet{
 //			}
 		} //insert end
 			
-		
+		if("delete".equals(action)){
+			List<String> errorMsgs =new LinkedList<String>();
+			System.out.println("======");
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+//			try{
+				/***************************1.接收請求參數***************************************/
+				String follower_Mem_No = req.getParameter("follower_Mem_No");
+				System.out.println("follower_Mem_No + +" +follower_Mem_No);
+				String followed_Mem_No = req.getParameter("followed_Mem_No");
+				System.out.println("followed_Mem_No + +" +followed_Mem_No);
+				Follow_tmService follow_tmSvc = new Follow_tmService();		
+				follow_tmSvc.deleteFollow_tmVO(follower_Mem_No, followed_Mem_No);
+				follow_tmSvc.deleteFollow_tmVO(followed_Mem_No, follower_Mem_No);
+				
+				/***************************2.開始刪除資料***************************************/
+				
+				
+				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
+				String url = "/frontdesk/follow_tm/followTmList.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);
+				successView.forward(req, res);
+				
+//				/***************************其他可能的錯誤處理**********************************/
+//			} catch (Exception e) {
+//				errorMsgs.add("刪除資料失敗 : "+e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/follow_tm/followTmList.jsp");
+//				failureView.forward(req, res);
+//			}
+		}// delete end\
+		System.out.println("==========end");
+	
 		
 		
 		

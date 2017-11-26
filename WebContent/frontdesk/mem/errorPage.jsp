@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta HTTP-EQUIV="refresh" CONTENT="5;URL=http://localhost:8081/BA104G3_2017_10_31/mem/index.jsp">
+<meta HTTP-EQUIV="refresh" CONTENT="5;URL=<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
 
 <link href="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.js"></script> 

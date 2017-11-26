@@ -4,6 +4,9 @@
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
 
+<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
+
+
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <% request.getAttribute("updateSuccess"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -77,14 +80,21 @@
     			
 			</div>
 		
-            <div class="form-group">密碼
+            <div class="form-group">請輸入舊密碼
             <input type="password" name="mem_Pw" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
             id="inputPassword1" pattern="[A-Za-z0-9]{6,16}" maxlength='16' title='由英文或數字所組成的6~16字元' 
             onchange="$('#inputPassword2').attr('pattern',$(this).val())" required />
     			
 			</div>
+		
+            <div class="form-group">請輸入新密碼
+            <input type="password" name="mem_Pw_New" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
+            id="inputPassword1" pattern="[A-Za-z0-9]{6,16}" maxlength='16' title='由英文或數字所組成的6~16字元' 
+            onchange="$('#inputPassword2').attr('pattern',$(this).val())" required />
+    			
+			</div>
 			
-			<div class="form-group">再次確認密碼
+			<div class="form-group">再次輸入新密碼
             <input type="password" name="mem_Pw_reg" size="36" placeholder="請輸入數字及英文字母" class="form-control input-lg" tabindex="3" 
             id="inputPassword2" title='與密碼不符' required />
     			
@@ -273,6 +283,23 @@
 				  timer: 1500
 				})
 		};
+		
+		var memPw = '${MemSvc.getOneMem(memVO.mem_No).mem_Pw}';
+		
+		
+		$("[name='mem_Pw']").blur(function(){
+			var mem_pw =$("#inputPassword1").val();
+			console.log("a ++" +mem_pw);
+			if( mem_pw != memPw){
+				
+				console.log("adsfasdf ++" +memPw);
+				swal('Oops !','你輸入的舊密碼與原本不相符','error');
+			}
+		});
+		$("[name='mem_Pw_reg']").blur(function(){
+			if($("[name='mem_Pw_New']").val() != $("[name='mem_Pw_reg']").val())
+				swal('Oops !','第二次輸入的新密碼與第一次不相符','error');
+		});
 		
 		
 		

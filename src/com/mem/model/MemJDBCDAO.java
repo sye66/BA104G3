@@ -28,10 +28,13 @@ public class MemJDBCDAO implements MemDAO_interface{
 	private static final String LOGIN_MEM=
 			"SELECT * FROM mem WHERE mem_Email=?";
 	
+	private static final String UPDATEPW=
+			"UPDATE MEM SET mem_Pw=? WHERE mem_Email=?";
+	
 	private static final String WEBSOCKET=
 			"SELECT * FROM mem WHERE mem_Id=?";
 	
-	private static final String Authentication=
+	private static final String AUTHENTICATION=
 			"UPDATE mem SET mem_State =? ,mem_Id=?, mem_No=? WHERE mem_Email=?";
 	
 	private static final String RECHARGE=
@@ -249,7 +252,6 @@ public class MemJDBCDAO implements MemDAO_interface{
 
 	@Override
 	public MemVO Authentication(MemVO memVO) {
-
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -258,7 +260,7 @@ public class MemJDBCDAO implements MemDAO_interface{
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(Authentication);
+			pstmt = con.prepareStatement(AUTHENTICATION);
 			
 			pstmt.setInt(1, memVO.getMem_State());
 			pstmt.setString(2, memVO.getMem_Id());
@@ -345,6 +347,63 @@ public class MemJDBCDAO implements MemDAO_interface{
 	}
 	
 }
+
+	@Override
+	public void updatePw(MemVO memVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATEPW);
+			
+			
+			pstmt.setString(1, memVO.getMem_Pw());
+			pstmt.setString(2, memVO.getMem_Email());
+			
+			pstmt.executeUpdate();
+			
+			
+			
+			
+	}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally{
+		if (pstmt != null){
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace(System.err);
+			}
+		}
+		if (con != null){
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	}
+
+
+
+
+	
+
+
+
+
+
+
 
 
 
@@ -1266,6 +1325,12 @@ public class MemJDBCDAO implements MemDAO_interface{
 		dao.updateByEmp(memVO8);
 		
 		System.out.println(memVO8.getMem_State());
+		
+		MemVO memVO9 = new MemVO();
+		
+		memVO9.setMem_Pw("A123456");
+		memVO9.setMem_Email("aa0953711016@gmail.com");
+		
 
 	}
 
@@ -1277,21 +1342,6 @@ public class MemJDBCDAO implements MemDAO_interface{
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -35,6 +35,7 @@ public class MemServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		//登入用區塊
 		if ("loginServlet".equals(action)){
 			
 			List<String> errorMsgs = new LinkedList<String>();
@@ -46,8 +47,6 @@ public class MemServlet extends HttpServlet{
 				MemService memSvc = new MemService();
 				MemVO memVO = memSvc.loginMem(mem_Email);
 				
-//System.out.println("mem_No :" + memVO.getMem_No());
-//				System.out.println("Email :" + mem_Email);
 				String mem_Email_reg = "^[a-zA-Z0-9_]{3,15}@[a-zA-Z]{2,7}.[a-zA-Z.]{3,7}$";
 				if (mem_Email ==null || mem_Email.trim().length() ==0){
 					errorMsgs.add("E-mail請勿空白");
@@ -60,10 +59,6 @@ public class MemServlet extends HttpServlet{
 				
 				String mem_Pw = req.getParameter("mem_Pw").trim();
 				
-//				System.out.println("mem_Pw :" + mem_Pw);
-//				System.out.println("使用者輸入 :" + memVO.getMem_Email());
-//				System.out.println("資料庫 :" + mem_Pw);
-//				System.out.println("使用者輸入 :" + memVO.getMem_Pw());
 				
 				if (mem_Pw == null || mem_Pw.trim().length() == 0){
 					errorMsgs.add("密碼請勿空白");
@@ -84,7 +79,6 @@ public class MemServlet extends HttpServlet{
 				
 				String location = req.getParameter("reuestURL");
 			    
-			    System.out.println("location" + location);
 			    String url = "/lib/publicfile/include/file/index.jsp";
 			    String url_reg= "/frontdesk/mem/register.jsp";
 			     if(location.equals(url_reg)){
@@ -102,6 +96,107 @@ public class MemServlet extends HttpServlet{
 			failureView.forward(req, res);
 		}
 	}
+		
+		
+if ("forgetPw".equals(action)){
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			try{
+				/***************************1.先驗證E-mail 跟生日**********************/
+				String mem_Email = req.getParameter("mem_Email");
+				MemService memSvc = new MemService();
+				MemVO memVO = memSvc.loginMem(mem_Email);
+				String email = memVO.getMem_Email();
+				
+				
+				String mem_Email_reg = "^[a-zA-Z0-9_]{3,15}@[a-zA-Z]{2,7}.[a-zA-Z.]{3,7}$";
+				if (mem_Email ==null || mem_Email.trim().length() ==0){
+					errorMsgs.add("E-mail請勿空白");
+				} else if (!mem_Email.trim().matches(mem_Email_reg)){
+				errorMsgs.add("請正確輸入E-mail");
+				} else if (!(mem_Email.equals(email))){
+					errorMsgs.add("查無此E-mail");
+					
+				}
+				
+				Date mem_Bday =null;
+				try{
+					mem_Bday = Date.valueOf(req.getParameter("mem_Bday").trim());
+					
+				} catch (IllegalArgumentException e) {
+					mem_Bday = new Date(System.currentTimeMillis());
+					errorMsgs.add("請輸入正確生日 ! ");
+				}
+				
+				
+				
+				
+				
+				if (!errorMsgs.isEmpty()){
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mem/memForgetPw.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				
+				/***************************mail區塊 1***************************************/
+				
+				String to = memVO.getMem_Email();
+			      
+			    String subject = "密碼補發";
+			      
+			    String ch_name = memVO.getMem_Id();
+			    String passRandom = "WD750x5p1G9b6Y9";
+			    String messageText = "Hello! " + ch_name + " 請使用此新密碼: " + passRandom + "\n" +
+			    					 ", 請登入後至會員中心 修改密碼，或至http://10.120.25.29:8081/BA104G3/lib/publicfile/include/file/index.jsp 修改密碼,謝謝您"; 
+			    
+//			    Integer mem_Code = Integer.valueOf(passRandom);
+			    
+				/***************************mail區塊 1***************************************/
+				
+				/***************************2.再呼叫Service修改密碼*****************************************/
+			   
+				String mem_Pw = "WD750x5p1G9b6Y9";
+				
+				memVO.setMem_Pw(mem_Pw);
+
+				//更改資料庫密碼
+				memVO = memSvc.updatePw(memVO);
+				System.out.println("++++"+memVO.getMem_Pw());
+				
+				
+				
+				/***************************送出新的E-mail*************************************/
+				 MailService mailService = new MailService();
+				 mailService.sendMail(to, subject, messageText);
+				
+				
+//				String location = req.getParameter("reuestURL");
+//			    
+//			    System.out.println("location" + location);
+			    String url = "/lib/publicfile/include/file/index.jsp";
+//			    String url_reg= "/frontdesk/mem/register.jsp";
+//			     if(location.equals(url_reg)){
+//			     RequestDispatcher successView = req.getRequestDispatcher(url);	//判斷使用者是否在註冊頁面  登入帳號,如果是就跳轉主頁
+//			     successView.forward(req, res);
+//			    }else if(location != null){
+			     RequestDispatcher successView = req.getRequestDispatcher(url);  //讓使用者登入後停留在原頁面
+			     successView.forward(req, res);
+//			    }
+			 /***************************其他可能的錯誤處理*************************************/
+			
+		} catch (Exception e){
+			errorMsgs.add("無法取得資料:" + e.getMessage());
+			RequestDispatcher failureView =req.getRequestDispatcher("/frontdesk/mem/memForgetPw.jsp");
+			failureView.forward(req, res);
+		}
+	}
+
+
+
+
 	
 		
 		if ("logoutServlet".equals(action)){
@@ -318,7 +413,7 @@ public class MemServlet extends HttpServlet{
 				
 				/***************************mail區塊 1***************************************/
 				
-				String to = "kiz7386@gmail.com";
+				String to = memVO.getMem_Email();
 			      
 			    String subject = "密碼通知";
 			      
@@ -496,9 +591,22 @@ public class MemServlet extends HttpServlet{
 				System.out.println(mem_No);
 				
 				
+				MemService memSvc = new MemService();
+				MemVO memVO = memSvc.getOneMem(mem_No);
+				String oldPw =memVO.getMem_Pw();
 				String mem_Pw = req.getParameter("mem_Pw").trim();
 				if (mem_Pw == null || mem_Pw.trim().length() == 0){
 					errorMsgs.add("密碼請勿空白");
+				}else if(!mem_Pw.equals(oldPw)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("舊密碼與原本不符合");					
+				}
+				
+				String mem_Pw_New = req.getParameter("mem_Pw_New").trim();
+				String mem_Pw_reg = req.getParameter("mem_Pw_reg").trim();
+				if (mem_Pw_New == null || mem_Pw_New.trim().length() == 0){
+					errorMsgs.add("新密碼請勿空白");
+				}else if(!mem_Pw_New.equals(mem_Pw_reg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("第二次新密碼與第一次不符合");					
 				}
 				
 				String mem_Name = req.getParameter("mem_Name");
@@ -600,16 +708,19 @@ public class MemServlet extends HttpServlet{
 				}
 				
 				
+				Integer mem_State =new Integer (req.getParameter("mem_State"));
+				
+				System.out.println("mem_State+"+mem_State);
 				
 				
-				MemVO memVO = new MemVO();
+				memVO = new MemVO();
 				
 				Part part = req.getPart("mem_Pic");
 				InputStream is = part.getInputStream();
 				byte[] buffer_update = new byte[is.available()];
 				
 				if (buffer_update.length ==0){
-				MemService memSvc = new MemService();
+				memSvc = new MemService();
 				MemVO memVO1 = memSvc.getOneMem(mem_No);
 				buffer_update = memVO1.getMem_Pic();
 				}
@@ -629,7 +740,7 @@ public class MemServlet extends HttpServlet{
 				memVO.setMem_Pic(buffer_update);
 				memVO.setMem_Intro(mem_Intro);
 //				memVO.setMem_Code(mem_Code);
-//				memVO.setMem_State(mem_State);
+				memVO.setMem_State(mem_State);
 //				memVO.setMem_Gps_Lat(mem_Gps_Lat);
 //				memVO.setMem_Gps_Lng(mem_Gps_Lng);
 //				memVO.setMem_Ip(mem_Ip);
@@ -655,8 +766,9 @@ public class MemServlet extends HttpServlet{
 				
 System.out.println("STEP1");				
 				/***************************2.開始新增資料***************************************/
-				MemService memSvc = new MemService();
-				memVO = memSvc.updateByMem(mem_No,mem_Pw, mem_Name, mem_Id, mem_Bday, mem_Tel, mem_Pho, mem_Gend, mem_Email, buffer_update, mem_Intro, real_mem_Address,mem_Search);
+				memVO.setMem_Pw(mem_Pw_reg);
+				memSvc = new MemService();
+				memVO = memSvc.updateByMem(mem_No,mem_Pw_reg, mem_Name, mem_Id, mem_Bday, mem_Tel, mem_Pho, mem_Gend, mem_Email, buffer_update, mem_Intro, real_mem_Address,mem_Search, mem_State);
 				
 System.out.println("STEP2");				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
@@ -686,9 +798,10 @@ System.out.println("STEP3");
 			
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				MemVO memVO = new MemVO();
 				String mem_No = req.getParameter("mem_No").trim();
-				System.out.println(mem_No);
+				MemService memSvc = new MemService();
+				MemVO memVO = memSvc.getOneMem(mem_No);
+				System.out.println(memVO.getMem_Email());
 				
 				Integer mem_State = new Integer (req.getParameter("mem_State"));
 				
@@ -697,7 +810,7 @@ System.out.println("STEP3");
 				
 				/***************************mail區塊 1***************************************/
 				
-				String to = "kiz7386@gmail.com";
+				String to = memVO.getMem_Email();
 			      
 			    String subject = "密碼通知";
 			      
@@ -733,7 +846,7 @@ System.out.println("STEP3");
 				
 System.out.println("STEP1");				
 				/***************************2.開始新增資料***************************************/
-				MemService memSvc = new MemService();
+				memSvc = new MemService();
 				memVO = memSvc.updateByEmp(memVO);
 				
 				

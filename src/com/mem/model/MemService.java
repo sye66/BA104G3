@@ -40,6 +40,13 @@ public class MemService {
 
 		return memVO;
 	}
+	
+	public MemVO updatePw(MemVO memVO) {
+		
+		dao.updatePw(memVO);
+
+		return memVO;
+	}
 
 	public MemVO addMem(String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday, String mem_Tel, String mem_Pho,
 			Integer mem_Gend, String mem_Email, byte[] mem_Pic, String mem_Intro, Integer mem_Code, Integer mem_State,
@@ -108,7 +115,7 @@ public class MemService {
 
 	public MemVO updateByMem(String mem_No, String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday,
 			String mem_Tel, String mem_Pho, Integer mem_Gend, String mem_Email, byte[] mem_Pic, String mem_Intro,
-			String mem_Address, Integer mem_Search) {
+			String mem_Address, Integer mem_Search ,Integer mem_State) {
 
 		MemVO memVO = new MemVO();
 
@@ -125,6 +132,7 @@ public class MemService {
 		memVO.setMem_Intro(mem_Intro);
 		memVO.setMem_Address(mem_Address);
 		memVO.setMem_Search(mem_Search);
+		memVO.setMem_State(mem_State);
 
 		dao.updateByMem(memVO);
 
