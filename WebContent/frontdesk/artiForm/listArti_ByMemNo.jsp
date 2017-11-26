@@ -55,7 +55,7 @@ ${arti_No}
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 </h1>
+                         <a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><h1>所有文章列表 </h1></a>
                     </div>
                 </div>
                     
@@ -75,9 +75,11 @@ ${arti_No}
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
-                        <a class="sidebar-toggler" href="#">
-                            <i></i>111
+                    <c:if test="${memVO.mem_State == 1}">
+                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/ad/listMusic.jsp">
+                            <i></i>Relax Music
                         </a>
+                        </c:if>
                         <c:if test="${memVO.mem_State == 1}">
                         <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
@@ -85,6 +87,9 @@ ${arti_No}
                             </c:if>
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
+                        </a>
+                        <a class="refresh" href="/BA104G3/frontdesk/artiForm/ArtiForm_main.jsp">
+                            <i>Main page</i>
                         </a>
                     </div>
                         
