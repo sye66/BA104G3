@@ -1252,6 +1252,115 @@ public class GetMissionServlet extends HttpServlet {
 				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
 			}	
-		}	
+		}
+		/**
+		 * @author Sander
+		 * @param issue_mission_to_takecase
+		 * @param takecase_Mem_No
+		 * 直接發任務給接案人
+		 * 要注意新增接案候選人，值來自於jsp上調用得VO，多設定一個hidden傳過來
+		 */
+		// 任務類別
+		if ("issue_mission_to_takecase".equals(action)) {
+			
+			// Value Receiving Test
+			System.out.println("-----------直接發案開始-----------");
+			System.out.println("got post from takecase");
+			
+			// 錯誤處理
+			List<String> errorMsg = new LinkedList<>();
+			req.setAttribute("errorMsg", errorMsg);
+			GetMissionVO getMissionVO = new GetMissionVO();
+			String key = null;
+			String takecase_Mem_No = req.getParameter("takecase_Mem_No");
+			System.out.println("指定接案人: " + takecase_Mem_No);
+			try {				
+				// 任務類別
+				String mission_Category = req.getParameter("mission_Category");
+				// 任務名稱
+				String mission_Name = req.getParameter("mission_Name");
+				// 任務敘述
+				String  mission_Des = req.getParameter("mission_Des");
+				// 發案人會員編號
+				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
+				// 任務截止時間
+				Timestamp mission_Due_Time;
+				// 任務模式
+				Integer mission_Pattern = 1;
+				// 任務積分報酬
+				Double mission_Pay = Double.parseDouble(req.getParameter("mission_Pay"));
+				// GPS-LAT
+				Double mission_Gps_Lat = Double.parseDouble(req.getParameter("mission_Gps_Lat"));
+				// GPS-LNG
+				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
+				// 任務開始時間 - null
+				// 任務結束時間 - null
+				
+				/**********驗證開始**********/
+				if (mission_Pay < 50.00) {
+					errorMsg.add("安安積分太少了吧");
+				}
+				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
+					errorMsg.add("安安請告知任務名稱喔");
+				}
+				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
+					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+				}
+
+				// 錯誤訊息傳回
+				if (!errorMsg.isEmpty()) {
+					for (String string : errorMsg) {
+						System.out.println(errorMsg);
+					}
+					req.setAttribute("getMissionVO", getMissionVO);
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+					inputError.forward(req, res);
+					return;
+				}
+				
+				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+				MemService memService = new MemService();
+				MemVO memVO = memService.getOneMem(issuer_Mem_No);
+				if (memVO.getMem_Point() < mission_Pay) {
+					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					NotEnoughPoint.forward(req, res);
+					return;
+				}
+				/**********準備寫入與轉向**********/
+				// 任務截止時間加工
+				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
+				Calendar calendar = Calendar.getInstance();
+				//以現在的時間點創建(任務建立時間點)
+				calendar.setTimeInMillis(System.currentTimeMillis());
+				//加五天
+				calendar.add(calendar.DAY_OF_MONTH, 5);
+				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
+				System.out.println(mission_Due_Time);
+
+				// 調用取得自增主鍵的新增方法
+				GetMissionService getMissionService = new GetMissionService();
+				key = getMissionService.addMissionReturnKey(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				System.out.println(key);
+				// 扣除積分
+				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
+				// 加入接案候選人，設定狀態(2) 發案人邀請接案
+				CaseCandidateService caseCandidateService = new CaseCandidateService();
+				caseCandidateService.addCaseCandidate(takecase_Mem_No, key, 2);
+				
+				System.out.println("直接發案，會員: " + issuer_Mem_No);
+				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
+				successView.forward(req, res);
+				
+			} catch (Exception e) {
+				errorMsg.add(e.getMessage());
+				System.out.println(e.getMessage());
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+				inputError.forward(req, res);
+			}	
+		}
+		
+		
+		
 	}
 }

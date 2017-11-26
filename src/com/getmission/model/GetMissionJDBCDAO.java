@@ -267,15 +267,15 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 				getMissionVO.setMission_Category(rs.getString("mission_category"));
 				getMissionVO.setMission_Name(rs.getString("mission_name"));
 				getMissionVO.setMission_Des(rs.getString("mission_des"));
-				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
-				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
-				getMissionVO.setMission_Release_Time(rs.getTimestamp("mission_release_time"));
-				getMissionVO.setMission_Due_Time(rs.getTimestamp("mission_due_time"));
-				getMissionVO.setMission_Start_Time(rs.getTimestamp("mission_start_time"));
-				getMissionVO.setMission_End_Time(rs.getTimestamp("mission_end_time"));
-				getMissionVO.setMission_State(rs.getInt("mission_state"));
-				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
-				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
+//				getMissionVO.setIssuer_Mem_No(rs.getString("issuer_mem_no"));
+//				getMissionVO.setTakecase_Mem_No(rs.getString("takecase_mem_no"));
+//				getMissionVO.setMission_Release_Time(rs.getTimestamp("mission_release_time"));
+//				getMissionVO.setMission_Due_Time(rs.getTimestamp("mission_due_time"));
+//				getMissionVO.setMission_Start_Time(rs.getTimestamp("mission_start_time"));
+//				getMissionVO.setMission_End_Time(rs.getTimestamp("mission_end_time"));
+//				getMissionVO.setMission_State(rs.getInt("mission_state"));
+//				getMissionVO.setMission_Pattern(rs.getInt("mission_pattern"));
+//				getMissionVO.setMission_Pay(rs.getDouble("mission_pay"));
 				list.add(getMissionVO); // Store the row in the list
 			}
 
@@ -576,10 +576,11 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String key = null;
+		String[] col = {"MISSION_NO"};
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT,1);
+			pstmt = con.prepareStatement(INSERT_STMT,col);
 
 			pstmt.setString(1, getMissionVO.getMission_Category());
 			pstmt.setString(2, getMissionVO.getMission_Name());
@@ -634,10 +635,10 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		GetMissionVO getMissionVO1 = new GetMissionVO();
 		getMissionVO1.setMission_Category("教育");
 		getMissionVO1.setMission_Name("救救我Java!!");
-		getMissionVO1.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達!");
+		getMissionVO1.setMission_Des("哇!!怎麼辦怎麼辦,我的專題出不來阿 gg思密達22222222!");
 		getMissionVO1.setIssuer_Mem_No("M000004");
 		getMissionVO1.setTakecase_Mem_No("M000003");
-		getMissionVO1.setMission_Release_Time(Timestamp.valueOf("2017-10-27 11:11:11.0000000"));
+//		getMissionVO1.setMission_Release_Time(Timestamp.valueOf("2017-10-27 11:11:11.0000000"));
 //		getMissionVO1.setMission_Due_Time(java.sql.Timestamp.valueOf("2017-11-01"));
 //		getMissionVO1.setMission_Start_Time(java.sql.Timestamp.valueOf("2017-10-28"));
 //		getMissionVO1.setMission_End_Time(java.sql.Timestamp.valueOf("2017-10-31"));
@@ -689,23 +690,23 @@ public class GetMissionJDBCDAO implements GetMissionDAO_interface {
 		// System.out.println("---------------------");
 //
 //		// 查詢
-//		List<GetMissionVO> list = dao.getAll();
-//		for (GetMissionVO agetMissionVO : list) {
-//			System.out.print(agetMissionVO.getMission_No() + ",");
-//			System.out.print(agetMissionVO.getMission_Category() + ",");
-//			System.out.print(agetMissionVO.getMission_Name() + ",");
-//			System.out.print(agetMissionVO.getMission_Des() + ",");
-//			System.out.print(agetMissionVO.getIssuer_Mem_No() + ",");
-//			System.out.print(agetMissionVO.getTakecase_Mem_No() + ",");
-//			System.out.print(agetMissionVO.getMission_Release_Time() + ",");
-//			System.out.print(agetMissionVO.getMission_Due_Time() + ",");
-//			System.out.print(agetMissionVO.getMission_Start_Time() + ",");
-//			System.out.print(agetMissionVO.getMission_End_Time() + ",");
-//			System.out.print(agetMissionVO.getMission_State() + ",");
-//			System.out.print(agetMissionVO.getMission_Pattern() + ",");
-//			System.out.println(agetMissionVO.getMission_Pay());
-//			System.out.println();
-//		}
+		List<GetMissionVO> list = dao.getAll();
+		for (GetMissionVO agetMissionVO : list) {
+			System.out.print(agetMissionVO.getMission_No() + ",");
+			System.out.print(agetMissionVO.getMission_Category() + ",");
+			System.out.print(agetMissionVO.getMission_Name() + ",");
+			System.out.print(agetMissionVO.getMission_Des() + ",");
+			System.out.print(agetMissionVO.getIssuer_Mem_No() + ",");
+			System.out.print(agetMissionVO.getTakecase_Mem_No() + ",");
+			System.out.print(agetMissionVO.getMission_Release_Time() + ",");
+			System.out.print(agetMissionVO.getMission_Due_Time() + ",");
+			System.out.print(agetMissionVO.getMission_Start_Time() + ",");
+			System.out.print(agetMissionVO.getMission_End_Time() + ",");
+			System.out.print(agetMissionVO.getMission_State() + ",");
+			System.out.print(agetMissionVO.getMission_Pattern() + ",");
+			System.out.println(agetMissionVO.getMission_Pay());
+			System.out.println();
+		}
 	}
 
 	@Override

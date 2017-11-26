@@ -26,7 +26,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		}
 	}
 
-	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, sysdate, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION ( MISSION_NO, MISSION_CATEGORY, MISSION_NAME, MISSION_DES, ISSUER_MEM_NO, TAKECASE_MEM_NO, MISSION_RELEASE_TIME, MISSION_DUE_TIME, MISSION_START_TIME, MISSION_END_TIME, MISSION_STATE, MISSION_PATTERN, MISSION_PAY, MISSION_GPS_LAT, MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, sysdate, sysdate+5, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd hh:mm:ss') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd hh:mm:ss') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd hh:mm:ss') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd hh:mm:ss') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission order by mission_release_time desc";
 	private static final String GET_ONE_STMT = "SELECT mission_no ,mission_category , mission_name,mission_des,issuer_mem_no,takecase_mem_no,to_char(mission_release_time,'yyyy-mm-dd hh:mm:ss') mission_release_time,to_char(mission_due_time,'yyyy-mm-dd hh:mm:ss') mission_due_time,to_char(mission_start_time,'yyyy-mm-dd hh:mm:ss') mission_start_time,to_char(mission_end_time,'yyyy-mm-dd hh:mm:ss') mission_end_time,mission_state,mission_pattern,mission_pay,mission_Gps_Lat,mission_Gps_Lng FROM mission where mission_no = ?";
 	private static final String DELETE = "DELETE FROM mission where mission_no = ?";
@@ -271,7 +271,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
 
 			con = ds.getConnection();
@@ -837,11 +837,12 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		String key = null;
+		String[] col = {"MISSION_NO"};
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(INSERT_STMT,1);
+			pstmt = con.prepareStatement(INSERT_STMT,col);
 
 			pstmt.setString(1, getMissionVO.getMission_Category());
 			pstmt.setString(2, getMissionVO.getMission_Name());
@@ -859,8 +860,7 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 			
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
-				String key = rs.getString(1);
-				return key;
+				key = rs.getString(1);
 			} else {
 				return null;
 			}
@@ -884,5 +884,6 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 				}
 			}
 		}
+		return key;
 	}
 }
