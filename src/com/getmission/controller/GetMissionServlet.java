@@ -33,6 +33,8 @@ public class GetMissionServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
+		
+				
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -1040,7 +1042,6 @@ public class GetMissionServlet extends HttpServlet {
 			// }
 		}
 		
-		//map 的 jasn 
 		if("getmissionmap".equals(action)){
 			List<String> errorMsg = new LinkedList<>();
 			req.setAttribute("errorMsg", errorMsg);
@@ -1051,6 +1052,7 @@ public class GetMissionServlet extends HttpServlet {
 			GetMissionService getMissionSvc = new GetMissionService();
 			List<GetMissionVO> list = getMissionSvc.getAllValidMission();
 			jsonStr = gson.toJson(list);
+			String json = new Gson().toJson(list);
 			
 			System.out.println(jsonStr);
 			try {
@@ -1059,8 +1061,10 @@ public class GetMissionServlet extends HttpServlet {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			System.out.println(jsonStr);
-			out.write(obj.toString());
+			res.getWriter().write(json);
+			res.setContentType("Application/json");
+			res.setCharacterEncoding("UTF-8");
+//			out = res.getWriter();
 			out.flush();
 			out.close();
 			
