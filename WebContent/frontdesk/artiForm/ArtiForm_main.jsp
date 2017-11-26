@@ -17,25 +17,52 @@
 %>
 
 <jsp:useBean id="artiFormDAO" scope="page" class="com.artiForm.model.ArtiFormDAO" />
-
 <html>
 <head>
 <title>所有文章資料 - listAllArtiForm.jsp</title>
-<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
+<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 div> .timeline-body{
     float: left;
+}
+
+.video-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0 ;
+	overflow:hidden;
+	margin-left:10px;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:10px;
+	left:10px;
+	width:100%;
+	height:100%;
+}
+.gridContainer clearfix{
+  margin:0 auto;
 }
   
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-<body bgcolor='white'>
+
+<body style="background: url('.jpg') no-repeat center center fixed; background-size: cover; background-color:white;">
+
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -48,12 +75,12 @@ div> .timeline-body{
 </c:if>
 
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
-
+<div class="container">
 <div class="page-header position-relative">
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 </h1>
+                        <a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><h1>所有文章列表 </h1></a>
                     </div>
                 </div>
                     
@@ -69,6 +96,7 @@ div> .timeline-body{
                         </h1>
                       </div>
                   </div>
+    
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
@@ -85,75 +113,25 @@ div> .timeline-body{
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
-                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/ArtiForm_main.jsp">
+                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp">
                             <i>Main page</i>
                         </a>
                     </div>
-                        
                     </div>
-<div class="container" style="font-size: 18px; text-align: center;">       
-<%@ include file="/frontdesk/page1.file" %>                        
-	<c:forEach var="artiFormVO" items="${set}" varStatus="s" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" >
-   </div>                     
-                <div class="page-body">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-datetime">
-                                <div class="timeline-time">
-                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
-                                </div>
-                                <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-                                <div class="timeline-date" style="font-size:24px; font-family:Microsoft JhengHei;">${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</div>
-                                <div class="timeline-date">
-                                <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
-	                     style="height:100px;width:120px; box-shadow:3px 3px 12px gray;padding:3px;"/>
+            
+<div class="page-body">
+<div class="video-container">
 
-                                </div>
-                                <div class="timeline-time">
-                                <p></p>
-                                
-                                </div>
-                            </div>
-                            <div class="timeline-badge sky">
-                                <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			                    <td>${artiClassSvc.getOneClass(artiFormVO.arti_Cls_No).arti_Cls_Name}</td>
-                            </div>
-                            
-                            <div class="timeline-panel bordered-top-3 bordered-azure">
-                                <div class="timeline-header bordered-bottom bordered-blue">
-                                    <span class="timeline-title">
-                                    
-                                        <td> <a href="/BA104G3/artiForm/artiForm.do?arti_No=${artiFormVO.arti_No}&arti_Cls_No=${artiFormVO.arti_Cls_No}&mem_No=${memVO.mem_No}&action=jumpOne_For_Display">
-                                        ${artiFormVO.arti_No}</a></td>
-                                        <td> ${artiFormVO.arti_Status} </td>
-                                    </span>
+        <iframe class="embed-responsive" frameborder="0" allowfullscreen="1" 
+                        title="Youtube viedo player" width="50%" height="50%" 
+                        src="https://www.youtube.com/embed/jSwV3IpNF2U?playlist=ehjOL_bqzSc&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
+                        id="widget2" sytle="position: absolute; max-width:50% marging-left:-61px; margin-top:0px; width:600px; height:300px; webkitallowfullscreen mozallowfullscreen allowfullscreen;">
+        </iframe>          
+</div>
+</div>
 
-                                </div>
-                                <div class="timeline-body">
-                                <div class="">
-                                    <p style="font-family:Microsoft JhengHei;"> ${artiFormVO.arti_Title}</p>
-                                </div>                                
-                            </div>
-                            
-                            <div class="timeline-body">
-                            <p> 目前文章人氣 : ${artiFormVO.arti_Like} </p><br>
-                                    <img src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
-	                     style="height:150px;width:180px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-	                     
-                                </div>
-                           <div class="timeline-body">
-                                 
-                                </div>
-                                
-                            </div>
-                        </li>
-                    </ul>
-                </div> 
-                    </c:forEach>
-<div class="container" style="font-size: 18px; text-align: center;">    
- <%@ include file="/backdesk/page2.file" %> 
- </div>        
-     
+</div>
+<hr>
     <!--Basic Scripts-->
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -173,6 +151,7 @@ div> .timeline-body{
 
         ga('create', 'UA-52103994-1', 'auto');
         ga('send', 'pageview');
+
         
     </script>
 </body>
