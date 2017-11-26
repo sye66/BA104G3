@@ -2,9 +2,12 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
   ArtiReportService artiReportSvc = new ArtiReportService();
   Set<ArtiReportVO> set= (Set<ArtiReportVO>) request.getAttribute("artiReportSet");
   pageContext.setAttribute("set",set);
@@ -79,6 +82,7 @@
                               <td>
 			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 檢舉狀態變更 </button>
@@ -89,6 +93,7 @@
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                 <button class="btn btn-danger" type="submit" name="action" value="deleteReportFMBack"> 刪除檢舉 </button>

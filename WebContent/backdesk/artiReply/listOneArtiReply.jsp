@@ -5,9 +5,12 @@
 <%@ page import="com.artiClass.model.*"%>
 <%@ page import="com.artiReply.model.*"%>
 <%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+  
   ArtiReplyService artiReplySvc = new ArtiReplyService();
   ArtiReplyVO artiReplyVO = (ArtiReplyVO) request.getAttribute("artiReplySet");  
  %>
@@ -15,7 +18,7 @@
 
 <html>
 <head>
-
+ 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -101,21 +104,13 @@
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter">${artiReplyVO41.reply_Time}</h5>
                         <div class="widget-toolbar">
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="reply_No"  value="${artiReplyVO41.reply_No}">
-                                <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReply_For_Update">修改回覆</button>
-			                    </FORM>
-                            </div>
-                            </div>
+
                             <div class="btn-group">
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="reply_No"  value="${artiReplyVO41.reply_No}">
 			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
  			                    </FORM>  

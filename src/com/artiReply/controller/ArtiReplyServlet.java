@@ -618,13 +618,22 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				String reply_No = req.getParameter("reply_No");
 				String mem_No = req.getParameter("mem_No");
+				
+				String emp_No = req.getParameter("emp_No");
+				if(req.getSession().getAttribute("emp_No")==null){
+					String contextPath = getServletContext().getContextPath();
+					errorMsgs.add("@@ 要麻煩請你先登入喔~");
+					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+					failuewView.forward(req, res);
+					return;
+				}
 
 				/***************************2.開始刪除資料***************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
 				artiReplySvc.deleteArtiReply(reply_No, mem_No);
 
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/backdesk/artiReply/listAllArtiReply.jsp";
+				String url = "/backdesk/artiReply/listAllArtiReply_back.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 

@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.rank.model.*"%>
+<%@ page import="com.relation.model.*"%>
+<%@ page import="com.artiForm.model.*"%>
+<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-
+<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 
 <% 
 	MemVO memVO = (MemVO)session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
+	String mem_No_main = memVO.getMem_No();
 	RankService rankSvc = new RankService();
 	RankVO rankVO = rankSvc.getOneRank(mem_No);
 	pageContext.setAttribute("rankVO",rankVO);
+	ArtiFormService artiSvc = new ArtiFormService();
+	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
+	pageContext.setAttribute("set", set);
+	
 %>
       <%request.getSession().setAttribute("memVO" ,memVO); %>
 
@@ -24,7 +32,7 @@
 
 </head>
 
-<body>
+<body style="background-color : #ffc">
 	<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 	<br>
 	<br>
@@ -67,6 +75,9 @@
  				  </div>
  				</div>
  			</div>
+			
+<%--  				<jsp:include page="/frontdesk/relation/beAddFriendlList.jsp" flush="true" /> --%>
+			
  			<div class="col-xs-12 col-sm-8">
  				<div class="panel panel-info">
 					  <div class="panel-heading">
@@ -83,8 +94,9 @@
 					    		</tr>
 					    	</thead>
 					    	<tbody>
+					    	
 					    		<tr>
-					    			<td>資料</td>
+					    			<td></td>
 					    			<td>資料</td>
 					    			<td>資料</td>
 					    		</tr>
@@ -93,6 +105,7 @@
 					    			<td>資料</td>
 					    			<td>資料</td>
 					    		</tr>
+					    		
 					    	</tbody>
 					    </table>
 					  </div>
@@ -102,29 +115,26 @@
 				<br>
 				<div class="panel panel-info">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">標題</h3>
+					    <h3 class="panel-title">看看吧</h3>
 					  </div>
 					  <div class="panel-body">
 					    <table class="table table-hover">
 					    	<!-- <caption>我是表格標題</caption> -->
 					    	<thead>
-					    		<tr>
-					    			<th>表格標題</th>
-					    			<th>表格標題</th>
-					    			<th>表格標題</th>
-					    		</tr>
+					    		<th>
+					    			<a href="<%=request.getContextPath()%>/frontdesk/artiForm/listArti_ByMemNo.jsp">
+					    			<button class="btn btn-warning">前往個人文章頁面</button></a>
+					    		</th>
 					    	</thead>
 					    	<tbody>
+					    	<c:forEach var="artiFormVO" items="${set}">
 					    		<tr>
-					    			<td>資料</td>
-					    			<td>資料</td>
-					    			<td>資料</td>
+					    			<td>你發表了《${artiFormVO.arti_No}》這篇文章</td>
 					    		</tr>
 					    		<tr>
-					    			<td>資料</td>
-					    			<td>資料</td>
-					    			<td>資料</td>
+					    			<td>有${artiFormVO.arti_Like}個人說你的文章讚!</td>
 					    		</tr>
+					    	</c:forEach>
 					    	</tbody>
 					    </table>
 					  </div>

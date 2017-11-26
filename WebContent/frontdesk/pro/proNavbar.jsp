@@ -38,7 +38,8 @@
 	align-items: center;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
-	padding: .5rem 1rem
+	padding: .5rem 1rem;
+	
 }
 
 .navbar>.container, .navbar>.container-fluid {
@@ -76,11 +77,13 @@
 	list-style: none;
 	border:2px;
 	border-color: red;
-}
 
+}
+/* 字大小 */
 .navbar-nav .nav-link {
 	padding-right: 0;
-	padding-left: 0
+	padding-left: 0;
+		font-size:18px;
 }
 
 .navbar-nav .dropdown-menu {

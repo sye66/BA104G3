@@ -3,20 +3,34 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
 <%@ page import="com.mem.model.*" %>
+<%@ page import="com.casecandidate.model.*" %>
 <%@ page import="com.relation.model.*" %>
+<%@ page import="com.getmission.model.*" %>
 <%-- <c:if test="${not empty login_memVO.mem_Id}"><% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %></c:if> --%>
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 <jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
-
-
+<jsp:useBean id="CaseCandidateService" scope="page" class="com.casecandidate.model.CaseCandidateService"/>
+<jsp:useBean id="GetMissionService" scope="page" class="com.getmission.model.GetMissionService"/>
 
 <% MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
-   String memVO1 = request.getParameter("takecase_Mem_No");
+//    String memVO1 = request.getParameter("takecase_Mem_No");
    String takecase_Mem_No = request.getParameter("takecase_Mem_No");
+   String issuer_Mem_No = request.getParameter("issuer_Mem_No");
+   String mission_No = request.getParameter("mission_No");
+//    System.out.println(memVO1);
+
+   CaseCandidateVO caseCandidateVO = new CaseCandidateVO();
+   CaseCandidateService ccSvc = new CaseCandidateService();
+   caseCandidateVO.setCandidate_Mem_No(takecase_Mem_No);
+   caseCandidateVO.setMission_No(mission_No);
+   request.setAttribute("caseCandidateVO", caseCandidateVO);
+   request.setAttribute("mission_No", mission_No);
+//    System.out.println("caseCandidateVO.getCandidate_Mem_No"+caseCandidateVO.getCandidate_Mem_No());
+//    System.out.println("caseCandidateVO.getCandidate_Mem_No"+caseCandidateVO.getCandidate_Mem_No());
    
-   System.out.println(memVO1);
-   System.out.println("takecase_Mem_No"+takecase_Mem_No);
+   
+//    System.out.println(caseCandidateVO.candidate_Mem_No);
 %>
         
 <%/*
@@ -93,9 +107,8 @@
     <body onload="connect();" onunload="disconnect();">
 <!--     上層 div-->
         <div id="fix_head" style="height : 100px ; width:500%; background-color: #ccc">
-       
 		</div>
-		<div id="head">
+		<div id="head" style="height : 100px ; width:500%; background-color: #ccc">
         <h1> Chat Room </h1>
 	    <h3 id="statusOutput" class="statusOutput"></h3>
 		
@@ -124,9 +137,9 @@
 <!-- 			</div> -->
 		</div>
 
-			<div id="fix_bottom" style="height : 50px ; width:5000px; background-color:#fff;"></div>
+			<div id="fix_bottom" style="height : 50px ; width:550px; background-color:#fff;"></div>
         <div id="type_in">
-        <div class="panel input-area">
+        <div class="panel input-area" style="height : 50px ; width:5500px; background-color:#18bc9c;">
         <hr style="width:500%">
             <input value="${memVO.mem_Id}" readonly id="userName" class="text-field" type="text"/>		
        
@@ -139,27 +152,50 @@
             <input type="submit" id="sendMessage" class="button" value="送出" onclick="sendMessage();"/>
 		    <input type="button" id="connect"     class="button" value="連線" onclick="connect();"/>
 		    <input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/>
-<!-- 		    <select type="button" id="roomNo"  class="button" value="房間號碼" onclick="sendRoomNo();"> -->
-<!-- 		    <option value="1001">AAAAAA</option> -->
-<%-- 			<option value="${memVO.mem_No}">BBBBB</option> --%>
-<!-- 			<option value="3">其他</option> -->
-<!-- 		    </select> -->
+			<input id="mem_Pic" name="mem_Pic" size="30" type="file" value="上傳照片" onchange="previewFile();"  multiple/>
+<%-- 			<img id="img_pic" src="<%=request.getContextPath()%>/mem/images/nopic.jpg" alt="your image" width="150" height="200" />  --%>
 	    </div>
 	    </div>
     </body>
 <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery.js"></script>
     
+    
+    <script type="text/javascript">
+    
+		function previewFile(input) {
+			 var i;
+	 		 var preview = document.querySelector('#img_pic');
+	  		 var reader  = new FileReader();
+			for(i=0 ; i<100;i++){
+	 		 var file    = document.querySelector('input[type=file]').files[i];
+	  		  reader.addEventListener("load", function () {
+	  		  preview.src = reader.result;
+	 			 }, false);
+	 		 if (file) {
+	 			 reader.onload = function(e){
+	 				 //e.target.result = base64 format picture
+	 				sendImg(e.target.result);
+	 			 }
+	   			 reader.readAsDataURL(file);
+	   			
+	 		 }	
+		}
+		}
+    
+    </script>
+    
 <script>
     
     //把EL跟JSP的內容存成變數,方便跟JS溝通
-     
     
+    var missionNo = '${caseCandidateVO.mission_No}';
+    var targetMemNo = '${caseCandidateVO.candidate_Mem_No}';
 	var memno = '${memVO.mem_No}';
     var context = '<%=request.getContextPath() %>';
     var memname = "${memVO.mem_Id}";
+    alert("missionNo + targetMemNo" +targetMemNo+missionNo);
     
-    var MyPoint = "/MyEchoServer/"+memname+"/"+memno;		// 對照server 哪個Server / 使用者名稱 / 房號
-    alert(MyPoint);
+    var MyPoint = "/MyEchoServer/"+memno+"/"+missionNo;		// 對照server 哪個Server / 使用者名稱 / 房號
     var host = window.location.host;
     var path = window.location.pathname;
     var webCtx = path.substring(0, path.indexOf('/', 1));
@@ -215,17 +251,66 @@ webSocket.onmessage = function(event) {
 // 			var JSON.data{userName : ""};
 			var userName = jsonObj.userName;
 	        var message = jsonObj.message;
-	        console.log("@@@@@@@@@@@@@"+ jsonObj.memno)
-			console.log("jsonObj.userName"+ jsonObj.userName)
-			console.log("11sadasd11111userName +"+ memno)
-	        if(memname === jsonObj.userName){
-	        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+userName+':'+message+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-	            console.log("endPointURL +" +endPointURL);
-			console.log("1111111userName +"+ userName)
-			} else {
-	        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+'</span><span>  </span></div>');
-			}
+	        var url = jsonObj.src;
+		    var nowdate = jsonObj.time;
+// 	        var status = jsonObj.status;
+	        	
+	        if(url !=null){
+	        
+			        if(memname != jsonObj.userName){
+			        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+':'+message+':'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+					console.log("1111111userName +"+ userName)
+					} else {
+			        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+					}
+	        }else{
+	        	    if(memname === jsonObj.userName){
+	        	       $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+':'+userName+':'+message+':'+nowdate+':'+status+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+	        	    }else{
+	        		   $('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+status+':'+'</span><span>  </span></div>');
+	        	     }
+	        }
 			console.log('test')			
+			
+			
+// 		     if(url !=null){
+			        
+// 			        if(memname === jsonObj.userName){
+// 			        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+':'+message+':'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+// 					console.log("1111111userName +"+ userName)
+// 					} else {
+// 			        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+// 					}
+// 	        }else{
+// 	        	    if(memname === jsonObj.userName){
+// 	        	       $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+':'+userName+':'+message+':'+nowdate+':'+status+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+// 	        	    }else{
+// 	        		   $('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+status+':'+'</span><span>  </span></div>');
+// 	        	    }
+// 	        }
+// 			console.log('test')			
+			
+// 			   if(url ==null){
+// 			        if(memname === jsonObj.userName){
+// 			        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+url+':'+userName+':'+message+':'+nowdate+':'+status+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+// 					console.log("1111111userName +"+ userName)
+// 					} else {
+// 			        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+status+':'+url+'</span><span>  </span></div>');
+// 					}
+// 	        }else{
+	        	
+// 	        	    if(memname === jsonObj.userName){
+// 	        	       $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+':'+userName+':'+message+':'+nowdate+':'+status+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+// 	        	    }else{
+// 	        		   $('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+status+':'+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+// 	        	    }
+// 	        	}
+// 	        }
+// 			console.log('test')		
+			
+			
+			
+			
 			$('html, body').scrollTop(10000000);
 		};
 
@@ -269,12 +354,34 @@ webSocket.onclose = function(event) {
 	    	
 	    	// * 把使用者名稱 跟訊息 存成jsonObj 傳到 server端的 onMessage()
 	    	console.log('-------------------------'+userName)
-	        var jsonObj = {"userName" : userName, "message" : message, "memno" : memno};
-webSocket.send(JSON.stringify(jsonObj));
+	        var jsonObj = {"userName" : userName, "message" : message, "memno" : memno ,};
+		webSocket.send(JSON.stringify(jsonObj));
+		
+		
 	        inputMessage.value = "";
 	        inputMessage.focus();
 	    }
 	}
+	
+	function sendImg(url){
+		var inputMessage = document.getElementById("message");
+	    var message = inputMessage.value.trim();
+	    var date = new Date();
+	    var nowdate = date.getHours()+":"+date.getMinutes()
+	    var jsonObj ={
+	    		"userName" : userName,
+	    		"src" : url,
+	    		"time" : nowdate,
+// 	    		"status" : status
+	    		};
+	    console.log("src : " + url);
+	    webSocket.send(JSON.stringify(jsonObj));
+	    inputMessage.value = "";
+        inputMessage.focus();
+		}
+	
+	
+	
 
 	// (9) 把斷線的按扭打開 ,其他兩個關閉
 	function disconnect () {
