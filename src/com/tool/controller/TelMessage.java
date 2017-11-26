@@ -52,7 +52,10 @@ public class TelMessage {
 
 		 public static void main(String[] args) {
 			 TelMessage se = new TelMessage();
-		 	String[] tel ={"0953711016"};
+			 String te = "0953-711016";
+			 String tel2 =te.replaceAll("-","");
+			 String[] tel ={tel2};
+		 	
 		 	String message = "恭喜你獲得麗星郵輪3日遊,請於三日內繳交保證金100元,於(005) 069-005-161111,以確認資格!!";
 		 	se.sendMessage(tel , message);
 		 }	

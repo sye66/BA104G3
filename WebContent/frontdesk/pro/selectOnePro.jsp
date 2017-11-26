@@ -112,16 +112,7 @@
 // 	}
 </script>
 
-
-
-
-
-
-
-
-
-
-
+<title>工具人出租</title>
 
 </head>
 <body>
@@ -232,7 +223,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 							<td style="padding-left: 50px; padding-top: 13px;">
 							<FORM METHOD="post" style="height: 42px; width: 180px;" ACTION="<%=request.getContextPath()%>/pro/proTrackServlet.do">
-									<button type="submit" class="btn btn-Secondary"  style="width: 180px; margin-top: 5px; font-size: 20px;">加入追蹤清單</button>
+									<button type="submit" class="btn btn-Secondary"  style="width: 180px; margin-top: 5px; font-size: 20px;border-radius: 5px;">加入追蹤清單</button>
 									<input type="hidden" name="pro_No" value="${proVO.pro_No}" >
 									<input type="hidden" name="proCar_Price"  value="${dsPrice}">
 									<input type="hidden" name="action" value="insertProTrack">
@@ -243,7 +234,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 							
 							<td style="padding-left: 100px; padding-top: 13px;">
 								<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-								style="width: 50px;">已加入追蹤</td>
+								style="width: 50px;border-radius: 3px;">已加入追蹤</td>
 
 							<%
 								}
@@ -266,7 +257,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 
 									<button type="submit" class="btn btn-warning addcar" 
-										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;">放入購物車</button>
+										style="width: 180px; margin: 5px; margin-left: 0px; font-size: 20px;border-radius: 5px;">放入購物車</button>
 									<input type="hidden" name="proCar_No" value="${proVO.pro_No}">
 									<input type="hidden" name="proCar_Name" value="${proVO.pro_Name}"> 
 									<input type="hidden" name="proCar_Info" value="${proVO.pro_Info}"> 
