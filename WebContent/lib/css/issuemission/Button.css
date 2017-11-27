@@ -1,0 +1,81 @@
+.issuemission_notenough_goreserve_button {
+   padding: 25px 50px;
+   border: 1px solid #C7C7C7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#ADEDBF), to(#0A570A));
+   background: -webkit-linear-gradient(top, #ADEDBF, #0A570A);
+   background: -moz-linear-gradient(top, #ADEDBF, #0A570A);
+   background: -ms-linear-gradient(top, #ADEDBF, #0A570A);
+   background: -o-linear-gradient(top, #ADEDBF, #0A570A);
+   background-color: #0A570A;
+   box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #0CA819;
+   -webkit-box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #0CA819;
+   -moz-box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #0CA819;
+   -webkit-border-radius: 19px;
+   -moz-border-radius: 19px;
+   border-radius: 20px;
+   text-shadow: #41A822 1px 1px 0px;
+   color: #B9D4C1;
+   font-size: 50px;
+   font-family: '微軟正黑體';
+   text-decoration: none;
+   font-weight: bold;
+   -webkit-transition: 0.2s;
+   -moz-transition: 0.2s;
+   -o-transition: 0.2s;
+   cursor: pointer;
+   text-align: center;
+   }
+.issuemission_notenough_goreserve_button:hover {
+   background: none;
+   background-color: #0A570A;
+   box-shadow: 0px 0px 5px 0px #AAAAAA;
+   -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+   -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+   border: 1px solid #ffffff;
+   color: #1A8A0B;
+   }
+.issuemission_notenough_goreserve_button:active {
+   top: 1px;
+   position: relative;
+   }
+
+.issuemission_notenough_gogetmission_button {
+   padding: 25px 50px;
+   border: 1px solid #C7C7C7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#FF0000));
+   background: -webkit-linear-gradient(top, #FFFFFF, #FF0000);
+   background: -moz-linear-gradient(top, #FFFFFF, #FF0000);
+   background: -ms-linear-gradient(top, #FFFFFF, #FF0000);
+   background: -o-linear-gradient(top, #FFFFFF, #FF0000);
+   background-color: #FF0000;
+   box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #9C0000;
+   -webkit-box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #9C0000;
+   -moz-box-shadow: 0px 7px 2px -5px #1A1A1A, inset 0px 0px 3px #9C0000;
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+   text-shadow: #FF7A7A 1px 1px 0px;
+   color: #8F0000;
+   font-size: 50px;
+   font-family: '微軟正黑體';
+   text-decoration: none;
+   font-weight: bold;
+   -webkit-transition: 0.2s;
+   -moz-transition: 0.2s;
+   -o-transition: 0.2s;
+   cursor: pointer;
+   text-align: center;
+   }
+.issuemission_notenough_gogetmission_button:hover {
+   background: none;
+   background-color: #FF0000;
+   box-shadow: 0px 0px 5px 0px #AAAAAA;
+   -webkit-box-shadow: 0px 0px 5px 0px #AAAAAA;
+   -moz-box-shadow: 0px 0px 5px 0px #AAAAAA;
+   border: 1px solid #ffffff;
+   color: #470000;
+   }
+.issuemission_notenough_gogetmission_button:active {
+   top: 1px;
+   position: relative;
+   }

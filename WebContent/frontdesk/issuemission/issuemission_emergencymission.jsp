@@ -134,7 +134,7 @@
 
 						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
 								<input type="hidden" name="action" value="issue_Emergency_Mission">
-								<input type="submit" name="發出任務">
+								<input type="submit" name="發出任務" class="btn btn-primary">
 						</div>
 						
 					</div>
