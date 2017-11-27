@@ -496,7 +496,7 @@ webSocket.onclose = function(event) {
 		   
 // 		    request.setAttribute("chatRecordVO", chatRecordVO);
 <%-- 		   %> --%>
-// 		   console.log("chatContent" + chatContent);
+// 		   console.log("chatContent" + chatContent); 
 		   
 		     var jsonObj = {"userName" : userName, "message" : message, "memno" : memno};
 				webSocket.send(JSON.stringify(jsonObj));
