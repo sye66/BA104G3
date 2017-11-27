@@ -85,7 +85,7 @@
 			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 檢舉狀態變更 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看檢舉 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>                            

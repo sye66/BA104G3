@@ -77,7 +77,7 @@
 	list-style: none;
 	border:2px;
 	border-color: red;
-
+  
 }
 /* 字大小 */
 .navbar-nav .nav-link {
@@ -492,7 +492,7 @@
 							<li class="nav-item">
 								<h3>
 									<a class="nav-link js-scroll-trigger"
-										href="#contact"><i
+										href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp"><i
 										class="glyphicon glyphicon-send"></i> 發案區 </a>
 								</h3>
 							</li>
@@ -617,7 +617,12 @@ function getFocus() {
 							<!-- End # Login Form -->
 
 
-
+					<!--神奇小按鈕 -->
+						<br>
+						<button type="button" onclick="aa0953711016()">神</button>
+						<button type="button" id="M000001">M1</button>						
+						
+                    <!--神奇小按鈕 -->
 
 						</div>
 						<div class="modal-footer">
@@ -627,9 +632,26 @@ function getFocus() {
 					</div>
 				</div>
 			</div>
+<!--神奇方法 -->
+			<script type="text/javascript">
+				function aa0953711016(){
+					
+				var v = document.getElementById("login_username");			
+					v.value="aa0953711016@gmail.com";
+						
+				var a=document.getElementById("login_password");  
+					a.value="A123456";	
+				}
+				$('#M000001').click(function(){
+					$('#login_username').val("aaa@gmail.com");
+					$('#login_password').val("A123456");
+				});
+				
+				
+			</script>
+		<!--神奇方法 -->
 
-
-
+	
 
 			<div class="modal fade" id="modal-id1">
 				<div class="modal-dialog">

@@ -38,6 +38,9 @@ public class ArtiFormJNDIDAO implements ArtiFormDAO_interface {
 	private static final String GET_ARTI_BY_MEM_NO= 
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM WHERE MEM_NO = ? order by ARTI_NO DESC";
 
+	private static final String GET_ARTI_BY_ARTI_CLS_NO= 
+			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM WHERE ARTI_CLS_NO = ? order by ARTI_NO DESC";
+	
 	private static final String GET_ONE_STMT =
 			"SELECT ARTI_NO,MEM_NO,ARTI_TITLE,ARTI_LIKE,DESCRIBE,to_char(ARTI_TIME,'yyyy-mm-dd hh:mm:ss') ARTI_TIME,ARTI_PIC,ARTI_CLS_NO,ARTI_STATUS FROM ARTI_FORM where ARTI_NO = ?";
 	
@@ -415,6 +418,71 @@ public class ArtiFormJNDIDAO implements ArtiFormDAO_interface {
 			pstmt =  con.prepareStatement(GET_ARTI_BY_MEM_NO);
 			
 			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+
+		    while(rs.next()){
+		    	
+		    	artiFormVO = new ArtiFormVO();
+
+				artiFormVO.setArti_No(rs.getString("ARTI_NO"));
+				artiFormVO.setMem_No(rs.getString("MEM_NO"));
+				artiFormVO.setArti_Title(rs.getString("ARTI_TITLE"));
+				artiFormVO.setArti_Like(rs.getInt("ARTI_LIKE"));
+				artiFormVO.setDescribe(rs.getString("DESCRIBE"));
+				artiFormVO.setArti_Time(rs.getTimestamp("ARTI_TIME"));
+				artiFormVO.setArti_Pic(rs.getBytes("ARTI_PIC"));
+				artiFormVO.setArti_Cls_No(rs.getInt("ARTI_CLS_NO"));
+				artiFormVO.setArti_Status(rs.getString("ARTI_STATUS"));
+				set.add(artiFormVO);
+
+		    }
+			
+		} catch (SQLException se){
+			System.out.println(se);
+			throw new RuntimeException("A database error occured." + se.getMessage());
+		} catch (Exception e){
+			System.out.println(e);
+			e.printStackTrace(System.err);
+		} finally {
+			if(rs!=null){
+				try{
+					rs.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt!=null){
+				try{
+					pstmt.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con!=null){
+				try{
+					con.close();
+				} catch (Exception e){
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	@Override
+	public Set<ArtiFormVO> findArtiByArtiClsNo(Integer arti_Cls_No){
+		Set<ArtiFormVO> set = new LinkedHashSet<ArtiFormVO>();
+		ArtiFormVO artiFormVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{			
+			con = ds.getConnection();
+			pstmt =  con.prepareStatement(GET_ARTI_BY_ARTI_CLS_NO);
+			
+			pstmt.setInt(1, arti_Cls_No);
 			rs = pstmt.executeQuery();
 
 		    while(rs.next()){

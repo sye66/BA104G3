@@ -17,45 +17,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>工具人出租</title>
 
-<style>
-  table#table-1 {
-  margin-top: 10%;
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-    
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 98%;
-	background-color: white;
-	    font-size:20px;
-	margin-bottom: 5px;
-  }
-  table, th, td ,#bo{
-    border: 1px solid #0044BB;
-  }
-  th, td {
-    padding: 5px;
-    font-size:20px;
-    text-align: center;
-  }
-  #img{width:150px;
-	heigth:200px}
-	
-</style>
-
 </head>
 <body>
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
@@ -114,4 +75,45 @@
 </div>
 
 </body>
+
+
+<style>
+  table#table-1 {
+  margin-top: 10%;
+	background-color: #CCCCFF;
+    border: 2px solid black;
+    text-align: center;
+    
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
+
+<style>
+  table {
+	width: 98%;
+	background-color: white;
+	    font-size:20px;
+	margin-bottom: 5px;
+  }
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
+  }
+  th, td {
+    padding: 5px;
+    font-size:20px;
+    text-align: center;
+  }
+  #img{width:150px;
+	heigth:200px}
+	
+</style>
+
 </html>

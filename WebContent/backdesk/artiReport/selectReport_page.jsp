@@ -95,6 +95,7 @@
                                   </FORM>
                                   </div><!--info-->
                         </li>
+                        
                         <li>
                             <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
                                 <div class="info">
@@ -114,21 +115,7 @@
                                </FORM>
                                 </div><!--info-->
                         </li>
-                            <li>
-                                <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
-                                    <div class="info">
-                                       <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                                       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
-                                       <b><font color=orange> 選擇檢舉的文章分類 : </font></b>
-                                       <select size="1" name="arti_Cls_No">
-                                       <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-                                       <option value="${artiClassVO.arti_Cls_No}"${(artiReportVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' }>${artiClassVO.arti_Cls_Name}
-                                       </c:forEach>   
-                                       </select>
-                                        <button class="btn btn-primary" type="submit" name="action" value="listReport_ByArtiClsNo"> 送出查詢 </button>
-                                       </FORM>
-                                    </div><!--info-->
-                            </li>
+
                             <li>
                                 <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
                                     <div class="info">

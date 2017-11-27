@@ -5,34 +5,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>工具人出租</title>
-<style>
-  table#table-1 {
-	width: 450px;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 80px;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-  #img{width:150px;
-	heigth:200px}
-</style>
-
-
-<style type="text/css">
-	#top{margin-top: auto;
-		 margin-left: auto}
-</style>
 
 </head>
 <body>
@@ -116,4 +88,34 @@
 
 
 </body>
+
+<style>
+  table#table-1 {
+	width: 450px;
+	background-color: #CCCCFF;
+	margin-top: 5px;
+	margin-bottom: 10px;
+    border: 3px ridge Gray;
+    height: 80px;
+    text-align: center;
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+  #img{width:150px;
+	heigth:200px}
+</style>
+
+
+<style type="text/css">
+	#top{margin-top: auto;
+		 margin-left: auto}
+</style>
+
 </html>

@@ -24,7 +24,7 @@ RelationService relationSvc = new RelationService();
 if(related_Mem_No ==null){
 	
 	related_Mem_No= memVO.getMem_No();
-	System.out.println("related_Mem_No + " +related_Mem_No);
+	System.out.println("related_Mem_No ++++ " +related_Mem_No);
 }
  
 List<RelationVO> relationVO = relationSvc.getAllFriends(related_Mem_No);
@@ -139,6 +139,7 @@ System.out.println("relationVO + " +relationVO);
 		<th>性別</th>
 		<th>完成任務數</th>
 		<th>聊天視窗</th>
+		<th>刪除好友</th>
 		</tr>
 			
 		<%@ include file="page1.file" %>
@@ -165,7 +166,7 @@ System.out.println("relationVO + " +relationVO);
 				</h2></c:if></c:if>
 				
 				
-			<td><input type="subbmit" class="btn btn-success btn-block btn-lg" value="申請聊天" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')"></td>
+			<td><input type="submit" style="width:70px"  class="btn btn-success btn-sm" value="申請聊天" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')"></td>
 <!-- 			   <input type="hidden" name="action" value="updateByMem"> -->
 			   
 			   
@@ -177,8 +178,17 @@ System.out.println("relationVO + " +relationVO);
 			
 			
 			
-		</tr>
+		
 		</form>	
+		
+		<form METHOD="post" ACTION="<%=request.getContextPath()%>/relation/relation.do?" name="form1">
+			    <input type="hidden" name="mem_No" value="${relationVO.mem_No}">
+	        	<input type="hidden" name="related_Mem_No" value="<%= (relationVO==null)? "" : memVO.getMem_No()%>">
+				<input type="hidden" name="relation_Status" value=1 >
+			<td><input style="width:50px" type="submit" class="btn btn-danger  btn-sm" value="刪除" ></td>
+			    <input type="hidden" name="action" value="delete">
+		</form>
+		</tr>
 		</c:forEach>
 </table>
 <%@ include file="page2.file" %>

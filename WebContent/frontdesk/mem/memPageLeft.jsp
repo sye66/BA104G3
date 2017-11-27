@@ -105,7 +105,6 @@
                         	<h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/mem/memAuthentication.jsp">會員驗證</a></h3>
                         </c:if>
                             <h3><a id="noUnderLine" href="<%= request.getContextPath() %>/frontdesk/mem/memUpdateFile.jsp">修改會員資料</a></h3>
-                            <h3><a id="noUnderLine" href="#">忘記密碼</a></h3>
                         </div>
                     </div>
                 </div>
@@ -152,8 +151,7 @@
                     </div>
                     <div id="ddd" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel4">
                         <div class="panel-body">
-                            <h3><a id="noUnderLine" href="#">ＦＡＱ</a></h3>
-                            <h3><a id="noUnderLine" href="#">免責條款</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/mem/FAQ.jsp">ＦＡＱ</a></h3>
                         </div>
                     </div>
                 </div>

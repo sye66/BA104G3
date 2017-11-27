@@ -41,55 +41,6 @@
 <%-- 	<link rel=stylesheet type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/register.css"> --%>
 <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/component/datetimepicker/jquery.datetimepicker.css" /> --%>
 <%-- <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/mem/register.css" /> --%> 
-<style>
-  table#table-1 {
-	width: 98%;
-	background-color: #CCCCFF;
-	margin-top: 5px;
-	margin-bottom: 10px;
-    border: 3px ridge Gray;
-    height: 40px;
-    text-align: center;
-    
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 98%;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	
-  }
-  table, th, td ,#bo{
-    border: 1px solid #0044BB;
-    text-align: center;
-     font-size:20px;
-  } 
-  th, td {
-    padding: 5px;
-    text-align: center;
-    height:200px;
-  }
-  #img{width:150px;
-	heigth:150px}
-</style>
-<style>
-#img_pic,#old_pic{width:150px;
-	heigth:200px}
-	#hh {
-	 height:100px}
-</style>
 
   </head>
 
@@ -286,7 +237,55 @@
 		
 </script>
 
+<style>
+  table#table-1 {
+	width: 98%;
+	background-color: #CCCCFF;
+	margin-top: 5px;
+	margin-bottom: 10px;
+    border: 3px ridge Gray;
+    height: 40px;
+    text-align: center;
+    
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
 
+<style>
+  table {
+	width: 98%;
+	background-color: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+  }
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
+    text-align: center;
+     font-size:20px;
+  } 
+  th, td {
+    padding: 5px;
+    text-align: center;
+    height:200px;
+  }
+  #img{width:150px;
+	heigth:150px}
+</style>
+<style>
+#img_pic,#old_pic{width:150px;
+	heigth:200px}
+	#hh {
+	 height:100px}
+</style>
 
 
 

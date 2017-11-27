@@ -69,7 +69,8 @@
                         <h5 class="bigger lighter"> ${artiReplyVO.mem_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style="">${artiReplyVO.arti_Cls_No}</div>
+                            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
+                                <div class="" style="">${artiClassSvc.getOneClass(artiReplyVO.arti_Cls_No).arti_Cls_Name }</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
@@ -110,19 +111,7 @@
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter">${artiReplyVO.reply_Time}</h5>
                         <div class="widget-toolbar">
-                            <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-                                <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
-			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                    </FORM>
-                            </div>
-                            </div>
+                            
                             <div class="btn-group">
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
@@ -140,16 +129,9 @@
                         </div>
                     </div>
                 </div>
-    
-	<tr>	
-		<td></td>
-		<td></td>
-		<jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			<td>${artiClassSvc.getOneClass(artiReplyVO.arti_Cls_No).arti_Cls_Name }</td>
-	</tr>
-
 	</c:forEach>
-
+<div class="container" style="font-size: 18px; text-align: center;">    
  <%@ include file="/backdesk/page2.file" %> 
+ </div>
 </body>
 </html>

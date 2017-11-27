@@ -83,7 +83,7 @@
               <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>
             </li>
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
+              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/ArtiForm_main.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
             </li>
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
@@ -169,22 +169,22 @@ function getFocus() {
                     </form>
                     <!-- End # Login Form -->
                     
-					<!--神奇小按鈕 -->
 						<br>
-						<button type="button" onclick="aa0953711016()">神</button>
-						<button type="button" id="M000001">M1</button>						
-						
+						<div class="col-xs-12 col-sm-8"><button type="button" onclick="aa0953711016()">神</button>
+						<button type="button" id="M000001">M1</button></div>						
+						<div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
+					<!--神奇小按鈕 -->
                     <!--神奇小按鈕 -->
                     
 					</div>
 					<div class="modal-footer">
 <%-- 						<button type="button" class="btn btn-default" data-dismiss="modal">����</button> 
- 						<button type="button" class="btn btn-primary">Save changes</button> --%>
+ 						<button type="button" class="btn btn-danger">Save changes</button> --%>
 					</div>
 				</div>
 			</div>
 		</div>
-<!--神奇方法 -->
+		<!--神奇方法 -->
 			<script type="text/javascript">
 				function aa0953711016(){
 					

@@ -133,7 +133,7 @@ public class Follow_tmDAO implements Follow_tmDAO_interface{
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(UPDATE);
+			pstmt = con.prepareStatement(DELETE);
 			pstmt.setString(1, follower_Mem_No);
 			pstmt.setString(2, followed_Mem_No);
 			
