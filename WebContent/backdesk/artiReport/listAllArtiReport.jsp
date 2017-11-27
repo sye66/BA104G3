@@ -60,7 +60,7 @@
                         <th> 會員名稱 </th>
                         <th> 文章標題 </th>
                         <th> 檢舉時間 </th>
-                        <th> 類別 </th>
+                        <th> 後台處理回覆 </th>
                         <th> 檢舉狀態 </th>
                         <th > 後台管理 </th>
                     </tr>
@@ -76,9 +76,8 @@
                              <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService"/>
 			                 <td>${artiFormSvc.getOneArtiForm(artiReportVO.arti_No).arti_Title }</td>
                              <td> <fmt:formatDate value="${artiReportVO.report_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-                             
-                              <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			                  <td>${artiClassSvc.getOneClass(artiReportVO.arti_Cls_No).arti_Cls_Name }</td>
+
+			                  <td>${artiReportVO.rep_Re_Desc}</td>
                              <td> ${artiReportVO.report_Status} </td>
                              
 		                     

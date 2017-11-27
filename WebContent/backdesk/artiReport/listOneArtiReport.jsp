@@ -55,8 +55,7 @@
                         <h5 class="bigger lighter"> ${artiReportSet.mem_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                            <div class="" style="">${artiClassSvc.getOneClass(artiReportSet.arti_Cls_No).arti_Cls_Name }</div>
+                            <div class="" style="">${artiReportSet.rep_Re_Desc}</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
