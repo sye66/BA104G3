@@ -1,4 +1,4 @@
-<%@page import="java.sql.Timestamp"%>
+	<%@page import="java.sql.Timestamp"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -24,7 +24,7 @@
 <body>
 	
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
-	<jsp:include page="/backdesk/disputecase/backdeskLeft_DisputeCase.jsp" flush="true" />
+	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />
 	<div class="container">
 	
 

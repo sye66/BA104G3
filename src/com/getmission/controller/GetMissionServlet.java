@@ -1253,7 +1253,7 @@ public class GetMissionServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
-				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_emergencymission.jsp");
 				inputError.forward(req, res);
 			}	
 		}
@@ -1317,7 +1317,7 @@ public class GetMissionServlet extends HttpServlet {
 						System.out.println(errorMsgs);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
-					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_takecasemission.jsp");
 					inputError.forward(req, res);
 					return;
 				}
@@ -1359,7 +1359,7 @@ public class GetMissionServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
-				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_takecasemission.jsp");
 				inputError.forward(req, res);
 			}	
 		}
