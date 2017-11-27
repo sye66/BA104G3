@@ -16,7 +16,18 @@
 		<script src="<%=request.getContextPath()%>/lib/component/JQueryUI/jquery-ui.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
-		<style>
+	    <style type="text/css">
+	        body {
+	            background-image: url(<%=request.getContextPath()%>/res/images/issuemission/tool_1920.jpg);
+	            background-repeat: no-repeat;
+	            background-attachment: fixed;
+	            background-position: center;
+	            background-size: cover;
+	            font-family: Microsoft JhengHei;
+	        }
+    	   label,p {
+	       	color: white;
+	       }
 	       #map {
 	        height: 300px;
 	        width: 100%;
@@ -71,7 +82,7 @@
 								<label for="mission_Pay">積分花費</label>
 								<input type="number" name="mission_Pay" id="mission_Pay" class="form-control is-invalid" value=50>
 						 	    <div class="invalid-feedback">
-	        						一般任務固定消費50點積分
+	        						<p>直接發案積分無上限</p>
 	      						</div>
 							</div>
 						<%-- 位置GoogleMap --%>
