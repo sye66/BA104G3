@@ -9,7 +9,7 @@ import com.pro.model.ProVO;
 public class ProOrdListService {
 	private ProOrdListDAO_interface dao;
 	public ProOrdListService(){
-		dao = new ProOrdListJDBCDAO();
+		dao = new ProOrdListDAO();
 	}
 	
 	public ProOrdListVO addProOrdList(String ord_No,String pro_No,Integer ordPro_Count,Integer ordPor_Price,Connection con){

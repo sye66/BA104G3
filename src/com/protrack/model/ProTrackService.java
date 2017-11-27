@@ -8,7 +8,7 @@ import com.pro.model.ProVO;
 public class ProTrackService {
 	private ProTrackDAO_interface dao;
 	public ProTrackService(){
-		dao = new ProTrackJDBCDAO();
+		dao = new ProTrackDAO();
 	}
 	public ProTrackVO addProTrack(String mem_No,String pro_No){
 		ProTrackVO proTrackVO = new ProTrackVO();
