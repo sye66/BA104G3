@@ -34,6 +34,11 @@ public class ChatRecordService {
 		return dao.findByPrimaryKey(sender_Mem_No, receiver_Mem_No, chat_Datetime);
 	}
 	
+	public List<ChatRecordVO> getRecord(String sender_Mem_No, String receiver_Mem_No) {
+		return dao.getRecord(sender_Mem_No, receiver_Mem_No);
+	}
+	
+	
 	public List<ChatRecordVO> getAllChatRecord(){
 		return dao.getAll();
 	}

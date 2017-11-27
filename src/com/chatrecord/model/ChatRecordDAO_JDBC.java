@@ -20,6 +20,8 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 	private static final String GET_ALL_STMT = "SELECT * FROM CHAT_RECORD";
 	private static final String DELETE_STMT = "DELETE FROM CHAT_RECORD WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =? AND CHAT_DATETIME =?)";
 	private static final String UPDATE_STMT = "UPDATE CHAT_RECORD SET CHAT_CONTENT=? WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =? AND CHAT_DATETIME =?)";
+	private static final String GET_CONTENT = "SELECT * FROM CHAT_RECORD WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =?) order by CHAT_DATETIME";
+	
 	
 	
 	@Override
@@ -211,6 +213,61 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 		}
 		return chatRecordVO;
 	}
+	
+	@Override
+	public List<ChatRecordVO> getRecord(String sender_mem_no, String receiver_mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<ChatRecordVO> list = new ArrayList<>();
+		ResultSet rs = null;
+		
+		try {
+			System.out.println("---------------------------------------");
+			Class.forName(DRIVER);
+			System.out.println("載入成功");
+			con = DriverManager.getConnection(URL, USR, PSW);
+			System.out.println("連線成功");
+			pstmt = con.prepareStatement(GET_CONTENT);
+			
+			pstmt.setString(1, sender_mem_no);
+			pstmt.setString(2, receiver_mem_no);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ChatRecordVO chatRecordVO = new ChatRecordVO();
+				chatRecordVO.setSender_Mem_No(rs.getString(1));
+				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
+				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
+				chatRecordVO.setChat_Content(rs.getString(4));
+			}
+			
+			System.out.println("主鍵查詢完畢");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("載入失敗，類別未找到");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL異常");
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
+	}
+	
 
 	@Override
 	public List<ChatRecordVO> getAll() {
@@ -267,34 +324,49 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 	}
 	public static void main(String[] args) {
 		ChatRecordDAO_interface dao = new ChatRecordDAO_JDBC();
-		ChatRecordVO insertChatRecord = new ChatRecordVO();
-		ChatRecordVO updateChatRecord = new ChatRecordVO();
-		ChatRecordVO getOneChatRecord = new ChatRecordVO();
-		List<ChatRecordVO> getAllChatRecord = new ArrayList<>();
+//		ChatRecordVO insertChatRecord = new ChatRecordVO();
+//		ChatRecordVO updateChatRecord = new ChatRecordVO();
+//		ChatRecordVO getOneChatRecord = new ChatRecordVO();
+//		List<ChatRecordVO> getAllChatRecord = new ArrayList<>();
+//		
+//		insertChatRecord.setSender_Mem_No("M000005");
+//		insertChatRecord.setReceiver_Mem_No("M000018");
+//		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+//		insertChatRecord.setChat_Content("HIHIHI!!!!");
+//		dao.insert(insertChatRecord);
+//		
+//		updateChatRecord.setSender_Mem_No("M000005");
+//		updateChatRecord.setReceiver_Mem_No("M000018");
+//		updateChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+//		updateChatRecord.setChat_Content("YOYOYOOYOYOYO!!!");
+//		
+//		dao.update(updateChatRecord);
+//		
+//		dao.delete("M000005", "M000018", Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+//		
+//		insertChatRecord.setSender_Mem_No("M000005");
+//		insertChatRecord.setReceiver_Mem_No("M000018");
+//		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+//		insertChatRecord.setChat_Content("HIHIHI!!!!");
+//		dao.insert(insertChatRecord);
 		
-		insertChatRecord.setSender_Mem_No("M000005");
-		insertChatRecord.setReceiver_Mem_No("M000018");
-		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		insertChatRecord.setChat_Content("HIHIHI!!!!");
-		dao.insert(insertChatRecord);
+//		System.out.println(); 
+//		ChatRecordVO chatRecordVO4 =dao.findByPrimaryKey("M000003", "M000001", Timestamp.valueOf("2017-11月-27 11:37:36")); 
+//		System.out.println(chatRecordVO4.getChat_Content());
+//		System.out.println(chatRecordVO4.getReceiver_Mem_No());
+//		System.out.println(chatRecordVO4.getSender_Mem_No());
+//		System.out.println(chatRecordVO4.getChat_Datetime());
 		
-		updateChatRecord.setSender_Mem_No("M000005");
-		updateChatRecord.setReceiver_Mem_No("M000018");
-		updateChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		updateChatRecord.setChat_Content("YOYOYOOYOYOYO!!!");
+		List<ChatRecordVO> List =dao.getRecord("M000003", "M000001");
+		for(ChatRecordVO VO: List){
+		System.out.println(VO.getChat_Content());
+		System.out.println(VO.getReceiver_Mem_No());
+		System.out.println(VO.getSender_Mem_No());
+		System.out.println(VO.getChat_Datetime());
 		
-		dao.update(updateChatRecord);
-		
-		dao.delete("M000005", "M000018", Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		
-		insertChatRecord.setSender_Mem_No("M000005");
-		insertChatRecord.setReceiver_Mem_No("M000018");
-		insertChatRecord.setChat_Datetime(Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
-		insertChatRecord.setChat_Content("HIHIHI!!!!");
-		dao.insert(insertChatRecord);
-		
-		dao.findByPrimaryKey("M000005", "M000018", Timestamp.valueOf("2017-11-11 11:11:11.000000000"));
+		}
 		dao.getAll();
+		
 		
 	}
 	

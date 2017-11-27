@@ -21,6 +21,7 @@ public class ChatRecordDAO implements ChatRecordDAO_interface{
 	private static final String GET_ALL_STMT = "SELECT * FROM CHAT_RECORD";
 	private static final String DELETE_STMT = "DELETE FROM CHAT_RECORD WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =? AND CHAT_DATETIME =?)";
 	private static final String UPDATE_STMT = "UPDATE CHAT_RECORD SET CHAT_CONTENT=? WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =? AND CHAT_DATETIME =?)";
+	private static final String GET_CONTENT = "SELECT * FROM CHAT_RECORD WHERE (SENDER_MEM_NO =? AND RECEIVER_MEM_NO =?) order by CHAT_DATETIME";
 	
 	private static DataSource ds = null;
 	static {
@@ -247,5 +248,54 @@ public class ChatRecordDAO implements ChatRecordDAO_interface{
 			}
 		}
 		return listAllChatRecord;
+	}
+
+	@Override
+	public List<ChatRecordVO> getRecord(String sender_Mem_No, String receiver_Mem_no) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		List<ChatRecordVO> list = null;
+		ResultSet rs = null;
+		
+		try {
+			System.out.println("---------------------------------------");
+			con = ds.getConnection();
+			System.out.println("連線成功");
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			
+			pstmt.setString(1, sender_Mem_No);
+			pstmt.setString(2, receiver_Mem_no);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ChatRecordVO chatRecordVO = new ChatRecordVO();
+				chatRecordVO.setSender_Mem_No(rs.getString(1));
+				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
+				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
+				chatRecordVO.setChat_Content(rs.getString(4));
+			}
+			
+			System.out.println("主鍵查詢完畢");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("SQL異常");
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+
+					e.printStackTrace();
+				}
+			}
+		}
+		return list;
 	}
 }

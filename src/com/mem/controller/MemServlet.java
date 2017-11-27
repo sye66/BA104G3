@@ -238,7 +238,7 @@ if ("forgetPw".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			try{
+//			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 //				String mem_No = new String(req.getParameter("mem_No").trim());
 				
@@ -413,11 +413,11 @@ if ("forgetPw".equals(action)){
 				
 				/***************************mail區塊 1***************************************/
 				
-				String to = memVO.getMem_Email();
+				String to = mem_Email;
 			      
 			    String subject = "密碼通知";
 			      
-			    String ch_name = memVO.getMem_Id();
+			    String ch_name = mem_Id;
 			    String passRandom = "111";
 			    String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" +
 			    					 " (已經啟用) , 請至會員中心 http://10.120.25.29:8081/BA104G3/frontdesk/mem/memAuthentication.jsp 驗證,謝謝您"; 
@@ -502,13 +502,13 @@ if ("forgetPw".equals(action)){
 				
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				
-				
-				errorMsgs.add(e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mem/register.jsp");
-				failureView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				
+//				
+//				errorMsgs.add(e.getMessage());
+//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mem/register.jsp");
+//				failureView.forward(req, res);
+//			}
 		}
 		
 		
