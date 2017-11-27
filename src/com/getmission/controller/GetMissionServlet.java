@@ -1081,8 +1081,8 @@ public class GetMissionServlet extends HttpServlet {
 			System.out.println("got post from issuemission");
 			
 			// 錯誤處理
-			List<String> errorMsg = new LinkedList<>();
-			req.setAttribute("errorMsg", errorMsg);
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			GetMissionVO getMissionVO = new GetMissionVO();
 			
 			try {				
@@ -1110,17 +1110,17 @@ public class GetMissionServlet extends HttpServlet {
 				
 				/**********驗證開始**********/
 				if (mission_Pay != 50.00) {
-					errorMsg.add("HTML的READONLY就是叫你不要改啦");
+					errorMsgs.add("HTML的READONLY就是叫你不要改啦");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
-					errorMsg.add("安安請告知任務名稱喔");
+					errorMsgs.add("安安請告知任務名稱喔");
 				}
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
-					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+					errorMsgs.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
 				// 錯誤訊息傳回
-				if (!errorMsg.isEmpty()) {
-					for (String string : errorMsg) {
+				if (!errorMsgs.isEmpty()) {
+					for (String string : errorMsgs) {
 						System.out.println(string);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
@@ -1156,7 +1156,7 @@ public class GetMissionServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 			} catch (Exception e) {
-				errorMsg.add(e.getMessage());
+				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
 				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 				inputError.forward(req, res);
@@ -1174,8 +1174,8 @@ public class GetMissionServlet extends HttpServlet {
 			System.out.println("got post from Emergency");
 			
 			// 錯誤處理
-			List<String> errorMsg = new LinkedList<>();
-			req.setAttribute("errorMsg", errorMsg);
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			GetMissionVO getMissionVO = new GetMissionVO();
 			
 			try {				
@@ -1202,22 +1202,22 @@ public class GetMissionServlet extends HttpServlet {
 				
 				/**********驗證開始**********/
 				if (mission_Pay < 50.00) {
-					errorMsg.add("安安積分太少了吧");
+					errorMsgs.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
-					errorMsg.add("安安請告知任務名稱喔");
+					errorMsgs.add("安安請告知任務名稱喔");
 				}
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
-					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+					errorMsgs.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
 
 				// 錯誤訊息傳回
-				if (!errorMsg.isEmpty()) {
-					for (String string : errorMsg) {
-						System.out.println(errorMsg);
+				if (!errorMsgs.isEmpty()) {
+					for (String string : errorMsgs) {
+						System.out.println(errorMsgs);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
-					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
+					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_emergencymission.jsp");
 					inputError.forward(req, res);
 					return;
 				}
@@ -1251,7 +1251,7 @@ public class GetMissionServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 			} catch (Exception e) {
-				errorMsg.add(e.getMessage());
+				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
 				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
@@ -1272,8 +1272,8 @@ public class GetMissionServlet extends HttpServlet {
 			System.out.println("got post from takecase");
 			
 			// 錯誤處理
-			List<String> errorMsg = new LinkedList<>();
-			req.setAttribute("errorMsg", errorMsg);
+			List<String> errorMsgs = new LinkedList<>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			GetMissionVO getMissionVO = new GetMissionVO();
 			String key = null;
 			String takecase_Mem_No = req.getParameter("takecase_Mem_No");
@@ -1302,19 +1302,19 @@ public class GetMissionServlet extends HttpServlet {
 				
 				/**********驗證開始**********/
 				if (mission_Pay < 50.00) {
-					errorMsg.add("安安積分太少了吧");
+					errorMsgs.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
-					errorMsg.add("安安請告知任務名稱喔");
+					errorMsgs.add("安安請告知任務名稱喔");
 				}
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
-					errorMsg.add("不給任務敘述是要我們怎麼幫你啊蛤");
+					errorMsgs.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
 
 				// 錯誤訊息傳回
-				if (!errorMsg.isEmpty()) {
-					for (String string : errorMsg) {
-						System.out.println(errorMsg);
+				if (!errorMsgs.isEmpty()) {
+					for (String string : errorMsgs) {
+						System.out.println(errorMsgs);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
 					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
@@ -1357,7 +1357,7 @@ public class GetMissionServlet extends HttpServlet {
 				successView.forward(req, res);
 				
 			} catch (Exception e) {
-				errorMsg.add(e.getMessage());
+				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
 				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed.jsp");
 				inputError.forward(req, res);
