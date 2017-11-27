@@ -31,12 +31,6 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-	<tr><td>
-		 <h3>所有檢舉文張列表 - listAllArtiReport.jsp</h3>
-		 <h4><a href="selectReport_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0"> [Article Report HOME] </a></h4>
-	</td></tr>
-</table>
-
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -85,7 +79,7 @@
 			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看檢舉 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReportFMback_For_Display"> 查看檢舉 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 		                     </td>                            

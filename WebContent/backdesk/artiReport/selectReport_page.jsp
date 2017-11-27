@@ -102,14 +102,11 @@
                                  <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService" />
                                  
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do " enctype="multipart/form-data">
-                                <b>選擇被檢舉的文章編號 :</b>
+                                <b>選擇被檢舉的文章標題 :</b>
                                 <select size="1" name="arti_No">
-                                
                                 <c:forEach var="artiFromVO" items="${artiFormSvc.all}" > 
-
                                 <option value="${artiFromVO.arti_No}"${(artiFormVO.arti_No==artiReportVO.arti_No)?'selected':'' }>${artiFromVO.arti_Title}
                                 </c:forEach>
- 
                                 </select>
                                <button class="btn btn-primary" type="submit" name="action" value="listReport_ByArtiNo"> 送出查詢 </button>
                                </FORM>
