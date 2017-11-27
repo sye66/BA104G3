@@ -171,11 +171,20 @@ function getFocus() {
                     
 						<br>
 					<!--神奇小按鈕 -->	
-						<div class="col-xs-12 col-sm-8"><button type="button" onclick="aa0953711016()">神</button>
-						<button type="button" id="M000001">M1</button></div>						
-						<div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
+						<div class="col-xs-12 col-sm-8">
+						
+						
+						<button type="button" onclick="aa0953711016()">神</button>
+						<button type="button" id="M000002">柏</button>	
+						<button type="button" id="M000003">武</button>
+						<button type="button" id="M000004">子</button>						
+<!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
                     
+                    <div class="col-xs-12 col-sm-4">
+                    <a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp">
+                    <input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
+                   
 					
 					</div>
 					<div class="modal-footer">
@@ -273,10 +282,25 @@ function getFocus() {
  	
  	<script type="text/javascript">
  	
- 	$('#M000001').click(function(){
-		$('#login_username').val("aaa@gmail.com");
-		$('#login_password').val("A123456");
+ 	$('#M000002').click(function(){
+		$('#login_username').val("BBB@gmail.com");
+		$('#login_password').val("E123456");
 	});
+ 	
+ 	$('#M000003').click(function(){
+		$('#login_username').val("CCC@gmail.com");
+		$('#login_password').val("F123456");
+	});
+ 	
+ 	$('#M000004').click(function(){
+		$('#login_username').val("ziu0614@gmail.com");
+		$('#login_password').val("B123456");
+	});
+ 	
+//  	$('#GM1').click(function(){
+// 		$('#login_username').val("burnerzx@gmail.com");
+// 		$('#login_password').val("OFFICAL1");
+// 	});
  	</script>
  
   </body>
