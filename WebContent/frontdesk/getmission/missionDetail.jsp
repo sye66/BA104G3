@@ -40,21 +40,20 @@
 <div class="col-xs-12 col-sm-12">
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 </div>
-
+<br><br><br><br><br><br><br>
 	<table>
 		<tr>
 		<td>
 			<div class="form-group">
-				<label for="aa" class="col-xs-12 col-sm-3 control-label">${memSvc.getOneMem(memVO.mem_No).mem_No}--${memSvc.getOneMem(memVO.mem_No).mem_Name}
-					你好 </label>
+				
 				<div class="col-xs-12 col-sm-9">
 					<c:if test="${not empty errorMsgs}">
 					<div>${errorMsgs}</div>
 					</c:if>
 				</div>
 			</div>
-			</td>
-			<td>
+		</td>
+		<td>
 			<div class="panel-body">
 
 					<form method="post"
@@ -68,9 +67,10 @@
 							value="${mem_No}">
 					</form>
 				</div>
-			</td>
+		</td>
 		</tr>
 		<tr class="jas">
+		
 			<div class="col-xs-12 col-sm-1"></div>
 			<div class="col-xs-12 col-sm-10">
 				<div class="col-xs-12 col-sm-6">
@@ -102,16 +102,7 @@
 										<img
 											src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
 											alt="">
-										<div class="container">
-											<div class="carousel-caption">
-												<h1>CSS可樂好喝超爽快</h1>
-												<p>你喝過了嗎？</p>
-												<p>
-													<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-														up today</a>
-												</p>
-											</div>
-										</div>
+										
 									</div>
 								</c:if>
 								<c:if test="${p.index != 0 }">
@@ -119,16 +110,7 @@
 										<img
 											src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
 											alt="">
-										<div class="container">
-											<div class="carousel-caption">
-												<h1>CSS可樂好喝超爽快</h1>
-												<p>你喝過了嗎？</p>
-												<p>
-													<a class="btn btn-lg btn-primary" href="#" role="button">Sign
-														up today</a>
-												</p>
-											</div>
-										</div>
+									
 									</div>
 								</c:if>
 							</c:forEach>
@@ -158,9 +140,11 @@
 				</div>
 		</tr>
 		</div>
+		</table>
+		<table>
 		<tr>
 			<div class="col-xs-12 col-sm-1"></div>
-			<div class="col-xs-12 col-sm-10">
+			<div class="col-xs-12 col-sm-9">
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">任務細節</h3>
@@ -180,7 +164,7 @@
 			</div>
 		</tr>
 		<tr>
-
+<div class="col-xs-12 col-sm-2">
 
 			<td>
 				<div class="panel-body">
@@ -265,6 +249,7 @@
 				</form>
 
 			</td>
+			</div>
 		</tr>
 	</table>
 	
