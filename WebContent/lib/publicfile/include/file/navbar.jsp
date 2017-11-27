@@ -170,12 +170,14 @@ function getFocus() {
                     <!-- End # Login Form -->
                     
 						<br>
+					<!--神奇小按鈕 -->	
 						<div class="col-xs-12 col-sm-8"><button type="button" onclick="aa0953711016()">神</button>
 						<button type="button" id="M000001">M1</button></div>						
 						<div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
-					<!--神奇小按鈕 -->
                     <!--神奇小按鈕 -->
                     
+                    <div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
+					
 					</div>
 					<div class="modal-footer">
 <%-- 						<button type="button" class="btn btn-default" data-dismiss="modal">����</button> 
