@@ -22,7 +22,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/casecandidate/waitcase.jsp"> </span>
+    <meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/casecandidate/waitcase.jsp"></span>
+    <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
+    <link href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.css" rel="stylesheet" type="text/css" />
     <span style="font-size:24px;">3秒之後自動跳轉到首頁</span>
     <title>
         <c:if test="${CaseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(mem_No)}">，恭喜'接案'成功 ! 請等待發案方回復 </c:if>
@@ -32,8 +34,6 @@
         heigth: 100%
     }
     </style>
-    <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
-    <link href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -43,6 +43,7 @@
         </script>
     </c:if>
     memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
+    
     <form id="login-form" method="post" action="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
         <div>
             <input type="hidden" name="action" value="register">
