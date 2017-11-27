@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.disputecase.model.DisputeCaseVO"%>
 <%@page import="com.disputecase.model.DisputeCaseService"%>
@@ -11,6 +12,7 @@
 <jsp:useBean id="disputeCaseService" scope="page" class="com.disputecase.model.DisputeCaseService"></jsp:useBean>
 <jsp:useBean id="memService" scope="page" class="com.mem.model.MemService"></jsp:useBean>
 <%
+List<MemVO> list = memService.getAll(); 
 List<GetMissionVO> listUserMissionPending = getMissionService.findByMem("M000002",1);
 List<GetMissionVO> listUserMission = getMissionService.findByMem("M000002",1);
 List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem("M000011");
@@ -127,8 +129,8 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-					<a href="issuemission_normalmission.jsp"><div class="css_issuemissionbutton">一般任務</div></a>
-					<a href="issuemission_emergencymission.jsp"><div class="css_issuemissionbutton">緊急任務</div></a>
+					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_normalmission.jsp"><div class="css_issuemissionbutton">一般任務</div></a>
+					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"><div class="css_issuemissionbutton">緊急任務</div></a>
 				</div>
 			</div>
 		</div>
@@ -199,48 +201,69 @@ SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		<%-- 分頁開始點 --%>
 		<div class="container">
 			<div class="row">
-				<%-- include file="pages/page1.file"--%>
 			</div>
 		</div>
 		<%-- 取得所有會員的集合 --%>
-		<%int i=0;%>
-		<c:forEach var="memVO" items="${memService.getAll()}" begin="1" varStatus="StepCount" step="1">
-		<%-- 如果超過兩個加上Container&Row (Start)--%>
-					<c:if test="${StepCount.index/2==0}">
-						<div class="Container">
-							<div class="Row">
-					</c:if>
-					<%-- 開始寫入本體 --%>
-					<div class="col-xs-12 col-sm-6">
-						<div class="container">
-							<div class="row">
-						<%-- 會員照片 --%>
-							<div class="col-xs-12 col-sm-2">
-								<img class="userimg" src ="<%=request.getContextPath()%>/mem/mem.do?action=get_Mem_pic&request_From_Issue=${memVO.mem_No}">
-							</div>
-						<%-- 會員資訊 --%>
-							<div class="col-xs-12 col-sm-10">
-							    <div class="panel panel-primary">
-							        <div class="panel-heading">
-							            <h3 class="panel-title">${memVO.mem_Id}</h3>
-							        </div>
-							        <div class="panel-body">
-							        	${memVO.mem_Intro}
-							        	<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post">
-							        		<input type="hidden" name="takecase_Mem_No" value="${memVO.mem_No}">
-							        		<input type="submit" value="直接發案" class="btn btn-info">
-							        	</form>
-							        </div>
-							    </div>
-							</div>
-							</div>
-						</div>
-					</div>
-					<%-- ----- --%>
-		</c:forEach>
-
-
+			    <%-- 如果超過兩個加上Container&Row (Start)--%>
+			        <c:if test="${StepCount.index/2==0}">
+			            <div class="Container">
+			                <div class="Row">
+			        </c:if>
+			        <%-- 開始寫入本體 --%>
+			            <div class="col-xs-12 col-sm-6">
+			                <div class="container">
+			                    <div class="row">
+			                        <%-- 會員照片 --%>
+				<%@ include file="pages/page1.file" %>
+			<c:forEach var="memVO" items="${memService.getAll()}" begin="1" varStatus="StepCount" step="1">
+				                        <div class="col-xs-12 col-sm-2">
+				                            <img class="userimg" src="<%=request.getContextPath()%>/mem/mem.do?action=get_Mem_pic&request_From_Issue=${memVO.mem_No}">
+				                        </div>
+			                        <%-- 會員資訊 --%>
+			                            <div class="col-xs-12 col-sm-10">
+			                                <div class="panel panel-primary">
+			                                    <div class="panel-heading">
+			                                        <h3 class="panel-title">${memVO.mem_Id}</h3>
+			                                    </div>
+			                                    <div class="panel-body">
+			                                        ${memVO.mem_Intro}
+			                                        <form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post">
+			                                            <input type="hidden" name="takecase_Mem_No" value="${memVO.mem_No}">
+			                                            <input type="submit" value="直接發案" class="btn btn-info">
+			                                        </form>
+			                                    </div>
+			                                </div>
+			                            </div>
+            		<%@ include file="pages/page2.file" %>
+			                    </div>
+			                </div>
+			            </div>
+			        <c:if test="${StepCount.index%2==1 }">
+			            </div>
+			            </div>
+			        </c:if>
+			</c:forEach>
+			
+	        <c:if test="${StepCount.index%2==0 }">
+	            </div>
+	            </div>
+	        </c:if>
+        	<div class="container text-center">
+            	<div class="row">
+                </div>
+        	</div>
 	<hr>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<!-- =============================================================== -->
 
 	<%@ include file="/lib/publicfile/include/file/footer.jsp"%>
