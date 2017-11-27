@@ -50,6 +50,9 @@ public class MyEchoServer {
 		this.session = userSession;
 		MemChatRoom.mem_room.put(myName, myRoom);
 		MemChatRoom.mem_session.put(myName, this);
+		
+		//也可以再server端把資料庫資料重新讀入各自的頁面
+//		MemChatRoom.mem_session.get(loop).session.getAsyncRemote().sendText(message);
 	}
 
 	// (5) 把userSession 跟 message存到 非同步的遙控器(主要是在前一封訊息還蠻傳送完成,不能傳下一封)

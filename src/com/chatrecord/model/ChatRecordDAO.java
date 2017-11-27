@@ -254,14 +254,14 @@ public class ChatRecordDAO implements ChatRecordDAO_interface{
 	public List<ChatRecordVO> getRecord(String sender_Mem_No, String receiver_Mem_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		List<ChatRecordVO> list = null;
+		List<ChatRecordVO> list = new ArrayList<>();
 		ResultSet rs = null;
 		
 		try {
 			System.out.println("---------------------------------------");
 			con = ds.getConnection();
 			System.out.println("連線成功");
-			pstmt = con.prepareStatement(GET_ONE_STMT);
+			pstmt = con.prepareStatement(GET_CONTENT);
 			
 			pstmt.setString(1, sender_Mem_No);
 			pstmt.setString(2, receiver_Mem_no);
@@ -273,6 +273,7 @@ public class ChatRecordDAO implements ChatRecordDAO_interface{
 				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
 				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
 				chatRecordVO.setChat_Content(rs.getString(4));
+				list.add(chatRecordVO);
 			}
 			
 			System.out.println("主鍵查詢完畢");

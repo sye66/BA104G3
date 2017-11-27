@@ -215,7 +215,7 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 	}
 	
 	@Override
-	public List<ChatRecordVO> getRecord(String sender_mem_no, String receiver_mem_no) {
+	public List<ChatRecordVO> getRecord(String sender_Mem_No, String receiver_Mem_no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		List<ChatRecordVO> list = new ArrayList<>();
@@ -229,8 +229,8 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 			System.out.println("連線成功");
 			pstmt = con.prepareStatement(GET_CONTENT);
 			
-			pstmt.setString(1, sender_mem_no);
-			pstmt.setString(2, receiver_mem_no);
+			pstmt.setString(1, sender_Mem_No);
+			pstmt.setString(2, receiver_Mem_no);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -239,6 +239,7 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 				chatRecordVO.setReceiver_Mem_No(rs.getString(2));
 				chatRecordVO.setChat_Datetime(rs.getTimestamp(3));
 				chatRecordVO.setChat_Content(rs.getString(4));
+				list.add(chatRecordVO);
 			}
 			
 			System.out.println("主鍵查詢完畢");
@@ -265,6 +266,7 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 				}
 			}
 		}
+		System.out.println("llllllllllllllll");
 		return list;
 	}
 	

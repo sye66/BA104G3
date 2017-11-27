@@ -479,40 +479,8 @@ webSocket.onclose = function(event) {
 	    	
 	    	// * 把使用者名稱 跟訊息 存成jsonObj 傳到 server端的 onMessage()
 	    	console.log('-------------------------'+userName)
-	   
-		
-		
-		
-// 		var chatContent = $('#myPanel').text();
-<%-- 		<%   crSvc = new ChatRecordService(); --%>
-// 		    chatRecordVO = new ChatRecordVO();
-		    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
-		    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
-		    chat_Datetime = date.getHours()+":"+date.getMinutes();
-		    chatRecordVO.setChat_Datetime(chat_Datetime);
-		   
-		    
-// 		    System.out.println("adfasdf" +takecase_Mem_No);
-		   
-// 		    request.setAttribute("chatRecordVO", chatRecordVO);
-<%-- 		   %> --%>
-// 		   console.log("chatContent" + chatContent);
-		   
-		     var jsonObj = {"userName" : userName, "message" : message, "memno" : memno};
-				webSocket.send(JSON.stringify(jsonObj));
-		
-		   var queryString= {"action":"insert","chatContent":chatContent, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chatRecordVO.getChat_Datetime()%>'};
-		$.ajax({
-			 type: "POST",
-			 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do",
-			 data: queryString,
-			 dataType: "json",
-			 
-			 success: function (data){ },
-			 error: function(){alert("網路不穩斷線")}
-			 
-       });
-		
+	        var jsonObj = {"userName" : userName, "message" : message, "memno" : memno ,};
+		webSocket.send(JSON.stringify(jsonObj));
 		
 		
 	        inputMessage.value = "";
@@ -549,7 +517,32 @@ webSocket.close();
 		document.getElementById('sendMessage').disabled = true;
 		document.getElementById('connect').disabled = false;
 		document.getElementById('disconnect').disabled = true;
+		var chatContent = $('#myPanel').text();
+		<%   crSvc = new ChatRecordService();
+		    chatRecordVO = new ChatRecordVO();
+		    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
+		    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
+		    Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
+		    chatRecordVO.setChat_Datetime(chat_Datetime);
+		   
+		    
+		    System.out.println("adfasdf" +takecase_Mem_No);
+		   
+		    request.setAttribute("chatRecordVO", chatRecordVO);
+		   %>
+		   console.log("chatContent" + chatContent);
+		   var queryString= {"action":"insert","chatContent":chatContent, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>'};
 		
+		$.ajax({
+			 type: "POST",
+			 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do",
+			 data: queryString,
+			 dataType: "json",
+			 
+			 success: function (data){ },
+			 error: function(){alert("網路不穩斷線")}
+			 
+       });
 		//$('#save').submit();
 		console.log("1111111111133333333111111111");
 	}
