@@ -8,5 +8,6 @@ public interface ChatRecordDAO_interface {
 	public void delete(String sender_Mem_No, String receiver_Mem_no, Timestamp chat_Datetime);
 	public void update(ChatRecordVO chatRecordVO);
 	public ChatRecordVO findByPrimaryKey(String sender_Mem_No, String receiver_Mem_no, Timestamp chat_Datetime);
+	public List<ChatRecordVO> getRecord(String sender_Mem_No, String receiver_Mem_no);
 	public List<ChatRecordVO> getAll();
 }

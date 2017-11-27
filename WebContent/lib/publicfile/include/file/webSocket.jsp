@@ -33,7 +33,6 @@
 
   
    
-   
 %>
         
 <%/*
@@ -223,6 +222,41 @@
 			document.getElementById('sendMessage').disabled = false;
 			document.getElementById('connect').disabled = true;
 			document.getElementById('disconnect').disabled = false;
+			
+			<%  ChatRecordService crSvc = new ChatRecordService();
+			    ChatRecordVO chatRecordVO = new ChatRecordVO();
+			    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
+			    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
+			    
+			    System.out.println("adfasdf" +takecase_Mem_No);
+			   
+			    request.setAttribute("chatRecordVO", chatRecordVO);
+			   %>
+			var takecase_Mem_No = '<%=takecase_Mem_No%>';
+			console.log("takecase_Mem_No + " +takecase_Mem_No);
+			var aaa = '${crSvc.getRecord("M000003","M000001")}';
+			<% System.out.println("qqqqqqqqqqqqqq" +crSvc.getRecord("M000003","M000001"));%>
+			console.log("111111+"+'<%=memVO.getMem_No()%>');
+			console.log('${param.takecase_Mem_No}');
+			
+			console.log("aaa + " +aaa);
+			var chatContent = $('#myPanel').append().val();
+			   console.log("chatContent" + chatContent);
+			   var queryString= {"action":"insert","chatContent":chatContent, "Sender_Mem_No":'<%=memVO.getMem_No()%>'};
+			
+// 			$.ajax({
+// 				 type: "POST",
+<%-- 				 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do", --%>
+// 				 data: queryString,
+// 				 dataType: "json",
+				 
+// 				 success: function (data){ },
+// 				 error: function(){alert("網路不穩斷線")}
+				 
+// 	       });
+// 			//$('#save').submit();
+// 			console.log("1111111111133333333111111111");
+			
 		};
 		
 // 		if("${memVO.mem_Id}" == inputUserName){
@@ -402,13 +436,13 @@ webSocket.close();
 		document.getElementById('connect').disabled = false;
 		document.getElementById('disconnect').disabled = true;
 		var chatContent = $('#myPanel').text();
-		<%  ChatRecordService crSvc = new ChatRecordService();
-		    ChatRecordVO chatRecordVO = new ChatRecordVO();
+		<%   crSvc = new ChatRecordService();
+		    chatRecordVO = new ChatRecordVO();
 		    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
 		    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
 		    Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
 		    chatRecordVO.setChat_Datetime(chat_Datetime);
-		    Integer aaa = 11;
+		   
 		    
 		    System.out.println("adfasdf" +takecase_Mem_No);
 		   
@@ -424,7 +458,7 @@ webSocket.close();
 			 dataType: "json",
 			 
 			 success: function (data){ },
-			 error: function(){alert("暫時不提供此時段派車服務")}
+			 error: function(){alert("網路不穩斷線")}
 			 
        });
 		//$('#save').submit();
