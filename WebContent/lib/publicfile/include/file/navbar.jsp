@@ -176,7 +176,6 @@ function getFocus() {
 						<div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
                     <!--神奇小按鈕 -->
                     
-                    <div class="col-xs-12 col-sm-4"><a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp"><input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
 					
 					</div>
 					<div class="modal-footer">
