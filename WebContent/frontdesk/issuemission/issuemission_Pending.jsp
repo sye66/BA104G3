@@ -19,12 +19,13 @@
 		</style>
 	</head>
 	<body>
-		
+		<%-- 抓session 會員MemVO 與任務 MissionVO 塞進Request 丟進QRcodeAccept --%> 
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12" style="text-align: center;">
 					<h1 class="text-center">接案人驗證</h1>
-					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do">
+					<%--這裡要補完 --%>
+					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do?mem_No=&mission_No=">
 					<form action="<%=request.getContextPath()%>/qrcodeaccept/qrcodeaccept.do">
 						<input type="hidden" name="action" value="input_By_Type">
 						<input type="text" name="validation">

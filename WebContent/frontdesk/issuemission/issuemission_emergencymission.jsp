@@ -1,5 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="com.mem.model.*" %>
+<%
+	MemVO memVOemergencymission;
+	try{
+		memVOemergencymission = (MemVO) request.getSession().getAttribute("memVO");
+		if (memVOemergencymission.getMem_Name() == null){
+			RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
+			notLogin.forward(request, response);
+			return;
+		}
+	} catch (NullPointerException e){
+		RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
+		notLogin.forward(request, response);
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -42,14 +58,28 @@
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2"></div>
 			</div>
 		</div>
-
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<p><font color='white'>請修正以下錯誤:</font></p>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color:white"><p>${message}</p></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</c:if>
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
 				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do">
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 						<%-- 發案人會員編號 --%>
-						<input type="hidden" name="issuer_Mem_No" value="M000010">
+						<input type="hidden" name="issuer_Mem_No" value="<%=memVOemergencymission.getMem_No()%>">
 						<%-- 任務類別 --%>
 							<div class="form-group">
 								<label for="mission_Category">

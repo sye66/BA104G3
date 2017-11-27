@@ -12,11 +12,25 @@
 <jsp:useBean id="disputeCaseService" scope="page" class="com.disputecase.model.DisputeCaseService"></jsp:useBean>
 <jsp:useBean id="memService" scope="page" class="com.mem.model.MemService"></jsp:useBean>
 <%
-List<MemVO> list = memService.getAll(); 
-List<GetMissionVO> listUserMissionPending = getMissionService.findByMem("M000002",1);
-List<GetMissionVO> listUserMission = getMissionService.findByMem("M000002",1);
-List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem("M000011");
-SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	MemVO memVO2;
+	try{
+		memVO2 = (MemVO) request.getSession().getAttribute("memVO");
+		if (memVO2.getMem_Name() == null){
+			RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
+			notLogin.forward(request, response);
+			return;
+		}
+	} catch (NullPointerException e){
+		RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
+		notLogin.forward(request, response);
+		return;
+	}
+	String mem_No = memVO2.getMem_No();
+	List<MemVO> list = memService.getAll(); 
+	List<GetMissionVO> listUserMissionPending = getMissionService.findByMem(mem_No,1);
+	List<GetMissionVO> listUserMission = getMissionService.findByMem(mem_No,1);
+	List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(mem_No);
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 %>
 <style type="text/css">
 	.userimg{
