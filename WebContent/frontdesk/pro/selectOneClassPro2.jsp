@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 
 <%
 //     ProService proSvc = new ProService();
@@ -27,32 +27,29 @@
 <style>
 
 .proName{
-  	font-size:20px;
+  	color:#000;
+	font-family: Microsoft JhengHei;
+	font-weight:bold;
+   	font-size:20px; 
 } 
 .proPrice{
     font-size:20;
     color:red;
+	font-family: Microsoft JhengHei;
  }
  .imgCont{
  	 display:  flex;
      align-items: center;
      justify-content:  center;
-     max-width: 110%;
  }
  .proDiscount{
+ 
+ 	color:#000;
+	font-family: Microsoft JhengHei;
  	font-size:16px;
  	text-decoration:line-through;
  }
- #ontopDiv {
-    top: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #ffffff;
-    padding: 15px;
-    font-size: 16px;
-   
-}
-
+ 
 .card{
 	width:256px;
 	box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.2);
@@ -76,6 +73,8 @@
 
 </head>
 <body>
+<a name="aaa"></a>
+
 <!-- TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
@@ -112,18 +111,23 @@
 			<div class="col-xs-12 col-sm-3 proDiv">
 		     	<div class="card" style="width:100%;">
 			 	    <div class="imgCont">
-		  				<img class="card-img-top" style="width:100%;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+		  				<img class="card-img-top" style="width:200px;height:200px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	    </div>
 	  				<div class="card-body">
-	   			 		<p class="card-text proName">${proVO.pro_Name}</p>
+	   			 		<p class="card-text proName" style="height:45px;">${proVO.pro_Name}</p>
 	   			 		<c:if test="${proVO.pro_Discount==100}">
-	   			 			<P>　</P>
-	   			 			<p class="card-footer proPrice">價格:$${proVO.pro_Price}</p>
+	   			 			
+	   			 			<p class="card-footer proPrice" style="height:28px;">價格:${proVO.pro_Price}點</p>
+	   			 			<P style="height:28px;">　</P>
 	   			 		</c:if>
 	   			 		
 	   			 		<c:if test="${proVO.pro_Discount!=100}">
-	   			 		<p class="card-footer proDiscount">原價:$${proVO.pro_Price}</p>
-	   			 		<p class="card-footer proPrice">折扣價:$${(proVO.pro_Price)*(proVO.pro_Discount)/100}</p>
+	   			 		<p class="card-footer proDiscount" style="height:28px;">價格:${proVO.pro_Price}點</p>
+	   			 		
+	   			 			<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
+	   			 		 	<fmt:parseNumber var="dsPrice" integerOnly="true" 
+                      		 type="number" value="${balance}" />
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:<c:out value="${dsPrice}"/>點</p>
 	   			 		</c:if>
 	 			 	</div>
 				</div>

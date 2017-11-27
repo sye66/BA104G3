@@ -119,7 +119,7 @@
 
 		<div class="col-xs-12 col-sm-12 " id="ontopDiv">
 		<!--搜尋 -->
-		<div class="col-xs-12 col-sm-3 col-sm-offset-4">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-4">
 
 			<div class="input-group select01">
 				<span class="input-group-btn"> <a href=""

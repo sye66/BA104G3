@@ -174,7 +174,9 @@ nav-tabs li a:focus{
 		      <div class="panel-body">
 		      <table class="table table-hover">
 					<thead id="order001">
-							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th><th>更動</th></tr>
+							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
+<!-- 							<th>更動</th> -->
+							</tr>
 							
 					
 					
@@ -182,7 +184,7 @@ nav-tabs li a:focus{
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
 						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
-						<td>修改</td>
+<!-- 						<td>修改</td> -->
 						</tr>
 					</thead>
 					<tbody id="order002">	
@@ -250,7 +252,9 @@ nav-tabs li a:focus{
 		      <div class="panel-body">
 		      <table class="table table-hover">
 					<thead id="order001">
-							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th><th>更動</th></tr>
+							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
+<!-- 							<th>更動</th> -->
+							</tr>
 							
 					
 					
@@ -258,7 +262,7 @@ nav-tabs li a:focus{
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
 						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
-						<td>修改</td>
+<!-- 						<td>修改</td> -->
 						</tr>
 					</thead>
 					<tbody id="order002">	
@@ -323,7 +327,9 @@ nav-tabs li a:focus{
 		      <div class="panel-body">
 		      <table class="table table-hover">
 					<thead id="order001">
-							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th><th>更動</th></tr>
+							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
+<!-- 							<th>更動</th> -->
+							</tr>
 							
 					
 					
@@ -331,7 +337,7 @@ nav-tabs li a:focus{
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
 						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
-						<td>修改</td>
+<!-- 						<td>修改</td> -->
 						</tr>
 					</thead>
 					<tbody id="order002">	
@@ -397,7 +403,9 @@ nav-tabs li a:focus{
 		      <div class="panel-body">
 		      <table class="table table-hover">
 					<thead id="order001">
-							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th><th>更動</th></tr>
+							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
+<!-- 							<th>更動</th> -->
+							</tr>
 							
 					
 					

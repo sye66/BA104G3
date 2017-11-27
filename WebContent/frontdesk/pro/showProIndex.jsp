@@ -30,7 +30,7 @@
 
 
 
-
+<a name="aaa"></a>
 	
 
 	<div class="col-xs-12 col-sm-2 col-sm-offset-1">
@@ -372,13 +372,6 @@
 	<!-- 右2結束 -->
 <div class="col-xs-12 col-sm-12">
 	
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top d-lg-none">
-      <a class="btn btn-primary js-scroll-trigger" href="#page-top">
-        <i class="fa fa-chevron-up"></i>
-      </a>
-    </div>
 
 	<jsp:include page="/lib/publicfile/include/file/footer2.jsp" flush="true"></jsp:include>
 </div>	

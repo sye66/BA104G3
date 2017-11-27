@@ -151,7 +151,7 @@
 </head>
 <body>
 
-	
+<a name="aaa"></a>	
 	
 <!-- TOP -->
 <div class="row">
@@ -167,7 +167,7 @@
 </div>
 <div class="col-xs-12 col-sm-12">	
 	<!--中6-->
-	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-4">
 	
 	<!--麵包屑 -->
 		<div class="col-xs-12 col-sm-11">
@@ -337,10 +337,10 @@ $(function() {
 					top: event.pageY-250,
 				},
 				end: {
-					left: offset.left+10,
-					top: offset.top+10,
-// 					left: offset.left-770,
-// 					top: offset.top-80,
+// 					left: offset.left+10,
+// 					top: offset.top+10,
+					left: offset.left-600,
+					top: offset.top-60,
 					width: 0,
 					height: 0
 				},
@@ -377,7 +377,7 @@ $(function() {
 	      error:function(xhr, ajaxOptions, thrownError){
 	       swal(
 	         'Oops...',
-	         '出錯瞜!',
+	         '按太快囉!',
 	         'error'
 	       )
 	      } // error end
@@ -397,7 +397,7 @@ $(function() {
 <div class="m-sidebar"> 
     <div class="cart"> 
         <i id="end"></i> 
-        <img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/1208499.gif"> 
+<%--         <img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/1208499.gif">  --%>
     </div> 
 </div> 
 <div id="msg">已成功加入購物車！</div> 	
