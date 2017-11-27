@@ -9,6 +9,10 @@ try{
 		RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
 		notLogin.forward(request, response);
 		return;
+	}  else if (memVOnormalcase.getMem_State()==0 || memVOnormalcase.getMem_State()==9) {
+		RequestDispatcher disqualify = request.getRequestDispatcher("/frontdesk/issuemission/issuemission_Disqualify.jsp");
+		disqualify.forward(request, response);
+		return;
 	}
 } catch (NullPointerException e){
 	RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");

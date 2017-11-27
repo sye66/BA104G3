@@ -39,7 +39,7 @@
 		<div role="tabpanel" class="tab-pane active " id="tabbbb">
 			<div class="list-group">
 				<a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp" class="list-group-item">&nbsp;&nbsp;檢舉任務管理</a> 
-				<a href="#" class="list-group-item">&nbsp;&nbsp;爭議事件處理</a> 
+				<a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_Manage.jsp" class="list-group-item">&nbsp;&nbsp;爭議事件處理</a> 
 				<a href="#" class="list-group-item">&nbsp;&nbsp;官方任務管理</a> 
 			</div>
 	</div><!--rol -->
