@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>接案失敗</h1>
+	<h1>未被授權進入此區</h1>
 </body>
 </html>

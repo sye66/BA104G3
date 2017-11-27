@@ -81,7 +81,7 @@
                              <td> <fmt:formatDate value="${artiReportVO.report_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
                              
                               <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			                  <td>${artiClassSvc.getOneClass(artiReportVO.arti_Cls_No).arti_Cls_Name }</td>
+			                  <td>$artiReportVO.rep_Re_Desc}</td>
                              <td> ${artiReportVO.report_Status} </td>
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">

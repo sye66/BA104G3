@@ -23,6 +23,9 @@
 	
 } 
 .proName2{ 
+   	color:#000;
+	font-family: Microsoft JhengHei;
+	font-weight:bold;
    	font-size:18px; 
 }  
 .proPrice2{
@@ -58,7 +61,7 @@
 
 <div style="text-align:center;">
   
-  
+  <div class="col-xs-12 col-sm-11 ">
 	<c:forEach var="proVO" items="${list}" end="10">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
 		<c:if test="${proVO.pro_Discount!=100}">
@@ -74,7 +77,7 @@
 	   			 		 <fmt:parseNumber var="dsPrice" integerOnly="true" 
                        type="number" value="${balance}" />
 	   			 		 
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">促銷價:<span><c:out value="${dsPrice}" /></span>點</p>
 	   			 		
 	 			 	</div>
 				</div>
@@ -84,7 +87,7 @@
 	 	</a>
  	</c:forEach>  	
  	
-
+</div>
 </div>
  
 </body>

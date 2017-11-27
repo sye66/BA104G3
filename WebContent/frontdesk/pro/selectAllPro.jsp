@@ -18,11 +18,17 @@
  <style>
 
 .proName{
-  	font-size:20px;
+  	font-size:22px;
+  	
+  	color:#000;
+	font-family: Microsoft JhengHei;
+	font-weight:bold;
 } 
 .proPrice{
-    font-size:20;
+   font-size:20;
     color:red;
+	font-family: Microsoft JhengHei;
+	font-weight:bold;
  }
  .imgCont{
  	 display:  flex;
@@ -31,7 +37,9 @@
      max-width: 100%;
  }
  .proDiscount{
- 	font-size:16px;
+ 	color:#000;
+	font-family: Microsoft JhengHei;
+ 	font-size:18px;
  	text-decoration:line-through;
  }
  
@@ -69,23 +77,23 @@
 			<div class="col-xs-12 col-sm-4 ">
 		     	<div class="card" style="width:100%;">
 			 	    <div class="imgCont">
-		  				<img class="card-img-top" style="width:80%;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+		  				<img class="card-img-top" style="width:200px;height:200px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	    </div>
 	  				<div class="card-body">
-	   			 		<p class="card-text proName" style="height:28px;color:#000;">${proVO.pro_Name}</p>
+	   			 		<p class="card-text proName" style="height:50px;">${proVO.pro_Name}</p>
 	   			 		<c:if test="${proVO.pro_Discount==100}">
-	   			 			<P style="height:25px;">　</P>
-	   			 			<p class="card-footer proPrice" style="height:28px;">價格:$${proVO.pro_Price}</p>
+	   			 			<p class="card-footer proPrice" style="height:28px;">價格:${proVO.pro_Price}點</p>
+	   			 			<P style="height:28px;">　</P>
 	   			 		</c:if>
 	   			 		
 	   			 		<c:if test="${proVO.pro_Discount!=100}">
-	   			 		<p class="card-footer proDiscount" style="height:25px ;color:#000;">原價:$${proVO.pro_Price}</p>
+	   			 		<p class="card-footer proDiscount" style="height:28px ;">原價:${proVO.pro_Price}點</p>
 	   			 		
 	   			 		 <c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
 	   			 		 <fmt:parseNumber var="dsPrice" integerOnly="true" 
                        type="number" value="${balance}" />
 	   			 		 
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:<c:out value="${dsPrice}" />點</p>
 	   			 		</c:if>
 	   			 		
 	   			 		

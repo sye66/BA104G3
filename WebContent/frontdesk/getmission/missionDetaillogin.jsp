@@ -108,10 +108,7 @@
 						<div class="form-group">
 							<label for="aa" class="col-xs-12 col-sm-3 control-label">${memSvc.getOneMem(memVO.mem_No).mem_No}--${memSvc.getOneMem(memVO.mem_No).mem_Name}
 								你好 </label>
-							<div class="col-xs-12 col-sm-9">
-								<input type="text" name="aa" id="aa" placeholder="文字"
-									class="form-control">
-							</div>
+							
 						</div>
 
 						<td>
@@ -215,11 +212,15 @@
 								<h4>發案人:</h4>
 								<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 							</div>
+						</div>
 					</tr>
+					</table>
 					</div>
-					<tr>
+					<div class="col-xs-12 col-sm-10">
+					<table>
 						<div class="col-xs-12 col-sm-1"></div>
-						<div class="col-xs-12 col-sm-10">
+						<div class="col-xs-12 col-sm-9">
+					<tr>
 							<div class="panel panel-info">
 								<div class="panel-heading">
 									<h3 class="panel-title">任務細節</h3>
@@ -236,16 +237,17 @@
 							</div>
 
 
-						</div>
 					</tr>
+						</div>
 					
 					<% 
 							missionmem.setCandidate_Mem_No(memVO.getMem_No());
 							pageContext.setAttribute("missionmem" ,missionmem);
 							
 							%>
+						</div>
+							<div class="col-xs-12 col-sm-2">
 					<tr>
-
 						<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
 							<td>
 								<div class="panel-body">
@@ -307,14 +309,6 @@
 							</div>
 						</div>
 
-
-
-
-
-
-
-
-
 						<td>
 							<div class="panel-body">
 
@@ -341,10 +335,12 @@
 
 						</td>
 					</tr>
+					</div>
 				</table>
 			</div>
+			</div>
 		</div>
-	</div>
+	
 		<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 
 	<script src="https://code.jquery.com/jquery.js"></script>

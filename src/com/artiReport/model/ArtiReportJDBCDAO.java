@@ -13,25 +13,25 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 	String passwd = "123456";
 	
 	private static final String INSERT_REPORT = 
-			"INSERT INTO ARTI_REPORT (REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,REPORT_TIME,ARTI_CLS_NO,REPORT_STATUS) VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL),7,'0'),?,?,?,?,?,?)";
+			"INSERT INTO ARTI_REPORT (REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,REPORT_TIME,REP_RE_DESC,REPORT_STATUS) VALUES ('REP'||LPAD(to_char(ARTI_REPORT_SEQUENCE.NEXTVAL),7,'0'),?,?,?,?,?,?)";
 	
 	private static final String GET_ALL_REPORT= 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,ARTI_CLS_NO,REPORT_STATUS FROM ARTI_REPORT order by REPORT_NO";
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT order by REPORT_NO";
 	
 	private static final String GET_ONE_REPORT = 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,ARTI_CLS_NO,REPORT_STATUS FROM ARTI_REPORT where REPORT_NO";
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT where REPORT_NO";
 	
 	private static final String GET_REPORT_BY_ARTI_NO = 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,ARTI_CLS_NO,REPORT_STATUS FROM ARTI_REPORT WHERE ARTI_NO = ? order by REPORT_NO";
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE ARTI_NO = ? order by REPORT_NO";
 
-	private static final String GET_REPORT_BY_ARTI_CLS_NO = 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,ARTI_CLS_NO,REPORT_STATUS FROM ARTI_REPORT WHERE ARTI_CLS_NO = ? order by REPORT_NO";
+	private static final String GET_REPORT_BY_REP_RE_DESC = 
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE REP_RE_DESC = ? order by REPORT_NO";
 	
 	private static final String DELETE_REPORT = 
 			"DELETE FROM ARTI_REPORT where REPORT_NO = ?";
 	
 	private static final String UPDATE_REPORT = 
-			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  ARTI_CLS_NO=?, REPORT_STATUS=? where REPORT_NO =?";
+			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  REP_RE_DESC=?, REPORT_STATUS=? where REPORT_NO =?";
 	
 	
 	public void insertReport(ArtiReportVO artiReportVO){
@@ -47,7 +47,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 			pstmt.setString(2, artiReportVO.getArti_No());
 			pstmt.setString(3, artiReportVO.getReport_Desc());
 			pstmt.setTimestamp(4, artiReportVO.getReport_Time());
-			pstmt.setInt(5, artiReportVO.getArti_Cls_No());
+			pstmt.setString(5, artiReportVO.getRep_Re_Desc());
 			pstmt.setString(6, artiReportVO.getReport_Status());
 
 			pstmt.executeUpdate();
@@ -91,7 +91,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 			pstmt.setString(2, artiReportVO.getArti_No());
 			pstmt.setString(3, artiReportVO.getReport_Desc());
 			pstmt.setTimestamp(4, artiReportVO.getReport_Time());
-			pstmt.setInt(5, artiReportVO.getArti_Cls_No());
+			pstmt.setString(5, artiReportVO.getRep_Re_Desc());
 			pstmt.setString(6, artiReportVO.getReport_Status());
 			pstmt.setString(7, artiReportVO.getReport_No());
 			
@@ -185,7 +185,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 				artiReportVO.setArti_No(rs.getString("arti_No"));
 				artiReportVO.setReport_Desc(rs.getString("report_Desc"));
 				artiReportVO.setReport_Time(rs.getTimestamp("report_Time"));
-				artiReportVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiReportVO.setRep_Re_Desc(rs.getString("Rep_Re_Desc"));
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 			}
 			
@@ -245,7 +245,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 				artiReportVO.setArti_No(rs.getString("arti_No"));
 				artiReportVO.setReport_Desc(rs.getString("report_Desc"));
 				artiReportVO.setReport_Time(rs.getTimestamp("report_Time"));
-				artiReportVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiReportVO.setRep_Re_Desc(rs.getString("Rep_Re_Desc"));
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 				set.add(artiReportVO);
 			}
@@ -281,7 +281,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 	}
 	
 	@Override
-	public Set<ArtiReportVO> findReportByArtiClsNo(Integer arti_Cls_No) {
+	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc) {
 		Set<ArtiReportVO> set = new LinkedHashSet<ArtiReportVO>();
 		ArtiReportVO artiReportVO = null;
 		
@@ -292,9 +292,9 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);;
-			pstmt = con.prepareStatement(GET_REPORT_BY_ARTI_CLS_NO);
+			pstmt = con.prepareStatement(GET_REPORT_BY_REP_RE_DESC);
 			
-			pstmt.setInt(1, arti_Cls_No);
+			pstmt.setString(1, rep_Re_Desc);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
@@ -304,7 +304,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 				artiReportVO.setArti_No(rs.getString("arti_No"));
 				artiReportVO.setReport_Desc(rs.getString("report_Desc"));
 				artiReportVO.setReport_Time(rs.getTimestamp("report_Time"));
-				artiReportVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiReportVO.setRep_Re_Desc(rs.getString("Rep_Re_Desc"));
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 				set.add(artiReportVO);
 			}
@@ -360,7 +360,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 				artiReportVO.setArti_No(rs.getString("arti_No"));
 				artiReportVO.setReport_Desc(rs.getString("report_Desc"));
 				artiReportVO.setReport_Time(rs.getTimestamp("report_Time"));
-				artiReportVO.setArti_Cls_No(rs.getInt("arti_Cls_No"));
+				artiReportVO.setRep_Re_Desc(rs.getString("Rep_Re_Desc"));
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 				set.add(artiReportVO);
 			}
@@ -409,7 +409,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 //		artiReportVO1.setArti_No("AR00000081");
 //		artiReportVO1.setReport_Desc("XD");
 //		artiReportVO1.setReport_Time(java.sql.Timestamp.valueOf("2017-02-13 07:11:14"));
-//		artiReportVO1.setArti_Cls_No(3);
+//		artiReportVO1.setRep_Re_Desc(3);
 //		artiReportVO1.setReport_Status("待處理");
 //		dao.insertReport(artiReportVO1);
 		
@@ -420,7 +420,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 //		artiReportVO2.setArti_No("AR00000081");
 //		artiReportVO2.setReport_Desc("XD ^O^/");
 //		artiReportVO2.setReport_Time(java.sql.Timestamp.valueOf("2017-02-15 07:11:14"));
-//		artiReportVO2.setArti_Cls_No(1);
+//		artiReportVO2.setRep_Re_Desc(1);
 //		artiReportVO2.setReport_Status("處理中");
 //		dao.updateReport(artiReportVO2);
 		
@@ -434,7 +434,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 //		artiReportVO3.setArti_No("AR00000033");
 //		artiReportVO3.setReport_Desc("妨礙風化");
 //		artiReportVO3.setReport_Time(java.sql.Timestamp.valueOf("2016-01-15 10:15:28"));
-//		artiReportVO3.setArti_Cls_No(2);
+//		artiReportVO3.setRep_Re_Desc(2);
 //		artiReportVO3.setReport_Status("已處理");
 //		System.out.println("OK!");
 		
@@ -446,7 +446,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 			System.out.println(aReport.getArti_No() + ",  ");
 			System.out.println(aReport.getReport_Desc() + ",  ");
 			System.out.println(aReport.getReport_Time() + ",  ");
-			System.out.println(aReport.getArti_Cls_No() + ",  ");
+			System.out.println(aReport.getRep_Re_Desc() + ",  ");
 			System.out.println(aReport.getReport_Status() + ",  ");
 		}
 	}

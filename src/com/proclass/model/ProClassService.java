@@ -9,7 +9,7 @@ import com.pro.model.ProVO;
 public class ProClassService {
 	private ProClassDAO_interface dao;
 	public ProClassService(){
-		dao = new ProClassJDBCDAO();
+		dao = new ProClassDAO();
 	}
 	
 	public ProClassVO addProClass(String pro_Class_Name){

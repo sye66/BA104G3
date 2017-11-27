@@ -12,21 +12,21 @@ public class ArtiReportService {
 		dao = new ArtiReportDAO();
 	}
 	
-	public ArtiReportVO addArtiReport (String mem_No, String arti_No, String report_Desc, java.sql.Timestamp report_Time, Integer arti_Cls_No, String report_Status){
+	public ArtiReportVO addArtiReport (String mem_No, String arti_No, String report_Desc, java.sql.Timestamp report_Time, String rep_Re_Desc, String report_Status){
 		
 		ArtiReportVO artiReportVO = new ArtiReportVO();
 		artiReportVO.setMem_No(mem_No);
 		artiReportVO.setArti_No(arti_No);
 		artiReportVO.setReport_Desc(report_Desc);
 		artiReportVO.setReport_Time(report_Time);
-		artiReportVO.setArti_Cls_No(arti_Cls_No);
+		artiReportVO.setRep_Re_Desc(rep_Re_Desc);
 		artiReportVO.setReport_Status(report_Status);
 		dao.insertReport(artiReportVO);
 		
 		return artiReportVO;
 	}
 	
-	public ArtiReportVO updateArtiReport (String report_No, String mem_No, String arti_No, String report_Desc, java.sql.Timestamp report_Time, Integer arti_Cls_No, String report_Status){
+	public ArtiReportVO updateArtiReport (String report_No, String mem_No, String arti_No, String report_Desc, java.sql.Timestamp report_Time, String rep_Re_Desc, String report_Status){
 		
 		ArtiReportVO artiReportVO = new ArtiReportVO();
 		artiReportVO .setReport_No(report_No);
@@ -34,7 +34,7 @@ public class ArtiReportService {
 		artiReportVO .setArti_No(arti_No);
 		artiReportVO .setReport_Desc(report_Desc);
 		artiReportVO .setReport_Time(report_Time);
-		artiReportVO .setArti_Cls_No(arti_Cls_No);
+		artiReportVO .setRep_Re_Desc(rep_Re_Desc);
 		artiReportVO .setReport_Status(report_Status);
 		dao.updateReport(artiReportVO);
 		
@@ -57,8 +57,8 @@ public class ArtiReportService {
 		return dao.findReportByArtiNo(arti_No);
 	}
 	
-	public Set<ArtiReportVO> findReportByArtiClsNo(Integer arti_Cls_No){
-		return dao.findReportByArtiClsNo(arti_Cls_No);
+	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc){
+		return dao.findReportByRep_Re_Desc(rep_Re_Desc);
 	}
 
 }

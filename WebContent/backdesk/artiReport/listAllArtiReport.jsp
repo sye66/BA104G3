@@ -3,9 +3,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReport.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
   ArtiReportService artiReportSvc = new ArtiReportService();
   Set<ArtiReportVO> set= artiReportSvc.getAllReport();
   pageContext.setAttribute("set",set);
@@ -57,7 +60,7 @@
                         <th> 會員名稱 </th>
                         <th> 文章標題 </th>
                         <th> 檢舉時間 </th>
-                        <th> 類別 </th>
+                        <th> 後台處理回覆 </th>
                         <th> 檢舉狀態 </th>
                         <th > 後台管理 </th>
                     </tr>
@@ -73,18 +76,18 @@
                              <jsp:useBean id="artiFormSvc" scope="page" class="com.artiForm.model.ArtiFormService"/>
 			                 <td>${artiFormSvc.getOneArtiForm(artiReportVO.arti_No).arti_Title }</td>
                              <td> <fmt:formatDate value="${artiReportVO.report_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-                             
-                              <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-			                  <td>${artiClassSvc.getOneClass(artiReportVO.arti_Cls_No).arti_Cls_Name }</td>
+
+			                  <td>${artiReportVO.rep_Re_Desc}</td>
                              <td> ${artiReportVO.report_Status} </td>
                              
 		                     
 		                      <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                 <button class="btn btn-info" type="submit" name="action" value="getOneReport_For_Display"> 查看檢舉 </button>
+			                 <button class="btn btn-info" type="submit" name="action" value="getOneReportFMback_For_Display"> 查看檢舉 </button>
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 			                 </td>

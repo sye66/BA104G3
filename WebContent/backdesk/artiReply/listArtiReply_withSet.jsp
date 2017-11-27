@@ -4,9 +4,12 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReply.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
   ArtiReplyService artiReplySvc = new ArtiReplyService();
   Set<ArtiReplyVO> set= (Set<ArtiReplyVO>) request.getAttribute("artiReplySet");
   pageContext.setAttribute("set",set);
@@ -117,10 +120,10 @@
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除回覆</button>
+			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReplyFMBack">刪除回覆</button>
  			                    <input type="hidden" name="whichPage" value="<%=whichPage%>">
  			                    </FORM>  
                             </div>

@@ -44,7 +44,7 @@
 
 
 <div class="title">
-        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的檢舉   // <a href="/BA104G3/backdesk/artiReply/listAllArtiReport.jsp">List</a> all Article Reply.  
+        <h3> 這裡是討論區文章資料查詢 -- 列出單ㄧ文章的檢舉   // <a href="/BA104G3/backdesk/artiReport/listAllArtiReport.jsp">List</a> all Article Reply.  
          <br/>
         </div>
 
@@ -55,8 +55,7 @@
                         <h5 class="bigger lighter"> ${artiReportSet.mem_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                            <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService"/>
-                            <div class="" style="">${artiClassSvc.getOneClass(artiReportSet.arti_Cls_No).arti_Cls_Name }</div>
+                            <div class="" style="">${artiReportSet.rep_Re_Desc}</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
@@ -103,7 +102,6 @@
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
                                 <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
-                                <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
                                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                    <button class="btn btn-success" type="submit" name="action" value="getOneReport_For_Update">檢舉回覆</button>
@@ -114,10 +112,9 @@
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
-			                    <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReport">刪除檢舉</button>
+			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReportFMBack">刪除檢舉</button>
  			                    </FORM>  
                             </div>
                             </div>

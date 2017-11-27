@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.businessrefinery.barcode.QRCode;
+import com.sun.org.apache.bcel.internal.generic.GotoInstruction;
 
 
 public class QRcode extends HttpServlet {
@@ -17,7 +18,12 @@ public class QRcode extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("image/jpeg");
 		ServletOutputStream outputStream = response.getOutputStream();
+		System.out.println("Get Request From img/issuemission_Pending");
 		
+		String mem_No = request.getParameter("mem_No");
+		String mission_No = request.getParameter("mission_No");
+		System.out.println("Got mem_No: " + mem_No);
+		System.out.println("Got mission_No: " +mission_No);
 		/**
 		 * @author Sander
 		 * 在<img>中屬性src連結到此Servlet即可
@@ -28,7 +34,9 @@ public class QRcode extends HttpServlet {
 	    // new QRcode物件
 	    QRCode barcode = new QRCode();
 	    // 填入要轉碼的資訊
-	    barcode.setCode(request.getScheme() +"://"+ request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "?encodingmsg=helloworld");
+	    String URL = request.getScheme() +"://"+ request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "?mission_No=";
+	    System.out.println("Send Full URL: " + URL);
+	    barcode.setCode(URL);
 	    // 設定大小，15~20效果不錯
 	    barcode.setModuleSize(15);
 	    // 解析度

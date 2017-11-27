@@ -8,7 +8,7 @@ import com.pro.shoppingcart.ProCartVO;
 public class ProOrderService {
 	private ProOrderDAO_interface dao;
 	public ProOrderService(){
-		dao = new ProOrderJDBCDAO();
+		dao = new ProOrderDAO();
 	}
 	
 	public ProOrderVO addProOrder(String mem_No ,Date ord_Date,Integer ord_Price,String ord_Consignee,String ord_Address,String ord_Phone,String ord_Shipinfo,Date ord_Ship_Date){

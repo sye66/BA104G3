@@ -379,7 +379,7 @@ $(document).ready(function(){
       error:function(xhr, ajaxOptions, thrownError){
        swal(
          'Oops...',
-         '出錯瞜!',
+         '按太快瞜!',
          'error'
        )
       } // error end

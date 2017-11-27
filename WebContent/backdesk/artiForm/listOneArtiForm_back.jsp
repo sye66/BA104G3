@@ -138,8 +138,8 @@ div {
                             <div>
                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
 			                <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
+			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                <button class="btn btn-danger" type="submit" name="action" value="deleteArtiFMBack">刪除文章</button>
                             </FORM>
                             </div>
