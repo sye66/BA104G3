@@ -350,7 +350,7 @@ public class ChatRecordDAO_JDBC implements ChatRecordDAO_interface{
 //		insertChatRecord.setChat_Content("HIHIHI!!!!");
 //		dao.insert(insertChatRecord);
 		
-//		System.out.println();
+//		System.out.println(); 
 //		ChatRecordVO chatRecordVO4 =dao.findByPrimaryKey("M000003", "M000001", Timestamp.valueOf("2017-11月-27 11:37:36")); 
 //		System.out.println(chatRecordVO4.getChat_Content());
 //		System.out.println(chatRecordVO4.getReceiver_Mem_No());
