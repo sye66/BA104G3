@@ -90,6 +90,8 @@
 	<br>
 	<br>
 	<%-- 第一層 - 任務顯示面板 --%>
+	<div class="container-fluid">
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8">
@@ -268,6 +270,7 @@
                     <%@ include file="pages/page2.file"%>
                 </div>
 			</div>
+			</div></div>
 	<hr>
 	<br>
 	<br>
@@ -281,6 +284,7 @@
 	<br>
 	<br>
 	<!-- =============================================================== -->
+	
 
 	<%@ include file="/lib/publicfile/include/file/footer.jsp"%>
     <script src="https://code.jquery.com/jquery.js"></script>

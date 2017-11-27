@@ -587,7 +587,7 @@ public class ArtiFormServlet extends HttpServlet {
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
-				errorMsgs.add(" 刪除資料失敗 : 回覆文章還沒刪除喔~~~ " + e.getMessage());
+				errorMsgs.add(" 刪除資料失敗 : 回覆文章還沒刪除OR檢舉文章還沒處理喔~~~ " + e.getMessage());
 				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/select_page.jsp");
 				failuewView.forward(req, res);
 			}

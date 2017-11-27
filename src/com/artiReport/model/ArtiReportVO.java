@@ -8,7 +8,7 @@ public class ArtiReportVO implements java.io.Serializable {
 	private String arti_No;
 	private String report_Desc;
 	private Timestamp report_Time;
-	private Integer arti_Cls_No;
+	private String rep_Re_Desc;
 	private String report_Status;
 	
 	
@@ -42,11 +42,11 @@ public class ArtiReportVO implements java.io.Serializable {
 	public void setReport_Time(Timestamp report_Time) {
 		this.report_Time = report_Time;
 	}
-	public Integer getArti_Cls_No() {
-		return arti_Cls_No;
+	public String getRep_Re_Desc() {
+		return rep_Re_Desc;
 	}
-	public void setArti_Cls_No(Integer arti_Cls_No) {
-		this.arti_Cls_No = arti_Cls_No;
+	public void setRep_Re_Desc(String rep_Re_Desc) {
+		this.rep_Re_Desc = rep_Re_Desc;
 	}
 	public String getReport_Status() {
 		return report_Status;

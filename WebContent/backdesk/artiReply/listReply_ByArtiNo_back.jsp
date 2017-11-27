@@ -3,10 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReply.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
 <jsp:useBean id="artiReplySvc1" scope="session" class="com.artiReply.model.ArtiReplyService" />
 <%
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+
     ArtiReplyService artiReplySvc = new ArtiReplyService();
 	String arti_No = (String) session.getAttribute("arti_No");
     Set<ArtiReplyVO> set = ( Set<ArtiReplyVO>) artiReplySvc.findReplyByArtiNo(arti_No);
@@ -103,6 +106,7 @@ h3{
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" >
 		                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
+		                        <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 		                        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		                        <input type="hidden" name="report_Desc"  value="${artiReportVO.report_Desc}">
                                 <button class="btn btn-warning" type="submit" name="action" value="insertReport_4Reply"> 檢舉回覆 </button>
@@ -113,6 +117,7 @@ h3{
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
+			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReplyFMBack">刪除回覆</button>
  			                    </FORM>  

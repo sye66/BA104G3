@@ -24,11 +24,16 @@
 	
 } 
 .proName0{ 
+	color:#000;
+	font-family: Microsoft JhengHei;
+	font-weight:bold;
    	font-size:18px; 
 }  
 .proPrice0{
  	font-size:16; 
-    color:red; 
+    color:red;
+	font-family: Microsoft JhengHei;
+	font-weight:bold; 
 } 
 .proDiscount0{ 
   	font-size:14px; 
@@ -52,7 +57,7 @@
 <body>
 
 
-  <div class="col-xs-12 col-sm-12">
+  <div class="col-xs-12 col-sm-11 col-sm-offset-1">
   
 	<c:forEach var="proVO" items="${list}" end="9">
 	
@@ -60,23 +65,25 @@
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}" style="text-decoration:none;">
 		
 		<c:if test="${proVO.pro_Status=='上架'}" >
-		<h3 style="margin-left:16px; color:red;">TOP:<%=count %></h3>
+		<h3 style="margin-left:16px; color:#000093;">TOP:<span style="color:red;"><%=count %></span></h3>
 		<div style="text-align:center ">
 			<div class="col-xs-12 col-sm-12 proDiv0">
 		     	<div class="card0"  >
 		     	
 			 	    <div class="imgCont0">
 			 	    
-		  				<img class="card-img-top" style="width:100px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+		  				<img class="card-img-top" style="width:100px;height:100px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	        
 			   	    </div>
 	  				<div class="card-body">
-	   			 		<p class="card-text proName0">${proVO.pro_Name}</p>
+	   			 		<p class="card-text proName0" style="height:30px;">${proVO.pro_Name}</p>
 	   			 		<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
 	   			 		 <fmt:parseNumber var="dsPrice" integerOnly="true" 
                        type="number" value="${balance}" />
 	   			 		 
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">
+<%-- 	   			 		折扣價:<span><c:out value="${dsPrice}" /></span>點 --%>
+	   			 		</p>
 	   			 		
 	 			 	</div>
 				</div>

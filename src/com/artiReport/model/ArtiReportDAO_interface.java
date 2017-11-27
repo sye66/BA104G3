@@ -10,6 +10,6 @@ public interface ArtiReportDAO_interface {
 	public ArtiReportVO findByPrimaryKey (String report_No);
 	public Set<ArtiReportVO> getAllReport();
 	public Set<ArtiReportVO> findReportByArtiNo(String arti_No);
-	public Set<ArtiReportVO> findReportByArtiClsNo(Integer arti_Cls_No);
+	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc);
 
 }
