@@ -111,7 +111,6 @@ $(document).ready(function(){
   $( ".deletBtn2" ).on( "click", function( event ) {
          var $item = $( this );         
          swal({
-      title: 'Are you sure?',
       text: "確定刪除商品嗎?",
       type: 'warning',
       showCancelButton: true,
@@ -136,17 +135,13 @@ $(document).ready(function(){
 //       async: false,           // 預設值為 true 非同步
       success:function(response){
        swal(
-        'Sucess!',
         '已刪除此商品追蹤',
-        'success'
        )
        setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
       }, // success end        
       error:function(xhr, ajaxOptions, thrownError){
        swal(
-         'Oops...',
          '出錯瞜!',
-         'error'
        )
       } // error end
      }) //.ajax end 
@@ -162,9 +157,7 @@ $(document).ready(function(){
   $( ".add2" ).on( "click", function( event ) {
          var $item = $( this );         
          swal(
-        	 'Sucess!',
              '已放入購物車',
-             'success'      
            ).then(function () {
      	
     	var action = $item.parent().find("input.action").val();
@@ -185,9 +178,7 @@ $(document).ready(function(){
       }, // success end        
       error:function(xhr, ajaxOptions, thrownError){
        swal(
-         'Oops...',
          '出錯瞜!',
-         'error'
        )
       } // error end
      }) //.ajax end 

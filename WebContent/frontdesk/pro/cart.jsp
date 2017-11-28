@@ -101,9 +101,10 @@ window.onscroll = function() {
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
 
+<div class="row">
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
-</div>
+</div></div>
 <!-- 商城TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
@@ -208,7 +209,7 @@ window.onscroll = function() {
 	<div class="container">
 		<div class="row">           
 			<div class="col-xs-12 col-sm-3 col-sm-offset-3"><h3>共&nbsp;<span style="color:red;"><%=buylist.size()%></span>&nbsp;項商品</h3></div>
-			<div class="col-xs-12 col-sm-4"><h2>總計:&nbsp;<span style="color:red;" id="total"><%=totalPrice%></span>&nbsp;點</h2></div>
+			<div class="col-xs-12 col-sm-4"><h3>總計:&nbsp;<span style="color:red;" id="total"><%=totalPrice%></span>&nbsp;點</h3></div>
 <!-- 			<div class="col-xs-12 col-sm-2"> -->
 		</div>
 	</div>
@@ -350,7 +351,6 @@ $(document).ready(function(){
   $( ".deletBtn" ).on( "click", function( event ) {
          var $item = $( this );         
          swal({
-      title: 'Are you sure?',
       text: "確定刪除商品嗎?",
       type: 'warning',
       showCancelButton: true,
@@ -370,7 +370,6 @@ $(document).ready(function(){
 //       async: false,           // 預設值為 true 非同步
       success:function(response){
        swal(
-        'Sucess!',
         '已刪除此商品',
         'success'
        )
@@ -378,7 +377,6 @@ $(document).ready(function(){
       }, // success end        
       error:function(xhr, ajaxOptions, thrownError){
        swal(
-         'Oops...',
          '按太快瞜!',
          'error'
        )

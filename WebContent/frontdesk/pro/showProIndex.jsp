@@ -64,7 +64,7 @@
 
 			<br>
 			<ol class="breadcrumb">
-				<li><a href="http://localhost:8081/BA104G3/lib/publicfile/include/file/index.jsp">首頁</a></li>
+				<li><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
 				<li class="active">積分商城
 				</li>
 

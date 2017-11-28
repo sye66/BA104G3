@@ -3,6 +3,7 @@
 <%@ page import="com.rank.model.*"%>
 <%@ page import="com.relation.model.*"%>
 <%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.relation.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -14,12 +15,22 @@
 	MemVO memVO = (MemVO)session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
 	String mem_No_main = memVO.getMem_No();
+	//所有會員
+	MemService memSvc = new MemService();
+	List<MemVO> getAllMemVO = memSvc.getAll();
+	pageContext.setAttribute("getAllMemVO", getAllMemVO);
+	//顯示自己排名
 	RankService rankSvc = new RankService();
 	RankVO rankVO = rankSvc.getOneRank(mem_No);
 	pageContext.setAttribute("rankVO",rankVO);
+	//顯示自己文章
 	ArtiFormService artiSvc = new ArtiFormService();
 	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
 	pageContext.setAttribute("set", set);
+	//顯示好友
+	RelationService relationSvc = new RelationService();
+	List<RelationVO> relationVO = relationSvc.getAllRelationWithMem_No(mem_No);
+	pageContext.setAttribute("relationVO", relationVO);
 	
 %>
       <%request.getSession().setAttribute("memVO" ,memVO); %>
@@ -29,7 +40,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+	
+	
 </head>
 
 <body style="background-color : #ffc">
@@ -46,7 +58,7 @@
 			<div class="col-xs-12 col-sm-4">
  				<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">標題</h3>
+ 				    <h3 class="panel-title">個人</h3>
  				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">
@@ -71,6 +83,26 @@
  				    			<a href="<%=request.getContextPath()%>/frontdesk/personal/personalAchieve.jsp"><span class="icon icon-pencil"></span>成就查詢</a>
  				    		</td>
  				    	</tr>
+ 				    </table>				
+ 				  </div>
+ 				</div>
+ 			
+ 			
+ 				<div class="panel panel-primary">
+ 				  <div class="panel-heading">
+ 				    <h3 class="panel-title">其他</h3>
+ 				  </div>
+ 				  <div class="panel-body">
+ 				    <table class="table table-hover">
+ 				    	<c:forEach var="all" items="${getAllMemVO}">
+	 				    	<tr>
+	 				    		<td>
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>	
+	 				    	</tr>
+ 				    	</c:forEach>
  				    </table>				
  				  </div>
  				</div>

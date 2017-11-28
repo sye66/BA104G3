@@ -13,7 +13,7 @@
 %>
 <html>
 <head>
-<title>訂單</title>
+<title>工具人出租</title>
 
 <style>
 .cartPro3{ 
@@ -28,9 +28,9 @@
 .totalPrice2{
 	color:red;
 }
-tr th , td { 
+.cartPro3 tr th ,.cartPro3 tr td { 
 text-align:center; 
-/* 	border-bottom:3px orange double; */
+ 	border-bottom:3px #FFBA3B solid; 
 /* 	border-right: 3px orange double; */
 } 
 </style>
@@ -39,12 +39,15 @@ text-align:center;
 
 </head>
 <body>
+<a name="aaa"></a>
+
 <!-- TOP -->
 <div class="row">
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/proNavbar.jsp" flush="true"/> 
 <%-- <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true"></jsp:include> --%>
-</div></div>
+</div>
+</div>
 <!-- 商城TOP -->
 <div class="col-xs-12 col-sm-12 ">
 <jsp:include page="/frontdesk/pro/selectProTOP.jsp" flush="true" />	
@@ -57,7 +60,7 @@ text-align:center;
   			<ol class="breadcrumb">
     			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
     			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp">積分商城</a></li>
-  				<li class="breadcrumb-item active">購物車</li>
+  				<li class="breadcrumb-item active">填寫訂單</li>
   			
   			</ol>
 		</nav>
@@ -102,17 +105,17 @@ text-align:center;
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pro/proOrderServlet.do" name="form1">
 
 <br>
-			<div class="form-group"><h3>姓名</h3>
+			<div class="form-group"><h3>收件人姓名:</h3>
             <input type="TEXT" name="ord_Consignee" size="36" placeholder="請輸入中文或英文姓名" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Name()%>" />
     		</div>
 									
-			<div class="form-group"><h3>市話號碼</h3>
+			<div class="form-group"><h3>市話號碼:</h3>
             <input type="TEXT" name="mem_Tel" size="36" placeholder="EX:03-3345678" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Tel()%>" />
 			</div>
 			
-			<div class="form-group"><h3>手機號碼</h3>
+			<div class="form-group"><h3>手機號碼:</h3>
             <input type="TEXT" name="mem_Pho" size="36" placeholder="EX:0978978978" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Pho()%>" />
 			
@@ -123,7 +126,7 @@ text-align:center;
 
 
 
-			<div class="form-group"><h3>通訊地址</h3>
+			<div class="form-group"><h3>寄送地址:</h3>
             <input type="TEXT" name="ord_Address" size="36" placeholder="XXX路XXX巷XX弄XX號" class="form-control input-lg" tabindex="3"
 			value="<%= (memVO==null)? "": memVO.getMem_Address()%>" />
 			
@@ -181,21 +184,38 @@ text-align:center;
 			
 			
           
-	</tr>
-		<tr><%totalPrice=totalPrice+(int)(order.getProCar_Price()*order.getProCar_Quantity()); }%>
-        	
-        	<td width="200" colspan="2">
-        		<h3 >共<%=buylist.size()%>項商品</h3>
-			
-    		</td>
-    		<td width="200" colspan="3">
-    		
-    			<h3 >總計扣除:&nbsp;<span style="color:red;">${totalPrice}</span>&nbsp;點</h3>
+		</tr>
+		<%totalPrice=totalPrice+(int)(order.getProCar_Price()*order.getProCar_Quantity()); }%>
+		</table>
+		<hr size="2px" align="center" width="100%">
+		<table>
+		<tr >
+			<td width="100"></td>
+        	<td width="200"></td>
+    		<td width="300" >
+    			<h4>您的點數:&nbsp;<span style="color:red;">${memVO.mem_Point}</span>&nbsp;點</h4>
     		</td>
     	</tr>
-    	
+		<tr>
+			<td width="100"></td>
+        	<td width="200" >
+        		<h4>共<%=buylist.size()%>項商品</h4>
+			
+    		</td>
+    		<td width="300">
+    			<h4>扣除點數:&nbsp;<span style="color:red;">-${totalPrice}</span>&nbsp;點</h4>
+    		</td>
+    	</tr>
+    	<tr>
+        	
+        	<td width="100"></td>
+        	<td width="200"></td>
+    		<td width="300">
+    			<h4>剩餘點數:&nbsp;<span style="color:red;">${memVO.mem_Point-totalPrice}</span>&nbsp;點</h4>
+    		</td>
+    	</tr>
 </table>	
-	
+	<hr size="2px" align="center" width="100%">
 <%}%>	
 	 
 </div>	  
