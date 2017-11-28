@@ -273,7 +273,7 @@ function sendMessage() {
     if (message === ""){
         alert ("訊息請勿空白!");
         inputMessage.focus();	
-    }else{ 
+    }else{  
     	console.log('-------------------------'+userName)
     	
     	//**************************************************************************************
