@@ -1,6 +1,6 @@
 package com.android.model;
 
-
+import java.util.List;
 
 public class Mission_ImagesService {
 	private Mission_ImagesDAO_interface dao;
@@ -29,6 +29,18 @@ public class Mission_ImagesService {
 		mission_ImagesVO.setIssuer_Mem_No(issuer_Mem_No);
 		mission_ImagesVO.setMission_No(mission_No);
 		dao.insertNoImage(mission_No,issuer_Mem_No);
+		return mission_ImagesVO;
+	}
+	
+	public Mission_ImagesVO updateMissionImages(String mission_No,String issuer_Mem_No, byte[] issuer_Images){
+		Mission_ImagesVO mission_ImagesVO = new Mission_ImagesVO();
+		mission_ImagesVO.setIssuer_Mem_No(issuer_Mem_No);
+		mission_ImagesVO.setMission_No(mission_No);
+		mission_ImagesVO.setIssuer_Images(issuer_Images);
+		List<String> imageNoList = dao.getImageNoByMissionNo(mission_No);
+		mission_ImagesVO.setImage_No(imageNoList.get(0));
+		System.out.println(issuer_Mem_No+" "+mission_No+" "+mission_No);
+		dao.update(mission_ImagesVO);
 		return mission_ImagesVO;
 	}
 	

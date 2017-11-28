@@ -2,6 +2,7 @@ package com.android.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 
 
@@ -15,15 +16,20 @@ public class MissionVO implements Serializable {
 	private String mission_Des;
 	private String issuer_Mem_No;
 	private String takecase_Mem_No;
-	private Date mission_Release_Time;
-	private Date mission_Due_Time;
-	private Date mission_Start_Time;
-	private Date mission_End_Time;
+//	private Date mission_Release_Time;
+//	private Date mission_Due_Time;
+//	private Date mission_Start_Time;
+//	private Date mission_End_Time;
 	private Integer mission_State;
 	private Integer mission_Pattern;
 	private Double mission_Pay;
 	private Double mission_Gps_Lat;
 	private Double mission_Gps_Lng;
+	
+	private Timestamp mission_Release_Time;
+	private Timestamp mission_Due_Time;
+	private Timestamp mission_Start_Time;
+	private Timestamp mission_End_Time;
 	
 	
 //	Mission_ImagesVO mission_ImagesVO;
@@ -88,35 +94,35 @@ public class MissionVO implements Serializable {
 		this.takecase_Mem_No = takecase_Mem_No;
 	}
 
-	public Date getMission_Release_Time() {
+	public Timestamp getMission_Release_Time() {
 		return mission_Release_Time;
 	}
 
-	public void setMission_Release_Time(Date mission_Release_Time) {
+	public void setMission_Release_Time(Timestamp mission_Release_Time) {
 		this.mission_Release_Time = mission_Release_Time;
 	}
 
-	public Date getMission_Due_Time() {
+	public Timestamp getMission_Due_Time() {
 		return mission_Due_Time;
 	}
 
-	public void setMission_Due_Time(Date mission_Due_Time) {
+	public void setMission_Due_Time(Timestamp mission_Due_Time) {
 		this.mission_Due_Time = mission_Due_Time;
 	}
 
-	public Date getMission_Start_Time(){
+	public Timestamp getMission_Start_Time(){
 		return mission_Start_Time;
 	}
 
-	public void setMission_Start_Time(Date mission_Start_Time) {
+	public void setMission_Start_Time(Timestamp mission_Start_Time) {
 		this.mission_Start_Time = mission_Start_Time;
 	}
 
-	public Date getMission_End_Time() {
+	public Timestamp getMission_End_Time() {
 		return mission_End_Time;
 	}
 
-	public void setMission_End_Time(Date mission_End_Time) {
+	public void setMission_End_Time(Timestamp mission_End_Time) {
 		this.mission_End_Time = mission_End_Time;
 	}
 

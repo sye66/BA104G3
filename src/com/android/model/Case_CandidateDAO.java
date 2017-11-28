@@ -30,8 +30,8 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		}
 		
 	}
-//	
-////  一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
+	
+
 //	private static DataSource ds = null;
 //	static {
 //		try {
@@ -44,7 +44,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 	
 	private static final String INSERT_CASE_CANDIDATE = "INSERT INTO CASE_CANDIDATE(CANDIDATE_MEM_NO ,MISSION_NO ,ISSUER_INVITING) VALUES( ?, ? ,? )";
 	private static final String GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO = "SELECT MISSION_NO FROM CASE_CANDIDATE WHERE CANDIDATE_MEM_NO=? ";
-	//加狀態
+	//嚙稼嚙踝蕭嚙璀
 	private static final String GET_ALL_CANDIDATE_MEM_NO_BY_MISSION_NO = "SELECT CANDIDATE_MEM_NO FROM CASE_CANDIDATE WHERE MISSION_NO=?";
 	private static final String DELETE_CASE_CANDIDATE = "DELETE FROM CASE_CANDIDATE WHERE CANDIDATE_MEM_NO = ? AND MISSION_NO = ? ";
 	private static final String DELETE_BY_MISSION_NO = "DELETE FROM CASE_CANDIDATE WHERE MISSION_NO = ? ";
@@ -155,7 +155,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO + " AND ISSUER_INVITING =1");
+			pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO + " AND ISSUER_INVITING =1 ");
 			pstmt.setString(1, candidate_Mem_No);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {

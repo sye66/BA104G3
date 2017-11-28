@@ -2,6 +2,7 @@ package com.android.model;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -13,7 +14,7 @@ public class MissionService {
 		dao = new MissionDAO();
 	}
 	
-	public MissionVO addMission(String mission_Category, String mission_Name, String mission_Des, String issuer_Mem_No, String takecase_Mem_No, Date mission_Release_Time, Date mission_Due_Time, Date mission_Start_Time, Date mission_End_Time, Integer mission_State, Integer mission_Pattern, Double mission_Pay, Double mission_Gps_Lat, Double mission_Gps_Lng ){
+	public MissionVO addMission(String mission_Category, String mission_Name, String mission_Des, String issuer_Mem_No, String takecase_Mem_No, Timestamp mission_Release_Time, Timestamp mission_Due_Time, Timestamp mission_Start_Time, Timestamp mission_End_Time, Integer mission_State, Integer mission_Pattern, Double mission_Pay, Double mission_Gps_Lat, Double mission_Gps_Lng ){
 		MissionVO mission = new MissionVO();
 		
 		mission.setMission_Category(mission_Category);
@@ -28,14 +29,14 @@ public class MissionService {
 		mission.setMission_State(mission_State);
 		mission.setMission_Pattern(mission_Pattern);
 		mission.setMission_Pay(mission_Pay);
-//		mission.setMission_Gps_Lat(mission_Gps_Lat);
-//		mission.setMission_Gps_Lng(mission_Gps_Lng);
+		mission.setMission_Gps_Lat(mission_Gps_Lat);
+		mission.setMission_Gps_Lng(mission_Gps_Lng);
 		dao.insert(mission);
 		return  mission;
 		
 	}
 	
-	public MissionVO updateMission(String mission_No, String mission_Category, String mission_Des, String mission_Name, String issuer_Mem_No, String takecase_Mem_No, Date mission_Release_Time, Date mission_Due_Time, Date mission_Start_Time, Date mission_End_Time, Integer mission_State, Integer mission_Pattern, Double mission_Pay, Double mission_Gps_Lat, Double mission_Gps_Lng ){
+	public MissionVO updateMission(String mission_No, String mission_Category, String mission_Des, String mission_Name, String issuer_Mem_No, String takecase_Mem_No, Timestamp mission_Release_Time, Timestamp mission_Due_Time, Timestamp mission_Start_Time, Timestamp mission_End_Time, Integer mission_State, Integer mission_Pattern, Double mission_Pay, Double mission_Gps_Lat, Double mission_Gps_Lng ){
 		MissionVO mission = new MissionVO();
 		
 		mission.setMission_No(mission_No);
