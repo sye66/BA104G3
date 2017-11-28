@@ -52,7 +52,7 @@
         </a>
         </c:if>
       <c:if test="${memVO.mem_State==1}">
-        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webToolSocket.jsp ', 'Yahoo', config='height=500,width=550')">
+        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')">
         <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         </c:if>
@@ -83,7 +83,7 @@
               <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>
             </li>
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
+              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/ArtiForm_main.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
             </li>
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
@@ -169,22 +169,32 @@ function getFocus() {
                     </form>
                     <!-- End # Login Form -->
                     
-					<!--神奇小按鈕 -->
 						<br>
-						<button type="button" onclick="aa0953711016()">神</button>
-						<button type="button" id="M000001">M1</button>						
+					<!--神奇小按鈕 -->	
+						<div class="col-xs-12 col-sm-8">
 						
+						
+						<button type="button" onclick="aa0953711016()">神</button>
+						<button type="button" id="M000002">柏</button>	
+						<button type="button" id="M000003">武</button>
+						<button type="button" id="M000004">子</button>						
+<!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
                     
+                    <div class="col-xs-12 col-sm-4">
+                    <a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp">
+                    <input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
+                   
+					
 					</div>
 					<div class="modal-footer">
 <%-- 						<button type="button" class="btn btn-default" data-dismiss="modal">����</button> 
- 						<button type="button" class="btn btn-primary">Save changes</button> --%>
+ 						<button type="button" class="btn btn-danger">Save changes</button> --%>
 					</div>
 				</div>
 			</div>
 		</div>
-<!--神奇方法 -->
+		<!--神奇方法 -->
 			<script type="text/javascript">
 				function aa0953711016(){
 					
@@ -272,96 +282,27 @@ function getFocus() {
  	
  	<script type="text/javascript">
  	
- 	$('#M000001').click(function(){
-		$('#login_username').val("aaa@gmail.com");
-		$('#login_password').val("A123456");
+ 	$('#M000002').click(function(){
+		$('#login_username').val("BBB@gmail.com");
+		$('#login_password').val("E123456");
 	});
+ 	
+ 	$('#M000003').click(function(){
+		$('#login_username').val("CCC@gmail.com");
+		$('#login_password').val("F123456");
+	});
+ 	
+ 	$('#M000004').click(function(){
+		$('#login_username').val("ziu0614@gmail.com");
+		$('#login_password').val("B123456");
+	});
+ 	
+//  	$('#GM1').click(function(){
+// 		$('#login_username').val("burnerzx@gmail.com");
+// 		$('#login_password').val("OFFICAL1");
+// 	});
  	</script>
- <script>
-    
-    var ToolMan = "/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
-    var hostTool = window.location.hostTool;
-    var pathTool = window.location.pathname;
-    var toolWebCtx = pathTool.substring(0, pathTool.indexOf('/', 1));
-    var endToolManURL = "ws://" + window.location.hostTool + toolWebCtx + ToolMan;
-    
-	var statusOutput = document.getElementById("statusOutput");
-	var webToolSocket;
-	
-	function connect() {
-		// 建立 webToolSocket 物件
-		webToolSocket = new webToolSocket(endToolManURL);
-		
-		webToolSocket.onopen = function(event) {
-			updateStatus("webToolSocket 成功連線");
-			document.getElementById('sendMessage').disabled = false;
-			document.getElementById('connect').disabled = true;
-			document.getElementById('disconnect').disabled = false;
-		};
-
-		webToolSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-	        var jsonObj = JSON.parse(event.data);
-	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-	        messagesArea.value = messagesArea.value + message;
-	        messagesArea.scrollTop = messagesArea.scrollHeight;
-		};
-
-		webToolSocket.onclose = function(event) {
-			updateStatus("webToolSocket 已離線");
-		};
-	}
-	
-	
-	var inputUserName = document.getElementById("userName");
-	inputUserName.focus();
-	
-	function sendMessage(action, take_Meme_No) {
-		
-		
-		
-	    var userName = take_Meme_No;
-	    
-	    if("missionOk".equal(action)){
-	    	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
-		    
-		    if (message === ""){
-		        alert ("訊息請勿空白!");
-		        inputMessage.focus();	
-		    }else{
-		        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
-// 		        webToolSocket.send(JSON.stringify(jsonObj));
-				swal(
-				  '${memVO.mem_Id}',
-				  inputMessage,
-				  'success'
-				)
-		    }
-	    }
-	    
- 		
-	}
-	
-	
-	$("#id").click(function(){
-		var Str = "你的任務已經OK囉";
-		
-		
-		sendMessage(missionOk, take_Meme_No);
-		
-	})
-	
-	function disconnect () {
-		webToolSocket.close();
-		
-	}
-
-	
-	function updateStatus(newStatus) {
-		statusOutput.innerHTML = newStatus;
-	}
-    
-</script>
+ 
   </body>
 
 </html>
