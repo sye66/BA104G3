@@ -40,7 +40,7 @@
 
   </head>
 
-  <body id="page-top"  style="font-family:Microsoft JhengHei;">
+  <body id="page-top"  style="font-family:Microsoft JhengHei;"   onload="connect();" onunload="disconnect();">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -302,6 +302,92 @@ function getFocus() {
 // 		$('#login_password').val("OFFICAL1");
 // 	});
  	</script>
+ 
+ <script>
+    
+    var ToolMan = "/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
+    var hostTool = window.location.hostTool;
+    var pathTool = window.location.pathname;
+    var toolWebCtx = pathTool.substring(0, pathTool.indexOf('/', 1));
+    var endToolManURL = "ws://" + window.location.hostTool + toolWebCtx + ToolMan;
+    
+	var statusOutput = document.getElementById("statusOutput");
+	var webToolSocket;
+	
+	function connect() {
+		// 建立 webToolSocket 物件
+		webToolSocket = new webToolSocket(endToolManURL);
+		
+		webToolSocket.onopen = function(event) {
+			updateStatus("webToolSocket 成功連線");
+			document.getElementById('sendMessage').disabled = false;
+			document.getElementById('connect').disabled = true;
+			document.getElementById('disconnect').disabled = false;
+		};
+
+		webToolSocket.onmessage = function(event) {
+			var messagesArea = document.getElementById("messagesArea");
+	        var jsonObj = JSON.parse(event.data);
+	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
+	        messagesArea.value = messagesArea.value + message;
+	        messagesArea.scrollTop = messagesArea.scrollHeight;
+		};
+
+		webToolSocket.onclose = function(event) {
+			updateStatus("webToolSocket 已離線");
+		};
+	}
+	
+	
+	var inputUserName = document.getElementById("userName");
+	inputUserName.focus();
+	
+	function sendMessage(action, take_Meme_No) {
+		
+		
+		
+	    var userName = take_Meme_No;
+	    
+	    if("missionOk".equal(action)){
+	    	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
+		    
+		    if (message === ""){
+		        alert ("訊息請勿空白!");
+		        inputMessage.focus();	
+		    }else{
+		        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
+// 		        webToolSocket.send(JSON.stringify(jsonObj));
+				swal(
+				  '${memVO.mem_Id}',
+				  inputMessage,
+				  'success'
+				)
+		    }
+	    }
+	    
+ 		
+	}
+	
+	
+	$("#id").click(function(){
+		var Str = "你的任務已經OK囉";
+		
+		
+		sendMessage(missionOk, take_Meme_No);
+		
+	})
+	
+	function disconnect () {
+		webToolSocket.close();
+		
+	}
+
+	
+	function updateStatus(newStatus) {
+		statusOutput.innerHTML = newStatus;
+	}
+    
+</script>
  
   </body>
 
