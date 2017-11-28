@@ -465,7 +465,35 @@
 }
 </style>
 
-<title></title>
+<!--神奇方法 -->
+			
+			<script type="text/javascript">
+			$('#M000001').click(function(){
+				$('#login_username').val("aa0953711016@gmail.com");
+				$('#login_password').val("A123456");
+			});
+ 			$('#M000002').click(function(){
+				$('#login_username').val("sanderxavalon@gmail.com");
+				$('#login_password').val("E123456");
+			});
+ 	
+ 			$('#M000003').click(function(){
+				$('#login_username').val("CCC@gmail.com");
+				$('#login_password').val("F123456");
+			});
+ 	
+ 			$('#M000004').click(function(){
+				$('#login_username').val("ziu0614@gmail.com");
+				$('#login_password').val("B123456");
+			});
+ 	
+//  	$('#GM1').click(function(){
+// 		$('#login_username').val("burnerzx@gmail.com");
+// 		$('#login_password').val("OFFICAL1");
+// 	});
+ 	</script>
+		<!--神奇方法 -->
+
 </head>
 <body>
 	<!-- 引入TOP-->
@@ -641,34 +669,6 @@ function getFocus() {
 					</div>
 				</div>
 			</div>
-<!--神奇方法 -->
-			
-			<script type="text/javascript">
-			$('#M000001').click(function(){
-				$('#login_username').val("aa0953711016@gmail.com");
-				$('#login_password').val("A123456");
-			});
- 			$('#M000002').click(function(){
-				$('#login_username').val("sanderxavalon@gmail.com");
-				$('#login_password').val("E123456");
-			});
- 	
- 			$('#M000003').click(function(){
-				$('#login_username').val("CCC@gmail.com");
-				$('#login_password').val("F123456");
-			});
- 	
- 			$('#M000004').click(function(){
-				$('#login_username').val("ziu0614@gmail.com");
-				$('#login_password').val("B123456");
-			});
- 	
-//  	$('#GM1').click(function(){
-// 		$('#login_username').val("burnerzx@gmail.com");
-// 		$('#login_password').val("OFFICAL1");
-// 	});
- 	</script>
-		<!--神奇方法 -->
 
 	
 
