@@ -388,7 +388,7 @@ function getFocus() {
     
      
     
-    var MyPoint ="/MissionSocket/${memVO.mem_No}/dddd";
+    var MyPoint ="/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
     var host = window.location.host;
     var path = window.location.pathname;
     var webCtx = path.substring(0, path.indexOf('/', 1));
