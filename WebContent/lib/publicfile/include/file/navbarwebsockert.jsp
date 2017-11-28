@@ -321,22 +321,25 @@ function getFocus() {
 		
 		
 	    var userName = take_Meme_No;
-	    if (userName === ""){
-	        alert ("會員名稱請勿空白!");
-	        inputUserName.focus();	
-			return;
+	    
+	    if("missionOk".equal(action)){
+	    	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
+		    
+		    if (message === ""){
+		        alert ("訊息請勿空白!");
+		        inputMessage.focus();	
+		    }else{
+		        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
+// 		        webToolSocket.send(JSON.stringify(jsonObj));
+				swal(
+				  '${memVO.mem_Id}',
+				  inputMessage,
+				  'success'
+				)
+		    }
 	    }
 	    
-// 	    var inputMessage = document.getElementById("message");
- 		var inputMessage = "你的任務已經OK囉";
-	    
-	    if (message === ""){
-	        alert ("訊息請勿空白!");
-	        inputMessage.focus();	
-	    }else{
-	        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
-	        webToolSocket.send(JSON.stringify(jsonObj));
-	    }
+ 		
 	}
 	
 	
@@ -344,7 +347,7 @@ function getFocus() {
 		var Str = "你的任務已經OK囉";
 		
 		
-		sendMessage(XXX, take_Meme_No);
+		sendMessage(missionOk, take_Meme_No);
 		
 	})
 	

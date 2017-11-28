@@ -337,6 +337,14 @@
     <servlet-name>AdServlet</servlet-name>
     <url-pattern>/ad/ad.do</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>Messages</servlet-name>
+    <servlet-class>com.artiChat.controller.Messages</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Messages</servlet-name>
+    <url-pattern>/artiChat/artiChat.do</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetMissionServlet</servlet-name>
     <servlet-class>com.getmission.controller.GetMissionServlet</servlet-class>

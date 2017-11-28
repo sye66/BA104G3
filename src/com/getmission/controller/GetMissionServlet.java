@@ -9,6 +9,7 @@ import java.sql.Time;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.swing.plaf.synth.SynthSeparatorUI;
+import javax.websocket.Session;
 
 import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
@@ -866,8 +867,13 @@ public class GetMissionServlet extends HttpServlet {
 					memVO = memSvc.updateMemPoint(takecase_Mem_No, now);
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
+				
+					MissionSocket.pushMissionText(takecase_Mem_No);
+					
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/mission_finalsuccess.jsp");
 					failureView.forward(req, res);
+
+					
 					return; // 程式中斷
 
 					/*************************** 其他可能的錯誤處理 *************************************/

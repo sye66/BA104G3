@@ -237,7 +237,7 @@ System.out.println("修改完成");
 				 ***********/
 
 				String url = null;
-				 if(requestURL.equals("/BA104G3/backdesk/proOrder/listProOrder_B2.jsp")){
+				 if(requestURL.equals("/backdesk/proOrder/listProOrder_B2.jsp")){
 					url  = "/backdesk/proOrder/listProOrder_B2.jsp";
 				}else{
 					url  = "/pro/proOrderServlet.do?action=getListProOrder";

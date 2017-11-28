@@ -40,7 +40,7 @@
 
   </head>
 
-  <body id="page-top"  style="font-family:Microsoft JhengHei;"   onload="connect();" onunload="disconnect();">
+  <body id="page-top"  style="font-family:Microsoft JhengHei;">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -177,7 +177,7 @@ function getFocus() {
 						<button type="button" onclick="aa0953711016()">神</button>
 						<button type="button" id="M000002">柏</button>	
 						<button type="button" id="M000003">武</button>
-						<button type="button" id="M000004">子</button></div>						
+						<button type="button" id="M000004">子</button>						
 <!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
                     
@@ -283,7 +283,7 @@ function getFocus() {
  	<script type="text/javascript">
  	
  	$('#M000002').click(function(){
-		$('#login_username').val("sanderxavalon@gmail.com");
+		$('#login_username').val("BBB@gmail.com");
 		$('#login_password').val("E123456");
 	});
  	
@@ -302,59 +302,6 @@ function getFocus() {
 // 		$('#login_password').val("OFFICAL1");
 // 	});
  	</script>
- 
- <script>
-    
-    var MyPoint ="/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
-    var host = window.location.host;
-    var path = window.location.pathname;
-    var webCtx = path.substring(0, path.indexOf('/', 1));
-    var endPointURL = "ws://" + host + webCtx + MyPoint;
-    
-
-	var webSocket;
-	
-	function connect() {
-		// 建立 websocket 物件
-		webSocket = new WebSocket(endPointURL);
-		
-		webSocket.onopen = function(event) {
-// 			updateStatus("WebSocket 成功連線");
-		
-		};
-
-		webSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-	        var jsonObj = JSON.parse(event.data);
-	        if(jsonObj.action=='missionOk'){
-	        	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
-	        	swal(
-	   				  '${memVO.mem_Id}',
-	   				  inputMessage,
-	   				  'success'
-   				)
-	        	
-	        }
-	        
-	 
-		};
-
-		webSocket.onclose = function(event) {
-			updateStatus("WebSocket 已離線");
-		};
-	}
-	
-
-
-	
-	function disconnect () {
-		webSocket.close();
-		
-	}
-
-	
-
-</script>
  
   </body>
 
