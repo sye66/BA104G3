@@ -2,6 +2,7 @@ package com.artiReport.model;
 
 import java.util.Set;
 
+import com.artiForm.model.ArtiFormVO;
 import com.artiReply.model.ArtiReplyVO;
 
 public class ArtiReportService {
@@ -41,6 +42,8 @@ public class ArtiReportService {
 		return artiReportVO;
 	}
 	
+
+	
 	public void deleteArtiReport(String report_No){
 		dao.deleteReport(report_No);
 	}
@@ -57,8 +60,8 @@ public class ArtiReportService {
 		return dao.findReportByArtiNo(arti_No);
 	}
 	
-	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc){
-		return dao.findReportByRep_Re_Desc(rep_Re_Desc);
+	public Set<ArtiReportVO> findReportByMemNo(String mem_No){
+		return dao.findReportByMemNo(mem_No);
 	}
 
 }

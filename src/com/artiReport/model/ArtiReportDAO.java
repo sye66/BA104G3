@@ -32,15 +32,15 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 	private static final String GET_REPORT_BY_ARTI_NO = 
 			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE ARTI_NO = ? order by REPORT_NO";
 
-	private static final String GET_REPORT_BY_REP_RE_DESC = 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPOR _TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE REP_RE_DESC = ? order by REPORT_NO";
+	private static final String GET_REPORT_BY_MEM_NO = 
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPOR _TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE MEM_NO = ? order by REPORT_NO";
 	
 	private static final String DELETE_REPORT = 
 			"DELETE FROM ARTI_REPORT where REPORT_NO = ?";
 	
 	private static final String UPDATE_REPORT = 
 			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  REP_RE_DESC=?, REPORT_STATUS=? where REPORT_NO =?";
-	
+
 	private static final String UPDATE_ARTI_STATUS = 
 			"UPDATE ARTI_FORM set ARTI_STATUS='有檢舉未處理' where ARTI_NO =?";
 
@@ -111,6 +111,7 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 			pstmt.setTimestamp(4, artiReportVO.getReport_Time());
 			pstmt.setString(5, artiReportVO.getRep_Re_Desc());
 			pstmt.setString(6, artiReportVO.getReport_Status());
+			pstmt.setString(7, artiReportVO.getReport_No());
 			
 			pstmt.executeUpdate();
 			con.commit();
@@ -136,8 +137,9 @@ public class ArtiReportDAO implements ArtiReportDAO_interface {
 				}
 			}
 		}
-		
 	}
+	
+
 
 	@Override
 	public void deleteReport(String report_No) {
@@ -287,22 +289,21 @@ System.out.println("REPORT-DAO-G1-555");
 	}
 	
 	@Override
-	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc) {
+	public Set<ArtiReportVO> findReportByMemNo(String mem_No) {
 		Set<ArtiReportVO> set = new LinkedHashSet<ArtiReportVO>();
 		ArtiReportVO artiReportVO = null;
-System.out.println("Report-DAO-111");
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-System.out.println("Report-DAO-222");
+
 		try{
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_REPORT_BY_REP_RE_DESC);
-System.out.println("Report-DAO-333");	
-			pstmt.setString(1, rep_Re_Desc);
-System.out.println(rep_Re_Desc);	
-            rs = pstmt.executeQuery();
-System.out.println("Report-DAO-444");
+			pstmt = con.prepareStatement(GET_REPORT_BY_MEM_NO);
+
+			pstmt.setString(1, mem_No);
+			rs = pstmt.executeQuery();
+
 			while(rs.next()){
 				artiReportVO = new ArtiReportVO();
 				artiReportVO.setReport_No(rs.getString("report_No"));
@@ -314,7 +315,7 @@ System.out.println("Report-DAO-444");
 				artiReportVO.setReport_Status(rs.getString("report_Status"));
 				set.add(artiReportVO);
 			}
-System.out.println("Report-DAO-555");
+			
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured."+se.getMessage());
 		} catch (Exception e){
@@ -344,6 +345,7 @@ System.out.println("Report-DAO-555");
 		}
 		return set;
 	}
+	
 
 	@Override
 	public Set<ArtiReportVO> getAllReport() {
