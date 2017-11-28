@@ -305,88 +305,138 @@ function getFocus() {
  
  <script>
     
-    var ToolMan = "/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
-    var hostTool = window.location.hostTool;
-    var pathTool = window.location.pathname;
-    var toolWebCtx = pathTool.substring(0, pathTool.indexOf('/', 1));
-    var endToolManURL = "ws://" + window.location.hostTool + toolWebCtx + ToolMan;
-    
-	var statusOutput = document.getElementById("statusOutput");
-	var webToolSocket;
+//     var ToolMan = "/MissionSocket/${memVO.mem_No}/wjwj";
+//     var hostTool = window.location.host;
+//     var pathTool = window.location.pathname;
+//     var toolWebCtx = pathTool.substring(0, pathTool.indexOf('/', 1));
+//     var endToolManURL = "ws://" + window.location.host + toolWebCtx + ToolMan;
+// // 	var statusOutput = document.getElementById("statusOutput");
+// 	var webSocket;
 	
-	function connect() {
-		// 建立 webToolSocket 物件
-		webToolSocket = new webToolSocket(endToolManURL);
+// 	function connect() {
+// 		// 建立 webSocket 物件
+// 			console.log("dfdsfsdfsdfdsf");
+//     console.log(endToolManURL);
+//     webSocket = new webSocket(endToolManURL);
 		
-		webToolSocket.onopen = function(event) {
-			updateStatus("webToolSocket 成功連線");
-			document.getElementById('sendMessage').disabled = false;
-			document.getElementById('connect').disabled = true;
-			document.getElementById('disconnect').disabled = false;
-		};
+// 		webSocket.onopen = function(event) {
+// 			updateStatus("webSocket 成功連線");
+// 		};
 
-		webToolSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-	        var jsonObj = JSON.parse(event.data);
-	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-	        messagesArea.value = messagesArea.value + message;
-	        messagesArea.scrollTop = messagesArea.scrollHeight;
-		};
+// 		webSocket.onmessage = function(event) {
+// 			var messagesArea = document.getElementById("messagesArea");
+// 	        var jsonObj = JSON.parse(event.data);
+// 	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
+// 	        messagesArea.value = messagesArea.value + message;
+// 	        messagesArea.scrollTop = messagesArea.scrollHeight;
+// 		};
 
-		webToolSocket.onclose = function(event) {
-			updateStatus("webToolSocket 已離線");
-		};
-	}
+// 		webSocket.onclose = function(event) {
+// 			updateStatus("webSocket 已離線");
+// 		};
+// 	}
 	
 	
-	var inputUserName = document.getElementById("userName");
-	inputUserName.focus();
 	
-	function sendMessage(action, take_Meme_No) {
+	
+// 	function sendMessage(action, take_Meme_No) {
 		
 		
 		
-	    var userName = take_Meme_No;
+// 	    var userName = take_Meme_No;
 	    
-	    if("missionOk".equal(action)){
-	    	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
+// 	    if("missionOk".equal(action)){
+// 	    	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
 		    
-		    if (message === ""){
-		        alert ("訊息請勿空白!");
-		        inputMessage.focus();	
-		    }else{
-		        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
-// 		        webToolSocket.send(JSON.stringify(jsonObj));
-				swal(
-				  '${memVO.mem_Id}',
-				  inputMessage,
-				  'success'
-				)
-		    }
-	    }
+// 		    if (message === ""){
+// 		        alert ("訊息請勿空白!");
+// 		        inputMessage.focus();	
+// 		    }else{
+// 		        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
+// // 		        webSocket.send(JSON.stringify(jsonObj));
+// 				swal(
+// 				  '${memVO.mem_Id}',
+// 				  inputMessage,
+// 				  'success'
+// 				)
+// 		    }
+// 	    }
 	    
  		
+// 	}
+	
+	
+// 	$("#id").click(function(){
+// 		var Str = "你的任務已經OK囉";
+		
+		
+// 		sendMessage(missionOk, take_Meme_No);
+		
+// 	})
+	
+// 	function disconnect () {
+// 		webSocket.close();
+		
+// 	}
+
+	
+// 	function updateStatus(newStatus) {
+// 		statusOutput.innerHTML = newStatus;
+// 	}
+    
+    
+    
+     
+    
+    var MyPoint ="/MissionSocket/${memVO.mem_No}/dddd";
+    var host = window.location.host;
+    var path = window.location.pathname;
+    var webCtx = path.substring(0, path.indexOf('/', 1));
+    var endPointURL = "ws://" + host + webCtx + MyPoint;
+    
+
+	var webSocket;
+	
+	function connect() {
+		// 建立 websocket 物件
+		webSocket = new WebSocket(endPointURL);
+		
+		webSocket.onopen = function(event) {
+// 			updateStatus("WebSocket 成功連線");
+		
+		};
+
+		webSocket.onmessage = function(event) {
+			var messagesArea = document.getElementById("messagesArea");
+	        var jsonObj = JSON.parse(event.data);
+	        if(jsonObj.action=='missionOk'){
+	        	var inputMessage = "你的任務已經OK囉,積分已匯入,請確認查閱";
+	        	swal(
+	   				  '${memVO.mem_Id}',
+	   				  inputMessage,
+	   				  'success'
+   				)
+	        	
+	        }
+	        
+	 
+		};
+
+		webSocket.onclose = function(event) {
+			updateStatus("WebSocket 已離線");
+		};
 	}
 	
-	
-	$("#id").click(function(){
-		var Str = "你的任務已經OK囉";
-		
-		
-		sendMessage(missionOk, take_Meme_No);
-		
-	})
+
+
 	
 	function disconnect () {
-		webToolSocket.close();
+		webSocket.close();
 		
 	}
 
 	
-	function updateStatus(newStatus) {
-		statusOutput.innerHTML = newStatus;
-	}
-    
+
 </script>
  
   </body>
