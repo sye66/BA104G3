@@ -48,13 +48,14 @@ nav-tabs li a:focus{
 	
 }
 .ord_No{
+	
 	width:300px;
 }
 .ord_Ship_Date , .ord_Date{
 	width:250px;
 }
 .ord_Shipinfo{
-	width:200px;
+	width:223px;
 }
 
 
@@ -81,6 +82,10 @@ nav-tabs li a:focus{
 <%
 		List<ProOrderVO> list = (List<ProOrderVO>) session.getAttribute("proOrderlist");
 		pageContext.setAttribute("list",list);
+		int a = 0;
+		int b = 0;
+		int c = 0;
+		int d = 0;
 %>
 <jsp:useBean id="proOrdListSvc" scope="page" class="com.proordlist.model.ProOrdListService" />
 <jsp:useBean id="proSvc" scope="page" class="com.pro.model.ProService" />
@@ -145,11 +150,20 @@ nav-tabs li a:focus{
 		  <!-- 區塊1 -->
 		  <c:forEach var="proOrder" items="${list}">
 		  <div class="panel panel-default" >
-		    <div class="panel-heading" role="tab" id="panel1" >
+		    <div class="panel-heading" role="tab" id="panel1" style="padding:1px;">
 		     
 		    	<table id="order01">
-		    		<tr>
-		    			<td class="ord_No"><a href="#${proOrder.ord_No}1" data-parent="#accordion1" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}1">
+		    		
+		    		<c:if test="${proOrder.ord_Shipinfo=='未出貨' }"><tr style="background-color:#FFF8D7 ;"></c:if>	
+		          	<c:if test="${proOrder.ord_Shipinfo=='已取消' }"><tr style="background-color:#FFD2D2 ;"></c:if>	
+		    		<c:if test="${proOrder.ord_Shipinfo=='已退款' }"><tr style="background-color:#D2E9FF ;"></c:if>
+					<c:if test="${proOrder.ord_Shipinfo=='已出貨' }"><tr style="background-color:#E8FFC4 ;"></c:if>
+		    		
+		    		 <%a++ ;%>
+		    		
+		    			<td class="ord_No"><a href="#${proOrder.ord_No}1" data-parent="#accordion1" 
+		    			    data-toggle="collapse" role="button" aria-expanded="true" 
+		    			    aria-controls="${proOrder.ord_No}1" style="color:#2828FF;">
 		          			訂單編號:${proOrder.ord_No}&nbsp;&nbsp;</a></td>
 		          		<td class="ord_Date">訂單日期:${proOrder.ord_Date}</td>	
 		          			<c:if test="${proOrder.ord_Shipinfo=='未出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;無</td></c:if>	
@@ -157,15 +171,21 @@ nav-tabs li a:focus{
 		    				<c:if test="${proOrder.ord_Shipinfo=='已退款' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;退款日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 							<c:if test="${proOrder.ord_Shipinfo=='已出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 		    			<td class="ord_Shipinfo">&nbsp;&nbsp;&nbsp;狀態:${proOrder.ord_Shipinfo}</td>
-		      			<td><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
-							<form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
+		      			<td class="ord_Shipinfo"><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+							
+							<form  name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               				<input type="hidden" name="action"  value="updateProOrderUp">
               				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               				<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
               				<input type="hidden" name="ord_Shipinfo" value="已取消">
              				<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
-             				<button type="submit" class="btn btn-danger"  style="marager-bottom:0px;">取消</button>
-             				</form></c:if></td>
+             				
+             				<div style="text-align: center;vertical-align: middle;">
+             				<button type="submit" class="btn btn-danger">取消</button>
+             			
+             				</div>
+             				</form>
+             				</c:if></td>
 		    		</tr>
 		    	</table>
 		    </div>
@@ -174,7 +194,7 @@ nav-tabs li a:focus{
 		      <div class="panel-body">
 		      <table class="table table-hover">
 					<thead id="order001">
-							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
+							<tr><th>收件人</th><th>電話</th><th>地址</th><th>總花費點數</th>
 <!-- 							<th>更動</th> -->
 							</tr>
 							
@@ -183,12 +203,13 @@ nav-tabs li a:focus{
 						<tr><td>${proOrder.ord_Consignee }</td>
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
-						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
+						<td>總共<span style="color:red;">${proOrder.ord_Price }</span>點</td>
 <!-- 						<td>修改</td> -->
 						</tr>
 					</thead>
+				
 					<tbody id="order002">	
-						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th></tr>
+						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th><th>小計</th></tr>
 		      		<c:forEach var="proOrdListVO" items="${proOrdListSvc.all}">	
 		      			<tr>
 		      			<c:if test="${proOrdListVO.ord_No==proOrder.ord_No }">
@@ -199,6 +220,7 @@ nav-tabs li a:focus{
 		      				</c:forEach>	
 		      				<td>${proOrdListVO.ordPro_Price}</td>
 		      				<td>${proOrdListVO.ordPro_Count }</td>
+		      				<td><span style="color:red;">${proOrdListVO.ordPro_Price*proOrdListVO.ordPro_Count}</span>點</td>
 		      			</c:if>
 		      			</tr>
 		      		</c:forEach>
@@ -208,6 +230,17 @@ nav-tabs li a:focus{
 		    </div>
 		</div>
 	</c:forEach>
+	<br><br><br><br><br><br>
+	<c:if test="<%=a==0 %>">
+		  	<div class="col-xs-12 col-sm-6 col-sm-offset-5" >
+		  	<br>
+		  	<h2>無訂單資料</h2>
+		  	<br><br><br><br><br><br>
+		  	</div>
+	</c:if>
+	
+	
+	
 </div>
 		
 	</div>	
@@ -222,12 +255,14 @@ nav-tabs li a:focus{
 		  <!-- 區塊2 -->
 		  <c:forEach var="proOrder" items="${list}">
 		  <c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+		   <%b++;%>
+		  
 		  <div class="panel panel-default" >
-		    <div class="panel-heading" role="tab" id="panel1" >
+		    <div class="panel-heading" role="tab" id="panel1" style="padding:1px;">
 		     
 		    	<table id="order01">
-		    		<tr>
-		    			<td class="ord_No"><a href="#${proOrder.ord_No}2" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}2">
+		    		<tr style="background-color:#FFF8D7 ;">
+		    			<td class="ord_No"><a href="#${proOrder.ord_No}2" style="color:#2828FF;" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}2">
 		          			訂單編號:${proOrder.ord_No} </a></td>
 		          		<td class="ord_Date">訂單日期:${proOrder.ord_Date}</td>	
 		          			<c:if test="${proOrder.ord_Shipinfo=='未出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;無</td></c:if>	
@@ -235,7 +270,7 @@ nav-tabs li a:focus{
 		    				<c:if test="${proOrder.ord_Shipinfo=='已退款' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;退款日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 							<c:if test="${proOrder.ord_Shipinfo=='已出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 		    			<td class="ord_Shipinfo">&nbsp;&nbsp;&nbsp;狀態:${proOrder.ord_Shipinfo}</td>
-		      			<td><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+		      			<td class="ord_Shipinfo"><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
 							<form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               				<input type="hidden" name="action"  value="updateProOrderUp">
               				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -287,6 +322,17 @@ nav-tabs li a:focus{
 		</div>
 		</c:if>
 	</c:forEach>
+	<br><br><br><br><br><br>
+	<c:if test="<%=b==0 %>">
+		  	<div class="col-xs-12 col-sm-6 col-sm-offset-5" >
+		  	<br>
+		  	<h2>無訂單資料</h2>
+		  	<br><br><br><br><br><br>
+		  	</div>
+	</c:if>
+	
+	
+	
 </div>
 </div>
 
@@ -297,12 +343,14 @@ nav-tabs li a:focus{
 		  <!-- 區塊3 -->
 		  <c:forEach var="proOrder" items="${list}">
 		  <c:if test="${proOrder.ord_Shipinfo=='已取消' }">
+		  <%c++; %>
+		  
 		  <div class="panel panel-default" >
-		    <div class="panel-heading" role="tab" id="panel1" >
+		    <div class="panel-heading" role="tab" id="panel1" style="padding:1px;">
 		     
 		    	<table id="order01">
-		    		<tr>
-		    			<td class="ord_No"><a href="#${proOrder.ord_No}3" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}3">
+		    		<tr style="background-color:#FFD2D2 ;">
+		    			<td class="ord_No"><a href="#${proOrder.ord_No}3" style="color:#2828FF;" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}3">
 		          			訂單編號:${proOrder.ord_No}</a></td>
 		          		<td class="ord_Date">訂單日期:${proOrder.ord_Date}</td>	
 		          			<c:if test="${proOrder.ord_Shipinfo=='未出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;無</td></c:if>	
@@ -310,7 +358,7 @@ nav-tabs li a:focus{
 		    				<c:if test="${proOrder.ord_Shipinfo=='已退款' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;退款日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 							<c:if test="${proOrder.ord_Shipinfo=='已出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 		    			<td class="ord_Shipinfo">&nbsp;&nbsp;&nbsp;狀態:${proOrder.ord_Shipinfo}</td>
-		      			<td><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+		      			<td class="ord_Shipinfo"><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
 							<form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               				<input type="hidden" name="action"  value="updateProOrderUp">
               				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -362,6 +410,15 @@ nav-tabs li a:focus{
 		</div>
 		</c:if>
 	</c:forEach>
+	<br><br><br><br><br><br>
+	
+	<c:if test="<%=c==0 %>">
+		  	<div class="col-xs-12 col-sm-6 col-sm-offset-5" >
+		  	<br>
+		  	<h2>無訂單資料</h2>
+		  	<br><br><br><br><br><br>
+		  	</div>
+	</c:if>
 </div>
 </div>
 
@@ -373,12 +430,15 @@ nav-tabs li a:focus{
 		  <!-- 區塊4 -->
 		  <c:forEach var="proOrder" items="${list}">
 		  <c:if test="${proOrder.ord_Shipinfo=='已退款' }">
+		 	<%c++ ;%>
+		  
+		  
 		  <div class="panel panel-default" >
-		    <div class="panel-heading" role="tab" id="panel1" >
+		    <div class="panel-heading" role="tab" id="panel1" style="padding:1px;">
 		     
 		    	<table id="order01">
-		    		<tr>
-		    			<td class="ord_No"><a href="#${proOrder.ord_No}" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}">
+		    		<tr style="background-color:#D2E9FF ;">
+		    			<td class="ord_No"><a href="#${proOrder.ord_No}" style="color:#2828FF;" data-parent="#accordion2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="${proOrder.ord_No}">
 		          			訂單編號:${proOrder.ord_No} </a></td>
 		          		<td class="ord_Date">訂單日期:${proOrder.ord_Date}</td>	
 		          			<c:if test="${proOrder.ord_Shipinfo=='未出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;無</td></c:if>	
@@ -386,7 +446,7 @@ nav-tabs li a:focus{
 		    				<c:if test="${proOrder.ord_Shipinfo=='已退款' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;退款日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 							<c:if test="${proOrder.ord_Shipinfo=='已出貨' }"><td class="ord_Ship_Date">&nbsp;&nbsp;&nbsp;出貨日期:&nbsp;${proOrder.ord_Ship_Date}</td></c:if>
 		    			<td class="ord_Shipinfo">&nbsp;&nbsp;&nbsp;狀態:${proOrder.ord_Shipinfo}</td>
-		      			<td><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
+		      			<td class="ord_Shipinfo"><c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
 							<form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               				<input type="hidden" name="action"  value="updateProOrderUp">
               				<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
@@ -438,6 +498,16 @@ nav-tabs li a:focus{
 		</div>
 		</c:if>
 	</c:forEach>
+	<br><br><br><br><br><br>
+	
+	<c:if test="<%=d==0 %>">
+		  	<div class="col-xs-12 col-sm-6 col-sm-offset-5" >
+		  	<br>
+		  	<h2>無訂單資料</h2>
+		  	<br><br><br><br><br><br>
+		  	</div>
+		  </c:if>
+	
 </div>
 </div>
 

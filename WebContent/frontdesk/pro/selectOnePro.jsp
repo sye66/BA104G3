@@ -374,7 +374,7 @@ $(function() {
 //	       async: false,           // 預設值為 true 非同步
 	      success:function(response){
 	    	  
-	       setTimeout(function(){location.reload()}, 2000) ;   //重新刷新              
+	       setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
 	      }, // success end        
 	      error:function(xhr, ajaxOptions, thrownError){
 	       swal(
