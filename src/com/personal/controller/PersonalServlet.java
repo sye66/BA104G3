@@ -74,7 +74,7 @@ System.out.println(memVO);
 				
 				if (memVO == null) {
 					errorMsgs.add("查無資料");
-				}
+				} 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
@@ -164,6 +164,8 @@ System.out.println(mem_No);
 				failureView.forward(req, res);
 			}
 		}
+		
+		
 	}
 
 }

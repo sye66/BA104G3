@@ -39,16 +39,14 @@ public class CompServlet extends HttpServlet {
 				String[] list = req.getParameterValues("auth_No");
 				
 				String emp_No = new String(str);
-				
-				
-				
+	
 				CompService compSvc = new CompService();
-	System.out.println("1111111111111111111111111");			
+	
 //				for(int i =0; i<list.length; i++)
+	
 					for(String auth_No : list){
 					compSvc.addEmpComp(emp_No, auth_No);	
 					}
-	System.out.println("2222222222222222222222222222");
 	
 	String url = "/backdesk/emp/select_page.jsp";
 	RequestDispatcher successView = req.getRequestDispatcher(url);
