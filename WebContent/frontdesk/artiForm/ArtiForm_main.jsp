@@ -56,7 +56,7 @@ div> .timeline-body{
 .gridContainer clearfix{
   margin:0 auto;
 }
-  
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
@@ -80,7 +80,7 @@ div> .timeline-body{
 
                 <div class="title">
                     <div class="list">
-                        <a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><h1>所有文章列表 </h1></a>
+                        <a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><h1 style="font-family:Microsoft JhengHei;color:#EEEE00;background-color: #191970;font-size:300%;">所有文章列表 </h1></a>
                     </div>
                 </div>
                     
@@ -114,10 +114,12 @@ div> .timeline-body{
                         <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
                         </a>
-                            </c:if>
+                        </c:if>
+                        <c:if test="${memVO.mem_State == 1}">
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
+                        </c:if>
                         <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp">
                             <i>Main page</i>
                         </a>
@@ -128,13 +130,13 @@ div> .timeline-body{
 </div>
             
 <div class="page-body">
-<img src="/BA104G3/res/images/arti_ref/cow.png">
+<a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><img src="/BA104G3/res/images/arti_ref/cow.png"></a>
 
 <div class="video-container">
         <iframe class="embed-responsive" frameborder="0" allowfullscreen="1" 
-                        title="Youtube viedo player" width="50%" height="50%" 
-                        src="https://www.youtube.com/embed/jSwV3IpNF2U?playlist=ehjOL_bqzSc&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
-                        id="widget2" sytle="position: absolute; max-width:50% marging-left:-61px; margin-top:0px; width:600px; height:300px; webkitallowfullscreen mozallowfullscreen allowfullscreen;">
+                      title="Youtube viedo player" width="50%" height="50%" 
+                      src="https://www.youtube.com/embed/jSwV3IpNF2U?playlist=ehjOL_bqzSc&iv_load_policy=3&enablejsapi=1&disablekb=1&autoplay=1&controls=0&showinfo=0&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
+                      id="widget2" sytle="position: absolute; max-width:50% marging-left:-61px; margin-top:0px; width:600px; height:300px; webkitallowfullscreen mozallowfullscreen allowfullscreen;">
         </iframe>          
 </div>
 </div>

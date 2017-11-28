@@ -86,10 +86,12 @@ div> .timeline-body{
                         <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
                         </a>
-                            </c:if>
+                        </c:if>
+                        <c:if test="${memVO.mem_State == 1}">
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
+                        </c:if>
                         <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/ArtiForm_main.jsp">
                             <i>Main page</i>
                         </a>
