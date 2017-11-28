@@ -13,8 +13,11 @@
 	List<Ach_DetailVO> list = achdSvc.getPersonal(mem_No);
 	pageContext.setAttribute("list",list);
 // 	AchieveService achieveSvc = new AchieveService();
-// 	List<Achieve> list = achieveSvc.getThree(ach_No); 
-
+// 	List<Achieve> list = achieveSvc.getThree(ach_No);
+	List<AchieveVO> achieveVO =(List<AchieveVO>) request.getAttribute("achieveVO");
+	pageContext.setAttribute("achieveVO",achieveVO);
+	List<Ach_DetailVO> ach_detailVO =(List<Ach_DetailVO>) request.getAttribute("ach_detailVO");
+	pageContext.setAttribute("ach_detailVO",ach_detailVO);
 %>
 
 <%--       <%request.getSession().setAttribute("memVO" ,memVO); %> --%>
@@ -103,6 +106,34 @@
 							</div>
 						</table>
 							
+					  </div>
+				</div>
+				<div class="panel panel-info">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">標題</h3>
+					  </div>
+					  <div class="panel-body">
+					    <table class="table table-hover">
+					    	<!-- <caption>我是表格標題</caption> -->
+					    	<thead>
+					    		<tr>
+					    			<th>成就名稱</th>
+					    			<th>成就圖片</th>
+					    			<th>成就說明</th>
+					    		</tr>
+					    	</thead>
+					    	<tbody>
+							<c:forEach var="c" items="${achieveVO}">
+							<tr>
+								<td>${c.ach_Name}&nbsp;&nbsp;</td>
+								<td>
+								<img id="img" src="<%=request.getContextPath() %>/achieve/achieveShowImage.do?ach_No=${c.ach_No}">
+								</td>
+								<td>${c.ach_Explain}</td>
+							</tr>
+							</c:forEach>
+							</tbody>
+						</table>
 					  </div>
 				</div>
  			</div>

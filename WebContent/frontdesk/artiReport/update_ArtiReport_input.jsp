@@ -79,7 +79,7 @@
 	</tr>
 	<tr>
 		<td>文章分類:</td>
-		<td><input type="hidden" name="arti_Cls_No" value="<%=artiReportVO.getArti_Cls_No()%>"><%=artiReportVO.getArti_Cls_No()%></td>
+		<td><input type="hidden" name="arti_Cls_No" value="<%=artiReportVO.getRep_Re_Desc()%>"><%=artiReportVO.getRep_Re_Desc()%></td>
 	</tr>
 	
 </table>

@@ -282,6 +282,14 @@
     <url-pattern>/comp/comp.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AllMemServlet</servlet-name>
+    <servlet-class>com.personal.controller.AllMemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllMemServlet</servlet-name>
+    <url-pattern>/all/all.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RankServlet</servlet-name>
     <servlet-class>com.rank.controller.RankServlet</servlet-class>
   </servlet>

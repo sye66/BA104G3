@@ -21,14 +21,21 @@
 	pageContext.setAttribute("list3",list3);
 	pageContext.setAttribute("list4",list4);
 	pageContext.setAttribute("list5",list5);
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<style>
+		hr{
+			color : red;
+		}
+	</style>
 </head>
-<body>
+<body style="background-color : #ffc">
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 	<br>
@@ -62,18 +69,20 @@
 					    <!-- 標籤面板：內容區 -->
 					    <div class="tab-content">
 					        <div role="tabpanel" class="tab-pane active" id="tab1">
+					        	<table>
 					        	<c:forEach var="rankVO" items="${list}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
+					        	</table>
 					        </div>
 					        <div role="tabpanel" class="tab-pane" id="tab2">
 					        	<c:forEach var="rankVO" items="${list1}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
 					        </div>
 					        <div role="tabpanel" class="tab-pane" id="tab3">
 					        	<c:forEach var="rankVO" items="${list2}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
 					        </div>					        
 					    </div>
@@ -103,17 +112,17 @@
 					    <div class="tab-content">
 					        <div role="tabpanel" class="tab-pane active" id="tab4">
 					        	<c:forEach var="rankVO" items="${list3}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
 					        </div>
 					        <div role="tabpanel" class="tab-pane" id="tab5">
 					        	<c:forEach var="rankVO" items="${list4}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
 					        </div>
 					        <div role="tabpanel" class="tab-pane" id="tab6">
 					        	<c:forEach var="rankVO" items="${list5}">
-					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" weight="200px" height="200px"><br>
+					        		<IMG SRC="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${rankVO.mem_No}" width="200px" height="200px"><br><br><hr color="red"><br><br>
 					        	</c:forEach>
 					        </div>					        
 					    </div>

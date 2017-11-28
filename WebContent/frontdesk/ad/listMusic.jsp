@@ -94,9 +94,16 @@
                     <!--Header Buttons-->
                     
                     <div class="header-buttons">
-                        <a class="sidebar-toggler" href="#">
-                            <i></i>111
+                     <c:if test="${memVO.mem_State == 1}">
+                        <a class="refresh" href="/BA104G3/frontdesk/artiReport/listReport_ByMemNo.jsp">
+                            <i></i>Report return
                         </a>
+                        </c:if>
+                    <c:if test="${memVO.mem_State == 1}">
+                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/ad/listMusic.jsp">
+                            <i></i>Relax Music
+                        </a>
+                        </c:if>
                         <c:if test="${memVO.mem_State == 1}">
                         <a class="refresh" id="refresh-toggler" href="/BA104G3/frontdesk/artiForm/listArti_ByMemNo.jsp">
                             <i>Personal</i>
@@ -105,7 +112,7 @@
                         <a class="fullscreen" id="fullscreen-toggler" href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">
                             <i> POST </i>
                         </a>
-                        <a class="refresh" href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp">
+                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/ArtiForm_main.jsp">
                             <i>Main page</i>
                         </a>
                     </div>
@@ -118,7 +125,7 @@
 		    <div class="auto-resizable-iframe">
         <iframe class="embed-responsive" frameborder="0" width="560" height: auto !important; allowfullscreen="0" 
                         title="Youtube viedo player" width="50%" height="50%" 
-                        src="https://www.youtube.com/embed/1_mvb0fUF8w?&enablejsapi=1&disablekb=1&autoplay=0&controls=1&showinfo=1&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
+                        src="https://www.youtube.com/embed/kkx-7fsiWgg?&enablejsapi=1&disablekb=1&autoplay=0&controls=1&showinfo=1&rel=0&loop=1&wmode=transparent&origin=https%3A%2F%2Fwww.domraider.io&widgetid=1" 
                         sytle="position: absolute; max-width:50% marging-left:-61px; margin-top:0px; width:560px; height:315px;">
         </iframe>
         </div>

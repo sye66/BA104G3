@@ -177,7 +177,7 @@ function getFocus() {
 						<button type="button" onclick="aa0953711016()">神</button>
 						<button type="button" id="M000002">柏</button>	
 						<button type="button" id="M000003">武</button>
-						<button type="button" id="M000004">子</button>						
+						<button type="button" id="M000004">子</button></div>						
 <!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
                     

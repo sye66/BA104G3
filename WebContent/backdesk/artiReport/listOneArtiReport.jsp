@@ -10,9 +10,10 @@
 
 <%
   EmpVO empVO = (EmpVO) session.getAttribute("empVO");
-
+  
   ArtiReportService artiReportSvc = new ArtiReportService();
   ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportSet"); 
+  session.setAttribute("artiReportVO",artiReportVO);
  %>
 
 <html>
@@ -55,6 +56,11 @@
                         <h5 class="bigger lighter"> ${artiReportSet.mem_No} </h5>
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
+                            <div class="" style="">${artiReportSet.report_Status}</div>
+                            </div>
+                        </div>
+                        <div class="widget-toolbar">
+                            <div class="" style="width:100px;">
                             <div class="" style="">${artiReportSet.rep_Re_Desc}</div>
                             </div>
                         </div>
@@ -94,24 +100,34 @@
                         <div class="widget-main padding-16">
                             ${artiReportSet.report_Desc}
                         </div>
+                        
+                        <div class="widget-main padding-16">
+                             <div>
+                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
+                                <input type="text" name="rep_Re_Desc" size="126"  value="${artiReportSet.rep_Re_Desc}">
+                                <input type="hidden" name="report_No"  value="${artiReportSet.report_No}">
+                                <input type="hidden" name="mem_No"  value="${artiReportSet.mem_No}">
+                                <input type="hidden" name="arti_No"  value="${artiReportSet.arti_No}">
+                                <input type="hidden" name="report_Desc"  value="${artiReportSet.report_Desc}">
+                                <input type="hidden" name="report_Time"  value="${artiReportSet.report_Time}">
+                                <input type="hidden" name="report_Status"  value="${artiReportSet.report_Status}">
+                                <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
+			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+ 			                    <button class="btn btn-success" type="submit" name="action" value="Report_Reply">檢舉回覆</button>
+			                    </FORM>
+                            </div>
+                        </div>
                     </div>
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter">${artiReportSet.report_Time}</h5>
                         <div class="widget-toolbar">
                             <div class="btn-group">
-                            <div>
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-                                <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
-                                <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
-			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                    <button class="btn btn-success" type="submit" name="action" value="getOneReport_For_Update">檢舉回覆</button>
-			                    </FORM>
-                            </div>
+
                             </div>
                             <div class="btn-group">
                             <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			                    <input type="hidden" name="reply_No"  value="${artiReportSet.report_No}">
+			                    <input type="hidden" name="report_No"  value="${artiReportSet.report_No}">
 			                    <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <button class="btn btn-danger" type="submit" name="action" value="deleteReportFMBack">刪除檢舉</button>

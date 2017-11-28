@@ -30,7 +30,9 @@
 	height: 450px;
 	width: 550px;
 }
-
+.proTable td{
+	width: 300px;
+}
 .proName {
 	font-weight: 900;
 	font-size: 30px;
@@ -199,7 +201,7 @@
 							<td><p class="proInfo">
 									<c:forTokens var="alpha" items="${proVO.pro_Info}" delims=",">
 										<c:forEach var="person" items="${alpha}">
-											<p>✦${person}</p>
+											<p style="font-size:16px;">✦${person}</p>
 										</c:forEach>
 									</c:forTokens>
 								</p></td>
