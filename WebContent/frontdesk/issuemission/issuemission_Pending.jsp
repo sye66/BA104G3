@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="">
 	<head>
@@ -14,23 +14,67 @@
 		<![endif]-->
 		<style type="text/css">
 			img{
-				width: 200px;
+				width: 300px;
 			}
+			body {
+	            background-image: url(<%=request.getContextPath()%>/res/images/QRcode/mountain_1920.jpg);
+	            background-repeat: no-repeat;
+	            background-attachment: fixed;
+	            background-position: center;
+	            background-size: cover;
+	            font-family: Microsoft JhengHei;
+	        }
 		</style>
 	</head>
 	<body>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<p><font color='red'>請修正以下錯誤:</font></p>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color:red"><p>${message}</p></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</c:if>
 		<%-- 抓session 會員MemVO 與任務 MissionVO 塞進Request 丟進QRcodeAccept --%> 
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12" style="text-align: center;">
 					<h1 class="text-center">接案人驗證</h1>
-					<%--這裡要補完 --%>
-					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do?mem_No=&mission_No=">
-					<form action="<%=request.getContextPath()%>/qrcodeaccept/qrcodeaccept.do">
-						<input type="hidden" name="action" value="input_By_Type">
-						<input type="text" name="validation">
-						<input type="submit" value="驗證身分" class="btn btn-primary">
-					</form>
+					<br>
+					<br>
+					<p style="font-size: 200%">請掃描下方QRcode</p>
+					<br>
+					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do?takecase_Mem_No=<%=request.getParameter("mission_No")%>&mission_No=<%=request.getParameter("takecase_Mem_No")%>">
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<p style="font-size: 200%; color: grey;">...或是直接輸入驗證碼</p>
+					<br>
+					<br>
+					<br>
+					<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+						<div class="form-group">
+						    <form action="<%=request.getContextPath()%>/qrcodeaccept/qrcodeaccept.do">
+						        <input type="hidden" name="action" value="input_By_Type">
+						        <input type="password" class="form-control" name="validation">
+						        <br>
+						        <br>
+						        <input type="submit" value="驗證身分" class="btn btn-primary btn-lg">
+						    </form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

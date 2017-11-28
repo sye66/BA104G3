@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,7 +11,7 @@
 
 <style type="text/css" media="screen">
 .loginpage {
-	background: #fff url(../res/images/pro_icons/patternbg.png);
+	background: #fff url(<%=request.getContextPath()%>/res/images/pro_icons/patternbg.png);
 }
 
 .loginbox {
@@ -27,7 +29,7 @@
 
 .loginboxinner {
 	padding: 20px;
-	background: #32415a url(../images/patternbg.png);
+	background: #32415a url(<%=request.getContextPath()%>/res/images/pro_icons/v.png);
 	-moz-border-radius: 0 2px 2px 0;
 	-webkit-border-radius: 0 0 2px 2px;
 	border-radius: 0 0 2px 2px;
@@ -62,7 +64,7 @@
 }
 
 .loginbox .username {
-	background: #eee url(../images/icons/username.png) no-repeat 13px center;
+	background: #eee url(<%=request.getContextPath()%>/res/images/pro_icons/username.png) no-repeat 13px center;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -96,7 +98,7 @@
 }
 
 .loginbox .password {
-	background: #eee url(../images/icons/password.png) no-repeat 13px center;
+	background: #eee url(<%=request.getContextPath()%>/res/images/pro_icons/password.png) no-repeat 13px center;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -124,7 +126,7 @@
 }
 
 .loginbox button {
-	background: #f0801d url(../images/btngrad.png) repeat-x top left;
+	background: #f0801d url(<%=request.getContextPath()%>/res/images/pro_icons/btngrad.png) repeat-x top left;
 	border: 0;
 	padding: 15px 0;
 	text-align: center;
@@ -220,10 +222,24 @@
 </style>
 </head>
 
+	
+
 <body class="loginpage">
+
+	
+	
 	<div class="loginbox">
 		<div class="loginboxinner">
-
+		
+		<c:if test="${not empty errorMsgs}">
+	<font color='red'>請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+	</c:if>
+		
 			<div class="logo">
 				<h1 class="logo">
 					ToolMan.<span>Admin</span>
@@ -255,18 +271,22 @@
 				<!--loginf-->
 			</div>
 			<!--nopassword-->
+			
+			
 
-			<form id="login" action="/backdesk/backdesk.jsp" method="post">
+			<form id="login" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do" method="post">
 
-				<div class="username">
+				<div class="username" style="">
 					<div class="usernameinner">
 						<input type="text" name="username" id="username" />
+						<input type="hidden" name="action" value="emplogin">
 					</div>
 				</div>
 
 				<div class="password">
 					<div class="passwordinner">
 						<input type="password" name="password" id="password" />
+						<input type="hidden" name="action" value="emplogin">
 					</div>
 				</div>
 
@@ -275,12 +295,35 @@
 
 
 			</form>
+			
+				<br>
+				<!--神奇小按鈕-->
+						<button type="button" onclick="e01()"  class="btn btn-success" style="width:20px;height:10px;">老</button>						
+					    <button type="button" onclick="e02()"  class="btn btn-success" style="width:20px;height:10px;">王</button>
+                <!--神奇小按鈕 -->
+				
 
 		</div>
 		<!--loginboxinner-->
 	</div>
 	<!--loginbox-->
-
+			<!--神奇方法 -->
+			<script type="text/javascript">
+			function e01(){
+				var v = document.getElementById("username");			
+					v.value="E000001";
+				var a=document.getElementById("password");  
+					a.value="123";	
+				}	
+			
+			function e02(){
+				var v = document.getElementById("username");			
+					v.value="E000002";
+				var a=document.getElementById("password");  
+					a.value="123";	
+				}		
+			</script>
+		<!--神奇方法 -->
 
 </body>
 </html>

@@ -149,7 +149,7 @@ System.out.println("清購物車");
 				 * 3.新增完成,準備轉交
 				 ***********/
 				
-				String url = "/frontdesk/pro/showProIndex.jsp";
+				String url = "/frontdesk/proOrder/proOrder3.jsp";
 System.out.println("轉交 "+url);				
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);

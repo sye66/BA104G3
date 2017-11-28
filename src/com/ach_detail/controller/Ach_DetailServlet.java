@@ -1,11 +1,13 @@
 package com.ach_detail.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,7 @@ import com.achieve.model.AchieveService;
 import com.achieve.model.AchieveVO;
 import com.mem.model.MemVO;
 
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 @WebServlet("/Ach_DetailServlet")
 public class Ach_DetailServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -180,19 +182,25 @@ public class Ach_DetailServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 			
  			try{
- 				List<AchieveVO> achieveVO = null ;
+ 				List<AchieveVO> achieveVO = new LinkedList<AchieveVO>();
  				MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
  				String mem_No = memVO.getMem_No();
  				Ach_DetailService achdSvc = new Ach_DetailService();
  				List<Ach_DetailVO> ach_detailVO = achdSvc.getPersonal(mem_No);
+
  				
  				AchieveService achieveSvc = new AchieveService();
  				for(int i =0;i < ach_detailVO.size();i++){
- 					achieveVO = achieveSvc.getThree(ach_detailVO.get(i).getAch_No());
+ 					achieveVO.add(achieveSvc.getOneAchieve(ach_detailVO.get(i).getAch_No()));
  				}
  				
  				req.setAttribute("achieveVO", achieveVO);
-		
+ 				req.setAttribute("ach_detailVO", ach_detailVO);
+ System.out.println(achieveVO+"++++++++++++++++++");
+ 				String url = "/frontdesk/personal/personalAchieve.jsp";
+ 				RequestDispatcher successView = req.getRequestDispatcher(url); 
+				successView.forward(req, res);
+ 
  				
  			}catch (Exception e) {
 				String url = "/frontdesk/personal/PersonalPage.jsp";

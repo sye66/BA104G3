@@ -56,18 +56,25 @@
                         <td>${issuerMission.mission_Des}</td>
                         <td>${memSvc.getOneMem(issuerMission.takecase_Mem_No).mem_Id}</td>
                         <td>
-                            <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
                                 <c:if test="${issuerMission.mission_State == 3 }">
-                                    <button class="btn btn-warning" type="submit" name="action" value="checkmem">接案人身分確認</button>
+                                	<form method="post" action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_Pending.jsp">
+                                		<input type="hidden" name="mission_No" value="${issuerMission.mission_No}">
+                                		<input type="hidden" name="takecase_Mem_No" value="${issuerMission.takecase_Mem_No}">
+                                    	<button class="btn btn-warning" type="submit">接案人身分確認</button>
+                                    </form>
                                 </c:if>
                                 <c:if test="${issuerMission.mission_State == 4 }">
-                                    <button class="btn btn-danger" type="submit" name="action" value="givepay">完成報酬交付</button>
-                                    <button class="btn btn-danger" type="submit" name="action" value="haveproblem">案件爭議訴求</button>
+		                            <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
+		                                <input type="hidden" name="mission_No" value="${issuerMission.mission_No}">
+		                                <input type="hidden" name="takecase_Mem_No" value="${issuerMission.takecase_Mem_No}">
+		                                <input type="hidden" name="requestURL" value="/frontdesk/mission/issuerfinalstep.jsp">
+	                                    <button class="btn btn-danger" type="submit" name="action" value="givepay">完成報酬交付</button>
+        		                    </form>
+        		                    <form method="post" action="<%=request.getContextPath()%>/frontdesk/disputeCase/issueDisputeCase.jsp">
+        		                    	<input type="hidden" name="mission_No" value="${issuerMission.mission_No}">
+	                                    <button class="btn btn-danger" type="submit">案件爭議訴求</button>
+	                                </form>
                                 </c:if>
-                                <input type="hidden" name="mission_No" value="${issuerMission.mission_No}">
-                                <input type="hidden" name="takecase_Mem_No" value="${issuerMission.takecase_Mem_No}">
-                                <input type="hidden" name="requestURL" value="/frontdesk/mission/issuerfinalstep.jsp">
-                            </form>
                         </td>
                     </tr>
                 </c:if>
@@ -77,87 +84,6 @@
     <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
         <button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
     </form>
-<script>
-    
-    var ToolMan = "/MissionSocket/${memVO.mem_No}/${memVO.mem_Id}";
-    var hostTool = window.location.hostTool;
-    var pathTool = window.location.pathname;
-    var toolWebCtx = pathTool.substring(0, pathTool.indexOf('/', 1));
-    var endToolManURL = "ws://" + window.location.hostTool + toolWebCtx + ToolMan;
-    
-	var statusOutput = document.getElementById("statusOutput");
-	var webToolSocket;
-	
-	function connect() {
-		// 建立 webToolSocket 物件
-		webToolSocket = new webToolSocket(endToolManURL);
-		
-		webToolSocket.onopen = function(event) {
-			updateStatus("webToolSocket 成功連線");
-			document.getElementById('sendMessage').disabled = false;
-			document.getElementById('connect').disabled = true;
-			document.getElementById('disconnect').disabled = false;
-		};
 
-		webToolSocket.onmessage = function(event) {
-			var messagesArea = document.getElementById("messagesArea");
-	        var jsonObj = JSON.parse(event.data);
-	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-	        messagesArea.value = messagesArea.value + message;
-	        messagesArea.scrollTop = messagesArea.scrollHeight;
-		};
-
-		webToolSocket.onclose = function(event) {
-			updateStatus("webToolSocket 已離線");
-		};
-	}
-	
-	
-	var inputUserName = document.getElementById("userName");
-	inputUserName.focus();
-	
-	function sendMessage(action, take_Meme_No) {
-		
-		
-		
-	    var userName = take_Meme_No;
-	    if (userName === ""){
-	        alert ("會員名稱請勿空白!");
-	        inputUserName.focus();	
-			return;
-	    }
-	    
-// 	    var inputMessage = document.getElementById("message");
- 		var inputMessage = "你的任務已經OK囉";
-	    
-	    if (message === ""){
-	        alert ("訊息請勿空白!");
-	        inputMessage.focus();	
-	    }else{
-	        var jsonObj = {"action": action, "userName" : userName, "message" : inputMessage};
-	        webToolSocket.send(JSON.stringify(jsonObj));
-	    }
-	}
-	
-	
-	$("#id").click(function(){
-		var Str = "你的任務已經OK囉";
-		
-		
-		sendMessage(XXX, take_Meme_No);
-		
-	})
-	
-	function disconnect () {
-		webToolSocket.close();
-		
-	}
-
-	
-	function updateStatus(newStatus) {
-		statusOutput.innerHTML = newStatus;
-	}
-    
-</script>
 </body>
 </html>

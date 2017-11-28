@@ -11,7 +11,7 @@
 
 <style type="text/css" media="screen">
 .loginpage {
-	background: #fff url(../res/images/pro_icons/patternbg.png);
+	background: #fff url(<%=request.getContextPath()%>/res/images/pro_icons/patternbg.png);
 }
 
 .loginbox {
@@ -29,7 +29,7 @@
 
 .loginboxinner {
 	padding: 20px;
-	background: #32415a url(../res/images/pro_icons/password.png);
+	background: #32415a url(../res/images/pro_icons/p.png);
 	-moz-border-radius: 0 2px 2px 0;
 	-webkit-border-radius: 0 0 2px 2px;
 	border-radius: 0 0 2px 2px;
@@ -64,7 +64,7 @@
 }
 
 .loginbox .username {
-	background: #eee url(../images/icons/username.png) no-repeat 13px center;
+	background: #eee url(<%=request.getContextPath()%>/res/images/pro_icons/username.png) no-repeat 13px center;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -98,7 +98,7 @@
 }
 
 .loginbox .password {
-	background: #eee url(../images/icons/password.png) no-repeat 13px center;
+	background: #eee url(<%=request.getContextPath()%>/res/images/pro_icons/password.png) no-repeat 13px center;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
@@ -126,7 +126,7 @@
 }
 
 .loginbox button {
-	background: #f0801d url(../images/btngrad.png) repeat-x top left;
+	background: #f0801d url(<%=request.getContextPath()%>/res/images/pro_icons/btngrad.png) repeat-x top left;
 	border: 0;
 	padding: 15px 0;
 	text-align: center;
@@ -276,7 +276,7 @@
 
 			<form id="login" action="<%=request.getContextPath()%>/loginhandler/loginhandler.do" method="post">
 
-				<div class="username">
+				<div class="username" style="">
 					<div class="usernameinner">
 						<input type="text" name="username" id="username" />
 						<input type="hidden" name="action" value="emplogin">
@@ -295,12 +295,35 @@
 
 
 			</form>
+			
+				<br>
+				<!--神奇小按鈕-->
+						<button type="button" onclick="e01()"  class="btn btn-success" style="width:20px;height:10px;">老</button>						
+					    <button type="button" onclick="e02()"  class="btn btn-success" style="width:20px;height:10px;">王</button>
+                <!--神奇小按鈕 -->
+				
 
 		</div>
 		<!--loginboxinner-->
 	</div>
 	<!--loginbox-->
-
+			<!--神奇方法 -->
+			<script type="text/javascript">
+			function e01(){
+				var v = document.getElementById("username");			
+					v.value="E000001";
+				var a=document.getElementById("password");  
+					a.value="123";	
+				}	
+			
+			function e02(){
+				var v = document.getElementById("username");			
+					v.value="E000002";
+				var a=document.getElementById("password");  
+					a.value="123";	
+				}		
+			</script>
+		<!--神奇方法 -->
 
 </body>
 </html>

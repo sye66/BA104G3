@@ -24,14 +24,15 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 	private static final String GET_REPORT_BY_ARTI_NO = 
 			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE ARTI_NO = ? order by REPORT_NO";
 
-	private static final String GET_REPORT_BY_REP_RE_DESC = 
-			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE REP_RE_DESC = ? order by REPORT_NO";
+	private static final String GET_REPORT_BY_MEM_NO= 
+			"SELECT REPORT_NO,MEM_NO,ARTI_NO,REPORT_DESC,to_char(REPORT_TIME,'yyyy-mm-dd hh:mm:ss') REPORT_TIME,REP_RE_DESC,REPORT_STATUS FROM ARTI_REPORT WHERE MEM_NO = ? order by REPORT_NO";
 	
 	private static final String DELETE_REPORT = 
 			"DELETE FROM ARTI_REPORT where REPORT_NO = ?";
 	
 	private static final String UPDATE_REPORT = 
 			"UPDATE ARTI_REPORT set MEM_NO=?, ARTI_NO=?, REPORT_DESC=?, REPORT_TIME=?,  REP_RE_DESC=?, REPORT_STATUS=? where REPORT_NO =?";
+
 	
 	
 	public void insertReport(ArtiReportVO artiReportVO){
@@ -122,6 +123,8 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 			}
 		}
 	}
+	
+
 	
 	public void deleteReport (String report_No){
 		Connection con = null;
@@ -281,7 +284,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 	}
 	
 	@Override
-	public Set<ArtiReportVO> findReportByRep_Re_Desc(String rep_Re_Desc) {
+	public Set<ArtiReportVO> findReportByMemNo(String mem_No) {
 		Set<ArtiReportVO> set = new LinkedHashSet<ArtiReportVO>();
 		ArtiReportVO artiReportVO = null;
 		
@@ -291,10 +294,10 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 		
 		try{
 			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);;
-			pstmt = con.prepareStatement(GET_REPORT_BY_REP_RE_DESC);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_REPORT_BY_MEM_NO);
 			
-			pstmt.setString(1, rep_Re_Desc);
+			pstmt.setString(1, mem_No);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()){
@@ -338,6 +341,7 @@ public class ArtiReportJDBCDAO implements ArtiReportDAO_interface {
 		}
 		return set;
 	}
+	
 	
 	public Set<ArtiReportVO> getAllReport(){
 		Set<ArtiReportVO> set = new LinkedHashSet<ArtiReportVO>();

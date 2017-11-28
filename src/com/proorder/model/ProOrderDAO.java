@@ -222,7 +222,6 @@ public class ProOrderDAO implements ProOrderDAO_interface{
 			}
 			
 			
-			con = ds.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException("A database error occured. " + e.getMessage());
 		}finally {

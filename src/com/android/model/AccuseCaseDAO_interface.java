@@ -8,6 +8,5 @@ public interface AccuseCaseDAO_interface {
           public void delete(String accuse_No);
           public AccuseCaseVO findByPrimaryKey(String accuse_No);
           public List<AccuseCaseVO> getAll();
-          //?¬ç?¨è????¥è©¢(?³å?¥å???¸å????Map)(???? List)
-//        public List<EmpVO> getAll(Map<String, String[]> map); 
+
 }

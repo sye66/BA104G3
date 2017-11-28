@@ -282,6 +282,14 @@
     <url-pattern>/comp/comp.do</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AllMemServlet</servlet-name>
+    <servlet-class>com.personal.controller.AllMemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AllMemServlet</servlet-name>
+    <url-pattern>/all/all.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>RankServlet</servlet-name>
     <servlet-class>com.rank.controller.RankServlet</servlet-class>
   </servlet>
@@ -328,6 +336,14 @@
   <servlet-mapping>
     <servlet-name>AdServlet</servlet-name>
     <url-pattern>/ad/ad.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>Messages</servlet-name>
+    <servlet-class>com.artiChat.controller.Messages</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Messages</servlet-name>
+    <url-pattern>/artiChat/artiChat.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetMissionServlet</servlet-name>

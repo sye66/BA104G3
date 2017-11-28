@@ -538,9 +538,9 @@
 
 							<li class="nav-item1">
 								<h3>
-									<a class="nav-link js-scroll-trigger" id="create-user"> <c:if
+									<a class="nav-link js-scroll-trigger" id="create-user" > <c:if
 											test="${not empty memVO.mem_No}">
-											<li><a style="text-decoration: none;" href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i
+											<li><a style="text-decoration: none;font-size:18px;" href='#modal-id1' data-toggle="modal" >${memVO.mem_Id}<i
 													class="glyphicon glyphicon-log-out"></i> 登出
 											</a></li>
 										</c:if> <c:if test="${empty memVO.mem_No}">
@@ -617,12 +617,21 @@ function getFocus() {
 							<!-- End # Login Form -->
 
 
-					<!--神奇小按鈕 -->
 						<br>
-						<button type="button" onclick="aa0953711016()">神</button>
-						<button type="button" id="M000001">M1</button>						
+					<!--神奇小按鈕 -->	
+						<div class="col-xs-12 col-sm-8">
 						
+						
+						<button type="button" id="M000001">神</button>
+						<button type="button" id="M000002">柏</button>	
+						<button type="button" id="M000003">武</button>
+						<button type="button" id="M000004">子</button></div>						
+<!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
+                    
+                    <div class="col-xs-12 col-sm-4">
+                    <a style="text-decoration:none;" href="<%=request.getContextPath()%>/frontdesk/mem/memForgetPw.jsp">
+                    <input type="submit" value="忘記密碼" class="btn btn-danger btn-block"></a></div>
 
 						</div>
 						<div class="modal-footer">
@@ -633,22 +642,32 @@ function getFocus() {
 				</div>
 			</div>
 <!--神奇方法 -->
+			
 			<script type="text/javascript">
-				function aa0953711016(){
-					
-				var v = document.getElementById("login_username");			
-					v.value="aa0953711016@gmail.com";
-						
-				var a=document.getElementById("login_password");  
-					a.value="A123456";	
-				}
-				$('#M000001').click(function(){
-					$('#login_username').val("aaa@gmail.com");
-					$('#login_password').val("A123456");
-				});
-				
-				
-			</script>
+			$('#M000001').click(function(){
+				$('#login_username').val("aa0953711016@gmail.com");
+				$('#login_password').val("A123456");
+			});
+ 			$('#M000002').click(function(){
+				$('#login_username').val("sanderxavalon@gmail.com");
+				$('#login_password').val("E123456");
+			});
+ 	
+ 			$('#M000003').click(function(){
+				$('#login_username').val("CCC@gmail.com");
+				$('#login_password').val("F123456");
+			});
+ 	
+ 			$('#M000004').click(function(){
+				$('#login_username').val("ziu0614@gmail.com");
+				$('#login_password').val("B123456");
+			});
+ 	
+//  	$('#GM1').click(function(){
+// 		$('#login_username').val("burnerzx@gmail.com");
+// 		$('#login_password').val("OFFICAL1");
+// 	});
+ 	</script>
 		<!--神奇方法 -->
 
 	

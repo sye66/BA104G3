@@ -37,7 +37,8 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 	private static final String GET_ALL_STMT = "SELECT * FROM MISSION_IMAGES ORDER BY MISSION_NO";
 //	private static final String GET_STMT_BY_MISSION_NO = "SELECT IMAGE_NO FROM MISSION_IMAGES where MISSION_No = ?";
 	private static final String GET_STMT_BY_MISSION_NO = "SELECT ISSUER_IMAGES FROM MISSION_IMAGES WHERE MISSION_NO = ? AND ROWNUM<=1";
-	
+	private static final String GET_IMAGE_NO_BY_MISSION_NO = "SELECT IMAGE_NO FROM MISSION_IMAGES WHERE MISSION_NO = ? AND ROWNUM<=1";
+	 
 	@Override
 	public void insert(Mission_ImagesVO mission_ImagesVO) {
 		// TODO Auto-generated method stub
@@ -116,9 +117,57 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 			}
 		}
 	}
+	
+	
+	
+	
+	
+	
 
+	
+	public void update(Mission_ImagesVO mission_ImagesVO) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+					Connection con = null;
+					PreparedStatement pstmt= null;
+				try {
+					con = DriverManager.getConnection(url,userid,passwd);	
+					pstmt = con.prepareStatement(UPDATE);
+					System.out.println("mmmmmmmno"+mission_ImagesVO.getMission_No());
+					pstmt.setString(1, mission_ImagesVO.getMission_No());
+					System.out.println("mmmmmmmmmemno"+mission_ImagesVO.getIssuer_Mem_No());
+					pstmt.setString(2, mission_ImagesVO.getIssuer_Mem_No());
+					pstmt.setBytes(3, mission_ImagesVO.getIssuer_Images());
+					pstmt.setString(4, mission_ImagesVO.getImage_No());
+					System.out.println("immmmmmage"+mission_ImagesVO.getIssuer_Images());
+					pstmt.executeUpdate();
+
+					// Handle any driver errors
+				}  catch (SQLException se) {
+					throw new RuntimeException("A database error occured. "
+							+ se.getMessage());
+					// Clean up JDBC resources
+				} finally {
+					if (pstmt != null) {
+						try {
+							pstmt.close();
+						} catch (SQLException se) {
+							se.printStackTrace(System.err);
+						}
+					}
+					if (con != null) {
+						try {
+							con.close();
+						} catch (Exception e) {
+							e.printStackTrace(System.err);
+						}
+					}
+				}
+	}
+	
 	@Override
 	public void update(String image_No) {
+		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		
 	}
@@ -190,7 +239,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 		PreparedStatement pstmt= null;
 	try {
 		con = DriverManager.getConnection(url,userid,passwd);		
-			pstmt = con.prepareStatement(GET_STMT_BY_MISSION_NO);
+			pstmt = con.prepareStatement(GET_IMAGE_NO_BY_MISSION_NO);
 			pstmt.setString(1, mission_No);
 			rs = pstmt.executeQuery();
 			

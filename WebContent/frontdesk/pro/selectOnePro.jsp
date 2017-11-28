@@ -30,7 +30,9 @@
 	height: 450px;
 	width: 550px;
 }
-
+.proTable td{
+	width: 300px;
+}
 .proName {
 	font-weight: 900;
 	font-size: 30px;
@@ -199,7 +201,7 @@
 							<td><p class="proInfo">
 									<c:forTokens var="alpha" items="${proVO.pro_Info}" delims=",">
 										<c:forEach var="person" items="${alpha}">
-											<p>✦${person}</p>
+											<p style="font-size:16px;">✦${person}</p>
 										</c:forEach>
 									</c:forTokens>
 								</p></td>
@@ -372,7 +374,7 @@ $(function() {
 //	       async: false,           // 預設值為 true 非同步
 	      success:function(response){
 	    	  
-	       setTimeout(function(){location.reload()}, 2000) ;   //重新刷新              
+	       setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
 	      }, // success end        
 	      error:function(xhr, ajaxOptions, thrownError){
 	       swal(
