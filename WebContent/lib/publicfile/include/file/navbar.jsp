@@ -283,7 +283,7 @@ function getFocus() {
  	<script type="text/javascript">
  	
  	$('#M000002').click(function(){
-		$('#login_username').val("BBB@gmail.com");
+		$('#login_username').val("sanderxavalon@gmail.com");
 		$('#login_password').val("E123456");
 	});
  	

@@ -9,7 +9,7 @@ public class TelMessage {
 
 		      String user    = "85559671"; //帳號
 		      String passwd  = "2irioiai"; //密碼
-		      String messageBig5 = new String(message.getBytes(),"big5"); //簡訊內容
+		      String messageBig5 = new String(message.getBytes(),"utf-8"); //簡訊內容
 
 		      //----建立連線 and 檢查帳號密碼是否錯誤
 		      sock2air mysms = new sock2air();

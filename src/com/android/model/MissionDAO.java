@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MissionDAO implements MissionDAO_interface {
 	String userid = "BA104G3";
 	String passwd = "123456";
 
-	private static final String INSERT_STMT = "INSERT INTO MISSION(MISSION_NO, MISSION_NAME , MISSION_CATEGORY ,  MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION(MISSION_NO, MISSION_NAME , MISSION_CATEGORY ,  MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY ,MISSION_GPS_LAT ,MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),?,?,?,?,sysdate,sysdate,?,?,?,?,?)";
 			//"INERT INTO mission (mission_No,  mission_Category, mission_Name, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, ,mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng) VALUES (to_char(sysdate,'yyyymmdd')||'MIS'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission ORDER BY mission_No";
 	private static final String GET_ONE_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission WHERE mission_No = ?";		
@@ -33,6 +34,7 @@ public class MissionDAO implements MissionDAO_interface {
 	private static final String UPDATE_MISSION_STATE_BY_MISSION_NO = "UPDATE MISSION SET MISSION_STATE = ? WHERE MISSION_NO = ?";
 	private static final String GET_SEARCH_MISSION = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission where mission_state != 5 and mission_state != 6 and mission_state != 9 ORDER BY mission_No";
 	private static final String GET_STMT_BY_TAKECASE_MEM_UNFINISHED = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission where takecase_Mem_No = ? AND (mission_state < 5 OR mission_state = 8)";
+	private static final String UPDATE_MISSION = "UPDATE mission SET mission_Des = ?, mission_Pattern = ?, mission_Pay=?, mission_Gps_Lat=?, mission_Gps_Lng=?  where mission_No=?";
 	
 	@Override
 	public void insert(MissionVO missionVO) {
@@ -64,13 +66,16 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.setString(2, missionVO.getMission_Category());
 			pstmt.setString(3, missionVO.getMission_Des());
 			pstmt.setString(4, missionVO.getIssuer_Mem_No());
-			pstmt.setDate(5, missionVO.getMission_Release_Time());
-			pstmt.setDate(6, missionVO.getMission_Due_Time());
-			pstmt.setInt(7, missionVO.getMission_State());
-			pstmt.setInt(8, missionVO.getMission_Pattern());
-			pstmt.setDouble(9, missionVO.getMission_Pay());
-//座標
+//			pstmt.setTimestamp(5, missionVO.getMission_Release_Time());
+//			pstmt.setTimestamp(6, missionVO.getMission_Due_Time());
+			pstmt.setInt(5, missionVO.getMission_State());
+			pstmt.setInt(6, missionVO.getMission_Pattern());
+			pstmt.setDouble(7, missionVO.getMission_Pay());
+			pstmt.setDouble(8, missionVO.getMission_Gps_Lat());
+			pstmt.setDouble(9, missionVO.getMission_Gps_Lng());
 
+//pstmt.setTimestamp(5, missionVO.getMission_Release_Time());
+//pstmt.setTimestamp(6, missionVO.getMission_Due_Time());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -108,7 +113,7 @@ public class MissionDAO implements MissionDAO_interface {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-//未完成		
+		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url,userid,passwd);
@@ -119,10 +124,10 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.setString(3, missionVO.getMission_Des());
 			pstmt.setString(4, missionVO.getIssuer_Mem_No());
 			pstmt.setString(5, missionVO.getTakecase_Mem_No());
-			pstmt.setDate(6, missionVO.getMission_Release_Time());
-			pstmt.setDate(7, missionVO.getMission_Due_Time());
-			pstmt.setDate(8, missionVO.getMission_Start_Time());
-			pstmt.setDate(9, missionVO.getMission_End_Time());
+			pstmt.setTimestamp(6, missionVO.getMission_Release_Time());
+			pstmt.setTimestamp(7, missionVO.getMission_Due_Time());
+			pstmt.setTimestamp(8, missionVO.getMission_Start_Time());
+			pstmt.setTimestamp(9, missionVO.getMission_End_Time());
 			pstmt.setInt(10, missionVO.getMission_State());
 			pstmt.setInt(11, missionVO.getMission_Pattern());
 			pstmt.setDouble(12, missionVO.getMission_Pay());
@@ -130,7 +135,13 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.setDouble(14, missionVO.getMission_Gps_Lng());
 			pstmt.setString(15, missionVO.getMission_No());
 			
+//			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
+			
 			pstmt.executeUpdate();
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -229,16 +240,22 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
 				missionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
+				
+				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 				
 			}
@@ -291,10 +308,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -302,6 +319,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
 				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
 			
@@ -355,10 +376,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+//				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -366,6 +387,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
 				
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
 			
@@ -419,10 +444,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -430,6 +455,10 @@ public class MissionDAO implements MissionDAO_interface {
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
 				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
 			
@@ -482,10 +511,10 @@ public List<MissionVO> getByTakecaseMemUnfinished(String takecase_Mem_No) {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -493,6 +522,10 @@ public List<MissionVO> getByTakecaseMemUnfinished(String takecase_Mem_No) {
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
 				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
 			
@@ -545,10 +578,10 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -556,6 +589,10 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 				list.add(missionVO);
 				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
 			
@@ -608,10 +645,10 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 			missionVO.setMission_Des(rs.getString("mission_Des"));
 			missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 			missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-			missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-			missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-			missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-			missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 			missionVO.setMission_State(rs.getInt("mission_State"));
 			missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 			missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -619,6 +656,10 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 			missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 			list.add(missionVO);
 			
+//			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 			
 		}
 		
@@ -648,7 +689,7 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 	return list;
 }
 
-public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No) {
+public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No, String candidate_Mem_No) {
 	
 	List<MissionVO> list = new ArrayList<MissionVO>();
 	MissionVO missionVO = null;
@@ -659,7 +700,19 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No) {
 	try {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, userid, passwd);
-		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State <= 2 ");
+		
+		pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CASE_CANDIDATE_NO);
+		pstmt.setString(1, candidate_Mem_No);
+		rs = pstmt.executeQuery();
+		System.out.println("candidate"+ candidate_Mem_No);
+		System.out.println("issuer_Mem_No"+ issuer_Mem_No);
+		StringBuffer sb = new StringBuffer();
+		while(rs.next()){
+			sb.append(" AND mission_No != "+"'"+rs.getString("mission_No")+"'");
+		}
+		System.out.println("sb"+sb);
+		
+		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State <= 2"+sb);
 		pstmt.setString(1, issuer_Mem_No);
 		rs = pstmt.executeQuery();
 		
@@ -671,10 +724,10 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No) {
 			missionVO.setMission_Des(rs.getString("mission_Des"));
 			missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 			missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-			missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-			missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-			missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-			missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 			missionVO.setMission_State(rs.getInt("mission_State"));
 			missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 			missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
@@ -682,8 +735,14 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No) {
 			missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
 			list.add(missionVO);
 			
+//			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 			
 		}
+		
+		
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -734,15 +793,21 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
 				missionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
+				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
+				
 				list.add(missionVO);
 				
 				
@@ -798,15 +863,20 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 					missionVO.setMission_Des(rs.getString("mission_Des"));
 					missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 					missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-					missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-					missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-					missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-					missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+					missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+					missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+					missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+					missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 					missionVO.setMission_State(rs.getInt("mission_State"));
 					missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 					missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
 					missionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
 					missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
+					
+//					missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//					missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//					missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//					missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 					
 				}
 				
@@ -888,15 +958,21 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 				missionVO.setMission_Des(rs.getString("mission_Des"));
 				missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
 				missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
-				missionVO.setMission_Release_Time(rs.getDate("mission_Release_Time"));
-				missionVO.setMission_Due_Time(rs.getDate("mission_Due_Time"));
-				missionVO.setMission_Start_Time(rs.getDate("mission_Start_Time"));
-				missionVO.setMission_End_Time(rs.getDate("mission_End_Time"));
+				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				missionVO.setMission_State(rs.getInt("mission_State"));
 				missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
 				missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
 				missionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
 				missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
+				
+//				missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//				missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//				missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
+				
 				list.add(missionVO);		
 			}		
 		} catch (SQLException e) {
@@ -921,7 +997,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		return list;
 	}
 	
-	public void addTakeCaseMem(String takecase_NO, String mission_No, Date mission_Start_Time, Date mission_End_Time){
+	public void addTakeCaseMem(String takecase_NO, String mission_No, Timestamp mission_Start_Time, Timestamp mission_End_Time){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -932,8 +1008,8 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 			pstmt = con.prepareStatement(UPDATE_STMT_TAKECASE_MEM);
 			
 			pstmt.setString(1, takecase_NO);
-			pstmt.setDate(2, mission_Start_Time);
-			pstmt.setDate(3, mission_End_Time);
+			pstmt.setTimestamp(2, mission_Start_Time);
+			pstmt.setTimestamp(3, mission_End_Time);
 			pstmt.setString(4, mission_No);
 			pstmt.executeUpdate();
 			
@@ -1009,46 +1085,97 @@ public void deleteAccuse_Case(String mission_No) {
 
 
 
-public void updateMissionState(Integer mission_State, String mission_No){
+	public void updateMissionState(Integer mission_State, String mission_No){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
 	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-
-	try {
-		Class.forName(driver);
-		con = DriverManager.getConnection(url,userid,passwd);
-		pstmt = con.prepareStatement(UPDATE_MISSION_STATE_BY_MISSION_NO);
-		
-		pstmt.setInt(1, mission_State);
-		pstmt.setString(2, mission_No);
-		
-		pstmt.executeUpdate();
-		
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} finally {
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_MISSION_STATE_BY_MISSION_NO);
+			
+			pstmt.setInt(1, mission_State);
+			pstmt.setString(2, mission_No);
+			
+			pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-		}
-		
-		if (con != null) {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-}
+	
+public void updateMission(MissionVO missionVO){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url,userid,passwd);
+			pstmt = con.prepareStatement(UPDATE_MISSION);
+			
+		
+			pstmt.setString(1, missionVO.getMission_Des());
+			pstmt.setInt(2, missionVO.getMission_Pattern());
+			pstmt.setDouble(3, missionVO.getMission_Pay());
+			pstmt.setDouble(4, missionVO.getMission_Gps_Lat());
+			pstmt.setDouble(5, missionVO.getMission_Gps_Lng());
+			pstmt.setString(6, missionVO.getMission_No());
+			
+
+			
+			pstmt.executeUpdate();
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
 
 }

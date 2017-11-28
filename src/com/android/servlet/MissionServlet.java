@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedList;
@@ -38,7 +39,7 @@ public class MissionServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		BufferedReader br = req.getReader();
 		StringBuffer jsonIn = new StringBuffer();
 		String line = null;
@@ -58,7 +59,7 @@ public class MissionServlet extends HttpServlet {
 		DisputeCaseDAO disputcaseDAO = new DisputeCaseDAO();
 		String action = jsonObject.get("action").getAsString();
 
-		//¬d¥ş³¡¥ô°È
+		//æŸ¥å…¨éƒ¨ä»»å‹™
 		if ("getAll".equals(action)) {
 			List<MissionVO> missionList = missionDAO.getAll();
 			writeText(res, gson.toJson(missionList));
@@ -66,80 +67,97 @@ public class MissionServlet extends HttpServlet {
 		if("getSearchMission".equals(action)){
 			List<MissionVO> missionList = missionDAO.getSearchMission();
 			writeText(res, gson.toJson(missionList));
-		}else //±µ®×¤Hªº¥ô°È
+		}else //æ¥æ¡ˆäººçš„ä»»å‹™
 		if("getByTakecaseMem".equals(action)) {
 			String takecase_Mem_No = jsonObject.get("mem_No").getAsString();
 			System.out.println(takecase_Mem_No);
 			List<MissionVO> takeList = missionDAO.getByTakecaseMem(takecase_Mem_No);
 			writeText(res,gson.toJson(takeList));
-		}else //¶i¦æ¤¤
+		}else //é€²è¡Œä¸­
 		if ("getByTakecaseMemUnfinished".equals(action)){
 			String takecase_Mem_No = jsonObject.get("mem_No").getAsString();
 			System.out.println(takecase_Mem_No);
 			List<MissionVO> takeList = missionDAO.getByTakecaseMemUnfinished(takecase_Mem_No);
 			writeText(res,gson.toJson(takeList));
-		}else //±µ®×¤H¤wµ²®×ªº¥ô°È
+		}else //æ¥æ¡ˆäººå·²çµæ¡ˆçš„ä»»å‹™
 		if("getByTakecaseMemClosed".equals(action)) {
 				String takecase_Mem_No = jsonObject.get("mem_No").getAsString();
 				System.out.println(takecase_Mem_No);
 				List<MissionVO> takeList = missionDAO.getByTakecaseMemClosed(takecase_Mem_No);
 				writeText(res,gson.toJson(takeList));
-		}else //¬d¥ô°È½s¸¹
+		}else //æŸ¥ä»»å‹™ç·¨è™Ÿ
 		if("findByPrimaryKey".equals(action)) {
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			MissionVO mission = missionDAO.findByPrimaryKey(mission_No);
 			writeText(res,gson.toJson(mission));
-		}else //¬dfa®×¤H
+		}else //æŸ¥faæ¡ˆäºº
 			if("getByIssuerMem".equals(action)){
 			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
 			List<MissionVO> issuerList = missionDAO.getByIssuerMem(issuer_Mem_No);
 			writeText(res,gson.toJson(issuerList));
-		} else //¬dfa®×¤H
+		} else //æŸ¥faæ¡ˆäºº
 			if("getByIssuerMemResponse".equals(action)){
 			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
-			List<MissionVO> issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No);
+			String candidate_Mem_No = jsonObject.get("candidate_Mem_No").getAsString();
+			String btText = jsonObject.get("btText").getAsString();
+			List<MissionVO> issuerList = null;
+			issuerList = missionDAO.getByIssuerMemResponse(candidate_Mem_No,issuer_Mem_No);
+//			if("ç™¼èµ·çš„ä»»å‹™".equals(btText)){
+//				System.out.println("ç™¼èµ·çš„ä»»å‹™");
+//				issuerList = missionDAO.getByIssuerMemResponse(candidate_Mem_No,issuer_Mem_No);
+//			}else if ("æå‡ºè«‹æ±‚".equals(btText)) {
+//				System.out.println("æå‡ºè«‹æ±‚");
+//				issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No,candidate_Mem_No);
+//			}else{
+//				System.out.println("xxxç™¼èµ·çš„ä»»å‹™");
+//				issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No,candidate_Mem_No);
+//			}
 			writeText(res,gson.toJson(issuerList));
-		} else //¬dfa®×¤H
+		} else //æŸ¥faæ¡ˆäºº
 			if("getByIssuerMemProcess".equals(action)){
 			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
 			List<MissionVO> issuerList = missionDAO.getByIssuerMemProcess(issuer_Mem_No);
 			writeText(res,gson.toJson(issuerList));
-		} else //¬dfa®×¤H
+		} else //æŸ¥faæ¡ˆäºº
 			if("getByIssuerMemClosed".equals(action)){
 			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
 			List<MissionVO> issuerList = missionDAO.getByIssuerMemClosed(issuer_Mem_No);
 			writeText(res,gson.toJson(issuerList));
-		} else //§R°£¥ô°È ÁÙ­n§R°£­Ô¿ï¤H¸ò¹Ï¤ù
+		} else //åˆªé™¤ä»»å‹™ é‚„è¦åˆªé™¤å€™é¸äººè·Ÿåœ–ç‰‡
 			if("delete".equals(action)){
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
 			mission_ImagesSvc.deleteMissionImagesByMissionNo(mission_No);
-//«á­±ÁÙ¦³ÀËÁ|¸òª§Ä³¥ô°È
+//å¾Œé¢é‚„æœ‰æª¢èˆ‰è·Ÿçˆ­è­°ä»»å‹™
 			missionDAO.deleteAccuse_Case(mission_No);
 			missionDAO.delete(mission_No);
-		} else //·s¼W©Î§ó·s
+		} else //æ–°å¢æˆ–æ›´æ–°
 			if ("insert".equals(action) || "update".equals(action)) {
 				String missionJson = jsonObject.get("mission").getAsString();
 				MissionVO mission = gson.fromJson(missionJson, MissionVO.class);
 				String imageBase64 = null;
 				try{
 					imageBase64 = jsonObject.get("imageBase64").getAsString();
+					System.out.println("immmmmma64");
 				} catch (Exception e){
 					e.printStackTrace();
+					System.out.println("noimmmmmma64");
 				}
 				byte[] mission_Pic = null;
 				if(imageBase64!=null){
-					mission_Pic = Base64.getMimeDecoder().decode(imageBase64);			
+					mission_Pic = Base64.getMimeDecoder().decode(imageBase64);
 				}
-				if ("insert".equals(action)) { //·s¼W¥ô°È
+				if ("insert".equals(action)) { //æ–°å¢ä»»å‹™
 					try{
 						missionDAO.insert(mission);			
 						List<MissionVO> issuerList = missionDAO.getByIssuerMem(mission.getIssuer_Mem_No());
 						System.out.println(mission_Pic);
 						if(mission_Pic==null){
 							Mission_ImagesVO mission_ImagesVO=mission_ImagesSvc.insertMissionImagesNoimage(issuerList.get(issuerList.size()-1).getMission_No(),mission.getIssuer_Mem_No());
+							System.out.println("insertpic");
 						} else{
 							Mission_ImagesVO mission_ImagesVO=mission_ImagesSvc.insertMissionImages(issuerList.get(issuerList.size()-1).getMission_No(),mission.getIssuer_Mem_No(),mission_Pic);
+							System.out.println("insertnopic");
 						}
 						System.out.println("ok");
 					}catch(Exception e){
@@ -147,15 +165,17 @@ public class MissionServlet extends HttpServlet {
 						System.out.println(mission_Pic);
 						e.printStackTrace();
 					}
-				} else if (action.equals("update")) { //§ó·s ¥¼§¹¦¨
+				} else if (action.equals("update")) { //æ›´æ–° æœªå®Œæˆ
 					try{
-						missionDAO.update(mission);			
+						missionDAO.updateMission(mission);			
 						List<MissionVO> issuerList = missionDAO.getByIssuerMem(mission.getIssuer_Mem_No());
-						System.out.println(mission_Pic);
+						System.out.println("miiiiiiiiiiipic"+mission_Pic);
+						System.out.println("issssss" + issuerList.get(issuerList.size()-1).getMission_No() + "   "+mission.getIssuer_Mem_No() );
 						if(mission_Pic==null){
-							Mission_ImagesVO mission_ImagesVO=mission_ImagesSvc.insertMissionImagesNoimage(issuerList.get(issuerList.size()-1).getMission_No(),mission.getIssuer_Mem_No());
+							System.out.println("update no pic");
 						} else{
-							Mission_ImagesVO mission_ImagesVO=mission_ImagesSvc.insertMissionImages(issuerList.get(issuerList.size()-1).getMission_No(),mission.getIssuer_Mem_No(),mission_Pic);
+							mission_ImagesSvc.updateMissionImages(issuerList.get(issuerList.size()-1).getMission_No(),mission.getIssuer_Mem_No(),mission_Pic);
+							System.out.println("update pic");
 						}
 						System.out.println("ok");
 					}catch(Exception e){
@@ -164,13 +184,13 @@ public class MissionServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}	
-		} else //¥ô°È½s¸¹¬d¹Ï¤ù½s¸¹
+		} else //ä»»å‹™ç·¨è™ŸæŸ¥åœ–ç‰‡ç·¨è™Ÿ
 		if (action.equals("getImage_NoByMission_No")){
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			List<String> image_NoList = mission_ImagesDAO.getImageNoByMissionNo(mission_No);
 			writeText(res,gson.toJson(image_NoList));
 			
-		} else //¥ô°È½s¸¹¬d¹Ï¤ù
+		} else //ä»»å‹™ç·¨è™ŸæŸ¥åœ–ç‰‡
 		if ("getIssuer_ImageByMission_No".equals(action)){
 			OutputStream os = res.getOutputStream();
 			int imageSize = jsonObject.get("imageSize").getAsInt();
@@ -188,40 +208,51 @@ public class MissionServlet extends HttpServlet {
 		
 				System.out.println("no pic");
 			}
-		} else //·s¼W¥ô°È­Ô¿ï¤H 
+		} else //æ–°å¢ä»»å‹™å€™é¸äºº 
 		if ("insert_case_candidate".equals(action)){
-//¼W¥[ª¬ºA
+//å¢åŠ ç‹€æ…‹
 				try{
 					String case_Candidate_No = jsonObject.get("mem_No").getAsString();
 					String mission_No = jsonObject.get("mission_No").getAsString();
 					Integer issuer_Inviting = jsonObject.get("issuer_Inviting").getAsInt();
-					System.out.println("·s¼W¥ô°È­Ô¿ï¤H"+case_Candidate_No +"\n¥ô°È" + mission_No);
+					System.out.println("æ–°å¢ä»»å‹™å€™é¸äºº"+case_Candidate_No +"\nä»»å‹™" + mission_No);
 					case_CandidateSvc.insertCaseCandidate(case_Candidate_No, mission_No, issuer_Inviting);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-		} else //§R°£¥ô°È­Ô¿ï¤H
+		} else //åˆªé™¤ä»»å‹™å€™é¸äºº
 			if ("delete_case_candidate".equals(action)){
 				try{
 					String case_Candidate_No = jsonObject.get("mem_No").getAsString();
 					String mission_No = jsonObject.get("mission_No").getAsString();
-					System.out.println("§R°£¥ô°È­Ô¿ï¤H"+case_Candidate_No +"\n¥ô°È" + mission_No);
+					System.out.println("åˆªé™¤ä»»å‹™å€™é¸äºº"+case_Candidate_No +"\nä»»å‹™" + mission_No);
 					case_CandidateSvc.deleteCaseCandidate(case_Candidate_No, mission_No);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		} else //§R°£­Ô¿ï¥ô°È
+		} else //åˆªé™¤å€™é¸ä»»å‹™
 			if ("deleteCaseCandidateByMissionNo".equals(action)){
 				try{
 //					String case_Candidate_No = jsonObject.get("mem_No").getAsString();
 					String mission_No = jsonObject.get("mission_No").getAsString();
-					System.out.println("§R°£mission_NO" + mission_No);
+					System.out.println("åˆªé™¤mission_NO" + mission_No);
 					case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}		
-		}else //­Ô¿ï¤Hªº¥ô°È
+				}	
+				
+		} else 
+		if("deleteCaseCandidateByMissionNoAndCandidateNO".equals(action)){
+			try{
+				String candidate_Mem_No = jsonObject.get("mem_No").getAsString();
+				String mission_No = jsonObject.get("mission_No").getAsString();
+				System.out.println("åˆªé™¤mission_NO" + mission_No);
+				case_CandidateSvc.deleteCaseCandidate(candidate_Mem_No, mission_No);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}else //å€™é¸äººçš„ä»»å‹™
 		  if ("getMissionByCandidateMemNo1".equals(action)) {
 			try{
 				String candidate_Mem_No = jsonObject.get("mem_No").getAsString();
@@ -234,7 +265,7 @@ public class MissionServlet extends HttpServlet {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-		} else //­Ô¿ï¤Hªº¥ô°È
+		} else //å€™é¸äººçš„ä»»å‹™
 			  if ("getMissionByCandidateMemNo2".equals(action)) {
 					try{
 						String candidate_Mem_No = jsonObject.get("mem_No").getAsString();
@@ -248,7 +279,7 @@ public class MissionServlet extends HttpServlet {
 					}catch(Exception e){
 						e.printStackTrace();
 					}
-		}else //­Ô¿ï¤Hªº¥ô°È½s¸¹
+		}else //å€™é¸äººçš„ä»»å‹™ç·¨è™Ÿ
 		if ("getAllMissionNoByCandidateMemNo".equals(action)) {
 			try{
 				String candidate_Mem_No = jsonObject.get("mem_No").getAsString();
@@ -267,9 +298,11 @@ public class MissionServlet extends HttpServlet {
 		if ("addTakeCaseMem".equals(action)) {
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			String take_Case_NO = jsonObject.get("takecase_NO").getAsString();
-			Date mission_Start_Time = new Date(System.currentTimeMillis());
-			Date mission_End_Time = new Date(System.currentTimeMillis()+60*60*24*1000*5);
-			case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
+			Timestamp mission_Start_Time = new Timestamp(System.currentTimeMillis());
+			Timestamp mission_End_Time = new Timestamp(System.currentTimeMillis()+60*60*24*1000*5);
+			System.out.println(mission_No+"tacccc"+take_Case_NO);
+//			case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
+			case_CandidateSvc.deleteCaseCandidate(take_Case_NO, mission_No);
 			missionDAO.addTakeCaseMem(take_Case_NO, mission_No, mission_Start_Time, mission_End_Time);
 			
 		} else 
@@ -298,7 +331,7 @@ public class MissionServlet extends HttpServlet {
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			List<String> accusr_NoList =  accuseCaseDAO.findAccuseCaseByMissionNo(mission_No);
 			writeText(res,gson.toJson(accusr_NoList));
-		} else //·s¼Wª§Ä³
+		} else //æ–°å¢çˆ­è­°
 		if ("addDisputeCase".equals(action)){
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			String dispute_Mem_No = jsonObject.get("mem_No").getAsString();
@@ -308,16 +341,20 @@ public class MissionServlet extends HttpServlet {
 			missionDAO.updateMissionState(8, mission_No);
 			
 			
-		}else //§R°£ª§Ä³
+		}else //åˆªé™¤çˆ­è­°
 		if ("deleteDisputeCase".equals(action)){
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			String dispute_Mem_No = jsonObject.get("mem_No").getAsString();	
-			System.out.println(mission_No +"  "+dispute_Mem_No);
+			System.out.println("åˆªé™¤ä»»å‹™ç·¨è™Ÿ æå‡ºçˆ­è­°äººç·¨è™Ÿ"+mission_No +"  "+dispute_Mem_No);
 			disputcaseDAO.delete(mission_No,dispute_Mem_No);
-			if(disputcaseDAO.findByMission(mission_No)==null){
+			List<DisputeCaseVO> dispute = null;
+			dispute=disputcaseDAO.findByMission(mission_No);
+			System.out.println(dispute);
+			if(dispute.size()==0){
+				System.out.println("æ²’æœ‰çˆ­è­°");
 				missionDAO.updateMissionState(3, mission_No);
 			}			
-		}else //¬dª§Ä³®×¥ó
+		}else //æŸ¥çˆ­è­°æ¡ˆä»¶
 		if ("findByMem".equals(action)){
 			String dispute_Mem_No = jsonObject.get("mem_No").getAsString();
 			List<DisputeCaseVO> disputeCaseList = disputcaseDAO.findByMem(dispute_Mem_No);
@@ -327,6 +364,11 @@ public class MissionServlet extends HttpServlet {
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			List<DisputeCaseVO> disputeCaseList = disputcaseDAO.findByMission(mission_No);
 			writeText(res,gson.toJson(disputeCaseList));
+		} else //no use
+		if ("updateMission".equals(action)){
+			String missionJson = jsonObject.get("mission").getAsString();
+			MissionVO mission = gson.fromJson(missionJson, MissionVO.class);
+			missionDAO.updateMission(mission);
 		}
 
 	}
