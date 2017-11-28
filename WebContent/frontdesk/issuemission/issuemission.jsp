@@ -172,6 +172,7 @@
 				        });
 				        var infoWindow = new google.maps.InfoWindow({contents: contentString});
 				        // Try HTML5 geolocation.
+				        var allMission = [<]
 				        if (navigator.geolocation) {
 				          navigator.geolocation.getCurrentPosition(function(position) {
 				            pos = {

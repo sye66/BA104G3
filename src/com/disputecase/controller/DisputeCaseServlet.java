@@ -23,6 +23,7 @@ import com.getmission.model.GetMissionService;
 import com.getmission.model.GetMissionVO;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.sun.corba.se.spi.protocol.RequestDispatcherRegistry;
 
 // TODO 新增案件請連上Session
 
@@ -107,9 +108,10 @@ public class DisputeCaseServlet extends HttpServlet {
 		 */
 		
 		if ("issue_Dispute_Case".equals(action)) {
-			List<String> errorMsg = new LinkedList<>();
-			request.setAttribute("errorMsg", errorMsg);
-			
+			List<String> errorMsgs = new LinkedList<>();
+			request.setAttribute("errorMsgs", errorMsgs);
+			String mission_No = request.getParameter("mission_No");
+			String dispute_Mem_No = request.getParameter("dispute_Mem_No");
 			try {
 				/********** 接收請求參數 - 文字 **********/
 				String disputeContent = request.getParameter("dispute_Content");
@@ -126,11 +128,11 @@ public class DisputeCaseServlet extends HttpServlet {
 				}
 				
 				/**********錯誤驗證與處理**********/
-				if (disputeContent == null && (disputeContent.trim()).length() == 0) {
-					errorMsg.add("請輸入內文");
+				if (disputeContent == null || (disputeContent.trim()).length() == 0) {
+					errorMsgs.add("請輸入內文");
 					System.out.println("輸入錯誤");
 				}
-				if (!errorMsg.isEmpty()) {
+				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = request.getRequestDispatcher(ISSUE_CASE);
 					failureView.forward(request, response);
 					System.out.println("轉向");
@@ -145,17 +147,15 @@ public class DisputeCaseServlet extends HttpServlet {
 				disputeCaseVO.setDispute_Attachment(byteArrPic);
 				Date date = new Date();
 				Timestamp timestamp = new Timestamp(date.getTime());
-				// TODO 轉換任務狀態要有會員的SESSION
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.missionFinish("MISSION000000027");
-				// TODO 新增爭議案件要有會員的SESSION
-				disputeCaseService.addDisputeCase(null, "MISSION000000027", "M000007", null, timestamp, null, 1, disputeContent, byteArrPic, null);
+				getMissionService.missionFinish(mission_No);
+				disputeCaseService.addDisputeCase(null,mission_No, dispute_Mem_No, null, timestamp, null, 1, disputeContent, byteArrPic, null);
 				System.out.println("新增爭議案件: "); // TODO 在console加上爭議案件編號
 				
 				RequestDispatcher issueDoneView = request.getRequestDispatcher(ISSUE_CASE_SUCCESS);
 				issueDoneView.forward(request, response);
 			} catch (Exception e) {
-				errorMsg.add("無法取得資料" + e.getMessage());
+				errorMsgs.add("無法取得資料" + e.getMessage());
 				RequestDispatcher failureView = request.getRequestDispatcher(ISSUE_CASE);
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());

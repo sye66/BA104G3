@@ -20,10 +20,11 @@ public class QRcode extends HttpServlet {
 		ServletOutputStream outputStream = response.getOutputStream();
 		System.out.println("Get Request From img/issuemission_Pending");
 		
-		String mem_No = request.getParameter("mem_No");
+		String takecase_Mem_No = request.getParameter("takecase_Mem_No");
 		String mission_No = request.getParameter("mission_No");
-		System.out.println("Got mem_No: " + mem_No);
+		System.out.println("Got takecase_Mem_No: " + takecase_Mem_No);
 		System.out.println("Got mission_No: " +mission_No);
+		System.out.println("Auth Code: " + takecase_Mem_No + mission_No);
 		/**
 		 * @author Sander
 		 * 在<img>中屬性src連結到此Servlet即可
