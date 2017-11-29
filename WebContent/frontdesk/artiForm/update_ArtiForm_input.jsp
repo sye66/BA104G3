@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.artiForm.model.*"%>
-
+<%@ page import="com.mem.model.*"%>
 <%
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); //EmpServlet.java (Concroller), 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+    MemVO memVO = (MemVO)session.getAttribute("memVO");
 %>
-
 
 <html>
 <head>
@@ -13,7 +13,7 @@
 <title>員工資料修改 - update_artiForm_input.jsp</title>
 
 	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/booystrap.min.css" />
-	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/revised.min.css" />
+	<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/post.min.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body bgcolor='white'>
+<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
 <table id="table-1">
 	<tr><td>
@@ -44,13 +45,14 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
+<br>
+<div class="container">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
 <div class="col-xs-12 col-sm-11 widget-container-span">
     <div class="widget-box">
         <div class="widget-header header-color-dark">
-            <h5 class="bigger lighter">${artiFormVO.arti_Title}</h5>
+            原訂標題 : <h5 class="bigger lighter">${artiFormVO.arti_Title}</h5><br>
             <div class="widget-toolbar">
                 <div class="" style="width:100px;">
                     <div class="" style="">
@@ -88,6 +90,7 @@
                      <div class="btn-group">
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
+                             更正標題 : <input type="TEXT" name="arti_Title" size="45"	value="<%=artiFormVO.getArti_Title()%>" />
                              <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
 		                      分類:<font color=red><b>*</b></font>
 		                      <select size="1" name="arti_Cls_No">
@@ -117,11 +120,7 @@
                                   <input type="hidden" name="mem_No" value="<%=artiFormVO.getMem_No()%>"><%=artiFormVO.getMem_No()%>
                                   </div>
                                </div>
-                               <div class="widget-toolbar">
-                                  <div class="widget-main padding-6">
-                                  <input type="TEXT" name="arti_Title" size="45"	value="<%=artiFormVO.getArti_Title()%>" />
-                                  </div>
-                               </div>
+
                            </div>
                        </div>
                     </div>
@@ -154,11 +153,12 @@
            </div>
        </div>
    </div>
+
 <hr />
 <br>
 
 </body>
-
+ <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>

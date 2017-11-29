@@ -6,6 +6,7 @@
 <%@ page import="com.ad.model.*"%>
 
 <%
+  EmpVO empVO = (EmpVO) session.getAttribute("empVO");
   AdVO adVO = new AdVO();
 %>
 
@@ -148,7 +149,7 @@ a{
                             <div>
  
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
-<!--  			                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">  -->
+  			                    <input type="hidden" name="reply_No"  value="${empVO.emp_No}">
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                    <button class="btn btn-info" type="submit" name="action" value="insertAd">廣告新增</button>
  			                    </FORM>  
@@ -163,7 +164,6 @@ a{
 						</div>
 					</div>	
               </div>
- 
  
                         </div>
                     </div>

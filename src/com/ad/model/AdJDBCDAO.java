@@ -18,7 +18,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 	    private static final String INSERT_AD= 
 			"INSERT INTO AD (AD_NO,AD_PIC,AD_DESC,AD_START,AD_END,AD_FTY_NO,AD_FTY_NAME) VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),?,?,?,?,?,?)";
 		private static final String GET_ALL_AD = 
-			"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END DESC";
+			"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END ASC";
 		private static final String GET_ONE_AD = 
 			"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD where AD_NO = ?";
 		private static final String DELETE_AD = 
@@ -71,8 +71,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 					}
 				}
 			}
-			
-			
+						
 		}
 		@Override
 		public void updateAd(AdVO adVO) {

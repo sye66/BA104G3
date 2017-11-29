@@ -213,7 +213,9 @@ public class AccusecaseServlet extends HttpServlet {
 			String requestURL = req.getParameter("requestURL");
 
 			if (empVO.getEmp_No() == null) {
-				res.sendRedirect("/BA104G3/backdesk/index.jsp");
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/index.jsp");
+				failureView.forward(req, res);
 				return;
 			}
 			try {
