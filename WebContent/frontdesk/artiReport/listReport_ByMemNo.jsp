@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.artiReport.model.*"%>
 <%@ page import="com.mem.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
 <jsp:useBean id="artiReportSvc1" scope="page" class="com.artiReport.model.ArtiReportService" />
@@ -12,6 +13,7 @@
     ArtiReportVO artiReportVO = new ArtiReportVO();
     ArtiReportService artiReportSvc = new ArtiReportService();
 
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
     MemVO memVO = (MemVO) session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
  	request.setAttribute("mem_No",mem_No);
@@ -114,7 +116,7 @@
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-			                        
+			                      <c:if test="${empVO.emp_State == 1}">
 			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 			                        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
@@ -123,7 +125,7 @@
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除檢舉</button>
  			                    </FORM>
-                                
+                                </c:if>
                                 </div>
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                       <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-                                
+                                <c:if test="${empVO.emp_State == 1}">
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
                                     <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
                                     <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
@@ -140,7 +142,7 @@
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                        <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
 			                    </FORM>
-                                
+                                </c:if>
                                 </div>
                             </div>
                         </div>

@@ -48,14 +48,25 @@
 			 請輸入主題文章標題 : <input type="text" id="title" name="arti_Title" size="45" 
 			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
             </h5>
+            
             <div class="widget-toolbar">
-
+               <div class="" style="width:100px;">
+                   <div class="" style="">文章分類 :
+                   <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
+                   <select size="1" name="arti_Cls_No">
+		           <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
+		           <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
+		           </c:forEach>
+		           </select>
+                   </div>
+                 </div>
              </div>
+             
              <div class="widget-toolbar">
                  <div class="" style="width:100px;">
                      <div class="" style="">
                      <input type="hidden" name="arti_No" size="45" 
-			 value="<%= (artiFormVO==null)? "AR00000066" : artiFormVO.getArti_No()%>" />
+			 value="<%= (artiFormVO==null)? "AR00000001" : artiFormVO.getArti_No()%>" />
                      </div>
                  </div>
              </div>
@@ -63,7 +74,7 @@
                  <div class="" style="width:100px;">
                      <div class="" style="">
                      <input type="hidden" name="arti_Status" size="45"
-			 value="<%= (artiFormVO==null)? "1" : artiFormVO.getArti_Status()%>" />
+			 value="<%= (artiFormVO==null)? "ㄧ般" : artiFormVO.getArti_Status()%>" />
                      </div>
                  </div>
              </div>
@@ -83,18 +94,6 @@
                  <div class="btn-toolbar">
                      <div class="btn-group">
                      
-                         <div class="widget-toolbar">
-                             <div class="" style="width:100px;">
-                                 <div class="" style="">文章分類 :
-                                 <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
-                                 <select size="1" name="arti_Cls_No">
-		                         <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-		                         <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
-		                         </c:forEach>
-		                         </select>
-                                 </div>
-                              </div>
-                          </div>
                      
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
@@ -135,12 +134,12 @@
                   </div>
               </div>
               
-               <div class="widget-toolbar">
+ <!--              <div class="widget-toolbar">
 					<div class="col-xs-12 col-sm-8">
 						<button class="btn btn-warning" type="button" onclick="ArtiSample()">Magic</button>
 					</div>	
               </div>
-              
+ -->               
            </div>
        </div>
    </div>
