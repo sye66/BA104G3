@@ -235,11 +235,21 @@ public class AccusecaseServlet extends HttpServlet {
 						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
 						caseCandidateService.deleteOneCase(mission_No);
 					}
+					List<AccuseCaseVO> lists = AccuseCaseSvc.getCaseByNotFinishmission(mission_No, 1);
+					for(AccuseCaseVO list :lists){
+						list = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+					}
 					
 				}else if(accuse_State == 3){
 					if(GetMissionSvc.getOneMission(mission_No).getMission_State() ==72 ){
-						getMissionVO = GetMissionSvc.takeMission(mission_No, 2);
-						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+						if(AccuseCaseSvc.getCaseByNotFinishmission(mission_No, 1).size()<2){
+							getMissionVO = GetMissionSvc.takeMission(mission_No, 2);
+							accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+						}else{
+							getMissionVO = GetMissionSvc.takeMission(mission_No, 72);
+							accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+						}
+						
 					}else if(GetMissionSvc.getOneMission(mission_No).getMission_State() ==7){
 						getMissionVO = GetMissionSvc.takeMission(mission_No, 1);
 						accuseVO = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);

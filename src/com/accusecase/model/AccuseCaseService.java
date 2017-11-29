@@ -99,4 +99,7 @@ public class AccuseCaseService {
 
 		return accuseCaseVO;
 	}
+	public List<AccuseCaseVO> getCaseByNotFinishmission(String mission_No,Integer accuse_State){
+		return dao.getCaseByNotFinishmission(mission_No, accuse_State);
+	}
 }

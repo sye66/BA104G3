@@ -10,6 +10,7 @@ public interface AccuseCaseDAO_interface {
           public List<AccuseCaseVO> getAll();
           public AccuseCaseVO getOneAccusecase(String mission_No,String Accuser_No);
           public List<AccuseCaseVO> getCaseBymission(String mission_No);
+          public List<AccuseCaseVO> getCaseByNotFinishmission(String mission_No,Integer accuse_State);
           //萬用複合查詢(傳入參數型態Map)(回傳 List)
 //        public List<EmpVO> getAll(Map<String, String[]> map); 
 }

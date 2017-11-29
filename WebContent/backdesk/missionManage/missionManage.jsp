@@ -43,7 +43,7 @@
 	<div class="col-xs-12 col-sm-9 mission">
 		<div class="panel panel-info mission">
 			<div class="panel-heading mission">
-				<h3 class="panel-title">推推阿緯工具人</h3>
+				<h3 class="panel-title">檢舉處理</h3>
 				<div role="tabpanel">
 					<!-- 標籤面板：標籤區 -->
 					<ul class="nav nav-tabs" role="tablist">
@@ -87,9 +87,7 @@
 											<td>${memSvc.getOneMem(accusecaseVO.accuser_No).mem_Id}</td>
 											<td>${accusecaseVO.accuse_Date}</td>
 											<td>${accusecaseVO.accuse_Detail}</td>
-											<form method="post"
-												action="<%=request.getContextPath()%>/accusecase/accusecase.do"
-												name="accusecase1">
+											<form method="post" action="<%=request.getContextPath()%>/accusecase/accusecase.do" name="accusecase1">
 												<td><select id="accuse_State" name="accuse_State">
 														<option value="1">檢舉審核中</option>
 														<option value="2">檢舉成功</option>
@@ -103,12 +101,10 @@
 													value="/backdesk/missionManage/missionManage.jsp">
 
 												</td>
-												</from>
+											</from>
 												<td>
 													<div class="panel-body">
-														<form method="post"
-															action="<%=request.getContextPath()%>/getmission/getmission.do"
-															name="getmission1">
+														<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 															<button class="btn btn-warning" type="submit"
 																name="action" value="mission_Detail">任務細節</button>
 

@@ -36,6 +36,8 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			"select *from accuse_case where mission_No = ? and accuser_No = ?";
 	private static final String GET_ACCUSECASE_BY_MISSION=
 			"SELECT * FROM ACCUSE_CASE WHERE MISSION_NO=?" ;
+	private static final String NOTFINISH_ACCUSECASE_BY_MISSION=
+			"SELECT * FROM ACCUSE_CASE WHERE MISSION_NO=? AND ACCUSE_STATE=?" ;
 	@Override
 	public void insert(AccuseCaseVO accuseCaseVO) {
 
@@ -301,6 +303,69 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ACCUSECASE_BY_MISSION);
 			pstmt.setString(1, mission_No);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				// empVO 也稱為 Domain objects
+				accuseCaseVO = new AccuseCaseVO();
+				accuseCaseVO.setAccuse_No(rs.getString("accuse_no"));
+				accuseCaseVO.setMission_No(rs.getString("mission_no"));
+				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
+				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
+				accuseCaseVO.setAccuse_Date(rs.getTimestamp("accuse_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getTimestamp("close_case_date"));
+				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
+				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
+				list.add(accuseCaseVO); // Store the row in the list
+			}
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+	
+	
+	@Override
+	public List<AccuseCaseVO> getCaseByNotFinishmission(String mission_No,Integer accuse_State) {
+		List<AccuseCaseVO> list = new ArrayList<AccuseCaseVO>();
+		AccuseCaseVO accuseCaseVO = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(NOTFINISH_ACCUSECASE_BY_MISSION);
+			pstmt.setString(1, mission_No);
+			pstmt.setInt(2, accuse_State);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
