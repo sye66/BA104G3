@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.swing.plaf.synth.SynthToggleButtonUI;
 
 import com.pro.model.ProService;
 import com.pro.model.ProVO;
@@ -96,48 +97,64 @@ System.out.println("前台進入商品編號: "+pro_No);
 			}
 		}
 
-		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+		if ("insert".equals(action)) { 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-
+			
+			String requestURL = req.getParameter("requestURL");
+System.out.println("requestURL: "+requestURL);			
 			try {
 				/***********************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
 				 *************************/
 				String pro_Name = req.getParameter("pro_Name").trim();
+				if(pro_Name.length()==0){
+					errorMsgs.add("商品名稱不可以空白喔!");
+				}
+				
 				String pro_Info = req.getParameter("pro_Info").trim();
-
+				if(pro_Info.length()==0){
+					errorMsgs.add("商品說明不可以空白喔!");
+				}
+				
+System.out.println("pro_Name: "+pro_Name);
 				java.sql.Date pro_Dis_StartDate = null;
 				try {
 					pro_Dis_StartDate = java.sql.Date.valueOf(req.getParameter("pro_Dis_StartDate").trim());
 				} catch (IllegalArgumentException e) {
-					pro_Dis_StartDate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					pro_Dis_StartDate = null;
 				}
 				java.sql.Date pro_Dis_EndDate = null;
 				try {
 					pro_Dis_EndDate = java.sql.Date.valueOf(req.getParameter("pro_Dis_EndDate").trim());
 				} catch (IllegalArgumentException e) {
-					pro_Dis_EndDate = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸入日期!");
+					pro_Dis_EndDate = null;
 				}
 
 				Integer pro_Price = null;
 				try {
 					pro_Price = new Integer(req.getParameter("pro_Price").trim());
+					if(pro_Price <= 0){
+						errorMsgs.add("售價太低囉!");
+					}
+					
+				
 				} catch (NumberFormatException e) {
-					pro_Price = 0;
-					errorMsgs.add("售價請填數字");
+					
+						errorMsgs.add("售價格式是錯囉!");
+					 
+					
 				}
-
+System.out.println("pro_Price: "+pro_Price);
 				Integer pro_Discount = null;
 				try {
 					pro_Discount = new Integer(req.getParameter("pro_Discount").trim());
+					if(pro_Discount > 100||pro_Discount<1){
+						errorMsgs.add("折扣只能1~100%");}
 				} catch (NumberFormatException e) {
-					pro_Discount = 100;
-					errorMsgs.add("折扣請填數字");
+					
 				}
-
+System.out.println(pro_Discount);
 				String pro_Class_No = new String(req.getParameter("pro_Class_No").trim());
 				String pro_Status = new String(req.getParameter("pro_Status").trim());
 				

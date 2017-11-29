@@ -129,7 +129,7 @@
               							<input type="hidden" name="ord_Shipinfo"  value="已退款">
 <%--               							<input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> --%>
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
-             							<button type="submit" class="btn btn-warning" >退款</button>
+             							<button type="submit" class="btn btn-danger" >退款</button>
           								</form></div>
        								 </td>
 								</c:if>

@@ -30,7 +30,7 @@
 		List<ProOrderVO> proOrderList =(List<ProOrderVO>) proOrderSvc.getAll();
 		List<ProOrderVO> list = new ArrayList<ProOrderVO>();
 		for(ProOrderVO p:proOrderList){
-			if((p.getOrd_Shipinfo()).equals("未出貨")){
+			if((p.getOrd_Shipinfo()).equals("未出貨")||(p.getOrd_Shipinfo()).equals("已取消")){
 				list.add(p);
 			}
 		}
@@ -64,14 +64,14 @@
 						<caption></caption>
 						<thead>
 							<tr>
-								<th>訂單編號</th>
-								<th>收件人</th>
-								<th>地址</th>
-								<th>電話</th>
-								<th>狀態</th>
-								<th>出貨日期</th>
-								<th>查詢</th>
-								<th>更動</th>
+								<th style="width:180px;text-align:left;">訂單編號</th>
+								<th style="width:180px;text-align:left;">收件人</th>
+								<th style="width:180px;text-align:left;">地址</th>
+								<th style="width:180px;text-align:left;">電話</th>
+								<th style="width:180px;text-align:left;">狀態</th>
+								<th style="width:180px;text-align:left;">出貨日期</th>
+								<th style="width:180px;text-align:left;">查詢</th>
+								<th style="width:180px;text-align:left;">更動</th>
 								
 							</tr>
 						</thead>
@@ -79,18 +79,18 @@
 						<%@ include file="page1.file" %> 
 						<c:forEach var="proOrder" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 							<tr>
-								<td>${proOrder.ord_No } </td>
-								<td>${proOrder.ord_Consignee }</td>
-								<td>${proOrder.ord_Address }</td>
-								<td>${proOrder.ord_Phone }</td>
-								<td>${proOrder.ord_Shipinfo }</td>
-								<td>${proOrder.ord_Ship_Date }</td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_No } </td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_Consignee }</td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_Address }</td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_Phone }</td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_Shipinfo }</td>
+								<td style="width:180px;text-align:left;">${proOrder.ord_Ship_Date }</td>
 								
-								<td>
+								<td style="width:180px;text-align:left;">
 <%-- 									<a href="<%=request.getContextPath()%>/pro/proOrdListServlet.do?action=getOneOrdList&ord_No=${proOrder.ord_No}"> --%>
 <%-- 									<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/resizeApi.png" style="width: 30px;"> --%>
 <!-- 									</a> -->
-									<div align="center">
+									<div align="left">
          							    <form name="select" action="<%=request.getContextPath()%>/pro/proOrdListServlet.do" method="POST" >
               							<input type="hidden" name="action"  value="getOneOrdList">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
@@ -104,9 +104,9 @@
 								
 								
 							
-									
+									<c:if test="${proOrder.ord_Shipinfo=='未出貨' }">
 									<td width="100">
-										<div align="center">
+										<div align="left">
          							    <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               							<input type="hidden" name="action"  value="updateProOrderUp">
               							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B2.jsp">
@@ -116,7 +116,20 @@
              							<button type="submit" class="btn btn-warning" >出貨</button>
           								</form></div>
        								 </td>
-							
+								</c:if>
+								<c:if test="${proOrder.ord_Shipinfo=='已取消' }">
+									<td width="100">
+										<div align="left">
+         							    <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
+              							<input type="hidden" name="action"  value="updateProOrderUp">
+              							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+              							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
+              							<input type="hidden" name="ord_Shipinfo"  value="已退款">
+             							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
+             							<button type="submit" class="btn btn-danger" >退款</button>
+          								</form></div>
+       								 </td>
+								</c:if>
 								
 							</tr>
 							
