@@ -262,14 +262,13 @@
 								<div class="panel-heading">
 									<h3 class="panel-title">${memVO.mem_Id}</h3>
 								</div>
-								<div class="panel-body">
-									${memVO.mem_Intro}
+								<div class="panel-body" style="height: 110px">
+									<p style="font-size: 16px;">${memVO.mem_Intro}</p>
 									<form
 										action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp"
 										method="post">
-										<input type="hidden" name="takecase_Mem_No"
-											value="${memVO.mem_No}"> <input type="submit"
-											value="直接發案" class="btn btn-info">
+										<input type="hidden" name="takecase_Mem_No"	value="${memVO.mem_No}"> 
+										<input type="submit" value="直接發案" class="btn btn-info">
 									</form>
 								</div>
 							</div>
