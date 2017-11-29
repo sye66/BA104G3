@@ -8,6 +8,10 @@ import java.util.List;
 
 import javax.mail.search.IntegerComparisonTerm;
 
+import org.hibernate.exception.GenericJDBCException;
+
+import com.sun.org.apache.bcel.internal.generic.StackInstruction;
+
 public class MemService {
 
 	private MemDAO_interface dao;
@@ -140,11 +144,6 @@ public class MemService {
 
 	}
 	
-	
-	
-	
-	
-
 	public MemVO updateMem(String mem_No, String mem_Pw, String mem_Name, String mem_Id, Date mem_Bday, String mem_Tel,
 			String mem_Pho, Integer mem_Gend, String mem_Email, byte[] mem_Pic, String mem_Intro, Integer mem_Code,
 			Integer mem_State, Double mem_Gps_Lat, Double mem_Gps_Lng, String mem_Ip, Date mem_Date,
@@ -190,7 +189,17 @@ public class MemService {
 	public List<MemVO> getAll() {
 		return dao.getAll();
 	}
-	
+	public List<MemVO> getAll(String mem_No) {
+		MemVO memVO = dao.findByPrimaryKey(mem_No);
+		List<MemVO> listGetAllMem = dao.getAll();
+		if (listGetAllMem.contains(memVO)) {
+			listGetAllMem.remove(memVO);
+			System.out.println("移除登入的memVO:" + memVO.getMem_Name() + " " + memVO.getMem_No());
+			return listGetAllMem;
+		}
+		System.out.println("沒有進IF");
+		return dao.getAll();
+	}
 	public List<MemVO> getAllForFriend(String mem_No){
 		return dao.getAllForFriend(mem_No);
 	}
