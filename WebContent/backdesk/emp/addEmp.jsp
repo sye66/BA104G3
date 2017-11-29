@@ -79,28 +79,28 @@
 <table>
 	<tr>
 		<td>員工姓名:</td>
-		<td><input type="TEXT" name="emp_Name" size="45" 
-			 value="<%= (empVO==null)? "吳永志" : empVO.getEmp_Name()%>" /></td>
+		<td><input type="TEXT" name="emp_Name" size="45" id="Username"
+			 value="<%= (empVO==null)? "" : empVO.getEmp_Name()%>" placeholder="Username" required /></td>
 	</tr>
 	<tr>
 		<td>信箱:</td>
-		<td><input type="TEXT" name="emp_Mail" size="45"
-			 value="<%= (empVO==null)? "aaa123@gmail.com" : empVO.getEmp_Mail()%>" /></td>
+		<td><input type="TEXT" name="emp_Mail" size="45" id="Useremail"
+			 value="<%= (empVO==null)? "" : empVO.getEmp_Mail()%>" placeholder="Useremail" required /></td>
 	</tr>
 	<tr>
 		<td>職稱:</td>
-		<td><input type="TEXT" name="emp_Job" size="45"
-			 value="<%= (empVO==null)? "manager" : empVO.getEmp_Job()%>" /></td>
+		<td><input type="TEXT" name="emp_Job" size="45" id="Userjob"
+			 value="<%= (empVO==null)? "" : empVO.getEmp_Job()%>" placeholder="Userjob" required /></td>
 	</tr>
 	<tr>
 		<td>電話:</td>
-		<td><input type="TEXT" name="emp_Phone" size="45"
-			 value="<%= (empVO==null)? "3345678" : empVO.getEmp_Phone()%>" /></td>
+		<td><input type="TEXT" name="emp_Phone" size="45" id="Userphone"
+			 value="<%= (empVO==null)? "" : empVO.getEmp_Phone()%>" placeholder="Userphone" required /></td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="emp_State" size="45"
-			 value="<%= (empVO==null)? "100" : empVO.getEmp_State()%>" /></td>
+		<td><input type="TEXT" name="emp_State" size="45" id="Userstate"
+			 value="<%= (empVO==null)? "" : empVO.getEmp_State()%>" placeholder="Userstate" required /></td>
 	</tr>
 
 
@@ -113,6 +113,7 @@
 <input type="submit" value="送出新增">
 
 </FORM>
+<button type="button" id="newEmp">神</button>
 </div>
 </body>
 
@@ -130,6 +131,16 @@
   }
 </style>
 
+<script type="text/javascript">
+$('#newEmp').click(function(){
+	$('#Username').val("吳永志");
+	$('#Useremail').val("aaa123@gmail.com");
+	$('#Userjob').val("manager");
+	$('#Userphone').val("3345678");
+	$('#Userstate').val("在職");
+});
+
+</script>
 <script>
        // $.datetimepicker.setLocale('zh');
        // $('#f_date1').datetimepicker({
