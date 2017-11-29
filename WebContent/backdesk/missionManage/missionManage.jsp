@@ -114,10 +114,7 @@
 										</tr>
 									</c:if>
 								</c:forEach>
-
-
 							</table>
-
 						</div>
 						<div role="tabpanel" class="tab-pane" id="tab2">
 						<div>歷史查閱</div>
