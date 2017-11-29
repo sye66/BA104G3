@@ -18,7 +18,6 @@
  	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
     pageContext.setAttribute("set",set);
 %>
-
 <html>
 <head><title> 分類文章 - listArti_ByMemNo.jsp   ${arti_No} </title>
 <link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/artiAll.css" />

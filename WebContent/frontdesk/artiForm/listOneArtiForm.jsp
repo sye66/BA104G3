@@ -11,21 +11,18 @@
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
    MemVO memVO = (MemVO)session.getAttribute("memVO");
+   String mem_No = memVO.getMem_No();
+   session.setAttribute("mem_No",mem_No);
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
 
-   
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
-    
-    String mem_No = (String) session.getAttribute("mem_No");
-	session.setAttribute("mem_No",mem_No);
-    
+
 	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
-
 
 <html>
 <head>
@@ -112,24 +109,22 @@ div {
                           
                               <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
 	                               <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 	                              <p >${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
                                   </div>
                                </div>
                                 <div class="widget-toolbar">
-                                  <div class="widget-main padding-6">
-                                  <h4 style="font-family:Microsoft JhengHei;">詳細內文 : </h4><br>
-                                   <font size="4" style="font-family:Microsoft JhengHei;">${artiFormVO.describe}</font>
-                                  </div>
+
                                </div>
+                               
                            </div>
                        </div>
                     </div>
                     <div class="widget-main padding-16">
-                    
-                    
+                        <h4 style="font-family:Microsoft JhengHei;">詳細內文 : </h4><br>
+                        <font size="4" style="font-family:Microsoft JhengHei;">${artiFormVO.describe}</font>
                     </div>                    
          </div>
 		 

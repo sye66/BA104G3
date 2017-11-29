@@ -47,9 +47,7 @@
 			<li style="color:red">${message}</li>
 		</c:forEach>
 	</ul>
-</c:if>
-
- 	
+</c:if>	
 
 <div class="widgetbox">
 
@@ -85,7 +83,8 @@
 
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="arti_No"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="adNo"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                 <button class="btn btn-danger" type="submit" name="action" value="deleteAdFMBack"> 刪除廣告 </button>
@@ -96,6 +95,7 @@
                              <td>
 			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">
 			                 <button class="btn btn-info" type="submit" name="action" value="getOneAd_For_Display"> 查看廣告 </button>
