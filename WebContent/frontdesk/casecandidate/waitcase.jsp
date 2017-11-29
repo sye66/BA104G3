@@ -2,13 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="java.util.*"%>
+
+
 <jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="caseCandidateSvc" scope="page" class="com.casecandidate.model.CaseCandidateService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-
-<%
-	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
-%>
+<c:set var="sessionMemVO" value="${memVO}"/>
 
 <!DOCTYPE html>
 <html lang="">
@@ -37,15 +36,19 @@
                     </form>
                 </div>
             </div>
-            <h2>${memSvc.getOneMem(memVO.mem_No).mem_Name }...您目前接取所等待任務</h2>
+            <h2>${sessionMemVO.mem_Name}...您目前接取所等待任務</h2>
 		<%-- 除5,6,8,9 --%>
 		<c:forEach var="caseCandidateVO" items="${caseCandidateSvc.getCase(memVO.mem_No)}" varStatus="m" step="1">
-			<c:if test="${	getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==1 || 
-							getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==2 ||
-							getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==3 || 
-							getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==4 || 
-							getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==7 ||
-							getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_State ==72	
+			<c:set var="mission_No" value="${caseCandidateVO.mission_No}"/>
+			<c:set var="missionVO" value="${getMissionSvc.getOneMission(mission_No)}"/>
+			<c:set var="issuerMemVO" value="${memSvc.getOneMem(missionVO.issuer_Mem_No)}"/>
+			<c:set var="mission_status" value="${missionVO.mission_State}"/>
+			<c:if test="${	mission_status ==1 || 
+							mission_status ==2 ||
+							mission_status ==3 || 
+							mission_status ==4 || 
+							mission_status ==7 ||
+							mission_status ==72	
 						}">
 				<div class="panel panel-warning">
 					<div class="panel-heading">
@@ -54,7 +57,7 @@
 							<input type="hidden" name="requestURL" value="/frontdesk/casecandidate/waitcase.jsp">
 							<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">任務細節</button>
 						</form>
-						<h3 class="panel-title">${caseCandidateVO.mission_No} 任務>>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).mission_Name } </h3>
+						<h3 class="panel-title">${mission_No} 任務>> ${missionVO.mission_Name} </h3>
 					</div>
 					<div class="panel-body">
 						<table class="table">
@@ -63,14 +66,14 @@
 						        <td>發案人</td>
 						    </tr>
 						    <tr>
-						        <td>${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No }</td>
-						        <td>${memSvc.getOneMem(getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No).mem_Id}</td>
+						        <td>${missionVO.issuer_Mem_No}</td>
+						        <td>${issuerMemVO.mem_Id}</td>
 						        <td>
 						        <div class="panel-body">
-										<form method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?issuer_Mem_No=${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No}" name="getmission5">
-											<button onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=550')" class="btn btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
-											<input type="hidden" name="issuer_Mem_No" value="${getMissionSvc.getOneMission(caseCandidateVO.mission_No).issuer_Mem_No}"> 
-											<input type="hidden" name="mission_No" value="${caseCandidateVO.mission_No}"> 
+										<form method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?issuer_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${mission_No}" name="getmission5">
+											<button onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=550')" class="btn btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
+											<input type="hidden" name="issuer_Mem_No" value="${missionVO.issuer_Mem_No}"> 
+											<input type="hidden" name="mission_No" value="${mission_No}"> 
 										</form>
 									</div>
 						        </td>
