@@ -41,6 +41,8 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 </div>
 <br><br><br><br><br><br><br>
+<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+	<div class="row">
 	<table>
 		<tr>
 		<td>
@@ -53,26 +55,12 @@
 				</div>
 			</div>
 		</td>
-		<td>
-			<div class="panel-body">
-
-					<form method="post"
-						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
-						name="getmission3">
-						<button class="btn-lg btn-danger" type="submit" name="action"
-							value="accusecase">檢舉任務</button>
-						<input type="hidden" name="mission_No"
-							value="${getMissionVO.mission_No}">
-						<input type="hidden" name="mem_No"
-							value="${mem_No}">
-					</form>
-				</div>
-		</td>
+		
 		</tr>
 		<tr class="jas">
 		
-			<div class="col-xs-12 col-sm-1"></div>
-			<div class="col-xs-12 col-sm-10">
+			
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1">
 				<div class="col-xs-12 col-sm-6">
 					<div id="carousel-id" class="carousel slide amos"
 						data-ride="carousel">
@@ -125,7 +113,7 @@
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 ">
+				<div class="col-xs-12 col-sm-4 ">
 					<h3 class="text-center">任務簡介</h3>
 					<h4>任務編號:</h4>
 					<p>----${getMissionVO.mission_No}</p>
@@ -138,13 +126,27 @@
 					<h4>發案人:</h4>
 					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 				</div>
+				<div class="col-xs-12 col-sm-2 ">
+				<div class="panel-body">
+
+					<form method="post"
+						action="<%=request.getContextPath()%>/accusecase/accusecase.do"
+						name="getmission3">
+						<button class="btn-lg btn-danger" type="submit" name="action"
+							value="accusecase">檢舉任務</button>
+						<input type="hidden" name="mission_No"
+							value="${getMissionVO.mission_No}">
+						<input type="hidden" name="mem_No"
+							value="${mem_No}">
+					</form>
+				</div>
+				</div>
 		</tr>
 		</div>
 		</table>
 		<table>
 		<tr>
-			<div class="col-xs-12 col-sm-1"></div>
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
 				<div class="panel panel-info">
 					<div class="panel-heading">
 						<h3 class="panel-title">任務細節</h3>
@@ -162,12 +164,11 @@
 
 
 			</div>
-		</tr>
-		<tr>
-<div class="col-xs-12 col-sm-2">
+			
+<!-- 			<div class="col-xs-12 col-sm-2"> -->
 
 			<td>
-				<div class="panel-body">
+				
 
 					<form method="post"
 						action="<%=request.getContextPath()%>/getmission/getmission.do"
@@ -176,14 +177,8 @@
 								class="btn-lg btn-warning">我要接案</button></a> <input type="hidden"
 							name="mission_No" value="${getMissionVO.mission_No}">
 					</form>
-				</div>
+				
 			</td>
-
-
-
-
-
-
 			<div class="modal fade" id="modal-id-mission">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -215,15 +210,6 @@
 					</div>
 				</div>
 			</div>
-
-
-
-
-
-
-
-
-
 			<td>
 				<div class="panel-body">
 
@@ -249,10 +235,13 @@
 				</form>
 
 			</td>
-			</div>
+<!-- 			</div> -->
+			
 		</tr>
-	</table>
 	
+	</table>
+	</div>
+</div>
 	<div class="col-xs-12 col-sm-12">
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
 	</div>

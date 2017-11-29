@@ -108,10 +108,8 @@
 															<button class="btn btn-warning" type="submit"
 																name="action" value="mission_Detail">任務細節</button>
 
-															<input type="hidden" name="mission_No"
-																value="${accusecaseVO.mission_No}"> <input
-																type="hidden" name="requestURL"
-																value="/bakedesk/missionManage/missionManage.jsp">
+															<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
+															<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManage.jsp">
 														</form>
 													</div>
 												</td>
