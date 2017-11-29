@@ -136,9 +136,9 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffeff3f8',endC
 .widget-main{padding:12px}
 .widget-toolbar .progress{vertical-align:middle;display:inline-block;margin:0}
 .widget-header[class*="header-color-"]{
-    color:#FFF;
+    color:#004B97;
     filter:progid:DXImageTransform.Microsoft.gradient(enabled=false)}
-.header-color-dark{background:#008F8F;border-color:#454545}
+.header-color-dark{background:#A3D1D1;border-color:#454545}
 .widget-toolbox:first-child{padding:2px;border-bottom:1px solid #CCC}
 .widget-toolbox:last-child{padding:2px;border-top:1px solid #CCC}
 

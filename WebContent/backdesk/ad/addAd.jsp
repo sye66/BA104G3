@@ -123,21 +123,20 @@ a{
                                     
                                     <div class="widget-toolbar">
                                      <div class="widget-main padding-6">   
-                                    廠商編號 : <input type="text" name="ad_Fty_No"  value="${adVO.ad_Fty_No}">
+                                    廠商編號 : <input id="Fty_No" type="text" name="ad_Fty_No"  value="${adVO.ad_Fty_No}">
                                     <hr>
                                     <div class="widget-main padding-6">   
-                                    廠商名稱 : <input type="text" name="ad_Fty_Name"  value="${adVO.ad_Fty_Name}">
+                                    廠商名稱 : <input id="Fty_Name" type="text" name="ad_Fty_Name"  value="${adVO.ad_Fty_Name}">
                                     <hr>
-                                    廣告標題 :
-                                    <input type="text" name="ad_Desc" size="45" value="${adVO.ad_Desc}">
+                                    廣告標題 : <input id="Desc" type="text" name="ad_Desc" size="45" value="${adVO.ad_Desc}">
                                     </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="widget-main padding-16">
-                         廣告開始 : <input type="text" name="ad_Start"  value="${adVO.ad_Start}">
-                         廣告結束 : <input type="text" name="ad_End"  value="${adVO.ad_End}">
+                         <input type="hidden" name="ad_Start"  value="${adVO.ad_Start}">
+                         <input type="hidden" name="ad_End"  value="${adVO.ad_End}">
                         </div>
                     </div>
                     <div class="widget-header header-color-dark">
@@ -156,6 +155,16 @@ a{
                             </div>
                             </div>
                             </div>
+                            
+               <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="ADSample()">Magic</button>
+						</div>
+					</div>	
+              </div>
+ 
+ 
                         </div>
                     </div>
                     </FORM>
@@ -208,4 +217,17 @@ a{
 		   value: '<%=arti_Time%>', // value:   new Date(),
         });
 </script>
+    		<!--神奇方法 -->
+			<script type="text/javascript">
+				function ADSample(){
+				var no = document.getElementById("Fty_No");			
+					no.value="FTY000020";
+				var name=document.getElementById("Fty_Name");  
+					name.value="果然匯 蔬食宴";
+				var desc = document.getElementById("Desc");			
+				desc.value="【台北東區】異國蔬食料理自助Buffet-素食也可以精緻好吃!";
+				}
+			</script>
+		<!--神奇方法 -->
+
 </html>
