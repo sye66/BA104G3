@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.getmission.model.*"%>
+<%@ page import="com.missionimages.model.*"%>
+<%@ page import="java.util.*" %>
 <jsp:useBean id="missionImagesSvc" scope="page" class="com.missionimages.model.MissionImagesService" />
 <jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-<%@ page import="com.getmission.model.*"%>
-<%@ page import="com.missionimages.model.*"%>
+<c:set var="sessionMemVO" value="${memVO}"/>
+<c:set var="missionAsTakecase" value="${getMissionSvc.successGetMission(sessionMemVO.mem_No)}" />
+<c:if test="${sessionMemVO == null}" var="test">
+	<c:redirect url="${request.getContextPath()}/lib/publicfile/include/file/index.jsp"></c:redirect>
+</c:if>
 
-<%
-	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
-%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,51 +40,47 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-3">
-                <c:if test="${not empty errorMsgs}">
-                    <div>${errorMsgs}</div>
-                </c:if>
+                <%-- 錯誤處理 --%>
+                    <c:if test="${not empty errorMsgs}">
+                        <div>${errorMsgs}</div>
+                    </c:if>
                 <%-- 歡迎詞 --%>
-                <p>${memSvc.getOneMem(memVO.mem_No).mem_Name} 你好</p>
-                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                    <button class="btn btn-info index" type="submit" name="action" value="missionindex">任務首頁</button>
-                </form>
+                    <p>${sessionMemVO.mem_Name} 你好</p>
+                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
+                        <button class="btn btn-info index" type="submit" name="action" value="missionindex">任務首頁</button>
+                    </form>
                 <%-- 查看接案候選人 --%>
-                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                    <button class="btn btn-info pushdiv" type="submit" name="action" value="mymission">查看任務接案候選人</button>
-                </form>
+                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
+                        <button class="btn btn-info pushdiv" type="submit" name="action" value="mymission">查看任務接案候選人</button>
+                    </form>
                 <%-- 查看自己候選的接案 --%>
-                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                    <button class="btn btn-info pushdiv" type="submit" name="action" value="missionwait">接案候選狀態</button>
-                </form>
+                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
+                        <button class="btn btn-info pushdiv" type="submit" name="action" value="missionwait">接案候選狀態</button>
+                    </form>
                 <%-- 當任務狀態為身分未確認(3)或確認(4)時宣告alright = true --%>
-                    <c:if test="${getMissionSvc.successGetMission(memVO.mem_No).size() != 0  }">
-                        <c:forEach var="missionstate" items="${getMissionSvc.successGetMission(memVO.mem_No)}" varStatus="state" step="1">
-                            <c:if test="${missionstate.mission_State == 3 ||missionstate.mission_State ==  4  }">
-                                <c:set var="alright" value="true"></c:set>
+                    <c:if test="${missionAsTakecase.size() != 0  }">
+                        <c:forEach var="missionVO" items="${missionAsTakecase}" varStatus="state" step="1" end="${stop}" >
+                            <c:if test="${missionVO.mission_State == 3 ||missionVO.mission_State ==  4  }">
+                            	<%-- 往"/frontdesk/mission/finalstep.jsp" --%>
+                            	<a href="<%=request.getContextPath()%>/frontdesk/mission/finalstep.jsp" class="btn btn-danger">正在進行的接案</a>
+                            	<c:set var="stop" value="0"/>
+                        	</c:if>
+                        </c:forEach>
+
+                    </c:if>
+                <%-- 當任務狀態為身分未確認(3)或確認(4)時宣告ok = true --%>
+                    <c:set var="issuersCaseList" value="${getMissionSvc.findIssuerCase(memVO.mem_No)}" />
+                    <c:if test="${issuersCaseList.size() != 0  }">
+                        <c:forEach var="missionVO" items="${issuersCaseList}" varStatus="state2" step="1" end="${stop}">
+                            <c:if test="${missionVO.mission_State == 3 || missionVO.mission_State == 4 }">
+                                <a href="<%=request.getContextPath()%>/frontdesk/mission/issuerfinalstep.jsp" class="btn btn-warning">發案進行中</a>
+                                <c:set var="stop" value="0"/>
                             </c:if>
                         </c:forEach>
-                        <%-- 當alright為true則顯示出動吧工具人 --%>
-                            <c:if test="${alright}">
-                                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                                    <button class="btn btn-danger pushdiv" type="submit" name="action" value="successgetmission">出動吧~工具人</button>
-                                </form>
-                            </c:if>
+                    <%-- 當ok為true則顯示出動吧工具人 --%>
+
                     </c:if>
-                    <%-- 當任務狀態為身分未確認(3)或確認(4)時宣告ok = true --%>
-                        <c:if test="${getMissionSvc.findIssuerCase(memVO.mem_No).size() != 0  }">
-                            <c:forEach var="missionstate2" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="state2" step="1">
-                                <c:if test="${missionstate2.mission_State == 3 ||missionstate2.mission_State == 4 }">
-                                    <c:set var="ok" value="true"></c:set>
-                                </c:if>
-                            </c:forEach>
-                        <%-- 當ok為true則顯示出動吧工具人 --%>
-                            <c:if test="${ok}">
-                                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                                    <button class="btn btn-warning pushdiv" type="submit" name="action" value="missiondone">任務結案</button>
-                                </form>
-                            </c:if>
-                        </c:if>
-            </div>
+                </div>
             
             <div class="col-xs-12 col-sm-9">
                 <div class="showMissionBoard"></div>
