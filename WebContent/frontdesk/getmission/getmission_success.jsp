@@ -44,13 +44,13 @@
     </style>
 </head>
 
-<body>
+<body>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 fadeInLeft animated" style="text-align: center;">
-            <p style="font-family: Microsoft JhengHei; color: yellow; font-size: 800%;">恭喜接案成功！</p>
-            <p style="font-family: Microsoft JhengHei; color: white; font-size: 600%;">請等發案方回復</p>
+            <p style="font-family: Microsoft JhengHei; color: yellow; font-size: 800%; background-color: black;">恭喜接案成功！</p>
+            <p style="font-family: Microsoft JhengHei; color: white; font-size: 600%; background-color: black;">請等發案方回復</p>
         </div>
     </div>
 </div>
