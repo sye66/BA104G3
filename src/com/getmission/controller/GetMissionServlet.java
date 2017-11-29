@@ -873,7 +873,7 @@ public class GetMissionServlet extends HttpServlet {
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
 				
-					MissionSocket.pushMissionText(takecase_Mem_No);
+					MissionSocket.pushMissionText(takecase_Mem_No); //websocket
 					
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/mission_finalsuccess.jsp");
 					failureView.forward(req, res);
