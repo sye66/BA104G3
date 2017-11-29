@@ -30,7 +30,7 @@ public class AdDAO implements AdDAO_interface {
     private static final String INSERT_AD= 
 		"INSERT INTO AD (AD_NO,AD_PIC,AD_DESC,AD_START,AD_END,AD_FTY_NO,AD_FTY_NAME) VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),?,?,?,?,?,?)";
 	private static final String GET_ALL_AD = 
-		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END DESC";
+		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END ASC";
 	private static final String GET_ONE_AD = 
 		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD where AD_NO = ?";
 	private static final String DELETE_AD = 
@@ -127,16 +127,16 @@ public class AdDAO implements AdDAO_interface {
 	public void deleteAd(String ad_No) {
 		Connection con = null;
 		PreparedStatement pstmt =  null;
-		
+System.out.println("AD-delete-DAO-111");
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_AD);
-			
+System.out.println("AD-delete-DAO-222");
 			pstmt.setString(1, ad_No);
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
-			
+System.out.println("AD-delete-DAO-33");		
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} catch (Exception e){
@@ -219,38 +219,30 @@ public class AdDAO implements AdDAO_interface {
 	public Set<AdVO> findAdByFtyNo (String ad_Fty_No){
 		Set<AdVO> set = new LinkedHashSet<AdVO>();
 		AdVO adVO = null;
-System.out.println("AD-DAO-111");
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-System.out.println("AD-DAO-222");
+
 		try{			
 			
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_AD_BY_FTY_NO);
-System.out.println("AD-DAO-333");
+
 			pstmt.setString(1, ad_Fty_No);
 			rs = pstmt.executeQuery();
-System.out.println(ad_Fty_No);
+
 		    while(rs.next()){
 		    	adVO = new AdVO();
-System.out.println("AD-DAO-444");
 		    	adVO.setAd_No(rs.getString("ad_No"));
-System.out.println("AD-DAO-555");
 		    	adVO.setAd_Pic(rs.getBytes("ad_Pic"));
-System.out.println("AD-DAO-666");
 		    	adVO.setAd_Desc(rs.getString("ad_Desc"));
-System.out.println("AD-DAO-777");
 		    	adVO.setAd_Start(rs.getTimestamp("ad_Start"));
-System.out.println("AD-DAO-888");
 		    	adVO.setAd_End(rs.getTimestamp("ad_End"));
-System.out.println("AD-DAO-999");
 		    	adVO.setAd_Fty_No(rs.getString("ad_Fty_No"));
-System.out.println("AD-DAO-aaa");
 		    	adVO.setAd_Fty_Name(rs.getString("ad_Fty_Name"));
-System.out.println("AD-DAO-bbb");
 		    	set.add(adVO);
-System.out.println("AD-DAO-555");  	
+ 	
 		    }
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());

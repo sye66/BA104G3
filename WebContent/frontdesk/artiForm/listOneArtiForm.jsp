@@ -11,16 +11,14 @@
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
    MemVO memVO = (MemVO)session.getAttribute("memVO");
+   String mem_No = memVO.getMem_No();
+   session.setAttribute("mem_No",mem_No);
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
 
-   
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
-    
-    String mem_No = (String) session.getAttribute("mem_No");
-	session.setAttribute("mem_No",mem_No);
-    
+
 	String arti_No = (String) session.getAttribute("arti_No");
 	session.setAttribute("arti_No",arti_No);
 %>

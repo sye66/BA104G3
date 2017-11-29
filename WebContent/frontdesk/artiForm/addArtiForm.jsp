@@ -43,22 +43,12 @@
     <div class="widget-box">
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">
-            <input type="hidden" name="mem_No" size="45"
-			 value="<%= (artiFormVO==null)? "M000006" : artiFormVO.getMem_No()%>" />
-			 請輸入主題文章標題 : <input type="text" id="title" name="arti_Title" size="45" 
-			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
+            <h1>工具人 -- 會員神靠北專區</h1>
             </h5>
             
             <div class="widget-toolbar">
                <div class="" style="width:100px;">
-                   <div class="" style="">文章分類 :
-                   <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
-                   <select size="1" name="arti_Cls_No">
-		           <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-		           <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
-		           </c:forEach>
-		           </select>
-                   </div>
+
                  </div>
              </div>
              
@@ -90,14 +80,29 @@
          
         
          <div class="widget-body">
+         
+          <input type="hidden" name="mem_No" size="45"
+			 value="<%= (artiFormVO==null)? "M000001" : artiFormVO.getMem_No()%>" />
+			 <h3>請輸入主題文章標題 : </h3> <input type="text" id="title" name="arti_Title" size="80" 
+			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" /><br>
+			 
              <div class="widget-toolbox">
-                 <div class="btn-toolbar">
+                 <div class="btn-toolbar">        
                      <div class="btn-group">
-                     
                      
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
                               <i class="icon-ok bigger-110"></i>
+                              
+                    <div class="" style=""><h3>文章分類 : </h3>
+                   <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
+                   <select size="1" name="arti_Cls_No">
+		           <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
+		           <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
+		           </c:forEach>
+		           </select>
+                   </div><br><br>
+                   
                               <h3>文章主題照片 : </h3><br>
                               <img id="theImage" src="<%=request.getContextPath()%>/image/XXX.jpg=${artiFormVO.arti_No}"
 	                     style="height:150px;width:180px;"/>
@@ -120,7 +125,7 @@
 
                  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" >
 		        <input type="hidden" name="describe"  value="${artiFormVO.describe}">	        
-                <button class="btn btn-success" type="submit" name="action" value="insertArti"> 新增文章 </button>
+                <button class="btn btn-info" type="submit" name="action" value="insertArti"> 新增文章 </button>
                 </FORM>
 
                   </div>
@@ -128,7 +133,7 @@
 
               <div class="widget-toolbar">
                  <div class="btn-group">
-                 <button class="btn btn-sm btn-info">
+                 <button class="btn btn-sm btn-warning">
                   <a href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"> 取消 </a> 
                   </button>
                   </div>

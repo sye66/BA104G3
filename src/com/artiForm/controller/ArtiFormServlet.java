@@ -39,7 +39,7 @@ public class ArtiFormServlet extends HttpServlet {
 			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				HttpSession session = req.getSession();
-				String mem_No =req.getParameter("mem_No");
+//				String mem_No =req.getParameter("mem_No");
 				
 				String str = req.getParameter("arti_No");
 				if(str==null||(str.trim()).length()==0){
@@ -84,7 +84,7 @@ public class ArtiFormServlet extends HttpServlet {
 				req.setAttribute("arti_No", arti_No);
 //				req.setAttribute("mem_No", mem_No);
 //	            req.getSession().setAttribute("arti_No", arti_No);
-				req.getSession().setAttribute("mem_No", mem_No);
+//				req.getSession().setAttribute("mem_No", mem_No);
 
 				String url = "/frontdesk/artiForm/listOneArtiForm.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -308,7 +308,25 @@ public class ArtiFormServlet extends HttpServlet {
 			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 			HttpSession session = req.getSession();
 			String arti_No = req.getParameter("arti_No");
+			
 			String mem_No = req.getParameter("mem_No");
+			if(req.getSession().getAttribute("mem_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
+			
+			String user = (String) req.getSession().getAttribute("mem_No");
+			if(!user.equals(mem_No)){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add(" = ___ = A 要本人才能修改喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
+			
 			String arti_Title = req.getParameter("arti_Title");
 			Integer arti_Like = new Integer(req.getParameter("arti_Like"));
 			String describe = req.getParameter("describe");
@@ -520,7 +538,7 @@ public class ArtiFormServlet extends HttpServlet {
 				/***************************1.接收請求參數***************************************/
 				HttpSession session = req.getSession();
 				String arti_No = req.getParameter("arti_No");
-				
+			
 				String mem_No = req.getParameter("mem_No");
 				if(req.getSession().getAttribute("mem_No")==null){
 					String contextPath = getServletContext().getContextPath();
@@ -531,9 +549,9 @@ public class ArtiFormServlet extends HttpServlet {
 				}
 				
 				String user = (String) req.getSession().getAttribute("mem_No");
-				if(user!=mem_No){
+				if(!user.equals(mem_No)){
 					String contextPath = getServletContext().getContextPath();
-					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
+					errorMsgs.add(" = ___ = A 要本人才能修改喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
 					failuewView.forward(req, res);
 					return;
@@ -551,7 +569,7 @@ public class ArtiFormServlet extends HttpServlet {
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 刪除資料失敗 : " + e.getMessage());
-				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_delete.jsp");
 				failuewView.forward(req, res);
 			}
 		}
