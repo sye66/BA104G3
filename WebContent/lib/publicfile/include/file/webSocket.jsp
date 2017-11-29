@@ -22,6 +22,9 @@
    String takecase_Mem_No = request.getParameter("takecase_Mem_No");
    String issuer_Mem_No = request.getParameter("issuer_Mem_No");
    String mission_No = request.getParameter("mission_No");
+   MemVO memVO2 =MemSvc.getOneMem(takecase_Mem_No);
+   MemVO memVO3 =MemSvc.getOneMem(issuer_Mem_No);
+   
 
    CaseCandidateVO caseCandidateVO = new CaseCandidateVO();
    CaseCandidateService ccSvc = new CaseCandidateService();
@@ -43,16 +46,66 @@
 
 
 <style>
-/* 	#messagesArea_left{ */
-/* 		float: left; */
-/* 		margin-left: 3%; */
-/* 	} */
-/* 	#messagesArea_right{ */
-/* 		float: right;		 */
-/* 		margin-right: 3%; */
-/* 		width:150px; */
-/* 		height:150px; */
-/* 	} */
+
+
+/* 兩側對話框的邊線 */
+	div.speech {
+
+    float: left;
+    margin: 10px 0;
+    padding: 8px;
+    table-layout: fixed;
+    word-break: break-all;
+    position: relative;
+    background: -webkit-gradient( linear, 50% 0%, 50% 100%, from(#ffffff), color-stop(0.1, #ececec), color-stop(0.5, #dbdbdb), color-stop(0.9, #dcdcdc), to(#8c8c8c) );
+    border: 1px solid #989898;
+    border-radius: 8px;
+}
+
+/* 右側文字過常會自動換行,及對話框換色*/
+div.speech.right {
+
+ display: inline-block;
+ box-shadow: -2px 2px 5px #CCC;
+ margin-right: 10px;
+ max-width: 75%;
+ float: right;
+ background: -webkit-gradient( linear, 50% 0%, 50% 100%, from(#e4ffa7), color-stop(0.1, #bced50), color-stop(0.4, #aed943), color-stop(0.8, #a7d143), to(#99BF40) );
+
+}
+
+/* 左側文字過常會自動換行*/
+div .left {
+
+ display: inline-block;
+ box-shadow: 2px 2px 2px #CCCCCC;
+ margin-left: 10px;
+ max-width: 75%;
+ position: relative;
+ background: -webkit-gradient( linear, 50% 0%, 50% 100%, from(#ffffff), color-stop(0.1, #eae8e8), color-stop(0.4, #E3E3E3), color-stop(0.8, #DFDFDF), to(#D9D9D9) );
+
+}
+
+
+/* 左邊上下對話框的間距*/
+.leftd {
+
+ clear: both;
+ float: left;
+ margin-left: 10px;
+
+}
+
+
+/* 右邊上下對話框的間距*/
+.rightd {
+
+ clear: both;
+ float: right;
+ margin-right: 10px;
+
+}
+
 	#type_in{
 	position:fixed;
 		bottom:0px;
@@ -130,24 +183,37 @@
 		  		     preview.src = reader.result;
 		 	     }, false);
 		 		 
-		 		 if (file) {
-		 			 reader.onload = function(e){
-		 			 sendImg(e.target.result);
-		 	     	 }
-		   		     reader.readAsDataURL(file);
+		 			 toFile(file);
+		   		    
 		 		 }	
 			 }
+		
+		function toFile(file){
+			var reader  = new FileReader();
+		if (file) {
+			 reader.onload = function(e){
+			 sendImg(e.target.result);
+			 url=e.target.result;
+	     	 }
+			 reader.readAsDataURL(file);
 		}
+		}
+		
 </script>
     
 <script>
     
    //把EL跟JSP的內容存成變數,方便跟JS溝通
+   var userName
+   var jsonObj
+var url="";
 var missionNo = '${caseCandidateVO.mission_No}';
 var targetMemNo = '${caseCandidateVO.candidate_Mem_No}';
 var memno = '${memVO.mem_No}';
 var context = '<%=request.getContextPath() %>';
 var memname = "${memVO.mem_Id}";
+var targetMemName ='<%=memVO2.getMem_Id()%>';
+var issuer_Mem_No ='<%=memVO3.getMem_Id()%>';
 alert("missionNo + targetMemNo" +targetMemNo+missionNo);
    
 var MyPoint = "/MyEchoServer/"+memno+"/"+missionNo;		// 對照server 哪個Server / 使用者名稱 / 房號
@@ -171,6 +237,8 @@ console.log(123);
 		document.getElementById('connect').disabled = true;
 		document.getElementById('disconnect').disabled = false;
 				
+		
+		//*****************************把之前的留言重新載入***************
 		<%  
 			ChatRecordService crSvc = new ChatRecordService();
 		    ChatRecordVO chatRecordVO = new ChatRecordVO();
@@ -196,8 +264,16 @@ console.log(123);
 	
 		var Sender_Mem_No = "<%=list.getSender_Mem_No()%>";
 		var Receiver_Mem_No = "<%=list.getReceiver_Mem_No()%>";
+		
+		<%
+		MemVO memVO4 =MemSvc.getOneMem(list.getSender_Mem_No());
+		MemVO memVO5 =MemSvc.getOneMem(list.getReceiver_Mem_No());
+		%>
+		
+		var Sender_Mem_Id = "<%=memVO4.getMem_Id()%>";
+		var Receiver_Mem_Id = "<%=memVO5.getMem_Id()%>";
 		var Chat_Datetime = "<%=list.getChat_Datetime()%>";		
-		var Chat_Content=":";
+		var Chat_Content=":"; 
 		<c:if test="<%=list.getChat_Content()!=null%>">
 			Chat_Content="<%=list.getChat_Content().trim()%>";
 		</c:if>
@@ -216,29 +292,57 @@ console.log(123);
 		Chat_Datetime =newDate.toLocaleString(); 
 		//***************把Timestamp 格式轉成 一般時間格式**************
 		
+		 userName = inputUserName.value.trim();
+	    console.log(userName);
+	    console.log("issuer_Mem_No + " +issuer_Mem_No);
 	    
-		        	
-	    if(Chat_Content.length >1000){	        
-	    	if(memname != jsonObj.userName){
-	      		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+	    
+		        
+	    if(<%=list.getChat_Content().length() %> >50){	        
+	    	if(memname === Sender_Mem_Id){
+	      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom">'+<c:if test="<%=list.getChat_Content().length()>50%>">'<span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="' </c:if> +Chat_Content+ <c:if test="<%=list.getChat_Content().length()>50%>"> '">'</c:if> +'<br>'+Sender_Mem_Id+'<br>'+Chat_Datetime+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
 				console.log("1111111userName +"+ userName);
-			} else {
-	      		$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-			}
-	    }else if(targetMemNo === Sender_Mem_No){
-	    
-	       	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+Receiver_Mem_No+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+memname+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
-			console.log("1111111userName +"+ userName);
-	       }else {
-	       	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><br>'+Chat_Datetime+':'+Chat_Content+':'+memname+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
-		}
-		
+	      		$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Receiver_Mem_Id+'<br>'+Chat_Datetime+'<img style="width: 200px; height: 200px;" src="'+Chat_Content+'"></span><span>  </span></div>');
+	      		console.log("111222222222222221111userName +"+ userName);
+	    	}
+	    }else{
+	    	if(memname === Sender_Mem_Id){
+	       	$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Receiver_Mem_Id+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
+			console.log("11333333333333333311111userName +"+ userName);
+	       	$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><br>'+Chat_Content+'<br>'+Sender_Mem_Id+'<br>'+Chat_Datetime+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
+	    	console.log("1111444444444444444444111userName +"+ userName);
+	       }
+	    }	
+	      		
+<%--  	     if(<%=list.getChat_Content().length() %> >50){	         --%>
+//     	if(memname === Sender_Mem_Id){
+<%--       		$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom">'+<c:if test="<%=list.getChat_Content().length()>50%>">'<span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="' </c:if> +Chat_Content+ <c:if test="<%=list.getChat_Content().length()>50%>"> '">'</c:if> +'__'+Chat_Datetime+'__'+Sender_Mem_Id+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>'); --%>
+// 			console.log("1111111userName +"+ userName);
+//     	} if(memname !== Sender_Mem_Id) {
+//       		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+targetMemName+'__'+Chat_Datetime+'<img style="width: 200px; height: 200px;" src="'+Chat_Content+'"></span><span>  </span></div>');
+//       		console.log("111222222222222221111userName +"+ userName);
+//     	}
+//     }else{
+//     	if(memname === Receiver_Mem_Id){
+//        	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+memname+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
+// 		console.log("11333333333333333311111userName +"+ userName);
+//        }if(memname === Sender_Mem_Id) {
+//        	$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><br>'+Chat_Datetime+'__'+Chat_Content+'__'+memname+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
+//     	console.log("1111444444444444444444111userName +"+ userName);
+//        }
+//     }	
+	      		
 		<%}%>
+		$('html, body').scrollTop(10000000);
 	};
 
+	//*****************************把之前的留言重新載入***************
+	
+	//*****************************把收到的訊息及輸入的訊息印出***************
+	
 	webSocket.onmessage = function(event) {
-		var jsonObj = JSON.parse(event.data);
-		var userName = jsonObj.userName;
+		 jsonObj = JSON.parse(event.data);
+		 userName = jsonObj.userName;
 		var message = jsonObj.message;
 		var nowdate = jsonObj.chat_Datetime;
 		nowdate=new Date();
@@ -247,7 +351,7 @@ console.log(123);
 			    
 			    
 			    
-		var url = jsonObj.src;
+		url = jsonObj.src;
 		        	
 	    if(url !=null){	        
 	    	if(memname != jsonObj.userName){
@@ -276,9 +380,11 @@ console.log(123);
 	
 var inputUserName = document.getElementById("userName");
 inputUserName.focus();
+
+//*****************************把收到的訊息及輸入的訊息印出***************
 	
 function sendMessage() {
-    var userName = inputUserName.value.trim();
+    userName = inputUserName.value.trim();
 	
     console.log("${memVO.mem_Id}" == userName);
     console.log("senduserName"+ userName);
@@ -318,47 +424,59 @@ function sendMessage() {
 	    request.setAttribute("chatRecordVO", chatRecordVO);
 	%>
     console.log("chatContent" + chatContent);
-    var queryString= {"action":"insert","chatContent":message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>'};
-		console.log("queryString +" +queryString);
-	$.ajax({
-		 type: "POST",
-		 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do",
-		 data: queryString,
-		 dataType: "json",
-		 
-		 success: function (data){ },
-		 error: function(){alert("網路不穩斷線")}
-		 
-      });
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+    
+    var queryString= {"action":"insert","chatContent":message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>',"src":url};
+	
+    console.log("queryString +" +queryString);
+    
+    upload(queryString);
+ 
     	//*************************************************************************************
-        var jsonObj = {"userName" : userName, "message" : message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>'};
+         jsonObj = {"userName" : userName, "message" : message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>'};
 		webSocket.send(JSON.stringify(jsonObj));
 	
         inputMessage.value = "";
         inputMessage.focus();
     }
 }
+
+
+function upload(aa){
+	console.log("aa +" +aa);
+$.ajax({
+	 type: "POST",
+	 url: "<%=request.getContextPath()%>/chatrecord/chatrecord.do",
+	 data: aa,
+	 dataType: "json",
+	 
+	 success: function (data){ },
+	 error: function(){alert("網路不穩斷線")}
+	 
+  });
+	
+}
+
+
+
 	
 function sendImg(url){
-	var userName = inputUserName.value.trim();
+	
+	userName = inputUserName.value.trim();
 	var inputMessage = document.getElementById("message");
     var message = inputMessage.value.trim();
     var date = new Date();
     var nowdate = date.getHours()+":"+date.getMinutes();
     alert(userName);
-    var jsonObj ={
-    		"userName" : userName,
-    		"src" : url,
-    		"time" : nowdate,
+     jsonObj ={
+    		"action":"insert",
+    		"chatContent":message, 
+    		"Sender_Mem_No":'<%=memVO.getMem_No()%>' , 
+    		"Receiver_Mem_No":'<%=takecase_Mem_No%>' , 
+    		"chat_Datetime":'<%=chat_Datetime%>',
+    		"src":url
     		};
-    console.log("src : " + url);
+    console.log(jsonObj);
+    upload(jsonObj);
     webSocket.send(JSON.stringify(jsonObj));
     inputMessage.value = "";
        inputMessage.focus();
