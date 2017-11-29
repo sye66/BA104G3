@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.android.model.MissionService;
+import com.android.model.MissionVO;
 import com.casecandidate.model.CaseCandidateService;
 import com.casecandidate.model.CaseCandidateVO;
+import com.getmission.controller.MailService;
 import com.getmission.model.GetMissionService;
 import com.getmission.model.GetMissionVO;
+import com.mem.model.MemService;
 import com.mem.model.MemVO;
 
 public class CaseCandidateServlet extends HttpServlet {
@@ -69,7 +73,17 @@ public class CaseCandidateServlet extends HttpServlet {
 			/*************************** 2.開始查詢 *****************************************/
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
 			CaseCandidateVo = caseCandidateSvc.addCaseCandidate(memVO.getMem_No(), mission_No, 1);
-
+			/**
+			 * @author Sander
+			 * 新增候選人時寄信給發案人
+			 */
+			MissionService missionService = new MissionService();
+			MissionVO missionVO = missionService.getOneMission(mission_No);
+			String issuer_Mem_NO = missionVO.getIssuer_Mem_No();
+			MemService memService = new MemService();
+			MemVO issuerMemVO = memService.getOneMem(issuer_Mem_NO);
+			MailService mailService = new MailService();
+			mailService.sendMail(issuerMemVO.getMem_Email(), String.format("您有新的接案候選人:%s!", issuerMemVO.getMem_Id()), String.format("您有新的接案候選:%s!別讓他/她等太久，趕快去任務管理中心查看這個接案人吧！", issuerMemVO.getMem_Id()));			
 			req.setAttribute("CaseCandidateVo", CaseCandidateVo);
 			req.setAttribute("errorMsgs", errorMsgs);
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmission_success.jsp");

@@ -8,6 +8,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.sun.java_cup.internal.runtime.virtual_parse_stack;
+
 public class MissionImagesDAO implements MissionImagesDAO_interface {
 
 	// 一個應用程式中,針對一個資料庫 ,共用一個DataSource即可
@@ -22,7 +24,8 @@ public class MissionImagesDAO implements MissionImagesDAO_interface {
 	}
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO emp2 (image_no, mission_no,issuer_mem_no,issuer_images) VALUES (image_seq.NEXTVAL, ?, ?, ?)";
+		"INSERT INTO MISSION_IMAGES (image_no, mission_no,issuer_mem_no,issuer_images) "
+		+ "VALUES ('PIC'||LPAD(to_char(SEQ_DIS_CASE_NO.NEXTVAL),6,'0'), ?, ?, ?)";
 	private static final String GET_ALL_STMT = 
 		"SELECT image_no, mission_no,issuer_mem_no,issuer_images FROM mission_images order by image_no";
 	private static final String GET_ONE_STMT = 
@@ -55,7 +58,7 @@ public class MissionImagesDAO implements MissionImagesDAO_interface {
 			
 
 			pstmt.executeUpdate();
-
+			System.out.println("新增任務 - 圖片寫入成功");
 			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
