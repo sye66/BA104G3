@@ -26,6 +26,7 @@
 		return;
 	}
 	String mem_No = memVO2.getMem_No();
+	System.out.print("JSP的 mem_No:" + mem_No);
 	List<MemVO> list = memService.getAll(); 
 	List<GetMissionVO> listUserMissionPending = getMissionService.findByMem(mem_No,1);
 	List<GetMissionVO> listUserMission = getMissionService.findByMem(mem_No,1);
@@ -172,6 +173,7 @@
 				        });
 				        var infoWindow = new google.maps.InfoWindow({contents: contentString});
 				        // Try HTML5 geolocation.
+				        
 				        if (navigator.geolocation) {
 				          navigator.geolocation.getCurrentPosition(function(position) {
 				            pos = {
@@ -223,7 +225,7 @@
             </div>
         <%-- 取得所有會員的集合 --%>
             <c:set var="index" value="${1*1}" />
-            <c:forEach var="memVO" items="${memService.getAll()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="StepCount" step="1">
+            <c:forEach var="memVO" items="<%=memService.getAll(mem_No)%>" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="StepCount" step="1">
                 <c:set var="index" value="${index + 1}" />
                 <%-- 如果超過兩個加上Container&Row (Start)--%>
                     <c:if test="${StepCount.index/2==0}">

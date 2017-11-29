@@ -230,7 +230,6 @@ public class MemVO {
 		this.mem_Search = mem_Search;
 	}
 
-
 	public Integer getMem_Point() {
 		return mem_Point;
 	}
@@ -246,5 +245,42 @@ public class MemVO {
 		return "MemVO [mem_Date=" + mem_Date + "]";
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((mem_Email == null) ? 0 : mem_Email.hashCode());
+		result = prime * result + ((mem_No == null) ? 0 : mem_No.hashCode());
+		return result;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MemVO other = (MemVO) obj;
+		if (mem_Email == null) {
+			if (other.mem_Email != null)
+				return false;
+		} else if (!mem_Email.equals(other.mem_Email))
+			return false;
+		if (mem_No == null) {
+			if (other.mem_No != null)
+				return false;
+		} else if (!mem_No.equals(other.mem_No))
+			return false;
+		return true;
+	}
 	
 }

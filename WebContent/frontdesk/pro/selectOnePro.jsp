@@ -321,9 +321,10 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 	<div class="col-xs-12 col-sm-3"><!--空 --></div>
 </div>
 
-<script type="text/javascript" src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/lib/publicfile/include/js/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/frontdesk/pro/jquery.fly.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.5/sweetalert2.all.js"></script>
+<script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2.all.js"></script>
+
 
 <script>
 
