@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.lang.*" %>
+<%@ page import="java.text.*" %>
 <%@ page import="com.mem.model.*" %>
 <%@ page import="com.casecandidate.model.*" %>
 <%@ page import="com.relation.model.*" %>
@@ -206,8 +207,26 @@ console.log(123);
 		console.log("Chat_Datetime +" +Chat_Datetime);
 		console.log("Chat_Content +" +Chat_Content);
 		console.log(Chat_Content.split(':'));
-		        
-	    if(targetMemNo === Sender_Mem_No){
+		
+		//***************把Timestamp 格式轉成 一般時間格式**************
+		var Chat_Datetime = Date.parse(Chat_Datetime);  
+		Chat_Datetime = Chat_Datetime / 1000;  
+		var newDate = new Date();  
+		newDate.setTime(Chat_Datetime * 1000);  
+		Chat_Datetime =newDate.toLocaleString(); 
+		//***************把Timestamp 格式轉成 一般時間格式**************
+		
+	    
+		        	
+	    if(Chat_Content.length >1000){	        
+	    	if(memname != jsonObj.userName){
+	      		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+				console.log("1111111userName +"+ userName);
+			} else {
+	      		$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+			}
+	    }else if(targetMemNo === Sender_Mem_No){
+	    
 	       	$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+Receiver_Mem_No+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+memname+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
 			console.log("1111111userName +"+ userName);
 	       }else {
@@ -222,22 +241,26 @@ console.log(123);
 		var userName = jsonObj.userName;
 		var message = jsonObj.message;
 		var nowdate = jsonObj.chat_Datetime;
-			    console.log("nowdate +" +nowdate);
+		nowdate=new Date();
+		nowdate = nowdate.getHours()+':'+nowdate.getMinutes();
+			    
+			    
+			    
 			    
 		var url = jsonObj.src;
 		        	
 	    if(url !=null){	        
 	    	if(memname != jsonObj.userName){
-	      		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+	      		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
 				console.log("1111111userName +"+ userName);
 			} else {
-	      		$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+':'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+	      		$('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+userName+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
 			}
 	    }else{
 	    	if(memname === jsonObj.userName){
-	    	    $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+':'+userName+':'+message+':'+nowdate+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+	    	    $('#myPanel').append('<div style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+userName+'_'+message+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
 	    	}else{
-	    		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+':'+message+':'+nowdate+':'+'</span><span>  </span></div>');
+	    		$('#myPanel').append('<div><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+message+'_'+nowdate+'</span><span>  </span></div>');
 	    	}
 	    }
 	
@@ -285,7 +308,9 @@ function sendMessage() {
 	    chatRecordVO = new ChatRecordVO();
 	    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
 	    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
+	    String dateStr="";
 	    Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
+	    System.out.println("chat_Datetime+"+chat_Datetime);
 	    chatRecordVO.setChat_Datetime(chat_Datetime);
 		    
 	    System.out.println("adfasdf" +takecase_Mem_No);
