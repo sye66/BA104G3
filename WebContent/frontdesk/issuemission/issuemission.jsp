@@ -161,7 +161,7 @@
 						</a>
 					</div>
 					<div class="row" style="margin-top:10px; margin-left: auto;margin-right: auto;">
-						<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"
+						<a href="<%=request.getContextPath()%>/frontdesk/mission/missiongroup.jsp"
 						style="margin-left: auto;margin-right: auto;">
 							<div class="mission_management_button">查看我的任務</div>
 						</a>

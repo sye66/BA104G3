@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 body {
-	font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: '微軟正黑體';
 	overflow-x: hidden
 }
 
@@ -22,7 +22,7 @@ a, a.active, a:active, a:focus, a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: '微軟正黑體';
 	font-weight: 700;
 	text-transform: uppercase
 }
@@ -114,7 +114,7 @@ section.success {
 }
 
 #mainNav {
-	font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family:'微軟正黑體';
 	font-weight: 700;
 	text-transform: uppercase;
 	border: none;

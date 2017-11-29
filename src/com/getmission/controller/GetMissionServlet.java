@@ -52,16 +52,10 @@ public class GetMissionServlet extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		JSONObject obj = new JSONObject();
 
-		if ("listmission_ByCompositeQuery".equals(action)) { // 來自getMission.jsp的請求
-
+		if ("listmission_ByCompositeQuery".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
-			MemVO memVO =  (MemVO) req.getSession().getAttribute("memVO");
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 			req.setAttribute("errorMsgs", errorMsgs);
-
-			// try {
-
 			/*************************** 1.將輸入資料轉為Map **********************************/
 			// 採用Map<String,String[]> getParameterMap()的方法
 			// 注意:an immutable java.util.Map
@@ -78,41 +72,24 @@ public class GetMissionServlet extends HttpServlet {
 			/*************************** 2.開始複合查詢 ***************************************/
 			GetMissionService getMissionSvc = new GetMissionService();
 			List<GetMissionVO> list = getMissionSvc.getAll(map);
-			/***************************
-			 * 3.查詢完成,準備轉交(Send the Success view)
-			 ************/
-			req.setAttribute("listmission_ByCompositeQuery", list); // 資料庫取出的list物件,存入request
+			/************ 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("listmission_ByCompositeQuery", list);
 			RequestDispatcher successView = null;
 			if (memVO == null) {
 				successView = req.getRequestDispatcher("/frontdesk/getmission/getMissionSearch.jsp"); // 成功轉交getMissionSearch.jsp
 			} else {
 				successView = req.getRequestDispatcher("/frontdesk/getmission/getMissionSearchlogin.jsp"); // 成功轉交getMissionSearchlogin.jsp
 			}
-
 			successView.forward(req, res);
-
-			/*************************** 其他可能的錯誤處理 **********************************/
-			// } catch (Exception e) {
-			// errorMsgs.add(e.getMessage());
-			// RequestDispatcher failureView = req
-			// .getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
-			// failureView.forward(req, res);
-			// }
 		}
 
-		if ("mission_Detail".equals(action)) { // 來自getMission.jsp 的請求
+		if ("mission_Detail".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
-																// 可能為【/emp/listAllEmp.jsp】
-																// 或
-																// 【/dept/listEmps_ByDeptno.jsp】
-																// 或 【
-																// /dept/listAllDept.jsp】
+			String requestURL = req.getParameter("requestURL");
 
 			MemVO memVO = (MemVO) req.getSession().getAttribute("memVO");
 
@@ -127,7 +104,7 @@ public class GetMissionServlet extends HttpServlet {
 				/***************************
 				 * 3.查詢完成,準備轉交(Send the Success view)
 				 ************/
-				req.setAttribute("getMissionVO", getMissionVO); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("getMissionVO", getMissionVO);
 				String url = null;
 				if (memVO == null) {
 					url = "/frontdesk/getmission/missionDetail.jsp";
@@ -135,7 +112,7 @@ public class GetMissionServlet extends HttpServlet {
 					url = "/frontdesk/getmission/missionDetaillogin.jsp";
 				}
 
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 ************************************/
@@ -146,20 +123,14 @@ public class GetMissionServlet extends HttpServlet {
 			}
 		}
 
-		if ("take_mission".equals(action)) { // 來自getmission.jsp 或
-												// mission_Detail的請求
+		if ("take_mission".equals(action)) { // 來自getmission.jsp或mission_Detail的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-
 			String requestURL = req.getParameter("requestURL"); // 送出修改的來源網頁路徑:
 																// 可能為【/getmission/getmission.jsp】
 																// 或
 																// 【/getmission/mission_Detail.jsp】
-
-			// try {
 			/***************************
 			 * 1.接收請求參數 - 輸入格式的錯誤處理
 			 **********************/
@@ -168,19 +139,17 @@ public class GetMissionServlet extends HttpServlet {
 			if (memVO == null) {
 				errorMsgs.add("請登入再來喔");
 				System.out.println(errorMsgs);
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
 				failureView.forward(req, res);
-			
+
 				return;
-			}else if (memVO.getMem_State() == 0) {
-					errorMsgs.add("請驗證再來喔");
-					System.out.println(errorMsgs);
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
-					failureView.forward(req, res);
-					
-					return;
+			} else if (memVO.getMem_State() == 0) {
+				errorMsgs.add("請驗證再來喔");
+				System.out.println(errorMsgs);
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMission.jsp");
+				failureView.forward(req, res);
+
+				return;
 			}
 
 			String mission_No = req.getParameter("mission_No").trim();
@@ -189,10 +158,8 @@ public class GetMissionServlet extends HttpServlet {
 			Integer mission_State = getMissionSvc.getOneMission(mission_No).getMission_State();
 
 			CaseCandidateService CaseCandidateSvc = new CaseCandidateService();
-			
 
-			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No()) ) {
-
+			if (!getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
 				if (!CaseCandidateSvc.getCandidate(mission_No).contains(memVO.getMem_No())) {
 					if (mission_State == 1 || mission_State == 2 || mission_State == 7 || mission_State == 72) {
 						if (mission_State == 1 || mission_State == 2) {
@@ -214,7 +181,6 @@ public class GetMissionServlet extends HttpServlet {
 						failureView.forward(req, res);
 						return;
 					}
-
 					// Send the use back to the form, if there were errors
 					if (!errorMsgs.isEmpty()) {
 						req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
@@ -225,9 +191,7 @@ public class GetMissionServlet extends HttpServlet {
 					}
 
 					/*************************** 2.開始修改資料 *****************************************/
-
 					getMissionVO = getMissionSvc.takeMission(mission_No, getMissionVO.getMission_State());
-
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
 					req.setAttribute("errorMsgs", errorMsgs);
@@ -235,15 +199,6 @@ public class GetMissionServlet extends HttpServlet {
 					RequestDispatcher failureView = req.getRequestDispatcher("/casecandidate/casecandidate.do");
 					failureView.forward(req, res);
 					return; // 程式中斷
-
-					/*************************** 其他可能的錯誤處理 *************************************/
-					// } catch (Exception e) {
-					// System.out.println(e);
-					// errorMsgs.add("修改資料失敗:"+e.getMessage());
-					// RequestDispatcher failureView = req
-					// .getRequestDispatcher("/frontdesk/getmission/getmission.jsp");
-					// failureView.forward(req, res);
-					// }
 				} else {
 					errorMsgs.add("請不要重覆接取相同任務~");
 					RequestDispatcher failureView = req
@@ -251,7 +206,6 @@ public class GetMissionServlet extends HttpServlet {
 					failureView.forward(req, res);
 					return;
 				}
-
 			} else {
 				errorMsgs.add("不能接自己的任務喔~");
 				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
@@ -263,7 +217,6 @@ public class GetMissionServlet extends HttpServlet {
 
 		if ("chosemem".equals(action)) { // 來自getmission.jsp 或
 											// mission_Detail的請求
-
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -608,23 +561,11 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
-
 			/*************************** 2. *****************************************/
-
 			req.setAttribute("memVO", memVO);
-
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/casecandidate/waitcase.jsp");
 			failureView.forward(req, res);
 			return; // 程式中斷
-
-			/*************************** 其他可能的錯誤處理 *************************************/
-			// } catch (Exception e) {
-			// System.out.println(e);
-			// errorMsgs.add("修改資料失敗:"+e.getMessage());
-			// RequestDispatcher failureView = req
-			// .getRequestDispatcher("/frontdesk/getmission/getmission.jsp");
-			// failureView.forward(req, res);
-			// }
 		}
 
 		if ("successgetmission".equals(action)) { // 來自getmission.jsp 或
@@ -1082,27 +1023,26 @@ public class GetMissionServlet extends HttpServlet {
 		}
 		
 		/**
-		 * @author Sander
-		 * 新增一般任務，積分五十點。
+		 * @author Sander 新增一般任務，積分五十點。
 		 */
 		// 任務類別
 		if ("issue_Normal_Mission".equals(action)) {
-			
+
 			// Value Receiving Test
 			System.out.println("got post from issuemission");
-			
+
 			// 錯誤處理
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			GetMissionVO getMissionVO = new GetMissionVO();
-			
-			try {				
+
+			try {
 				// 任務類別
 				String mission_Category = req.getParameter("mission_Category");
 				// 任務名稱
 				String mission_Name = req.getParameter("mission_Name");
 				// 任務敘述
-				String  mission_Des = req.getParameter("mission_Des");
+				String mission_Des = req.getParameter("mission_Des");
 				// 發案人會員編號
 				String issuer_Mem_No = req.getParameter("issuer_Mem_No");
 				// 任務截止時間
@@ -1120,12 +1060,12 @@ public class GetMissionServlet extends HttpServlet {
 				Date date = new Date(System.currentTimeMillis());
 				// 任務圖片
 				Part pic = req.getPart("mission_Images");
-				
-				/**********驗證開始**********/
+
+				/********** 驗證開始 **********/
 				if (mission_Pay != 50.00) {
 					errorMsgs.add("HTML的READONLY就是叫你不要改啦");
 				}
-				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
+				if (mission_Name == null || (mission_Name.trim()).length() == 0) {
 					errorMsgs.add("安安請告知任務名稱喔");
 				}
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
@@ -1137,20 +1077,22 @@ public class GetMissionServlet extends HttpServlet {
 						System.out.println(string);
 					}
 					req.setAttribute("getMissionVO", getMissionVO);
-					RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+					RequestDispatcher inputError = req
+							.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 					inputError.forward(req, res);
 					return;
 				}
-				
-				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
+
+				/********** 儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面 **********/
 				MemService memService = new MemService();
 				MemVO memVO = memService.getOneMem(issuer_Mem_No);
 				if (memVO.getMem_Point() < mission_Pay) {
-					RequestDispatcher NotEnoughPoint = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
+					RequestDispatcher NotEnoughPoint = req
+							.getRequestDispatcher("/frontdesk/issuemission/issuemission_Failed_NotEnough.jsp");
 					NotEnoughPoint.forward(req, res);
 					return;
 				}
-				/**********圖片驗證，沒有圖片就回傳NULL**********/
+				/********** 圖片驗證，沒有圖片就回傳NULL **********/
 				byte[] byteArrPic = null;
 				if (pic != null) {
 					InputStream inputStream = pic.getInputStream();
@@ -1159,41 +1101,41 @@ public class GetMissionServlet extends HttpServlet {
 					inputStream.read(byteArrPic);
 					inputStream.close();
 				}
-				
-				
-				
-				/**********準備寫入與轉向**********/
+
+				/********** 準備寫入與轉向 **********/
 				// 任務截止時間加工
 				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
 				Calendar calendar = Calendar.getInstance();
-				//以現在的時間點創建(任務建立時間點)
+				// 以現在的時間點創建(任務建立時間點)
 				calendar.setTimeInMillis(System.currentTimeMillis());
-				//加五天
+				// 加五天
 				calendar.add(calendar.DAY_OF_MONTH, 5);
-				//第一次getTime()是Date, 第二次getTime()是Timestamp
+				// 第一次getTime()是Date, 第二次getTime()是Timestamp
 				mission_Due_Time = new Timestamp(calendar.getTime().getTime());
 				System.out.println(mission_Due_Time);
-				
+
 				GetMissionService getMissionService = new GetMissionService();
-				String key = getMissionService.addMissionReturnKey(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
-				
+				String key = getMissionService.addMissionReturnKey(mission_Category, mission_Name, mission_Des,
+						issuer_Mem_No, null, null, mission_Due_Time, null, null, 1, mission_Pattern, mission_Pay,
+						mission_Gps_Lat, mission_Gps_Lng);
+
 				MissionImagesService missionImagesService = new MissionImagesService();
 				missionImagesService.addMissionImages(key, issuer_Mem_No, byteArrPic);
 				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
-				
-				
-				
-				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
+
+				RequestDispatcher successView = req
+						.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
-				
+
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				System.out.println(e.getMessage());
-				RequestDispatcher inputError = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
+				RequestDispatcher inputError = req
+						.getRequestDispatcher("/frontdesk/issuemission/issuemission_normalmission.jsp");
 				inputError.forward(req, res);
 			}
-			
+
 		}
 		/**
 		 * @author Sander

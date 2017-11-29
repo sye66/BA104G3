@@ -4,11 +4,12 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 body {
-	font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: '微軟正黑體';
 	overflow-x: hidden;
 }
 
 p {
+	font-family: '微軟正黑體';
 	font-size: 20px;
 }
 
@@ -17,13 +18,13 @@ p.small {
 }
 
 a, a.active, a:active, a:focus, a:hover {
+	font-family: '微軟正黑體';
 	color: #18BC9C;
 	outline: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial,
-		sans-serif;
+	font-family: '微軟正黑體';
 	font-weight: 700;
 	text-transform: uppercase;
 }
@@ -115,8 +116,7 @@ section.success {
 }
 
 #mainNav {
-	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial,
-		sans-serif;
+	font-family: '微軟正黑體';
 	font-weight: 700;
 	text-transform: uppercase;
 	border-style: solid;
@@ -145,6 +145,7 @@ section.success {
 
 #mainNav .navbar-nav li.nav-item a.nav-link {
 	color: black;
+	font-family:'微軟正黑體';
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
@@ -218,8 +219,7 @@ header.masthead img {
 }
 
 header.masthead .intro-text .name {
-	font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial,
-		sans-serif;
+	font-family: '微軟正黑體';
 	font-size: 2em;
 	font-weight: 700;
 	display: block;
