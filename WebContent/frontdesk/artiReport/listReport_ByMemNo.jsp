@@ -23,7 +23,7 @@
 %>
 
 <html>
-<head><title> 分類文章 - listReport_ByMemNo.jsp   ${arti_No} </title>
+<head><title>個人檢舉列表</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -57,7 +57,7 @@
 <div class="page-header position-relative">
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 </h1>
+                       <a  href="/BA104G3/frontdesk/artiForm/listAllArtiForm.jsp"><h1>所有文章列表 </h1></a>
                     </div>
                 </div>
                     
