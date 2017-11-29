@@ -96,8 +96,7 @@
 												<td>
 													<button class="btn btn-info" type="submit" name="action" value="manageaccuse">審核確認</button> 
 													<input type="hidden" name="accuse_No" value="${accusecaseVO.accuse_No}">
-													<input type="hidden" name="requestURL"
-													value="/backdesk/missionManage/missionManage.jsp">
+													<input type="hidden" name="requestURL" value="/backdesk/missionManage/missionManage.jsp">
 
 												</td>
 											</form>
