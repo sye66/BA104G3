@@ -80,7 +80,7 @@
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
-				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do">
+				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" enctype="multipart/form-data">
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 						<%-- 發案人會員編號 --%>
 						<input type="hidden" name="issuer_Mem_No" value="<%=memVOemergencymission.getMem_No()%>">
@@ -176,7 +176,11 @@
 						      }
 						    </script>
 						 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
-
+						<%-- 任務圖片 --%>
+							<div class="form-group">
+								<label for="mission_images">上傳圖片</label>
+								<input type="file" name="mission_images" id="mission_images" placeholder="上傳圖片" class="form-control">
+							</div>
 						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
 								<input type="hidden" name="action" value="issue_Emergency_Mission">
 								<input type="submit" name="發出任務" class="btn btn-primary">

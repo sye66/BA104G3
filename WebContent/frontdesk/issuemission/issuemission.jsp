@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- TODO記得要放專案路徑 -->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/issuemission/SanderTemplate.css">
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/issuemission/Button.css">
     <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -146,8 +147,8 @@
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_normalmission.jsp"><div class="css_issuemissionbutton">一般任務</div></a>
-					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"><div class="css_issuemissionbutton">緊急任務</div></a>
+					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_normalmission.jsp"><div class="issuemission_ermergency_button">一般任務</div></a>
+					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"><div class="issuemission_normal_button">緊急任務</div></a>
 				</div>
 			</div>
 		</div>

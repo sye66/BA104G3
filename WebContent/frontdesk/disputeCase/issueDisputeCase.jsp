@@ -82,25 +82,28 @@
 				<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 					<p style="font-size:450%">抱歉讓你受委屈了</p>
 					<p style="font-size:200%">似乎接案人讓您不是很滿意，<span style="background-color: black;color: black;">雖然我們不CARE</span>請在下方填入發生了甚麼事情，我們<span style="background-color: black;color: black;">大概等到明年</span>將在第一時間為您處理</p>
-					<form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do" enctype="multipart/form-data">
-						<input type="hidden" name="action" value="issue_Dispute_Case">
-						<input type="hidden" name="dispute_Mem_No" value="<%=memVO.getMem_No()%>">
-						<input type="hidden" name="mission_No" value="<%=request.getParameter("mission_No")%>">
-						<div class="form-group">
-							<label for="dispute_Content">申訴內容</label>
-							<input type="text" name="dispute_Content" id="dispute_Content" placeholder="臣等恭營聖旨" class="form-control" height="300px;">
-						</div>
-						<div class="form-group">
-							<label for="dispute_Attachment">申訴附件</label>
 
-							<input type="file" name="dispute_Attachment" id="dispute_Attachment" class="form-control">
+					<%-- 表單開始 --%>
+						<form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do" enctype="multipart/form-data">
+							<input type="hidden" name="action" value="issue_Dispute_Case">
+							<input type="hidden" name="dispute_Mem_No" value="<%=memVO.getMem_No()%>">
+							<input type="hidden" name="mission_No" value="<%=request.getParameter("mission_No")%>">
+							<div class="form-group">
+								<label for="dispute_Content">申訴內容</label>
+								<input type="text" name="dispute_Content" id="dispute_Content" placeholder="臣等恭營聖旨" class="form-control" height="300px;">
+							</div>
+							<%-- 圖片 --%>
+							<div class="form-group">
+								<label for="dispute_Attachment">申訴附件</label>
 
-	        				<img class="preview" style="max-width: 600px; max-height: 600px;">
-						</div>
-						<div style="text-align: center;">
-							<input type="submit" class=" btn btn-danger btn-lg" value="給我弄死他！">
-						</div>
-					</form>
+								<input type="file" name="dispute_Attachment" id="dispute_Attachment" class="form-control">
+
+		        				<img class="preview" style="max-width: 600px; max-height: 600px;">
+							</div>
+							<div style="text-align: center;">
+								<input type="submit" class=" btn btn-danger btn-lg" value="給我弄死他！">
+							</div>
+						</form>
 				</div>
 			</div>
 		</div>

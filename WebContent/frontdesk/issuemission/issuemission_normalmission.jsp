@@ -57,30 +57,31 @@ try{
 	</head>
 	<body>
 		<%-- Banner --%>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-sm-offset-2"></div>
-			</div>
-		</div>
-		<%-- 錯誤表列 --%>
-		<c:if test="${not empty errorMsgs}">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12">
-					<p><font color='white'>請修正以下錯誤:</font></p>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color:white"><p>${message}</p></li>
-						</c:forEach>
-					</ul>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-8 col-sm-offset-2"></div>
 				</div>
 			</div>
-		</div>
-		</c:if>
+		<%-- 錯誤表列 --%>
+			<c:if test="${not empty errorMsgs}">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12">
+							<p><font color='white'>請修正以下錯誤:</font></p>
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style="color:white"><p>${message}</p></li>
+								</c:forEach>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</c:if>
 		<%-- IssueMissionForm --%>
 		<div class="container">
 			<div class="row">
-				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do">
+				<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" enctype="multipart/form-data">
+
 					<div class="col-xs-12 col-sm-8 col-sm-offset-2">
 						<%-- 發案人會員編號 --%>
 						<input type="hidden" name="issuer_Mem_No" value="<%=memVOnormalcase.getMem_No()%>">
@@ -176,12 +177,16 @@ try{
 						      }
 						    </script>
 						 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
-
+						
+						<%-- 任務圖片 --%>
+							<div class="form-group">
+								<label for="mission_images">上傳圖片</label>
+								<input type="file" name="mission_images" id="mission_images" placeholder="上傳圖片" class="form-control">
+							</div>
 						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
 								<input type="hidden" name="action" value="issue_Normal_Mission">
 								<input type="submit" name="發出任務" class="btn btn-primary">
 						</div>
-						
 					</div>
 				</form>
 			</div>

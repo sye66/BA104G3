@@ -1,12 +1,14 @@
 package com.getmission.controller;
 
 import java.io.*;
+import java.security.Key;
 import java.sql.Timestamp;
 import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 import javax.websocket.Session;
@@ -15,6 +17,7 @@ import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.omg.CORBA.BAD_TYPECODE;
 
 import com.accusecase.model.*;
 import com.casecandidate.model.*;
@@ -26,10 +29,12 @@ import com.google.gson.GsonBuilder;
 import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.missionimages.model.MissionImagesService;
+import com.sun.corba.se.spi.orbutil.fsm.Input;
 import com.tool.controller.TelMessage;
 
 import sun.util.resources.cldr.aa.CalendarData_aa_ER;
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class GetMissionServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -1113,6 +1118,8 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務開始時間 - null
 				// 任務結束時間 - null
 				Date date = new Date(System.currentTimeMillis());
+				// 任務圖片
+				Part pic = req.getPart("mission_Images");
 				
 				/**********驗證開始**********/
 				if (mission_Pay != 50.00) {
@@ -1134,6 +1141,7 @@ public class GetMissionServlet extends HttpServlet {
 					inputError.forward(req, res);
 					return;
 				}
+				
 				/**********儲值驗證，不夠就轉向積分不足頁面，再轉儲值或是發任務頁面**********/
 				MemService memService = new MemService();
 				MemVO memVO = memService.getOneMem(issuer_Mem_No);
@@ -1142,6 +1150,18 @@ public class GetMissionServlet extends HttpServlet {
 					NotEnoughPoint.forward(req, res);
 					return;
 				}
+				/**********圖片驗證，沒有圖片就回傳NULL**********/
+				byte[] byteArrPic = null;
+				if (pic != null) {
+					InputStream inputStream = pic.getInputStream();
+					byteArrPic = new byte[inputStream.available()];
+					System.out.println(byteArrPic.length);
+					inputStream.read(byteArrPic);
+					inputStream.close();
+				}
+				
+				
+				
 				/**********準備寫入與轉向**********/
 				// 任務截止時間加工
 				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
@@ -1155,9 +1175,15 @@ public class GetMissionServlet extends HttpServlet {
 				System.out.println(mission_Due_Time);
 				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				String key = getMissionService.addMissionReturnKey(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				
+				MissionImagesService missionImagesService = new MissionImagesService();
+				missionImagesService.addMissionImages(key, issuer_Mem_No, byteArrPic);
 				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
+				
+				
+				
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
 				successView.forward(req, res);
 				
@@ -1183,7 +1209,7 @@ public class GetMissionServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			GetMissionVO getMissionVO = new GetMissionVO();
-			
+			String key;
 			try {				
 				// 任務類別
 				String mission_Category = req.getParameter("mission_Category");
@@ -1205,6 +1231,8 @@ public class GetMissionServlet extends HttpServlet {
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
+				// 任務圖片
+				Part pic = req.getPart("mission_Images");
 				
 				/**********驗證開始**********/
 				if (mission_Pay < 50.00) {
@@ -1216,7 +1244,7 @@ public class GetMissionServlet extends HttpServlet {
 				if (mission_Des == null || (mission_Des.trim()).length() == 0) {
 					errorMsgs.add("不給任務敘述是要我們怎麼幫你啊蛤");
 				}
-
+				
 				// 錯誤訊息傳回
 				if (!errorMsgs.isEmpty()) {
 					for (String string : errorMsgs) {
@@ -1236,7 +1264,14 @@ public class GetMissionServlet extends HttpServlet {
 					NotEnoughPoint.forward(req, res);
 					return;
 				}
-
+				/**********圖片驗證**********/
+				byte[] byteArrPic = null;
+				if (pic != null) {
+					InputStream inputStream = pic.getInputStream();
+					byteArrPic = new byte[inputStream.available()];
+					inputStream.read(byteArrPic);
+					inputStream.close();
+				}
 				/**********準備寫入與轉向**********/
 				// 任務截止時間加工
 				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
@@ -1250,7 +1285,9 @@ public class GetMissionServlet extends HttpServlet {
 				System.out.println(mission_Due_Time);
 				
 				GetMissionService getMissionService = new GetMissionService();
-				getMissionService.addMission(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				key = getMissionService.addMissionReturnKey(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				MissionImagesService missionImagesService = new MissionImagesService();
+				missionImagesService.addMissionImages(key, issuer_Mem_No, byteArrPic);
 				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
 				System.out.println("新增一般任務，會員: " + issuer_Mem_No);
 				RequestDispatcher successView = req.getRequestDispatcher("/frontdesk/issuemission/issuemission_Success.jsp");
@@ -1305,7 +1342,7 @@ public class GetMissionServlet extends HttpServlet {
 				Double mission_Gps_Lng = Double.parseDouble(req.getParameter("mission_Gps_Lng"));
 				// 任務開始時間 - null
 				// 任務結束時間 - null
-				
+				Part pic = req.getPart("mission_images");
 				/**********驗證開始**********/
 				if (mission_Pay < 50.00) {
 					errorMsgs.add("安安積分太少了吧");
@@ -1336,6 +1373,15 @@ public class GetMissionServlet extends HttpServlet {
 					NotEnoughPoint.forward(req, res);
 					return;
 				}
+				/**********圖片驗證**********/
+				byte[] byteArrPic = null;
+				if (pic != null) {
+					InputStream inputStream = pic.getInputStream();
+					byteArrPic = new byte[inputStream.available()];
+					inputStream.read(byteArrPic);
+					inputStream.close();
+				}
+				
 				/**********準備寫入與轉向**********/
 				// 任務截止時間加工
 				// 開始後五天為截止，看起來DAO沒辦法改了。在此手動加五天
@@ -1351,6 +1397,8 @@ public class GetMissionServlet extends HttpServlet {
 				// 調用取得自增主鍵的新增方法
 				GetMissionService getMissionService = new GetMissionService();
 				key = getMissionService.addMissionReturnKey(mission_Category,mission_Name,mission_Des,issuer_Mem_No,null,null,mission_Due_Time, null, null,1,mission_Pattern,mission_Pay,mission_Gps_Lat,mission_Gps_Lng);
+				MissionImagesService missionImagesService = new MissionImagesService();
+				missionImagesService.addMissionImages(key, issuer_Mem_No, byteArrPic);
 				System.out.println(key);
 				// 扣除積分
 				memService.DecreaseMemPoint(issuer_Mem_No, mission_Pay.intValue());
