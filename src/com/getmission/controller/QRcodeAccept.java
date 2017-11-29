@@ -7,6 +7,7 @@ import java.util.List;
 import javax.mail.Message;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,27 +28,26 @@ public class QRcodeAccept extends HttpServlet {
 	 * 當doGet收到來自QRcode或是手動輸入後
 	 * 將任務類別改變。
 	 */
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		System.out.println(action);
+		
+		/** Deprecate
 		if ("input_By_QRcode".equals(action)) {
 			List<String> errorMsgs = new LinkedList<>();
 			request.setAttribute("errorMsgs", errorMsgs);
-			// 接收傳來的name
-			String decoding = request.getParameter("encodingmsg");
-			System.out.println(decoding);
-			
 			// 接收對方傳來的任務與接案人參數
-			String mission_No = null;
-			String takecase_Mem_No = null;
-			
+			String mission_No = request.getParameter("mission_No");
+			String takecase_Mem_No = request.getParameter("takecase_Mem_No");
 			GetMissionService getMissionService = new GetMissionService();
 			GetMissionVO getMissionVO = getMissionService.getOneMission(mission_No);
 			
 			// 驗證此接案人與資料庫任務內紀錄的接案人是否一致
 			if (takecase_Mem_No.equals(getMissionVO.getTakecase_Mem_No())) {
 				getMissionService.updateOneMissionStatus(mission_No, 4);
+				ServletOutputStream outputStream = response.getOutputStream();
+				outputStream.print("成功驗證!");
+				outputStream.close();
 			} else {
 				errorMsgs.add("與資料庫不一致");
 				RequestDispatcher disqualify = request.getRequestDispatcher("/frontdesk/issuemission/issuemission_Pending.jsp");
@@ -55,6 +55,8 @@ public class QRcodeAccept extends HttpServlet {
 				return;
 			}			
 		}
+		*/
+			
 		if ("input_By_Type".equals(action)) {
 			String validation = request.getParameter("validation");
 			List<String> errorMsgs = new LinkedList<>();

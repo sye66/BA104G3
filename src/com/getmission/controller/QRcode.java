@@ -35,7 +35,8 @@ public class QRcode extends HttpServlet {
 	    // new QRcode物件
 	    QRCode barcode = new QRCode();
 	    // 填入要轉碼的資訊
-	    String URL = request.getScheme() +"://"+ request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "?mission_No=";
+		String URL = request.getScheme() + "://" + "10.120.25.5" + ":" + request.getServerPort()
+				+ request.getContextPath() +"/qrcodeaccept/qrcodeaccept.do?action=input_By_QRcode" + "&mission_No=" + mission_No + "&takecase_Mem_No=" + takecase_Mem_No;
 	    System.out.println("Send Full URL: " + URL);
 	    barcode.setCode(URL);
 	    // 設定大小，15~20效果不錯
