@@ -37,7 +37,9 @@
 	<div class="col-xs-12 col-sm-4">
  				<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">${AllMemVO.mem_Name}的個人小檔案</h3>
+ 				    <h3 class="panel-title">${AllMemVO.mem_Name}的個人小檔案<div align="right">
+ 				    <button class="btn btn-warning">關注他</button>
+ 				    <button class="btn btn-warning">加為好友</button></div></h3>
  				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">

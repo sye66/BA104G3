@@ -33,6 +33,7 @@
 	pageContext.setAttribute("relationVO", relationVO);
 	
 %>
+
       <%request.getSession().setAttribute("memVO" ,memVO); %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -90,18 +91,35 @@
  			
  				<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">其他</h3>
+ 				    <h3 class="panel-title">其他使用者</h3>
  				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">
- 				    	<c:forEach var="all" items="${getAllMemVO}">
-	 				    	<tr>
+ 				    	<c:forEach var="all" items="${getAllMemVO}" varStatus="om">
+ 				    	<c:if test="${(om.index%3)==0}">
+ 				    		<tr>
+	 				    		<td>
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    		<c:if test="${(om.index%3)==1}">
+	 				    		<td>
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    		<c:if test="${(om.index%3)==2}">
 	 				    		<td>
 	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
 	 				    			<img id="img" width="50px" height="50px" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
 	 				    			</a>
 	 				    		</td>	
 	 				    	</tr>
+ 				    	</c:if>
+ 				    	
  				    	</c:forEach>
  				    </table>				
  				  </div>

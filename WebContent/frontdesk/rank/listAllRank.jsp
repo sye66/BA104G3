@@ -10,6 +10,7 @@
 <%
 	RankService rankSvc = new RankService();
 	List<RankVO> list = rankSvc.getWNRank();
+	
 	List<RankVO> list1 = rankSvc.getMNRank();
 	List<RankVO> list2 = rankSvc.getSNRank();
 	List<RankVO> list3 = rankSvc.getWCRank();
@@ -23,6 +24,7 @@
 	pageContext.setAttribute("list5",list5);
 	
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
