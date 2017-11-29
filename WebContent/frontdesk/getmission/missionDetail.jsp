@@ -6,6 +6,8 @@
 <jsp:useBean id="getMissionSvc" scope="page"
 	class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+<jsp:useBean id="ChangeStateToName" scope="page" class="com.getmission.controller.ChangeStateToName" />
+
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
 
@@ -122,7 +124,7 @@
 					<h4>任務種類:</h4>
 					<p>----${getMissionVO.mission_Category}</p>
 					<h4>任務狀態:</h4>
-					<p>----${getMissionVO.mission_State}</p>
+					<p>----${ChangeStateToName.ChangeStateToName(getMissionVO.mission_State)}</p>
 					<h4>發案人:</h4>
 					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 				</div>
@@ -152,13 +154,13 @@
 						<h3 class="panel-title">任務細節</h3>
 					</div>
 					<div class="panel-body">
-						<p>----發案人${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 
-						<p>----${getMissionVO.mission_Des}</p>
-						<p>----${getMissionVO.mission_Release_Time}</p>
-						<p>----${getMissionVO.mission_Due_Time}</p>
-						<p>----${getMissionVO.mission_Pattern}</p>
-						<p>----${getMissionVO.mission_Pay} 積分</p>
+						<h5>敘述</h5><p>${getMissionVO.mission_Des}</p>
+						<h5>任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>
+						<h5>任務截止日期</h5><p>${getMissionVO.mission_Due_Time}</p>
+						<h5>任務模式</h5><p>${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
+						<h5>任務報酬</h5><p>${getMissionVO.mission_Pay} 積分</p>
 					</div>
 				</div>
 

@@ -66,9 +66,10 @@
         height: 400px;
         width: 100%;
        }
-       p{
+       ul,li,tr,td,label,p{
         style="color:black;"
-        font-size:20px;
+        font-size:12px;
+        font-family: "微軟正黑體";
         }
        .userimg{
        	width: 100%;
@@ -93,7 +94,6 @@
 	<br>
 	<%-- 第一層 - 任務顯示面板 --%>
 	<div class="container-fluid">
-	
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-8">
@@ -120,21 +120,22 @@
 						        <table class="table table-condensed">
 						        	<thead>
 						        		<tr>
-						        			<td><p>任務編號</p></td>
-						        			<td><p>任務名稱</p></td>
-						        			<td><p>發出日期</p></td>
+						        			<td>任務編號</td>
+						        			<td>任務名稱</td>
+						        			<td>發出日期</td>
 						        		</tr>
 						        	</thead>
 						        	<tbody>
 						        		<%for(GetMissionVO getMissionVO : listUserMissionPending){ %>
 						        		<tr>
-						        			<td><p><%=getMissionVO.getMission_No() %></p></td>
-						        			<td><p><%=getMissionVO.getMission_Name() %></p></td>
-						        			<td><p><%=simpleDateFormat.format(getMissionVO.getMission_Release_Time())%></p></td>
+						        			<td><%=getMissionVO.getMission_No() %></td>
+						        			<td><%=getMissionVO.getMission_Name() %></td>
+						        			<td><%=simpleDateFormat.format(getMissionVO.getMission_Release_Time())%></td>
 						        		</tr>
 						        		<%}%>
 						        	</tbody>
 						        </table>
+						        <span id='table_page'></span>
 					        </div>
 					        <div role="tabpanel" class="tab-pane" id="tab2">
 					        	<p>頭條標籤的內容</p>
@@ -147,12 +148,29 @@
 				</div>
 				<%-- 發案按鈕區 --%>
 				<div class="col-xs-12 col-sm-4">
-					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_normalmission.jsp"><div class="issuemission_ermergency_button">一般任務</div></a>
-					<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"><div class="issuemission_normal_button">緊急任務</div></a>
+					<div class="row" style="margin-bottom:30px;">
+						<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_normalmission.jsp"
+						style="margin-left: auto;margin-right: auto;">
+							<div class="issuemission_normal_button" style="">一般任務</div>
+						</a>
+					</div>
+					<div class="row" style="margin-top: 30px;margin-left: auto;margin-right: auto;">
+						<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"
+						style="margin-left: auto;margin-right: auto;">
+							<div class="issuemission_ermergency_button">緊急任務</div>
+						</a>
+					</div>
+					<div class="row" style="margin-top:10px; margin-left: auto;margin-right: auto;">
+						<a href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_emergencymission.jsp"
+						style="margin-left: auto;margin-right: auto;">
+							<div class="mission_management_button">查看我的任務</div>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	<hr>
+	
 	<!-- =============================================================== -->
 
 	<!-- 第二層 - Google Map -->
