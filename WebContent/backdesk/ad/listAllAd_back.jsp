@@ -47,9 +47,7 @@
 			<li style="color:red">${message}</li>
 		</c:forEach>
 	</ul>
-</c:if>
-
- 	
+</c:if>	
 
 <div class="widgetbox">
 

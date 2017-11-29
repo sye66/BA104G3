@@ -127,16 +127,16 @@ public class AdDAO implements AdDAO_interface {
 	public void deleteAd(String ad_No) {
 		Connection con = null;
 		PreparedStatement pstmt =  null;
-System.out.println("AD-delete-DAO-111");
+
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_AD);
-System.out.println("AD-delete-DAO-222");
+
 			pstmt.setString(1, ad_No);
 			pstmt.executeUpdate();
 			con.commit();
 			con.setAutoCommit(true);
-System.out.println("AD-delete-DAO-33");		
+
 		} catch (SQLException se){
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} catch (Exception e){

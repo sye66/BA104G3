@@ -573,7 +573,6 @@ public class ArtiFormServlet extends HttpServlet {
 				failuewView.forward(req, res);
 			}
 		}
-
 		
 		/******[ 後台刪除 ]******/
 		if ("deleteArtiFMBack".equals(action)){
@@ -611,6 +610,5 @@ public class ArtiFormServlet extends HttpServlet {
 			}
 		}
 
-		
 	}
 }

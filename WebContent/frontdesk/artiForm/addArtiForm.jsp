@@ -77,8 +77,7 @@
                  </div>
              </div>
          </div>
-         
-        
+
          <div class="widget-body">
          
           <input type="hidden" name="mem_No" size="45"

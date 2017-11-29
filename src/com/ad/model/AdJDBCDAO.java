@@ -71,8 +71,7 @@ public class AdJDBCDAO implements AdDAO_interface {
 					}
 				}
 			}
-			
-			
+						
 		}
 		@Override
 		public void updateAd(AdVO adVO) {

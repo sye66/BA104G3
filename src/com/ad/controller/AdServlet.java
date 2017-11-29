@@ -393,36 +393,36 @@ System.out.println("AD-Server-555");
 		if ("deleteAdFMBack".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-System.out.println("AD-delete-Server-111");
-//			try{
+
+			try{
 				/***************************1.接收請求參數***************************************/
                 HttpSession session = req.getSession();
 				String ad_No = req.getParameter("ad_No");
-System.out.println("AD-delete-Server-222");
 
-//               String emp_No = req.getParameter("emp_No");
-//               if(req.getSession().getAttribute("emp_No")==null){
-//	               String contextPath = getServletContext().getContextPath();
-//	               errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//	               RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-//	               failuewView.forward(req, res);
-//	               return;
-//               }
+
+               String emp_No = req.getParameter("emp_No");
+               if(req.getSession().getAttribute("emp_No")==null){
+	               String contextPath = getServletContext().getContextPath();
+	               errorMsgs.add("@@ 要麻煩請你先登入喔~");
+	               RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+	               failuewView.forward(req, res);
+	               return;
+               }
 				/***************************2.開始刪除資料***************************************/
 				AdService adSvc = new AdService();
 				adSvc.deleteAd(ad_No);
-System.out.println("AD-delete-Server-333");
+
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
 				String url = "/backdesk/ad/listAllAd_back.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
-System.out.println("AD-delete-Server-444");
+
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
-//				failuewView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
+				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
+				failuewView.forward(req, res);
+			}
 		}
 		
 		if ("get_Music".equals(action)){

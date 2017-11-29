@@ -57,8 +57,6 @@ public class ArtiFormDAO implements ArtiFormDAO_interface {
 	
 	private static final String GET_REPLY_BY_ARTI_NO= 
 			"SELECT REPLY_NO,MEM_NO,ARTI_NO,REPLY_DESC,to_char(REPLY_TIME,'yyyy-mm-dd hh:mm:ss')REPLY_TIME, ARTI_CLS_NO FROM ARTI_REPLY WHERE ARTI_NO = ? order by REPLY_NO";
-	
-
 
 	@Override
 	public void insertArti (ArtiFormVO artiFormVO) {

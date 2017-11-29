@@ -24,7 +24,6 @@
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 
-
 <html>
 <head>
 <title>文章資料 - listOneArtiFrom_Test.jsp</title>
