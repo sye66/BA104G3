@@ -46,18 +46,11 @@
                     </c:if>
                 <%-- 歡迎詞 --%>
                     <p>${sessionMemVO.mem_Name} 你好</p>
-                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                        <button class="btn btn-info index" type="submit" name="action" value="missionindex">任務首頁</button>
-                    </form>
                 <%-- 查看接案候選人 --%>
-                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                        <button class="btn btn-info pushdiv" type="submit" name="action" value="mymission">查看任務接案候選人</button>
-                    </form>
+                        <a href="<%=request.getContextPath()%>/frontdesk/casecandidate/casecandidate.jsp">查看任務接案候選人</a>
                 <%-- 查看自己候選的接案 --%>
-                    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                        <button class="btn btn-info pushdiv" type="submit" name="action" value="missionwait">接案候選狀態</button>
-                    </form>
-                <%-- 當任務狀態為身分未確認(3)或確認(4)時宣告alright = true --%>
+                        <a href="<%=request.getContextPath()%>/frontdesk/casecandidate/waitcase.jsp">接案候選狀態</a>
+                <%-- 接案人任務 - 當任務狀態為身分未確認(3)或確認(4)時顯示正在進行的接案 --%>
                     <c:if test="${missionAsTakecase.size() != 0  }">
                         <c:forEach var="missionVO" items="${missionAsTakecase}" varStatus="state" step="1" end="${stop}" >
                             <c:if test="${missionVO.mission_State == 3 ||missionVO.mission_State ==  4  }">
@@ -68,12 +61,12 @@
                         </c:forEach>
 
                     </c:if>
-                <%-- 當任務狀態為身分未確認(3)或確認(4)時宣告ok = true --%>
+                <%-- 發案人任務 - 當任務狀態為身分未確認(3)或確認(4)時顯示發案進行中--%>
                     <c:set var="issuersCaseList" value="${getMissionSvc.findIssuerCase(memVO.mem_No)}" />
                     <c:if test="${issuersCaseList.size() != 0  }">
                         <c:forEach var="missionVO" items="${issuersCaseList}" varStatus="state2" step="1" end="${stop}">
                             <c:if test="${missionVO.mission_State == 3 || missionVO.mission_State == 4 }">
-                                <a href="<%=request.getContextPath()%>/frontdesk/mission/issuerfinalstep.jsp" class="btn btn-warning">發案進行中</a>
+                                <a href="<%=request.getContextPath()%>/frontdesk/mission/issuerfinalstep.jsp" class="btn btn-warning">發出案件進行中</a>
                                 <c:set var="stop" value="0"/>
                             </c:if>
                         </c:forEach>

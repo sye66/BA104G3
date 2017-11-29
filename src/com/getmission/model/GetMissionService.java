@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.apache.catalina.tribes.util.StringManager;
 
+import com.mem.model.MemService;
+import com.mem.model.MemVO;
+
 public class GetMissionService {
 
 	private GetMissionDAO_interface dao;
@@ -130,10 +133,35 @@ public class GetMissionService {
 		return dao.getAll();
 	}
 	
+	public List<GetMissionVO> getAll(String mem_No) {
+		List<GetMissionVO> listGetAllMission = dao.getAll();
+		List<GetMissionVO> listGetSpecificMission = dao.findIssuerCase(mem_No);
+		if (listGetAllMission.containsAll(listGetSpecificMission)) {
+			listGetAllMission.removeAll(listGetSpecificMission);
+			for (GetMissionVO getMissionVO : listGetSpecificMission) {
+				System.out.printf("移除傳入會員:%s 的 任務:%s",mem_No,getMissionVO);
+			}
+		}
+		System.out.println("沒有任務在資料庫");
+		return dao.getAll();
+	}
+	
 	public List<GetMissionVO> getAllValidMission(){
 		return dao.getAllValidMission();
 	}
 	
+	public List<GetMissionVO> getAllValidMission(String mem_No){
+		List<GetMissionVO> listGetAllValMission = dao.getAllValidMission();
+		List<GetMissionVO> listGetSpecificMission = dao.findIssuerCase(mem_No);
+		if (listGetAllValMission.contains(listGetSpecificMission)) {
+			listGetAllValMission.remove(listGetSpecificMission);
+			for (GetMissionVO getMissionVO : listGetSpecificMission) {
+				System.out.printf("移除傳入會員:%s 的 任務:%s",mem_No,getMissionVO);
+			}
+		}
+		System.out.println("沒有任務在資料庫");
+		return dao.getAllValidMission();
+	}
 	public List<GetMissionVO> getOkAll(){
 		return dao.getOkAll();
 	}
@@ -154,6 +182,7 @@ public class GetMissionService {
 		return getMissionVO;
 	}
 	
+	// 查出所有用戶為接案人的任務
 	public List<GetMissionVO> successGetMission(String takecase_Mem_No){
 		return dao.successGetMission(takecase_Mem_No);
 	}

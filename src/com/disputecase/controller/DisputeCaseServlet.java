@@ -2,6 +2,7 @@ package com.disputecase.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Authenticator.RequestorType;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -334,6 +335,21 @@ public class DisputeCaseServlet extends HttpServlet {
 				failureView.forward(request, response);
 				System.out.println("轉向" + e.getMessage());
 			}
+		}
+	/**
+	 * @author Sander
+	 * @hidden get_Picture
+	 * 拿圖片
+	 */
+		if("get_Picture".equals(action)) {
+			byte[] barcodeByteImage;
+			String dispute_Case_No = request.getParameter("dispute_Case_No");
+			DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(dispute_Case_No);
+			byte[] byteArrPic = disputeCaseVO.getDispute_Attachment();
+			OutputStream outputStream = response.getOutputStream();
+			int length = byteArrPic.length;
+			outputStream.write(byteArrPic, 0, length);
+			outputStream.close();
 		}
 	}
 }

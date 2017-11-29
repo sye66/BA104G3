@@ -1,4 +1,3 @@
-
 <%@page import="com.getmission.model.GetMissionVO"%>
 <%@page import="com.getmission.model.GetMissionService"%>
 <%@page import="com.mem.model.MemService"%>
@@ -31,6 +30,12 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+    #dispute_Attachment{
+        width: 200px;
+
+    }
+</style>
 <title>回覆爭議案件</title>
 </head>
 <body>
@@ -74,8 +79,15 @@
                     <label for="dispute_Content">申訴內容</label>
                     <input type="text" name="dispute_Content" id="dispute_Content" class="form-control" value="<%=disputeCaseVO.getDispute_Content()%>" readonly="readonly">
                 </div>
+                    <div class="row" style="text-align: center">
+                        <img src="<%=request.getContextPath()%>/disputecase/disputecase.do?action=get_Picture&dispute_Case_No=<%=disputeCaseNo%>" id="dispute_Attachment">
+                    </div>
+                    <div class="row" style="text-align: center; margin-top: 20px;">
+                        <a href='#modal-id' data-toggle="modal" class="btn btn-primary">回覆此案件</a>
+                        <a href='#modal-id2' data-toggle="modal" class="btn btn-warning">退回此案件</a>
+                    </div>
+
                 <!-- 回覆modal -->
-                <a href='#modal-id' data-toggle="modal" class="btn btn-primary">回覆此案件</a>
                 <div class="modal fade" id="modal-id">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -98,7 +110,6 @@
                     </div>
                 </div>                
                 <!-- 退回modal -->
-                <a href='#modal-id2' data-toggle="modal" class="btn btn-warning">退回此案件</a>
                 <div class="modal fade" id="modal-id2">
                     <div class="modal-dialog">
                         <div class="modal-content">

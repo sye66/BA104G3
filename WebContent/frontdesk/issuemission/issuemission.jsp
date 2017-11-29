@@ -284,7 +284,7 @@
 		</div>
 		<%-- 老師的分頁檔案PART2 --%>
 	     <div class="container">
-			<%@ include file="pages/page2.file"%>
+			<%@include file="pages/page2.file"%>
 		</div>
 	</div>
 	<hr>
