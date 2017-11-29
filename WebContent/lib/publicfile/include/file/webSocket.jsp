@@ -273,7 +273,7 @@ console.log(123);
 		var Sender_Mem_Id = "<%=memVO4.getMem_Id()%>";
 		var Receiver_Mem_Id = "<%=memVO5.getMem_Id()%>";
 		var Chat_Datetime = "<%=list.getChat_Datetime()%>";		
-		var Chat_Content=":";
+		var Chat_Content=":"; 
 		<c:if test="<%=list.getChat_Content()!=null%>">
 			Chat_Content="<%=list.getChat_Content().trim()%>";
 		</c:if>
