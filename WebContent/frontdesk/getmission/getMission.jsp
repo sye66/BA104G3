@@ -252,9 +252,6 @@
       }
 
       
-      
-       
-      
       var allmission = [ 
     	  <c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
     		['${getMissionVO.mission_Name}','${getMissionVO.mission_Category}' ,${getMissionVO.mission_Gps_Lat} , ${getMissionVO.mission_Gps_Lng}]
@@ -301,7 +298,7 @@
             shape: shape,
             title: mission[0]
           });
-        }
+        }}
         
 // 
     </script>
