@@ -7,20 +7,20 @@
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
+<jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
 <jsp:useBean id="artireplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
    MemVO memVO = (MemVO)session.getAttribute("memVO");
-   String mem_No = memVO.getMem_No();
-   session.setAttribute("mem_No",mem_No);
+
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
 
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
 
-	String arti_No = (String) session.getAttribute("arti_No");
-	session.setAttribute("arti_No",arti_No);
+	String arti_No = (String) request.getAttribute("arti_No");
+	request.setAttribute("arti_No",arti_No);
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 
@@ -111,7 +111,7 @@ div {
                                   <div class="widget-main padding-6">
                                   <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:120px;width:150px; box-shadow:3px 3px 12px gray;padding:3px;"/>
-	                               <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
+	                               
 	                              <p >${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</p>
                                   </div>
                                </div>

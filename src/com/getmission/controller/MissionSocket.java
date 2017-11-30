@@ -72,20 +72,20 @@ public class MissionSocket {
 		System.out.println(userSession.getId() + ": Disconnected: " + Integer.toString(reason.getCloseCode().getCode()));
 	}
 
-	 static void pushMissionText(String mem_no) {
+	 static void pushMissionText(String mem_no,String action) {
 		 System.out.println("outside missionOk");
+		 System.out.println(action);
 		 		if(missionMessage.containsKey(mem_no)){
-		 			System.out.println("Before missionOk");
+		 			System.out.println("Before "+action);
 		 			try {
 		 				
-		 				System.out.println("missionOk");
+		 				System.out.println(action);
 		 				
 						JSONObject jb = new JSONObject();
-						jb.put("action","missionOk" );
+						jb.put("action",action );
 						Session session = missionMessage.get(mem_no);
 						session.getAsyncRemote().sendText(jb.toString());
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 								

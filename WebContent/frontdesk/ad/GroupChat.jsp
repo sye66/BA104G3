@@ -36,12 +36,12 @@
 }
 
 .mp4{
-    height:350px;
+    height:345px;
     text-align: center;
 }
 
 .list-content{
-    height:500px
+    height:515px
 }
 
 .list >.list-content >.message-area {
@@ -115,6 +115,19 @@ textarea {
   width:100%;
   height: 100%;
 }
+
+main {
+  display: block;
+  height:100%;
+  margin-top:350px;
+}
+
+.list-content >.panel {
+  padding-bottom: 16px;
+  height:100%;
+  margin-top:350px;
+}
+
 
 </style>
     </head>

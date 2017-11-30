@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -38,6 +39,8 @@ public class MissionCommentDAO implements  MissionCommentDAO_interface{
 			"SELECT* FROM MISSION_COMMENT WHERE REVIEWER=? AND LISTENER =? AND MISSION_NO = ?  order by comment_Time desc";
 	private static final String DELETE = 
 			"DELETE MISSION_COMMENT WHERE REVIEWER=? AND LISTENER=? AND MISSION_NO";
+	private static final String ALL = 
+			"SELECT * FROM MISSION_COMMENT ORDER BY REVIEWER";
 	
 	@Override
 	public void insert(MissionCommentVO missionCommentVO) {
@@ -204,26 +207,225 @@ public class MissionCommentDAO implements  MissionCommentDAO_interface{
 
 	@Override
 	public List<MissionCommentVO> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<MissionCommentVO> list = new ArrayList<MissionCommentVO>();
+		MissionCommentVO missionCommentVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(ALL);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				missionCommentVO = new MissionCommentVO();
+				
+				missionCommentVO.setReviewer(rs.getString("reviewer"));
+				missionCommentVO.setListener(rs.getString("listener"));
+				missionCommentVO.setMission_No(rs.getString("mission_No"));
+				missionCommentVO.setComment_Detail(rs.getString("comment_Detail"));
+				missionCommentVO.setComment_Point(rs.getInt("comment_Point"));
+				missionCommentVO.setComment_Time(rs.getTimestamp("comment_Time"));
+				list.add(missionCommentVO);
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public List<MissionCommentVO> getByReviewer(String reviewer) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MissionCommentVO> list = new ArrayList<MissionCommentVO>();
+		MissionCommentVO missionCommentVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_REVIEWER);
+			pstmt.setString(1, reviewer);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				missionCommentVO = new MissionCommentVO();
+				
+				missionCommentVO.setReviewer(rs.getString("reviewer"));
+				missionCommentVO.setListener(rs.getString("listener"));
+				missionCommentVO.setMission_No(rs.getString("mission_No"));
+				missionCommentVO.setComment_Detail(rs.getString("comment_Detail"));
+				missionCommentVO.setComment_Point(rs.getInt("comment_Point"));
+				missionCommentVO.setComment_Time(rs.getTimestamp("comment_Time"));
+				list.add(missionCommentVO);
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public List<MissionCommentVO> getByListener(String listener) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MissionCommentVO> list = new ArrayList<MissionCommentVO>();
+		MissionCommentVO missionCommentVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_LISTENER);
+			pstmt.setString(1, listener);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				missionCommentVO = new MissionCommentVO();
+				
+				missionCommentVO.setReviewer(rs.getString("reviewer"));
+				missionCommentVO.setListener(rs.getString("listener"));
+				missionCommentVO.setMission_No(rs.getString("mission_No"));
+				missionCommentVO.setComment_Detail(rs.getString("comment_Detail"));
+				missionCommentVO.setComment_Point(rs.getInt("comment_Point"));
+				missionCommentVO.setComment_Time(rs.getTimestamp("comment_Time"));
+				list.add(missionCommentVO);
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 	@Override
 	public List<MissionCommentVO> getByMission(String mission_No) {
-		// TODO Auto-generated method stub
-		return null;
+		List<MissionCommentVO> list = new ArrayList<MissionCommentVO>();
+		MissionCommentVO missionCommentVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(FIND_BY_MISSION);
+			pstmt.setString(1, mission_No);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				missionCommentVO = new MissionCommentVO();
+				
+				missionCommentVO.setReviewer(rs.getString("reviewer"));
+				missionCommentVO.setListener(rs.getString("listener"));
+				missionCommentVO.setMission_No(rs.getString("mission_No"));
+				missionCommentVO.setComment_Detail(rs.getString("comment_Detail"));
+				missionCommentVO.setComment_Point(rs.getInt("comment_Point"));
+				missionCommentVO.setComment_Time(rs.getTimestamp("comment_Time"));
+				list.add(missionCommentVO);
+			}
+			
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
 	}
 
 }
