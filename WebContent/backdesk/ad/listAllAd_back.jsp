@@ -7,7 +7,7 @@
 
 <%
     AdService adSvc = new AdService();
-    Set<AdVO> set = adSvc.getAllAd();
+    Set<AdVO> set = adSvc.getAllAd_A();
     pageContext.setAttribute("set",set);    
 %>
 

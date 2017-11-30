@@ -60,6 +60,10 @@ public class AdService {
 		return dao.getAllAd();
 	}
 	
+	public Set<AdVO> getAllAd_A(){
+		return dao.getAllAd_A();
+	}
+	
 	public List<AdVO> getAllAD(Map<String, String[]> map) {
 		return dao.getAllAD(map);
 	}
