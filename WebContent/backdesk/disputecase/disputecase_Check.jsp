@@ -47,7 +47,7 @@
     }
 
     body {
-        background-image: url(<%=request.getContextPath()%>/res/images/disputecase/tools-pattern-2146.png);
+        background-image: url(<%=request.getContextPath()%>/res/images/disputecase/tweed.png);
         background-repeat: repeat;
     }
     </style>
