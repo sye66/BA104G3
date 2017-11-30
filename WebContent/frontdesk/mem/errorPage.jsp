@@ -15,7 +15,7 @@
 <link href="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/lib/publicfile/sweetalert-master/src/sweetalert.js"></script> 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
- <style type="text/css">
+ <style type="text/css"> 
 	        body {
 	            background-image: url(<%=request.getContextPath()%>/res/images/mem/memCenter/wrong.jpg);
 	            background-repeat: no-repeat;
