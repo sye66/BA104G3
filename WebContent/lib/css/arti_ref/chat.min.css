@@ -57,11 +57,6 @@ footer {
   background-attachment: fixed;
 }
 
-main {
-  display: block;
-  height:100%;
-  margin-top:340px;
-}
 
 button {
   overflow: visible;
@@ -73,12 +68,6 @@ html {
   font-family: 'Helvetica Neue', sans-serif;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-}
-
-.list-content >.panel {
-  padding-bottom: 16px;
-  height:100%;
-  margin-top:350px;
 }
 
 .list-content >.panel:after,
