@@ -172,8 +172,8 @@ try{
 		                <tr>
 		                    <th>案件編號</th>
 		                    <th>原任務編號</th>
-		                    <th>提出人</th>
-		                    <th>發案時間</th>
+		                    <th>提出人(發案人)</th>
+		                    <th>申請爭議時間</th>
 		                </tr>
 		            </thead>
 		            <tbody>
