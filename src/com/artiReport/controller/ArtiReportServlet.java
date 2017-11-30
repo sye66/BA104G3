@@ -344,7 +344,6 @@ System.out.println("insertReport");
 				artiReportVO.setReport_Time(report_Time);
 				artiReportVO.setRep_Re_Desc(rep_Re_Desc);
 				artiReportVO.setReport_Status(report_Status);
-System.out.println(rep_Re_Desc);
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("artiReportVO", artiReportVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
