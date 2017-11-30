@@ -35,13 +35,28 @@
     #dispute_Attachment {
         width: 200px;
     }
+    .formcol{
+        border-radius: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 30px;
+        background-color: #34445e;
+        border: #ff9000 solid 2px;
+        color: white;
+        font-family: "微軟正黑體";
+    }
+
+    body {
+        background-image: url(<%=request.getContextPath()%>/res/images/disputecase/tools-pattern-2146.png);
+        background-repeat: repeat;
+    }
     </style>
     <title>回覆爭議案件</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="text-align: center">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 formcol">
                 <%-- ----------------------------------------------------------- --%>
                 <div class="row">
                     <%-- 爭議案件編號 --%>
