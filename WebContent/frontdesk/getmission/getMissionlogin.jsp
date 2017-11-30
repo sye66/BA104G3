@@ -30,7 +30,7 @@
 <title>getmissionLogin</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-<script type="text/javascript" src="js/*"></script>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
 <%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/map.js"></script> --%>
 <!--[if lt IE 9]>

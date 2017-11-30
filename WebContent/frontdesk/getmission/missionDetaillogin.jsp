@@ -36,6 +36,27 @@
 #carousel-id {
 	height: 500px;
 }
+
+.missionImg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -999;
+        }
+        .missionImg img {
+            max-height: 520px;
+            min-width: auto;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 1000px) {
+            img.missionImg {
+                left: 50%;
+                margin-left: -500px;
+            }
+        }
 </style>
 </head>
 <body>
@@ -113,7 +134,7 @@
 								varStatus="p">
 
 								<c:if test="${p.index == 0 }">
-									<div class="item active">
+									<div class="item active missionImg">
 										<img
 											src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
 											alt="">
@@ -121,7 +142,7 @@
 									</div>
 								</c:if>
 								<c:if test="${p.index != 0 }">
-									<div class="item">
+									<div class="item missionImg">
 										<img
 											src="<%=request.getContextPath()%>/missionimages/getpic.do?image_No=${missionImagesVO.image_No}"
 											alt="">
