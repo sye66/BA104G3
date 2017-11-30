@@ -12,6 +12,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp"> </span> 
+<style type="text/css">
+	        body {
+	            background-image: url(<%=request.getContextPath()%>/res/images/mem/memCenter/success.jpg);
+	            background-repeat: no-repeat;
+	            background-attachment: fixed;
+	            background-position: center;
+	            background-size: cover;
+	            font-family: Microsoft JhengHei;
+	        }
+	       	label,p {
+	       	color: white;
+	       }
+	       #map {
+	        height: 300px;
+	        width: 100%;
+	       }
+	    </style>
 
 <title>
 	<c:if test="${memVO.mem_State == 0}">恭喜'註冊'成功 ! </c:if>
@@ -52,9 +69,6 @@ img #show {heigth:100%}
                     	</div>
                     </form>
                     
-                    <div class="row">
-			<div class="col-xs-12 col-sm-12"><img id="show" src="<%=request.getContextPath()%>/lib/publicfile/include/img/0.png"></div>
-		</div>
                     
 </body>
 </html>

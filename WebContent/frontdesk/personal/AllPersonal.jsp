@@ -117,7 +117,7 @@
 				 //html就是innerHTML
 					$('#changeBtn1').html('<button onclick="delApply()" class="btn btn-success">已申請好友</button>');
 			 },
-			 error: function(){alert("網路不穩斷線")}
+			 error: function(){alert("網路不穩")}
 		  });
 		}
 	
@@ -132,7 +132,7 @@
 			 success: function (data){
 					$('#changeBtn1').html('<button onclick="addFriend()" class="btn btn-warning">加為好友</button>');
 			 },
-			 error: function(){alert("網路不穩斷線")}
+			 error: function(){alert("網路不穩")}
 		  });
 		}
 	

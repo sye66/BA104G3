@@ -72,16 +72,18 @@
               </c:if>
               <i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
-             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/AllPersonal.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
-            </li>
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
             </li>
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
             </li>
-
+            <c:if test="${not empty memVO.mem_Id}">
+             <li class="nav-item">
+              <h3>
+              <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
+            </li>
+            </c:if>
             <c:if test="${not empty memVO.mem_Id}">
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/mem/memCenter.jsp"><i class="glyphicon glyphicon-user"></i> 會員中心 　</a></h3>
@@ -272,7 +274,7 @@ function getFocus() {
     <!-- Custom scripts for this template -->
     <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/freelancer.min.js"></script>
  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js"></script>
- 	
+ 			<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
  	<script type="text/javascript">
  	
  	$('#M000002').click(function(){
