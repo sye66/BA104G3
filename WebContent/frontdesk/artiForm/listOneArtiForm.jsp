@@ -123,7 +123,7 @@ div {
                        </div>
                     </div>
                     <div class="widget-main padding-16">
-                        <h4 style="font-family:Microsoft JhengHei;">詳細內文 : </h4><br>
+                        <h2 style="font-family:Microsoft JhengHei;">詳細內文 : </h2><br>
                         <font size="4" style="font-family:Microsoft JhengHei;">${artiFormVO.describe}</font>
                     </div>                    
          </div>

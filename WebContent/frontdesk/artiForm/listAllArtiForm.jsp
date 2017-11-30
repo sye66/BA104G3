@@ -53,7 +53,7 @@ div> .timeline-body{
 
                 <div class="title">
                     <div class="list">
-                        <h1>所有文章列表 </h1>
+                        <a  href="/BA104G3/frontdesk/ad/GroupChat.jsp"><h1> 神靠北練功房 </h1></a>
                     </div>
                 </div>
                     
@@ -92,8 +92,8 @@ div> .timeline-body{
                             <i> POST </i>
                         </a>
                         </c:if>
-                        <a class="sidebar-toggler" href="/BA104G3/frontdesk/artiForm/ArtiForm_main.jsp">
-                            <i>Main page</i>
+                         <a class="sidebar-toggler" href="/BA104G3/frontdesk/ad/GroupChat.jsp">
+                            <i>Chat</i>
                         </a>
                     </div>
                         

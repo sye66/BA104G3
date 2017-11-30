@@ -1,0 +1,138 @@
+@import 'http://fonts.googleapis.com/css?family=Noto+Sans';
+
+body {
+  width:90%;
+  height:90%;
+  line-height: 100%;
+  word-break: break-word;
+  font: 18px verdana, Times New Roman, arial, helvetica, sans-serif, Microsoft JhengHei;
+  
+}
+audio {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.layout-rel {
+  height: 100%;
+}
+.layout-rel body {
+  height: 100%;
+  position: relative;
+}
+body {
+  background: #ededed;
+}
+
+footer {
+  height: 80px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #fafafa;
+  border-top: 1px solid #ddd;
+  z-index: 50;
+}
+
+.layout-scroll footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.layout-scroll main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 80px;
+  left: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+    
+  padding: 0;
+  margin: 0;
+  background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+  background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+main {
+  display: block;
+  height:100%;
+  margin-top:340px;
+}
+
+button {
+  overflow: visible;
+}
+
+html {
+  height:100%;
+  font-size: 100%;
+  font-family: 'Helvetica Neue', sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+.list-content >.panel {
+  padding-bottom: 16px;
+  height:100%;
+  margin-top:340px;
+}
+
+.list-content >.panel:after,
+.list-content >.panel:before {
+  content: ' ';
+  display: table;
+  height:100%;
+}
+.list-content >.panel:after {
+  clear: both;
+  height:100%;
+}
+
+
+
+.publisher .bar {
+  height: 36px;
+  padding: 9px 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.publisher .bar .panel {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: block;
+  font-size: 16px;
+  resize: none;
+  overflow: hidden;
+  border-radius: 9px;
+  padding: 8px 36px;
+  border: 1px solid #c8c8c8;
+  background: #CCDDFF;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.publisher .widget {
+  border-top: 1px solid #ddd;
+}
+
+

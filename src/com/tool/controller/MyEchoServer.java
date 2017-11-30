@@ -34,12 +34,12 @@ public class MyEchoServer {
 	private String roomNo;		//房間號碼	
 	private Session session;	//哪條連線
 	
-//private static final Set<Session> allSessions = Collections.synchronizedSet(new HashSet<Session>());
+private static final Set<Session> allSessions = Collections.synchronizedSet(new HashSet<Session>());
 	
 @OnOpen
 	public void onOpen(@PathParam("myName") String myName, @PathParam("myRoom") String myRoom, Session userSession) throws IOException {
 	//	(3)	把資訊存到allSession 的集合裡面 ,便且顯示
-//		allSessions.add(userSession);
+		allSessions.add(userSession);
 		System.out.println(userSession.getId() + ": 已連線");
 		System.out.println(myName + ": 已連線");
 		System.out.println(myRoom + ": 房號");
