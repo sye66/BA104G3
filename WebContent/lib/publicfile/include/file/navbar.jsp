@@ -335,7 +335,15 @@ function getFocus() {
    				)
 	        	
 	        }
-	        
+	        if(jsonObj.action=='checkmem'){
+	        	var inputMessage = "恭喜你成功獲得青睞~快快去做任務吧";
+	        	swal(
+	   				  '${memVO.mem_Id}',
+	   				  inputMessage,
+	   				  'success'
+   				)
+	        	
+	        }
 	 
 		};
 
