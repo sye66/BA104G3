@@ -55,7 +55,7 @@ try{
     margin: 15px;
 	}
 </style>
-<title>爭議案件 - 尚未處理</title>
+<title>爭議案件 - 退回案件</title>
 </head>
 <body>
 
@@ -65,7 +65,7 @@ try{
 	<br>
 	<br>
 	<div class="container">
-		<%-- 上方圖示列表 --%>
+	<%-- 上方圖示列表 --%>
 		<div class="row">
 			<%-- 未處理案件 --%>
 			<div class="col-xs-12 col-sm-3">
@@ -177,7 +177,7 @@ try{
 		                </tr>
 		            </thead>
 		            <tbody>
-		                <%for(DisputeCaseVO disputeCaseVO : listAllPendingCase){%>
+		                <%for(DisputeCaseVO disputeCaseVO : listAllRejectCase){%>
 		                    <tr>
 		                        <td>
 		                            <%=disputeCaseVO.getDispute_Case_No()%>

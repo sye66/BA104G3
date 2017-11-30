@@ -30,7 +30,9 @@ public class AdDAO implements AdDAO_interface {
     private static final String INSERT_AD= 
 		"INSERT INTO AD (AD_NO,AD_PIC,AD_DESC,AD_START,AD_END,AD_FTY_NO,AD_FTY_NAME) VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),?,?,?,?,?,?)";
 	private static final String GET_ALL_AD = 
-		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END ASC";
+		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END DESC";
+	private static final String GET_ALL_AD_A = 
+			"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD order by AD_END ASC";
 	private static final String GET_ONE_AD = 
 		"SELECT AD_NO,AD_PIC,AD_DESC,to_char(AD_START,'yyyy-mm-dd hh:mm:ss') AD_START,to_char(AD_END,'yyyy-mm-dd hh:mm:ss') AD_END,AD_FTY_NO,AD_FTY_NAME FROM AD where AD_NO = ?";
 	private static final String DELETE_AD = 
@@ -286,6 +288,62 @@ public class AdDAO implements AdDAO_interface {
 		try{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_AD);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				adVO = new AdVO();
+				adVO.setAd_No(rs.getString("ad_No"));
+				adVO.setAd_Pic(rs.getBytes("ad_Pic"));
+				adVO.setAd_Desc(rs.getString("ad_Desc"));
+				adVO.setAd_Start(rs.getTimestamp("ad_Start"));
+				adVO.setAd_End(rs.getTimestamp("ad_End"));
+				adVO.setAd_Fty_No(rs.getString("ad_Fty_No"));
+				adVO.setAd_Fty_Name(rs.getString("ad_Fty_Name"));
+				set.add(adVO);
+			}
+			
+		} catch (SQLException se){
+			throw new RuntimeException("A database error occured." + se.getMessage());
+		} catch (Exception e){
+			e.printStackTrace(System.err);
+		} finally{
+			if(rs!=null){
+				try{
+					rs.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if(pstmt!=null){
+				try{
+					pstmt.close();
+				} catch (SQLException se){
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con!=null){
+				try{
+					con.close();
+				} catch (Exception e){
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return set;
+	}
+	
+	@Override
+	public Set<AdVO> getAllAd_A() {
+		Set<AdVO> set = new LinkedHashSet<AdVO>();
+		AdVO adVO = null;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try{
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_ALL_AD_A);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){

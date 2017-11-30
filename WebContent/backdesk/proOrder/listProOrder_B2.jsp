@@ -140,8 +140,18 @@
 <%@include file="page2.file" %>	
 
 
+<%if(list.size()==0){
+			System.out.println(list.size());
+			%>	
+			<div class="col-xs-12 col-sm-6 col-sm-offset-5">
+			<h3>查無資料</h3>
+			</div>
+		<%} %>	
+
+
 				</div>		
 			
+		
 <!-- 		</div> -->
 <div class="col-xs-12 col-sm-2 ">
 <br><br><br>		

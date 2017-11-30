@@ -106,7 +106,7 @@ try{
 			                </div>
 			            </div>
 			        </div>
-			        <a href="#">
+			        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_OnGoing.jsp">
 			            <div class="panel-footer">
 			                <span class="pull-left">查看細節</span>
 			                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -129,7 +129,7 @@ try{
 			                </div>
 			            </div>
 			        </div>
-			        <a href="#">
+			        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_Closed.jsp">
 			            <div class="panel-footer">
 			                <span class="pull-left">查看細節</span>
 			                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -152,7 +152,7 @@ try{
 			                </div>
 			            </div>
 			        </div>
-			        <a href="#">
+			        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_Rejected.jsp">
 			            <div class="panel-footer">
 			                <span class="pull-left">查看細節</span>
 			                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

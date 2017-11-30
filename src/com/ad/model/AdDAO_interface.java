@@ -11,6 +11,7 @@ public interface AdDAO_interface {
 	public AdVO findByPrimaryKey(String ad_No);
 
 	public Set<AdVO> getAllAd();
+	public Set<AdVO> getAllAd_A();
 	public Set<AdVO> findAdByFtyNo(String ad_Fty_No);
 	public List<AdVO> getAllAD(Map<String, String[]> map);
 

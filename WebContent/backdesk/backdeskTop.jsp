@@ -100,7 +100,7 @@ String str6 = "AU000006";
 <%-- 						<%for(CompVO e: list){ --%>
 <!-- //   							if((e.getAuth_No()).contains(str2)){  -->
 <%--  						%>  --%>
-						<li><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
 								
 <%--  						<%	}  --%>
 							

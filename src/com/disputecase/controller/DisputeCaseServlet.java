@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.hibernate.type.PrimitiveByteArrayBlobType;
+
 import com.businessrefinery.barcode.QRCode;
 import com.disputecase.model.DisputeCaseService;
 import com.disputecase.model.DisputeCaseVO;
@@ -42,6 +45,8 @@ public class DisputeCaseServlet extends HttpServlet {
     private static final String CASE_REPLY		= "/backdesk/disputecase/disputecase_Reply.jsp";
     private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_Reply_Success.jsp";
     private static final String TEST_FAILED 	= "/backdesk/disputecase/disputecase_Fail_Closed.jsp";
+    private static final String CASE_NEW	 	= "/backdesk/disputecase/disputecase_New.jsp";
+    private static final String CASE_CHECK 		= "/backdesk/disputecase/disputecase_Check.jsp";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -99,6 +104,29 @@ public class DisputeCaseServlet extends HttpServlet {
 				failview.forward(request, response);
 			}
 		}
+		/**
+		 * @author Sander
+		 * @hidden emp_Get_Case
+		 * 員工接手案件，改變DISPUTE_CASE EMP(該員工編號) 與DISPUTE_CASE_STATUS(2) 處理中
+		 */
+		if ("emp_Get_Case".equals(action)) {
+			String emp_No = request.getParameter("emp_No");
+			String dispute_Case_No = request.getParameter("dispute_Case_No");
+			try {
+				disputeCaseService = new DisputeCaseService();
+				DisputeCaseVO disputeCaseVO = disputeCaseService.getOneDisputeCase(dispute_Case_No);
+				disputeCaseVO.setEmp_No(emp_No);
+				disputeCaseVO.setDispute_Case_Status(2);
+				disputeCaseService.updateDisputeCase(disputeCaseVO);
+				RequestDispatcher getDone = request.getRequestDispatcher(CASE_NEW);
+				getDone.forward(request, response);
+			} catch (Exception e) {
+				System.out.println("EMP get dispute case error, root cause: "+ e);
+				RequestDispatcher fail = request.getRequestDispatcher(CASE_NEW);
+				fail.forward(request, response);
+			}
+		}
+		
 		
 		/**
 		 * @author Sander
@@ -213,7 +241,8 @@ public class DisputeCaseServlet extends HttpServlet {
 				GetMissionVO getMissionVO = getMissionService.getOneMission(mission_No);
 				Integer mission_Pay = 0;
 				try {
-					mission_Pay = Integer.parseInt((getMissionVO.getMission_Pay()).toString());
+				  	String str_Mission_Pay = (getMissionVO.getMission_Pay().toString()).substring(0, (getMissionVO.getMission_Pay().toString()).indexOf(".")) + (getMissionVO.getMission_Pay().toString()).substring((getMissionVO.getMission_Pay().toString()).indexOf(".") + 1);
+				  	mission_Pay = Integer.parseInt(str_Mission_Pay);
 				} catch (NumberFormatException e) {
 					System.out.println("數字格式錯誤，使用預設值50");
 					mission_Pay = 50;
@@ -280,7 +309,8 @@ public class DisputeCaseServlet extends HttpServlet {
 				GetMissionVO getMissionVO = getMissionService.getOneMission(mission_No);
 				Integer mission_Pay = 0;
 				try {
-					mission_Pay = Integer.parseInt((getMissionVO.getMission_Pay()).toString());
+				  	String str_Mission_Pay = (getMissionVO.getMission_Pay().toString()).substring(0, (getMissionVO.getMission_Pay().toString()).indexOf(".")) + (getMissionVO.getMission_Pay().toString()).substring((getMissionVO.getMission_Pay().toString()).indexOf(".") + 1);
+				  	mission_Pay = Integer.parseInt(str_Mission_Pay);
 				} catch (NumberFormatException e) {
 					System.out.println("數字格式錯誤，使用預設值50");
 					mission_Pay = 50;
