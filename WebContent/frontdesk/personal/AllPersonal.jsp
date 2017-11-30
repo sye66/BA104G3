@@ -31,6 +31,9 @@
 	<br>
 	<br>
 	<br>
+	<br>
+	<br>
+	<br>
 	
 	<div class="container">
 		<div class="row">
@@ -105,7 +108,9 @@
  			</div>
  		</div>
  	</div>	
-	
+	<br>
+	<br>
+	<br>
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
 </body>
