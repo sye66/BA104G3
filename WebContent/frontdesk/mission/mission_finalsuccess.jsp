@@ -37,34 +37,44 @@ img #show {heigth:100%}
 
 </head>
 <body>
- <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
-	<br><br><br><br><br>
+	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br>
- 
-<c:if test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">
-	<script type="text/javascript">
-		swal(${memSvc.getOneMem(memVO.mem_No).mem_Id}，恭喜結案 ! 可喜可賀可喜可賀);
-	</script>
-</c:if>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
+	<c:if
+		test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">
+		<script type="text/javascript">
+			swal(${memSvc.getOneMem(memVO.mem_No).mem_Id}，恭喜結案 ! 可喜可賀可喜可賀);
+		</script>
+	</c:if>
 
-<div>3秒之後自動跳轉到首頁</div>
+	memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
+
+	<div>3秒之後自動跳轉到首頁</div>
 
 
 
 
 
-	 <form id="login-form" method="post" action="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
-                    	<div>
-                    		<input type="hidden" name="action" value="register">
-                    		<button type="submit" class="btn btn-success btn-lg btn-block">按我直接回首頁</button>
-                    	</div>
-                    </form>
-                    
-                    <div class="row">
-			<div class="col-xs-12 col-sm-12"><img id="show" src="<%=request.getContextPath()%>/res/images/index/intelligence.png"></div>
+	<form id="login-form" method="post"
+		action="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
+		<div>
+			<input type="hidden" name="action" value="register">
+			<button type="submit" class="btn btn-success btn-lg btn-block">按我直接回首頁</button>
 		</div>
-  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>                  
+	</form>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-12">
+			<img id="show"
+				src="<%=request.getContextPath()%>/res/images/index/intelligence.png">
+		</div>
+	</div>
+	<jsp:include page="/lib/publicfile/include/file/footer.jsp"
+		flush="true"></jsp:include>
 </body>
 </html>

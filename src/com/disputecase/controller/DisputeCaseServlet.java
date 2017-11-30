@@ -40,7 +40,7 @@ public class DisputeCaseServlet extends HttpServlet {
     private static final String CASE_MANAGE 	= "/backdesk/disputecase/disputecase_Manage.jsp";
     private static final String GET_RESULT 		= "/backdesk/disputecase/disputecase_Result.jsp";
     private static final String CASE_REPLY		= "/backdesk/disputecase/disputecase_Reply.jsp";
-    private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_ReplySent.jsp";
+    private static final String CASE_REPLY_SENT = "/backdesk/disputecase/disputecase_Reply_Success.jsp";
     private static final String TEST_FAILED 	= "/backdesk/disputecase/disputecase_Fail_Closed.jsp";
 	
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

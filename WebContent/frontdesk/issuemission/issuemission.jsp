@@ -210,6 +210,7 @@
 				            var marker = new google.maps.Marker({
 				          		position: pos,
 				          		map: map,
+				          		draggable:true,
 				          		title: "某工具人"
 				        	});	
 				           	marker.addListener('click', function () {

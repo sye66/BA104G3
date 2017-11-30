@@ -253,6 +253,7 @@
 
       
       
+       \
       
       var allmission = [ 
     	  <c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
