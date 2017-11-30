@@ -46,16 +46,9 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
       
-      <c:if test="${memVO.mem_State==null || memVO.mem_State==0 || memVO.mem_State==9}">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <a class="navbar-brand js-scroll-trigger" href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
         <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
-        </c:if>
-      <c:if test="${memVO.mem_State==1}">
-        <a class="navbar-brand js-scroll-trigger" href="#" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')">
-        <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
-        </a>
-        </c:if>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           Menu
@@ -80,7 +73,7 @@
               <i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
              <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="#contact"><i class="glyphicon glyphicon-user"></i> 排行榜　</a></h3>
+              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/AllPersonal.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
             </li>
             <li class="nav-item">
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/ArtiForm_main.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>

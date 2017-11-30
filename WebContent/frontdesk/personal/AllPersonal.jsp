@@ -4,8 +4,15 @@
     <%@ page import="com.mem.model.*"%>
     <%@ page import="com.rank.model.*"%>
     <%@ page import="com.artiForm.model.*"%>
+    <%@ page import="com.relation.model.*" %>
+    <%@ page import="com.follow_tool_man.model.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
+<jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="Follow_tmSvc" scope="page" class="com.follow_tool_man.model.Follow_tmService"/>
+<jsp:useBean id="MemSvc" scope="page" class="com.mem.model.MemService"/>
     <%
+    	
     	MemVO AllMemVO = (MemVO)request.getAttribute("AllMemVO");
     	String personal_No = AllMemVO.getMem_No();
     	RankService rankSvc = new RankService();
@@ -15,10 +22,40 @@
     	ArtiFormService artiSvc = new ArtiFormService();
     	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(personal_No);
     	pageContext.setAttribute("set", set);
+    	
+    	//加好友
+    	RelationVO relationVO = (RelationVO)request.getSession().getAttribute("relationVO");
+    	MemVO memVO = (MemVO)request.getSession().getAttribute("memVO");
+    	String mem_No= memVO.getMem_No();
+    	String related_Mem_No = personal_No;
+    	System.out.println("memVO.getMem_No() +" +memVO.getMem_No());
+    	relationVO = RelationSvc.getOneRelationVO(mem_No, personal_No);
+    	if(relationVO!= null){
+    	Integer relation_Status = relationVO.getRelation_Status();
+    	System.out.println("relation_Status +" +relation_Status);
+    	}
+    	
+    	//關注工具人
+    	
+    	Follow_tmService follow_tmSvc = new Follow_tmService();
+    	Follow_tmVO follow_tmVO = (Follow_tmVO)request.getSession().getAttribute("follow_tmVO");
+    	String follower_Mem_No = memVO.getMem_No();
+    	String followed_Mem_No = personal_No;
+    	follow_tmVO =follow_tmSvc.getOneFollow_tmVO(follower_Mem_No, followed_Mem_No);
+    	System.out.println("follow_tmVO +" +follow_tmVO);
+    	if(follow_tmVO != null){
+    		Integer relation_Status = relationVO.getRelation_Status();
+        	System.out.println("relation_Status +" +relation_Status);
+    	}
+    	
     %>
+    
+    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+    
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -31,16 +68,104 @@
 	<br>
 	<br>
 	<br>
+	<script type="text/javascript">
+	
+	function watch(){
+	var queryString= {"action":"insert_New","follower_Mem_No":'<%=follower_Mem_No%>',"followed_Mem_No":'<%=followed_Mem_No%>',"follow_Status":'0'};
+	$.ajax({
+		 type: "POST",
+		 url: "<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do",
+		 data: queryString,
+		 dataType: "json",
+			
+		 success: function (data){
+			 var status = data.follow_Status;
+			 console.log("data.follow_Status + " +status);
+			 //html就是innerHTML
+				$('#changeBtn').html('<button onclick="disWatch()" class="btn btn-success">已關注</button>');
+		 },
+		 error: function(){alert("網路不穩斷線")}
+	  });
+	}
+	
+	function disWatch(){
+	var queryString= {"action":"delete","follower_Mem_No":'<%=follower_Mem_No%>',"followed_Mem_No":'<%=followed_Mem_No%>',"follow_Status":'0'};
+	$.ajax({
+		 type: "POST",
+		 url: "<%=request.getContextPath()%>/follow_tool_man/follow_tool_man.do",
+		 data: queryString,
+		//如果沒有回傳值，dataType要拿掉
+		 
+		 success: function (data){
+				$('#changeBtn').html('<button onclick="watch()" class="btn btn-warning">關注他</button>');
+		 },
+		 error: function(){alert("網路不穩斷線")}
+	  });
+	}
+
+	function addFriend(){
+		var queryString= {"action":"insert_New","mem_No":'<%=mem_No%>',"related_Mem_No":'<%=related_Mem_No%>',"relation_Status":'0'};
+		$.ajax({
+			 type: "POST",
+			 url: "<%=request.getContextPath()%>/relation/relation.do",
+			 data: queryString,
+			 dataType: "json",
+				
+			 success: function (data){
+				 var status = data.relation_Status;
+				 //html就是innerHTML
+					$('#changeBtn1').html('<button onclick="delApply()" class="btn btn-success">已申請好友</button>');
+			 },
+			 error: function(){alert("網路不穩斷線")}
+		  });
+		}
+	
+	function delApply(){
+		var queryString= {"action":"delete","mem_No":'<%=mem_No%>',"related_Mem_No":'<%=related_Mem_No%>',"relation_Status":'0'};
+		$.ajax({
+			 type: "POST",
+			 url: "<%=request.getContextPath()%>/relation/relation.do",
+			 data: queryString,
+			//如果沒有回傳值，dataType要拿掉	
+			
+			 success: function (data){
+					$('#changeBtn1').html('<button onclick="addFriend()" class="btn btn-warning">加為好友</button>');
+			 },
+			 error: function(){alert("網路不穩斷線")}
+		  });
+		}
+	
+	</script>
+    
+    
 	
 	<div class="container">
 		<div class="row">
 	<div class="col-xs-12 col-sm-4">
  				<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">${AllMemVO.mem_Name}的個人小檔案<div align="right">
- 				    <button class="btn btn-warning">關注他</button>
- 				    <button class="btn btn-warning">加為好友</button></div></h3>
+ 				    <h3 class="panel-title">${AllMemVO.mem_Name}的個人小檔案
+ 				    	<div class="btn-group" style="float:right;">
+ 				    	<p id=changeBtn>
+ 				    	    <c:if test="<%=follow_tmVO==null%>">
+ 				    	    <button onclick="watch()" class="btn btn-warning">關注他</button> 
+ 				    	    </c:if>
+ 				    	    <c:if test="<%=follow_tmVO!=null%>">
+ 				    	    <button onclick="disWatch()" class="btn btn-success">已關注</button>
+ 				    	    </c:if>
+ 				    	</p>
+ 				    	<p id=changeBtn1>
+ 				            <c:if test="<%=relationVO==null%>">
+ 				    		<button onclick="addFriend()" class="btn btn-warning">加為好友</button>
+ 				    		</c:if>
+ 				    		<c:if test="<%=relationVO!=null%>">
+ 				    		<button onclick="delApply()" class="btn btn-success">已申請好友</button>
+ 				    		</c:if>
+ 				    	</p>
+ 				    	</div>
+ 				    	</h3>
  				  </div>
+ 				    		
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<tr>

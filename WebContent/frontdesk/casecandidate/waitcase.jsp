@@ -73,7 +73,7 @@
 							        <td>${missionVO.issuer_Mem_No}</td>
 							        <td>${issuerMemVO.mem_Id}</td>
 							        <td style="text-align:center;">
-										<form method="get"
+										<form BorderStyle="0" method="get"
 											action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?issuer_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${mission_No}"
 											name="getmission5">
 											<button

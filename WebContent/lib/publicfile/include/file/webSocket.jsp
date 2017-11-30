@@ -216,7 +216,7 @@ var targetMemName ='<%=memVO2.getMem_Id()%>';
 var issuer_Mem_No ='<%=memVO3.getMem_Id()%>';
 alert("missionNo + targetMemNo" +targetMemNo+missionNo);
    
-var MyPoint = "/MyEchoServer/"+memno+"/"+missionNo;		// 對照server 哪個Server / 使用者名稱 / 房號
+var MyPoint = "/MyEchoServer/"+'<%=memVO.getMem_No()%>'+"/"+'<%=takecase_Mem_No%>';		// 對照server 哪個Server / 使用者編號 / 房號
 var host = window.location.host; 
 var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
@@ -409,20 +409,18 @@ function sendMessage() {
     	
     	
     	var chatContent = $('#myPanel').text();
-	<%   
-		crSvc = new ChatRecordService();
-	    chatRecordVO = new ChatRecordVO();
-	    chatRecordVO.setSender_Mem_No(memVO.getMem_No());
-	    chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
-	    String dateStr="";
-	    Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
-	    System.out.println("chat_Datetime+"+chat_Datetime);
-	    chatRecordVO.setChat_Datetime(chat_Datetime);
-		    
-	    System.out.println("adfasdf" +takecase_Mem_No);
-		   
-	    request.setAttribute("chatRecordVO", chatRecordVO);
-	%>
+			<%
+			crSvc = new ChatRecordService();
+			chatRecordVO = new ChatRecordVO();
+			chatRecordVO.setSender_Mem_No(memVO.getMem_No());
+			chatRecordVO.setReceiver_Mem_No(takecase_Mem_No);
+			String dateStr = "";
+			Timestamp chat_Datetime = new Timestamp(System.currentTimeMillis());
+			System.out.println("chat_Datetime+" + chat_Datetime);
+			chatRecordVO.setChat_Datetime(chat_Datetime);
+			System.out.println("takecase_Mem_No" + takecase_Mem_No);
+			request.setAttribute("chatRecordVO", chatRecordVO);
+			%>
     console.log("chatContent" + chatContent);
     
     var queryString= {"action":"insert","chatContent":message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":'<%=chat_Datetime%>',"src":url};
