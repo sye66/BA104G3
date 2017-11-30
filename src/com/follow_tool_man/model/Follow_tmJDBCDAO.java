@@ -28,7 +28,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 	
 	private static final String SELECT=
 			"SELECT follower_Mem_No,followed_Mem_No,follow_Status"
-			+ " FROM follow_tool_man WHERE follower_Mem_No=?";
+			+ " FROM follow_tool_man WHERE follower_Mem_No=? and followed_Mem_No=?";
 	
 	private static final String UPDATE=
 			"UPDATE follow_tool_man SET follow_Status=?"
@@ -182,6 +182,7 @@ public class Follow_tmJDBCDAO implements Follow_tmDAO_interface{
 			pstmt = con.prepareStatement(SELECT);
 			
 			pstmt.setString(1, follower_Mem_No);
+			pstmt.setString(2, followed_Mem_No);
 			
 			rs =pstmt.executeQuery();
 			

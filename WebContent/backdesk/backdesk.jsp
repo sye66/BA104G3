@@ -13,14 +13,17 @@
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.proorder.model.*"%>
+<%@ page import="com.emp.model.*"%>
 
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
 	GetMissionService getMissionSve = new GetMissionService();
-	int missCount = 0;
-	int missCount2 = 0;
-	int priOrdCount = 0;
+	int missCount = 0;//檢舉任務
+	int missCount2 = 0;//爭議任務
+	int priOrdCount = 0;//訂單審核
+	int empCount = 0;//員工授權
+	
 	List<GetMissionVO> missList = getMissionSve.getAll();
 	for(GetMissionVO g : missList){
 		if(g.getMission_State().equals(7)||g.getMission_State().equals(72)){
@@ -39,7 +42,13 @@
 		}
 	}
 	
-	
+	EmpService empSvc = new EmpService();
+	List<EmpVO> empList = empSvc.getAll();
+	for(EmpVO e: empList){
+		if(e.getEmp_State().equals("待授權")){
+			empCount++;
+		}
+	}
 	
 %>
 
@@ -205,15 +214,15 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-9">
                                    <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg01.png"style="height:40px;">
-                                    <span style="font-size:20px;">新進員工管理:</span>
+                                    <span style="font-size:20px;">新進員工授權:</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-3 text-right">
-                                    <div class="huge">12</div>
+                                    <div class="huge"><%=empCount %></div>
                                    
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="<%=request.getContextPath()%>/backdesk/emp/addEmpComp.jsp">
                             <div class="panel-footer">
                                 <span class="pull-left" style="font-size:16px;">查看詳情</span>
                                 <span class="pull-right"><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrow_right.png"></span>
@@ -273,14 +282,18 @@
 	 			 </div>	
 	 	
 	 	
-	 	
+	 	<div id="flot-placeholder" style="width:400px;height:300px"></div>
 	 	
 	 	
 	  
 	
             
     </div> 
-<script type="text/javascript"></script>   
+<script type="text/javascript">
+
+
+
+</script>   
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {

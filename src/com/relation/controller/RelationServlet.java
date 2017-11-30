@@ -1,6 +1,7 @@
 package com.relation.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 import com.relation.model.RelationService;
@@ -350,13 +352,9 @@ public class RelationServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 //			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-//				String stored_no = new String(req.getParameter("stored_no").trim());
 				String mem_No = req.getParameter("mem_No").trim();
-				
 				String related_Mem_No = req.getParameter("related_Mem_No").trim();
-				
 				Integer relation_Status = new Integer(req.getParameter("relation_Status").trim());
-				
 				
 				RelationVO relationVO = new RelationVO();
 				
@@ -364,72 +362,52 @@ public class RelationServlet extends HttpServlet{
 				relationVO.setRelated_Mem_No(related_Mem_No);
 				relationVO.setRelation_Status(relation_Status);
 				
-				
 				if (!errorMsgs.isEmpty()){
 					req.setAttribute("relationVO", relationVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/addRelationship.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/personal/PersonalPage.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
 				RelationService relationSvc = new RelationService();
-				relationVO = relationSvc.addRelationVO("M000001", "M000018", 0);
+				relationVO = relationSvc.addRelationVO(mem_No, related_Mem_No, relation_Status);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				req.getSession().setAttribute("relationVO", relationVO);
-				
-				String location = req.getParameter("reuestURL");
-				
-//				String url = "/frontdesk/relation/addRelationship.jsp";
-				String success ="ok";
-				req.setAttribute("success", success);
-				RequestDispatcher successView = req.getRequestDispatcher(location);  //讓使用者登入後停留在原頁面
-			    successView.forward(req, res);
-				
+				String responseJSONObject="";
+				Gson gson = new Gson();
+				responseJSONObject = gson.toJson(relationVO);
+				PrintWriter out = res.getWriter();
+				out.println(responseJSONObject);
 				
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add("修改資料失敗 :" + e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/addRelationship.jsp");
-//				failureView.forward(req, res);
-//			}
 		} //insert end
-		
 		
 		if("delete".equals(action)){
 			List<String> errorMsgs =new LinkedList<String>();
 			System.out.println("======");
 			req.setAttribute("errorMsgs", errorMsgs);
 			
-			try{
 				/***************************1.接收請求參數***************************************/
 				String mem_No = req.getParameter("mem_No");
-				
 				String related_Mem_No = req.getParameter("related_Mem_No");
+				Integer relation_Status = new Integer(req.getParameter("relation_Status").trim());
 				
 				RelationService relationSvc = new RelationService();				
 				RelationVO relationVO = relationSvc.getOneRelationVO(mem_No, related_Mem_No);
 				
 				
 				/***************************2.開始刪除資料***************************************/
-				relationSvc.deleteRelationVO(related_Mem_No, mem_No);
 				relationSvc.deleteRelationVO(mem_No, related_Mem_No);
 				
-				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
-				String url = "/frontdesk/relation/friendlList.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				String responseJSONObject="";
+				Gson gson = new Gson();
+				responseJSONObject = gson.toJson(relationVO);
+				PrintWriter out = res.getWriter();
+				out.println(responseJSONObject);
 				
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e) {
-				errorMsgs.add("刪除資料失敗 : "+e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/relation/friendlList.jsp");
-				failureView.forward(req, res);
-			}
 		}// delete end\
-		System.out.println("==========end");
 	}
-	
 }

@@ -38,7 +38,7 @@ public class RelationDAO implements RelationDAO_interface{
 	
 	private static final String SELECT=
 			"SELECT mem_No,related_Mem_No,relation_Status"
-			+ " FROM relation WHERE mem_No=?";
+			+ " FROM relation WHERE mem_No=? and related_Mem_No =?";
 	
 	private static final String UPDATE=
 			"UPDATE relation SET relation_Status=?"
@@ -283,6 +283,7 @@ public class RelationDAO implements RelationDAO_interface{
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT);
 			pstmt.setString(1, mem_No);
+			pstmt.setString(2, related_Mem_No);
 			
 			rs = pstmt.executeQuery();
 			

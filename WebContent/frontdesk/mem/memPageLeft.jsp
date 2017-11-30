@@ -108,6 +108,26 @@
                         </div>
                     </div>
                 </div>
+                <!-- 區塊5 -->
+                <div class="panel panel-info">
+                    <div class="panel-heading" role="tab" id="panel5">
+                        <h4 class="panel-title">
+			        <a id="noUnderLine" href="#eee" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="eee">
+			           <h2> 好友</h2>
+			        </a>
+			      </h4>
+                    </div>
+                    <div id="eee" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel5">
+                        <div class="panel-body">
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTm.jsp">關注工具人按鈕</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTmList.jsp">關注工具人列表</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友按鈕</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/friendlList.jsp">好友列表</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp">會員列表</a></h3>
+                        </div>
+                    </div>
+                </div>
                  <!-- 區塊2 -->
                 <div class="panel panel-info">
                     <div class="panel-heading" role="tab" id="panel2">
@@ -152,25 +172,6 @@
                     <div id="ddd" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel4">
                         <div class="panel-body">
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/mem/FAQ.jsp">ＦＡＱ</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- 區塊5 -->
-                <div class="panel panel-info">
-                    <div class="panel-heading" role="tab" id="panel5">
-                        <h4 class="panel-title">
-			        <a id="noUnderLine" href="#eee" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="eee">
-			           <h2> 好友</h2>
-			        </a>
-			      </h4>
-                    </div>
-                    <div id="eee" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel5">
-                        <div class="panel-body">
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTm.jsp">關注工具人按鈕</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTmList.jsp">關注工具人列表</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友按鈕</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/friendlList.jsp">好友列表</a></h3>
                         </div>
                     </div>
                 </div>
