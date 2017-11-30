@@ -337,7 +337,7 @@
     <servlet-name>AdServlet</servlet-name>
     <url-pattern>/ad/ad.do</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>Messages</servlet-name>
     <servlet-class>com.artiChat.controller.Messages</servlet-class>
   </servlet>
@@ -384,5 +384,13 @@
   <servlet-mapping>
     <servlet-name>Accusecase</servlet-name>
     <url-pattern>/accusecase/accusecase.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MissionComment</servlet-name>
+    <servlet-class>com.missioncomment.controller.MissionCommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MissionComment</servlet-name>
+    <url-pattern>/missioncomment/missioncomment.do</url-pattern>
   </servlet-mapping>
 </web-app>
