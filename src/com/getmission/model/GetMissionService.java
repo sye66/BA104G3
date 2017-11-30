@@ -2,6 +2,7 @@ package com.getmission.model;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.*;
 import java.util.List;
 import java.util.Map;
 
@@ -152,15 +153,30 @@ public class GetMissionService {
 	
 	public List<GetMissionVO> getAllValidMission(String mem_No){
 		List<GetMissionVO> listGetAllValMission = dao.getAllValidMission();
+		System.out.println("111111");
+		System.out.println(mem_No);
+		GetMissionVO getMissionMem = new GetMissionVO();
+		
+		getMissionMem.setIssuer_Mem_No(mem_No);
 		List<GetMissionVO> listGetSpecificMission = dao.findIssuerCase(mem_No);
-		if (listGetAllValMission.contains(listGetSpecificMission)) {
-			listGetAllValMission.remove(listGetSpecificMission);
-			for (GetMissionVO getMissionVO : listGetSpecificMission) {
-				System.out.printf("移除傳入會員:%s 的 任務:%s",mem_No,getMissionVO);
+		for(GetMissionVO issuer :listGetSpecificMission){
+			if(listGetAllValMission.contains(issuer)){
+				listGetAllValMission.remove(issuer);
 			}
+				
+			
 		}
+		
+		
+	
+		
+		for(GetMissionVO all :listGetAllValMission){
+			
+			System.out.println("   listGetAllValMission : "+all.getMission_No());
+		
+	}
 		System.out.println("沒有任務在資料庫");
-		return dao.getAllValidMission();
+		return listGetAllValMission;
 	}
 	public List<GetMissionVO> getOkAll(){
 		return dao.getOkAll();

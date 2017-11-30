@@ -234,7 +234,6 @@ public class GetMissionDAO implements GetMissionDAO_interface {
 
 			// Handle any driver errors
 		} catch (SQLException se) {
-			System.out.println("888888");
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
