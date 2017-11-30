@@ -2,14 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
+<%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.artiReport.model.*"%>
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.emp.model.*"%>
 
 <jsp:useBean id="memSvc" scope="session" class="com.mem.model.MemService" />
 <jsp:useBean id="artiReportSvc1" scope="page" class="com.artiReport.model.ArtiReportService" />
-
+<jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
 <%
+    ArtiFormVO artiformVO = new ArtiFormVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
     ArtiReportService artiReportSvc = new ArtiReportService();
 
@@ -65,10 +67,10 @@
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do"  name="form1" enctype="multipart/form-data">
-                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入內文關鍵字">
+                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入檢舉的文章編號 (EX:AR00000001)">
                         <input type="hidden" name="describe"  value="${artiFormVO.describe}">
     			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-                        <button class="btn btn-info" type="submit" name="action" value="listArti_BySearch"> GO!!! </button>
+                        <button class="btn btn-info" type="submit" name="action" value="getOneArti"> GO!!! </button>
                         </FORM>
                         </h1>
                       </div>
@@ -113,7 +115,7 @@
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
                     
-                        <h5 class="bigger lighter"> ${artiReportVO.mem_No} </h5>
+                        <h5 class="bigger lighter"> ${artiFormSvc.getOneArtiForm(artiReportVO.arti_No).arti_Title} </h5>
                         
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
@@ -169,6 +171,14 @@
                             <div class="" style="width:100px;">
                                 <div class="" style="">
                                 ${artiReportVO.report_Time}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-toolbar">
+                            <div class="" style="width:100px;">
+                                <div class="" style="">
+                                ${artiFormSvc.getOneArtiForm(artiReportVO.arti_No).mem_No}
                                 </div>
                             </div>
                         </div>
