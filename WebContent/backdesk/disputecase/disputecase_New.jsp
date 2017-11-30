@@ -185,9 +185,9 @@ try{
 		                            <%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%>
 		                        </td>
 		                        <td>
-									<form method="post" action="disputecase_Reply.jsp">
+									<form method="post" action="disputecase_Check.jsp">
 										<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-										<input type="submit" class="btn btn-info" value="回覆此案件">
+										<input type="submit" class="btn btn-info" value="查看此案件">
 									</form>
 								</td>
 								<td>
