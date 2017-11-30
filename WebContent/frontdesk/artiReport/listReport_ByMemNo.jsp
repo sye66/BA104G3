@@ -67,8 +67,8 @@
                       <div class="search">
                         <h1>
                        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do"  name="form1" enctype="multipart/form-data">
-                         <input type="text" size="40"  class="" name="describe"  placeholder="請輸入檢舉的文章編號 (EX:AR00000001)">
-                        <input type="hidden" name="describe"  value="${artiFormVO.describe}">
+                         <input type="text" size="40"  class="" name="arti_No"  placeholder="請輸入檢舉的文章編號 (EX:AR00000001)">
+                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
     			         <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
                         <button class="btn btn-info" type="submit" name="action" value="getOneArti"> GO!!! </button>
                         </FORM>
