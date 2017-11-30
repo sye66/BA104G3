@@ -26,19 +26,17 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-    #dispute_Attachment{
+    <meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
+    <style type="text/css">
+    #dispute_Attachment {
         width: 200px;
-
     }
-</style>
-<title>回覆爭議案件</title>
+    </style>
+    <title>回覆爭議案件</title>
 </head>
 <body>
     <div class="container">
@@ -134,18 +132,42 @@
                     <img src="<%=request.getContextPath()%>/disputecase/disputecase.do?action=get_Picture&dispute_Case_No=<%=disputeCaseNo%>" id="dispute_Attachment">
                 </div>
                     <div class="row" style="text-align: center; margin-top: 20px;">
-                        <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
-                        	<input type="hidden" name="action" value="emp_Get_Case">
-                        	<input type="hidden" name="emp_No" value="${empVO.emp_No}">
-                        	<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseNo%>">
-                        	<input type="submit" class="btn btn-primary" value="接手此案件">
-                        </form>
-                        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp" class="btn btn-warning">算了好麻煩喔</a>
+                        <button id="emp_Get_Case" class="btn btn-primary">接手此案件</button>
+                        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp">
+                            <button id="so_lazy" class="btn btn-warning">算了好麻煩喔</button>
+                        </a>
                     </div>
             </div>
         </div>
     </div>
     </div>
 </body>
-
+<script type="text/javascript">
+    $('#emp_Get_Case').click(function() {
+        $.ajax({
+            url: '<%=request.getContextPath()%>/disputecase/disputecase.do',
+            type: 'POST',
+            data: {
+                action: 'emp_Get_Case',
+                emp_No: "${empVO.emp_No}",
+                dispute_Case_No: "<%=disputeCaseNo%>"
+            },
+        })
+        .done(function() {
+            console.log("success");
+            swal({
+                  type: 'success',
+                  title: '接收爭議案件：<%=disputeCaseNo%>',
+                  showConfirmButton: false,
+                  timer: 1500
+            })
+            setTimeout(function () {
+                window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp")
+            },1600)
+        })
+        .fail(function() {
+            console.log("error");
+        })
+    });
+</script>
 </html>
