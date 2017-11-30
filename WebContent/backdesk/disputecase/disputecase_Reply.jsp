@@ -146,7 +146,7 @@
                     })
                 setTimeout(function(){
                     window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_OnGoing.jsp")
-                    },2000)
+                    },1500)
             }
 
         })
@@ -170,7 +170,7 @@
                     })
                 setTimeout(function(){
                     window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_OnGoing.jsp")
-                    },2000)
+                    },1500)
             }
 
         })
