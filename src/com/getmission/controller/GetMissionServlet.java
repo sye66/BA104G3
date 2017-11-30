@@ -319,6 +319,7 @@ public class GetMissionServlet extends HttpServlet {
 			req.setAttribute("getMissionVO", getMissionVO);
 			String url = "/casecandidate/casecandidate.do";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+			MissionSocket.pushMissionText(takecase_Mem_No,"checkmem"); //websocket
 			successView.forward(req, res);
 
 			/*************************** 其他可能的錯誤處理 *************************************/
@@ -703,7 +704,6 @@ public class GetMissionServlet extends HttpServlet {
 					req.setAttribute("getMissionVO", getMissionVO);
 					req.setAttribute("memVO", memVO);
 					RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/mission/issuerfinalstep.jsp");
-					MissionSocket.pushMissionText(takecase_Mem_No,"checkmem"); //websocket
 					failureView.forward(req, res);
 					return; // 程式中斷
 

@@ -126,7 +126,7 @@
 			<%@ include file="pages/page1.file"%>
 		</div>
 	</div>
-${getMissionSvc.getAllValidMission(memVO.mem_No).size()}
+
 	<c:set var="index" value="${1*1}" />
 	<c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission(memVO.mem_No)}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
 
