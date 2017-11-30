@@ -60,8 +60,7 @@ try{
 <body>
 
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
-	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />
-	<br>
+	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />	<br>
 	<br>
 	<br>
 	<div class="container">

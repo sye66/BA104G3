@@ -58,9 +58,8 @@ try{
 <title>爭議案件 - 退回案件</title>
 </head>
 <body>
-
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
-	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />
+	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />	
 	<br>
 	<br>
 	<br>
