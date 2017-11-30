@@ -22,6 +22,35 @@ public class GetMissionVO implements java.io.Serializable{
 	
 	
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((issuer_Mem_No == null) ? 0 : issuer_Mem_No.hashCode());
+		result = prime * result + ((mission_No == null) ? 0 : mission_No.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		GetMissionVO other = (GetMissionVO) obj;
+		if (issuer_Mem_No == null) {
+			if (other.issuer_Mem_No != null)
+				return false;
+		} else if (!issuer_Mem_No.equals(other.issuer_Mem_No))
+			return false;
+		if (mission_No == null) {
+			if (other.mission_No != null)
+				return false;
+		} else if (!mission_No.equals(other.mission_No))
+			return false;
+		return true;
+	}
 	public String getMission_No() {
 		return mission_No;
 	}

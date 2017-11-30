@@ -13,7 +13,8 @@
 	class="com.casecandidate.model.CaseCandidateService" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
-	List<GetMissionVO> list = getMissionService.getAllValidMission();
+	MemVO memVO2 = (MemVO) request.getSession().getAttribute("memVO");
+	List<GetMissionVO> list = getMissionService.getAllValidMission(memVO2.getMem_No());
 	CaseCandidateVO missionmem = new CaseCandidateVO();
 %>
 <jsp:useBean id="listmission_ByCompositeQuery" scope="request" type="java.util.List<GetMissionVO>" />

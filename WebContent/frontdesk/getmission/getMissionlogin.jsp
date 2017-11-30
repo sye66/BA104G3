@@ -13,8 +13,11 @@
 	class="com.casecandidate.model.CaseCandidateService" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
-	List<GetMissionVO> list = getMissionService.getAllValidMission();
+	MemVO memVO2 = (MemVO) request.getSession().getAttribute("memVO");
+	List<GetMissionVO> list = getMissionService.getAllValidMission(memVO2.getMem_No());
 	CaseCandidateVO missionmem = new CaseCandidateVO();
+	System.out.print("list"+list.size());
+	System.out.print("memVO2"+memVO2.getMem_No());
 	
 %>
 
@@ -123,11 +126,9 @@
 			<%@ include file="pages/page1.file"%>
 		</div>
 	</div>
-
+${getMissionSvc.getAllValidMission(memVO.mem_No).size()}
 	<c:set var="index" value="${1*1}" />
-	<c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission()}"
-		begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"
-		varStatus="s" step="1">
+	<c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission(memVO.mem_No)}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
 
 		<c:set var="index" value="${index + 1}" />
 

@@ -123,7 +123,7 @@ div {
                        </div>
                     </div>
                     <div class="widget-main padding-16">
-                        <h4 style="font-family:Microsoft JhengHei;">詳細內文 : </h4><br>
+                        <h2 style="font-family:Microsoft JhengHei;">詳細內文 : </h2><br>
                         <font size="4" style="font-family:Microsoft JhengHei;">${artiFormVO.describe}</font>
                     </div>                    
          </div>
@@ -221,6 +221,7 @@ div {
 		         <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
+		         <input type="hidden" name="rep_Re_Desc"  value="<%=artiReportVO.getRep_Re_Desc()%>">
                  <button class="btn btn-warning" type="submit" name="action" value="insertReport"> 檢舉文章</button>
 		         
 		        </div>

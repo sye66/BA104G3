@@ -68,6 +68,7 @@
 	<br>
 	<br>
 	<br>
+<<<<<<< HEAD
 	<script type="text/javascript">
 	
 	function watch(){
@@ -138,6 +139,11 @@
 	</script>
     
     
+=======
+	<br>
+	<br>
+	<br>
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	
 	<div class="container">
 		<div class="row">
@@ -230,7 +236,9 @@
  			</div>
  		</div>
  	</div>	
-	
+	<br>
+	<br>
+	<br>
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
 </body>
