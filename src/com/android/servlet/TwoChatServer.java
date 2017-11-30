@@ -16,7 +16,7 @@ import javax.websocket.OnError;
 import javax.websocket.OnClose;
 import javax.websocket.CloseReason;
 
-@ServerEndpoint("/TwoChatServer/{userName}")
+@ServerEndpoint("/MyEchoServer/{userName}")
 public class TwoChatServer {
 	private static Map<String, Session> sessionsMap = new ConcurrentHashMap<>();
 	Gson gson = new Gson();
