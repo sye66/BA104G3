@@ -134,11 +134,14 @@
                     <img src="<%=request.getContextPath()%>/disputecase/disputecase.do?action=get_Picture&dispute_Case_No=<%=disputeCaseNo%>" id="dispute_Attachment">
                 </div>
                     <div class="row" style="text-align: center; margin-top: 20px;">
-                        <a href="<%=request.getContextPath()%>/disputecase/disputecase.do?action=emp_Get_Case" class="btn btn-primary">接手此案件</a>
+                        <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
+                        	<input type="hidden" name="action" value="emp_Get_Case">
+                        	<input type="hidden" name="emp_No" value="${empVO.emp_No}">
+                        	<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseNo%>">
+                        	<input type="submit" class="btn btn-primary" value="接手此案件">
+                        </form>
                         <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp" class="btn btn-warning">算了好麻煩喔</a>
                     </div>
-            
-
             </div>
         </div>
     </div>
