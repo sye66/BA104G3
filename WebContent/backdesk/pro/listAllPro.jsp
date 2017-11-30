@@ -11,7 +11,7 @@
     pageContext.setAttribute("list",list);
 %>
 <jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
-
+<jsp:useBean id="proSvc2" scope="page" class="com.pro.model.ProService" />
 
 <html>
 <head>
@@ -22,7 +22,7 @@
 
 </head>
 <body>
- 
+ 	
     <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/pro/proBackLeft.jsp" flush="true" />
 	
@@ -36,6 +36,78 @@
 <!--   		</ol> -->
 <!-- 		</nav> -->
 <!-- 	</div> -->
+
+
+<div class="col-xs-12 col-sm-9">
+	<br>
+	
+		<h3>資料查詢:</h3>
+		<%-- 錯誤表列 --%>
+		<c:if test="${not empty errorMsgs}">
+			<font color='red'>請修正以下錯誤:
+				<ul>
+					<c:forEach var="message" items="${errorMsgs}">
+						<li>${message}</li>
+					</c:forEach>
+				</ul>
+			</font>
+		</c:if>
+
+	
+		<ul>
+		<br>
+			<table>
+				<tr>
+					<th style="text-align:left;height:30px;">輸入商品編號 (如P000001):</th>
+					<th style="text-align:left;height:30px;">選擇商品編號:</th>
+					<th style="text-align:left;height:30px;">選擇商品名稱:</th>
+				</tr>
+				<tr>
+				<td style="text-align:left;">
+				<FORM METHOD="post" style="width:250px;height:30px;"
+					ACTION="<%=request.getContextPath()%>/pro/pro.do">
+					<input type="text" name="pro_No">
+					<input type="submit" value="送出"> <input type="hidden"
+						name="action" value="getOne_For_Display">
+				</FORM>
+				</td>
+
+			
+
+				<td style="text-align:left;">
+				<FORM METHOD="post" style="width:300px;height:30px;"
+					ACTION="<%=request.getContextPath()%>/pro/pro.do">
+					 <select size="1" name="pro_No">
+					
+						<c:forEach var="proVO" items="${proSvc2.all}">
+							<option value="${proVO.pro_No}">${proVO.pro_No}
+						</c:forEach>
+					</select> <input type="submit" value="送出"> <input type="hidden"
+						name="action" value="getOne_For_Display">
+				</FORM>
+				</td>
+
+				<td style="text-align:left;">
+				<FORM METHOD="post" style="width:350px;height:30px;"
+					ACTION="<%=request.getContextPath()%>/pro/pro.do">
+					<select size="1" name="pro_No">
+						<c:forEach var="proVO" items="${proSvc2.all}">
+							<option value="${proVO.pro_No}">${proVO.pro_Name}
+						</c:forEach>
+					</select> <input type="submit" value="送出"> <input type="hidden"
+						name="action" value="getOne_For_Display">
+				</FORM>
+				</td>
+			</tr>
+		</table>
+
+
+		
+	</div>
+
+
+
+
 	<div class="col-xs-12 col-sm-9 ">
 	<br>
 	<table id="tavle01" >

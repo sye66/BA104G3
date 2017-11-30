@@ -14,18 +14,44 @@
 <%@ page import="com.mem.model.*"%>
 <%@ page import="com.proorder.model.*"%>
 <%@ page import="com.emp.model.*"%>
+<%@ page import="com.artiReport.model.*"%>
 
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
 	GetMissionService getMissionSve = new GetMissionService();
+	int missCount1 = 0;//全部任務
+	int missCount0 = 0;//一般任務
 	int missCount = 0;//檢舉任務
 	int missCount2 = 0;//爭議任務
+	
+
+	int missA = 0;//修繕
+	int missB = 0;//教育
+	int missC = 0;//交友
+	int missD = 0;//其他
+	
+	
 	int priOrdCount = 0;//訂單審核
 	int empCount = 0;//員工授權
 	
 	List<GetMissionVO> missList = getMissionSve.getAll();
 	for(GetMissionVO g : missList){
+		missCount1++;
+		
+		if(g.getMission_Category().equals("修繕")){
+			missA++;
+		}
+		if(g.getMission_Category().equals("教育")){
+			missB++;
+		}
+		if(g.getMission_Category().equals("交友")){
+			missC++;
+		}
+		if(g.getMission_Category().equals("其他")){
+			missD++;
+		}
+		
 		if(g.getMission_State().equals(7)||g.getMission_State().equals(72)){
 			missCount++;
 		}
@@ -50,6 +76,14 @@
 		}
 	}
 	
+	ArtiReportService artiReportSvc = new ArtiReportService();
+	  Set<ArtiReportVO> set= artiReportSvc.getAllReport();
+	  
+	  //一般任務
+	  missCount0=missCount1-missCount-missCount2;
+	  
+	    
+	  
 %>
 
 </head>
@@ -65,7 +99,7 @@
 	 	<div id="page-wrapper">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <h1 class="page-header" >等待處理案件:</h1>
+                    <h2 class="page-header" >等待處理案件:</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -74,30 +108,30 @@
 	 
 	  	<div class="col-xs-12 col-sm-10 col-sm-offset-1 ">
 	 		 
-	 		 <div class="col-xs-12 col-sm-3 ">
-	 				<div class="panel panel-yellow" style="border-color: #f0ad4e">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-9">
-                                    <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg10.png"style="height:40px;">
-                                    <span style="font-size:20px;">會員檢舉審核:</span>
-                                </div>
-                                <div class="col-xs-12 col-sm-3 text-right">
-                                    <div class="huge">26</div>
+<!-- 	 		 <div class="col-xs-12 col-sm-3 "> -->
+<!-- 	 				<div class="panel panel-yellow" style="border-color: #f0ad4e"> -->
+<!--                         <div class="panel-heading"> -->
+<!--                             <div class="row"> -->
+<!--                                 <div class="col-xs-12 col-sm-9"> -->
+<%--                                     <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg10.png"style="height:40px;"> --%>
+<!--                                     <span style="font-size:20px;">會員檢舉審核:</span> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xs-12 col-sm-3 text-right"> -->
+<!--                                     <div class="huge">26</div> -->
                                     
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left" style="font-size:16px;">查看詳情</span>
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <a href="#"> -->
+<!--                             <div class="panel-footer"> -->
+<!--                                 <span class="pull-left" style="font-size:16px;">查看詳情</span> -->
                                 
-                                <span class="pull-right"><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrow_right.png"></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-	 			 </div>	
+<%--                                 <span class="pull-right"><img src="<%=request.getContextPath()%>/res/images/pro_icons/arrow_right.png"></span> --%>
+<!--                                 <div class="clearfix"></div> -->
+<!--                             </div> -->
+<!--                         </a> -->
+<!--                     </div> -->
+<!-- 	 			 </div>	 -->
 	 			
 	 			
 	 			<div class="col-xs-12 col-sm-3 col-sm-offset-1">	
@@ -134,7 +168,7 @@
                                     <span style="font-size:20px;">討論區檢舉審核</span>
                                  </div>
                                 <div class="col-xs-12 col-sm-3 text-right">
-                                    <div class="huge">124</div>
+                                    <div class="huge"><%=set.size() %></div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +187,7 @@
 	 		
 	 		
 	 		
-	 			<div class="col-xs-12 col-sm-3 ">	
+	 			<div class="col-xs-12 col-sm-3 col-sm-offset-1">	
 	 				<div class="panel panel-red" style="border-color: #ff7575">
                         <div class="panel-heading">
                             <div class="row">
@@ -244,7 +278,7 @@
 	 	<div id="page-wrapper">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h2 class="page-header">統計圖表</h2>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -252,12 +286,64 @@
       </div>    <!-- /.row -->
 	
 	
-	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+		
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>		
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>		
+
+
 	 		
-	<div class="col-xs-12 col-sm-10 col-sm-offset-1 "> 		
-	 			<div class="col-xs-12 col-sm-3 ">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 "> 
+	
+				<div class="col-xs-12 col-sm-3 col-sm-offset-1">
+	 				<div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-9">
+                                    <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg21.png"
+                                         style="height:40px;">
+                                    <span style="font-size:20px;">任務</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 text-right">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel-footer">
+                            	<div style="width: 350px; height: 300px">
+  									<canvas id="canvasPie"></canvas>
+		 						</div>
+                            </div>
+                    </div>
+	 			 </div>	
+	 	
+	 	
+	 	
+				<div class="col-xs-12 col-sm-3 col-sm-offset-1">
+	 				<div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-9">
+                                    <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg21.png"
+                                         style="height:40px;">
+                                    <span style="font-size:20px;">任務分類</span>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 text-right">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel-footer">
+                            	<div style="width: 350px; height: 300px">
+  									<canvas id="doughnut-chart" ></canvas>
+		 						</div>
+                            </div>
+                    </div>
+	 			 </div>	
+	
+	
+	
+			
+	 			<div class="col-xs-12 col-sm-3 col-sm-offset-1">
 	 				<div class="panel panel-danger">
                         <div class="panel-heading">
                             <div class="row">
@@ -267,33 +353,68 @@
                                     <span style="font-size:20px;">本周新進會員數:</span>
                                 </div>
                                 <div class="col-xs-12 col-sm-3 text-right">
-                                   
-                                    
                                 </div>
                             </div>
                         </div>
-                        
                             <div class="panel-footer">
                             <canvas id="myChart"></canvas>
                                 <div class="clearfix"></div>
                             </div>
-                       
-                    </div>
+                   	</div>
+	 			 <div id="flot-placeholder" style="width:350px;height:300px"></div>
 	 			 </div>	
-	 	
-	 	
-	 	<div id="flot-placeholder" style="width:400px;height:300px"></div>
+	 		
 	 	
 	 	
 	  
 	
             
     </div> 
-<script type="text/javascript">
+<script>
+ //資料標題
+            var labels= ['一般任務<%=missCount0%>','被檢舉任務<%=missCount%>','爭議任務<%=missCount2%>'];
 
+            var ctx = document.getElementById('canvasPie').getContext('2d');
+            var pieChart = new Chart(ctx, {
+              type: 'pie',
+              data : {
+                labels:labels,
+                datasets: [{
+                    //預設資料
+                    data:[<%=missCount0%>,<%=missCount%>,<%=missCount2%>],
+                    backgroundColor: [
+                    //資料顏色
+                                "#00A1FF",
+                                "#FFff04",
+                                 "#FF0004"
+                    ],
+                }],
+              }
+            });
+</script> 
 
+<script>
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["修繕<%=missA%>", "教育<%=missB%>", "交友<%=missC%>", "其他<%=missD%>"],
+      datasets: [
+        {
+         
+          backgroundColor: ["#E800E8", "#2894FF","#FFD306","#FF8040"],
+          data: [<%=missA%>,<%=missB%>,<%=missC%>,<%=missD%>]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+       
+      }
+    }
+});
+</script> 
 
-</script>   
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {

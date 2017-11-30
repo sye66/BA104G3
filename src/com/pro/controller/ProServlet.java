@@ -39,8 +39,8 @@ public class ProServlet extends HttpServlet {
 		if ("getOne_For_Display".equals(action)||"getOne_For_Display_F".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
-//			String requestURL = req.getParameter("requestURL");
-		
+			String requestURL = req.getParameter("requestURL");
+System.out.println("requestURL: "+requestURL);		
 			try {
 				/***************************
 				 * 1.接收請求參數 - 輸入格式的錯誤處理
@@ -51,7 +51,7 @@ System.out.println("前台進入商品編號: "+pro_No);
 					errorMsgs.add("輸入格式的錯誤");
 				}
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/selectPage.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/backdesk/pro/listAllPro.jsp");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
