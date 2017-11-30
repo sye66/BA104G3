@@ -60,6 +60,9 @@ try{
 	
 	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />
+	<br>
+	<br>
+	<br>
 	<div class="container">
 	
 	<%-- 列出所有爭議案件 --%>
@@ -80,7 +83,7 @@ try{
 			                </div>
 			            </div>
 			        </div>
-			        <a href="#">
+			        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp">
 			            <div class="panel-footer">
 			                <span class="pull-left">查看細節</span>
 			                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -159,8 +162,9 @@ try{
 			    </div>
 			</div>
 		</div>
-
-
+		<br>
+		<br>
+		<br>
 		<%-- 案件查詢 --%>
 		<div class="col-xs-12 col-sm-12">
 			<div class="row">
@@ -182,51 +186,7 @@ try{
 		<br>
 		
 		
-		<%-- 待處理案件列出 --%>
-		<div class="col-xs-12 col-sm-12">
-	        <table class="table table-hover">
-	            <h2>爭議案件 - 待處理</h2>
-	            <thead>
-	                <tr>
-	                    <th>案件編號</th>
-	                    <th>原任務編號</th>
-	                    <th>提出人</th>
-	                    <th>發案時間</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	                <%for(DisputeCaseVO disputeCaseVO : listAllCase){%>
-	                    <tr>
-	                        <td>
-	                            <%=disputeCaseVO.getDispute_Case_No()%>
-	                        </td>
-	                        <td>
-	                            <%=disputeCaseVO.getMission_No()%>
-	                        </td>
-	                        <td>
-	                            <%=disputeCaseVO.getDispute_Mem_No() %>
-	                        </td>
-	                        <td>
-	                            <%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%>
-	                        </td>
-	                        <td>
-								<form method="post" action="disputecase_Reply.jsp">
-									<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-									<input type="submit" class="btn btn-info" value="回覆此案件">
-								</form>
-							</td>
-							<td>
-	                            <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
-									<input type="hidden" name="action" value="delete_Dispute_Case">
-									<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-	                            	<input type="submit" class="btn btn-danger" value="刪除此案件">
-	                            </form>
-	                        </td>
-	                    </tr>
-	                <%}%>
-	            </tbody>
-	    	</table>
-		</div>
+
 	</div>
 </body>
 </html>

@@ -4,6 +4,10 @@
 <%
 	MemVO memVO = (MemVO) request.getSession().getAttribute("memVO");
 %>
+<c:if test="${(memVO.mem_No) == null}">
+	<c:redirect url="${request.getContextPath()}/lib/publicfile/include/file/index.jsp" />
+</c:if>
+
 <!DOCTYPE html>
 <html lang="">
 	<head>
