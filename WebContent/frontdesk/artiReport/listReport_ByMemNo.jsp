@@ -120,16 +120,15 @@
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-			                      <c:if test="${empVO.emp_State == 1}">
+			                      
 			                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
 			                        <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-			                        <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
-			                        <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-			                        <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
+			                        <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
+			                        <input type="hidden" name="mem_No"  value="${artiReportVO.mem_No}">
 			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReply">刪除檢舉</button>
+			                        <button class="btn btn-danger" type="submit" name="action" value="deleteReport">刪除檢舉</button>
  			                    </FORM>
-                                </c:if>
+                            
                                 </div>
                             </div>
                         </div>
@@ -137,23 +136,14 @@
                       <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-                                <c:if test="${empVO.emp_State == 1}">
-                                <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
-                                    <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
-                                    <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
-                                    <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">
-                                    <input type="hidden" name="mem_No"  value="${artiReplyVO.mem_No}">
-			                        <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
- 			                        <button class="btn btn-success" type="submit" name="action" value="getOneReplyWithSet_For_Update">修改回覆</button>
-			                    </FORM>
-                                </c:if>
+
                                 </div>
                             </div>
                         </div>
                         
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
-                                <div class="" style="">${artiReportO.rep_Re_Desc}</div>
+                                <div class="" style="">${artiReportVO.rep_Re_Desc}</div>
                             </div>
                         </div>
                         <div class="widget-toolbar">
