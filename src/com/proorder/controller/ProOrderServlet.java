@@ -77,15 +77,15 @@ System.out.println("建立訂單 會員編號: "+mem_No);
 				proOrderVO.setOrd_Date(ord_Date);
 				proOrderVO.setOrd_Shipinfo(ord_Shipinfo);
 				proOrderVO.setOrd_Ship_Date(ord_Ship_Date);
-System.out.println("set完資料 "
-				+proOrderVO.getMem_No()+" "
-				+proOrderVO.getOrd_Consignee()+" "
-		        +proOrderVO.getOrd_Price()+" "
-		        +proOrderVO.getOrd_Phone()+" "
-		        +proOrderVO.getOrd_Address()+" "
-				+proOrderVO.getOrd_Date()+" "
-		        +proOrderVO.getOrd_Shipinfo()+" "
-		        +proOrderVO.getOrd_Ship_Date());				
+//System.out.println("set完資料 "
+//				+proOrderVO.getMem_No()+" "
+//				+proOrderVO.getOrd_Consignee()+" "
+//		        +proOrderVO.getOrd_Price()+" "
+//		        +proOrderVO.getOrd_Phone()+" "
+//		        +proOrderVO.getOrd_Address()+" "
+//				+proOrderVO.getOrd_Date()+" "
+//		        +proOrderVO.getOrd_Shipinfo()+" "
+//		        +proOrderVO.getOrd_Ship_Date());				
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -219,6 +219,7 @@ System.out.println("session取得的會員編號 "+mem_No);
 				String ord_No = req.getParameter("ord_No");
 				String requestURL = req.getParameter("requestURL");
 				
+System.out.println("requestURL"+requestURL);				
 				 
 				java.sql.Date ord_Ship_Date = new java.sql.Date(System.currentTimeMillis());
 System.out.println("UP訂單: "+ord_No);				
