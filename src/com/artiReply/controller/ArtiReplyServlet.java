@@ -618,15 +618,17 @@ public class ArtiReplyServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				String reply_No = req.getParameter("reply_No");
 				String mem_No = req.getParameter("mem_No");
-				
-				String emp_No = req.getParameter("emp_No");
-				if(req.getSession().getAttribute("emp_No")==null){
-					String contextPath = getServletContext().getContextPath();
-					errorMsgs.add("@@ 要麻煩請你先登入喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-					failuewView.forward(req, res);
-					return;
-				}
+
+//				String emp_No = req.getParameter("emp_No");
+//System.out.println("REPLY-BACK");
+//System.out.println(req.getSession().getAttribute("emp_No"));
+//				if(req.getSession().getAttribute("emp_No")==null){
+//					String contextPath = getServletContext().getContextPath();
+//					errorMsgs.add("@@ 要麻煩請你先登入喔~");
+//					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+//					failuewView.forward(req, res);
+//					return;
+//				}
 
 				/***************************2.開始刪除資料***************************************/
 				ArtiReplyService artiReplySvc = new ArtiReplyService();
