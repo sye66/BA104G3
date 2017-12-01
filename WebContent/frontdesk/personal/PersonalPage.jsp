@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
+<jsp:useBean id="memmemSvc" scope="page" class="com.mem.model.MemService"/>
 
 <% 
 	MemVO memVO = (MemVO)session.getAttribute("memVO");
@@ -18,6 +19,14 @@
 	//所有會員
 	MemService memSvc = new MemService();
 	List<MemVO> getAllMemVO = memSvc.getAll();
+	String str = new String();
+	MemVO memVO2 = new MemVO();
+	for(int i = 0; i < getAllMemVO.size(); i++){
+		if(memVO.getMem_No().equals(getAllMemVO.get(i).getMem_No()));
+		str = getAllMemVO.get(i).getMem_No();
+		memVO2 = memSvc.getOneMem(str);
+		getAllMemVO.remove(memVO2);
+	}
 	pageContext.setAttribute("getAllMemVO", getAllMemVO);
 	//顯示自己排名
 	RankService rankSvc = new RankService();
@@ -60,8 +69,8 @@
 }
 
 .profile-header-img > img.img-circle {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     border: 2px solid #51D2B7;
 }
 
@@ -213,7 +222,7 @@
 			<ul class="social">
                 <li class="facebook"><a href="<%=request.getContextPath()%>/frontdesk/personal/personalMissionHistory.jsp">歷史查詢</a></li>
                 <li class="twitter"><a href="<%=request.getContextPath()%>/frontdesk/mem/memUpdateFile.jsp">修改資料</a></li>
-                <li class="pinterest"><img src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memVO.mem_No}"><i class="fa fa-pinterest-p fa-3x"></i></li>
+                <li class="pinterest"><img src="#"><i class="fa fa-pinterest-p fa-3x"></i></li>
                 <li class="behance"><a href="<%=request.getContextPath()%>/frontdesk/personal/personalAchieve.jsp">成就查詢</a></li>
             </ul>
 		</div>
@@ -238,22 +247,23 @@
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<c:forEach var="all" items="${getAllMemVO}" varStatus="om">
- 				    	<c:if test="${(om.index%3)==0}">
+ 				    	
+ 				    	<c:if test="${(om.count%3)==1}">
  				    		<tr>
 	 				    		<td class="jump">
 	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
 	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
 	 				    			</a>
-	 				    		</td>	
+	 				    		</td>
  				    	</c:if>
- 				    		<c:if test="${(om.index%3)==1}">
+ 				    	<c:if test="${(om.count%3)==2}">
 	 				    		<td class="jump">
 	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
 	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
 	 				    			</a>
 	 				    		</td>	
  				    	</c:if>
- 				    		<c:if test="${(om.index%3)==2}">
+ 				    	<c:if test="${(om.count%3)==0}">
 	 				    		<td class="jump">
 	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
 	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">

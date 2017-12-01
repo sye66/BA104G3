@@ -137,7 +137,7 @@ $('#newEmp').click(function(){
 	$('#Useremail').val("aaa123@gmail.com");
 	$('#Userjob').val("manager");
 	$('#Userphone').val("3345678");
-	$('#Userstate').val("在職");
+	$('#Userstate').val("待授權");
 });
 
 </script>
