@@ -52,7 +52,7 @@
     <div class="row">
     <div class="col-xs-12 col-sm-12">
 <section class='rating-widget'>
-  <form METHOD="post" ACTION="<%=request.getContextPath()%>/getmission/getmission.do"">
+  <form METHOD="post" ACTION="<%=request.getContextPath()%>/missioncomment/missioncomment.do"">
   <!-- Rating Stars Box -->
   <div class='rating-stars text-center' >
     <ul id='stars' >
@@ -76,6 +76,11 @@
   <div class="col-xs-12 col-sm-12 col-sm-offset-5">
   <textarea class="smallInput center" ROWS="5"   COLS="20" name="comment_Detial"></textarea>
  </div>
+ 
+ <button class="btn btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
+ <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
+ <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
+								                
   </form>
 </section>
 
