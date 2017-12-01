@@ -394,20 +394,20 @@ System.out.println("AD-Server-555");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			try{
+//			try{
 				/***************************1.接收請求參數***************************************/
                 HttpSession session = req.getSession();
 				String ad_No = req.getParameter("ad_No");
 
 
-               String emp_No = req.getParameter("emp_No");
-               if(req.getSession().getAttribute("emp_No")==null){
-	               String contextPath = getServletContext().getContextPath();
-	               errorMsgs.add("@@ 要麻煩請你先登入喔~");
-	               RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-	               failuewView.forward(req, res);
-	               return;
-               }
+//               String emp_No = req.getParameter("emp_No");
+//               if(req.getSession().getAttribute("emp_No")==null){
+//	               String contextPath = getServletContext().getContextPath();
+//	               errorMsgs.add("@@ 要麻煩請你先登入喔~");
+//	               RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+//	               failuewView.forward(req, res);
+//	               return;
+//               }
 				/***************************2.開始刪除資料***************************************/
 				AdService adSvc = new AdService();
 				adSvc.deleteAd(ad_No);
@@ -418,11 +418,11 @@ System.out.println("AD-Server-555");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
-			} catch (Exception e){
-				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
-				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
-				failuewView.forward(req, res);
-			}
+//			} catch (Exception e){
+//				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
+//				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/ad/selectAd_page.jsp");
+//				failuewView.forward(req, res);
+//			}
 		}
 		
 		if ("get_Music".equals(action)){

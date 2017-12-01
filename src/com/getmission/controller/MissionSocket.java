@@ -44,14 +44,11 @@ public class MissionSocket {
 				for (Session session : allSessions) {
 					if (session.isOpen())
 						session.getAsyncRemote().sendText(message);
-
 				}
 			}
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		for (Session session : allSessions) {
 			if (session.isOpen())
 				session.getAsyncRemote().sendText(message);

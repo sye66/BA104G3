@@ -1,13 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.ad.model.*"%>
 <%@ page import="com.artiClass.model.*"%>
-
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
 <jsp:useBean id="artireplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
+
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     AdVO adVO = (AdVO) request.getAttribute("adVO"); 
 
@@ -143,11 +147,13 @@ a{
                         
                             <div class="btn-group">
                             <div>
-                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
-			                <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
-			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                <button class="btn btn-danger" type="submit" name="action" value="deleteAd">刪除廣告</button>
-                            </FORM>
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
+			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                 <button class="btn btn-danger" type="submit" name="action" value="deleteAdFMBack"> 刪除廣告 </button>
+
+			                 </FORM>
                             </div>
                             </div>
                            
