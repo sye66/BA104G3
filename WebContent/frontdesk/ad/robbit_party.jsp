@@ -35,7 +35,6 @@ div> .timeline-body{
 	height:0 ;
 	overflow:hidden;
 	margin-left:10px;
-
 }
 
 .video-container iframe, .video-container object, .video-container embed {
