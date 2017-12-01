@@ -22,7 +22,7 @@ public class MissionDAO implements MissionDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission ORDER BY mission_No";
 	private static final String GET_ONE_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission WHERE mission_No = ?";		
 	private static final String GET_STMT_BY_TAKECASE_MEM = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission where takecase_Mem_No = ?"; 
-	private static final String GET_STMT_BY_ISSUER_MEM = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission where issuer_Mem_No = ?";
+	private static final String GET_STMT_BY_ISSUER_MEM = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission where issuer_Mem_No = ? ";
 	private static final String DELETE = "DELETE FROM mission WHERE mission_No = ?";
 	private static final String DELETE_ACCUSE_CASE = "DELETE FROM ACCUSE_CASE WHERE MISSION_NO = ?";
 	private static final String UPDATE = "UPDATE mission SET mission_Name = ?, mission_Category = ?, mission_Des = ?, issuer_Mem_No = ?, takecase_Mem_No = ?, mission_Release_Time = ?, mission_Due_Time = ?, mission_Start_Time = ?, mission_End_Time = ?, mission_State = ?, mission_Pattern = ?, mission_Pay=?, mission_Gps_Lat=?, mission_Gps_Lng=?  where mission_No=?";
@@ -633,7 +633,7 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 	try {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, userid, passwd);
-		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State =3 AND mission_State =4 AND mission_State =8");
+		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND (mission_State =3 OR mission_State =4 OR mission_State =8)");
 		pstmt.setString(1, issuer_Mem_No);
 		rs = pstmt.executeQuery();
 		
@@ -713,6 +713,78 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No, String candi
 		System.out.println("sb"+sb);
 		
 		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State <= 2"+sb);
+		pstmt.setString(1, issuer_Mem_No);
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			missionVO = new MissionVO();
+			missionVO.setMission_No(rs.getString("mission_No"));
+			missionVO.setMission_Name(rs.getString("mission_Name"));
+			missionVO.setMission_Category(rs.getString("mission_Category"));
+			missionVO.setMission_Des(rs.getString("mission_Des"));
+			missionVO.setIssuer_Mem_No(rs.getString("issuer_Mem_No"));
+			missionVO.setTakecase_Mem_No(rs.getString("takecase_Mem_No"));
+			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
+			missionVO.setMission_State(rs.getInt("mission_State"));
+			missionVO.setMission_Pattern(rs.getInt("mission_Pattern"));
+			missionVO.setMission_Pay(rs.getDouble("mission_Pay"));
+			missionVO.setMission_Gps_Lat(rs.getDouble("mission_Gps_Lat"));
+			missionVO.setMission_Gps_Lng(rs.getDouble("mission_Gps_Lng"));
+			list.add(missionVO);
+			
+//			missionVO.setMission_Release_Time(rs.getTimestamp("mission_Release_Time"));
+//			missionVO.setMission_Due_Time(rs.getTimestamp("mission_Due_Time"));
+//			missionVO.setMission_Start_Time(rs.getTimestamp("mission_Start_Time"));
+//			missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
+			
+		}
+		
+		
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+	return list;
+}
+
+public List<MissionVO> getByIssuerMemResponse2(String issuer_Mem_No) {
+	
+	List<MissionVO> list = new ArrayList<MissionVO>();
+	MissionVO missionVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	try {
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, userid, passwd);
+		
+		
+		System.out.println("issuer_Mem_NoDAO"+issuer_Mem_No);
+		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND (mission_State <= 2 OR mission_State = 7 OR mission_State = 72)");
 		pstmt.setString(1, issuer_Mem_No);
 		rs = pstmt.executeQuery();
 		

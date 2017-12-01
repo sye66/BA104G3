@@ -113,6 +113,25 @@ public class MissionServlet extends HttpServlet {
 //				issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No,candidate_Mem_No);
 //			}
 			writeText(res,gson.toJson(issuerList));
+		}  else //查fa案人
+			if("getByIssuerMemResponse2".equals(action)){
+			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
+			System.out.println("issuer_Mem_No"+issuer_Mem_No);
+//			String candidate_Mem_No = jsonObject.get("candidate_Mem_No").getAsString();
+//			String btText = jsonObject.get("btText").getAsString();
+			List<MissionVO> issuerList = null;
+			issuerList = missionDAO.getByIssuerMemResponse2(issuer_Mem_No);
+//			if("發起的任務".equals(btText)){
+//				System.out.println("發起的任務");
+//				issuerList = missionDAO.getByIssuerMemResponse(candidate_Mem_No,issuer_Mem_No);
+//			}else if ("提出請求".equals(btText)) {
+//				System.out.println("提出請求");
+//				issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No,candidate_Mem_No);
+//			}else{
+//				System.out.println("xxx發起的任務");
+//				issuerList = missionDAO.getByIssuerMemResponse(issuer_Mem_No,candidate_Mem_No);
+//			}
+			writeText(res,gson.toJson(issuerList));
 		} else //查fa案人
 			if("getByIssuerMemProcess".equals(action)){
 			String issuer_Mem_No = jsonObject.get("mem_No").getAsString();
@@ -315,7 +334,7 @@ public class MissionServlet extends HttpServlet {
 		if ("addAccuseCase".equals(action)){
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			String accuser_No = jsonObject.get("mem_No").getAsString();
-			Date accuse_Date = new Date(System.currentTimeMillis());
+			Timestamp accuse_Date = new Timestamp(System.currentTimeMillis());
 			String accuse_Detail = jsonObject.get("accuse_Detail").getAsString();
 			Integer accuse_State = 1;
 //			case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
@@ -336,6 +355,8 @@ public class MissionServlet extends HttpServlet {
 			String mission_No = jsonObject.get("mission_No").getAsString();
 			String dispute_Mem_No = jsonObject.get("mem_No").getAsString();
 			String dispute_Content = jsonObject.get("dispute_Content").getAsString();
+//			byte[] dispute_Attachment = jsonObject.get("dispute_Attachment").
+//			byte[] dispute_Attachment = disputcaseDAO.findByMission(mission_No)
 			System.out.println(mission_No +"  "+dispute_Mem_No+"  "+dispute_Content);
 			disputcaseDAO.insert(mission_No, dispute_Mem_No, dispute_Content);
 			missionDAO.updateMissionState(8, mission_No);
@@ -369,6 +390,11 @@ public class MissionServlet extends HttpServlet {
 			String missionJson = jsonObject.get("mission").getAsString();
 			MissionVO mission = gson.fromJson(missionJson, MissionVO.class);
 			missionDAO.updateMission(mission);
+		}else
+		if ("findAccuseCaseReasonByMission".equals(action)){
+			String mission_No = jsonObject.get("mission_No").getAsString();
+			List<String> accuseList = accuseCaseDAO.findAccuseDetailByMission(mission_No);
+			writeText(res,gson.toJson(accuseList));
 		}
 
 	}
