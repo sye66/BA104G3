@@ -54,8 +54,8 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(1, accuseCaseVO.getMission_No());
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
-			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-			pstmt.setDate(5, accuseCaseVO.getClosed_Case_Date());
+			pstmt.setTimestamp(4, accuseCaseVO.getAccuse_Date());
+			pstmt.setTimestamp(5, accuseCaseVO.getClose_Case_Date());
 			pstmt.setString(6, accuseCaseVO.getAccuse_Detail());
 			pstmt.setInt(7, accuseCaseVO.getAccuse_State());
 
@@ -99,8 +99,8 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			pstmt.setString(1, accuseCaseVO.getMission_No());
 			pstmt.setString(2, accuseCaseVO.getAccuser_No());
 			pstmt.setString(3, accuseCaseVO.getEmp_No());
-			pstmt.setDate(4, accuseCaseVO.getAccuse_Date());
-			pstmt.setDate(5, accuseCaseVO.getClosed_Case_Date());
+			pstmt.setTimestamp(4, accuseCaseVO.getAccuse_Date());
+			pstmt.setTimestamp(5, accuseCaseVO.getClose_Case_Date());
 			pstmt.setString(6, accuseCaseVO.getAccuse_Detail());
 			pstmt.setInt(7, accuseCaseVO.getAccuse_State());
 			pstmt.setString(8, accuseCaseVO.getAccuse_No());
@@ -188,14 +188,14 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVo ä¹?ç¨±ç?ºDomain objects
+				// empVo ï¿½?ç¨±ï¿½?ï¿½Domain objects
 				accuseCaseVO = new AccuseCaseVO();
 				accuseCaseVO.setAccuse_No(rs.getString("accuse_no"));
 				accuseCaseVO.setMission_No(rs.getString("mission_no"));
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
-				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setAccuse_Date(rs.getTimestamp("accuse_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getTimestamp("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 			}
@@ -247,14 +247,13 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				// empVO ä¹?ç¨±ç?? Domain objects
 				accuseCaseVO = new AccuseCaseVO();
 				accuseCaseVO.setAccuse_No(rs.getString("accuse_no"));
 				accuseCaseVO.setMission_No(rs.getString("mission_no"));
 				accuseCaseVO.setAccuser_No(rs.getString("accuser_no"));
 				accuseCaseVO.setEmp_No(rs.getString("emp_no"));
-				accuseCaseVO.setAccuse_Date(rs.getDate("accuse_date"));
-				accuseCaseVO.setClosed_Case_Date(rs.getDate("close_case_date"));
+				accuseCaseVO.setAccuse_Date(rs.getTimestamp("accuse_date"));
+				accuseCaseVO.setClose_Case_Date(rs.getTimestamp("close_case_date"));
 				accuseCaseVO.setAccuse_Detail(rs.getString("accuse_detail"));
 				accuseCaseVO.setAccuse_State(rs.getInt("accuse_state"));
 				list.add(accuseCaseVO); // Store the row in the list
@@ -291,7 +290,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 		return list;
 	}
 	
-	public void addAccuseCase(String mission_No, String accuser_No,Date accuse_Date, String accuse_Detail ,Integer accuse_State){
+	public void addAccuseCase(String mission_No, String accuser_No,Timestamp accuse_Date, String accuse_Detail ,Integer accuse_State){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -302,7 +301,7 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 
 			pstmt.setString(1, mission_No);
 			pstmt.setString(2, accuser_No);
-			pstmt.setDate(3, accuse_Date);
+			pstmt.setTimestamp(3, accuse_Date);
 			pstmt.setString(4, accuse_Detail);
 			pstmt.setInt(5, accuse_State);
 
@@ -408,6 +407,48 @@ public class AccuseCaseDAO implements AccuseCaseDAO_interface {
 		}
 		
 		return accuser_NoList;
+	}
+	
+	public List<String> findAccuseDetailByMission(String mission_No){
+		List<String> accuser_List = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(GET_BY_MISSION_NO);
+			pstmt.setString(1, mission_No);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				
+				accuser_List.add(rs.getString("ACCUSE_DETAIL"));
+			}
+			
+			// Handle any driver errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return accuser_List;
 	}
 	
 	
