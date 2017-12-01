@@ -55,17 +55,16 @@ try{
     margin: 15px;
 	}
 </style>
-<title>爭議案件 - 尚未處理</title>
+<title>爭議案件 - 已結案</title>
 </head>
 <body>
 
-<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
-	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />
-		<br>
+	<jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
+	<jsp:include page="/backdesk/missionManage/missiondeskLeft.jsp" flush="true" />	<br>
 	<br>
 	<br>
 	<div class="container">
-		<%-- 上方圖示列表 --%>
+	<%-- 上方圖示列表 --%>
 		<div class="row">
 			<%-- 未處理案件 --%>
 			<div class="col-xs-12 col-sm-3">
@@ -174,10 +173,12 @@ try{
 		                    <th>原任務編號</th>
 		                    <th>提出人(發案人)</th>
 		                    <th>申請爭議時間</th>
+		                    <th>案件結束時間</th>
+		                    <th>負責員工</th>
 		                </tr>
 		            </thead>
 		            <tbody>
-		                <%for(DisputeCaseVO disputeCaseVO : listAllPendingCase){%>
+		                <%for(DisputeCaseVO disputeCaseVO : listAllClosedCase){%>
 		                    <tr>
 		                        <td>
 		                            <%=disputeCaseVO.getDispute_Case_No()%>
@@ -192,17 +193,10 @@ try{
 		                            <%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%>
 		                        </td>
 		                        <td>
-									<form method="post" action="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_Check.jsp">
-										<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-										<input type="submit" class="btn btn-info" value="查看此案件">
-									</form>
+									<%=simpleDateFormat.format(disputeCaseVO.getClose_Datetime())%>
 								</td>
 								<td>
-		                            <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
-										<input type="hidden" name="action" value="delete_Dispute_Case">
-										<input type="hidden" name="dispute_Case_No" value="<%=disputeCaseVO.getDispute_Case_No()%>">
-		                            	<input type="submit" class="btn btn-danger" value="刪除此案件">
-		                            </form>
+									<%=disputeCaseVO.getEmp_No()%>
 		                        </td>
 		                    </tr>
 		                <%}%>

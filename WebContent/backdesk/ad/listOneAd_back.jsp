@@ -143,11 +143,13 @@ a{
                         
                             <div class="btn-group">
                             <div>
-                            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" >
-			                <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
-			                <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			                <button class="btn btn-danger" type="submit" name="action" value="deleteAd">刪除廣告</button>
-                            </FORM>
+                             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
+			                 <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
+			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
+			                 <button class="btn btn-danger" type="submit" name="action" value="deleteAdFMBack"> 刪除廣告 </button>
+
+			                 </FORM>
                             </div>
                             </div>
                            

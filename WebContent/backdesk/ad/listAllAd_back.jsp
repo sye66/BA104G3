@@ -83,7 +83,7 @@
 
                              <td>
                              <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ad/ad.do" style="margin-bottom: 0px;">
-			                 <input type="hidden" name="adNo"  value="${adVO.ad_No}">
+			                 <input type="hidden" name="ad_No"  value="${adVO.ad_No}">
 			                 <input type="hidden" name="emp_No"  value="${empVO.emp_No}">
 			                 <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
 			                 <input type="hidden" name="whichPage" value="<%=whichPage%>">

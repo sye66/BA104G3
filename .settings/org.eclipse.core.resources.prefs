@@ -4,6 +4,7 @@ encoding//WebContent/frontdesk/mem/register_address.jsp=UTF-8
 encoding//WebContent/lib/component/datetimepicker/build/jquery.datetimepicker.min.css=UTF-8
 encoding//WebContent/lib/component/datetimepicker/jquery.datetimepicker.css=UTF-8
 encoding//WebContent/lib/css/issuemission/SanderTemplate.css=UTF-8
+encoding//WebContent/lib/publicfile/include/css/freelancer.min.css=UTF-8
 encoding//src/com/emp/model/EmpDAO.java=UTF-8
 encoding//src/com/emp/model/EmpDAO_interface.java=UTF-8
 encoding//src/com/emp/model/EmpService.java=UTF-8

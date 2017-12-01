@@ -18,10 +18,11 @@
 			h1,p{
 				font-family:Microsoft JhengHei;
 				font-weight: 900;
+				color: white;
 			}
 		</style>
     </head>
-	<body>
+	<body style="background-color: black;">
 	    <div class="container">
 	        <div class="row">
 	            <div class="col-xs-12 col-sm-12">

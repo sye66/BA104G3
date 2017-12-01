@@ -28,6 +28,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"></html>
 <style>
 
+body {
+  width:90%;
+  height:90%;
+  line-height: 100%;
+  word-break: break-word;
+  font: 18px verdana, Times New Roman, arial, helvetica, sans-serif, Microsoft JhengHei;
+  
+}
+
 .panel {
     border: 3px solid #0078ae;
     border-radius: 20px;
@@ -36,12 +45,14 @@
 }
 
 .mp4{
-    height:345px;
+    height:350px;
     text-align: center;
 }
 
 .list-content{
-    height:515px
+    height:500px;
+   margin-left: 20px;
+   font-size:20px;
 }
 
 .list >.list-content >.message-area {
@@ -104,7 +115,7 @@ h1 {
     box-shadow: 0 0 5px #000000;
     width: 20%;
 }
-textarea {
+map {
   font-weight: inherit;
   font-style: inherit;
   font-family: inherit;
@@ -128,7 +139,15 @@ main {
   margin-top:350px;
 }
 
-
+footer {
+  height: 80px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #fafafa;
+  border-top: 1px solid #ddd;
+  z-index: 50;
+}
 </style>
     </head>
     <body onload="connect();" onunload="disconnect();" class="layout-scroll">
@@ -136,17 +155,20 @@ main {
         <h1> Chat Room ***</h1>            
 	        <h3 id="statusOutput" class="statusOutput"></h3>
 	        
-
-    
 	 <main class="list" >
         <div>
             <div id="list" class="list-content">      
-            <textarea id="messagesArea" class="panel message-area" readonly >
-            </textarea>
+            <map id="messagesArea" class="panel message-area" readonly >
+            </map>
             </div>
         </div>
     </main>  
     
+
+    <div class="emo" style="background-color:#FFF">
+    
+    </div>
+
 <c:choose>
     <c:when test="${memVO.mem_State == 1}">
     <main class="mp4">
@@ -168,20 +190,50 @@ main {
     </main>
     </c:otherwise>
 </c:choose>
-    
-   
+
  <footer id="toolbar" class="publisher">
+ 
     <div class="bar" data-type="bar">  
         <div class="panel input-area">
             <input type="hidden" id="userName" class="text-field"  value="${memVO.mem_Name}"/>${memVO.mem_Name}
             <input type="text" id="message"  class="text-field"  placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"/>
+            
+      <td width="189" align="left"> &nbsp;&nbsp;字體顏色：
+      <select name="color" size="1" class="wenbenkuang" id="select" onChange="myNewFunction(this);">
+        <option selected style="color:#FFFF00" value="#FFFF00" >默認顏色</option>
+        <option style="color:#FF0000" value="FF0000">紅色熱情</option>
+        <option style="color:#0000FF" value="0000ff">藍色開朗</option>
+        <option style="color:#ff00ff" value="ff00ff">桃色浪漫</option>
+        <option style="color:#009900" value="009900">綠色青春</option>
+        <option style="color:#009999" value="009999">青色清爽</option>
+        <option style="color:#CCBBFF" value="CCBBFF">淡紫曖昧</option>
+        <option style="color:#FF8888" value="FF8888">平淡的熱情</option>
+        <option style="color:#66FFFF" value="66FFFF">青藍飄揚</option>
+        <option style="color:#999900" value="999900">青澀的青春</option>
+        <option style="color:#ff9900" value="ff9900">流金歲月</option>
+        <option style="color:#0099ff" value="0099ff">湖波蕩漾</option>
+        <option style="color:#9900ff" value="9900ff">發亮藍紫</option>
+        <option style="color:#ff0099" value="ff0099">愛的暗示</option>
+        <option style="color:#006600" value="006600">墨綠深沉</option>
+        <option style="color:#999999" value="999999">煙雨濛濛</option>
+      </select></td>
+<!--            
+       <select id="itemImage" name="itemImage">
+           <option data-img="">0</option>
+           <option data-img="BA1014G3/res/images/GroupChat/deer1.gif">1</option>
+           <option data-img="BA1014G3/res/images/GroupChat/deer2.gif">2</option>
+           <option data-img="BA1014G3/res/images/GroupChat/deer3.gif">3</option>
+       </select>
+         <img src="" id='changeImage'/>
+-->              
             <input type="submit" id="sendMessage" class="button" value="送出" onclick="sendMessage();"/>
 		    <input type="button" id="connect"     class="button" value="連線" onclick="connect();"/>
 		    <input type="button" id="disconnect"  class="button" value="離線" onclick="disconnect();"/>
 	    </div>
 	</div>
 </footer>
-	    
+
+
 </body>
 <script>
 
@@ -210,10 +262,38 @@ main {
 		};
 
 		webSocket.onmessage = function(event) {
+			//加照片版本
+//			var jsonObj = JSON.parse(even.data);
+//			var userName = jsonObj.userName;
+//			var message = jsonObj.message;
+			
+//			if(mem_Name===jsonObj.userName){
+//				$('#mem_Pic').append('<div style="text-align: left; vertical-align: text-bottom"><span style="word-break; break-all;">'+userName+' : '+message+'</span><span></span><img src="'+context+'/tool/showimage.do?mem_No='+mem_No+'"></div>');
+//			} else {
+//				$('#mem_Pic').append('<div><img src="'+context+'/tool/showimage.do?mem_No='+mem_No+'"><span style="word-break; break-all;width: 200px; height:50px">'+userName+' : '+message+'</span><span></span></div>');
+//			}
+//			$('html, body').scollTop(10000000);
+//            function myNewFunction(sel){
+//            	alert(sel.options[sel.selectedIndex].text);
+//            	}
+
+//    $(document).ready(function(){
+//        $('#itemImage').change(function(){
+//            var src = $(this).find('option:selected').attr('data-img');
+//            $('img#changeImage').attr('src',src);
+//         });
+//    });
+
+			//原版本
 			var messagesArea = document.getElementById("messagesArea");
+//			var color = document.getElementById("select").options[color].value;
+            var color =$("#select option:selected").val();
+//            var emo = $("#select option:selected").innerHTML();
 	        var jsonObj = JSON.parse(event.data);
-	        var message = jsonObj.userName + ": " + jsonObj.message + "\r\n";
-	        messagesArea.value = messagesArea.value + message;
+	        
+	        var message ="<font color='#"+ color +"'>" + jsonObj.userName+ "</font>"+": <font color='#" + color + "'>" + jsonObj.message + "</font><br>\r\n";
+//	        messagesArea.value = messagesArea.value + message;
+	        messagesArea.innerHTML =messagesArea.innerHTML+message;
 	        messagesArea.scrollTop = messagesArea.scrollHeight;
 		};
 
@@ -260,6 +340,72 @@ main {
 	function updateStatus(newStatus) {
 		statusOutput.innerHTML = newStatus;
 	}
-    
+
+	
 </script>
+<!--  
+<script type="text/javascript">
+        function onLoadBinaryFile() {
+            var theFile = document.getElementById("theBinaryFile");
+
+            // 確定選取了一個二進位檔案，而非其他格式。
+            if (theFile.files.length != 0 && theFile.files[0].type.match(/image.*/)) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var theImg = document.getElementById("theImage");
+                    theImg.src = e.target.result;
+                };
+                reader.onerror = function (e) {
+                    alert("例外狀況，無法讀取二進位檔");
+                };
+
+                // 讀取二進位檔案。
+                reader.readAsDataURL(theFile.files[0]);
+            }
+            else {
+                alert("請選取一個二進位檔");
+            }
+        }
+    </script>
+
+
+<script>
+	
+	function InitFace() {
+	    var strHTML = "";
+	    for (var i = 1; i <= 39; i++) {
+	        strHTML += "![](""/GroupChat/" + i + ".gif )";
+	    }
+	    $("#divFace").html(strHTML);
+	}
+	
+	$(function() {
+	    InitFace();
+	    $("table tr td img").click(function() {
+	        var strContent = $("#txtContent").val() + "<:" + this.id + ":>";
+	        $("#txtContent").val(strContent);
+	    })
+	});
+	
+	//face icons 
+	function InitFace() {
+	    var strHTML = "";
+	    for (var i = 1; i <= 10; i++) {
+	        strHTML += "![](""/GroupChat/" + i + ".gif)";
+	    }
+	    $("#divFace").html(strHTML);
+	}
+
+
+    window.onload = function() {
+    	document.getElementById("itemImage").onchange = showFormatImage;
+    	};
+    
+    	function showFormatImage() {
+             var image = document.getElementById("changeImage");
+             image.src = $('select[name=itemImage] option:selected').attr('data-img');
+             return false;
+          }
+</script>
+-->
 </html>

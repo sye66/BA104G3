@@ -24,24 +24,37 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-    #dispute_Attachment{
+    <meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
+    <style type="text/css">
+    #dispute_Attachment {
         width: 200px;
-
     }
-</style>
+    .formcol{
+        border-radius: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 30px;
+        background-color: #34445e;
+        border: #ff9000 solid 2px;
+        color: white;
+        font-family: "微軟正黑體";
+    }
+
+    body {
+        background-image: url(<%=request.getContextPath()%>/res/images/disputecase/white-scratched-background-2074.png);
+        background-repeat: repeat;
+    }
+    </style>
 <title>回覆爭議案件</title>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 formcol">
                 <div class="row">
                     <%-- 爭議案件編號 --%>
                     <div class="col-xs-12 col-sm-6">
@@ -91,7 +104,6 @@
                 <div class="modal fade" id="modal-id">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title">回覆訊息</h4>
@@ -100,12 +112,9 @@
                                     <input type="text" name="dispute_Reply" id="dispute_Reply" class="form-control" placeholder="請輸入回覆訊息" style="height: 200px">
                                 </div>
                                 <div class="modal-footer">
+                                    <button class="btn btn-primary" id="reply_Dispute_Case">回覆</button>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-                                    <input type="hidden" name="dispute_Case_No" value="<%=disputeCaseNo%>">
-                                    <input type="hidden" name="action" value="reply_Dispute_Case">
-                                    <input type="submit" class="btn btn-primary" value="回覆">
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>                
@@ -114,7 +123,6 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <!-- 表單從此開始 -->
-                            <form method="post" action="<%=request.getContextPath()%>/disputecase/disputecase.do">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title">退回原因</h4>
@@ -123,19 +131,68 @@
                                     <input type="text" name="dispute_Reject" id="dispute_Reject" class="form-control" placeholder="請輸入退回原因" style="height: 200px">
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-                                    <input type="hidden" name="dispute_Case_No" value="<%=disputeCaseNo%>">
-                                    <input type="hidden" name="action" value="reject_Dispute_Case">
-                                    <input type="submit" class="btn btn-warning" value="退回">
+                                    <button class="btn btn-warning" id="reject_Dispute_Case" >退回</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button> 
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
+
+<script type="text/javascript">
+    $("#reply_Dispute_Case").click(function(){
+        $.ajax({
+            url: '<%=request.getContextPath()%>/disputecase/disputecase.do',
+            type: 'post',
+            data:{
+                action: "reply_Dispute_Case",
+                dispute_Case_No: "<%=disputeCaseVO.getDispute_Case_No()%>",
+                dispute_Reply: $("#dispute_Reply").val()
+            },
+            success: function(){
+                swal({
+                      type: 'success',
+                      title: '已回覆該用戶',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                setTimeout(function(){
+                    window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_OnGoing.jsp")
+                    },1600)
+            }
+
+        })
+
+    })
+    $("#reject_Dispute_Case").click(function(){
+        $.ajax({
+            url: '<%=request.getContextPath()%>/disputecase/disputecase.do',
+            type: 'post',
+            data:{
+                action: "reject_Dispute_Case",
+                dispute_Case_No: "<%=disputeCaseVO.getDispute_Case_No()%>",
+                dispute_Reject: $("#dispute_Reject").val()
+            },
+            success: function(){
+                swal({
+                      type: 'success',
+                      title: '此爭議案件退回',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                setTimeout(function(){
+                    window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_OnGoing.jsp")
+                    },1600)
+            }
+
+        })
+
+    })
+</script>
+
 </body>
 
 </html>

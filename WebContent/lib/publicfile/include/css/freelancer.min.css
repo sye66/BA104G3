@@ -4,13 +4,13 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 body {
-	font-family: '微軟正黑體';
+	font-family: '敺株�迤暺��';
 	overflow-x: hidden
 }
 
 p {
 	font-size: 20px;
-	font-family: '微軟正黑體';
+	font-family: '敺株�迤暺��';
 }
 
 p.small {
@@ -23,7 +23,7 @@ a, a.active, a:active, a:focus, a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: '微軟正黑體';
+	font-family: '敺株�迤暺��';
 	font-weight: 700;
 	text-transform: uppercase
 }
@@ -115,7 +115,7 @@ section.success {
 }
 
 #mainNav {
-	font-family:'微軟正黑體';
+	font-family:'敺株�迤暺��';
 	font-weight: 700;
 	text-transform: uppercase;
 	border: none;
@@ -215,7 +215,7 @@ header.masthead img {
 }
 
 header.masthead .intro-text .name {
-	font-family: '微軟正黑體';
+	font-family: '敺株�迤暺��';
 	font-size: 2em;
 	font-weight: 700;
 	display: block;
