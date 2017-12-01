@@ -232,10 +232,6 @@ footer {
 	    </div>
 	</div>
 </footer>
-
-<div id="divFace">
-</div>	    
-
 	    
 </body>
 <script>
@@ -343,33 +339,10 @@ footer {
 	function updateStatus(newStatus) {
 		statusOutput.innerHTML = newStatus;
 	}
-	
-	function InitFace() {
-	    var strHTML = "";
-	    for (var i = 1; i <= 39; i++) {
-	        strHTML += "![]("<%=request.getContextPath()%>"/GroupChat/" + i + ".gif )";
-	    }
-	    $("#divFace").html(strHTML);
-	}
-	
-	$(function() {
-	    InitFace();
-	    $("table tr td img").click(function() {
-	        var strContent = $("#txtContent").val() + "<:" + this.id + ":>";
-	        $("#txtContent").val(strContent);
-	    })
-	});
-	
-	//face icons 
-	function InitFace() {
-	    var strHTML = "";
-	    for (var i = 1; i <= 10; i++) {
-	        strHTML += "![]("<%=request.getContextPath()%>"/GroupChat/" + i + ".gif)";
-	    }
-	    $("#divFace").html(strHTML);
-	}
-</script>
 
+	
+</script>
+<!--  
 <script type="text/javascript">
         function onLoadBinaryFile() {
             var theFile = document.getElementById("theBinaryFile");
@@ -394,8 +367,35 @@ footer {
         }
     </script>
 
-<!--  
+
 <script>
+	
+	function InitFace() {
+	    var strHTML = "";
+	    for (var i = 1; i <= 39; i++) {
+	        strHTML += "![](""/GroupChat/" + i + ".gif )";
+	    }
+	    $("#divFace").html(strHTML);
+	}
+	
+	$(function() {
+	    InitFace();
+	    $("table tr td img").click(function() {
+	        var strContent = $("#txtContent").val() + "<:" + this.id + ":>";
+	        $("#txtContent").val(strContent);
+	    })
+	});
+	
+	//face icons 
+	function InitFace() {
+	    var strHTML = "";
+	    for (var i = 1; i <= 10; i++) {
+	        strHTML += "![](""/GroupChat/" + i + ".gif)";
+	    }
+	    $("#divFace").html(strHTML);
+	}
+
+
     window.onload = function() {
     	document.getElementById("itemImage").onchange = showFormatImage;
     	};
