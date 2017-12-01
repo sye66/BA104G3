@@ -1,7 +1,12 @@
 <%@page import="com.pro.model.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ 
+<% 
 
-<% ProVO proVO = (ProVO) request.getAttribute("proVO"); %>
+	ProVO proVO = (ProVO) request.getAttribute("proVO");
+	pageContext.setAttribute(" proVO", proVO);
+%>
 
 <html>
 <head>
@@ -53,9 +58,15 @@
 	</tr>
 	
 	
-		
-		<tr>	
-			<td>${proVO.pro_Class_No}</td>
+		<jsp:useBean id="proClassSvc" scope="page" class="com.proclass.model.ProClassService" />
+		<tr>
+		<c:forEach var="proClassVO" items="${proClassSvc.all}">
+			<c:if test="${proVO.pro_Class_No==proClassVO.pro_Class_No}">
+					<td>${proClassVO.pro_Class_Name}</td>
+							
+			</c:if>				
+		</c:forEach>	
+			
 			<td>${proVO.pro_Status}</td>
 			<td>${proVO.pro_Discount}</td>
 			
