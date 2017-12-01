@@ -420,7 +420,7 @@ console.log(123);
 		console.log("Sender_Mem_No +" +Sender_Mem_No);
 		var nowdate = jsonObj.chat_Datetime;
 		//***************把Timestamp 格式轉成 一般時間格式**************
-		var date;
+		var date; 
 		date = new Date();
 		date = date.getUTCFullYear() + '-' +
 		    ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
