@@ -3,9 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.ad.model.*"%>
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
+
     AdService adSvc = new AdService();
     Set<AdVO> set = adSvc.getAllAd_A();
     pageContext.setAttribute("set",set);    

@@ -1,13 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.ad.model.*"%>
 <%@ page import="com.artiClass.model.*"%>
-
+<%@ page import="com.emp.model.*"%>
 <%-- 此頁暫練習採用 Script 的寫法取值 --%>
 
 <jsp:useBean id="artiFormSvc" scope="session" class="com.artiForm.model.ArtiFormService" />
 <jsp:useBean id="artireplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
+    EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
+
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     AdVO adVO = (AdVO) request.getAttribute("adVO"); 
 
