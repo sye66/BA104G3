@@ -138,7 +138,7 @@
                             		<td>發布時間</td>
                             		<td>處理狀態</td>
                             	</tr>
-                            	<%for(DisputeCaseVO disputeCaseVO : listGetMemDisCase){ %>
+                            	<%try{for(DisputeCaseVO disputeCaseVO : listGetMemDisCase){ %>
                             	<tr>
                             		<td><%=disputeCaseVO.getDispute_Case_No()%></td>
                             		<td><%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%></td>
@@ -158,7 +158,11 @@
                             		%>
                             		<td><%=status%></td>
                             	</tr>
-                            	<%}%>
+                            	<%} } catch(NullPointerException e){%>
+                            		<td></td>
+                            		<td></td>
+                            		<td></td>
+                            		<%} %>
                             </table>
                         </div>
                     </div>

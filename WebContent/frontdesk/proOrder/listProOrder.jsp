@@ -466,7 +466,7 @@ nav-tabs li a:focus{
 		      <table class="table table-hover">
 					<thead id="order001">
 							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
-							<th></th>
+<!-- 							<th></th> -->
 							</tr>
 							
 					
@@ -475,7 +475,7 @@ nav-tabs li a:focus{
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
 						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
-						<td></td>
+<!-- 						<td></td> -->
 						</tr>
 					</thead>
 					<tbody id="order002">	
