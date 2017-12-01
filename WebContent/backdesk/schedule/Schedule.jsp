@@ -75,14 +75,14 @@
 		    <!-- 標籤面板：標籤區 -->
 		    <ul class="nav nav-tabs" role="tablist">
 		        <li role="presentation" class="active">
-		            <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">數量周發獎勵</a>
+		            <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">任務數量獎勵</a>
 		        </li>
-		        <li role="presentation">
-		            <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">數量月發獎勵</a>
-		        </li>
-		        <li role="presentation">
-		            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">數量季發獎勵</a>
-		        </li>
+<!-- 		        <li role="presentation"> -->
+<!-- 		            <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">數量月發獎勵</a> -->
+<!-- 		        </li> -->
+<!-- 		        <li role="presentation"> -->
+<!-- 		            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">數量季發獎勵</a> -->
+<!-- 		        </li> -->
 		    </ul>
 		
 		    <!-- 標籤面板：內容區 -->
@@ -93,7 +93,7 @@
 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count++%>名&nbsp;&nbsp;
-						        請頒發一周數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewarda" size="5px">&nbsp;點   
+						        請頒發獎勵點數(任務數量組)&nbsp;&nbsp;<input type="text" name="rewarda" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
@@ -102,31 +102,31 @@
 		        </div>
 		         
 		         
-		        <div role="tabpanel" class="tab-pane" id="tab2">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
-		        	<%for(int i=0;i<10;i++){%>
-		        		第<%=count2++%>名&nbsp;&nbsp;
-						        請頒發一月數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardb" size="5px">&nbsp;點   
-		        		<br>
-		        	<%}%>
-		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
-					<input type="hidden" name="action" value="payReward2">
-					</FORM>
-		        </div>
+<!-- 		        <div role="tabpanel" class="tab-pane" id="tab2"> -->
+<%-- 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" > --%>
+<%-- 		        	<%for(int i=0;i<10;i++){%> --%>
+<%-- 		        		第<%=count2++%>名&nbsp;&nbsp; --%>
+<!-- 						        請頒發一月數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardb" size="5px">&nbsp;點    -->
+<!-- 		        		<br> -->
+<%-- 		        	<%}%> --%>
+<!-- 		        	<input type="submit" value="獎勵囉!" class="btn btn-info"> -->
+<!-- 					<input type="hidden" name="action" value="payReward2"> -->
+<!-- 					</FORM> -->
+<!-- 		        </div> -->
 		        
 		        
-		        <div role="tabpanel" class="tab-pane" id="tab3">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
-		        	<%for(int i=0;i<10;i++){%>
-		        		第<%=count3++%>名&nbsp;&nbsp;
-						        請頒發一季數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardc" size="5px">&nbsp;點   
-		        		<br>
-		        	<%}%>
+<!-- 		        <div role="tabpanel" class="tab-pane" id="tab3"> -->
+<%-- 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" > --%>
+<%-- 		        	<%for(int i=0;i<10;i++){%> --%>
+<%-- 		        		第<%=count3++%>名&nbsp;&nbsp; --%>
+<!-- 						        請頒發一季數量獎勵點數&nbsp;&nbsp;<input type="text" name="rewardc" size="5px">&nbsp;點    -->
+<!-- 		        		<br> -->
+<%-- 		        	<%}%> --%>
 		        	
-		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
-					<input type="hidden" name="action" value="payReward3">
-					</FORM>
-		        </div>
+<!-- 		        	<input type="submit" value="獎勵囉!" class="btn btn-info"> -->
+<!-- 					<input type="hidden" name="action" value="payReward3"> -->
+<!-- 					</FORM> -->
+<!-- 		        </div> -->
 		        
 		    </div>
 		   
@@ -137,14 +137,14 @@
 		    <!-- 標籤面板：標籤區 -->
 		    <ul class="nav nav-tabs" role="tablist">
 		        <li role="presentation" class="active">
-		            <a href="#tab4" aria-controls="tab1" role="tab" data-toggle="tab">積分周發獎勵</a>
+		            <a href="#tab4" aria-controls="tab1" role="tab" data-toggle="tab">積分獎勵</a>
 		        </li>
-		        <li role="presentation">
-		            <a href="#tab5" aria-controls="tab2" role="tab" data-toggle="tab">積分月發獎勵</a>
-		        </li>
-		        <li role="presentation">
-		            <a href="#tab6" aria-controls="tab3" role="tab" data-toggle="tab">積分季發獎勵</a>
-		        </li>
+<!-- 		        <li role="presentation"> -->
+<!-- 		            <a href="#tab5" aria-controls="tab2" role="tab" data-toggle="tab">積分月發獎勵</a> -->
+<!-- 		        </li> -->
+<!-- 		        <li role="presentation"> -->
+<!-- 		            <a href="#tab6" aria-controls="tab3" role="tab" data-toggle="tab">積分季發獎勵</a> -->
+<!-- 		        </li> -->
 		    </ul>
 		
 		    <!-- 標籤面板：內容區 -->
@@ -154,7 +154,7 @@
 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
 		        	<%for(int i=0;i<10;i++){%>
 		        		第<%=count4++%>名&nbsp;&nbsp;
-						        請頒發一周積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardd" size="5px">&nbsp;點   
+						        請頒發獎勵點數(積分組)&nbsp;&nbsp;<input type="text" name="rewardd" size="5px">&nbsp;點   
 		        		<br>
 		        	<%}%>
 		        	
@@ -162,30 +162,30 @@
 					<input type="hidden" name="action" value="payReward4">
 					</FORM>
 		        </div>
-		        <div role="tabpanel" class="tab-pane" id="tab5">
-		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
-		        	<%for(int i=0;i<10;i++){%>
-		        		第<%=count5++%>名&nbsp;&nbsp;
-						        請頒發一月積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewarde" size="5px">&nbsp;點   
-		        		<br>
-		        	<%}%>
+<!-- 		        <div role="tabpanel" class="tab-pane" id="tab5"> -->
+<%-- 		        <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" > --%>
+<%-- 		        	<%for(int i=0;i<10;i++){%> --%>
+<%-- 		        		第<%=count5++%>名&nbsp;&nbsp; --%>
+<!-- 						        請頒發一月積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewarde" size="5px">&nbsp;點    -->
+<!-- 		        		<br> -->
+<%-- 		        	<%}%> --%>
 		        	
-		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
-					<input type="hidden" name="action" value="payReward5">
-				</FORM>	
-		        </div>
-		        <div role="tabpanel" class="tab-pane" id="tab6">
-		         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" >
-		        	<%for(int i=0;i<10;i++){%>
-		        		第<%=count6++%>名&nbsp;&nbsp;
-						        請頒發一季積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardf" size="5px">&nbsp;點   
-		        		<br>
-		        	<%}%>
+<!-- 		        	<input type="submit" value="獎勵囉!" class="btn btn-info"> -->
+<!-- 					<input type="hidden" name="action" value="payReward5"> -->
+<!-- 				</FORM>	 -->
+<!-- 		        </div> -->
+<!-- 		        <div role="tabpanel" class="tab-pane" id="tab6"> -->
+<%-- 		         <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/rank/rank.do" > --%>
+<%-- 		        	<%for(int i=0;i<10;i++){%> --%>
+<%-- 		        		第<%=count6++%>名&nbsp;&nbsp; --%>
+<!-- 						        請頒發一季積分獎勵點數&nbsp;&nbsp;<input type="text" name="rewardf" size="5px">&nbsp;點    -->
+<!-- 		        		<br> -->
+<%-- 		        	<%}%> --%>
 		        	
-		        	<input type="submit" value="獎勵囉!" class="btn btn-info">
-					<input type="hidden" name="action" value="payReward6">
-				</FORM>		
-		        </div>
+<!-- 		        	<input type="submit" value="獎勵囉!" class="btn btn-info"> -->
+<!-- 					<input type="hidden" name="action" value="payReward6"> -->
+<!-- 				</FORM>		 -->
+<!-- 		        </div> -->
 		    </div>
 		    
 		</div>

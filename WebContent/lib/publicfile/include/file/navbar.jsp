@@ -96,6 +96,7 @@
            <li class="nav-item1">  <h3><a class="nav-link js-scroll-trigger" id="create-user"  >
 				
 				<c:if test="${not empty memVO.mem_No}">
+				<li><img src='https://goo.gl/images/nADEQ6' class='profile' style="border-radius: 50%;border:5px solid #fff;"/></li>
 				<li><a style="text-decoration:none;" href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
 				</c:if>
 				
