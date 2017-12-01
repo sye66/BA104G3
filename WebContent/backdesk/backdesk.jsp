@@ -343,26 +343,26 @@
 	
 	
 			
-	 			<div class="col-xs-12 col-sm-3 col-sm-offset-1">
-	 				<div class="panel panel-danger">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-9">
-                                    <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg21.png"
-                                         style="height:40px;">
-                                    <span style="font-size:20px;">本周新進會員數:</span>
-                                </div>
-                                <div class="col-xs-12 col-sm-3 text-right">
-                                </div>
-                            </div>
-                        </div>
-                            <div class="panel-footer">
-                            <canvas id="myChart"></canvas>
-                                <div class="clearfix"></div>
-                            </div>
-                   	</div>
-	 			 <div id="flot-placeholder" style="width:350px;height:300px"></div>
-	 			 </div>	
+<!-- 	 			<div class="col-xs-12 col-sm-3 col-sm-offset-1"> -->
+<!-- 	 				<div class="panel panel-danger"> -->
+<!--                         <div class="panel-heading"> -->
+<!--                             <div class="row"> -->
+<!--                                 <div class="col-xs-12 col-sm-9"> -->
+<%--                                     <img src="<%=request.getContextPath()%>/res/images/pro_icons/gg21.png" --%>
+<!--                                          style="height:40px;"> -->
+<!--                                     <span style="font-size:20px;">本周新進會員數:</span> -->
+<!--                                 </div> -->
+<!--                                 <div class="col-xs-12 col-sm-3 text-right"> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                             <div class="panel-footer"> -->
+<!--                             <canvas id="myChart"></canvas> -->
+<!--                                 <div class="clearfix"></div> -->
+<!--                             </div> -->
+<!--                    	</div> -->
+<!-- 	 			 <div id="flot-placeholder" style="width:350px;height:300px"></div> -->
+<!-- 	 			 </div>	 -->
 	 		
 	 	
 	 	
