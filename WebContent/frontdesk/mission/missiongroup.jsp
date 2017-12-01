@@ -66,12 +66,10 @@
                     <c:if test="${issuersCaseList.size() != 0  }">
                         <c:forEach var="missionVO" items="${issuersCaseList}" varStatus="state2" step="1" end="${stop}">
                             <c:if test="${missionVO.mission_State == 3 || missionVO.mission_State == 4 }">
-                                <a href="<%=request.getContextPath()%>/frontdesk/mission/issuerfinalstep.jsp" class="btn btn-warning">發出案件進行中</a>
+                                <a href="<%=request.getContextPath()%>/frontdesk/mission/issuerfinalstep.jsp" class="btn btn-warning">查看進行中案件</a>
                                 <c:set var="stop" value="0"/>
                             </c:if>
                         </c:forEach>
-                    <%-- 當ok為true則顯示出動吧工具人 --%>
-
                     </c:if>
                 </div>
             
@@ -80,7 +78,6 @@
             </div>
         </div>
     </div>
-
 	<br>
 	<br>
 	<br>
