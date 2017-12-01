@@ -87,9 +87,6 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
 	<%-- 第一層 - 任務顯示面板 --%>
 	<div class="container-fluid">
     <div class="container">

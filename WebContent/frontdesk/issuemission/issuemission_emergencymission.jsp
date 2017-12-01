@@ -113,7 +113,7 @@
 						<%-- 報酬 --%>
 							<div class="form-group">
 								<label for="mission_Pay">積分花費</label>
-								<input type="number" name="mission_Pay" id="mission_Pay" class="form-control is-invalid" value=50>
+								<input type="number" name="mission_Pay" id="mission_Pay" class="form-control is-invalid" value=100>
 						 	    <div class="invalid-feedback">
 	        						<p>緊急任務無積分上限</p>
 	      						</div>
