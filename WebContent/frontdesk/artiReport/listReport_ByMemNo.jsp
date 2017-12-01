@@ -140,11 +140,7 @@
                             </div>
                         </div>
                         
-                        <div class="widget-toolbar">
-                            <div class="" style="width:100px;">
-                                <div class="" style="">${artiReportVO.rep_Re_Desc}</div>
-                            </div>
-                        </div>
+
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">${artiReportVO.arti_No}</div>
