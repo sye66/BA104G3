@@ -110,6 +110,11 @@
 											name="getmission1">
 											<button class="btn btn-warning" type="submit" name="action"
 												value="mission_Detail">任務細節</button>
+												
+												<input type="hidden" name="mission_No"
+												value="${getMissionVO1.mission_No}"> <input
+												type="hidden" name="requestURL"
+												value="/frontdesk/getmission/getMission.jsp">
 										</form>
 									</div></td>
 					    		</tr>

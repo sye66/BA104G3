@@ -43,6 +43,9 @@ public class PersonalServlet extends HttpServlet {
 			req.setAttribute("errorMsgs",errorMsgs);
 			
 			try{
+//				HttpSession session = req.getSession();
+//				MemVO memVO = (MemVO) session.getAttribute("memVO");
+//				String str = memVO.getMem_No();
 				String str = req.getParameter("mem_No");
 				if(!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
