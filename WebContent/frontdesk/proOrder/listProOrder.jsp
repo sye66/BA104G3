@@ -301,7 +301,7 @@ nav-tabs li a:focus{
 						</tr>
 					</thead>
 					<tbody id="order002">	
-						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th></tr>
+						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th><th></th></tr>
 		      		<c:forEach var="proOrdListVO" items="${proOrdListSvc.all}">	
 		      			<tr>
 		      			<c:if test="${proOrdListVO.ord_No==proOrder.ord_No }">
@@ -312,6 +312,7 @@ nav-tabs li a:focus{
 		      				</c:forEach>	
 		      				<td>${proOrdListVO.ordPro_Price}</td>
 		      				<td>${proOrdListVO.ordPro_Count }</td>
+		      				<td></td>
 		      			</c:if>
 		      			</tr>
 		      		</c:forEach>
@@ -389,7 +390,7 @@ nav-tabs li a:focus{
 						</tr>
 					</thead>
 					<tbody id="order002">	
-						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th></tr>
+						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th><th></th></tr>
 		      		<c:forEach var="proOrdListVO" items="${proOrdListSvc.all}">	
 		      			<tr>
 		      			<c:if test="${proOrdListVO.ord_No==proOrder.ord_No }">
@@ -400,6 +401,7 @@ nav-tabs li a:focus{
 		      				</c:forEach>	
 		      				<td>${proOrdListVO.ordPro_Price}</td>
 		      				<td>${proOrdListVO.ordPro_Count }</td>
+		      				<td></td>
 		      			</c:if>
 		      			</tr>
 		      		</c:forEach>
@@ -464,7 +466,7 @@ nav-tabs li a:focus{
 		      <table class="table table-hover">
 					<thead id="order001">
 							<tr><th>收件人</th><th>電話</th><th>地址</th><th>花費點數</th>
-<!-- 							<th>更動</th> -->
+							<th></th>
 							</tr>
 							
 					
@@ -473,11 +475,11 @@ nav-tabs li a:focus{
 						<td>${proOrder.ord_Phone }</td>
 						<td>${proOrder.ord_Address }</td>
 						<td><span style="color:red;">${proOrder.ord_Price }</span>點</td>
-						<td>修改</td>
+						<td></td>
 						</tr>
 					</thead>
 					<tbody id="order002">	
-						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th></tr>
+						<tr><th>商品名稱</th><th>商品單價</th><th>商品數量</th><th></th></tr>
 		      		<c:forEach var="proOrdListVO" items="${proOrdListSvc.all}">	
 		      			<tr>
 		      			<c:if test="${proOrdListVO.ord_No==proOrder.ord_No }">
@@ -488,6 +490,7 @@ nav-tabs li a:focus{
 		      				</c:forEach>	
 		      				<td>${proOrdListVO.ordPro_Price}</td>
 		      				<td>${proOrdListVO.ordPro_Count }</td>
+		      				<td></td>
 		      			</c:if>
 		      			</tr>
 		      		</c:forEach>
