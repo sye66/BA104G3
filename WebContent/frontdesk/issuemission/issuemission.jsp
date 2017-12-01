@@ -1,3 +1,4 @@
+<%@page import="com.casecandidate.model.CaseCandidateService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.disputecase.model.DisputeCaseVO"%>
@@ -32,6 +33,7 @@
 	List<GetMissionVO> listUserMission = getMissionService.findByMem(mem_No,1);
 	List<DisputeCaseVO> listMemDisputeCase = disputeCaseService.getDisputeCaseByMem(mem_No);
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+	List<DisputeCaseVO> listGetMemDisCase = disputeCaseService.getDisputeCaseByMem(mem_No);
 %>
 <style type="text/css">
 	.userimg{
@@ -52,11 +54,6 @@
     <!-- TODO記得要放專案路徑 -->
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/issuemission/SanderTemplate.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/issuemission/Button.css">
-    <!--[if lt IE 9]>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-   
     <style type="text/css">
 	/* 對齊div用 */
     	/*div{border: 1px solid grey;}*/
@@ -106,13 +103,7 @@
                             <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">已發任務一覽</a>
                         </li>
                         <li role="presentation">
-                            <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">接案人申請列表</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">待結案與評價</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">爭議案件處理</a>
+                            <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">爭議案件處理</a>
                         </li>
                     </ul>
                     <!-- 標籤面板：內容區 -->
@@ -142,13 +133,36 @@
                                         <%}%>
                                 </tbody>
                             </table>
-                            <span id='table_page'></span>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="tab2">
-                            <p>頭條標籤的內容</p>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="tab3">
-                            <p>最新標籤的內容</p>
+                            <table class="table table-condensed">
+                            	<tr>
+                            		<td>爭議案件編號</td>
+                            		<td>發布時間</td>
+                            		<td>處理狀態</td>
+                            	</tr>
+                            	<%for(DisputeCaseVO disputeCaseVO : listGetMemDisCase){ %>
+                            	<tr>
+                            		<td><%=disputeCaseVO.getDispute_Case_No()%></td>
+                            		<td><%=simpleDateFormat.format(disputeCaseVO.getIssue_Datetime())%></td>
+                            		<%
+                            			Integer statusCode = disputeCaseVO.getDispute_Case_Status();
+                            			String status = null;
+                            			switch(statusCode){
+                            				case 1: status = "未處理";
+                            				break;
+                            				case 2: status = "處理中";
+                            				break;
+                            				case 3: status = "申訴成功";
+                            				break;
+                            				case 4: status = "申訴失敗";
+                            				break;
+                            			}
+                            		%>
+                            		<td><%=status%></td>
+                            	</tr>
+                            	<%}%>
+                            </table>
                         </div>
                     </div>
                 </div>
