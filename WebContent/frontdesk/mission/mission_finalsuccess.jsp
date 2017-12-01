@@ -23,10 +23,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<span style="font-size:18px;"> </span><span style="font-size:24px;"><meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp"> </span> 
-<span style="font-size:24px;">3秒之後自動跳轉到首頁</span> 															
+<meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp">
 <title>
-	<c:if test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">，恭喜結案 ! 可喜可賀可喜可賀 </c:if>
 	
 </title>
 <style>
@@ -34,47 +32,40 @@ img #show {heigth:100%}
 </style>
 <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
 <link href="<%=request.getContextPath()%>/lib/publicfile/include/css/sweetalert2.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+        body {
+            background-image: url(<%=request.getContextPath()%>/res/images/getmission/discovery-space-shuttle1920.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            font-family: Microsoft JhengHei;
+        }
+       h1 {
+       	color: #11866f;
+       	font-size: 60px;
+       }
+       p{
+       	color: #11866f;
+       	font-size: 24px;
+       }
+    </style>
 
 </head>
 <body>
-	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
-	<c:if
-		test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">
-		<script type="text/javascript">
-			swal(${memSvc.getOneMem(memVO.mem_No).mem_Id}，恭喜結案 ! 可喜可賀可喜可賀);
-		</script>
+	<c:if test="${getMissionSvc.getOneMission(mission_No).mission_State == 5}">
+	    <script type="text/javascript">
+	    	swal($ { memSvc.getOneMem(memVO.mem_No).mem_Id }， 恭喜結案!可喜可賀可喜可賀);
+	    </script>
 	</c:if>
 
-	memVO.mem_Id = ${memSvc.getOneMem(memVO.mem_No).mem_Id}
-
-	<div>3秒之後自動跳轉到首頁</div>
-
+	<h1>恭喜你！${memSvc.getOneMem(memVO.mem_No).mem_Name}！任務完成</h1>
+	<p>3秒之後自動跳轉到首頁</p>
 
 
 
 
-	<form id="login-form" method="post"
-		action="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
-		<div>
-			<input type="hidden" name="action" value="register">
-			<button type="submit" class="btn btn-success btn-lg btn-block">按我直接回首頁</button>
-		</div>
-	</form>
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-12">
-			<img id="show"
-				src="<%=request.getContextPath()%>/res/images/index/intelligence.png">
-		</div>
-	</div>
-	<jsp:include page="/lib/publicfile/include/file/footer.jsp"
-		flush="true"></jsp:include>
 </body>
 </html>
