@@ -1178,7 +1178,7 @@ public class GetMissionServlet extends HttpServlet {
 				Part pic = req.getPart("mission_Images");
 				
 				/**********驗證開始**********/
-				if (mission_Pay < 50.00) {
+				if (mission_Pay < 100.00) {
 					errorMsgs.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
@@ -1287,7 +1287,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務結束時間 - null
 				Part pic = req.getPart("mission_images");
 				/**********驗證開始**********/
-				if (mission_Pay < 50.00) {
+				if (mission_Pay < 100.00) {
 					errorMsgs.add("安安積分太少了吧");
 				}
 				if (mission_Name==null || (mission_Name.trim()).length() == 0) {
