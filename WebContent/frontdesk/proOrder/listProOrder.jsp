@@ -432,7 +432,7 @@ nav-tabs li a:focus{
 		  <!-- 區塊4 -->
 		  <c:forEach var="proOrder" items="${list}">
 		  <c:if test="${proOrder.ord_Shipinfo=='已退款' }">
-		 	<%c++ ;%>
+		 	<%d++ ;%>
 		  
 		  
 		  <div class="panel panel-default" >
