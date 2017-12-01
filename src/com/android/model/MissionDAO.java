@@ -17,7 +17,7 @@ public class MissionDAO implements MissionDAO_interface {
 	String userid = "BA104G3";
 	String passwd = "123456";
 
-	private static final String INSERT_STMT = "INSERT INTO MISSION(MISSION_NO, MISSION_NAME , MISSION_CATEGORY ,  MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY ,MISSION_GPS_LAT ,MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),?,?,?,?,sysdate,sysdate,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO MISSION(MISSION_NO, MISSION_NAME , MISSION_CATEGORY ,  MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY ,MISSION_GPS_LAT ,MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),?,?,?,?,sysdate,sysdate+5,?,?,?,?,?)";
 			//"INERT INTO mission (mission_No,  mission_Category, mission_Name, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, ,mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng) VALUES (to_char(sysdate,'yyyymmdd')||'MIS'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission ORDER BY mission_No";
 	private static final String GET_ONE_STMT = "SELECT mission_No, mission_Name, mission_Category, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng FROM mission WHERE mission_No = ?";		
@@ -566,7 +566,7 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State >=5 AND mission_State != 7 AND Mission_State!=72 AND Mission_State != 8");
+			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State =5 AND mission_State = 6 AND Mission_State =9");
 			pstmt.setString(1, issuer_Mem_No);
 			rs = pstmt.executeQuery();
 			
@@ -633,7 +633,7 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 	try {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, userid, passwd);
-		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State >= 3 AND mission_State != 5 AND mission_State != 6 AND mission_State != 9 ");
+		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State =3 AND mission_State =4 AND mission_State =8");
 		pstmt.setString(1, issuer_Mem_No);
 		rs = pstmt.executeQuery();
 		
