@@ -166,9 +166,10 @@ int count3 = 0;
 			<a href="
 <%-- 				<%=request.getContextPath()%>/frontdesk/pro/cart.jsp --%>
 				">
-				<img alt="通知" src="<%=request.getContextPath()%>/res/images/pro_icons/1183340.gif"
-					 style="height: 40px;"></a></span>
-			<span class="badge" ><%=count2%></span>
+<%-- 				<img alt="通知" src="<%=request.getContextPath()%>/res/images/pro_icons/1183340.gif" --%>
+<!-- 					 style="height: 40px;"> -->
+					 </a></span>
+<%-- 			<span class="badge" ><%=count2%></span> --%>
 			<!--通知 -->									
 		</div>
 		<!-- d2  結束-->

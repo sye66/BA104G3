@@ -616,10 +616,11 @@ public class ArtiReplyServlet extends HttpServlet {
 			try{
 				/***************************1.接收請求參數***************************************/
 				HttpSession session = req.getSession();
+
 				String reply_No = req.getParameter("reply_No");
 				String mem_No = req.getParameter("mem_No");
-				
 				String emp_No = req.getParameter("emp_No");
+
 				if(req.getSession().getAttribute("emp_No")==null){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");

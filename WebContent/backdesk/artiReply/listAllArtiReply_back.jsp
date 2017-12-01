@@ -8,6 +8,8 @@
 
 <%
     EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
 
     ArtiReplyService artiReplySvc = new ArtiReplyService();
     Set<ArtiReplyVO> set = artiReplySvc.getAllReply();
@@ -94,7 +96,7 @@
  			                 <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
 			                 </FORM>
 			                 </td>
-			                 
+			              
                              <td>
 			                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" style="margin-bottom: 0px;">
 			                 <input type="hidden" name="reply_No"  value="${artiReplyVO.reply_No}">

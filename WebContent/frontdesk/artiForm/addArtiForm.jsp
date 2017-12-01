@@ -43,12 +43,22 @@
     <div class="widget-box">
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">
-            <h1>工具人 -- 會員神靠北秘密基地 </h1>
-            </h5>
+            <input type="hidden" name="mem_No" size="45"
+			 value="<%= (artiFormVO==null)? "M000001" : artiFormVO.getMem_No()%>" />
+			 請輸入主題文章標題 :  <input type="text" id="title" name="arti_Title" size="80" 
+			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
             
             <div class="widget-toolbar">
                <div class="" style="width:100px;">
-
+                    <div class="" style="">分類 :
+                   <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
+                   <select size="1" name="arti_Cls_No">
+		           <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
+		           <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
+		           </c:forEach>
+		           </select>
+                   </div>
+                   
                  </div>
              </div>
              
@@ -80,10 +90,7 @@
 
          <div class="widget-body">
          
-          <input type="hidden" name="mem_No" size="45"
-			 value="<%= (artiFormVO==null)? "M000001" : artiFormVO.getMem_No()%>" />
-			 <h3>請輸入主題文章標題 : </h3> <input type="text" id="title" name="arti_Title" size="80" 
-			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" /><br>
+          
 			 
              <div class="widget-toolbox">
                  <div class="btn-toolbar">        
@@ -93,14 +100,7 @@
                              <div class="widget-main padding-6">
                               <i class="icon-ok bigger-110"></i>
                               
-                    <div class="" style=""><h3>文章分類 : </h3>
-                   <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
-                   <select size="1" name="arti_Cls_No">
-		           <c:forEach var="artiClassVO" items="${artiClassSvc.all}" > 
-		           <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}<br>
-		           </c:forEach>
-		           </select>
-                   </div><br><br>
+
                    
                               <h3>文章主題照片 : </h3><br>
                               <img id="theImage" src="<%=request.getContextPath()%>/image/XXX.jpg=${artiFormVO.arti_No}"

@@ -35,15 +35,14 @@ div> .timeline-body{
 	height:0 ;
 	overflow:hidden;
 	margin-left:10px;
-
 }
 
 .video-container iframe, .video-container object, .video-container embed {
 	position:absolute;
 	top:10px;
 	left:10px;
-	width:36%;
-	height:36%;
+	width:32%;
+	height:32%;
 }
 .gridContainer clearfix{
   margin:0 auto;

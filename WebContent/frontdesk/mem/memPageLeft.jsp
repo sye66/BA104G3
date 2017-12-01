@@ -119,12 +119,9 @@
                     </div>
                     <div id="eee" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel5">
                         <div class="panel-body">
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTm.jsp">關注工具人按鈕</a></h3>
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/follow_tm/followTmList.jsp">關注工具人列表</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/addRelationship.jsp">加好友按鈕</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/beAppliedRelationship.jsp">好友申請人</a></h3>
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/relation/friendlList.jsp">好友列表</a></h3>
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp">會員列表</a></h3>
                         </div>
                     </div>
                 </div>
@@ -141,26 +138,11 @@
                         <div class="panel-body">
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/stored_history/stored_historyRecharge_PointCard.jsp">點數卡儲值</a></h3>
                             <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/stored_history/rechage_credit.jsp">信用卡儲值</a></h3>
+                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/stored_history/stored_historyReview.jsp">儲值歷史紀錄</a></h3>
                         </div>
                     </div>
                 </div>
                 <!-- 區塊3 -->
-                <div class="panel panel-info">
-                    <div class="panel-heading" role="tab" id="panel3">
-                        <h4 class="panel-title">
-			        <a id="noUnderLine" href="#ccc" data-parent="#accordion2" data-toggle="collapse" role="button" class="collapsed" aria-expanded="false" aria-controls="ccc">
-			           <h2> 歷史紀錄查詢</h2>
-			        </a>
-			      </h4>
-                    </div>
-                    <div id="ccc" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel3">
-                        <div class="panel-body">
-                            <h3><a id="noUnderLine" href="<%=request.getContextPath()%>/frontdesk/stored_history/stored_historyReview.jsp">儲值歷史紀錄</a></h3>
-                            <h3><a id="noUnderLine" href="#">接案歷史紀錄</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- 區塊4 -->
                 <div class="panel panel-info">
                     <div class="panel-heading" role="tab" id="panel4">
                         <h4 class="panel-title">

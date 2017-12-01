@@ -26,24 +26,37 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
-    #dispute_Attachment{
+    <meta http-equiv="Content-Type" content="text/html; chaset=UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/lib/publicfile/include/js/sweetalert2all.js"></script>
+    <style type="text/css">
+    #dispute_Attachment {
         width: 200px;
-
     }
-</style>
-<title>回覆爭議案件</title>
+    .formcol{
+        border-radius: 15px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        margin-top: 30px;
+        background-color: #34445e;
+        border: #ff9000 solid 2px;
+        color: white;
+        font-family: "微軟正黑體";
+    }
+
+    body {
+        background-image: url(<%=request.getContextPath()%>/res/images/disputecase/tweed.png);
+        background-repeat: repeat;
+    }
+    </style>
+    <title>回覆爭議案件</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="text-align: center">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 formcol">
                 <%-- ----------------------------------------------------------- --%>
                 <div class="row">
                     <%-- 爭議案件編號 --%>
@@ -134,15 +147,42 @@
                     <img src="<%=request.getContextPath()%>/disputecase/disputecase.do?action=get_Picture&dispute_Case_No=<%=disputeCaseNo%>" id="dispute_Attachment">
                 </div>
                     <div class="row" style="text-align: center; margin-top: 20px;">
-                        <a href="<%=request.getContextPath()%>/disputecase/disputecase.do?action=emp_Get_Case" class="btn btn-primary">接手此案件</a>
-                        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp" class="btn btn-warning">算了好麻煩喔</a>
+                        <button id="emp_Get_Case" class="btn btn-primary">接手此案件</button>
+                        <a href="<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp">
+                            <button id="so_lazy" class="btn btn-warning">算了好麻煩喔</button>
+                        </a>
                     </div>
-            
-
             </div>
         </div>
     </div>
     </div>
 </body>
-
+<script type="text/javascript">
+    $('#emp_Get_Case').click(function() {
+        $.ajax({
+            url: '<%=request.getContextPath()%>/disputecase/disputecase.do',
+            type: 'POST',
+            data: {
+                action: 'emp_Get_Case',
+                emp_No: "${empVO.emp_No}",
+                dispute_Case_No: "<%=disputeCaseNo%>"
+            },
+        })
+        .done(function() {
+            console.log("success");
+            swal({
+                  type: 'success',
+                  title: '接收爭議案件：<%=disputeCaseNo%>',
+                  showConfirmButton: false,
+                  timer: 1500
+            })
+            setTimeout(function () {
+                window.location.replace("<%=request.getContextPath()%>/backdesk/disputecase/disputecase_New.jsp")
+            },1600)
+        })
+        .fail(function() {
+            console.log("error");
+        })
+    });
+</script>
 </html>

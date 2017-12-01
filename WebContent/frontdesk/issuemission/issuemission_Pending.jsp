@@ -26,7 +26,7 @@
 	        }
 		</style>
 	</head>
-	<body>
+	<body onload="connect();">
 		<%-- 錯誤表列 --%>
 		<c:if test="${not empty errorMsgs}">
 		<div class="container">
@@ -83,4 +83,26 @@
 		<script src="https://code.jquery.com/jquery.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</body>
+	<script type="text/javascript">
+ //    var MyPoint = "/MyEchoServer";
+ //    var host = window.location.host;
+ //    var path = window.location.pathname;
+ //    var webCtx = path.substring(0, path.indexOf('/', 1));
+ //    var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;    
+	// var webSocket;
+	// function connect() {
+	// 	// 建立 websocket 物件
+	// 	webSocket = new WebSocket(endPointURL);
+		
+	// 	webSocket.onopen = function(event) {
+	// 	};
+
+	// 	webSocket.onmessage = function(event) {
+	//         var jsonObj = JSON.parse(event.data);
+	// 	};
+
+	// 	webSocket.onclose = function(event) {
+	// 	};
+	// }
+	</script>
 </html>
