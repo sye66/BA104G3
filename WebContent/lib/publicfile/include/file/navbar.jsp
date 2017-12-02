@@ -9,7 +9,7 @@
 <%request.getAttribute("updateSuccess");%>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html lang="en">
-
+ 
 <style>
 #img_pic,#old_pic{width:40px;
 	heigth:25px;
