@@ -58,12 +58,15 @@ public class MissionCommentServlet extends HttpServlet {
 				Integer comment_Point = new Integer(req.getParameter("comment_Point"));
 				String listener = (String)req.getParameter("listener");
 				String comment_Detail = (String)req.getParameter("comment_Detail");
-				
+				if(comment_Detail ==null){
+					comment_Detail="沒有評論喔";
+				}
+				System.out.println("mission_No  "+mission_No+"memVO.getMem_No()  "+memVO.getMem_No());
 				MissionCommentService missionCommentSvc = new MissionCommentService();
 				MissionCommentVO missionCommentVO = new MissionCommentVO();
 				
 				missionCommentSvc.addMissionComment(memVO.getMem_No(), listener, mission_No, comment_Detail, comment_Point);
-				missionCommentVO = (MissionCommentVO) missionCommentSvc.getByReviewer(memVO.getMem_No());
+				missionCommentVO = (MissionCommentVO) missionCommentSvc.findByPrimaryKey(memVO.getMem_No(), listener, mission_No);
 				
 				req.setAttribute("missionCommentVO", missionCommentVO);
 				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
