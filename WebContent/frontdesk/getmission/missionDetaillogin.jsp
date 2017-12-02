@@ -25,7 +25,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Mission_Detail</title>
+<title>Mission_Detaillogin</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <!--[if lt IE 9]>
