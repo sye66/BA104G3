@@ -523,6 +523,14 @@
 								</h3>
 							</li>
 
+ 							<c:if test="${not empty memVO.mem_Id}">
+            					 <li class="nav-item">
+             					 <h3>
+            						  <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
+          						 </li>
+           					 </c:if>
+
+
 							<c:if test="${not empty memVO.mem_Id}">
 								<li class="nav-item">
 									<h3>

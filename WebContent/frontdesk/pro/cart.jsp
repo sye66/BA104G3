@@ -371,7 +371,7 @@ $(document).ready(function(){
       success:function(response){
        swal(
         '已刪除此商品',
-        'success'
+        
        )
        setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
       }, // success end        

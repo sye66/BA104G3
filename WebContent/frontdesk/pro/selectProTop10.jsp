@@ -82,7 +82,7 @@
                        type="number" value="${balance}" />
 	   			 		 
 	   			 		<p class="card-footer proPrice" style="height:28px;">
-<%-- 	   			 		折扣價:<span><c:out value="${dsPrice}" /></span>點 --%>
+	   			 		折扣價:<span><c:out value="${dsPrice}" /></span>點
 	   			 		</p>
 	   			 		
 	 			 	</div>

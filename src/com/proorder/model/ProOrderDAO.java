@@ -319,7 +319,7 @@ public class ProOrderDAO implements ProOrderDAO_interface{
 		try {
 			con = ds.getConnection();
 System.out.println("先新增訂單");
-
+System.out.println(proOrderVO.getOrd_Phone());
 			con.setAutoCommit(false);
 //先新增訂單
 			String cols[] = {"ORD_NO"};
