@@ -18,7 +18,7 @@
 
 /* 	border:3px orange double; */
 	height: 230px;
-	width:170px;
+	width:23%;
 	margin:6px;
 	
 	

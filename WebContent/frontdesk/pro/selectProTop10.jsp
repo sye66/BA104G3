@@ -102,7 +102,11 @@
 	 	</a>
 	 	
 	
-	 <% count++; %>
+	 <% 
+	 	System.out.println(count);
+	 	count++;
+	 	
+	 %>
  	</c:forEach>  	
  	
   </div>	

@@ -120,7 +120,7 @@
 
 		<div class="col-xs-12 col-sm-12" >
 		<br>
-		<img alt="" style="height:50px;width:790px;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
+		<img alt="" style="height:50px;width:100%;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
 		<br>
 		<div class="panel panel-info ">
 			<div class="panel-heading">
@@ -165,7 +165,7 @@
 
 <!-- 熱門 -->
 <div class="col-xs-12 col-sm-12">
-<img alt="" style="height:50px;width:790px;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
+<img alt="" style="height:50px;width:100%;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
 
 
 		<div role="tabpanel">
