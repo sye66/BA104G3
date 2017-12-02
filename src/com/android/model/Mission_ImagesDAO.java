@@ -8,25 +8,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.android.model.MissionVO;
 
 public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
-	static String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String userid = "BA104G3";
-	String passwd = "123456";
-
-	
+	private static DataSource ds = null;
 	static {
 		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}
-		
 	}
+
+	
+	
 	
 	
 	private static final String INSERT_STMT = "INSERT INTO MISSION_IMAGES(IMAGE_NO, MISSION_NO, ISSUER_MEM_NO, ISSUER_IMAGES) VALUES ('PIC'||LPAD(IMAGE_SEQ.NEXTVAL,6,'0'),?,?,?)";
@@ -45,7 +46,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 			Connection con = null;
 			PreparedStatement pstmt= null;
 		try {
-			con = DriverManager.getConnection(url,userid,passwd);	
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			System.out.println("mmmmmmmno"+mission_ImagesVO.getMission_No());
 			pstmt.setString(1, mission_ImagesVO.getMission_No());
@@ -85,7 +86,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 			Connection con = null;
 			PreparedStatement pstmt= null;
 		try {
-			con = DriverManager.getConnection(url,userid,passwd);
+			con = ds.getConnection();
 			
 			pstmt = con.prepareStatement(INSERT_NO_IMAGE);
 
@@ -131,7 +132,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 					Connection con = null;
 					PreparedStatement pstmt= null;
 				try {
-					con = DriverManager.getConnection(url,userid,passwd);	
+					con = ds.getConnection();
 					pstmt = con.prepareStatement(UPDATE);
 					System.out.println("mmmmmmmno"+mission_ImagesVO.getMission_No());
 					pstmt.setString(1, mission_ImagesVO.getMission_No());
@@ -184,7 +185,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt= null;
 	try {
-		con = DriverManager.getConnection(url,userid,passwd);
+		con = ds.getConnection();
 		
 		pstmt = con.prepareStatement(DELETE_BY_MISSION_NO);
 
@@ -238,7 +239,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 	
 		PreparedStatement pstmt= null;
 	try {
-		con = DriverManager.getConnection(url,userid,passwd);		
+		con = ds.getConnection();	
 			pstmt = con.prepareStatement(GET_IMAGE_NO_BY_MISSION_NO);
 			pstmt.setString(1, mission_No);
 			rs = pstmt.executeQuery();
@@ -291,7 +292,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt= null;
 	try {
-			con = DriverManager.getConnection(url,userid,passwd);
+		con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_MISSION_NO);
 			pstmt.setString(1, mission_No);
 			rs = pstmt.executeQuery();
@@ -345,8 +346,7 @@ public class Mission_ImagesDAO implements Mission_ImagesDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt= null;
 	try {
-		con = DriverManager.getConnection(url,userid,passwd);
-		
+		con = ds.getConnection();
 		pstmt = con.prepareStatement(INSERT_NO_IMAGE);
 
 		pstmt.setString(1, mission_No);

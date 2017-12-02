@@ -144,7 +144,7 @@ public class MemServlet extends HttpServlet {
 			      
 			    String ch_name = mem.getMem_Id();
 			    Integer passRandom = mem.getMem_Code();
-			    String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" +
+			    String messageText = "Hello! " + ch_name + " 請謹記此驗證碼: " + passRandom + "\n" +
 			    					 " (已經啟用) , 請登入驗證,謝謝您"; 
 			    
 			    Integer mem_Code = passRandom;
