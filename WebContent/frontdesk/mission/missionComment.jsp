@@ -42,20 +42,20 @@
 
 <div class="container">
     <div class="row">
-    <div class="col-xs-12 col-sm-12">
+    <div class="col-xs-12 col-sm-12 col-sm-offset-4">
 <section class='rating-widget'>
   <form METHOD="post" ACTION="<%=request.getContextPath()%>/missioncomment/missioncomment.do"">
   <!-- Rating Stars Box -->
-  <div class="panel panel-default">
+  <div class="panel panel-info" style="width:45%">
     <div class="panel-heading">
-      <h3 class="panel-title">任務評價</h3>
+      <h1 class="panel-title"><h2 style="color:red ; text-align : center">任務評價</h2></h1>
     </div>
     <div class="panel-body">
      <p>對於這次的任務 <b>${getMissionVO.mission_Name}</b> 還有 <b>合作方</b> 給予評價吧~.</p>
     </div>
     <table class="table">
       <tr>
-        <td>
+      <th colSpan="2">
           <div class='rating-stars text-center' >
     <ul id='stars' >
       <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
@@ -75,9 +75,9 @@
       </li>
     </ul>
   </div> 
-        </td>
+        <th>
 <td>
-          <button class="btn btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
+          <button class="btn-lg btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
  <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
  <c:if test="${getMissionVO.mission_No.issuer_Mem_No.equals(memVO.mem_No)}" var="reviewer"> 
  <input type="hidden" name="listener" value="${getMissionVO.mission_No.takecase_Mem_No}">
@@ -87,35 +87,23 @@
  </c:if>
  <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
        </td>
-        
-        <tr>
-        <td>
-          <div class="col-xs-12 col-sm-12 col-sm-offset-5">
-  <textarea class="smallInput center fuild" ROWS="5"   COLS="20" name="comment_Detial"></textarea>
-          </div>
-        </td>
-        </tr>
-       
       </tr>
+        <tr>
+        <th>
+       
+          <div class="col-xs-12 col-sm-12 ">
+  <textarea class="smallInput center fuild" style="width :100%"  name="comment_Detial"></textarea>
+          </div>
+     
+        <th>
+        </tr>
     </table>
   </div>
-								                
   </form>
 </section>
-
 </div>
 </div>
     </div>
-<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name= "getmission">
-	
-<button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
-
-</form>
-
-
-
-
-
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
 

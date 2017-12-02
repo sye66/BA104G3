@@ -10,6 +10,8 @@
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
 <%@ page import="com.casecandidate.model.*"%>
+<jsp:useBean id="caseCandidateSvc" scope="page"
+	class="com.casecandidate.model.CaseCandidateService" />
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
@@ -234,7 +236,6 @@
 							pageContext.setAttribute("missionmem" ,missionmem);
 							
 							%>
-
 			<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
 							<td>
 								<div class="panel-body">
