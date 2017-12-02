@@ -19,14 +19,12 @@
 	//所有會員
 	MemService memSvc = new MemService();
 	List<MemVO> getAllMemVO = memSvc.getAll();
-	String str = new String();
-	MemVO memVO2 = new MemVO();
-	for(int i = 0; i < getAllMemVO.size(); i++){
-		if(memVO.getMem_No().equals(getAllMemVO.get(i).getMem_No()));
-		str = getAllMemVO.get(i).getMem_No();
-		memVO2 = memSvc.getOneMem(str);
-		getAllMemVO.remove(memVO2);
-	}
+	MemVO noVO = memSvc.getOneMem(mem_No);
+	MemVO noVO1 = memSvc.getOneMem("OFFICAL000001");
+	MemVO noVO2 = memSvc.getOneMem("OFFICAL000002");
+	getAllMemVO.remove(noVO);
+	getAllMemVO.remove(noVO1);
+	getAllMemVO.remove(noVO2);
 	pageContext.setAttribute("getAllMemVO", getAllMemVO);
 	//顯示自己排名
 	RankService rankSvc = new RankService();
