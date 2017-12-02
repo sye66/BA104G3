@@ -559,10 +559,13 @@
 								</h3> <%--               <h1><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio　</a></h1> --%>
 							</li>
 						</ul>
+							
 					</div>
+					
 				</div>
+				
+				
 			</nav>
-
 
 
 			<div class="modal fade" id="modal-id">
