@@ -115,7 +115,19 @@
 		
 		<br>
 
-
+<div class="col-xs-12 col-sm-12" >
+<br>
+<div class="panel panel-info left001">
+			<div class="panel-heading">
+				<div class="panel-title"><h3 align="center">特價商品</h3>
+				</div>
+			</div>
+			<div class="panel-body">
+				
+<jsp:include page="/frontdesk/pro/selectHotPro.jsp" flush="true" />					
+			</div>
+		</div>
+</div>
 <!-- 所有商品 -->
 <div class="col-xs-12 col-sm-12" >
 
@@ -370,6 +382,7 @@
 
 	</div>
 	<!-- 右2結束 -->
+
 	
 
 	

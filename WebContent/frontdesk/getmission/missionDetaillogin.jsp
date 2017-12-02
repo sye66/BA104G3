@@ -172,7 +172,7 @@
 					<h4>任務狀態:</h4>
 					<p>----${ChangeStateToName.ChangeStateToName(getMissionVO.mission_State)}</p>
 					<h4>發案人:</h4>
-					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 				</div>
 				<div class="col-xs-12 col-sm-2 ">
 				<div class="panel-body">
@@ -216,7 +216,7 @@
 						<h3 class="panel-title">任務細節</h3>
 					</div>
 					<div class="panel-body">
-						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 
 						<h5>敘述</h5><p>${getMissionVO.mission_Des}</p>
 						<h5>任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>

@@ -11,8 +11,9 @@
 <html lang="en">
  
 <style>
-#img_pic,#old_pic{width:40px;
-	heigth:25px;
+#img_pic,#old_pic{
+	max-width:30px;
+	max-heigth:30px;
 	 border: #d3d3d3;
     border-radius: 5em;}
  .a_tag{
@@ -105,7 +106,7 @@
             
             
 				<c:if test="${not empty memVO.mem_No}">
-				<div>
+				<div id="img_old">
            <li style="margin-top:0px; margin-bottom:0px;" class="nav-item1">  <a href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp" class="nav-link js-scroll-trigger" id="create-user"  >
 				<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
 				</a>
