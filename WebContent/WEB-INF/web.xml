@@ -28,7 +28,6 @@
     <url-pattern>/frontdesk/mem/memCenter.jsp</url-pattern>
     <url-pattern>/frontdesk/personal/PersonalPage.jsp</url-pattern>
     <url-pattern>/frontdesk/pro/showProIndex.jsp</url-pattern>
-    <url-pattern>/frontdesk/artiForm/listAllArtiForm.jsp</url-pattern>
     <url-pattern>/frontdesk/getmission/getMissionlogin.jsp</url-pattern>
     <url-pattern>/frontdesk/getmission/getMission.jsp</url-pattern>
     <url-pattern>/frontdesk/issuemission/issuemission.jsp</url-pattern>

@@ -174,8 +174,8 @@ section.success {
 
 @media ( min-width : 992px) {
 	#mainNav {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: 15px;
+		padding-bottom: 15px;
 		-webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
 		-moz-transition: padding-top 0.3s, padding-bottom 0.3s;
 		transition: padding-top 0.3s, padding-bottom 0.3s;
