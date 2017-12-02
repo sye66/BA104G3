@@ -556,10 +556,13 @@
 							</div>
 							</c:if>
 						</ul>
+							
 					</div>
+					
 				</div>
+				
+				
 			</nav>
-
 
 
 			<div class="modal fade" id="modal-id">

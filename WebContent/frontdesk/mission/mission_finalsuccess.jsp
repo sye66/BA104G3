@@ -61,7 +61,7 @@ img #show {heigth:100%}
 	</c:if>
 
 	<h1>恭喜你！${memSvc.getOneMem(memVO.mem_No).mem_Name}！任務完成</h1>
-	<p>3秒之後自動跳轉到首頁</p>
+	<p>3秒之後自動跳轉到評論</p>
 
 
 

@@ -89,7 +89,7 @@
  <c:if test="${!reviewer}">
  <input type="hidden" name="listener" value="${getMissionVO.issuer_Mem_No}">
  </c:if>
- <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
+ <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp?mission_No=${getMissionVO.mission_No}">
        </td>
       </tr>
         <tr>

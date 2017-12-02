@@ -73,7 +73,7 @@
                 </li>
               </ul>
             </div>
-            <div class="footer-col col-md-4">
+            <div class="footer-col col-md-4" style="z-index:101;">
               <h3>QR code</h3>
               <p>
                 <img src="<%=request.getContextPath()%>/lib/publicfile/include/img/QRcode/static_qr_code_100.jpg"></p>
@@ -81,7 +81,7 @@
           </div>
         </div>
       </div>
-      <div class="footer-below">
+      <div class="footer-below" style="background-color: #343b4e;">
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
@@ -90,6 +90,10 @@
           </div>
         </div>
       </div>
+      
+<!--        <div style="z-index:100;position:absolute;left:1050px;  top:190px;"> -->
+<%-- 			   	    			<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/f001.png" --%>
+<!-- 									style="  "></div> -->
     </footer>
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->

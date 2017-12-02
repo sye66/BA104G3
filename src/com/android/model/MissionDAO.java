@@ -9,13 +9,23 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
  
 
 public class MissionDAO implements MissionDAO_interface {
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String userid = "BA104G3";
-	String passwd = "123456";
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String INSERT_STMT = "INSERT INTO MISSION(MISSION_NO, MISSION_NAME , MISSION_CATEGORY ,  MISSION_DES , ISSUER_MEM_NO ,  MISSION_RELEASE_TIME , MISSION_DUE_TIME , MISSION_STATE , MISSION_PATTERN ,MISSION_PAY ,MISSION_GPS_LAT ,MISSION_GPS_LNG) VALUES('MISSION'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'),?,?,?,?,sysdate,sysdate+5,?,?,?,?,?)";
 			//"INERT INTO mission (mission_No,  mission_Category, mission_Name, mission_Des, issuer_Mem_No, takecase_Mem_No, mission_Release_Time, mission_Due_Time, mission_Start_Time, mission_End_Time, mission_State, ,mission_Pattern, mission_Pay, mission_Gps_Lat, mission_Gps_Lng) VALUES (to_char(sysdate,'yyyymmdd')||'MIS'||LPAD(to_char(MISSION_SEQ.NEXTVAL),9,'0'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -43,8 +53,7 @@ public class MissionDAO implements MissionDAO_interface {
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 
 //			pstmt.setString(1, missionVO.getMission_Category());
@@ -79,10 +88,7 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+	
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -115,8 +121,7 @@ public class MissionDAO implements MissionDAO_interface {
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userid,passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1, missionVO.getMission_Name());
@@ -143,9 +148,7 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.executeUpdate();
 			
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,8 +183,7 @@ public class MissionDAO implements MissionDAO_interface {
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setString(1, mission_No);
@@ -189,10 +191,7 @@ public class MissionDAO implements MissionDAO_interface {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -227,8 +226,7 @@ public class MissionDAO implements MissionDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_STMT);
 			rs = pstmt.executeQuery();
 			
@@ -260,9 +258,7 @@ public class MissionDAO implements MissionDAO_interface {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -295,8 +291,7 @@ public class MissionDAO implements MissionDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_SEARCH_MISSION);
 			rs = pstmt.executeQuery();
 			
@@ -326,9 +321,7 @@ public class MissionDAO implements MissionDAO_interface {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -362,8 +355,7 @@ public class MissionDAO implements MissionDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM);
 			pstmt.setString(1, issuer_Mem_No);
 			rs = pstmt.executeQuery();
@@ -394,9 +386,7 @@ public class MissionDAO implements MissionDAO_interface {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -430,8 +420,7 @@ public class MissionDAO implements MissionDAO_interface {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_TAKECASE_MEM);
 			pstmt.setString(1, takecase_Mem_No);
 			rs = pstmt.executeQuery();
@@ -461,10 +450,7 @@ public class MissionDAO implements MissionDAO_interface {
 //				missionVO.setMission_End_Time(rs.getTimestamp("mission_End_Time"));
 				
 			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -497,8 +483,7 @@ public List<MissionVO> getByTakecaseMemUnfinished(String takecase_Mem_No) {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_TAKECASE_MEM_UNFINISHED);
 			pstmt.setString(1, takecase_Mem_No);
 			rs = pstmt.executeQuery();
@@ -529,9 +514,7 @@ public List<MissionVO> getByTakecaseMemUnfinished(String takecase_Mem_No) {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -564,8 +547,7 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State =5 AND mission_State = 6 AND Mission_State =9");
 			pstmt.setString(1, issuer_Mem_No);
 			rs = pstmt.executeQuery();
@@ -596,9 +578,7 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -631,8 +611,7 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 	ResultSet rs = null;
 	
 	try {
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, userid, passwd);
+		con = ds.getConnection();
 		pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND (mission_State =3 OR mission_State =4 OR mission_State =8)");
 		pstmt.setString(1, issuer_Mem_No);
 		rs = pstmt.executeQuery();
@@ -663,9 +642,7 @@ public List<MissionVO> getByIssuerMemProcess(String issuer_Mem_No) {
 			
 		}
 		
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -698,8 +675,7 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No, String candi
 	ResultSet rs = null;
 	
 	try {
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, userid, passwd);
+		con = ds.getConnection();
 		
 		pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CASE_CANDIDATE_NO);
 		pstmt.setString(1, candidate_Mem_No);
@@ -744,9 +720,7 @@ public List<MissionVO> getByIssuerMemResponse(String issuer_Mem_No, String candi
 		
 		
 		
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -779,8 +753,7 @@ public List<MissionVO> getByIssuerMemResponse2(String issuer_Mem_No) {
 	ResultSet rs = null;
 	
 	try {
-		Class.forName(driver);
-		con = DriverManager.getConnection(url, userid, passwd);
+		con = ds.getConnection();
 		
 		
 		System.out.println("issuer_Mem_NoDAO"+issuer_Mem_No);
@@ -816,9 +789,7 @@ public List<MissionVO> getByIssuerMemResponse2(String issuer_Mem_No) {
 		
 		
 		
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -851,8 +822,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		ResultSet rs = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_STMT_BY_TAKECASE_MEM_CLOSED);
 			pstmt.setString(1, takecase_Mem_No);
 			rs = pstmt.executeQuery();
@@ -885,9 +855,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 				
 			}
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -921,8 +889,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		
 		
 		try {
-				Class.forName(driver);
-				con = DriverManager.getConnection(url, userid, passwd);
+				con = ds.getConnection();
 				pstmt = con.prepareStatement(GET_ONE_STMT);
 				pstmt.setString(1, mission_No);
 				rs = pstmt.executeQuery();
@@ -969,8 +936,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT_CASE_CANDIDATE);
 
 
@@ -981,10 +947,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -1018,7 +981,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		ResultSet rs = null;
 		String sql = GET_MISSION_BY_KEYWORD + keyword + " = " + keyvalue + " ORDER BY mission_No" ;
 		try {
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
@@ -1075,8 +1038,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 		PreparedStatement pstmt = null;
 	
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userid,passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_STMT_TAKECASE_MEM);
 			
 			pstmt.setString(1, takecase_NO);
@@ -1085,9 +1047,7 @@ public List<MissionVO> getByTakecaseMemClosed(String takecase_Mem_No) {
 			pstmt.setString(4, mission_No);
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1119,8 +1079,7 @@ public void deleteAccuse_Case(String mission_No) {
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_ACCUSE_CASE);
 
 			pstmt.setString(1, mission_No);
@@ -1128,10 +1087,7 @@ public void deleteAccuse_Case(String mission_No) {
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -1163,8 +1119,7 @@ public void deleteAccuse_Case(String mission_No) {
 		PreparedStatement pstmt = null;
 	
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userid,passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_MISSION_STATE_BY_MISSION_NO);
 			
 			pstmt.setInt(1, mission_State);
@@ -1172,9 +1127,7 @@ public void deleteAccuse_Case(String mission_No) {
 			
 			pstmt.executeUpdate();
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1205,8 +1158,7 @@ public void updateMission(MissionVO missionVO){
 		PreparedStatement pstmt = null;
 		
 		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url,userid,passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE_MISSION);
 			
 		
@@ -1222,9 +1174,7 @@ public void updateMission(MissionVO missionVO){
 			pstmt.executeUpdate();
 			
 			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

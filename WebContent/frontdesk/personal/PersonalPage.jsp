@@ -4,10 +4,15 @@
 <%@ page import="com.relation.model.*"%>
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.relation.model.*"%>
+<%@ page import="com.missioncomment.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/lib/css/getmission/star.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+<link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css'>
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 <jsp:useBean id="memmemSvc" scope="page" class="com.mem.model.MemService"/>
@@ -44,6 +49,11 @@
 		System.out.println("memNO +"+ list.getRelation_Status());
 	}
 	pageContext.setAttribute("relationVO", relationVO);
+	//抓星星
+	MissionCommentService mcSvc = new MissionCommentService();
+	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
+// 	tryVO.get(0).getListener();
+	pageContext.setAttribute("tryVO", tryVO);
 	
 %>
 
@@ -344,7 +354,42 @@
 					    </table>
 					  </div>
 					</div>
+					<br>
+					<br>
+					<br>
+					
+					<div class="panel panel-info">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">看看吧</h3>
+					  </div>
+					<table class="table">
+      <tr>
+        <td>
+          <div class='rating-stars text-center' >
+    <ul id='stars' >
+      <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Good' data-value='3' name="comment_Point" value="3">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Excellent' data-value='4' name="comment_Point" value="4">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='WOW!!!' data-value='5' name="comment_Point" value="5">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+    </ul>
+  </div> 
+        </td>
+
+    </table>
 		</div>
+		</div>
+		
 		<div class="col-xs-12 col-sm-4">
 			<div class="panel panel-info">
 					  <div class="panel-heading">
@@ -373,8 +418,22 @@
 					  </div>
 					</div>
 		</div>
+		
 	</div>
 </div>
+
+	<c:forEach var="qqVO" items="${tryVO}">
+		<table>
+			<tr>
+				<td>
+					${qqVO.listener}
+					${qqVO.mission_No}
+				</td>
+		</table>
+	</c:forEach>
+
+ <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
