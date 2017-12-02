@@ -37,7 +37,7 @@
     <br>
     <br>
     <br>
-    <br><br><br>
+    <br><br>
     <div class="panel panel-info">
         <div class="panel-heading">
             <h3 class="panel-title">任務完成小面板兒</h3>
