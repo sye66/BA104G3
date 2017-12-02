@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import com.mem.model.MemVO;
+import com.missioncomment.model.*;
 
 public class MissionCommentServlet extends HttpServlet {
 
@@ -54,7 +55,20 @@ public class MissionCommentServlet extends HttpServlet {
 			
 			try{
 				String mission_No = (String)req.getParameter("mission_No");
+				Integer comment_Point = new Integer(req.getParameter("comment_Point"));
+				String listener = (String)req.getParameter("listener");
+				String comment_Detail = (String)req.getParameter("comment_Detail");
 				
+				MissionCommentService missionCommentSvc = new MissionCommentService();
+				MissionCommentVO missionCommentVO = new MissionCommentVO();
+				
+				missionCommentSvc.addMissionComment(memVO.getMem_No(), listener, mission_No, comment_Detail, comment_Point);
+				missionCommentVO = (MissionCommentVO) missionCommentSvc.getByReviewer(memVO.getMem_No());
+				
+				req.setAttribute("missionCommentVO", missionCommentVO);
+				RequestDispatcher failureView = req.getRequestDispatcher("");
+				failureView.forward(req, res);
+				return;
 				
 			}catch (Exception e) {
 				System.out.println(e);

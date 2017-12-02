@@ -11,7 +11,7 @@
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
-	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("mission_No");
+	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 
 %>
 
@@ -38,48 +38,67 @@
 <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 
 	<br><br><br><br><br>
-	<br>
+	<br><br><br>
 
-    <div class="container-fuild">
-        <div class="row">
-<header class='header text-center' style="margin-left:42%">
-    <h2>任務評價</h2>
-  <p>對於這次的任務 <b>${getMissionVO.mission_No }</b> 還有 <b>合作方</b> 給予評價吧~.</p>
-</header>
-
-</div></div>
 <div class="container">
     <div class="row">
     <div class="col-xs-12 col-sm-12">
 <section class='rating-widget'>
   <form METHOD="post" ACTION="<%=request.getContextPath()%>/missioncomment/missioncomment.do"">
   <!-- Rating Stars Box -->
-  <div class='rating-stars text-center' >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">任務評價</h3>
+    </div>
+    <div class="panel-body">
+     <p>對於這次的任務 <b>${getMissionVO.mission_Name}</b> 還有 <b>合作方</b> 給予評價吧~.</p>
+    </div>
+    <table class="table">
+      <tr>
+        <td>
+          <div class='rating-stars text-center' >
     <ul id='stars' >
-      <li class='star' title='Poor' data-value='1' name="comment_Point">
+      <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Fair' data-value='2' name="comment_Point">
+      <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Good' data-value='3' name="comment_Point">
+      <li class='star' title='Good' data-value='3' name="comment_Point" value="3">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Excellent' data-value='4' name="comment_Point">
+      <li class='star' title='Excellent' data-value='4' name="comment_Point" value="4">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='WOW!!!' data-value='5' name="comment_Point">
+      <li class='star' title='WOW!!!' data-value='5' name="comment_Point" value="5">
         <i class='fa fa-star fa-fw'></i>
       </li>
     </ul>
-  </div>
-  <div class="col-xs-12 col-sm-12 col-sm-offset-5">
-  <textarea class="smallInput center" ROWS="5"   COLS="20" name="comment_Detial"></textarea>
- </div>
- 
- <button class="btn btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
+  </div> 
+        </td>
+<td>
+          <button class="btn btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
  <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
+ <c:if test="${getMissionVO.mission_No.issuer_Mem_No.equals(memVO.mem_No)}" var="reviewer"> 
+ <input type="hidden" name="listener" value="${memVO.mem_No}">
+ </c:if>
+ <c:if test="${!reviewer}">
+ <input type="hidden" name="listener" value="${getMissionVO.mission_No.takecase_Mem_No}">
+ </c:if>
  <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
+       </td>
+        
+        <tr>
+        <td>
+          <div class="col-xs-12 col-sm-12 col-sm-offset-5">
+  <textarea class="smallInput center fuild" ROWS="5"   COLS="20" name="comment_Detial"></textarea>
+          </div>
+        </td>
+        </tr>
+       
+      </tr>
+    </table>
+  </div>
 								                
   </form>
 </section>
