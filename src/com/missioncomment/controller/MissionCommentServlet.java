@@ -66,7 +66,7 @@ public class MissionCommentServlet extends HttpServlet {
 				missionCommentVO = (MissionCommentVO) missionCommentSvc.getByReviewer(memVO.getMem_No());
 				
 				req.setAttribute("missionCommentVO", missionCommentVO);
-				RequestDispatcher failureView = req.getRequestDispatcher("");
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
 				failureView.forward(req, res);
 				return;
 				

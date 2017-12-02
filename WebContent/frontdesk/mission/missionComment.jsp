@@ -11,8 +11,12 @@
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 
 <%
-	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
-
+	String mission_No = (String) request.getQueryString();
+	String[] number =  mission_No.split("=");
+	GetMissionService getMissionService = new GetMissionService();
+	GetMissionVO getMissionVO = getMissionService.getOneMission(number[1]);
+	pageContext.setAttribute("getMissionVO" ,getMissionVO);
+	
 %>
 
 <!DOCTYPE html>
@@ -39,7 +43,6 @@
 
 	<br><br><br><br><br>
 	<br><br><br>
-
 <div class="container">
     <div class="row">
     <div class="col-xs-12 col-sm-12 col-sm-offset-4">
@@ -57,20 +60,20 @@
       <tr>
       <th colSpan="2">
           <div class='rating-stars text-center' >
-    <ul id='stars' >
-      <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
+    <ul id='stars' name="comment_Point">
+      <li class='star' title='Poor' data-value='1'  value="1">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
+      <li class='star' title='Fair' data-value='2'  value="2">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Good' data-value='3' name="comment_Point" value="3">
+      <li class='star' title='Good' data-value='3'  value="3">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='Excellent' data-value='4' name="comment_Point" value="4">
+      <li class='star' title='Excellent' data-value='4'  value="4">
         <i class='fa fa-star fa-fw'></i>
       </li>
-      <li class='star' title='WOW!!!' data-value='5' name="comment_Point" value="5">
+      <li class='star' title='WOW!!!' data-value='5'  value="5">
         <i class='fa fa-star fa-fw'></i>
       </li>
     </ul>
@@ -78,12 +81,13 @@
         <th>
 <td>
           <button class="btn-lg btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
+          <input type="hidden" class="startvalue" name="comment_Point" value="0"/>
  <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
- <c:if test="${getMissionVO.mission_No.issuer_Mem_No.equals(memVO.mem_No)}" var="reviewer"> 
- <input type="hidden" name="listener" value="${getMissionVO.mission_No.takecase_Mem_No}">
+ <c:if test="${getMissionVO.issuer_Mem_No.equals(memVO.mem_No)}" var="reviewer"> 
+ <input type="hidden" name="listener" value="${getMissionVO.takecase_Mem_No}">
  </c:if>
  <c:if test="${!reviewer}">
- <input type="hidden" name="listener" value="${getMissionVO.mission_No.issuer_Mem_No}">
+ <input type="hidden" name="listener" value="${getMissionVO.issuer_Mem_No}">
  </c:if>
  <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
        </td>
@@ -106,7 +110,11 @@
     </div>
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
+<script>
+	
 
+
+</script>
  
 <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include></div>
 

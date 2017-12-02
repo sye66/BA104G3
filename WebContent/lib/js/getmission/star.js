@@ -55,3 +55,13 @@ function responseMessage(msg) {
   $('.success-box').fadeIn(200);  
   $('.success-box div.text-message').html("<span>" + msg + "</span>");
 }
+
+$(document).ready(function(){
+	$(".star").click(function(){
+		
+		console.log($(this).val());
+		
+		$(".startvalue").val($(this).val());
+		
+	});
+});
