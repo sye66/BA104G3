@@ -48,6 +48,7 @@
 	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
 // 	tryVO.get(0).getListener();
 	pageContext.setAttribute("tryVO", tryVO);
+	
 %>
 
       <%request.getSession().setAttribute("memVO" ,memVO); %>
