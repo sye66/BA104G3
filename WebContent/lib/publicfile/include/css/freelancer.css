@@ -174,8 +174,8 @@ section.success {
 
 @media ( min-width : 992px) {
 	#mainNav {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding-top: 0px;
+		padding-bottom: 27px;
 		-webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
 		-moz-transition: padding-top 0.3s, padding-bottom 0.3s;
 		transition: padding-top 0.3s, padding-bottom 0.3s;
@@ -198,7 +198,7 @@ section.success {
 	}
 	#mainNav.navbar-shrink {
 		padding-top: 0px;
-		padding-bottom: 0px;
+		padding-bottom: 22px;
 	}
 	#mainNav.navbar-shrink .navbar-brand {
 		font-size: 1.5em;

@@ -109,7 +109,7 @@
 										<div align="left">
          							    <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proOrderServlet.do" method="POST" >
               							<input type="hidden" name="action"  value="updateProOrderUp">
-              							<input type="hidden" name="requestURL" value="<%=request.getContextPath()%>/backdesk/proOrder/listProOrder_B2.jsp">
+              							<input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
               							<input type="hidden" name="ord_No"  value="${proOrder.ord_No}">
               							<input type="hidden" name="ord_Shipinfo"  value="已出貨">
              							<input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>"> 
@@ -141,7 +141,7 @@
 
 
 <%if(list.size()==0){
-			System.out.println(list.size());
+System.out.println(list.size());
 			%>	
 			<div class="col-xs-12 col-sm-6 col-sm-offset-5">
 			<h3>查無資料</h3>

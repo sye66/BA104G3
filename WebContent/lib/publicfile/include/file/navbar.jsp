@@ -7,8 +7,27 @@
 <%-- <c:if test="${not empty login_memVO.mem_Id}"><% MemVO memVO = (MemVO)request.getSession().getAttribute("login_memVO"); %></c:if> --%>
 <%MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); %>
 <%request.getAttribute("updateSuccess");%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
 <html lang="en">
+ 
+<style>
+
+#photo,.logo_size{
+		heigth:70px;
+}
+#img_pic_nav,#old_pic_nav,.logo_size{
+	max-width:70px;
+	 border: #d3d3d3;
+    border-radius: 5em;}
+ .a_tag{
+ 	margin-top:25px;
+ 	font-size:18px;
+ }
+ .a_tag2{
+ 	margin-top:6px;
+ 	font-size:18px;
+ }
+</style>
 
   <head>
 
@@ -47,15 +66,15 @@
       <div class="container">
       
         <a class="navbar-brand js-scroll-trigger" href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
-        <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        <img class="logo_size" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          Menu
+          Menu 
           <i class="fa fa-bars"></i>
         </button>
-        <div id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+        <div style="margin-top:0px; margin-bottom:0px; font-size=10px;" id="navbarResponsive">
+          <ul style="margin-top:20px" class="navbar-nav ml-auto">
            
             
            
@@ -79,10 +98,6 @@
               <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
             </li>
             <c:if test="${not empty memVO.mem_Id}">
-             <li class="nav-item">
-              <h3>
-              <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
-            </li>
             </c:if>
             <c:if test="${not empty memVO.mem_Id}">
             <li class="nav-item">
@@ -93,20 +108,27 @@
 <!--  開新分頁 target="_blank"   跳新視窗        onclick="window.open(' http://tw.yahoo.com ', 'Yahoo', config='height=500,width=500');"> -->
             
             
-           <li class="nav-item1">  <h3><a class="nav-link js-scroll-trigger" id="create-user"  >
-				
 				<c:if test="${not empty memVO.mem_No}">
-				<li><a style="text-decoration:none;" href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i class="glyphicon glyphicon-log-out"></i> 登出</a></li>
+				<div id="photo">
+           <li style="margin-top:0px; margin-bottom:0px;" class="nav-item1">  <a href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp" class="nav-link js-scroll-trigger" id="create-user"  >
+				<img id="old_pic_nav" src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
+				</a>
+            	</li>
+            	</div>
+				</c:if>
+				<c:if test="${empty memVO.mem_No}">
+				<div style="margin-top:6px; margin-bottom:0px;">
+				<a class="a_tag2" style="text-decoration:none" href='#modal-id' data-toggle="modal"><i class=" glyphicon glyphicon-log-in"></i> 登入/註冊　</a>
+				</div>
+				</c:if>
+				<c:if test="${not empty memVO.mem_No}">
+				<div style="margin-top:25px; margin-bottom:0px;">
+				<a class="a_tag"style="style="text-decoration:none"  href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i class="glyphicon glyphicon-log-out"></i> 登出</a>
+				</div>
 				</c:if>
 				
-				<c:if test="${empty memVO.mem_No}">
-				<li><a style="text-decoration:none;" href='#modal-id' data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i> 登入/註冊　</a></li>
-				</c:if>
-				</a></h3>
-<%--               <h1><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio　</a></h1> --%>
 
-<%-- 					<li><jsp:include page="/index.html" flush="true"></jsp:include></li> --%>
-            </li>
+            
           </ul>
        </div>
       </div>

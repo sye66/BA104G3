@@ -10,8 +10,8 @@ public class AccuseCaseService {
 		dao = new AccuseCaseDAO();
 	}
 
-	public AccuseCaseVO addAccuseCase( String mission_No,String accuser_No,String emp_No, java.sql.Date accuse_Date,
-			java.sql.Date closed_Case_Date, String accuse_Detail, Integer accuse_State) {
+	public AccuseCaseVO addAccuseCase( String mission_No,String accuser_No,String emp_No, java.sql.Timestamp accuse_Date,
+			java.sql.Timestamp closed_Case_Date, String accuse_Detail, Integer accuse_State) {
 
 		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 
@@ -20,7 +20,7 @@ public class AccuseCaseService {
 		accuseCaseVO.setAccuser_No(accuser_No);
 		accuseCaseVO.setEmp_No(emp_No);
 		accuseCaseVO.setAccuse_Date(accuse_Date);
-		accuseCaseVO.setClosed_Case_Date(closed_Case_Date);
+		accuseCaseVO.setClose_Case_Date(closed_Case_Date);
 		accuseCaseVO.setAccuse_Detail(accuse_Detail);
 		accuseCaseVO.setAccuse_State(accuse_State);
 		dao.insert(accuseCaseVO);
@@ -28,8 +28,8 @@ public class AccuseCaseService {
 		return accuseCaseVO;
 	}
 
-	public AccuseCaseVO updateAccuseCase(String accuse_No, String mission_No,String accuser_No,String emp_No, java.sql.Date accuse_Date,
-			java.sql.Date closed_Case_Date, String accuse_Detail, Integer accuse_State) {
+	public AccuseCaseVO updateAccuseCase(String accuse_No, String mission_No,String accuser_No,String emp_No, java.sql.Timestamp accuse_Date,
+			java.sql.Timestamp closed_Case_Date, String accuse_Detail, Integer accuse_State) {
 
 		AccuseCaseVO accuseCaseVO = new AccuseCaseVO();
 
@@ -38,7 +38,7 @@ public class AccuseCaseService {
 		accuseCaseVO.setAccuser_No(accuser_No);
 		accuseCaseVO.setEmp_No(emp_No);
 		accuseCaseVO.setAccuse_Date(accuse_Date);
-		accuseCaseVO.setClosed_Case_Date(closed_Case_Date);
+		accuseCaseVO.setClose_Case_Date(closed_Case_Date);
 		accuseCaseVO.setAccuse_Detail(accuse_Detail);
 		accuseCaseVO.setAccuse_State(accuse_State);
 		dao.update(accuseCaseVO);

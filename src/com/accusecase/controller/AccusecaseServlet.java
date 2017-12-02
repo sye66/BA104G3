@@ -218,7 +218,7 @@ public class AccusecaseServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;
 			}
-			try {
+//			try {
 				String accuse_No = (String) req.getParameter("accuse_No");
 				String mission_No = (String)req.getParameter("mission_No");
 				Integer accuse_State = new Integer(req.getParameter("accuse_State"));
@@ -239,7 +239,8 @@ public class AccusecaseServlet extends HttpServlet {
 					}
 					List<AccuseCaseVO> lists = AccuseCaseSvc.getCaseByNotFinishmission(mission_No, 1);
 					for(AccuseCaseVO list :lists){
-						list = AccuseCaseSvc.updateAccuseCasebyemp(accuse_No, empVO.getEmp_No(), accuse_State);
+//						System.out.println("list.getAccuser_No()"+list.getAccuser_No());
+						AccuseCaseSvc.updateAccuseCasebyemp(list.getAccuse_No(), empVO.getEmp_No(), accuse_State);
 					}
 					
 				}else if(accuse_State == 3){
@@ -274,14 +275,14 @@ public class AccusecaseServlet extends HttpServlet {
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交
 				successView.forward(req, res);
 				return;
-			} catch (Exception e) {
-				System.out.println(e);
-				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
-				req.setAttribute("errorMsgs", errorMsgs);
-				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
-				failureView.forward(req, res);
-				return;
-			}
+//			} catch (Exception e) {
+//				System.out.println(e);
+//				errorMsgs.add("消除檢舉失敗:" + e.getMessage());
+//				req.setAttribute("errorMsgs", errorMsgs);
+//				RequestDispatcher failureView = req.getRequestDispatcher(requestURL);
+//				failureView.forward(req, res);
+//				return;
+//			}
 
 		}
 	}
