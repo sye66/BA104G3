@@ -11,12 +11,16 @@
 <html lang="en">
  
 <style>
-#img_pic,#old_pic{width:40px;
-	heigth:25px;
+
+#photo,.logo_size{
+		heigth:40px;
+}
+#img_pic_nav,#old_pic_nav,.logo_size{
+	max-width:70px;
 	 border: #d3d3d3;
     border-radius: 5em;}
  .a_tag{
- 	margin-top:34px;
+ 	margin-top:25px;
  	font-size:18px;
  }
  .a_tag2{
@@ -62,7 +66,7 @@
       <div class="container">
       
         <a class="navbar-brand js-scroll-trigger" href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
-        <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        <img class="logo_size" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         </a>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +74,7 @@
           <i class="fa fa-bars"></i>
         </button>
         <div style="margin-top:0px; margin-bottom:0px; font-size=10px;" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul style="margin-top:15px" class="navbar-nav ml-auto">
            
             
            
@@ -105,9 +109,9 @@
             
             
 				<c:if test="${not empty memVO.mem_No}">
-				<div>
+				<div id="photo">
            <li style="margin-top:0px; margin-bottom:0px;" class="nav-item1">  <a href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp" class="nav-link js-scroll-trigger" id="create-user"  >
-				<img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
+				<img id="old_pic_nav" src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
 				</a>
             	</li>
             	</div>
@@ -118,7 +122,7 @@
 				</div>
 				</c:if>
 				<c:if test="${not empty memVO.mem_No}">
-				<div style="margin-top:30px; margin-bottom:0px;">
+				<div style="margin-top:25px; margin-bottom:0px;">
 				<a class="a_tag"style="style="text-decoration:none"  href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i class="glyphicon glyphicon-log-out"></i> 登出</a>
 				</div>
 				</c:if>
