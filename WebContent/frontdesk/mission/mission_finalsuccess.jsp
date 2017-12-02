@@ -23,7 +23,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp">
+<meta http-equiv="refresh" content="3;URL=<%=request.getContextPath()%>/frontdesk/mission/missionComment.jsp?mission_No=${getMissionVO.mission_No}">
 <title>
 	
 </title>

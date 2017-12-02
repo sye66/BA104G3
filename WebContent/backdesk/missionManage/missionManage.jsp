@@ -98,20 +98,17 @@
 													<input type="hidden" name="accuse_No" value="${accusecaseVO.accuse_No}">
 													<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}">
 													<input type="hidden" name="requestURL" value="/backdesk/missionManage/missionManage.jsp">
-
 												</td>
 											</form>
-														<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
+											<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 												<td>
 													<div class="panel-body">
-															<button class="btn btn-warning" type="submit"
-																name="action" value="mission_Detail">任務細節</button>
-
-															<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
-															<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManage.jsp">
+														<button class="btn btn-warning" type="submit" name="action" value="mission_Detail">任務細節</button>
+														<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
+														<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManage.jsp">
 													</div>
 												</td>
-														</form>
+											</form>
 										</tr>
 									</c:if>
 								</c:forEach>
@@ -164,11 +161,8 @@
 										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 											<button class="btn btn-warning" type="submit" name="action"
 												value="mission_Detail">任務細節</button>
-
-											<input type="hidden" name="mission_No"
-												value="${accusecaseVO.mission_No}"> 
-											<input type="hidden" name="requestURL"
-												value="/bakedesk/missionManage/missionManageok.jsp">
+											<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
+											<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManageok.jsp">
 										</form>
 						</div>
 						</td>

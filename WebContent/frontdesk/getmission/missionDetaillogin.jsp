@@ -10,6 +10,8 @@
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
 <%@ page import="com.casecandidate.model.*"%>
+<jsp:useBean id="caseCandidateSvc" scope="page"
+	class="com.casecandidate.model.CaseCandidateService" />
 
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
@@ -25,7 +27,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-<title>Mission_Detail</title>
+<title>Mission_Detaillogin</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <!--[if lt IE 9]>
@@ -172,7 +174,7 @@
 					<h4>任務狀態:</h4>
 					<p>----${ChangeStateToName.ChangeStateToName(getMissionVO.mission_State)}</p>
 					<h4>發案人:</h4>
-					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 				</div>
 				<div class="col-xs-12 col-sm-2 ">
 				<div class="panel-body">
@@ -216,7 +218,7 @@
 						<h3 class="panel-title">任務細節</h3>
 					</div>
 					<div class="panel-body">
-						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 
 						<h5>敘述</h5><p>${getMissionVO.mission_Des}</p>
 						<h5>任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>
@@ -234,7 +236,6 @@
 							pageContext.setAttribute("missionmem" ,missionmem);
 							
 							%>
-
 			<c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
 							<td>
 								<div class="panel-body">

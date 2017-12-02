@@ -18,7 +18,7 @@
 
 /* 	border:3px orange double; */
 	height: 180px;
-	width:200px;
+	width:170px;
 	margin:16px;
 	
 } 
@@ -27,6 +27,7 @@
 	font-family: Microsoft JhengHei;
 	font-weight:bold;
    	font-size:18px; 
+   	height:40px;
 }  
 .proPrice2{
  	font-size:16; 
@@ -61,7 +62,7 @@
 
 <div style="text-align:center;">
   
-  <div class="col-xs-12 col-sm-11 ">
+  <div class="col-xs-12 col-sm-12 ">
 	<c:forEach var="proVO" items="${list}" end="10">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
 		<c:if test="${proVO.pro_Discount!=100}">

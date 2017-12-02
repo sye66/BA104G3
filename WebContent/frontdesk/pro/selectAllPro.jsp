@@ -90,10 +90,10 @@
 		
 		<c:if test="${proVO.pro_Status=='上架'}" >
 		
-			<div class="col-xs-12 col-sm-4 " class="">
+			<div class="col-xs-12 col-sm-4 " class="ccc">
 				<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}" style="text-decoration:none;">
 		     		<div class="card " >
-			 		    <div class="imgCont">
+			 		    <div class="imgCont proDiv">
 		  					<img class="card-img-top" style="width:150px;height:150px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
 			   	 	   </div>
 	  					<div class="card-body">
@@ -125,24 +125,25 @@
 	  						</c:if>
 	  					</c:forEach>
 	  					
-	  					<div style="z-index:3;position:absolute;left:220px;  top:220px;">
-	  					
-			   	    			<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/go01.gif"
-									style="width: 50px;border-radius: 3px;">
-						</div>
-			
-			
 			</div>
 		 </c:if>
 	 </div>
  	</c:forEach>  	
  </div>
-
+<script src="https://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
+$(function(){
+	$(".ccc").hover(function(event){
 	
-
-
+			alert(123)
+			
+			
+		});
+	});
+	
 </script>
+
+
  
 </body>
 </html>

@@ -40,8 +40,9 @@
 }
 
 .proPrice {
-	font-size: 20;
+	font-size: 24px;
 	color: red;
+	font-weight: 900;
 }
 
 .imgCont01 {
@@ -62,6 +63,7 @@
 .proDiscount {
 	font-size: 16px;
 	text-decoration: line-through;
+	
 }
 
 #ontopDiv {
@@ -386,12 +388,6 @@ $(function() {
 	      } // error end
 	     }) //.ajax end 
 			
-			
-			
-			
-			
-		     	
-		    	
 		   
 		});
    });

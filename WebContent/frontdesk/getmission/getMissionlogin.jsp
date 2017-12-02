@@ -169,7 +169,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
 							<p>${getMissionVO.mission_No }</p>
-							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
 
 							<p>1.任務方向:${getMissionVO.mission_Category }</p>
 
