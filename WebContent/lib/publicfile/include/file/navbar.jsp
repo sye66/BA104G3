@@ -11,18 +11,12 @@
 <html lang="en">
  
 <style>
-<<<<<<< HEAD
 
 #photo,.logo_size{
-		heigth:40px;
+		heigth:70px;
 }
 #img_pic_nav,#old_pic_nav,.logo_size{
 	max-width:70px;
-=======
-#img_pic,#old_pic{
-	max-width:30px;
-	max-heigth:30px;
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	 border: #d3d3d3;
     border-radius: 5em;}
  .a_tag{
@@ -80,7 +74,7 @@
           <i class="fa fa-bars"></i>
         </button>
         <div style="margin-top:0px; margin-bottom:0px; font-size=10px;" id="navbarResponsive">
-          <ul style="margin-top:15px" class="navbar-nav ml-auto">
+          <ul style="margin-top:20px" class="navbar-nav ml-auto">
            
             
            
@@ -115,11 +109,7 @@
             
             
 				<c:if test="${not empty memVO.mem_No}">
-<<<<<<< HEAD
 				<div id="photo">
-=======
-				<div id="img_old">
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
            <li style="margin-top:0px; margin-bottom:0px;" class="nav-item1">  <a href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp" class="nav-link js-scroll-trigger" id="create-user"  >
 				<img id="old_pic_nav" src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
 				</a>
