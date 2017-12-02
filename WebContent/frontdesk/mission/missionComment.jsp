@@ -80,10 +80,10 @@
           <button class="btn btn-warning" type="submit" name="action" value="givecomment">發出評論</button>
  <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
  <c:if test="${getMissionVO.mission_No.issuer_Mem_No.equals(memVO.mem_No)}" var="reviewer"> 
- <input type="hidden" name="listener" value="${memVO.mem_No}">
+ <input type="hidden" name="listener" value="${getMissionVO.mission_No.takecase_Mem_No}">
  </c:if>
  <c:if test="${!reviewer}">
- <input type="hidden" name="listener" value="${getMissionVO.mission_No.takecase_Mem_No}">
+ <input type="hidden" name="listener" value="${getMissionVO.mission_No.issuer_Mem_No}">
  </c:if>
  <input type="hidden" name="requestURL" value="/frontdesk/mission/missionComment.jsp">
        </td>
