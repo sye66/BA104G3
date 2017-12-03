@@ -51,8 +51,10 @@
 	pageContext.setAttribute("relationVO", relationVO);
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
-	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
-// 	tryVO.get(0).getListener();
+	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
+	for(MissionCommentVO sr : tryVO){
+		System.out.println("sr.getMission_No()sr.getMission_No()sr.getMission_No()"+sr.getMission_No());
+	}
 	pageContext.setAttribute("tryVO", tryVO);
 	
 %>
@@ -363,6 +365,7 @@
 					    <h3 class="panel-title">看看吧</h3>
 					  </div>
 					<table class="table">
+	<c:forEach var="qqVO" items="${tryVO}">
       <tr>
         <td>
           <div class='rating-stars text-center' >
@@ -385,6 +388,15 @@
     </ul>
   </div> 
         </td>
+
+				<td>
+					${qqVO.listener}
+					${qqVO.mission_No}
+					${qqVO.comment_Point}
+				</td>
+			<tr>
+	</c:forEach>
+
 
     </table>
 		</div>
@@ -422,15 +434,7 @@
 	</div>
 </div>
 
-	<c:forEach var="qqVO" items="${tryVO}">
-		<table>
-			<tr>
-				<td>
-					${qqVO.listener}
-					${qqVO.mission_No}
-				</td>
-		</table>
-	</c:forEach>
+
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
