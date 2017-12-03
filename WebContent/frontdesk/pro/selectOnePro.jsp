@@ -28,7 +28,7 @@
 	margin: 20px;
 	padding: 0px;
 	height: 450px;
-	width: 550px;
+	width: 600px;
 }
 .proTable td{
 	width: 300px;
@@ -36,7 +36,7 @@
 .proName {
 	font-weight: 900;
 	font-size: 30px;
-	width: 200px;
+	width: 250px;
 }
 
 .proPrice {
@@ -210,19 +210,19 @@
 						</tr>
 						<tr>
 							<td><c:if test="${proVO.pro_Discount==100}">
-									<P></P>
+								
 									
 									<c:set var="balance" value="${proVO.pro_Price}" />
 	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
-									<p class="proPrice">價格:$${dsPrice}</p>
+									<p class="proPrice">價格:${dsPrice}點</p>
 								</c:if> 
 								<c:if test="${proVO.pro_Discount!=100}">
-									<p class="proDiscount">原價:$${proVO.pro_Price}</p>
+									<span class="proDiscount">原價:${proVO.pro_Price}點</span>
 									
 									<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
 	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
 	   			 		 
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:<span style="font-size:36px;"><c:out value="${dsPrice}"/></span>點</p>
 	   			 		
 								</c:if></td>
 						</tr>
