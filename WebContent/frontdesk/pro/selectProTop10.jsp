@@ -30,7 +30,7 @@
    	font-size:15px; 
 }  
 .proPrice0{
- 	font-size:16; 
+ 	font-size:18; 
     color:red;
 	font-family: Microsoft JhengHei;
 	font-weight:bold; 

@@ -6,7 +6,8 @@
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
     
 
-<%
+<%	
+	
     ProService proSvc = new ProService();
     List<ProVO> list = proSvc.getHot();
    
@@ -33,6 +34,8 @@
 .proPrice2{
  	font-size:16; 
     color:red; 
+    font-family: Microsoft JhengHei;
+	font-weight:bold;
 } 
 /*  .imgCont{ */
 /*  	 display:  flex; */
