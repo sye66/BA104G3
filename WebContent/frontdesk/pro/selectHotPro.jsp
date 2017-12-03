@@ -9,8 +9,13 @@
 <%	
 	
     ProService proSvc = new ProService();
-    List<ProVO> list = proSvc.getHot();
-   
+    List<ProVO> list2 = proSvc.getHot();
+    Set<ProVO> list = new HashSet<ProVO>();
+   	for(ProVO p : list2){
+   		if(p.getPro_Discount().equals(50)){
+   			list.add(p);
+   		}
+   	}
     pageContext.setAttribute("list",list);
     
 %>
@@ -70,13 +75,16 @@
   <div class="col-xs-12 col-sm-12 ">
 	<c:forEach var="proVO" items="${list}" end="3">
 		<a href="<%=request.getContextPath()%>/pro/pro.do?action=getOne_For_Display_F&pro_No=${proVO.pro_No}">
-		<c:if test="${proVO.pro_Discount!=100}">
 		<c:if test="${proVO.pro_Status=='上架'}" >
 			<div class="col-xs-12 col-sm-12 proDiv2">
 		     	<div class="card2" style="background-color: #fff;">
 			 	    <div class="imgCont2">
 			 	    	<br>
-		  				<img class="card-img-top" style="width:100px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+		  				<img class="card-img-top" style="width:100px;height:100px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
+			   	    	<div style="z-index:3;position:absolute;left:-50px;  top:-30px;">
+							<img alt="" style="height:80px;width:150px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+						</div>
+			   	    
 			   	    </div>
 	  				<div class="card-body">
 	   			 		<p class="card-text proName2">${proVO.pro_Name}</p>
@@ -91,7 +99,9 @@
 	 			 	</div>
 				</div>
 			</div>
-		</c:if>
+			
+						
+					
 		</c:if>
 	 	</a>
  	</c:forEach>  	

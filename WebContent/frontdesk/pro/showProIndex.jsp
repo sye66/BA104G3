@@ -109,7 +109,7 @@
 
 						<div class="item">
 
-							<a href="<%=request.getContextPath()%>/pro/pro.do"> <img
+							<a href="#"> <img
 								src="<%=request.getContextPath()%>/res/images/pro_icons/aa02.jpg"
 								alt="" style="height: 250px; width: 900px;">
 							</a>
@@ -157,7 +157,7 @@
 <%-- 								src="<%=request.getContextPath()%>/res/images/pro_icons/g003.png"> --%>
 							
 <!-- 						</div> -->
-<!-- 						<div style="position: absolute; left: 750px; top: 25px;"> -->
+<!-- 						<div style="position: absolute; left: 850px; top: 25px;"> -->
 <%-- 												<img alt="" style="height:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/s01.png"> --%>
 <!-- 						</div> -->
 <!-- 					</div> -->

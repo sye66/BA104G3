@@ -183,7 +183,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -196,13 +197,26 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
-
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -210,7 +224,7 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 25px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
 																	style="width: 30px; border-radius: 3px;">
@@ -250,7 +264,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -263,13 +278,29 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
+																
 															</div>
 														</div>
 													</a>
@@ -277,10 +308,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -321,7 +352,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -334,11 +366,9 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
 															</div>
@@ -348,14 +378,30 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
 											
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 												</div>
 											
 
@@ -392,7 +438,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -405,13 +452,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -419,10 +480,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -461,7 +522,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -474,13 +536,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -488,10 +564,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -551,7 +627,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -564,13 +641,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -578,10 +669,10 @@
 													<c:forEach var="proTrackVO" items="${p02}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -618,7 +709,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -631,13 +723,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -645,10 +751,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -689,7 +795,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -702,13 +809,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -716,10 +837,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -760,7 +881,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -773,13 +895,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -787,10 +923,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>
@@ -829,7 +965,8 @@
 															<div class="card-body" style="text-align:center;">
 																<p class="card-text proName">${proVO.pro_Name}</p>
 																<c:if test="${proVO.pro_Discount==100}">
-																	<p class="card-footer proPrice">價格:${proVO.pro_Price}點</p>
+																	<p class="card-footer proPrice">價格:
+																	<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">${proVO.pro_Price}</span>點</p>
 																	<P style="height: 20px;"></P>
 																</c:if>
 
@@ -842,13 +979,27 @@
 																	<fmt:parseNumber var="dsPrice" integerOnly="true"
 																		type="number" value="${balance}" />
 
-																	<p class="card-footer proPrice" style="height: 20px;">
-																		折扣價:
-																		<c:out value="${dsPrice}" />
-																		點
-																	</p>
+																	<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 													<span style="color:red;font-size:24px;font-family: Microsoft JhengHei;">
+	   			 													<c:out value="${dsPrice}" /></span>點</span>
 																</c:if>
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:160px;  top:-15px;">
+																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																
 															</div>
 														</div>
 													</a>
@@ -856,10 +1007,10 @@
 													<c:forEach var="proTrackVO" items="${list2}">
 														<c:if test="${proVO.pro_No==proTrackVO.pro_No}">
 															<div
-																style="z-index: 3; position: absolute; left: 30px; top: 10px;">
+																style="z-index: 3; position: absolute; left: 40px; top:70px;">
 																<img alt=""
 																	src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-																	style="width: 40px; border-radius: 3px;">
+																	style="width: 30px; border-radius: 3px;">
 															</div>
 														</c:if>
 													</c:forEach>

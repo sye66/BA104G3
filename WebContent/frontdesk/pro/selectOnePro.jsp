@@ -190,6 +190,27 @@
 		<div class="col-xs-12 col-sm-12">
 			<div class="proDiv">
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:550px;  top:30px;">
+																		<img alt="" style="height:120px;width:200px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
+
 				<table class="proTable">
 					<tbody>
 						<tr>
@@ -319,6 +340,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 		</div>
 
+																
 
 	</div>
 	<!--中6結束 -->
