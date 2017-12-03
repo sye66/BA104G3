@@ -349,7 +349,7 @@
 			<div class="panel panel-primary">
  				  <div class="panel-heading">
  				    <h3 class="panel-title"> 會員列表</h3>
- 				  </div> 
+ 				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<c:forEach var="all" items="${getAllMemVO}" varStatus="om">
