@@ -362,7 +362,7 @@
 					
 					<div class="panel panel-info">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">看看吧</h3>
+					    <h3 class="panel-title">所發的評論區</h3>
 					  </div>
 					<table class="table">
 	<c:forEach var="qqVO" items="${tryVO}"  varStatus="s">
