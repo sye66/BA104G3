@@ -31,6 +31,8 @@
 	getAllMemVO.remove(noVO1);
 	getAllMemVO.remove(noVO2);
 	pageContext.setAttribute("getAllMemVO", getAllMemVO);
+	pageContext.setAttribute("memSvc", memSvc);
+	
 	//顯示自己排名
 	RankService rankSvc = new RankService();
 	RankVO rankVO = rankSvc.getOneRank(mem_No);
@@ -39,16 +41,26 @@
 	ArtiFormService artiSvc = new ArtiFormService();
 	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
 	pageContext.setAttribute("set", set);
+	
+	//*********************************  智群********************
+	
+	
+	
 	//顯示好友
 	RelationService relationSvc = new RelationService();
-	List<RelationVO> relationVO = relationSvc.getAllRelationWithMem_No(mem_No);
+	List<RelationVO> relationVO = relationSvc.getAllFriends(mem_No);
 	System.out.println("memNO +"+ mem_No);
-	for(RelationVO list: relationVO){
-		System.out.println("memNO +"+ list.getMem_No());
-		System.out.println("memNO +"+ list.getRelated_Mem_No());
-		System.out.println("memNO +"+ list.getRelation_Status());
-	}
 	pageContext.setAttribute("relationVO", relationVO);
+	
+	//顯示誰+你好友
+	List<RelationVO> relationVO1 = relationSvc.getWhoAddme(mem_No);
+	pageContext.setAttribute("relationVO1", relationVO1);
+	
+// 	RelationVO relationVO2 = relationSvc.getOneRelationVO(mem_No);
+	
+	
+	//*********************************  智群********************
+	
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
 	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
@@ -254,6 +266,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-4">
+		
+<!-- 		//*********************************  智群******************** -->
+		
 			<div class="panel panel-primary">
  				  <div class="panel-heading">
  				    <h3 class="panel-title"> 好友</h3>
@@ -261,43 +276,82 @@
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<c:forEach var="relationVO" items="<%=relationVO%>" varStatus="om">
- 				    	
+ 				    	<c:if test="${relationVO.relation_Status==1}">
  				    	<c:if test="${(om.count%3)==1}">
  				    		<tr>
 	 				    		<td class="jump">
-	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.related_Mem_No}">
-	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
 	 				    			</a>
 	 				    		</td>
  				    	</c:if>
  				    	<c:if test="${(om.count%3)==2}">
 	 				    		<td class="jump">
-	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
-	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
 	 				    			</a>
 	 				    		</td>	
  				    	</c:if>
  				    	<c:if test="${(om.count%3)==0}">
 	 				    		<td class="jump">
-	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
-	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
 	 				    			</a>
 	 				    		</td>	
 	 				    	</tr>
  				    	</c:if>
- 				    	
+ 				    	</c:if>
  				    	</c:forEach>
  				    </table>				
  				  </div>
  				</div>
 			<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">其他使用者</h3>
+ 				    <h3 class="panel-title"> 向你申請加入好友</h3>
+ 				  </div>
+ 				  <div class="panel-body">
+ 				    <table class="table table-hover">
+ 				    	<c:forEach var="relationVO1" items="<%=relationVO1%>" varStatus="om">
+<%--  				    	<c:if test="${relationVO1.relation_Status==0}"> --%>
+ 				    	<c:if test="${(om.count%3)==1}">
+ 				    		<tr>
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==2}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==0}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+	 				    	</tr>
+ 				    	</c:if>
+<%--  				    	</c:if> --%>
+ 				    	</c:forEach>
+ 				    </table>				
+ 				  </div>
+ 				</div>
+ 				
+<!--  				//*********************************  智群******************** -->
+ 				
+			<div class="panel panel-primary">
+ 				  <div class="panel-heading">
+ 				    <h3 class="panel-title"> 會員列表</h3>
  				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<c:forEach var="all" items="${getAllMemVO}" varStatus="om">
- 				    	
+ 				    	<c:if test="${relationVO.relation_Status!=1}">
  				    	<c:if test="${(om.count%3)==1}">
  				    		<tr>
 	 				    		<td class="jump">
@@ -321,7 +375,7 @@
 	 				    		</td>	
 	 				    	</tr>
  				    	</c:if>
- 				    	
+ 				    	</c:if>
  				    	</c:forEach>
  				    </table>				
  				  </div>

@@ -38,7 +38,7 @@ System.out.println(str);
 		}catch(Exception e){
 			errorMsgs.add("無法取得資料:" + e.getMessage());
 			RequestDispatcher failureView = req
-					.getRequestDispatcher("/selectPersonalPage.jsp");
+					.getRequestDispatcher("/frontdesk/personal/AllPersonal.jsp");
 			failureView.forward(req, res);
 		}
 	}

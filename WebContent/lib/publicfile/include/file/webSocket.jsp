@@ -108,7 +108,8 @@ div .left {
 
 	#type_in{
 	position:fixed;
-		bottom:0px;
+		bottom:2px;
+		left:0px;
 		center;
 	}
 
@@ -122,7 +123,7 @@ div .left {
 	}
 	#fix_bottom{
 	position:fixed;
-		bottom:0px;
+		bottom:5px;
 	}
 	#head{
 	position:fixed;
@@ -134,6 +135,8 @@ div .left {
 	top:0px; 
 	height:268px;/*高度可以不寫，可以通過內部元素撐開，但是需要考慮是否會與自適應部分發生重合*/ 
 	width: 182px;/*寬度是必要，如果沒有寬度就無法撐出div*/ 
+	left:0px;
+	right:0px;
 	} 
 
 </style>
@@ -141,11 +144,11 @@ div .left {
     <title>工具人出租</title>
 </head>
     <body onload="connect();" onunload="disconnect();">
-        <div id="fix_head" style="height : 100px ; width:500%; background-color: #ccc">
+        <div id="fix_head" style="height : 57px ; width:100%; background-color: #ccc">
 		</div>
-		<div id="head" style="height : 100px ; width:500%; background-color: #ccc">
-        	<h1> Chat Room </h1>
-	    	<h3 id="statusOutput" class="statusOutput"></h3>
+		<div id="head">
+        	<h1 style="margin-bottom:0px ;margin-top:5px "> Chat Room </h1>
+	    	<h3 style="margin-top:0px" id="statusOutput" class="statusOutput"></h3>
 		</div>
 		
 <!-- 		<div> -->
@@ -157,12 +160,12 @@ div .left {
 <!-- 		</div> -->
 		
 		
-		<div id="myPanel"></div>
+		<div id="myPanel" style="overflow-y:auto ; max-height:380px"></div>
 
-		<div id="fix_bottom" style="height : 50px ; width:550px; background-color:#fff;"></div>
+		<div id="fix_bottom" style="height : 50px ; width:650px; background-color:#fff;"></div>
         <div id="type_in">
-        	<div class="panel input-area" style="height : 50px ; width:5500px; background-color:#18bc9c;">
-	        	<hr style="width:500%">
+        	<div class="panel input-area" style="height : 50px ; width:700px; background-color:#18bc9c;">
+	        	<hr style="width:250%">
 	            <input value="${memVO.mem_Id}" readonly id="userName" class="text-field" type="text"/>		
 	            <input id="message"  class="text-field" type="text" placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"/>
 	            
@@ -179,7 +182,7 @@ div .left {
     
     
 <script src="<%=request.getContextPath()%>/lib/publicfile/include/vendor/jquery/jquery.js"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript">
 		function previewFile(input) {
 			 var i;
@@ -403,7 +406,7 @@ console.log(123);
 			
 			
 			
-		$('html, body').scrollTop(10000000);
+		$('html, body , #myPanel').scrollTop(10000000);
 	};
 
 	//*****************************把之前的留言重新載入***************
@@ -453,7 +456,7 @@ console.log(123);
 	    }
 	
 	console.log('test')			
-		$('html, body').scrollTop(10000000);
+		$('html, body , #myPanel').scrollTop(10000000);
 	};
 
 	webSocket.onclose = function(event) {

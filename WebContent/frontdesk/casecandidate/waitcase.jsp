@@ -77,7 +77,7 @@
 											action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?issuer_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${mission_No}"
 											name="getmission5">
 											<button
-												onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=550')"
+												onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=700')"
 												class="btn btn-lg btn-success" type="button" name="action"
 												value="chatting">和他聊天~</button>
 											<input type="hidden" name="issuer_Mem_No"
