@@ -741,11 +741,11 @@ INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1428,'C0009','上架',8
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3090,'C0009','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a69.jpg'),'銀之魂-450W-電源供應器','80Plus銀牌認證標準,DC-DC電路設計,全日系工業等級電解電容,玩家首選之全黑扁排線設計,長效安靜120mm風扇');
 INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1650,'C0009','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a70.jpg'),'孤狼USB3.0遊戲機殼','一大機殼面板,2個 5.25”裝置空間,2個 3.5”裝置空間,2個 2.5”SSD裝置空間,左側板採用透明壓克力設計,上置USB3.0/USB2.0孔位');
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1730,'C0009','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a71.jpg'),'金太郎鑄造雙面炒鍋','導熱超快速省時節能,不沾少油煙健康好洗,七層鑄造鍋堅固耐用');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3980,'C0009','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a72.jpg'),'鍋寶歐風琺瑯鑄鐵鍋22CM','一鍋到底多功能烹煮,均勻續熱持續保溫,360度蒸氣循環回流適用：瓦斯爐、烤箱、,電磁爐、電陶爐、鹵素爐鍋身');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),999,'C0009','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a73.jpg'),'田園生活陶瓷平盤4件組','最實用的西式平盤,餐桌美學新選擇,北歐小清新風格,輕食熟食都適用');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),250,'C0009','上架',90,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a74.jpg'),'綠貝鄉村熊不鏽鋼環保餐具組','鏡面拋光技術,不留邊角使用更順心,特殊高溫烘烤貼花,不掉漆更衛生,可放入洗碗機清洗,輕鬆洗淨!,輕巧隨身攜帶,自備餐具好觀念');
-INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1990,'C0009','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a75.jpg'),'歐梅樂德國鋼8吋廚刀','德國鋼刀鋒銳利，持久耐用,洛式硬度高達58度,刀刃刀柄一體成形,堅固耐用');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1730,'C0010','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a71.jpg'),'金太郎鑄造雙面炒鍋','導熱超快速省時節能,不沾少油煙健康好洗,七層鑄造鍋堅固耐用');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),3980,'C0010','上架',80,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a72.jpg'),'鍋寶歐風琺瑯鑄鐵鍋22CM','一鍋到底多功能烹煮,均勻續熱持續保溫,360度蒸氣循環回流適用：瓦斯爐、烤箱、,電磁爐、電陶爐、鹵素爐鍋身');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),999,'C0010','上架',100,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a73.jpg'),'田園生活陶瓷平盤4件組','最實用的西式平盤,餐桌美學新選擇,北歐小清新風格,輕食熟食都適用');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),250,'C0010','上架',90,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a74.jpg'),'綠貝鄉村熊不鏽鋼環保餐具組','鏡面拋光技術,不留邊角使用更順心,特殊高溫烘烤貼花,不掉漆更衛生,可放入洗碗機清洗,輕鬆洗淨!,輕巧隨身攜帶,自備餐具好觀念');
+INSERT INTO PRO VALUES ('P'||LPAD(PRO_SEQ.NEXTVAL,6,'0'),1990,'C0010','上架',70,TO_DATE('2017-11-10','YYYY-MM-DD'),TO_DATE('2017-12-26','YYYY-MM-DD'),load_blob('a75.jpg'),'歐梅樂德國鋼8吋廚刀','德國鋼刀鋒銳利，持久耐用,洛式硬度高達58度,刀刃刀柄一體成形,堅固耐用');
 COMMIT;
 
 

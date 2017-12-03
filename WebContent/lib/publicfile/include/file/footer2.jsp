@@ -91,9 +91,9 @@
         </div>
       </div>
       
-      <div style="z-index:100;position:absolute;left:1050px;  top:190px;">
-			   	    			<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/f001.png"
-									style="  "></div>
+<!--       <div style="z-index:100;position:absolute;left:1050px;  top:190px;"> -->
+<%-- 			   	    			<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/f001.png" --%>
+<!-- 									style="  "></div> -->
       
     </footer>
 

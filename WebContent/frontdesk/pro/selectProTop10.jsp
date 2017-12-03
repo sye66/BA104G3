@@ -17,9 +17,9 @@
 .proDiv0{
 	
 /* 	border:3px orange double; */
-	height: 160px;
+	height: 180px;
 	width:180px;
- 	margin:0px,audio; 
+ 	margin:10px,audio; 
 	
 	
 } 
@@ -72,7 +72,7 @@
 		<div style="text-align:center ">
 			<div class="col-xs-12 col-sm-12 proDiv0">
 		     	<div class="card0"  style="background-color: #fff;">
-		     	
+		     
 			 	    <div class="imgCont0">
 			 	    
 		  				<img class="card-img-top" style="width:70px;height:70px;"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}" alt="Card image cap">
@@ -82,9 +82,15 @@
 			   	   <div style="z-index:3;position:absolute;left:20px;  top:5px;">
 						<img alt="" style="height:50px;width:40px;transform:rotate(10deg);" src="<%=request.getContextPath()%>/res/images/pro_icons/top00<%=count%>.png">
 					</div>
-		
+<%-- 					<%if(count==0){ %> --%>
+<!-- 					<div> -->
+<!-- 						<img alt="" style="height:60px;width:80px;z-index:3;position:absolute;left:50px;  top:-40px;"  -->
+<%-- 						src="<%=request.getContextPath()%>/res/images/pro_icons/top0000.png"> --%>
+<!-- 					</div> -->
+<%-- 					<% }%> --%>
+					
 	  				<div class="card-body">
-	   			 		<p class="card-text proName0" style="height:20px;">${proVO.pro_Name}</p>
+	   			 		<p class="card-text proName0" style="height:30px;">${proVO.pro_Name}</p>
 	   			 		<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
 	   			 		 <fmt:parseNumber var="dsPrice" integerOnly="true" 
                        type="number" value="${balance}" />
@@ -103,7 +109,7 @@
 	 	
 	
 	 <% 
-	 	System.out.println(count);
+	 
 	 	count++;
 	 	
 	 %>

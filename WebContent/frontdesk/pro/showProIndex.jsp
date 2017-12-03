@@ -32,8 +32,8 @@
 
 	<a name="aaa"></a>
 
-	<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;">
-		<!-- <div class="col-xs-12 col-sm-12" > -->
+<!-- 	<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;"> -->
+		<div class="col-xs-12 col-sm-12" >
 		<div class="col-xs-12 col-sm-2 col-sm-offset-2">
 			<br>
 			<br>
@@ -72,10 +72,12 @@
 
 		<div class="col-xs-12 col-sm-6">
 			<!--麵包屑 -->
-			<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;">
+<!-- 			<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;"> -->
+			<div class="col-xs-12 col-sm-12" style="background-color: #fff;">
 
 				<br>
-				<ol class="breadcrumb" style="background-color: #fef1ce;">
+<!-- 				<ol class="breadcrumb" style="background-color: #fef1ce;"> -->
+				<ol class="breadcrumb" style="background-color: #fff;">
 					<li><a
 						href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
 					<li class="active">積分商城</li>
@@ -149,16 +151,16 @@
 						
 				<br>
 				<div class="panel panel-info ">
-					<div class="panel-heading">
-						<div class="panel-title" style="height:20px;">
-							<img alt="" style="height: 20px;z-index: 3; position: absolute; left: 20px; top: 80px;"
-								src="<%=request.getContextPath()%>/res/images/pro_icons/g003.png">
+<!-- 					<div class="panel-heading"> -->
+<!-- 						<div class="panel-title" style="height:20px;"> -->
+<!-- 							<img alt="" style="height: 20px;z-index: 3; position: absolute; left: 20px; top: 80px;" -->
+<%-- 								src="<%=request.getContextPath()%>/res/images/pro_icons/g003.png"> --%>
 							
-						</div>
-						<div style="position: absolute; left: 750px; top: 25px;">
-							<%-- 					<img alt="" style="height:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/s01.png"> --%>
-						</div>
-					</div>
+<!-- 						</div> -->
+<!-- 						<div style="position: absolute; left: 750px; top: 25px;"> -->
+<%-- 												<img alt="" style="height:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/s01.png"> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="panel-body" style="background-color: #fef1ce;border: 5px solid #ACD6FF;">
 
 						<jsp:include page="/frontdesk/pro/selectHotPro.jsp" flush="true" />

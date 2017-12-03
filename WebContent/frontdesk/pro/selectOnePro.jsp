@@ -233,9 +233,10 @@
 							
 							MemVO memVO = (MemVO)session.getAttribute("memVO");
 							List<String> list2 = new ArrayList<String>();
+							String mem_No;
 System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 								if(session.getAttribute("memVO")!=null){
-								String mem_No = memVO.getMem_No();
+								mem_No = memVO.getMem_No();
 								ProTrackService proTrackSvc = new ProTrackService();
 								List<ProTrackVO> list = proTrackSvc.getOnePro(mem_No);
 								
@@ -263,8 +264,9 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 							<%}else{%>
 							
 							<td style="padding-left: 100px; padding-top: 13px;">
+								<a href="<%=request.getContextPath()%>/pro/proTrackServlet.do?action=deleteProTrack&pro_No=${proVO.pro_No}&mem_No=<%=mem_No%>&requestURL=<%=request.getServletPath()%>">
 								<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-								style="width: 50px;border-radius: 3px;">已加入追蹤</td>
+								style="width: 50px;border-radius: 3px;"></a>已加入追蹤</td>
 
 							<%
 								}
