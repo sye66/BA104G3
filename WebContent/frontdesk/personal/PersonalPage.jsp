@@ -16,7 +16,7 @@
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 <jsp:useBean id="memmemSvc" scope="page" class="com.mem.model.MemService"/>
-
+<jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <% 
 	MemVO memVO = (MemVO)session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
@@ -365,12 +365,12 @@
 					    <h3 class="panel-title">看看吧</h3>
 					  </div>
 					<table class="table">
-	<c:forEach var="qqVO" items="${tryVO}">
+	<c:forEach var="qqVO" items="${tryVO}"  varStatus="s">
       <tr>
         <td>
-          <div class='rating-stars text-center' >
-    <ul id='stars' >
-      <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
+          <div class='rating-stars text-center' style="width:300px">
+    <ul id='stars${s.index}' >
+      <li class='star ' title='Poor' data-value='1' name="comment_Point" value="1">
         <i class='fa fa-star fa-fw'></i>
       </li>
       <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
@@ -388,11 +388,20 @@
     </ul>
   </div> 
         </td>
-
+</tr>
+<tr>
 				<td>
-					${qqVO.listener}
-					${qqVO.mission_No}
-					${qqVO.comment_Point}
+					<h6>被評論者</h6><p style="font-size:15px;color:mediumslateblue">${memmemSvc.getOneMem(qqVO.listener).mem_Id}</p>
+					<h6>任務名</h6><p style="font-size:15px;color:mediumslateblue">${getMissionSvc.getOneMission(qqVO.mission_No).mission_Name}</p>
+					<h6>評論細節</h6><p style="font-size:15px;color:mediumslateblue">${qqVO.comment_Detail}</p>
+					<script>
+					$(document).ready(function(){
+					var s = ${qqVO.comment_Point};
+						 for (i = 0; i < s; i++) {
+							 $("#stars${s.index} li").eq(i).addClass("selected")
+						    }
+					});
+					</script>
 				</td>
 			<tr>
 	</c:forEach>
@@ -437,7 +446,7 @@
 
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script> --%>
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
