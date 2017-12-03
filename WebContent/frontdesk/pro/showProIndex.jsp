@@ -16,7 +16,7 @@
 
 
 </head>
-<body>
+<body >
 <!-- TOP -->
 <div class="row">
 <div class="col-xs-12 col-sm-12 ">
@@ -29,19 +29,21 @@
 </div>
 
 
-
 <a name="aaa"></a>
 	
-
-	<div class="col-xs-12 col-sm-2 col-sm-offset-1">
-		<br><br><br>
-		<div class="panel panel-info left001">
-			<div class="panel-heading">
-				<div class="panel-title">
-					<h3 align="center">排行榜</h3>
+<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;">
+<!-- <div class="col-xs-12 col-sm-12" > -->
+	<div class="col-xs-12 col-sm-2 col-sm-offset-2">
+		<br><br><br><br><br><br><br><br>
+		<div class="panel panel-danger left001" >
+			<div class="panel-heading" >
+				<div class="panel-title" >
+				<div style="z-index:3;position:absolute;left:5px;  top:66px;">
+					<img alt="" style="height:100px;width:270px;" src="<%=request.getContextPath()%>/res/images/pro_icons/top01.png">
+				</div>
 				</div>
 			</div>
-			<div class="panel-body" >
+			<div class="panel-body" style="background-color: #fef1ce;border:5px solid #f2dede;">
 	<div class="row">
 					
 					
@@ -58,12 +60,12 @@
 
 
 	
-	<div class="col-xs-12 col-sm-6">
+	<div class="col-xs-12 col-sm-6" >
 	<!--麵包屑 -->
-		<div class="col-xs-12 col-sm-12">
+		<div class="col-xs-12 col-sm-12" style="background-color: #fef1ce;">
 
 			<br>
-			<ol class="breadcrumb">
+			<ol class="breadcrumb" style="background-color: #fef1ce;">
 				<li><a href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">首頁</a></li>
 				<li class="active">積分商城
 				</li>
@@ -90,6 +92,7 @@
 					</div>
 					
 					<div class="item">
+					
 					<a  href="<%=request.getContextPath()%>/pro/pro.do" >
 						<img src="<%=request.getContextPath()%>/res/images/pro_icons/aa02.jpg" alt="" style="height:250px;width:900px;">
 					</a>
@@ -115,276 +118,353 @@
 		
 		<br>
 
-<div class="col-xs-12 col-sm-12" >
-<br>
-<div class="panel panel-info left001">
+		<div class="col-xs-12 col-sm-12" >
+		<br>
+		<img alt="" style="height:50px;width:100%;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
+		<br>
+		<div class="panel panel-info ">
 			<div class="panel-heading">
-				<div class="panel-title"><h3 align="center">特價商品</h3>
+				<div class="panel-title" style="height:30px;">
+					<img alt="" style="height:30px;" src="<%=request.getContextPath()%>/res/images/pro_icons/g003.png">
+					</div>
+				<div style="position:absolute;left:750px;top:25px; ">
+<%-- 					<img alt="" style="height:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/s01.png"> --%>
 				</div>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" style="background-color: #fef1ce;">
 				
-<jsp:include page="/frontdesk/pro/selectHotPro.jsp" flush="true" />					
+				<jsp:include page="/frontdesk/pro/selectHotPro.jsp" flush="true" />					
 			</div>
 		</div>
 </div>
-<!-- 所有商品 -->
+
+
 <div class="col-xs-12 col-sm-12" >
 
-<div style="text-align:center ">
-<jsp:include page="/frontdesk/pro/selectAllPro.jsp" flush="true" />
+	<div style="text-align:center ">
+
+
+
+
+
+	</div>
 </div>
-</div><!-- 所有商品 -->
+
+
+
+
+
+<!-- 所有商品 -->
+<!-- <div class="col-xs-12 col-sm-12" > -->
+
+<!-- <div style="text-align:center "> -->
+<%-- <jsp:include page="/frontdesk/pro/selectAllPro.jsp" flush="true" /> --%>
+<!-- </div> -->
+<!-- </div> -->
+<!-- 所有商品 -->
 
 <!-- 熱門 -->
-<!-- <div class="col-xs-12 col-sm-12"> -->
-<!-- 		<div role="tabpanel"> -->
-			<!-- 標籤面板：標籤區 -->
-<!-- 			<ul class="nav nav-tabs" role="tablist"> -->
-<!-- 				<li role="presentation" class="active"><a href="#tab1" -->
-<!-- 					aria-controls="tab1" role="tab" data-toggle="tab"><h2>熱門</h2></a></li> -->
-<!-- 				<li role="presentation"><a href="#tab2" aria-controls="tab2" -->
-<!-- 					role="tab" data-toggle="tab"><h2>熱門</h2></a></li> -->
-<!-- 				<li role="presentation"><a href="#tab3" aria-controls="tab3" -->
-<!-- 					role="tab" data-toggle="tab"><h2>熱門</h2></a></li> -->
-<!-- 				<li role="presentation"><a href="#amos" aria-controls="amos" -->
-<!-- 					role="tab" data-toggle="tab"><h2>熱門</h2></a></li> -->
-<!-- 			</ul> -->
+<div class="col-xs-12 col-sm-12">
+<img alt="" style="height:50px;width:100%;" src="<%=request.getContextPath()%>/res/images/pro_icons/lin01.png">
+
+
+		<div role="tabpanel">
+<!-- 			標籤面板：標籤區 -->
+			<ul class="nav nav-tabs"  role="tablist">
+				<li role="presentation" class="active"><a href="#tab1"
+					aria-controls="tab1" role="tab" data-toggle="tab"><h4>食品</h4></a></li>
+				<li role="presentation"><a href="#tab2" aria-controls="tab2"
+					role="tab" data-toggle="tab"><h4>3C產品</h4></a></li>
+				<li role="presentation"><a href="#tab3" aria-controls="tab3"
+					role="tab" data-toggle="tab"><h4>運動</h4></a></li>
+				<li role="presentation"><a href="#tab4" aria-controls="tab4"
+					role="tab" data-toggle="tab"><h4>餐卷</h4></a></li>
+				<li role="presentation"><a href="#tab5" aria-controls="tab5"
+					role="tab" data-toggle="tab"><h4>圖書</h4></a></li>	
+			</ul>
 
 		<!-- 標籤面板：內容區 --> 
-<!-- 			<div class="tab-content"> -->
-<!-- 				<div role="tabpanel" class="tab-pane active" id="tab1"> -->
-<!-- 					<table class="table table-hover"> -->
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="tab1">
+					<table class="table table-hover" style="font-size:16px;border:1px solid #CCC">
 
 
-<!-- 						<tbody> -->
-<!-- 							<tr> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00ED21/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00ED21/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/002ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/20CED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/20CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 							</tr> -->
+									</div></td>
+							</tr>
 
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-<!-- 				</div> -->
-<!-- 				<div role="tabpanel" class="tab-pane" id="tab2"> -->
-<!-- 					<table class="table table-hover"> -->
-
-
-<!-- 						<tbody> -->
-<!-- 							<tr> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/02CED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
-
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
-
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00C1D1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
-
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00CE11/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
-
-<!-- 									</div></td> -->
-<!-- 							</tr> -->
-
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-<!-- 				</div> -->
-<!-- 				<div role="tabpanel" class="tab-pane" id="tab3"> -->
-<!-- 					<table class="table table-hover"> -->
+						</tbody>
+					</table>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab2">
+					<table class="table table-hover">
 
 
-<!-- 						<tbody> -->
-<!-- 							<tr> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/10CED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/02CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/0aCED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00C1D1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CE11/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 							</tr> -->
+									</div></td>
+							</tr>
 
-<!-- 						</tbody> -->
-<!-- 					</table> -->
+						</tbody>
+					</table>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab3">
+					<table class="table table-hover">
 
-<!-- 				</div> -->
-<!-- 				<div role="tabpanel" class="tab-pane" id="amos"> -->
-<!-- 					<table class="table table-hover"> -->
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/10CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/001ED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/0aCED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+				<div role="tabpanel" class="tab-pane" id="tab4">
+					<table class="table table-hover">
 
 
-<!-- 						<tbody> -->
-<!-- 							<tr> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00CED1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00CEa1/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEa1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 								<td><div> -->
-<!-- 										<a href=""> <img -->
-<!-- 											src="https://api.fnkr.net/testimg/170x200/00CEDa/FFF/?text=img+placeholder">XXXXXX -->
-<!-- 										</a> -->
-<!-- 										<p>SSSS</p> -->
-<!-- 										<p> -->
-<!-- 											$987 <input type="button" name="" value="購買"> -->
-<!-- 										</p> -->
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEDa/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
 
-<!-- 									</div></td> -->
-<!-- 							</tr> -->
+									</div></td>
+							</tr>
 
-<!-- 						</tbody> -->
-<!-- 					</table> -->
+						</tbody>
+					</table>
 
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!--  </div> -->
+				</div>
+				
+				
+				<div role="tabpanel" class="tab-pane" id="tab5">
+					<table class="table table-hover">
+
+
+						<tbody>
+							<tr>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00aED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CED1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEa1/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+								<td><div>
+										<a href=""> <img
+											src="https://api.fnkr.net/testimg/170x200/00CEDa/FFF/?text=img+placeholder">XXXXXX
+										</a>
+										<p>SSSS</p>
+										<p>
+											$987 <input type="button" name="" value="購買">
+										</p>
+
+									</div></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+				</div>
+				
+				
+				
+				
+				
+			</div>
+		</div>
+ </div>
 <!-- 熱門 --> 
 
 	</div><!--中6結束 -->
 
 
 	<div class="col-xs-12 col-sm-2">
-		<br><br><br>
-		<div class="panel panel-info left001">
-			<div class="panel-heading">
-				<div class="panel-title"><h3 align="center">特價商品</h3>
-				</div>
-			</div>
-			<div class="panel-body">
-				
-<jsp:include page="/frontdesk/pro/selectHotPro.jsp" flush="true" />					
-			</div>
-		</div>
-
+		
 	</div>
 	<!-- 右2結束 -->
 
 	
-
+</div>
 	
 <div class="col-xs-12 col-sm-12">
 	

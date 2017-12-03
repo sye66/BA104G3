@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+ 
 <%@ page import="com.mem.model.*" %>
 <%@ page import="com.stored_history.model.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,6 +16,10 @@
     List<StoredVO> list = storedSvc.getAll(mem_No);
     System.out.print(list.size());
     pageContext.setAttribute("list", list);
+    
+    //可以直接在EL前面加上 sdf.format(值)，設定自己要的時間格式字串
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+    pageContext.setAttribute("sdf", sdf);
 %>
 
 <html>
@@ -195,7 +201,7 @@
 		<c:forEach var="storedVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 			
 		<tr>
-			<td>${storedVO.stored_Date}</td>
+			<td>${sdf.format(storedVO.stored_Date)}</td>
 			<td>${storedVO.stored_Cost}</td>
 		<c:if test="${storedVO.stored_Type ==1}">
 			<td>點數卡</td>

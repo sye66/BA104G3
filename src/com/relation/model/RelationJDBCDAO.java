@@ -360,6 +360,8 @@ public class RelationJDBCDAO implements RelationDAO_interface{
 			
 			while(rs.next()){
 				relationVO = new RelationVO();
+				
+				relationVO.setMem_No(rs.getString("mem_No"));
 				relationVO.setRelated_Mem_No(rs.getString("related_Mem_No"));
 				relationVO.setRelation_Status(rs.getInt("relation_Status"));
 				list.add(relationVO);

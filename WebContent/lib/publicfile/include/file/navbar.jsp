@@ -21,11 +21,11 @@
     border-radius: 5em;}
  .a_tag{
  	margin-top:25px;
- 	font-size:18px;
+ 	font-size:22px;
  }
  .a_tag2{
  	margin-top:6px;
- 	font-size:18px;
+ 	font-size:22px;
  }
 </style>
 
@@ -73,16 +73,16 @@
           Menu 
           <i class="fa fa-bars"></i>
         </button>
-        <div style="margin-top:0px; margin-bottom:0px; font-size=10px;" id="navbarResponsive">
+        <div style="margin-top:0px; margin-bottom:0px; font-size=30px;" id="navbarResponsive">
           <ul style="margin-top:20px" class="navbar-nav ml-auto">
            
             
            
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
+              <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp"><i class="glyphicon glyphicon-send"></i> 發案區　</a></h3>
             </li>
             <li class="nav-item">
-              <h3>
+              <h3 style="font-size:22px">
               <c:if test="${memVO ==null }" var= "login">
               <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp">
               </c:if>
@@ -91,17 +91,17 @@
               </c:if>
               <i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
-            <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
+            <li class="nav-item">	
+              <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
             </li>
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
+              <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
             </li>
             <c:if test="${not empty memVO.mem_Id}">
             </c:if>
             <c:if test="${not empty memVO.mem_Id}">
             <li class="nav-item">
-              <h3><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/mem/memCenter.jsp"><i class="glyphicon glyphicon-user"></i> 會員中心 　</a></h3>
+              <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/mem/memCenter.jsp"><i class="glyphicon glyphicon-user"></i> 會員中心 　</a></h3>
             </li>
             </c:if>
 

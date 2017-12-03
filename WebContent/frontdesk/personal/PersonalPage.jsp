@@ -42,6 +42,12 @@
 	//顯示好友
 	RelationService relationSvc = new RelationService();
 	List<RelationVO> relationVO = relationSvc.getAllRelationWithMem_No(mem_No);
+	System.out.println("memNO +"+ mem_No);
+	for(RelationVO list: relationVO){
+		System.out.println("memNO +"+ list.getMem_No());
+		System.out.println("memNO +"+ list.getRelated_Mem_No());
+		System.out.println("memNO +"+ list.getRelation_Status());
+	}
 	pageContext.setAttribute("relationVO", relationVO);
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
@@ -240,7 +246,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12">
-	<hr class="colorgraph">
+	<hr class="colorgraph"> 
 		</div>
 	</div>
 </div>	
@@ -248,6 +254,42 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-4">
+			<div class="panel panel-primary">
+ 				  <div class="panel-heading">
+ 				    <h3 class="panel-title"> 好友</h3>
+ 				  </div>
+ 				  <div class="panel-body">
+ 				    <table class="table table-hover">
+ 				    	<c:forEach var="relationVO" items="<%=relationVO%>" varStatus="om">
+ 				    	
+ 				    	<c:if test="${(om.count%3)==1}">
+ 				    		<tr>
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.related_Mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==2}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==0}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${all.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${all.mem_Intro}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${all.mem_No}">
+	 				    			</a>
+	 				    		</td>	
+	 				    	</tr>
+ 				    	</c:if>
+ 				    	
+ 				    	</c:forEach>
+ 				    </table>				
+ 				  </div>
+ 				</div>
 			<div class="panel panel-primary">
  				  <div class="panel-heading">
  				    <h3 class="panel-title">其他使用者</h3>

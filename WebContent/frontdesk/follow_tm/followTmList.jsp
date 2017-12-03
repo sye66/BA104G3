@@ -224,7 +224,7 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 			<c:if test="${follow_tmVO.followed_Mem_No != memVO.mem_No and follow_tmVO.follower_Mem_No !=memVO.mem_No}">
 			<td>
 			<div class="form-group">
-			<a href="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"></a>
+			<a href="<%=request.getContextPath() %>/all/all.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_No}"></a>
 			</div>
 			</td>
 			<td>${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_Name}</td>

@@ -53,6 +53,11 @@
 	justify-content: space-between
 }
 
+.container{
+	margin-top:30px;
+
+}
+
 .navbar-brand {
 	display: inline-block;
 	padding-top: .3125rem;
@@ -83,7 +88,7 @@
 .navbar-nav .nav-link {
 	padding-right: 0;
 	padding-left: 0;
-		font-size:18px;
+		font-size:25px;
 }
 
 .navbar-nav .dropdown-menu {
@@ -237,7 +242,8 @@
 		-ms-flex-flow: row nowrap;
 		flex-flow: row nowrap;
 		-ms-flex-pack: start;
-		justify-content: flex-start
+		justify-content: flex-start;
+		font-size:25px;
 	}
 	.navbar-expand-lg .navbar-nav {
 		-ms-flex-direction: row;
@@ -473,10 +479,10 @@
 		<div class="col-xs-12 col-sm-12 " class="navbarTop">
 
 
-			<nav class="navbar navbar-expand-lg navbar-light fixed-top "
+			<nav style="margin-bottom:27px"class="navbar navbar-expand-lg navbar-light fixed-top "
 				id="mainNav" style="height: 100px;">
 				<div class="container">
-					 <img src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+					 <img style="max-height:70px" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
         
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"
@@ -504,12 +510,6 @@
 							</li>
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger" href="#contact"><i
-										class="glyphicon glyphicon-user"></i> 排行榜 </a>
-								</h3>
-							</li>
-							<li class="nav-item">
-								<h3>
 									<a class="nav-link js-scroll-trigger"
 										href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i
 										class="glyphicon glyphicon-list-alt"></i> 討論區 </a>
@@ -522,13 +522,6 @@
 										class="glyphicon glyphicon-shopping-cart"></i> 積分商城 </a>
 								</h3>
 							</li>
-
- 							<c:if test="${not empty memVO.mem_Id}">
-            					 <li class="nav-item">
-             					 <h3>
-            						  <a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp"><i class="glyphicon glyphicon-user"></i> 個人頁面　</a></h3>
-          						 </li>
-           					 </c:if>
 
 
 							<c:if test="${not empty memVO.mem_Id}">
@@ -544,25 +537,32 @@
 
 
 
-							<li class="nav-item1">
-								<h3>
-									<a class="nav-link js-scroll-trigger" id="create-user" > <c:if
-											test="${not empty memVO.mem_No}">
-											<li><a style="text-decoration: none;font-size:18px;" href='#modal-id1' data-toggle="modal" >${memVO.mem_Id}<i
-													class="glyphicon glyphicon-log-out"></i> 登出
-											</a></li>
-										</c:if> <c:if test="${empty memVO.mem_No}">
-											<li><a style="text-decoration: none;" href='#modal-id' data-toggle="modal"><i
-													class="glyphicon glyphicon-log-in"></i> 登入/註冊 </a></li>
-										</c:if>
-									</a>
-								</h3> <%--               <h1><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio　</a></h1> --%>
-							</li>
+										<c:if test="${not empty memVO.mem_No}">
+							<div id="photo">
+			           <li style="margin-top:0px; margin-bottom:0px;" class="nav-item1">  <a href="<%=request.getContextPath()%>/frontdesk/personal/PersonalPage.jsp" class="nav-link js-scroll-trigger" id="create-user"  >
+							<img style="max-width:70px; border: #d3d3d3; border-radius: 5em;" src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${memVO.mem_No}">
+							</a>
+			            	</li>
+			            	</div>
+							</c:if>
+							<c:if test="${empty memVO.mem_No}">
+							<div style="margin-top:6px; margin-bottom:0px;">
+							<a class="a_tag2" style="text-decoration:none" href='#modal-id' data-toggle="modal"><i class=" glyphicon glyphicon-log-in"></i> 登入/註冊　</a>
+							</div>
+							</c:if>
+							<c:if test="${not empty memVO.mem_No}">
+							<div style="margin-top:25px; margin-bottom:0px;">
+							<a class="a_tag"style="style="text-decoration:none"  href='#modal-id1' data-toggle="modal">${memVO.mem_Id}<i class="glyphicon glyphicon-log-out"></i> 登出</a>
+							</div>
+							</c:if>
 						</ul>
+							
 					</div>
+					
 				</div>
+				
+				
 			</nav>
-
 
 
 			<div class="modal fade" id="modal-id">

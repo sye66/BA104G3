@@ -214,7 +214,7 @@ System.out.println("relationVO + " +relationVO);
 		<th>好友姓名</th>
 		<th>性別</th>
 		<th>完成任務數</th>
-		<th>聊天視窗</th>
+<!-- 		<th>聊天視窗</th> -->
 		<th>刪除好友</th>
 		</tr>
 			
@@ -226,7 +226,7 @@ System.out.println("relationVO + " +relationVO);
 			<c:if test="${RelationVO.related_Mem_No != memVO.mem_No and RelationVO.mem_No !=memVO.mem_No}">
 			<td>
 			<div class="form-group">
-			<a href="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"></a>
+			<a href="<%=request.getContextPath() %>/all/all.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"><img id="old_pic"src="<%=request.getContextPath() %>/mem/memShowImage.do?mem_No=${MemSvc.getOneMem(relationVO.mem_No).mem_No}"></a>
 			</div>
 			</td>
 			<td>${MemSvc.getOneMem(relationVO.mem_No).mem_Name}</td>
@@ -242,7 +242,7 @@ System.out.println("relationVO + " +relationVO);
 				</h2></c:if></c:if>
 				
 				
-			<td><input type="submit" style="width:70px"  class="btn btn-success btn-sm" value="申請聊天" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')"></td>
+<%-- 			<td><input type="submit" style="width:70px"  class="btn btn-success btn-sm" value="申請聊天" onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp ', 'Yahoo', config='height=500,width=550')"></td> --%>
 <!-- 			   <input type="hidden" name="action" value="updateByMem"> -->
 			   
 			   
