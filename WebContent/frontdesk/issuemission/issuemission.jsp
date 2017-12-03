@@ -200,53 +200,75 @@
 					<label>所在位置</label>
 				    <div id="map"></div>
 				    <script>
-				      function initMap() {
-				      	var pos;
-				      	var lat;
-				      	var lng;
-				      	var contentString = '<div class="content"><input type="submit" class="btn btn-primary" name="" value="Check"></div>';
-				        var map = new google.maps.Map(document.getElementById('map'), {
-				          center: {lat: -34.397, lng: 150.644},
-				          zoom: 15
-				        });
-				        var infoWindow = new google.maps.InfoWindow({contents: contentString});
-				        // Try HTML5 geolocation.
+				    function initMap() {
+				        var pos;
+				        var lat;
+				        var lng;
 				        
-				        if (navigator.geolocation) {
-				          navigator.geolocation.getCurrentPosition(function(position) {
-				            pos = {
-				              lat: position.coords.latitude,
-				              lng: position.coords.longitude
-				            };
+				        
+				        var map = new google.maps.Map(document.getElementById('map'), {
+				            center: { lat: -34.397, lng: 150.644 },
+				            zoom: 2
+				        });
 
-				            infoWindow.setPosition(pos);
-				            infoWindow.setContent(contentString);
-				            map.setCenter(pos);
-				            var marker = new google.maps.Marker({
-				          		position: pos,
-				          		map: map,
-				          		title: "某工具人"
-				        	});	
-				           	marker.addListener('click', function () {
-				           		infoWindow.open(map,marker);
-				           	})
-				        }, function() {
-				            handleLocationError(true, infoWindow, map.getCenter());
-				          });
+				        // Try HTML5 geolocation.
+
+				        if (navigator.geolocation) {
+				            navigator.geolocation.getCurrentPosition(function(position) {
+				                pos = {
+				                    lat: position.coords.latitude,
+				                    lng: position.coords.longitude
+				                };
+				                map.setCenter(pos);
+
+				                $.ajax({
+				                    url: '<%=request.getContextPath()%>/getmission/getmission.do',
+				                    type: 'post',
+				                    data: {
+				                        action: "get_Location_Json",
+				                    },
+				                    dataType: "json",
+
+				                    success: function(data) {
+				                        for (var i = 0; i < data.length; i++) {
+				                            var obj = data[i];
+				                            var contentString = '<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
+				                            var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
+				                            // InfoWindow
+				                            var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });
+				                            infoWindow2.setPosition(GPS_Position);
+				                            // Marker
+				                            var marker2 = new google.maps.Marker({
+				                                position: GPS_Position,
+				                                map: map,
+				                                title: "某工具人"
+				                            });
+				                            google.maps.event.addListener(marker2, 'click', (function(marker2, contentString, infoWindow2) {
+				                                return function() {
+				                                    infoWindow2.setContent(contentString);
+				                                    infoWindow2.open(map, marker2);
+				                                };
+				                            })(marker2, contentString, infoWindow2));
+				                        }
+				                    }
+				                })
+				            }, function() {
+				                handleLocationError(true, infoWindow, map.getCenter());
+				            });
 				        } else {
-				          // Browser doesn't support Geolocation
-				          handleLocationError(false, infoWindow, map.getCenter());
+				            // Browser doesn't support Geolocation
+				            handleLocationError(false, infoWindow, map.getCenter());
 				        }
-				      }
-			      
-				      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+				    }
+
+				    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 				        infoWindow.setPosition(pos);
 				        infoWindow.setContent(browserHasGeolocation ?
-				                              'Error: The Geolocation service failed.' :
-				                              'Error: Your browser doesn\'t support geolocation.');
-				      }
+				            'Error: The Geolocation service failed.' :
+				            'Error: Your browser doesn\'t support geolocation.');
+				    }
 				    </script>
-				 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
+				    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
 				</div>
 			</div>
 		</div>
