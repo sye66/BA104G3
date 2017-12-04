@@ -4,7 +4,9 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class LoginFilter implements Filter {
+import com.emp.model.EmpVO;
+
+public class LoginFilterForEmp implements Filter {
 
 	private FilterConfig config;
 
@@ -24,10 +26,10 @@ public class LoginFilter implements Filter {
 		// 【取得 session】
 		HttpSession session = req.getSession();
 		// 【從 session 判斷此user是否登入過】
-		Object username = session.getAttribute("username");
-		if (username == null) {
+		EmpVO empVO = (EmpVO) session.getAttribute("EmpVO");
+		if (empVO == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect("/BA104G3/backdesk/index.jsp");
+			res.sendRedirect("/BA104G3/index.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

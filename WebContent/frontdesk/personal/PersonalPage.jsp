@@ -502,13 +502,10 @@
 					  </div>
 					</div>
 					
+					
 					<br>
 					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<div class="panel panel-success">
+					<div class="panel panel-info">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">被評論區</h3>
 					  </div>
