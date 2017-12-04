@@ -219,7 +219,7 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 		<%@ include file="page1.file" %>	 
 		<c:forEach var="follow_tmVO" items="${follow_tmVO}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 		 <FORM>	
-		<tr>
+		<tr> 
 			<c:if test="${follow_tmVO.getFollow_Status()==0}">
 			<c:if test="${follow_tmVO.followed_Mem_No != memVO.mem_No and follow_tmVO.follower_Mem_No !=memVO.mem_No}">
 			<td>
