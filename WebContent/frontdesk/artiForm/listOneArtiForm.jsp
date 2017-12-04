@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.artiClass.model.*"%>
 <%@ page import="com.artiReply.model.*"%>
@@ -64,7 +65,7 @@ div {
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-   <br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-12 widget-container-center">
@@ -129,7 +130,7 @@ div {
          </div>
 		 
          <div class="widget-header header-color-dark">
-         <h5 class="bigger lighter">${artiFormVO.arti_Time}</h5>
+         <h5 class="bigger lighter"><fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> </h5>
          
          <div class="widget-toolbar">
              <div class="" style="width:100px;">
@@ -195,7 +196,7 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic"> 
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO.getReply_Desc()==null)?" @@? ": artiReplyVO.getReply_Desc()%>" />
                      </div>
                  </div>
              </div>     
@@ -233,7 +234,7 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO.getReport_Desc()==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      </div>
                  </div>
              </div>

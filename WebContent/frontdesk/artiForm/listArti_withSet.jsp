@@ -104,7 +104,7 @@ div> .timeline-body{
                         <li>
                             <div class="timeline-datetime">
                                 <div class="timeline-time">
-                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
+                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                                 </div>
                                 <div class="timeline-date">${artiFormVO.mem_No}</div>
                                 <div class="timeline-date">

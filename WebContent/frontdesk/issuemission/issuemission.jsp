@@ -232,7 +232,7 @@
 				                    success: function(data) {
 				                        for (var i = 0; i < data.length; i++) {
 				                            var obj = data[i];
-				                            var contentString = '<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
+				                            var contentString = obj.mem_No+'<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
 				                            var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
 				                            // InfoWindow
 				                            var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });

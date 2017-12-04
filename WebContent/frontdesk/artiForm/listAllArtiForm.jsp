@@ -10,6 +10,7 @@
     MemVO memVO = (MemVO) session.getAttribute("memVO");
 
     ArtiFormVO artiFormVO = new ArtiFormVO();
+    session.setAttribute("artiFormVO",artiFormVO);
     ArtiFormService artiSvc = new ArtiFormService();
     
     Set<ArtiFormVO> set = artiSvc.getAll();
@@ -36,6 +37,7 @@ div> .timeline-body{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body bgcolor='white'>
+<br><br>
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
@@ -107,7 +109,7 @@ div> .timeline-body{
                         <li>
                             <div class="timeline-datetime">
                                 <div class="timeline-time">
-                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
+                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                                 </div>
                                 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
                                 <div class="timeline-date" style="font-size:24px; font-family:Microsoft JhengHei;">${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</div>

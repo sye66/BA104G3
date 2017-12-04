@@ -50,7 +50,7 @@
 								mission_status ==4 || 
 								mission_status ==7 ||
 								mission_status ==72	}">
-					<div class="panel panel-warning">
+					<div class="panel panel-danger">
 						<div class="panel-heading">
 							<%-- 標題 --%>
 							<h3 class="panel-title">${mission_No} 任務>> ${missionVO.mission_Name} </h3>

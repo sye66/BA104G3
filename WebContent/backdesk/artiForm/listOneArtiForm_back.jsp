@@ -12,6 +12,8 @@
 <%
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
 
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();

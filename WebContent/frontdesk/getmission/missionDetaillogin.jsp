@@ -12,7 +12,8 @@
 <%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
-
+<jsp:useBean id="accusecaseSvc" scope="page"
+	class="com.accusecase.model.AccuseCaseService" />
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
@@ -68,6 +69,24 @@
     padding: 0;
     margin: 0;
 }  
+
+
+
+.slickButton3 {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: solid 1px lightgray;
+    background: lightgreen;
+    cursor: pointer;   
+    transition: box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+}
+ 
+.slickButton3:hover {
+    box-shadow:25px 25px 50px gray;
+}
+
 </style>
 </head>
 <body>
@@ -120,7 +139,7 @@
 		
 			
 			<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-				<div class="col-xs-12 col-sm-6">
+				<div class="col-xs-12 col-sm-6" >
 					<div id="carousel-id" class="carousel slide amos"
 						data-ride="carousel">
 						<!-- 幻燈片小圓點區 -->
@@ -187,8 +206,8 @@
 				</div>
 				<div class="col-xs-12 col-sm-2 ">
 				<div class="panel-body">
-								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
+				
+								<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action=""
 										name="getmission3">
@@ -202,8 +221,7 @@
 
 								</c:if>
 
-								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
+								<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 										name="getmission3">
@@ -222,18 +240,18 @@
 		<table>
 		<tr>
 			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
-				<div class="panel panel-info">
+				<div class="panel panel-danger ">
 					<div class="panel-heading">
 						<h3 class="panel-title">任務細節</h3>
 					</div>
-					<div class="panel-body">
-						<h5 style="color:brown">發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
+					<div class="panel-body slickButton3" Style="background-color:#f0f0cc">
+						<h5 style="color:brown">發案人</h5><p style="color:#6d6767">${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 
-						<h5 style="color:brown">敘述</h5><p>${getMissionVO.mission_Des}</p>
-						<h5 style="color:brown">任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>
-						<h5 style="color:brown">任務截止日期</h5><p>${getMissionVO.mission_Due_Time}</p>
+						<h5 style="color:brown">敘述</h5><p style="color:#6d6767">${getMissionVO.mission_Des}</p>
+						<h5 style="color:brown">任務發佈時間</h5><p style="color:#6d6767">${getMissionVO.mission_Release_Time}</p>
+						<h5 style="color:brown">任務截止日期</h5><p style="color:#6d6767">${getMissionVO.mission_Due_Time}</p>
 						<h5 style="color:brown">任務模式</h5><p style="color:red">${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
-						<h5 style="color:brown">任務報酬</h5><p>${getMissionVO.mission_Pay} 積分</p>
+						<h5 style="color:brown">任務報酬</h5><p style="color:#6d6767">${getMissionVO.mission_Pay} 積分</p>
 					</div>
 				</div>
 

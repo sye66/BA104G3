@@ -34,7 +34,7 @@
 	border-bottom:3px #FFBA3B solid;
 	border-left:1px #CCC solid;
 	border-right:1px #CCC solid;
-	background-color: #FFFFE4;
+	background-color: #FFFFE8;
 	
 }
 .breadcrumb li,.breadcrumb li a {
@@ -148,13 +148,14 @@ window.onscroll = function() {
 			<!-- 標籤面板：標籤區 -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:458px;text-align:center;background-color:#FFFFBB;border:1px 1px 1px 1px #CCC solid;"><h4>購物車(<%=count%>)</h4></a></li>
+					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:415px;text-align:center;background-color:#FFFFBB;border:1px 1px 1px 1px #CCC solid;"><h4>購物車(<%=count%>)</h4></a></li>
 				<li role="presentation">
-					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:458px;text-align:center;background-color:#96FFFF;border:1px 1px 1px 1px #CCC solid;"><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
+					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:416px;text-align:center;background-color:#96FFFF;border:1px 1px 1px 1px #CCC solid;"><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
 			</ul>
 
 			<!-- 標籤面板：內容區 -->
-			<div class="tab-content">
+			<div class="tab-content" style="width:100%;">
+			
 				<div role="tabpanel" class="tab-pane active" id="tab1">
 <!-- 					<table class="table table-hover"> -->
 
@@ -170,19 +171,19 @@ window.onscroll = function() {
 		 i++;
 		 ProCartVO order = buylist.get(index);
 	%>
-	<table class="cartPro" id="tab001">	
+	<table class="cartPro" id="tab001" style="width:100%;">	
 		<tr>
 			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
 		<tr height="30" >
 		
-			<td width="120">
+			<td width="120px">
 				<img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=order.getProCar_No()%>" alt="Card image cap"></td>
-			<td width="100">
+			<td width="100px">
 				<div align="center"><b><%=order.getProCar_Name()%></b></div></td>
-			<td width="100">
+			<td width="70px">
 				<div align="center" id="proPrice"><span class="price0001"><%=order.getProCar_Price()%></span>點</div></td>
-			<td width="100">
+			<td width="100px">
 				<div align="center">
 					<button type="button" class="min" style="width: 30px;">-</button>
 					<input type="text" class="text_box" name="proCar_Quantity" value="<%=order.getProCar_Quantity()%>"  style="width: 30px;text-align:center">	
@@ -190,7 +191,7 @@ window.onscroll = function() {
 					<button type="button"  class="add"  style="width: 30px;">+</button>
 				</div>	
 			</td>
-			<td width="100">
+			<td width="100px">
 				<div>&nbsp;<span style="color:red;" class="minPrice" id="minPrice"><%=order.getProCar_Price()*order.getProCar_Quantity()%></span>&nbsp;點</div>
 			</td>
 			

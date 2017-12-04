@@ -155,7 +155,7 @@
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-                                ${artiReportVO.report_Time}
+                               <fmt:formatDate value="${artiReportVO.report_Time}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </div>
                             </div>
                         </div>

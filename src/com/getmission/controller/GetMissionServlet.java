@@ -1377,6 +1377,7 @@ public class GetMissionServlet extends HttpServlet {
 					jsonObject = new JSONObject();
 					String mem_No = memVO.getMem_No();
 					System.out.println(mem_No);
+					String mem_Id = memVO.getMem_Id();
 					Double mem_GPS_LAT = memVO.getMem_Gps_Lat();
 					Double mem_GPS_LNG = memVO.getMem_Gps_Lng();
 					Double[] GPS = {mem_GPS_LAT,mem_GPS_LNG};

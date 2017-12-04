@@ -139,21 +139,21 @@
 
 								<c:if test="${proVO.pro_Discount==90}">
 									<div
-										style="z-index: 3; position: absolute; left: 170px; top: -5px;">
+										style="z-index: 3; position: absolute; left: 150px; top: -5px;">
 										<img alt="" style="height: 40px; width: 40px;"
 											src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
 									</div>
 								</c:if>
 								<c:if test="${proVO.pro_Discount==80}">
 									<div
-										style="z-index: 3; position: absolute; left: 170px; top: -5px;">
+										style="z-index: 3; position: absolute; left: 150px; top: -5px;">
 										<img alt="" style="height: 40px; width: 40px;"
 											src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
 									</div>
 								</c:if>
 								<c:if test="${proVO.pro_Discount==70}">
 									<div
-										style="z-index: 3; position: absolute; left: 170px; top: -5px;">
+										style="z-index: 3; position: absolute; left: 150px; top: -5px;">
 										<img alt="" style="height: 40px; width: 40px;"
 											src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 									</div>

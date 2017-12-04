@@ -24,8 +24,8 @@
 
 /* 	border:3px orange double; */
 	height: 230px;
-	width:23%;
-	margin:6px;
+	width:25%;
+	margin:0px;
 	
 	
 } 

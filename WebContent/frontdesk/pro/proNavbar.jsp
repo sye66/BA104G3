@@ -78,7 +78,7 @@
 	-ms-flex-direction: column;
 	flex-direction: column;
 	padding-left: 0;
-	margin-bottom: 0;
+	margin-bottom: 50px;
 	list-style: none;
 	border:2px;
 	border-color: red;
@@ -87,8 +87,8 @@
 /* 字大小 */
 .navbar-nav .nav-link {
 	padding-right: 0;
-	padding-left: 0;
-		font-size:25px;
+	padding-left: 10px;
+		font-size:22px;
 }
 
 .navbar-nav .dropdown-menu {
@@ -467,7 +467,7 @@
 }
 .nav-item{
 	color:#000;
-
+	
 }
 </style>
 
@@ -497,29 +497,30 @@
 
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger"
+									<a class="nav-link js-scroll-trigger" style="text-decoration: none"
 										href="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission.jsp"><i
-										class="glyphicon glyphicon-send"></i> 發案區 </a>
+										class="glyphicon glyphicon-send"></i> 發案區　 </a>
 								</h3>
 							</li>
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i
-										class="glyphicon glyphicon-screenshot"></i> 接案區 </a>
+									<a class="nav-link js-scroll-trigger" style="text-decoration: none"
+									href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp"><i
+										class="glyphicon glyphicon-screenshot"></i> 接案區 　</a>
 								</h3>
 							</li>
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger"
+									<a class="nav-link js-scroll-trigger" style="text-decoration: none"
 										href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i
-										class="glyphicon glyphicon-list-alt"></i> 討論區 </a>
+										class="glyphicon glyphicon-list-alt"></i> 討論區 　</a>
 								</h3>
 							</li>
 							<li class="nav-item">
 								<h3>
-									<a class="nav-link js-scroll-trigger"
+									<a class="nav-link js-scroll-trigger" style="text-decoration: none"
 										href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i
-										class="glyphicon glyphicon-shopping-cart"></i> 積分商城 </a>
+										class="glyphicon glyphicon-shopping-cart"></i> 積分商城 　</a>
 								</h3>
 							</li>
 
@@ -527,9 +528,9 @@
 							<c:if test="${not empty memVO.mem_Id}">
 								<li class="nav-item">
 									<h3>
-										<a class="nav-link js-scroll-trigger"
+										<a class="nav-link js-scroll-trigger" style="text-decoration: none"
 											href="<%=request.getContextPath()%>/frontdesk/mem/memCenter.jsp"><i
-											class="glyphicon glyphicon-user"></i> 會員中心 </a>
+											class="glyphicon glyphicon-user"></i> 會員中心　 </a>
 									</h3>
 								</li>
 							</c:if>
