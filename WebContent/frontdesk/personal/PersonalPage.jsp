@@ -63,7 +63,14 @@
 	
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
+<<<<<<< HEAD
+	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
+	for(MissionCommentVO z : tryVO){
+		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
+	}
+=======
 	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	pageContext.setAttribute("tryVO", tryVO);
 	
 	List<MissionCommentVO> tryVO2 = mcSvc.getByListener(mem_No);
@@ -462,6 +469,7 @@
 
 
     </table>
+
 		</div>
 		
 		
@@ -548,11 +556,20 @@
 		
 	</div>
 </div>
+<<<<<<< HEAD
+	
+	
+=======
 
 
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<<<<<<< HEAD
+<script src="<%=request.getContextPath()%>/lib/js/getmission/lookStar.js"></script>
+=======
 <%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script> --%>
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
