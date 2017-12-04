@@ -65,7 +65,7 @@ div {
 <body bgcolor='white'>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-   <br><br><br><br><br><br>
+   <br><br><br><br><br><br><br><br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-12 widget-container-center">

@@ -23,7 +23,7 @@
 <head>
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
-
+<br><br>
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 	<title>CKFinder - Sample - CKEditor Integration</title>

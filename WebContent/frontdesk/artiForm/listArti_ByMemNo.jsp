@@ -47,7 +47,7 @@ ${arti_No}
 		</c:forEach>
 	</ul>
 </c:if>
-<br><br><br><br><br>
+<br><br>
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <div class="page-header position-relative">

@@ -68,6 +68,7 @@
 </head>
 <body bgcolor='blue'>
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
+<br><br>
 <jsp:include page="/frontdesk/ad/listOneAd.jsp" flush="true" />
 
 <div class="page-header position-relative">

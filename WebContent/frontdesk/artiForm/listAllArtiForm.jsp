@@ -37,6 +37,7 @@ div> .timeline-body{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body bgcolor='white'>
+<br><br>
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
