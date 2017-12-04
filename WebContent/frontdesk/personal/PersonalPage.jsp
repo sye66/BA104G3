@@ -64,7 +64,7 @@
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
 
-	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
+	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
 	pageContext.setAttribute("tryVO", tryVO);
 	
 	
@@ -72,7 +72,7 @@
 		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
 	}
 
-	List<MissionCommentVO> tryVO2 = mcSvc.getByReviewer(mem_No);
+	List<MissionCommentVO> tryVO2 = mcSvc.getByListener(mem_No);
 	pageContext.setAttribute("tryVO2", tryVO2);
 	
 %>
@@ -502,6 +502,12 @@
 					  </div>
 					</div>
 					
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 					<div class="panel panel-success">
 					  <div class="panel-heading">
 					    <h3 class="panel-title">被評論區</h3>
@@ -555,20 +561,14 @@
 		
 	</div>
 </div>
-<<<<<<< HEAD
-	
-	
-=======
 
-
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<<<<<<< HEAD
+
 <script src="<%=request.getContextPath()%>/lib/js/getmission/lookStar.js"></script>
-=======
+
 <%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script> --%>
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
+
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
