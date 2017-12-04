@@ -1,9 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
 <%
-  ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
+  ArtiFormVO artiFormVO = new ArtiFormVO();
+  MemVO memVO = (MemVO) session.getAttribute("memVO");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
@@ -44,9 +46,9 @@
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">
             <input type="hidden" name="mem_No" size="45"
-			 value="<%= (artiFormVO==null)? "M000006" : artiFormVO.getMem_No()%>" />
+			 value="${memVO.mem_No}" />
 			 請輸入主題文章標題 : <input type="text" name="arti_Title" size="45" 
-			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
+			 value="<%= (artiFormVO.getArti_Title()==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
             </h5>
             <div class="widget-toolbar">
                 <div class="" style="width:100px;">
@@ -64,7 +66,7 @@
                  <div class="" style="width:100px;">
                      <div class="" style="">
                      <input type="hidden" name="arti_No" size="45" 
-			 value="<%= (artiFormVO==null)? "AR00000066" : artiFormVO.getArti_No()%>" />
+			 value="<%= (artiFormVO.getArti_No()==null)? "AR00000066" : artiFormVO.getArti_No()%>" />
                      </div>
                  </div>
              </div>
@@ -72,7 +74,7 @@
                  <div class="" style="width:100px;">
                      <div class="" style="">
                      <input type="hidden" name="arti_Status" size="45"
-			 value="<%= (artiFormVO==null)? "ㄧ般" : artiFormVO.getArti_Status()%>" />
+			 value="<%= (artiFormVO.getArti_Status()==null)? "ㄧ般" : artiFormVO.getArti_Status()%>" />
                      </div>
                  </div>
              </div>
@@ -80,7 +82,7 @@
                  <div class="" style="width:100px;">
                      <div class="" style="">
                      <input type="hidden" name="arti_Like" size="45" 
-			 value="<%= (artiFormVO==null)? 0 : artiFormVO.getArti_Like()%>" />
+			 value="<%= (artiFormVO.getArti_Like()==null)? 0 : artiFormVO.getArti_Like()%>" />
                      </div>
                  </div>
              </div>
@@ -103,7 +105,7 @@
                           </div>
                           
                           <textarea id="editor1" name="describe" rows="10" cols="80"
-		 value="<%= (artiFormVO==null)? "@@? " : artiFormVO.getDescribe()%>"></textarea>
+		 value="<%= (artiFormVO.getDescribe()==null)? "@@? " : artiFormVO.getDescribe()%>"></textarea>
                            </div>
                        </div>
                   </div>                    
