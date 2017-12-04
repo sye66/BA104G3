@@ -26,6 +26,24 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 </head>
+
+<style>
+.slickButton3 {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: solid 1px lightgray;
+    background: lightgreen;
+    cursor: pointer;   
+    transition: box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+}
+ 
+.slickButton3:hover {
+    box-shadow:25px 25px 50px gray;
+}
+
+</style>
 <body>
     <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
         <br>
@@ -34,46 +52,34 @@
         <br>
         <br>
         <br>
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <h3 class="panel-title">任務進行式</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+    <button class="good">
+        
+    <img src="<%=request.getContextPath()%>/res/images/getmission/good.jpg"  class="slickButton3">    
+    </button>                
+
+
+                </div>
             </div>
-            <div class="panel-body">
-                <c:if test="${not empty errorMsgs}">
-                    <div>${errorMsgs}</div>
-                </c:if>
-                <c:if test="${not empty mailService}" var="sendmail">
-                    <div>信件寄送成功~!!!!!!!等待發案人回應吧</div>
-                </c:if>
-            </div>
-            <table class="table">
-                <c:forEach var="successGetMission" items="${getMissionSvc.successGetMission(memVO.mem_No)}" varStatus="m" step="1">
-                    <c:if test="${successGetMission.mission_State == 3||successGetMission.mission_State == 4 ||successGetMission.mission_State ==73 ||successGetMission.mission_State == 74}">
-                        <tr>
-                            <td>${successGetMission.mission_No}</td>
-                            <td>${successGetMission.mission_Name}</td>
-                            <td>${successGetMission.mission_Des}</td>
-                            <td>${memSvc.getOneMem(successGetMission.issuer_Mem_No).mem_Id}</td>
-                            <td>
-                                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
-                                    <c:if test="${successGetMission.mission_State == 4 ||successGetMission.mission_State == 74}">
-                                        <c:if test="${!sendmail}">
-                                            <button class="btn btn-danger" type="submit" name="action" value="finishwork">完成任務交付</button>
-                                            <input type="hidden" name="mission_No" value="${successGetMission.mission_No}">
-                                            <input type="hidden" name="requestURL" value="/frontdesk/mission/finalstep.jsp">
-                                        </c:if>
-                                    </c:if>
-                                </form>
-                            </td>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </table>
         </div>
+
+
+
         <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission">
             <button class="btn btn-info" type="submit" name="action" value="missionindex">任務首頁</button>
         </form>
         <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true"></jsp:include>
+        <script type="text/javascript">
+        $(document).ready(function(){    
+                var i =0;
+        $('.good').click(function(){
+                i++;
+				console.log(i);
+            });
+        });
+        </script>
 </body>
 
 </html>

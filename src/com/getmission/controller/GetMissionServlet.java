@@ -896,13 +896,14 @@ public class GetMissionServlet extends HttpServlet {
 		      
 		    String subject = "任務完成通知";//傳 mail
 		      
-		    String issuer_Name = memVO.getMem_Id();
-		    String takecase_Mem_No = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No()).getMem_Id();
+		    String issuer_Name = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No()).getMem_Id();
+		    String takecase_Mem_No = memVO.getMem_Id();
 		    String mission_Name = getMissionSvc.getOneMission(mission_No).getMission_Name();
 		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, ["+mission_Name +"]~ \n" +takecase_Mem_No+
 		    					 " 已經完成囉~請快快去查驗吧~"; 
 		    
-
+		    System.out.println(messageText);
+		    MissionSocket.pushMissionText(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No(),"finishwork"); //websocket
 			GetMissionVO getMissionVO = new GetMissionVO();
 			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			// Send the use back to the form, if there were errors

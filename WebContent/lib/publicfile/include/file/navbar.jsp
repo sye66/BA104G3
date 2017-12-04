@@ -360,6 +360,15 @@ function getFocus() {
    				)
 	        	
 	        }
+	        if(jsonObj.action=='finishwork'){
+	        	var inputMessage = "嘿~你的任務已經被完成囉~趕快去查看成果吧";
+	        	swal(
+	   				  '${memVO.mem_Id}',
+	   				  inputMessage,
+	   				  'warning'
+   				)
+	        	
+	        }
 	 
 		};
 
