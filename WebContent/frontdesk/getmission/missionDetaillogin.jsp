@@ -12,7 +12,8 @@
 <%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
-
+<jsp:useBean id="accusecaseSvc" scope="page"
+	class="com.accusecase.model.AccuseCaseService" />
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
@@ -83,7 +84,7 @@
 }
  
 .slickButton3:hover {
-    box-shadow:5px 5px 10px gray;
+    box-shadow:25px 25px 50px gray;
 }
 
 </style>
@@ -205,8 +206,8 @@
 				</div>
 				<div class="col-xs-12 col-sm-2 ">
 				<div class="panel-body">
-								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
+				
+								<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) ==null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action=""
 										name="getmission3">
@@ -220,8 +221,7 @@
 
 								</c:if>
 
-								<c:if
-									test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
+								<c:if test="${accusecaseSvc.getOneAccuseCaseBymissionAndmem(getMissionVO.mission_No,memVO.mem_No) !=null && getMissionSvc.getOneMission(getMissionVO.mission_No).issuer_Mem_No != memVO.mem_No}">
 									<form method="post"
 										action="<%=request.getContextPath()%>/accusecase/accusecase.do"
 										name="getmission3">
