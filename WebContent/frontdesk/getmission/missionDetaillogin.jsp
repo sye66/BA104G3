@@ -68,6 +68,24 @@
     padding: 0;
     margin: 0;
 }  
+
+
+
+.slickButton3 {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: solid 1px black;
+    background: lightgreen;
+    cursor: pointer;   
+    transition: box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+}
+ 
+.slickButton3:hover {
+    box-shadow:5px 5px 10px gray;
+}
+
 </style>
 </head>
 <body>
@@ -222,7 +240,7 @@
 		<table>
 		<tr>
 			<div class="col-xs-12 col-sm-9 col-sm-offset-1">
-				<div class="panel panel-info">
+				<div class="panel panel-info slickButton3">
 					<div class="panel-heading">
 						<h3 class="panel-title">任務細節</h3>
 					</div>

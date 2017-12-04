@@ -39,14 +39,38 @@
 
 <style type="text/css">
 
+<c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission(memVO.mem_No)}" varStatus="s" step="1">
+<c:if test="${s.index%4==1 || s.index%4==2}">
+ 
+  .bgcolor${s.index}{
+	background-color:#d4f6dc;
+ }
+</c:if>
 
+ 
 
+</c:forEach>
 
 @media screen and (min-width: 768px) {
 	.pic {
 		
 	}
 }
+
+.slickButton {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: solid 1px black;
+    background: lightgreen;
+    cursor: pointer;
+}
+ 
+.slickButton:hover {
+    color: black;
+    background: yellow;
+}
+ 
 </style>
 </head>
 <body>
@@ -140,7 +164,7 @@
 		<div class="col-xs-12 col-sm-6">
 <div class="container">
 	
-			<div class="row">
+			<div class="row bgcolor${s.index}  " >
 
 				<div class="col-xs-12 col-sm-4">
 
@@ -164,8 +188,8 @@
 				<div class="col-xs-12 col-sm-8">
 				
 				
-					<div class="panel panel-default row">
-						<div class="panel-heading">
+					<div class="panel panel-default row slickButton">
+						<div class="panel-heading hoA">
 							<h3 class="panel-title">${getMissionVO.mission_Name}</h3>
 							<p>${getMissionVO.mission_No }</p>
 							<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
@@ -413,6 +437,8 @@
 //             });
 //           }
       }
+      
+      
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI0AqzghxJv55TD4xLnlng-4hZ57jt2JQ&libraries=places&callback=initMap">
 			
