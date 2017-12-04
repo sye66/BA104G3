@@ -175,10 +175,10 @@
  				    	<div class="btn-group" style="float:right">
  				    	<p id=changeBtn>
  				    	    <c:if test="<%=follow_tmVO==null%>">
- 				    	    <button onclick="watch()" class="btn btn-warning">關注他</button> 
+ 				    	    <button onclick="watch()" class="btn btn-warning">關注他</button>　
  				    	    </c:if>
  				    	    <c:if test="<%=follow_tmVO!=null%>">
- 				    	    <button onclick="disWatch()" class="btn btn-success">已關注</button>
+ 				    	    <button onclick="disWatch()" class="btn btn-success">已關注</button>　
  				    	    </c:if>
  				    	</p>
  				    	<p id=changeBtn1>

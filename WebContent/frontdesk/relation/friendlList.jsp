@@ -213,7 +213,7 @@ System.out.println("relationVO + " +relationVO);
 		<th>圖片</th>
 		<th>好友姓名</th>
 		<th>性別</th>
-		<th>完成任務數</th>
+<!-- 		<th>完成任務數</th> -->
 <!-- 		<th>聊天視窗</th> -->
 		<th>刪除好友</th>
 		</tr>
@@ -236,9 +236,9 @@ System.out.println("relationVO + " +relationVO);
 			<c:if test="${MemSvc.getOneMem(relationVO.mem_No).mem_Gend ==2}">
 			<td>女性</td>
 			</c:if>
-			<td>
-			<input type="hidden" name="action" value="update">
-			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td>
+<!-- 			<td> -->
+<!-- 			<input type="hidden" name="action" value="update"> -->
+<%-- 			${MemSvc.getOneMem(relationVO.mem_No).mission_Count}</td> --%>
 				</h2></c:if></c:if>
 				
 				

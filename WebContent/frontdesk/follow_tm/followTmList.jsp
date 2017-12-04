@@ -213,7 +213,7 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 		<th>圖片</th>
 		<th>關注的會員</th>
 		<th>性別</th>
-		<th>完成任務數</th>
+<!-- 		<th>完成任務數</th> -->
 		<th>刪除關注會員</th>
 		</tr>
 		<%@ include file="page1.file" %>	 
@@ -234,9 +234,9 @@ System.out.println("follow_tmVO + " +follow_tmVO);
 			<c:if test="${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mem_Gend ==2}">
 			<td>女性</td>
 			</c:if>
-			<td>
-			<input type="hidden" name="action" value="update">
-			${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mission_Count}</td>
+<!-- 			<td> -->
+<!-- 			<input type="hidden" name="action" value="update"> -->
+<%-- 			${MemSvc.getOneMem(follow_tmVO.followed_Mem_No).mission_Count}</td> --%>
 				</h2></c:if></c:if>
 		</form>	
 		
