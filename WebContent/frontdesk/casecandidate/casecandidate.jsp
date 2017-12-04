@@ -136,12 +136,12 @@
 							</c:forEach>
 						</c:if>
 						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0 && caseVO.mission_State == 1}">
-							<td><h4>目前無人接取</h4></td>
+							<td><h4 Style="color:#999">目前無人接取</h4></td>
 							<td></td>
 						</c:if>
 						<c:if test="${caseCandidateSvc.getCandidate(caseVO.mission_No).size() ==0 }">
 							<c:if test="${ caseVO.mission_State == 3 || caseVO.mission_State == 4}">
-							<td><h4>目前案件進入完成流程中</h4></td>
+							<td><h4 Style="color:red">目前案件進入完成流程中</h4></td>
 							<td></td>
 							</c:if>
 						</c:if>
