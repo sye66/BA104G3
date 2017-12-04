@@ -66,7 +66,7 @@
       <div class="container">
       
         <a class="navbar-brand js-scroll-trigger" href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp">
-        <img class="logo_size" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+        <img class="logo_size" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/teamwork.png">
         </a>
         
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
