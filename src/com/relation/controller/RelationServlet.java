@@ -349,6 +349,7 @@ public class RelationServlet extends HttpServlet{
 		
 		if ("insert_New".equals(action)){// 來自addStored.jsp的請求
 			List<String> errorMsgs = new LinkedList<String>();
+			System.out.println("insert_New");
 			req.setAttribute("errorMsgs", errorMsgs);
 //			try{
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
@@ -382,6 +383,49 @@ public class RelationServlet extends HttpServlet{
 				
 				/***************************其他可能的錯誤處理**********************************/
 		} //insert end
+		if ("insert_New_Each".equals(action)){// 來自addStored.jsp的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println("insert_New_Each");
+//			try{
+			/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+			String mem_No = req.getParameter("mem_No").trim();
+			String related_Mem_No = req.getParameter("related_Mem_No").trim();
+			Integer relation_Status = new Integer(req.getParameter("relation_Status").trim());
+			
+			RelationVO relationVO = new RelationVO();
+			
+			relationVO.setMem_No(mem_No);
+			relationVO.setRelated_Mem_No(related_Mem_No);
+			relationVO.setRelation_Status(relation_Status);
+			RelationService relationSvc = new RelationService();
+			relationVO = relationSvc.addRelationVO(mem_No, related_Mem_No, relation_Status);
+			
+			RelationVO relationVO1 = new RelationVO();
+			
+			relationVO1.setMem_No(related_Mem_No);
+			relationVO1.setRelated_Mem_No(mem_No);
+			relationVO1.setRelation_Status(relation_Status);
+			
+			if (!errorMsgs.isEmpty()){
+				req.setAttribute("relationVO", relationVO);
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/personal/PersonalPage.jsp");
+				failureView.forward(req, res);
+				return;
+			}
+			
+			/***************************2.開始新增資料***************************************/
+			relationVO1 = relationSvc.updaterelationVO( related_Mem_No,mem_No, 1);
+			System.out.println("relationVO1.related_Mem_No +" +relationVO1.getRelated_Mem_No());
+			/***************************3.新增完成,準備轉交(Send the Success view)***********/
+			String responseJSONObject="";
+			Gson gson = new Gson();
+			responseJSONObject = gson.toJson(relationVO);
+			PrintWriter out = res.getWriter();
+			out.println(responseJSONObject);
+			
+			/***************************其他可能的錯誤處理**********************************/
+		} //insert end
 		
 		if("delete".equals(action)){
 			List<String> errorMsgs =new LinkedList<String>();
@@ -399,6 +443,7 @@ public class RelationServlet extends HttpServlet{
 				
 				/***************************2.開始刪除資料***************************************/
 				relationSvc.deleteRelationVO(mem_No, related_Mem_No);
+				relationSvc.deleteRelationVO(related_Mem_No, mem_No);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/
 				String responseJSONObject="";

@@ -6,8 +6,7 @@
 <%@ page import="com.casecandidate.model.*"%>
 <jsp:useBean id="missionImagesSvc" scope="page"
 	class="com.missionimages.model.MissionImagesService" />
-<jsp:useBean id="getMissionSvc" scope="page"
-	class="com.getmission.model.GetMissionService" />
+<jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
@@ -54,7 +53,7 @@
 
 	<%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
 	<br><br><br><br><br>
-	<br>
+	<br><br><br>
 	
 
 

@@ -15,10 +15,12 @@ import javax.websocket.Session;
 
 import org.apache.catalina.connector.Request;
 import org.hibernate.hql.ast.SqlASTFactory;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.omg.CORBA.BAD_TYPECODE;
 
+import com.a.a.a.g.m.l;
 import com.accusecase.model.*;
 import com.casecandidate.model.*;
 import com.emp.model.EmpService;
@@ -30,7 +32,9 @@ import com.getmission.controller.MailService;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
 import com.missionimages.model.MissionImagesService;
+import com.sun.corba.se.spi.orb.StringPair;
 import com.sun.corba.se.spi.orbutil.fsm.Input;
+import com.sun.org.apache.bcel.internal.generic.StackInstruction;
 import com.tool.controller.TelMessage;
 
 import sun.util.resources.cldr.aa.CalendarData_aa_ER;
@@ -1360,8 +1364,36 @@ public class GetMissionServlet extends HttpServlet {
 				inputError.forward(req, res);
 			}	
 		}
-		
-		
-		
+		if("get_Location_Json".equals(action)) {
+			System.out.println("get_Location_Json");
+			String resJson = "";
+			Gson tranformer = new Gson();
+			MemService memService = new MemService();
+			List<MemVO> listGetAllMem = memService.getAll();
+			JSONObject jsonObject;
+			JSONArray jsonarr = new JSONArray();
+			for (MemVO memVO : listGetAllMem) {
+				try {
+					jsonObject = new JSONObject();
+					String mem_No = memVO.getMem_No();
+					System.out.println(mem_No);
+					Double mem_GPS_LAT = memVO.getMem_Gps_Lat();
+					Double mem_GPS_LNG = memVO.getMem_Gps_Lng();
+					Double[] GPS = {mem_GPS_LAT,mem_GPS_LNG};
+					jsonObject.put("mem_No", mem_No);
+					jsonObject.put("mem_GPS_LAT", mem_GPS_LAT);
+					jsonObject.put("mem_GPS_LNG", mem_GPS_LNG);
+					jsonarr.put(jsonObject);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			System.out.println(jsonarr);
+			resJson = tranformer.toJson(jsonarr);
+			PrintWriter printer = res.getWriter();
+			printer.println(jsonarr);
+			System.out.println("寫出json成功");
+		}
 	}
 }

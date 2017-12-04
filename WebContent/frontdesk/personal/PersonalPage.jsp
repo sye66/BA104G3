@@ -16,7 +16,7 @@
 
 <jsp:useBean id="RelationSvc" scope="page" class="com.relation.model.RelationService"/>
 <jsp:useBean id="memmemSvc" scope="page" class="com.mem.model.MemService"/>
-
+<jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <% 
 	MemVO memVO = (MemVO)session.getAttribute("memVO");
 	String mem_No = memVO.getMem_No();
@@ -31,6 +31,8 @@
 	getAllMemVO.remove(noVO1);
 	getAllMemVO.remove(noVO2);
 	pageContext.setAttribute("getAllMemVO", getAllMemVO);
+	pageContext.setAttribute("memSvc", memSvc);
+	
 	//顯示自己排名
 	RankService rankSvc = new RankService();
 	RankVO rankVO = rankSvc.getOneRank(mem_No);
@@ -39,17 +41,40 @@
 	ArtiFormService artiSvc = new ArtiFormService();
 	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(mem_No_main);
 	pageContext.setAttribute("set", set);
+	
+	//*********************************  智群********************
+	
+	
+	
 	//顯示好友
 	RelationService relationSvc = new RelationService();
-	List<RelationVO> relationVO = relationSvc.getAllRelationWithMem_No(mem_No);
+	List<RelationVO> relationVO = relationSvc.getAllFriends(mem_No);
+	System.out.println("memNO +"+ mem_No);
 	pageContext.setAttribute("relationVO", relationVO);
+	
+	//顯示誰+你好友
+	List<RelationVO> relationVO1 = relationSvc.getWhoAddme(mem_No);
+	pageContext.setAttribute("relationVO1", relationVO1);
+	
+// 	RelationVO relationVO2 = relationSvc.getOneRelationVO(mem_No);
+	
+	
+	//*********************************  智群********************
+	
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
+<<<<<<< HEAD
 	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
 	for(MissionCommentVO z : tryVO){
 		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
 	}
+=======
+	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	pageContext.setAttribute("tryVO", tryVO);
+	
+	List<MissionCommentVO> tryVO2 = mcSvc.getByListener(mem_No);
+	pageContext.setAttribute("tryVO2", tryVO2);
 	
 %>
 
@@ -242,7 +267,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12">
-	<hr class="colorgraph">
+	<hr class="colorgraph"> 
 		</div>
 	</div>
 </div>	
@@ -250,14 +275,92 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-4">
+		
+<!-- 		//*********************************  智群******************** -->
+		
 			<div class="panel panel-primary">
  				  <div class="panel-heading">
- 				    <h3 class="panel-title">其他使用者</h3>
+ 				    <h3 class="panel-title"> 好友</h3>
+ 				  </div>
+ 				  <div class="panel-body">
+ 				    <table class="table table-hover">
+ 				    	<c:forEach var="relationVO" items="<%=relationVO%>" varStatus="om">
+ 				    	<c:if test="${relationVO.relation_Status==1}">
+ 				    	<c:if test="${(om.count%3)==1}">
+ 				    		<tr>
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==2}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==0}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${relationVO.mem_No}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+	 				    	</tr>
+ 				    	</c:if>
+ 				    	</c:if>
+ 				    	</c:forEach>
+ 				    </table>				
+ 				  </div>
+ 				</div>
+			<div class="panel panel-primary">
+ 				  <div class="panel-heading">
+ 				    <h3 class="panel-title"> 向你申請加入好友</h3>
+ 				  </div>
+ 				  <div class="panel-body">
+ 				    <table class="table table-hover">
+ 				    	<c:forEach var="relationVO1" items="<%=relationVO1%>" varStatus="om">
+<%--  				    	<c:if test="${relationVO1.relation_Status==0}"> --%>
+ 				    	<c:if test="${(om.count%3)==1}">
+ 				    		<tr>
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==2}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+ 				    	</c:if>
+ 				    	<c:if test="${(om.count%3)==0}">
+	 				    		<td class="jump">
+	 				    			<a href="<%=request.getContextPath()%>/all/all.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			<img id="img" width="50px" height="50px" data-toggle="tooltip" title="${memSvc.getOneMem(relationVO1.getMem_No()).getMem_Intro()}" src="<%=request.getContextPath() %>/personalShowPic/personalShowPic.do?mem_No=${memSvc.getOneMem(relationVO1.getMem_No()).getMem_No()}">
+	 				    			</a>
+	 				    		</td>	
+	 				    	</tr>
+ 				    	</c:if>
+<%--  				    	</c:if> --%>
+ 				    	</c:forEach>
+ 				    </table>				
+ 				  </div>
+ 				</div>
+ 				
+<!--  				//*********************************  智群******************** -->
+ 				
+			<div class="panel panel-primary">
+ 				  <div class="panel-heading">
+ 				    <h3 class="panel-title"> 會員列表</h3>
  				  </div>
  				  <div class="panel-body">
  				    <table class="table table-hover">
  				    	<c:forEach var="all" items="${getAllMemVO}" varStatus="om">
- 				    	
+ 				    	<c:if test="${relationVO.relation_Status!=1}">
  				    	<c:if test="${(om.count%3)==1}">
  				    		<tr>
 	 				    		<td class="jump">
@@ -281,7 +384,7 @@
 	 				    		</td>	
 	 				    	</tr>
  				    	</c:if>
- 				    	
+ 				    	</c:if>
  				    	</c:forEach>
  				    </table>				
  				  </div>
@@ -320,14 +423,15 @@
 					
 					<div class="panel panel-info">
 					  <div class="panel-heading">
-					    <h3 class="panel-title">看看吧</h3>
+					    <h3 class="panel-title">所發的評論區</h3>
 					  </div>
 					<table class="table">
+	<c:forEach var="qqVO" items="${tryVO}"  varStatus="s">
       <tr>
         <td>
-          <div class='rating-stars text-center' >
-    <ul id='stars' >
-      <li class='star' title='Poor' data-value='1' name="comment_Point" value="1">
+          <div class='rating-stars text-center' style="width:300px">
+    <ul id='stars${s.index}' >
+      <li class='star ' title='Poor' data-value='1' name="comment_Point" value="1">
         <i class='fa fa-star fa-fw'></i>
       </li>
       <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
@@ -345,10 +449,30 @@
     </ul>
   </div> 
         </td>
+</tr>
+<tr>
+				<td>
+					<h6>被評論者</h6><p style="font-size:15px;color:mediumslateblue">${memmemSvc.getOneMem(qqVO.listener).mem_Id}</p>
+					<h6>任務名</h6><p style="font-size:15px;color:mediumslateblue">${getMissionSvc.getOneMission(qqVO.mission_No).mission_Name}</p>
+					<h6>評論細節</h6><p style="font-size:15px;color:mediumslateblue">${qqVO.comment_Detail}</p>
+					<script>
+					$(document).ready(function(){
+					var s = ${qqVO.comment_Point};
+						 for (i = 0; i < s; i++) {
+							 $("#stars${s.index} li").eq(i).addClass("selected")
+						    }
+					});
+					</script>
+				</td>
+			<tr>
+	</c:forEach>
+
 
     </table>
 
 		</div>
+		
+		
 		</div>
 		
 		<div class="col-xs-12 col-sm-4">
@@ -378,15 +502,74 @@
 					    </table>
 					  </div>
 					</div>
+					
+					<div class="panel panel-success">
+					  <div class="panel-heading">
+					    <h3 class="panel-title">被評論區</h3>
+					  </div>
+					<table class="table">
+	<c:forEach var="qqVO2" items="${tryVO2}"  varStatus="s2">
+      <tr>
+        <td>
+          <div class='rating-stars text-center' style="width:300px">
+    <ul id='stars${s2.index}-2' >
+      <li class='star ' title='Poor' data-value='1' name="comment_Point" value="1">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Fair' data-value='2' name="comment_Point" value="2">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Good' data-value='3' name="comment_Point" value="3">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='Excellent' data-value='4' name="comment_Point" value="4">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+      <li class='star' title='WOW!!!' data-value='5' name="comment_Point" value="5">
+        <i class='fa fa-star fa-fw'></i>
+      </li>
+    </ul>
+  </div> 
+        </td>
+</tr>
+<tr>
+				<td>
+					<h6>評論者</h6><p style="font-size:15px;color:deeppink">${memmemSvc.getOneMem(qqVO2.listener).mem_Id}</p>
+					<h6>任務名</h6><p style="font-size:15px;color:deeppink">${getMissionSvc.getOneMission(qqVO2.mission_No).mission_Name}</p>
+					<h6>評論細節</h6><p style="font-size:15px;color:deeppink">${qqVO2.comment_Detail}</p>
+					<script>
+					$(document).ready(function(){
+					var s = ${qqVO2.comment_Point};
+						 for (i = 0; i < s; i++) {
+							 $("#stars${s2.index}-2 li").eq(i).addClass("selected")
+						    }
+					});
+					</script>
+				</td>
+			<tr>
+	</c:forEach>
+
+
+    </table>
+		</div>
 		</div>
 		
 	</div>
 </div>
+<<<<<<< HEAD
 	
 	
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<<<<<<< HEAD
 <script src="<%=request.getContextPath()%>/lib/js/getmission/lookStar.js"></script>
+=======
+<%-- <script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script> --%>
+>>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 

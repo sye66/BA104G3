@@ -19,16 +19,14 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 	String userid = "BA104G3";
 	String passwd = "123456";
 
-	
+	private static DataSource ds = null;
 	static {
 		try {
-			Class.forName(driver);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/BA104G3");
+		} catch (NamingException e) {
+			e.printStackTrace();
 		}
-		
 	}
 	
 
@@ -56,8 +54,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_CASE_CANDIDATE);
 
 
@@ -69,10 +66,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -107,8 +101,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO);
 			pstmt.setString(1, candidate_Mem_No);
 			rs = pstmt.executeQuery();
@@ -117,10 +110,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 				mission_NoList.add(mission_No);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -153,8 +143,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO + " AND ISSUER_INVITING =1 ");
 			pstmt.setString(1, candidate_Mem_No);
 			rs = pstmt.executeQuery();
@@ -163,10 +152,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 				mission_NoList.add(mission_No);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -199,8 +185,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_MISSION_NO_BY_CANDIDATE_MEM_NO+ " AND ISSUER_INVITING =2");
 			pstmt.setString(1, candidate_Mem_No);
 			rs = pstmt.executeQuery();
@@ -209,10 +194,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 				mission_NoList.add(mission_No);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -245,8 +227,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(GET_ALL_CANDIDATE_MEM_NO_BY_MISSION_NO);
 			pstmt.setString(1, mission_No);
 			rs = pstmt.executeQuery();
@@ -255,10 +236,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 				candidate_Mem_NoList.add(candidate_Mem_No);
 			}
 			
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -288,8 +266,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_CASE_CANDIDATE);
 
 
@@ -300,10 +277,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
@@ -333,8 +307,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 		PreparedStatement pstmt = null;
 		try {
 
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(DELETE_BY_MISSION_NO);
 
 
@@ -345,10 +318,7 @@ public class Case_CandidateDAO implements Case_CandidateDAO_interface{
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
+		
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

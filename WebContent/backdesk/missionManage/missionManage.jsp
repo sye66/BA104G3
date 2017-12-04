@@ -31,6 +31,11 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<style>
+.caption {
+color:red;
+}
+</style>
 <body>
 
 	<%@ include file="/backdesk/backdeskTop.jsp"%>
@@ -64,6 +69,7 @@
 			</c:if>
 							</div>
 							<table class="table mission" border="1">
+								<tr class="caption">
 								<td>檢舉文件編號</td>
 								<td>受檢舉任務編號</td>
 								<td>受檢舉任務名稱</td>
@@ -75,6 +81,7 @@
 								<td>處理選項</td>
 								<td>處理確認</td>
 								<td>任務細節</td>
+								</tr>
 								<c:forEach var="accusecaseVO" items="${accusecaseSvc.getAll()}"
 									varStatus="a" step="1">
 									<c:if test="${accusecaseVO.accuse_State ==1}">
@@ -102,11 +109,11 @@
 											</form>
 											<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 												<td>
-													<div class="panel-body">
+													
 														<button class="btn btn-warning" type="submit" name="action" value="mission_Detail">任務細節</button>
 														<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
 														<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManage.jsp">
-													</div>
+													
 												</td>
 											</form>
 										</tr>
@@ -122,6 +129,7 @@
 			</c:if>
 			</div>
 			<table class="table mission" border="1">
+			<tr class="caption">
 				<td>檢舉文件編號</td>
 				<td>受檢舉任務編號</td>
 				<td>受檢舉任務名稱</td>
@@ -134,6 +142,7 @@
 				<td>處理員工編號</td>
 				<td>處理員工名</td>
 				<td>任務細節</td>
+				</tr>
 				<c:forEach var="accusecaseVO" items="${accusecaseSvc.getAll()}"
 					varStatus="a" step="1">
 					<c:if test="${accusecaseVO.accuse_State !=1}">
@@ -157,14 +166,14 @@
 						<td>${accusecaseVO.emp_No}</td>
 						<td>${empSvc.getOneEmp(accusecaseVO.emp_No).emp_Name}	</td>
 						<td>
-						<div class="panel-body">
+						
 										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
 											<button class="btn btn-warning" type="submit" name="action"
 												value="mission_Detail">任務細節</button>
 											<input type="hidden" name="mission_No" value="${accusecaseVO.mission_No}"> 
 											<input type="hidden" name="requestURL" value="/bakedesk/missionManage/missionManageok.jsp">
 										</form>
-						</div>
+						
 						</td>
 					</tr>
 					</c:if>

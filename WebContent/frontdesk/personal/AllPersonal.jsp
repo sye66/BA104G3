@@ -23,7 +23,9 @@
     	Set<ArtiFormVO> set = (Set<ArtiFormVO>)artiSvc.findArtiByMemNo(personal_No);
     	pageContext.setAttribute("set", set);
     	
-    	//加好友
+    	//*********************************  智群********************
+    	
+    	//加好友 (判定狀態1)
     	RelationVO relationVO = (RelationVO)request.getSession().getAttribute("relationVO");
     	MemVO memVO = (MemVO)request.getSession().getAttribute("memVO");
     	String mem_No= memVO.getMem_No();
@@ -32,9 +34,19 @@
     	relationVO = RelationSvc.getOneRelationVO(mem_No, personal_No);
     	if(relationVO!= null){
     	Integer relation_Status = relationVO.getRelation_Status();
+//     	relation_Status = (String) (relation_Status);
     	System.out.println("relation_Status +" +relation_Status);
+    	pageContext.setAttribute("relation_Status", relation_Status);
     	}
     	
+    	//加好友(判定狀態2)
+    	RelationVO relationVO1 = RelationSvc.getOneRelationVO(personal_No,mem_No);
+    	if(relationVO1!= null){
+        	Integer relation_Status1 = relationVO1.getRelation_Status();
+//         	relation_Status = (String) (relation_Status);
+        	System.out.println("relation_Status1 +" +relation_Status1);
+    	pageContext.setAttribute("relation_Status1", relation_Status1);
+    	}
     	//關注工具人
     	
     	Follow_tmService follow_tmSvc = new Follow_tmService();
@@ -44,9 +56,11 @@
     	follow_tmVO =follow_tmSvc.getOneFollow_tmVO(follower_Mem_No, followed_Mem_No);
     	System.out.println("follow_tmVO +" +follow_tmVO);
     	if(follow_tmVO != null){
-    		Integer relation_Status = relationVO.getRelation_Status();
-        	System.out.println("relation_Status +" +relation_Status);
+    		Integer follow_Status = follow_tmVO.getFollow_Status();
+        	System.out.println("follow_Status +" +follow_Status);
     	}
+    	
+    	//*********************************  智群********************
     	
     %>
     
@@ -68,6 +82,8 @@
 	<br>
 	<br>
 	<br>
+
+<!--     	//*********************************  智群******************** -->
 
 	<script type="text/javascript">
 	
@@ -105,7 +121,12 @@
 	}
 
 	function addFriend(){
+		if(<%=pageContext.getAttribute("relation_Status") ==null && pageContext.getAttribute("relation_Status1") ==null%>){
 		var queryString= {"action":"insert_New","mem_No":'<%=mem_No%>',"related_Mem_No":'<%=related_Mem_No%>',"relation_Status":'0'};
+		}
+		if(<%=pageContext.getAttribute("relation_Status1")%>==0){
+		var queryString= {"action":"insert_New_Each","mem_No":'<%=mem_No%>',"related_Mem_No":'<%=related_Mem_No%>',"relation_Status":'1'};
+		}
 		$.ajax({
 			 type: "POST",
 			 url: "<%=request.getContextPath()%>/relation/relation.do",
@@ -138,7 +159,7 @@
 	
 	</script>
     
-    
+<!--     	//*********************************  智群********************     -->
 
 	<br>
 	<br>
@@ -151,7 +172,7 @@
  				<div class="panel panel-primary">
  				  <div class="panel-heading">
  				    <h3 class="panel-title">${AllMemVO.mem_Name}的個人小檔案
- 				    	<div class="btn-group" style="float:right;">
+ 				    	<div class="btn-group" style="float:right">
  				    	<p id=changeBtn>
  				    	    <c:if test="<%=follow_tmVO==null%>">
  				    	    <button onclick="watch()" class="btn btn-warning">關注他</button> 

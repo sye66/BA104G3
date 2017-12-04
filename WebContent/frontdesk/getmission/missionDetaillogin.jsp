@@ -59,6 +59,15 @@
                 margin-left: -500px;
             }
         }
+        
+      body
+{
+<%--     background:  url('<%=request.getContextPath()%>/res/images/getmission/bgimg7.jpg') fixed; --%>
+   
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+}  
 </style>
 </head>
 <body>
@@ -165,16 +174,16 @@
 
 				<div class="col-xs-12 col-sm-4 ">
 					<h3 class="text-center">任務簡介</h3>
-					<h4>任務編號:</h4>
+					<h4 style="color:red">任務編號:</h4>
 					<p>----${getMissionVO.mission_No}</p>
-					<h4>任務名稱:</h4>
+					<h4 style="color:mediumslateblue">任務名稱:</h4>
 					<p>----${getMissionVO.mission_Name}</p>
-					<h4>任務種類:</h4>
+					<h4 style="color:mediumslateblue">任務種類:</h4>
 					<p>----${getMissionVO.mission_Category}</p>
-					<h4>任務狀態:</h4>
-					<p>----${ChangeStateToName.ChangeStateToName(getMissionVO.mission_State)}</p>
-					<h4>發案人:</h4>
-					<p>發案人:${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
+					<h4 style="color:mediumslateblue">任務狀態:</h4>
+					<p style="color:#21a261">----${ChangeStateToName.ChangeStateToName(getMissionVO.mission_State)}</p>
+					<h4 style="color:mediumslateblue">發案人:</h4>
+					<p>${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 				</div>
 				<div class="col-xs-12 col-sm-2 ">
 				<div class="panel-body">
@@ -218,13 +227,13 @@
 						<h3 class="panel-title">任務細節</h3>
 					</div>
 					<div class="panel-body">
-						<h5>發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Id}</p>
+						<h5 style="color:brown">發案人</h5><p>${getMissionVO.issuer_Mem_No}~${memSvc.getOneMem(getMissionVO.issuer_Mem_No).mem_Name}</p>
 
-						<h5>敘述</h5><p>${getMissionVO.mission_Des}</p>
-						<h5>任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>
-						<h5>任務截止日期</h5><p>${getMissionVO.mission_Due_Time}</p>
-						<h5>任務模式</h5><p>${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
-						<h5>任務報酬</h5><p>${getMissionVO.mission_Pay} 積分</p>
+						<h5 style="color:brown">敘述</h5><p>${getMissionVO.mission_Des}</p>
+						<h5 style="color:brown">任務發佈時間</h5><p>${getMissionVO.mission_Release_Time}</p>
+						<h5 style="color:brown">任務截止日期</h5><p>${getMissionVO.mission_Due_Time}</p>
+						<h5 style="color:brown">任務模式</h5><p style="color:red">${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
+						<h5 style="color:brown">任務報酬</h5><p>${getMissionVO.mission_Pay} 積分</p>
 					</div>
 				</div>
 
@@ -256,19 +265,13 @@
 									<button class="btn btn-info" style="visibility: hidden" >我要接案</button></a> 
 						</c:if>
 
-						<c:if test="${CaseCandidateSvc.getCandidate(mission_No).contains(mem_No)}">
-							<td><button class="btn btn-default" disabled>等待中...</button></td>
-						</c:if>
-						<c:if test="${mem_No == getMissionVO.issuer_Mem_No} ">
-							<td><button class="btn btn-default" disabled>等待別人接案...</button></td>
-						</c:if>
 			<div class="modal fade" id="modal-id-mission">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
+							<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">任務編號:${getMissionVO.mission_No}</h4>
 						</div>
 						<div class="modal-body">
 							<h4>任務名稱:</h4>
@@ -293,19 +296,7 @@
 					</div>
 				</div>
 			</div>
-			<td>
-				<div class="panel-body">
-
-					<form method="post"
-						action="<%=request.getContextPath()%>/getmission/getmission.do"
-						name="getmission3">
-						<button class="btn-lg btn-success" type="submit" name="action"
-							value="chat">和他聊天</button>
-						<input type="hidden" name="mission_No"
-							value="${getMissionVO.mission_No}">
-					</form>
-				</div>
-			</td>
+			
 
 			<td>
 				<form method="post"

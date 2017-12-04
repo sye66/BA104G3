@@ -36,6 +36,8 @@ public class ChangeStateToName {
 			Pattern = "緊急";
 		}else if(mission_Pattern==2){
 			Pattern = "一般";
+		}else if(mission_Pattern == 3){
+			Pattern = "官方";
 		}
 		return Pattern;
 		

@@ -30,7 +30,7 @@ public class RelationDAO implements RelationDAO_interface{
 			+ "VALUES (?,?,?)";
 	
 	private static final String GET_ALL_STMT=
-			"SELECT related_Mem_No,relation_Status"
+			"SELECT mem_No,related_Mem_No,relation_Status"
 			+ " FROM relation WHERE mem_No=? order by mem_No";
 	
 	private static final String GET_WHO_ADDME=
@@ -329,6 +329,8 @@ public class RelationDAO implements RelationDAO_interface{
 			
 			while(rs.next()){
 				RelationVO relationVO = new RelationVO();
+				
+				relationVO.setMem_No(rs.getString("mem_No"));
 				relationVO.setRelated_Mem_No(rs.getString("related_Mem_No"));
 				relationVO.setRelation_Status(rs.getInt("relation_Status"));
 				list.add(relationVO);

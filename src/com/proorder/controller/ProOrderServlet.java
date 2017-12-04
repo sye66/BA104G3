@@ -232,6 +232,24 @@ System.out.println("ord_Ship_Date: "+ord_Ship_Date);
 				
 				ProOrderService proOrderSvc = new ProOrderService();
 				proOrderSvc.updateProOrderUp(ord_No, ord_Shipinfo, ord_Ship_Date);
+				if(ord_Shipinfo.equals("已退款")){
+					ProOrderVO proOrderVO = proOrderSvc.getOneProOrder(ord_No);
+					String mem_No = proOrderVO.getMem_No();
+					Integer ord_Price = proOrderVO.getOrd_Price();
+System.out.println("訂單退款: "+ord_Price);					
+					MemService memSvc = new MemService();
+					MemVO memVO = memSvc.getOneMem(mem_No);
+					Integer mem_Point =memVO.getMem_Point();
+System.out.println("會員目前點數: "+mem_Point);					
+					mem_Point += ord_Price;
+System.out.println("退款後點數: "+mem_Point);				
+					memSvc.updateMemPoint(mem_No, mem_Point);
+					HttpSession session = req.getSession();
+					session.removeAttribute("memVO");
+					session.setAttribute("memVO", memVO);
+				}
+				
+				
 System.out.println("修改完成");				
 				/***************************
 				 * 3.刪除完成,準備轉交(Send the Success view)

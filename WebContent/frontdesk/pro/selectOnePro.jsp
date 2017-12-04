@@ -28,7 +28,7 @@
 	margin: 20px;
 	padding: 0px;
 	height: 450px;
-	width: 550px;
+	width: 600px;
 }
 .proTable td{
 	width: 300px;
@@ -36,7 +36,7 @@
 .proName {
 	font-weight: 900;
 	font-size: 30px;
-	width: 200px;
+	width: 250px;
 }
 
 .proPrice {
@@ -190,6 +190,27 @@
 		<div class="col-xs-12 col-sm-12">
 			<div class="proDiv">
 
+																<c:if test="${proVO.pro_Discount==90}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==80}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d002.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==70}">
+																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
+																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
+																	</div>
+																</c:if>
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:550px;  top:30px;">
+																		<img alt="" style="height:120px;width:200px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
+
 				<table class="proTable">
 					<tbody>
 						<tr>
@@ -210,19 +231,19 @@
 						</tr>
 						<tr>
 							<td><c:if test="${proVO.pro_Discount==100}">
-									<P></P>
+								
 									
 									<c:set var="balance" value="${proVO.pro_Price}" />
 	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
-									<p class="proPrice">價格:$${dsPrice}</p>
+									<p class="proPrice">價格:${dsPrice}點</p>
 								</c:if> 
 								<c:if test="${proVO.pro_Discount!=100}">
-									<p class="proDiscount">原價:$${proVO.pro_Price}</p>
+									<span class="proDiscount">原價:${proVO.pro_Price}點</span>
 									
 									<c:set var="balance" value="${(proVO.pro_Price)*(proVO.pro_Discount)/100}" />
 	   			 					 <fmt:parseNumber var="dsPrice" integerOnly="true"  type="number" value="${balance}" />
 	   			 		 
-	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:$<c:out value="${dsPrice}" /></p>
+	   			 		<p class="card-footer proPrice" style="height:28px;">折扣價:<span style="font-size:36px;"><c:out value="${dsPrice}"/></span>點</p>
 	   			 		
 								</c:if></td>
 						</tr>
@@ -233,9 +254,10 @@
 							
 							MemVO memVO = (MemVO)session.getAttribute("memVO");
 							List<String> list2 = new ArrayList<String>();
+							String mem_No;
 System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 								if(session.getAttribute("memVO")!=null){
-								String mem_No = memVO.getMem_No();
+								mem_No = memVO.getMem_No();
 								ProTrackService proTrackSvc = new ProTrackService();
 								List<ProTrackVO> list = proTrackSvc.getOnePro(mem_No);
 								
@@ -263,8 +285,9 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 							<%}else{%>
 							
 							<td style="padding-left: 100px; padding-top: 13px;">
+								<a href="<%=request.getContextPath()%>/pro/proTrackServlet.do?action=deleteProTrack&pro_No=${proVO.pro_No}&mem_No=<%=mem_No%>&requestURL=<%=request.getServletPath()%>">
 								<img alt="" src="<%=request.getContextPath()%>/res/images/pro_icons/heart.png"
-								style="width: 50px;border-radius: 3px;">已加入追蹤</td>
+								style="width: 50px;border-radius: 3px;"></a>已加入追蹤</td>
 
 							<%
 								}
@@ -317,6 +340,7 @@ System.out.println("onePro追蹤 "+session.getAttribute("memVO"));
 
 		</div>
 
+																
 
 	</div>
 	<!--中6結束 -->

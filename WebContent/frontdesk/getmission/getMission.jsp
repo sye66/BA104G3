@@ -149,7 +149,9 @@
 								            <div class="panel-body">
 								                <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission2">
 								                    <a href='#modal-mission-id${s.index} ' data-toggle="modal">
+								                  <c:if test="${memVO.mem_No != getMissionVO.issuer_Mem_No &&  !caseCandidateSvc.getCandidate(getMissionVO.mission_No).contains(missionmem) && getMissionVO.mission_State !=3 && getMissionVO.mission_State !=4 && getMissionVO.mission_State !=5 && getMissionVO.mission_State !=6 && getMissionVO.mission_State !=8 && getMissionVO.mission_State !=9}" var="accept">
 								                        <button class="btn btn-info">我要接案</button>
+								                         </c:if>
 								                    </a>
 								                    <input type="hidden" name="mission_No" value="${getMissionVO.mission_No}">
 								                </form>
@@ -255,7 +257,7 @@
       var allmission = [ 
     	  <c:forEach var="getMissionVO" items="${getMissionSvc.getAllValidMission()}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="s" step="1">
     		['${getMissionVO.mission_Name}','${getMissionVO.mission_Category}' ,${getMissionVO.mission_Gps_Lat} , ${getMissionVO.mission_Gps_Lng}]
-  		
+
   		<c:if test = "${!s.last}">
   		,
   		</c:if>
