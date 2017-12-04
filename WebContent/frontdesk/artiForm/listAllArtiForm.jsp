@@ -10,6 +10,7 @@
     MemVO memVO = (MemVO) session.getAttribute("memVO");
 
     ArtiFormVO artiFormVO = new ArtiFormVO();
+    session.setAttribute("artiFormVO",artiFormVO);
     ArtiFormService artiSvc = new ArtiFormService();
     
     Set<ArtiFormVO> set = artiSvc.getAll();
