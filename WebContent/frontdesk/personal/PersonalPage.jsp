@@ -46,7 +46,9 @@
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
 	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
-// 	tryVO.get(0).getListener();
+	for(MissionCommentVO z : tryVO){
+		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
+	}
 	pageContext.setAttribute("tryVO", tryVO);
 	
 %>
@@ -345,6 +347,7 @@
         </td>
 
     </table>
+
 		</div>
 		</div>
 		
@@ -379,19 +382,11 @@
 		
 	</div>
 </div>
-
-	<c:forEach var="qqVO" items="${tryVO}">
-		<table>
-			<tr>
-				<td>
-					${qqVO.listener}
-					${qqVO.mission_No}
-				</td>
-		</table>
-	</c:forEach>
+	
+	
 
  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="<%=request.getContextPath()%>/lib/js/getmission/star.js"></script>
+<script src="<%=request.getContextPath()%>/lib/js/getmission/lookStar.js"></script>
 	
 	<jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 
