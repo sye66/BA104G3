@@ -64,7 +64,7 @@
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
 
-	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
+	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
 	pageContext.setAttribute("tryVO", tryVO);
 	
 	
@@ -72,7 +72,7 @@
 		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
 	}
 
-	List<MissionCommentVO> tryVO2 = mcSvc.getByReviewer(mem_No);
+	List<MissionCommentVO> tryVO2 = mcSvc.getByListener(mem_No);
 	pageContext.setAttribute("tryVO2", tryVO2);
 	
 %>
