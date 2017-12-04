@@ -8,6 +8,8 @@
 
 <%
     EmpVO empVO = (EmpVO) session.getAttribute("empVO");
+    String emp_No = empVO.getEmp_No();
+    session.setAttribute("emp_No", emp_No);
 
     ArtiFormService artiSvc = new ArtiFormService();
     Set<ArtiFormVO> set = artiSvc.getAll();

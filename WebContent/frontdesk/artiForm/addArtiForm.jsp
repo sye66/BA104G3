@@ -1,9 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.artiForm.model.*"%>
+<%@ page import="com.mem.model.*"%>
 
 <%
   ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
+  MemVO memVO = (MemVO) session.getAttribute("memVO");
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
@@ -44,7 +47,7 @@
         <div class="widget-header header-color-dark">
             <h5 class="bigger lighter">
             <input type="hidden" name="mem_No" size="45"
-			 value="<%= (artiFormVO==null)? "M000001" : artiFormVO.getMem_No()%>" />
+			 value="${memVO.mem_No}" />
 			 請輸入主題文章標題 :  <input type="text" id="title" name="arti_Title" size="80" 
 			 value="<%= (artiFormVO==null)? "【問題】" : artiFormVO.getArti_Title()%>" />
             

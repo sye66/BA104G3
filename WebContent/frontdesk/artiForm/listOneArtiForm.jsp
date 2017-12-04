@@ -195,7 +195,7 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic"> 
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO==null)? " @@? " : artiReplyVO.getReply_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO.getReply_Desc()==null)?" @@? ": artiReplyVO.getReply_Desc()%>" />
                      </div>
                  </div>
              </div>     
@@ -233,7 +233,7 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXTAREA" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO.getReport_Desc()==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      </div>
                  </div>
              </div>
