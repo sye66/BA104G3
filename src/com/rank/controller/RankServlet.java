@@ -69,7 +69,7 @@ public class RankServlet extends HttpServlet {
 			successView.forward(req, res);
 			
 		}catch (Exception e) {
-			errorMsgs.add("新增資料不成功:" + e.getMessage());
+			errorMsgs.add("要公平一點喔!還有人沒給到獎勵!");
 			RequestDispatcher failureView = req
 					.getRequestDispatcher("/backdesk/schedule/Schedule.jsp");
 			failureView.forward(req, res);
