@@ -67,9 +67,7 @@ String str6 = "AU000006";
 					<ul class="nav nav-tabs headermenu">
 						<li><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><img src="<%=request.getContextPath()%>/res/images/pro_icons/teamwork.png"
 								style="height:80px;"></a></li>
-						<li><a
-							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
-								class="icon icon-flatscreen"></span>首頁</a></li>
+						
  						<%for(CompVO a: list){ 
     							if((a.getAuth_No()).contains(str1)){  
   						%>  
