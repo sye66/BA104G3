@@ -561,6 +561,7 @@ public class DisputeCaseDAO implements DisputeCaseDAO_interface{
 				disputeCaseVO.setIssue_Datetime(rs.getTimestamp(5));
 				disputeCaseVO.setClose_Datetime(rs.getTimestamp(6));
 				disputeCaseVO.setDispute_Case_Status(rs.getInt(7));
+				disputeCaseVO.setDispute_Content(rs.getString(8));
 				listDisputeCaseMem.add(disputeCaseVO);
 			}
 			
