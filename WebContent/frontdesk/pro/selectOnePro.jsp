@@ -416,9 +416,9 @@ $(function() {
 //	       cache: true,           // 預設值為 true 防止快取
 //	       async: false,           // 預設值為 true 非同步
 	      success:function(response){
-	    	if(<%=count%><0){
+	    	
 	    		setTimeout(function(){location.reload()}, 1500) ;   //重新刷新     
-	    	}  
+	    	 
 	                
 	      }, // success end        
 	      error:function(xhr, ajaxOptions, thrownError){
