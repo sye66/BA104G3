@@ -63,17 +63,16 @@
 	
 	//抓星星
 	MissionCommentService mcSvc = new MissionCommentService();
-<<<<<<< HEAD
+
 	List<MissionCommentVO> tryVO = mcSvc.getByListener(mem_No);
+	pageContext.setAttribute("tryVO", tryVO);
+	
+	
 	for(MissionCommentVO z : tryVO){
 		System.out.println(z.getComment_Point()+"+++++++++++++++++++++++++++++++++++++");
 	}
-=======
-	List<MissionCommentVO> tryVO = mcSvc.getByReviewer(mem_No);
->>>>>>> branch 'master' of https://github.com/sanderxavalon/BA104G3
-	pageContext.setAttribute("tryVO", tryVO);
-	
-	List<MissionCommentVO> tryVO2 = mcSvc.getByListener(mem_No);
+
+	List<MissionCommentVO> tryVO2 = mcSvc.getByReviewer(mem_No);
 	pageContext.setAttribute("tryVO2", tryVO2);
 	
 %>
