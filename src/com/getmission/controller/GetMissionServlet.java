@@ -903,7 +903,6 @@ public class GetMissionServlet extends HttpServlet {
 		    					 " 已經完成囉~請快快去查驗吧~"; 
 		    
 		    System.out.println(messageText);
-		    MissionSocket.pushMissionText(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No(),"finishwork"); //websocket
 			GetMissionVO getMissionVO = new GetMissionVO();
 			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			// Send the use back to the form, if there were errors
@@ -916,6 +915,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 			MailService mailService = new MailService();
+			MissionSocket.pushMissionText(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No(),"finishwork"); //websocket
 		    mailService.sendMail(to, subject, messageText);
 			req.setAttribute("memVO", memVO);
 			req.setAttribute("getMissionVO", getMissionVO);
