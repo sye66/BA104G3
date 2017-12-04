@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.artiForm.model.*"%>
 <%@ page import="com.artiClass.model.*"%>
 <%@ page import="com.artiReply.model.*"%>
@@ -129,7 +130,7 @@ div {
          </div>
 		 
          <div class="widget-header header-color-dark">
-         <h5 class="bigger lighter">${artiFormVO.arti_Time}</h5>
+         <h5 class="bigger lighter"><fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> </h5>
          
          <div class="widget-toolbar">
              <div class="" style="width:100px;">

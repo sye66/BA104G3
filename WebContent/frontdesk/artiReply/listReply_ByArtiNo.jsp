@@ -110,7 +110,7 @@
                         <div class="widget-toolbar">
                             <div class="" style="width:100px;">
                                 <div class="" style="">
-                                ${artiReplyVO.reply_Time}
+                                <fmt:formatDate value="${artiReplyVO.reply_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                                 </div>
                             </div>
                         </div>

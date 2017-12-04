@@ -109,7 +109,7 @@ ${arti_No}
                         <li>
                             <div class="timeline-datetime">
                                 <div class="timeline-time">
-                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss.SSS"/> 
+                                    <fmt:formatDate value="${artiFormVO.arti_Time}" pattern="yyyy-MM-dd HH:mm:ss"/> 
                                 </div>
                                 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
                                 <div class="timeline-date" style="font-size:24px; font-family:Microsoft JhengHei;">${memSvc.getOneMem(artiFormVO.mem_No).mem_Name}</div>
