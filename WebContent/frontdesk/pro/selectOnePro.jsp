@@ -2,12 +2,23 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ page import="com.pro.shoppingcart.*"%>
 <%@ page import="com.pro.model.*"%>
 <%@ page import="com.protrack.model.*"%>
 <%@ page import="com.mem.model.*" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 
 <%
+	int count = 0;
+	@SuppressWarnings("unchecked")
+	Vector<ProCartVO> buylist =  (Vector<ProCartVO>) session.getAttribute("shoppingcart");
+
+	if(buylist != null && (buylist.size() > 0)){
+		count = buylist.size();
+	}
+
+
+
 	ProVO proVO = (ProVO) session.getAttribute("ProVO");	
 	if(session.getAttribute("ProVO")!=null){
 		pageContext.setAttribute("ProVO",proVO);
@@ -171,7 +182,7 @@
 </div>
 <div class="col-xs-12 col-sm-12">	
 	<!--中6-->
-	<div class="col-xs-12 col-sm-6 col-sm-offset-4">
+	<div class="col-xs-12 col-sm-6 col-sm-offset-3">
 	
 	<!--麵包屑 -->
 		<div class="col-xs-12 col-sm-11">
@@ -190,6 +201,16 @@
 		<div class="col-xs-12 col-sm-12">
 			<div class="proDiv">
 
+																
+
+				<table class="proTable">
+					<tbody>
+						<tr>
+							<td rowspan="3" style="padding: 16px;"><img
+								class="card-img-top rounded imgCont01"
+								src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}"
+								alt="Card image cap">
+								
 																<c:if test="${proVO.pro_Discount==90}">
 																	<div style="z-index:3;position:absolute;left:600px;  top:50px;">
 																		<img alt="" style="height:70px;width:70px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d001.png">
@@ -210,14 +231,9 @@
 																		<img alt="" style="height:120px;width:200px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
 																	</div>
 																</c:if>
-
-				<table class="proTable">
-					<tbody>
-						<tr>
-							<td rowspan="3" style="padding: 16px;"><img
-								class="card-img-top rounded imgCont01"
-								src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=${proVO.pro_No}"
-								alt="Card image cap"></td>
+								
+								
+								</td>
 							<td><p class="proName">${proVO.pro_Name}</p></td>
 						</tr>
 						<tr>
@@ -368,8 +384,8 @@ $(function() {
 				end: {
 // 					left: offset.left+10,
 // 					top: offset.top+10,
-					left: offset.left-600,
-					top: offset.top-60,
+					left: offset.left-550,
+					top: offset.top-50,
 					width: 0,
 					height: 0
 				},
@@ -400,8 +416,10 @@ $(function() {
 //	       cache: true,           // 預設值為 true 防止快取
 //	       async: false,           // 預設值為 true 非同步
 	      success:function(response){
-	    	  
-	       setTimeout(function(){location.reload()}, 1500) ;   //重新刷新              
+	    	if(<%=count%><0){
+	    		setTimeout(function(){location.reload()}, 1500) ;   //重新刷新     
+	    	}  
+	                
 	      }, // success end        
 	      error:function(xhr, ajaxOptions, thrownError){
 	       swal(
