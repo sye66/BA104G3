@@ -44,7 +44,7 @@ public class MissionCommentService {
 		return missionCommentVO;
 	}
 	
-	public void delect(String reviewer,String listener,String mission_No){
+	public void delete(String reviewer,String listener,String mission_No){
 		dao.delete(reviewer, listener, mission_No);
 		
 	}
