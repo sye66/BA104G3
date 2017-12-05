@@ -45,7 +45,7 @@
 		</c:forEach>
 	</ul>
 </c:if>
-<br>
+<br><br><br><br><br><br>
 <div class="container">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 
@@ -111,7 +111,7 @@
                           </div>
                               <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_pic}"
+                                  <img src="<%=request.getContextPath()%>/tool/showimage.do?action=mem_Pic&mem_No=${artiFormVO.mem_No}&mem_${memSvc.getOneMem(memVO.mem_No).mem_Pic}"
 	                     style="height:120px;width:150px;"/>
                                   </div>
                                </div>
