@@ -1368,8 +1368,13 @@ public class GetMissionServlet extends HttpServlet {
 				inputError.forward(req, res);
 			}	
 		}
+		/**
+		 * @author Sander
+		 * @hidden get_Location_Json
+		 * 傳出給google map用的Json陣列
+		 */
 		if("get_Location_Json".equals(action)) {
-			System.out.println("get_Location_Json");
+			System.out.println("收到來自Google Map的AJAX請求");
 			String resJson = "";
 			Gson tranformer = new Gson();
 			MemService memService = new MemService();
@@ -1380,12 +1385,14 @@ public class GetMissionServlet extends HttpServlet {
 				try {
 					jsonObject = new JSONObject();
 					String mem_No = memVO.getMem_No();
-					System.out.println(mem_No);
 					String mem_Id = memVO.getMem_Id();
+					Integer mission_Count = memVO.getMission_Count();
 					Double mem_GPS_LAT = memVO.getMem_Gps_Lat();
 					Double mem_GPS_LNG = memVO.getMem_Gps_Lng();
 					Double[] GPS = {mem_GPS_LAT,mem_GPS_LNG};
 					jsonObject.put("mem_No", mem_No);
+					jsonObject.put("mem_Id", mem_Id);
+					jsonObject.put("mission_Count", mission_Count);
 					jsonObject.put("mem_GPS_LAT", mem_GPS_LAT);
 					jsonObject.put("mem_GPS_LNG", mem_GPS_LNG);
 					jsonarr.put(jsonObject);

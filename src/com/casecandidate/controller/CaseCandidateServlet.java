@@ -18,8 +18,10 @@ import com.casecandidate.model.CaseCandidateVO;
 import com.getmission.controller.MailService;
 import com.getmission.model.GetMissionService;
 import com.getmission.model.GetMissionVO;
+import com.mchange.v2.async.StrandedTaskReporting;
 import com.mem.model.MemService;
 import com.mem.model.MemVO;
+import com.tool.controller.TelMessage;
 
 public class CaseCandidateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -83,7 +85,16 @@ public class CaseCandidateServlet extends HttpServlet {
 			MemService memService = new MemService();
 			MemVO issuerMemVO = memService.getOneMem(issuer_Mem_NO);
 			MailService mailService = new MailService();
-			mailService.sendMail(issuerMemVO.getMem_Email(), String.format("您有新的接案候選人:%s!", issuerMemVO.getMem_Id()), String.format("您有新的接案候選:%s!別讓他/她等太久，趕快去任務管理中心查看這個接案人吧！", issuerMemVO.getMem_Id()));			
+			mailService.sendMail(issuerMemVO.getMem_Email(), String.format("您有新的接案候選人:%s!", issuerMemVO.getMem_Id()), String.format("您有新的接案候選:%s!別讓他/她等太久，趕快去任務管理中心查看這個接案人吧！", issuerMemVO.getMem_Id()));
+			/**
+			 * @author Sander
+			 * 新增候選人時發送簡訊給發案人
+			 */
+			String messageText = String.format("您有新的接案候選:%s!別讓他/她等太久，趕快去任務管理中心查看這個接案人吧！", issuerMemVO.getMem_Id());
+			String[] tel = {issuerMemVO.getMem_Pho()};
+			TelMessage telMessage = new TelMessage();
+			telMessage.sendMessage(tel, messageText);
+			
 			req.setAttribute("CaseCandidateVo", CaseCandidateVo);
 			req.setAttribute("errorMsgs", errorMsgs);
 			RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getmission_success.jsp");

@@ -201,89 +201,89 @@
 					<%-- 地圖 --%>
 					<label>所在位置</label>
 				    <div id="map"></div>
-				    <script>
-				    function initMap() {
-				        var pos;
-				        var lat;
-				        var lng;
-				        
-				        
-				        var map = new google.maps.Map(document.getElementById('map'), {
-				            center: { lat: -34.397, lng: 150.644 },
-				            zoom: 15
-				        });
+					<script>
+					function initMap() {
+					    var pos;
+					    var lat;
+					    var lng;
 
-				        // Try HTML5 geolocation.
 
-				        if (navigator.geolocation) {
-				            navigator.geolocation.getCurrentPosition(function(position) {
-				                pos = {
-				                    lat: position.coords.latitude,
-				                    lng: position.coords.longitude
-				                };
-				                map.setCenter(pos);
+					    var map = new google.maps.Map(document.getElementById('map'), {
+					        center: { lat: -34.397, lng: 150.644 },
+					        zoom: 15
+					    });
 
-				                $.ajax({
-				                    url: '<%=request.getContextPath()%>/getmission/getmission.do',
-				                    type: 'post',
-				                    data: {
-				                        action: "get_Location_Json",
-				                    },
-				                    dataType: "json",
+					    // Try HTML5 geolocation.
 
-				                    success: function(data) {
-				                        for (var i = 0; i < data.length; i++) {
-				                            var obj = data[i];
-				                            var contentString = obj.mem_No+'<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
-				                            var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
-				                            // InfoWindow
-				                            var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });
-				                            infoWindow2.setPosition(GPS_Position);
-				                            // Marker
-				                            var marker2 = new google.maps.Marker({
-				                                position: GPS_Position,
-				                                map: map,
-				                                title: "某工具人"
-				                            });
-				                            google.maps.event.addListener(marker2, 'click', (function(marker2, contentString, infoWindow2) {
-				                                return function() {
-				                                    infoWindow2.setContent(contentString);
-				                                    infoWindow2.open(map, marker2);
-				                                };
-				                            })(marker2, contentString, infoWindow2));
-				                        }
-				                    }
-				                })
-				            }, function() {
-				                handleLocationError(true, infoWindow, map.getCenter());
-				            });
-				        } else {
-				            // Browser doesn't support Geolocation
-				            handleLocationError(false, infoWindow, map.getCenter());
-				        }
-				    }
+					    if (navigator.geolocation) {
+					        navigator.geolocation.getCurrentPosition(function(position) {
+					            pos = {
+					                lat: position.coords.latitude,
+					                lng: position.coords.longitude
+					            };
+					            map.setCenter(pos);
 
-				    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-				        infoWindow.setPosition(pos);
-				        infoWindow.setContent(browserHasGeolocation ?
-				            'Error: The Geolocation service failed.' :
-				            'Error: Your browser doesn\'t support geolocation.');
-				    }
-				    </script>
-				    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
-				</div>
-			</div>
-		</div>
-	<hr>
-    <!-- =============================================================== -->
-	
-<%-- 第三層 - 接案人 --%>
-    <%-- 所有任務列表 --%>
-        <%-- 取得所有會員的集合 --%>
-        <div class="container">
-        <%-- 老師的分頁檔案PART1 --%>
-    	<%@ include file="pages/page1.file"%>
-        <c:forEach var="memVO" items="<%=memService.getAll(mem_No)%>"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="StepCount" step="1">
+					            $.ajax({
+					                url: '<%=request.getContextPath()%>/getmission/getmission.do',
+					                type: 'post',
+					                data: {
+					                    action: "get_Location_Json",
+					                },
+					                dataType: "json",
+
+					                success: function(data) {
+					                    for (var i = 0; i < data.length; i++) {
+					                        var obj = data[i];
+					                        var contentString = '<h2>' + obj.mem_Id + '</h2>' + '<p>已完成任務數量：' + obj.mission_Count + '</p>' +
+					                            '<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
+					                        var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
+					                        // InfoWindow
+					                        var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });
+					                        infoWindow2.setPosition(GPS_Position);
+					                        // Marker
+					                        var marker2 = new google.maps.Marker({
+					                            position: GPS_Position,
+					                            map: map,
+					                            title: "某工具人"
+					                        });
+					                        google.maps.event.addListener(marker2, 'click', (function(marker2, contentString, infoWindow2) {
+					                            return function() {
+					                                infoWindow2.setContent(contentString);
+					                                infoWindow2.open(map, marker2);
+					                            };
+					                        })(marker2, contentString, infoWindow2));
+					                    }
+					                }
+					            })
+					        }, function() {
+					            handleLocationError(true, infoWindow, map.getCenter());
+					        });
+					    } else {
+					        // Browser doesn't support Geolocation
+					        handleLocationError(false, infoWindow, map.getCenter());
+					    }
+					}
+
+					function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+					    infoWindow.setPosition(pos);
+					    infoWindow.setContent(browserHasGeolocation ?
+					        'Error: The Geolocation service failed.' :
+					        'Error: Your browser doesn\'t support geolocation.');
+					}
+					</script>				    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
+									</div>
+								</div>
+							</div>
+						<hr>
+					    <!-- =============================================================== -->
+						
+					<%-- 第三層 - 接案人 --%>
+					    <%-- 所有任務列表 --%>
+					        <%-- 取得所有會員的集合 --%>
+					        <div class="container">
+					        <%-- 老師的分頁檔案PART1 --%>
+					    	<%@ include file="pages/page1.file"%>
+					        <c:forEach var="memVO" items="<%=memService.getAll(mem_No)%>"  begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>" varStatus="StepCount" step="1">
         	<%-- 從一起算，第一筆(左側)資料加上ROW --%>
         	<c:if test="${((StepCount.count) % 2) == 1}">
         		<div class="row">
@@ -302,7 +302,7 @@
 									<h3 class="panel-title">${memVO.mem_Id}</h3>
 								</div>
 								<div class="panel-body" style="height: 110px">
-									<p style="font-size: 16px;">${memVO.mem_Intro}</p>
+									<p style="font-size: 12px;">${memVO.mem_Intro}</p>
 									<form
 										action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp"
 										method="post">
