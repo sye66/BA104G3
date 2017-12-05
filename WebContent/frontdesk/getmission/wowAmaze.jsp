@@ -92,13 +92,14 @@
                
                 $('.slickButton2').css('display','inline-block').fadeOut(500);
                 
+   					i++;
+   					console.log(i);
                 $.ajax({
    				 type: "POST",
    				 url: "<%=request.getContextPath()%>/getmission/WowAmaze.do",
    				 data: {"action" :"wow","plusone":1},
    				 dataType: "json",
    				 success: function (data){
-   					
    			     },
 //    	            error: function(){alert("AJAX-class發生錯誤囉!")}
    	        });
