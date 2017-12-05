@@ -52,7 +52,35 @@ try{
 	        height: 300px;
 	        width: 100%;
 	       }
-	    </style>
+</style>
+		<script type="text/javascript">
+		$(function() {
+
+		    function format_float(num, pos) {
+		        var size = Math.pow(10, pos);
+		        return Math.round(num * size) / size;
+		    }
+
+		    function preview(input) {
+
+		        if (input.files && input.files[0]) {
+		            var reader = new FileReader();
+
+		            reader.onload = function(e) {
+		                $('.preview').attr('src', e.target.result);
+		                var KB = format_float(e.total / 1024, 2);
+		                $('.size').text("檔案大小：" + KB + " KB");
+		            }
+
+		            reader.readAsDataURL(input.files[0]);
+		        }
+		    }
+
+		    $("body").on("change", "#mission_images", function() {
+		        preview(this);
+		    })
+		})
+		</script>
 
 	</head>
 	<body>
@@ -179,13 +207,16 @@ try{
 						 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsHkChmufu1IrpSdVxTk0VC3_6cvjQeIo&callback=initMap"></script>
 						
 						<%-- 任務圖片 --%>
-							<div class="form-group">
+							<div class="form-group" style="text-align: center;">
 								<label for="mission_images">上傳圖片</label>
-								<input type="file" name="mission_images" id="mission_images" placeholder="上傳圖片" class="form-control">
+								<input type="file" name="mission_images" id="mission_images" class="form-control">
+								<br>
+								<img class="preview" style="max-width: 300px; max-height: 300px;">
 							</div>
+						
 						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
 								<input type="hidden" name="action" value="issue_Normal_Mission">
-								<input type="submit" name="發出任務" class="btn btn-primary">
+								<input type="submit" value="發出任務" class="btn btn-primary btn-lg">
 						</div>
 					</div>
 				</form>
