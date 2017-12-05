@@ -37,10 +37,12 @@
     <br>
     <br>
     <br>
+    <br>
+    <br>
     <br><br>
     <div class="panel panel-info">
         <div class="panel-heading">
-            <h3 class="panel-title">任務完成小面板兒</h3>
+            <h3 class="panel-title">發案人任務面板</h3>
         </div>
         <div class="panel-body">
             <c:if test="${not empty errorMsgs}">
@@ -48,6 +50,13 @@
             </c:if>
         </div>
         <table class="table">
+        			<tr>
+        				<th>任務編號</th>
+        				<th>任務名稱</th>
+        				<th>任務描述</th>
+        				<th>接案人ID</th>
+        				<th></th>
+        			</tr>
             <c:forEach var="issuerMission" items="${getMissionSvc.findIssuerCase(memVO.mem_No)}" varStatus="m" step="1">
                 <c:if test="${issuerMission.mission_State == 3||issuerMission.mission_State == 4 }">
                     <tr>

@@ -87,6 +87,8 @@
 	<br>
 	<br>
 	<br>
+	<br>
+	<br>
 	<%-- 第一層 - 任務顯示面板 --%>
 	<div class="container-fluid">
     <div class="container">
@@ -208,7 +210,7 @@
 				        
 				        var map = new google.maps.Map(document.getElementById('map'), {
 				            center: { lat: -34.397, lng: 150.644 },
-				            zoom: 2
+				            zoom: 15
 				        });
 
 				        // Try HTML5 geolocation.
