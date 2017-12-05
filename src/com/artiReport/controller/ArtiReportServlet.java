@@ -367,6 +367,7 @@ public class ArtiReportServlet extends HttpServlet {
 			}
 		}
 		
+		
 		/******[ 更新 ]******/
 		if("Report_Reply".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
