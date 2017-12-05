@@ -59,14 +59,6 @@ public class DisputeCaseServlet extends HttpServlet {
 		DisputeCaseService disputeCaseService = new DisputeCaseService();
 		
 		/**
-		 * ajax test
-		 */
-		if ("ajax_test".equals(action)) {
-			String dispute_Reply = request.getParameter("dispute_Reply");
-			System.out.println(dispute_Reply);
-		}
-		
-		/**
 		 * @author
 		 * @hidden search_Dispute_Case
 		 * 查詢爭議案件

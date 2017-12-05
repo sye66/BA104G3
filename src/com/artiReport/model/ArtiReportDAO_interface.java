@@ -12,6 +12,7 @@ public interface ArtiReportDAO_interface {
 	public Set<ArtiReportVO> getAllReport();
 	public Set<ArtiReportVO> findReportByArtiNo(String arti_No);
 	public Set<ArtiReportVO> findReportByMemNo(String mem_No);
+	public Set<ArtiReportVO> findReportByStatus();
 	
 
 }
