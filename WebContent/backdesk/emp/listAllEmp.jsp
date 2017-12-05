@@ -17,73 +17,34 @@
 <title>所有員工資料 - listAllEmp.jsp</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-<style>
-   table#table-1 {
-    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
-    border-radius: 20px;
-    text-align: center;
-    width: 80%;
-    height: 60px;
-    padding-top: 30px;
-    color: #4cae4c;
-    margin : 20px;
-    margin-left : 20px;
-  }
-  
-  h3{
-    width: 80%;
-    height: 25px;  
-    margin : 20px;
-  }
-  
-  body{margin:40px;}
-</style>
 
 <style>
   table {
-	width: 800px;
+	width: 98%;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
+	
   }
-  table, th, td {
-    border: 1px solid #CCCCFF;
-  }
-  th, td {
-    padding: 5px;
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
     text-align: center;
-  }
+     font-size:20px;
+  } 
 </style>
+
 
 </head>
 <body bgcolor='white'>
  <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<br>
-		<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">所有員工查詢</li>
-  		</ol>
-	</nav>
-	</div>
 
 
-<table id="table-1">
-	<tr><td>
-		 <h3>所有員工資料</h3>
-		 
-	</td></tr>
-</table>
-<br>
-	<br>
-
-<div align="center">
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12">
+			<c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
@@ -133,6 +94,8 @@
 	</c:forEach>
 </table>
 <%@ include file="pages/page2.file" %>
+		</div>
+	</div>
 </div>
 
 
