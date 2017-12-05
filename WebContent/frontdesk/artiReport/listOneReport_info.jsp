@@ -11,7 +11,7 @@
 <jsp:useBean id="artireplySvc" scope="page" class="com.artiReply.model.ArtiReplyService" />
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
-  //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
+    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
     ArtiReportVO artiReportVO = (ArtiReportVO) request.getAttribute("artiReportVO"); 
     ArtiReplyVO artiReplyVO = new ArtiReplyVO();
     
@@ -36,6 +36,7 @@ div {
   word-break:normal;
 }
 
+
   table#table-1 {
 	background-color: #CCCCFF;
     border: 2px solid black;
@@ -58,15 +59,10 @@ div {
 
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 
-<h4></h4>
-<table id="table-1">
-	<tr><td>
-		 <h3>文章資料 - ListOneArtiReport.jsp    ${ arti_No}</h3>
-		 <h4><a href="/BA104G3/frontdesk/artiForm/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
-<hr>
-<hr>
+
+<br><br><br><br><br><br><br><br>
+${artiFormVO}
+${artiFormVO.arti_No}
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">

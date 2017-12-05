@@ -16,6 +16,7 @@
 
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
     ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO");
+    request.setAttribute("artiFormVO",artiFormVO);
 
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
@@ -41,6 +42,7 @@ div {
   word-break:normal;
   style="font-family:Microsoft JhengHei;
 }
+
 
   table#table-1 {
 	background-color: #CCCCFF;
@@ -171,7 +173,7 @@ div {
    </div>
    </div>
 <hr>	
-
+</FORM> 
 <div class="container">
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReply/artiReply.do" >     
 <div class="widget-body">
@@ -222,9 +224,11 @@ div {
 		         <input type="hidden" name="arti_No"  value="${artiFormVO.arti_No}">
 		         <input type="hidden" name="arti_Cls_No"  value="${artiFormVO.arti_Cls_No}">
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
-		         <input type="hidden" name="rep_Re_Desc"  value="<%=artiReportVO.getRep_Re_Desc()%>">
-                 <button class="btn btn-warning" type="submit" name="action" value="insertReport"> 檢舉文章</button>
-		         
+		         <input type="hidden" name="action"  value="insertReport">
+		         <input type="hidden" name="requestURL"  value="<%=request.getServletPath()%>">
+
+                 <button class="btn btn-warning" type="submit" > 檢舉文章</button>
+		         ${memVO.mem_No}1111111111111111
 		        </div>
 		    </div>
                                     
@@ -245,7 +249,7 @@ div {
 </div>
 </FORM>
 <hr>
-</FORM> 
+
 </div>
 	<jsp:include page="/frontdesk/artiReply/listReply_ByArtiNo.jsp" flush="true" />
 

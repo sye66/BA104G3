@@ -30,7 +30,7 @@ public class ArtiReportServlet extends HttpServlet {
 			
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+
 		/******[ 取出ㄧ個展示 ]******/
 		if("getOneReport_For_Display".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
@@ -293,19 +293,21 @@ public class ArtiReportServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
-		
+//		String actions = req.getParameter("actions");
 		if ("insertReport".equals(action)){
-System.out.println("insertReport");	
+	
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs",errorMsgs);
 			String requestURL = req.getParameter("requestURL");
 
-//			try{
+			try{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
 				HttpSession session = req.getSession();
 				
 				String mem_No = req.getParameter("mem_No").trim();
-				if(req.getSession().getAttribute("mem_No")==null){
+				System.out.println(mem_No);
+				if(mem_No==null){
+					System.out.println("111");
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
@@ -313,15 +315,6 @@ System.out.println("insertReport");
 					return;
 				}
 				
-				String user = (String) req.getSession().getAttribute("mem_No");
-
-				if(!user.equals(mem_No)){
-					String contextPath = getServletContext().getContextPath();
-					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
-					failuewView.forward(req, res);
-					return;
-				}
 
 				String arti_No = req.getParameter("arti_No").trim();			
 				String report_Desc = req.getParameter("report_Desc").trim();
@@ -333,11 +326,13 @@ System.out.println("insertReport");
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp report_Time = nowTime;
 
-				String rep_Re_Desc = req.getParameter("rep_Re_Desc");
+				String rep_Re_Desc = "[待處理]";
 				String report_Status = "待處理";
 
+				ArtiFormService artiFormSvc = new ArtiFormService ();
+				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
+				
 				ArtiReportVO artiReportVO = new ArtiReportVO();
-
 				artiReportVO.setMem_No(mem_No);
 				artiReportVO.setArti_No(arti_No);
 				artiReportVO.setReport_Desc (report_Desc );
@@ -357,19 +352,20 @@ System.out.println("insertReport");
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("artiReportVO", artiReportVO);
+				req.setAttribute("artiFormVO",artiFormVO);
+
 				String url = "/frontdesk/artiReport/listOneReport_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add(e.getMessage());
-//System.out.println("Report-server-888");
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(e.getMessage());
+
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				failureView.forward(req, res);
+			}
 		}
-		
 		
 		/******[ 更新 ]******/
 		if("Report_Reply".equals(action)){
@@ -383,14 +379,14 @@ System.out.println("insertReport");
 			String report_No = req.getParameter("report_No");
 			String mem_No = req.getParameter("mem_No");
 			
-//			String emp_No = req.getParameter("emp_No");
-//			if(req.getSession().getAttribute("emp_No")==null){
-//				String contextPath = getServletContext().getContextPath();
-//				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-//				failuewView.forward(req, res);
-//				return;
-//			}
+			String emp_No = req.getParameter("emp_No");
+			if(req.getSession().getAttribute("emp_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
 			
 			String arti_No = req.getParameter("arti_No");
 			String report_Desc = req.getParameter("report_Desc");
