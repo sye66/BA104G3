@@ -94,18 +94,6 @@ String str5 = "AU000005";
 							
   							} %> 
 
-	
-
- 							
-  						<%for(CompVO d: list){ 
-    							if((d.getAuth_No()).contains(str4)){  
-  						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/schedule/Schedule.jsp">
-						<span class="icon icon-settings"></span>獎勵管理</a></li>
- 						<%	}  
-							
-  							} %> 
- 							
 
  						<%for(CompVO e: list){ 
    							if((e.getAuth_No()).contains(str2)){  
