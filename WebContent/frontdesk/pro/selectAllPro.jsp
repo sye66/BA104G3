@@ -216,7 +216,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -299,7 +303,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 																
 															</div>
 														</div>
@@ -401,7 +409,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 												</div>
 											
 
@@ -472,7 +484,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -556,7 +572,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -661,7 +681,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -743,7 +767,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -829,7 +857,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -915,7 +947,11 @@
 																		<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 																	</div>
 																</c:if>
-																
+																<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 															</div>
 														</div>
 													</a>
@@ -1014,7 +1050,11 @@
 															</div>
 														</c:if>
 													</c:forEach>
-											
+													<c:if test="${proVO.pro_Discount==50}">
+																	<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+																		<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+																	</div>
+																</c:if>
 												</div>
 								</div>
 							</c:forEach>

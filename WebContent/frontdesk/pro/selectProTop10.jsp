@@ -98,7 +98,11 @@
 							<img alt="" style="height:40px;width:40px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d003.png">
 						</div>
 					</c:if>
-					
+					<c:if test="${proVO.pro_Discount==50}">
+						<div style="z-index:3;position:absolute;left:100px;  top:-10px;">
+							<img alt="" style="height:50px;width:100px;" src="<%=request.getContextPath()%>/res/images/pro_icons/d005.png">
+						</div>
+					</c:if>
 <%-- 					<%if(count==0){ %> --%>
 <!-- 					<div> -->
 <!-- 						<img alt="" style="height:60px;width:80px;z-index:3;position:absolute;left:50px;  top:-40px;"  -->
@@ -112,7 +116,7 @@
 	   			 		 <fmt:parseNumber var="dsPrice" integerOnly="true" 
                        type="number" value="${balance}" />
 	   			 		 <p class="card-footer proDiscount" style="height:10px ;">原價:${proVO.pro_Price}點</p>
-	   			 		<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;">折扣價:
+	   			 		<span class="card-footer proPrice" style="height:14px;font-family: Microsoft JhengHei;color:red;font-size:14px;">折扣價:
 	   			 			<span style="color:red;font-size:20px;font-family: Microsoft JhengHei;">
 	   			 			<c:out value="${dsPrice}" /></span>點</span>
 	   			 		
