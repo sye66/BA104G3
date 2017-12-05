@@ -56,7 +56,13 @@
             <div class="widget-toolbar">
                 <div class="" style="width:100px;">
                     <div class="" style="">
-                    
+                    <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
+                                                  分類:<font color=red><b>*</b></font>
+		            <select size="1" name="arti_Cls_No">
+			        <c:forEach var="artiClassVO" items="${artiClassSvc.all}">
+				    <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}
+			        </c:forEach>
+			        </select>
                     </div>
                 </div>
              </div>
@@ -91,13 +97,8 @@
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
                              更正標題 : <input type="TEXT" name="arti_Title" size="45"	value="<%=artiFormVO.getArti_Title()%>" />
-                             <jsp:useBean id="artiClassSvc" scope="page" class="com.artiClass.model.ArtiClassService" />
-		                      分類:<font color=red><b>*</b></font>
-		                      <select size="1" name="arti_Cls_No">
-			                  <c:forEach var="artiClassVO" items="${artiClassSvc.all}">
-				              <option value="${artiClassVO.arti_Cls_No}" ${(artiFormVO.arti_Cls_No==artiClassVO.arti_Cls_No)?'selected':'' } >${artiClassVO.arti_Cls_Name}
-			                  </c:forEach>
-			                  </select>
+                             
+
                               </div>
                           </div>
                      
@@ -117,7 +118,7 @@
                                </div>
                                 <div class="widget-toolbar">
                                   <div class="widget-main padding-6">
-                                  <input type="hidden" name="mem_No" value="<%=artiFormVO.getMem_No()%>"><%=artiFormVO.getMem_No()%>
+                                  <input type="hidden" name="mem_No" value="<%=artiFormVO.getMem_No()%>"><%=memVO.getMem_Name()%>
                                   </div>
                                </div>
 
