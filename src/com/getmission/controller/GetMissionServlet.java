@@ -896,13 +896,13 @@ public class GetMissionServlet extends HttpServlet {
 		      
 		    String subject = "任務完成通知";//傳 mail
 		      
-		    String issuer_Name = memVO.getMem_Id();
-		    String takecase_Mem_No = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No()).getMem_Id();
+		    String issuer_Name = memSvc.getOneMem(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No()).getMem_Id();
+		    String takecase_Mem_No = memVO.getMem_Id();
 		    String mission_Name = getMissionSvc.getOneMission(mission_No).getMission_Name();
 		    String messageText = "Hello! " + issuer_Name + " 您所發的任務, ["+mission_Name +"]~ \n" +takecase_Mem_No+
 		    					 " 已經完成囉~請快快去查驗吧~"; 
 		    
-
+		    System.out.println(messageText);
 			GetMissionVO getMissionVO = new GetMissionVO();
 			getMissionVO = getMissionSvc.getOneMission(mission_No);
 			// Send the use back to the form, if there were errors
@@ -915,6 +915,7 @@ public class GetMissionServlet extends HttpServlet {
 
 			/*************************** 2. *****************************************/
 			MailService mailService = new MailService();
+			MissionSocket.pushMissionText(getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No(),"finishwork"); //websocket
 		    mailService.sendMail(to, subject, messageText);
 			req.setAttribute("memVO", memVO);
 			req.setAttribute("getMissionVO", getMissionVO);
@@ -1377,6 +1378,7 @@ public class GetMissionServlet extends HttpServlet {
 					jsonObject = new JSONObject();
 					String mem_No = memVO.getMem_No();
 					System.out.println(mem_No);
+					String mem_Id = memVO.getMem_Id();
 					Double mem_GPS_LAT = memVO.getMem_Gps_Lat();
 					Double mem_GPS_LNG = memVO.getMem_Gps_Lng();
 					Double[] GPS = {mem_GPS_LAT,mem_GPS_LNG};

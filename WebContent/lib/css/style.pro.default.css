@@ -443,35 +443,41 @@ h5 {
 }
 
 .headermenu li a span.icon-flatscreen {
-	background: url(../../res/images/pro_icons/flatscreen.white.png) no-repeat center
+	background: url(../../res/images/pro_icons/gg51.png) no-repeat center
 		center;
+		height:40px;
 }
 
 .headermenu li a span.icon-pencil {
-	background: url(../../res/images/pro_icons/pencil.white.png) no-repeat center
-		center;
+	background: url(../../res/images/pro_icons/gg52.png) no-repeat center center;
+	height:40px;
 }
 
 .headermenu li a span.icon-speech {
-	background: url(../../res/images/pro_icons/speech.white.png) no-repeat center
+	background: url(../../res/images/pro_icons/gg53.png) no-repeat center
 		center;
+		height:40px;
 }
 
 .headermenu li a span.icon-message {
-	background: url(../../res/images/pro_icons/message.white.png) no-repeat center
+	background: url(../../res/images/pro_icons/gg54.png) no-repeat center
 		center;
+		height:40px;
 }
 
 .headermenu li a span.icon-chart {
-	background: url(../../res/images/pro_icons/chart.white.png) no-repeat center center;
+	background: url(../../res/images/pro_icons/gg55.png) no-repeat center center;
+	height:40px;
 }
 
 .headermenu li a span.icon-comment {
-	background: url(../../res/images/pro_icons/comment.png) no-repeat center center;
+	background: url(../../res/images/pro_icons/gg56.png) no-repeat center center;
+	height:40px;
 }
 
 .headermenu li a span.icon-settings {
-	background: url(../../res/images/pro_icons/settings.png) no-repeat center center;
+	background: url(../../res/images/pro_icons/gg57.png) no-repeat center center;
+	height:40px;
 }
 
 

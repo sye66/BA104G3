@@ -64,13 +64,14 @@ String str5 = "AU000005";
 				<!-- 標籤面板：標籤區 -->
 				<div class="header">
 					<ul class="nav nav-tabs headermenu">
-						<li><a
-							href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><span
-								class="icon icon-flatscreen"></span>首頁</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp"><img src="<%=request.getContextPath()%>/res/images/pro_icons/teamwork.png"
+								style="height:80px;"></a></li>
+						
  						<%for(CompVO a: list){ 
     							if((a.getAuth_No()).contains(str1)){  
   						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp"><span class="icon icon-pencil"></span>會員管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/mem/backdeskMemIndex.jsp">
+						<span class="icon icon-pencil"></span>會員管理</a></li>
 						<%	} 
 							
  							} %> 
@@ -78,7 +79,8 @@ String str5 = "AU000005";
   						<%for(CompVO b: list){ 
    							if((b.getAuth_No()).contains(str3)){  
  						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp"><span class="icon icon-pencil"></span>任務管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/missionManage/missionManage.jsp">
+						<span class="icon icon-speech"></span>任務管理</a></li>
  						<%	}  
 							
   							} %> 
@@ -86,15 +88,30 @@ String str5 = "AU000005";
  						<%for(CompVO c: list){ 
    							if((c.getAuth_No()).contains(str4)){  
   						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/artiForm/select_page.jsp"><span class="icon icon-pencil"></span>討論區管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/artiForm/select_page.jsp">
+						<span class="icon icon-message"></span>討論區管理</a></li>
 						<%	}  
 							
   							} %> 
+
 	
+
+ 							
+  						<%for(CompVO d: list){ 
+    							if((d.getAuth_No()).contains(str4)){  
+  						%>  
+						<li><a href="<%=request.getContextPath()%>/backdesk/schedule/Schedule.jsp">
+						<span class="icon icon-settings"></span>獎勵管理</a></li>
+ 						<%	}  
+							
+  							} %> 
+ 							
+
  						<%for(CompVO e: list){ 
    							if((e.getAuth_No()).contains(str2)){  
   						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp"><span class="icon icon-pencil"></span>商城管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/pro/listAllPro.jsp">
+						<span class="icon icon-chart"></span>商城管理</a></li>
 								
   						<%	}  
 							
@@ -103,7 +120,8 @@ String str5 = "AU000005";
  						<%for(CompVO f: list){
    							if((f.getAuth_No()).contains(str5)){  
  						%> 
-						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">
+						<span class="icon icon-comment"></span>員工管理</a></li>
  						<%	}  
 							
   							} %>

@@ -140,7 +140,7 @@ public class MemServlet extends HttpServlet {
 				
 				String to = mem.getMem_Email();
 			      
-			    String subject = "密碼通知";
+			    String subject = "工具人出租驗證碼通知";
 			      
 			    String ch_name = mem.getMem_Id();
 			    Integer passRandom = mem.getMem_Code();

@@ -48,26 +48,11 @@
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
+
 
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<br>
-		<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/pro/proBackIndex.jsp">商城管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">商品查詢</li>
-  		</ol>
-	</nav>
-	</div>
-
-   <tr><td><h2> 工具人 - 討論區檢舉文章管理 : 主頁 </h2><h4>( MVC )</h4></td></tr>
-</table>
-
-<p>This is the Home page for IBM Article Report: Home</p>
 	
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">

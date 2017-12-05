@@ -53,11 +53,6 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
-<table id="table-1">
-   <tr><td><h2> 工具人 - 討論區文章管理 : 主頁</h2><h4>( MVC )</h4></td></tr>
-</table>
-<br>
-<p>This is the Home page for IBM Article: Home</p>
 
 	
 <%-- 錯誤表列 --%>

@@ -548,7 +548,7 @@ public List<MissionVO> getByIssuerMemClosed(String issuer_Mem_No) {
 		
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND mission_State =5 AND mission_State = 6 AND Mission_State =9");
+			pstmt = con.prepareStatement(GET_STMT_BY_ISSUER_MEM+" AND (mission_State =5 OR mission_State = 6 OR Mission_State =9)");
 			pstmt.setString(1, issuer_Mem_No);
 			rs = pstmt.executeQuery();
 			
