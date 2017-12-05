@@ -67,6 +67,8 @@ div {
 </table>
 <hr>
 <hr>
+
+<br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">

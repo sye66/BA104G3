@@ -295,12 +295,12 @@ public class ArtiReportServlet extends HttpServlet {
 		}
 		
 		if ("insertReport".equals(action)){
-System.out.println("insertReport");	
+	
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs",errorMsgs);
 			String requestURL = req.getParameter("requestURL");
 
-//			try{
+			try{
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/	
 				HttpSession session = req.getSession();
 				
@@ -362,12 +362,12 @@ System.out.println("insertReport");
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
-//			} catch (Exception e){
-//				errorMsgs.add(e.getMessage());
-//System.out.println("Report-server-888");
-//				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
-//				failureView.forward(req, res);
-//			}
+			} catch (Exception e){
+				errorMsgs.add(e.getMessage());
+
+				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
+				failureView.forward(req, res);
+			}
 		}
 		
 		
@@ -383,14 +383,14 @@ System.out.println("insertReport");
 			String report_No = req.getParameter("report_No");
 			String mem_No = req.getParameter("mem_No");
 			
-//			String emp_No = req.getParameter("emp_No");
-//			if(req.getSession().getAttribute("emp_No")==null){
-//				String contextPath = getServletContext().getContextPath();
-//				errorMsgs.add("@@ 要麻煩請你先登入喔~");
-//				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
-//				failuewView.forward(req, res);
-//				return;
-//			}
+			String emp_No = req.getParameter("emp_No");
+			if(req.getSession().getAttribute("emp_No")==null){
+				String contextPath = getServletContext().getContextPath();
+				errorMsgs.add("@@ 要麻煩請你先登入喔~");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
+				failuewView.forward(req, res);
+				return;
+			}
 			
 			String arti_No = req.getParameter("arti_No");
 			String report_Desc = req.getParameter("report_Desc");
