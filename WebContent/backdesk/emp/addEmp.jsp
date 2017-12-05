@@ -9,31 +9,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="/BA104G3/lib/css/arti_ref/arti_back_style.css" />
+
 <title>Insert title here</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>員工資料新增 - addEmp.jsp</title>
 
 <style>
-   table#table-1 {
-    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
-    border-radius: 20px;
+ 
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
     text-align: center;
-    width: 80%;
-    height: 60px;
-    padding-top: 30px;
-    color: #4cae4c;
-    margin : 20px;
-    margin-left : 20px;
-  }
-  
-  h3{
-    width: 80%;
-    height: 25px;  
-    margin : 20px;
-  }
-  
-  body{margin:40px;}
+     font-size:20px;
+     
+  } 
+</style>
+
+
+<style type="text/css">
+	#top{margin-top: auto;
+		 margin-left: auto}
 </style>
 
 </head>
@@ -41,29 +35,13 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<br>
-		<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">新增員工</li>
-  		</ol>
-	</nav>
-	</div>
+	
 
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料新增 - addEmp.jsp</h3></td><td>
-		 
-	</td></tr>
-</table>
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12">
 
-
-<h3>資料新增:</h3>
-<br>
-<br>
-<%-- 錯誤表列 --%>
+			<%-- 錯誤表列 --%>
 
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -74,7 +52,7 @@
 	</ul>
 </c:if>
 
-<div align="center">
+
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" name="form1">
 <table>
 	<tr>
@@ -114,7 +92,10 @@
 
 </FORM>
 <button type="button" id="newEmp">神</button>
+		</div>
+	</div>
 </div>
+
 </body>
 
 

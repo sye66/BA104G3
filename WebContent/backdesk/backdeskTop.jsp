@@ -12,7 +12,6 @@ String str2 = "AU000002";
 String str3 = "AU000003";
 String str4 = "AU000004";
 String str5 = "AU000005";
-String str6 = "AU000006";
 	EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 	if(session.getAttribute("empVO")!=null){
 		emp_No = empVO.getEmp_No();
@@ -85,21 +84,13 @@ String str6 = "AU000006";
   							} %> 
  							
  						<%for(CompVO c: list){ 
-   							if((c.getAuth_No()).contains(str5)){  
+   							if((c.getAuth_No()).contains(str4)){  
   						%>  
 						<li><a href="<%=request.getContextPath()%>/backdesk/artiForm/select_page.jsp"><span class="icon icon-pencil"></span>討論區管理</a></li>
 						<%	}  
 							
   							} %> 
- 							
-  						<%for(CompVO d: list){ 
-    							if((d.getAuth_No()).contains(str4)){  
-  						%>  
-						<li><a href="<%=request.getContextPath()%>/backdesk/schedule/Schedule.jsp"><span class="icon icon-pencil"></span>獎勵管理</a></li>
- 						<%	}  
-							
-  							} %> 
- 							
+	
  						<%for(CompVO e: list){ 
    							if((e.getAuth_No()).contains(str2)){  
   						%>  
@@ -110,7 +101,7 @@ String str6 = "AU000006";
   							} %> 
  							 
  						<%for(CompVO f: list){
-   							if((f.getAuth_No()).contains(str6)){  
+   							if((f.getAuth_No()).contains(str5)){  
  						%> 
 						<li><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp"><span class="icon icon-pencil"></span>員工管理</a></li>
  						<%	}  

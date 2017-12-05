@@ -10,72 +10,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-<style>
-  table#table-1 {
-    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.01), 0 12px 15px 0 rgba(0, 0, 0, 0.1), 0 0px 50px 0   #8A5CB8, 0 12px 15px 0   #5C5CB8;
-    border-radius: 20px;
-    text-align: center;
-    width: 80%;
-    height: 60px;
-    padding-top: 30px;
-    color: #4cae4c;
-    margin : 20px;
-    margin-left : 20px;
-  }
-  
-  h3{
-    width: 80%;
-    height: 25px;  
-    margin : 20px;
-  }
-  
-  body{margin:40px;}
-</style>
+
 
 <style>
   table {
-	width: 450px;
+	width: 98%;
 	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
   }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
+  table, th, td ,#bo{
+    border: 1px solid #0044BB;
+    text-align: center;
+     font-size:20px;
+  } 
 </style>
-
 </head>
 <body bgcolor='white'>
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-	<div class="col-xs-12 col-sm-8 col-sm-offset-1">
-		<br>
-		<nav aria-label="breadcrumb" role="navigation">
-  		<ol class="breadcrumb">
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/backdesk.jsp">首頁</a></li>
-    		<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/backdesk/emp/select_page.jsp">員工管理</a></li>
-    		<li class="breadcrumb-item active" aria-current="page">修改資料</li>
-  		</ol>
-	</nav>
-	</div>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>員工資料修改 - update_emp_input.jsp</h3>
-		
-	</td></tr>
-</table>
-<br>
 
-<h3>資料修改:</h3>
-<br>
-<br>
-<div align="center">
-<%-- 錯誤表列 --%>
+
+<div class="container" align="center">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12">
+			<%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
 	<ul>
@@ -120,6 +82,9 @@
 <input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
 <input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>">  <!--只用於:istAllEmp.jsp-->
 <input type="submit" value="送出修改"></FORM>
+
+		</div>
+	</div>
 </div>
 
 </body>
