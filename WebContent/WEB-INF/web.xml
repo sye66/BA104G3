@@ -398,4 +398,12 @@
     <servlet-name>MissionComment</servlet-name>
     <url-pattern>/missioncomment/missioncomment.do</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>WowAmaze</servlet-name>
+    <servlet-class>com.getmission.controller.WowAmaze</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WowAmaze</servlet-name>
+    <url-pattern>/getmission/WowAmaze.do</url-pattern>
+  </servlet-mapping>
 </web-app>

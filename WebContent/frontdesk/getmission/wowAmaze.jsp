@@ -33,7 +33,7 @@
     font-weight: bold;
     padding: 10px;
     border: solid 1px lightgray;
-    background: lightgreen;
+    background: white;
     cursor: pointer;   
     transition: box-shadow 0.5s;
     -webkit-transition: box-shadow 0.5s;
@@ -42,7 +42,20 @@
 .slickButton3:hover {
     box-shadow:25px 25px 50px gray;
 }
-
+.slickButton2 {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: solid 1px black;
+    cursor: pointer;
+    opacity: 0.0;
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+}
+ 
+.slickButton2:hover {
+    opacity: 1;
+}
 </style>
 <body>
     <%@ include file="/lib/publicfile/include/file/navbar.jsp"%>
@@ -55,10 +68,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-    <button class="good">
+    <button class="good" type='button'>
         
     <img src="<%=request.getContextPath()%>/res/images/getmission/good.jpg"  class="slickButton3">    
     </button>                
+                <img src="<%=request.getContextPath()%>/res/images/getmission/plus-one.png"  vspace="100" class="slickButton2">
 
 
                 </div>
@@ -74,10 +88,31 @@
         <script type="text/javascript">
         $(document).ready(function(){    
                 var i =0;
-        $('.good').click(function(){
-                i++;
-				console.log(i);
+        $('.good').mousedown(function(){
+               
+                $('.slickButton2').css('opacity','1');
+                
+                
+				
             });
+        
+        $('.good').mouseup(function(){
+            i++;
+			console.log(i);
+			
+			$.ajax({
+				 type: "POST",
+				 url: "ajaxResponse.do",
+				 data: 1,
+				 dataType: "json",
+				 success: function (data){
+		            $('.slickButton2').css('opacity','0');
+					
+			     },
+	            error: function(){alert("AJAX-class發生錯誤囉!")}
+	        })
+        });
+       
         });
         </script>
 </body>
