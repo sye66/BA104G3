@@ -1065,7 +1065,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務結束時間 - null
 				Date date = new Date(System.currentTimeMillis());
 				// 任務圖片
-				Part pic = req.getPart("mission_Images");
+				Part pic = req.getPart("mission_images");
 
 				/********** 驗證開始 **********/
 				if (mission_Pay != 50.00) {
@@ -1101,11 +1101,14 @@ public class GetMissionServlet extends HttpServlet {
 				/********** 圖片驗證，沒有圖片就回傳NULL **********/
 				byte[] byteArrPic = null;
 				if (pic != null) {
+					System.out.println("pic不為空值，開啟Input Stream");
 					InputStream inputStream = pic.getInputStream();
 					byteArrPic = new byte[inputStream.available()];
 					System.out.println(byteArrPic.length);
 					inputStream.read(byteArrPic);
 					inputStream.close();
+				} else {
+					System.out.println("==============pic為空值，開啟Input Stream==============");
 				}
 
 				/********** 準備寫入與轉向 **********/
@@ -1180,7 +1183,7 @@ public class GetMissionServlet extends HttpServlet {
 				// 任務開始時間 - null
 				// 任務結束時間 - null
 				// 任務圖片
-				Part pic = req.getPart("mission_Images");
+				Part pic = req.getPart("mission_images");
 				
 				/**********驗證開始**********/
 				if (mission_Pay < 100.00) {
