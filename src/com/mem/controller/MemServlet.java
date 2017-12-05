@@ -136,7 +136,7 @@ if ("forgetPw".equals(action)){
 				} else if (!mem_Email.trim().matches(mem_Email_reg)){
 				errorMsgs.add("請正確輸入E-mail");
 				} else if (!(mem_Email.equals(email))){
-					errorMsgs.add("查無此E-mail");
+					errorMsgs.add("查無此E-mail"); 
 					
 				}
 				
