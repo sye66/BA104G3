@@ -65,33 +65,34 @@ public class WowAmaze extends HttpServlet {
 			GetMissionService getMissionSvc = new GetMissionService();
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
 			GetMissionVO getMissionVO  = new GetMissionVO();
+			getMissionVO= getMissionSvc.getOneMission(mission_No);
 			MemService memSvc = new MemService();
 			if(clickNum>=1000){
-			if(getMissionVO.getMission_State()!=5&&getMissionVO.getMission_State()!=6&&getMissionVO.getMission_State()!=9){
-				getMissionSvc.updateOneMissionStatus(mission_No, 5);
-				getMissionVO= getMissionSvc.getOneMission(mission_No);
-				List<CaseCandidateVO> lists = caseCandidateSvc.getCandidate(mission_No);
-				int mempoint = memSvc.getOneMem(memVO.getMem_No()).getMem_Point();
-				int pay = getMissionVO.getMission_Pay().intValue()+mempoint;
-				System.out.println("pay"+pay);
-				for(CaseCandidateVO list :lists){
-					memSvc.updateMemPoint(list.getCandidate_Mem_No(), pay);
-					MissionSocket.pushMissionText(list.getCandidate_Mem_No(),"missionOk"); //websocket
+				if(getMissionVO.getMission_State()!=5&&getMissionVO.getMission_State()!=6&&getMissionVO.getMission_State()!=9){
+					getMissionSvc.updateOneMissionStatus(mission_No, 5);
+					List<CaseCandidateVO> lists = caseCandidateSvc.getCandidate(mission_No);
+					int mempoint = memSvc.getOneMem(memVO.getMem_No()).getMem_Point();
+					int pay = getMissionVO.getMission_Pay().intValue()+mempoint;
+					System.out.println("pay"+pay);
+					for(CaseCandidateVO list :lists){
+						memSvc.updateMemPoint(list.getCandidate_Mem_No(), pay);
+						MissionSocket.pushMissionText(list.getCandidate_Mem_No(),"missionOk"); //websocket
+					}
+					req.setAttribute("getMissionVO", getMissionVO);
+					String url = "/frontdesk/getmission/getMission.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+					successView.forward(req, res);
+					
+				}else{
+					errorMsgs.add("此任務已經結束囉");
+					System.out.println("此任務已經結束囉");
+					String url = "/frontdesk/getmission/getMissionlogin.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+					successView.forward(req, res);
 				}
-				req.setAttribute("getMissionVO", getMissionVO);
-				String url = "/frontdesk/getmission/getMission.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
-				successView.forward(req, res);
-				
 			}else{
-				errorMsgs.add("此任務已經結束囉");
-				System.out.println("此任務已經結束囉");
-				String url = "/frontdesk/getmission/getMissionlogin.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
-				successView.forward(req, res);
-			}
-			}else{
-				clickNum = clickNum + plusone;
+					clickNum = clickNum + plusone;
+					System.out.println("afterclickNum: "+clickNum);
 			}
 			
 			if (!errorMsgs.isEmpty()) {
