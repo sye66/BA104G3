@@ -1,41 +1,43 @@
 package com.getmission.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class WowAmaze
- */
-@WebServlet("/WowAmaze")
-public class WowAmaze extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WowAmaze() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import org.json.JSONObject;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+public class WowAmaze extends HttpServlet {
+	
+   
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		doPost(req, res);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
+		res.setContentType("");
+		String action = req.getParameter("action");
+		PrintWriter out = res.getWriter();
+		JSONObject obj = new JSONObject();
+		int clickNum = 0;
+		if("wow".equals(action)){
+			Integer plusone = new Integer(req.getParameter("plusone"));
+			System.out.println(plusone);
+			clickNum = clickNum + plusone;
+			
+			if(clickNum>=1000){
+				
+			}
+			
+		}
 	}
 
 }

@@ -48,9 +48,9 @@
     padding: 10px;
     border: solid 1px black;
     cursor: pointer;
-    opacity: 0.0;
-    transition: opacity 0.5s;
-    -webkit-transition: opacity 0.5s;
+    display:none;
+/*     transition: opacity 0.5s; */
+/*     -webkit-transition: opacity 0.5s; */
 }
  
 .slickButton2:hover {
@@ -88,30 +88,22 @@
         <script type="text/javascript">
         $(document).ready(function(){    
                 var i =0;
-        $('.good').mousedown(function(){
+        $('.good').click(function(){
                
-                $('.slickButton2').css('opacity','1');
+                $('.slickButton2').css('display','inline-block').fadeOut(500);
                 
-                
+                $.ajax({
+   				 type: "POST",
+   				 url: "<%=request.getContextPath()%>/getmission/WowAmaze.do",
+   				 data: {"action" :"wow","plusone":1},
+   				 dataType: "json",
+   				 success: function (data){
+   					
+   			     },
+//    	            error: function(){alert("AJAX-class發生錯誤囉!")}
+   	        });
 				
             });
-        
-        $('.good').mouseup(function(){
-            i++;
-			console.log(i);
-			
-			$.ajax({
-				 type: "POST",
-				 url: "ajaxResponse.do",
-				 data: 1,
-				 dataType: "json",
-				 success: function (data){
-		            $('.slickButton2').css('opacity','0');
-					
-			     },
-	            error: function(){alert("AJAX-class發生錯誤囉!")}
-	        })
-        });
        
         });
         </script>
