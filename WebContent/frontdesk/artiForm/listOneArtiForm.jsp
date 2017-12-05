@@ -226,9 +226,7 @@ div {
 		         <input type="hidden" name="mem_No"  value="${memVO.mem_No}">
 		         <input type="hidden" name="action"  value="insertReport">
 		         <input type="hidden" name="requestURL"  value="<%=request.getServletPath()%>">
-
                  <button class="btn btn-warning" type="submit" > 檢舉文章</button>
-		         ${memVO.mem_No}1111111111111111
 		        </div>
 		    </div>
                                     
