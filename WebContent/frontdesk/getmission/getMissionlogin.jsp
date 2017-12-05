@@ -179,7 +179,6 @@
 							class="img-responsive pic center">
 							</c:if>
 						<div class="user text-center">
-							<p>USER PICTURE</p>
 						</div>
 					<!-- </div> -->
 

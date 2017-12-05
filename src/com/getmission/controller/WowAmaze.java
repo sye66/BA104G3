@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.casecandidate.model.*;
+import com.getmission.model.*;
+import com.mem.model.*;
+
 
 public class WowAmaze extends HttpServlet {
 	
@@ -32,7 +36,9 @@ public class WowAmaze extends HttpServlet {
 			Integer plusone = new Integer(req.getParameter("plusone"));
 			System.out.println(plusone);
 			clickNum = clickNum + plusone;
-			
+			MemVO memVO = new MemVO();
+			GetMissionService getMissionSvc = new GetMissionService();
+			CaseCandidateService caseCandidateService = new CaseCandidateService();
 			if(clickNum>=1000){
 				
 			}
