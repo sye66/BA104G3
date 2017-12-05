@@ -124,7 +124,7 @@
 <table>
 	
 	<tr>
-		<td ><a href="<%=request.getContextPath()%>/frontdesk/getmission/getMission.jsp" style="color:000;">
+		<td ><a href="<%=request.getContextPath()%>/frontdesk/getmission/getMissionlogin.jsp" style="color:000;">
 			<button type="button" class="btn btn-success" 
 			style="width:200px;height:50px;font-size:26px;color:000;">
 			去接任務</button></a></td>
