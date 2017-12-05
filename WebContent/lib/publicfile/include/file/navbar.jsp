@@ -91,9 +91,16 @@
               </c:if>
               <i class="glyphicon glyphicon-screenshot"></i> 接案區　</a></h3>
             </li>
+            	<c:if test="${memVO.mem_State!=9}">
             <li class="nav-item">	
               <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/artiForm/listAllArtiForm.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
             </li>
+            	</c:if>
+            	<c:if test="${memVO.mem_State==9}">
+            <li class="nav-item">	
+              <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/lib/publicfile/include/file/index.jsp"><i class="glyphicon glyphicon-list-alt"></i> 討論區　</a></h3>
+            </li>
+            	</c:if>
             <li class="nav-item">
               <h3 style="font-size:22px"><a class="nav-link js-scroll-trigger" href="<%=request.getContextPath()%>/frontdesk/pro/showProIndex.jsp"><i class="glyphicon glyphicon-shopping-cart"></i> 積分商城　</a></h3>
             </li>

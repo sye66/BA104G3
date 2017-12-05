@@ -8,11 +8,7 @@
 
 <%
     MemVO memVO = (MemVO) session.getAttribute("memVO");
-	if(memVO.getMem_State()==9){
-			RequestDispatcher notLogin = request.getRequestDispatcher("/lib/publicfile/include/file/index.jsp");
-			notLogin.forward(request, response);
-			return;
-	}
+	
 
     ArtiFormVO artiFormVO = new ArtiFormVO();
     session.setAttribute("artiFormVO",artiFormVO);
