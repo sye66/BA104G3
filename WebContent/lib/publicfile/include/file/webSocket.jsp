@@ -20,10 +20,10 @@
 <% 
    MemVO memVO = (MemVO)request.getSession().getAttribute("memVO"); 
    String takecase_Mem_No = request.getParameter("takecase_Mem_No");
-   String issuer_Mem_No = request.getParameter("issuer_Mem_No");
+//    String issuer_Mem_No = request.getParameter("issuer_Mem_No");
    String mission_No = request.getParameter("mission_No");
    MemVO memVO2 =MemSvc.getOneMem(takecase_Mem_No);
-   MemVO memVO3 =MemSvc.getOneMem(issuer_Mem_No);
+//    MemVO memVO3 =MemSvc.getOneMem(issuer_Mem_No);
    
 
    CaseCandidateVO caseCandidateVO = new CaseCandidateVO();
@@ -162,9 +162,9 @@ div .left {
 		
 		<div id="myPanel" style="overflow-y:auto ; max-height:380px"></div>
 
-		<div id="fix_bottom" style="height : 50px ; width:650px; background-color:#fff;"></div>
+		<div id="fix_bottom" style="height :width:650px; background-color:#fff;"></div>
         <div id="type_in">
-        	<div class="panel input-area" style="height : 50px ; width:700px; background-color:#18bc9c;">
+        	<div class="panel1 input-area" style="width:700px; background-color:#18bc9c;">
 	        	<hr style="width:250%">
 	            <input value="${memVO.mem_Id}" readonly id="userName" class="text-field" type="text"/>		
 	            <input id="message"  class="text-field" type="text" placeholder="訊息" onkeydown="if (event.keyCode == 13) sendMessage();"/>
@@ -215,10 +215,10 @@ div .left {
     
 <script>
     
-   //把EL跟JSP的內容存成變數,方便跟JS溝通
-   var message="";
-   var userName
-   var jsonObj
+//把EL跟JSP的內容存成變數,方便跟JS溝通
+var message="";
+var userName
+var jsonObj
 var url="";
 var missionNo = '${caseCandidateVO.mission_No}';
 var targetMemNo = '${caseCandidateVO.candidate_Mem_No}';
@@ -226,15 +226,15 @@ var memno = '${memVO.mem_No}';
 var context = '<%=request.getContextPath() %>';
 var memname = "${memVO.mem_Id}";
 var targetMemName ='<%=memVO2.getMem_Id()%>';
-var issuer_Mem_No ='<%=memVO3.getMem_Id()%>';
+<%-- var issuer_Mem_No ='<%=memVO3.getMem_Id()%>'; --%>
 alert("missionNo + targetMemNo" +targetMemNo+missionNo);
-   
+
 var MyPoint = "/MyEchoServer/"+'<%=memVO.getMem_No()%>'+"/"+missionNo;		// 對照server 哪個Server / 使用者編號 / 房號
 var host = window.location.host; 
 var path = window.location.pathname;
 var webCtx = path.substring(0, path.indexOf('/', 1));
 var endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-   console.log("endPointURL +" +endPointURL);
+console.log("endPointURL +" +endPointURL);
 var statusOutput = document.getElementById("statusOutput");
 var webSocket;
 	
@@ -309,7 +309,7 @@ console.log(123);
 		
 		 userName = inputUserName.value.trim();
 	    console.log(userName);
-	    console.log("issuer_Mem_No + " +issuer_Mem_No);
+// 	    console.log("issuer_Mem_No + " +issuer_Mem_No);
 	    console.log("Receiver_Mem_Id + " + Receiver_Mem_Id);
 	    console.log("memname +" + memname);
 	    console.log("Sender_Mem_Id +" + Sender_Mem_Id);
@@ -318,7 +318,7 @@ console.log(123);
 		        
 	    if(<%=list.getChat_Content().length() %> >50){	        
 	    	if(memname === Sender_Mem_Id){
-	      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom">'+<c:if test="<%=list.getChat_Content().length()>50%>">'<span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="' </c:if> +Chat_Content+ <c:if test="<%=list.getChat_Content().length()>50%>"> '">'</c:if> +'<br>'+Sender_Mem_Id+'<br>'+Chat_Datetime+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
+	      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><br>'+Sender_Mem_Id+'<br></span><span>  '+<c:if test="<%=list.getChat_Content().length()>50%>">'<span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="' </c:if> +Chat_Content+ <c:if test="<%=list.getChat_Content().length()>50%>"> '">'</c:if> +'：</span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"><br>'+Chat_Datetime+'</div>');
 				console.log("1111111userName +"+ userName);
 	    	}else{
 	      		$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Receiver_Mem_Id+'<br>'+Chat_Datetime+'<img style="width: 200px; height: 200px;" src="'+Chat_Content+'"></span><span>  </span></div>');
@@ -327,10 +327,10 @@ console.log(123);
 	    }else{
 	    	
 	    	if(memname === Sender_Mem_Id){
-	       	$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><br>'+Chat_Content+'<br>'+Sender_Mem_Id+'<br>'+Chat_Datetime+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"></div>');
+	       	$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+Sender_Mem_Id+'<br></span><span>  '+Chat_Content+'：</span><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"><br>'+Chat_Datetime+'</div>');
 			console.log("11333333333333333311111userName +"+ userName);
 			}else{
-	       	$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Receiver_Mem_Id+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
+	       	$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Receiver_Mem_Id+':'+Chat_Content+'<br>'+Chat_Datetime+'</span><span>  </span></div>');
 	    	console.log("1111444444444444444444111userName +"+ userName);
 	       }
 	    }	
@@ -386,7 +386,7 @@ console.log(123);
 		      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom">'+<c:if test="<%=list1.getChat_Content().length()>50%>">'<span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="' </c:if> +Chat_Content+ <c:if test="<%=list1.getChat_Content().length()>50%>"> '">'</c:if> +'<br>'+Sender_Mem_Id+'<br>'+Chat_Datetime+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
 					console.log("11155555555555555551111userName +"+ userName);
 		    	}else{
-		      		$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Sender_Mem_Id+'<br>'+Chat_Datetime+'<img style="width: 200px; height: 200px;" src="'+Chat_Content+'"></span><span>  </span></div>');
+		      		$('#myPanel').append('<div class="left speech leftd">'+Sender_Mem_Id+'<br><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'">：<span style="word-break: break-all; width: 200px; height: 50px;"><img style="width: 200px; height: 200px;" src="'+Chat_Content+'"></span><span><br>'+Chat_Datetime+'  </span></div>');
 		      		console.log("1116666666666666661111userName +"+ userName);
 		    	}
 		    }else{
@@ -395,7 +395,7 @@ console.log(123);
 		       	$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><br>'+Chat_Content+'<br>'+Receiver_Mem_Id+'<br>'+Chat_Datetime+':'+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"></div>');
 				console.log("1177777777777777771111userName +"+ userName);
 				}else{
-		       	$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+Sender_Mem_Id+':'+Chat_Content+':<br>'+Chat_Datetime+':</span><span>  </span></div>');
+		       	$('#myPanel').append('<div class="left speech leftd">'+Sender_Mem_Id+'<br><img src="'+context+'/mem/memShowImage.do?mem_No='+Sender_Mem_No+'"><span style="word-break: break-all; width: 200px; height: 50px;">：'+Chat_Content+'<br>'+Chat_Datetime+'</span><span>  </span></div>');
 		    	console.log("11188888888888111userName +"+ userName);
 		       }
 		    }	
@@ -441,17 +441,20 @@ console.log(123);
 		        	
 	    if(url !=null){	        
 	    	if(memno === Sender_Mem_No){
-	      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'">'+memname+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
-				console.log("1111111userName +"+ userName);
-				console.log("Date：" + Date);  
+	      		$('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom">'+memname+'<br><span style="word-break: break-all;"><img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span>：<img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"><br>'+nowdate+'</div>');
+				console.log("1111111userName +" + userName );
+// 				console.log("Date：" + Date);  
 			} else {
-	      		$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+nowdate+'<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span></div>');
+	      		$('#myPanel').append('<div class="left speech leftd">'+Sender_Mem_Id+'<br><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">：<img style="width: 200px; height: 200px;" src="'+url+'"></span><span>  </span><br>'+nowdate+'</div>');
+	      		console.log("1222222userName ");
 			}
 	    }else{
 	    	if(memno === Sender_Mem_No){
-	    	    $('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom"><span style="word-break: break-all;">'+memname+'_'+message+'_'+nowdate+'</span><span>  </span><img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"></div>');
+	    	    $('#myPanel').append('<div class="right speech rightd" style="text-align: right; vertical-align: text-bottom">'+memname+'<br><span style="word-break: break-all;">'+message+'</span><span>  </span>：<img src="'+context+'/mem/memShowImage.do?mem_No='+memno+'"><br>'+nowdate+'</div>');
+	    	    console.log("33333333userName ");
 	    	}else{
-	    		$('#myPanel').append('<div class="left speech leftd"><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'"><span style="word-break: break-all; width: 200px; height: 50px;">'+userName+'_'+message+'_'+nowdate+'</span><span>  </span></div>');
+	    		$('#myPanel').append('<div class="left speech leftd">'+userName+'<br><img src="'+context+'/mem/memShowImage.do?mem_No='+targetMemNo+'">：<span style="word-break: break-all; width: 200px; height: 50px;">'+message+'</span><span>  </span><br>'+nowdate+'</div>');
+	    		console.log("4444444userName ");
 	    	}
 	    }
 	
@@ -471,31 +474,31 @@ inputUserName.focus();
 //*****************************把收到的訊息及輸入的訊息印出***************
 	
 function sendMessage() {
-    userName = inputUserName.value.trim();
+ userName = inputUserName.value.trim();
 	
-    console.log("${memVO.mem_Id}" == userName);
-    console.log("senduserName"+ userName);
-   
-    if (userName === ""){
-        alert ("使用者名稱請勿空白!");	        
-        inputUserName.focus();	
+ console.log("${memVO.mem_Id}" == userName);
+ console.log("senduserName"+ userName);
+
+ if (userName === ""){
+     alert ("使用者名稱請勿空白!");	        
+     inputUserName.focus();	
 		return;
-    }
-    
-    if("${memVO.mem_Id}" == userName){
-    	var inputMessage = document.getElementById("message");
-    	var message = inputMessage.value.trim();
-    }
-    if (message === ""){
-        alert ("訊息請勿空白!");
-        inputMessage.focus();	
-    }else{ 
-    	console.log('-------------------------'+userName)
-    	
-    	//**************************************************************************************
-    	
-    	
-    	var chatContent = $('#myPanel').text();
+ }
+ 
+ if("${memVO.mem_Id}" == userName){
+ 	var inputMessage = document.getElementById("message");
+ 	var message = inputMessage.value.trim();
+ }
+ if (message === ""){
+     alert ("訊息請勿空白!");
+     inputMessage.focus();	
+ }else{ 
+ 	console.log('-------------------------'+userName)
+ 	
+ 	//**************************************************************************************
+ 	
+ 	
+ 	var chatContent = $('#myPanel').text();
 			<%
 			crSvc = new ChatRecordService();
 			chatRecordVO = new ChatRecordVO();
@@ -519,21 +522,22 @@ function sendMessage() {
 			    ('00' + date.getUTCSeconds()).slice(-2);
 			console.log(date);
 			var nowdate = date;
-    console.log("chatContent" + chatContent);
-    
-    var queryString= {"action":"insert","chatContent":message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":nowdate,"src":url};
-	
-    console.log("queryString +" +queryString);
-    
-    upload(queryString);
+ console.log("chatContent" + chatContent);
  
-    	//*************************************************************************************
-         jsonObj = {"userName" : userName, "message" : message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":nowdate};
+ var queryString= {"action":"insert","chatContent":message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":nowdate,"src":url};
+	
+ console.log("queryString +" +queryString);
+ 
+ upload(queryString);
+
+ 	//*************************************************************************************
+      jsonObj = {"userName" : userName, "message" : message, "Sender_Mem_No":'<%=memVO.getMem_No()%>' , "Receiver_Mem_No":'<%=takecase_Mem_No%>' , "chat_Datetime":nowdate};
 		webSocket.send(JSON.stringify(jsonObj));
 	
-        inputMessage.value = "";
-        inputMessage.focus();
-    }
+     inputMessage.value = "";
+     $('#mem_Pic').value ="";
+     inputMessage.focus();
+ }
 }
 
 
@@ -548,7 +552,7 @@ $.ajax({
 	 success: function (data){ },
 	 error: function(){alert("網路不穩斷線")}
 	 
-  });
+});
 	
 }
 
@@ -559,9 +563,9 @@ function sendImg(url){
 	
 	userName = inputUserName.value.trim();
 	var inputMessage = document.getElementById("message");
-    var message = inputMessage.value.trim();
-    //*******************************撰寫Timestamp格式
-    var date;
+ var message = inputMessage.value.trim();
+ //*******************************撰寫Timestamp格式
+ var date;
 	date = new Date();
 	date = date.getUTCFullYear() + '-' +
 	    ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
@@ -572,20 +576,21 @@ function sendImg(url){
 	console.log(date);
 	var nowdate = date;
 	//*******************************撰寫Timestamp格式
-    alert(userName);
-     jsonObj ={
-    		"action":"insert",
-    		"chatContent":message, 
-    		"Sender_Mem_No":'<%=memVO.getMem_No()%>' , 
-    		"Receiver_Mem_No":'<%=takecase_Mem_No%>' , 
-    		"chat_Datetime":nowdate,
-    		"src":url
-    		};
-    console.log(jsonObj);
-    upload(jsonObj);
-    webSocket.send(JSON.stringify(jsonObj));
-    inputMessage.value = "";
-       inputMessage.focus();
+ alert(userName);
+  jsonObj ={
+ 		"action":"insert",
+ 		"chatContent":message, 
+ 		"Sender_Mem_No":'<%=memVO.getMem_No()%>' , 
+ 		"Receiver_Mem_No":'<%=takecase_Mem_No%>' , 
+ 		"chat_Datetime":nowdate,
+ 		"src":url
+ 		};
+ console.log(jsonObj);
+ upload(jsonObj);
+ webSocket.send(JSON.stringify(jsonObj));
+ inputMessage.value = "";
+ $('#mem_Pic').value ="";
+    inputMessage.focus();
 }
 
 function disconnect () {
