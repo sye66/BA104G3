@@ -16,6 +16,7 @@ import com.artiForm.model.ArtiFormService;
 import com.artiForm.model.ArtiFormVO;
 import com.artiReply.model.ArtiReplyService;
 import com.artiReply.model.ArtiReplyVO;
+import com.google.gson.Gson;
 
 @MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 5*1024*1024, maxRequestSize = 5*5*1024*1024)
 public class ArtiFormServlet extends HttpServlet {
@@ -384,13 +385,19 @@ public class ArtiFormServlet extends HttpServlet {
 			Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 			Timestamp arti_Time = nowTime;
 
+//			double arti_Pic = Double.parseDouble(req.getParameter("arti_Pic"));
+			
 			byte[] arti_Pic = null;
 			try{
 				Part photo = req.getPart("arti_Pic");
-				InputStream in = photo.getInputStream();
-				arti_Pic = new byte[in.available()];
-				in.read(arti_Pic);
-				in.close();
+				System.out.println(photo.getSize()+"===================");
+				if(photo.getSize()!=0){
+					InputStream in = photo.getInputStream();
+					arti_Pic = new byte[in.available()];
+					in.read(arti_Pic);
+					in.close();
+				}
+				
 			} catch (FileNotFoundException fe){
 				fe.printStackTrace();
 			}
@@ -402,15 +409,17 @@ public class ArtiFormServlet extends HttpServlet {
 				errorMsgs.add(" 狀態請勿空白 ");
 			}
 			
-			ArtiFormVO artiFormVO = new ArtiFormVO();
-			
+			ArtiFormVO artiFormVO = new ArtiFormService().getOneArtiForm(arti_No);
+//			System.out.println("=============="+new Gson().toJson(artiFormVO));
 			artiFormVO.setArti_No(arti_No);
 			artiFormVO.setMem_No(mem_No);
 			artiFormVO.setArti_Title(arti_Title);
 			artiFormVO.setArti_Like(arti_Like);
 			artiFormVO.setDescribe(describe);
 			artiFormVO.setArti_Time(arti_Time);
-			artiFormVO.setArti_Pic(arti_Pic);
+			if(arti_Pic!=null){
+				artiFormVO.setArti_Pic(arti_Pic);
+			}
 			artiFormVO.setArti_Cls_No(arti_Cls_No);
 			artiFormVO.setArti_Status(arti_Status);
 
@@ -424,8 +433,7 @@ public class ArtiFormServlet extends HttpServlet {
 			
 			/***************************2.開始修改資料*****************************************/
 			ArtiFormService artiFormSvc = new ArtiFormService();
-			artiFormVO = artiFormSvc.updateArtiForm(arti_No, mem_No, arti_Title, arti_Like, describe, arti_Time, arti_Pic, arti_Cls_No, arti_Status);
-
+			artiFormVO = artiFormSvc.updateArtiForm(artiFormVO);
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("artiFormVO",artiFormVO);
 			String url = "/frontdesk/artiForm/listOneArtiForm.jsp";

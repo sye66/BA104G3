@@ -107,7 +107,12 @@ public class ArtiFormJDBCDAO implements ArtiFormDAO_interface {
 			pstmt.setInt(3, artiFormVO.getArti_Like());
 			pstmt.setString(4, artiFormVO.getDescribe());
 			pstmt.setTimestamp(5, artiFormVO.getArti_Time());
-			pstmt.setBytes(6, artiFormVO.getArti_Pic());
+			
+			if(artiFormVO.getArti_Pic()!=null){
+				pstmt.setBytes(6, artiFormVO.getArti_Pic());
+System.out.print("update-JDBC-111");
+			}
+System.out.print("update-JDBC-111");
 			pstmt.setInt(7, artiFormVO.getArti_Cls_No());
 			pstmt.setString(8, artiFormVO.getArti_Status());
 			pstmt.setString(9, artiFormVO.getArti_No());

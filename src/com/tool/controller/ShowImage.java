@@ -88,6 +88,34 @@ public class ShowImage extends HttpServlet {
 			}
 		}
 		
+		if("arti_Pic_update".equals(action)){
+			String arti_No = req.getParameter("arti_No");
+			ArtiFormService artiFormSvc = new ArtiFormService();
+			
+			try{
+
+				ArtiFormVO artiFormVO =  artiFormSvc.getOneArtiForm(arti_No);
+				InputStream in = new ByteArrayInputStream(artiFormVO.getArti_Pic());
+				byte[] buffer = new byte[in.available()];
+				int len = 0;
+				
+				try{
+					while((len=in.read(buffer))!=-1){
+						out.write(buffer,0,len);
+						out.close();
+					}
+				} catch(IOException ie){
+					ie.printStackTrace();
+				}
+			} catch (Exception e){
+				FileInputStream in = new FileInputStream(getServletContext().getRealPath("/res/images/arti_ref/XXX.jpg"));
+				byte [] arti_Pic = new byte[in.available()];
+				in.read(arti_Pic);
+				out.write(arti_Pic);
+				in.close();
+			}
+		}
+		
 		if("mem_Pic".equals(action)){
 			String mem_No = req.getParameter("mem_No");
 			MemService memSvc = new MemService();

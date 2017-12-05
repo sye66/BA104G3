@@ -55,6 +55,16 @@ public class ArtiFormService {
 		
 	}
 	
+	public ArtiFormVO updateArtiForm(ArtiFormVO artiFormVO ){
+		
+		dao.updateArti(artiFormVO);
+		
+		return artiFormVO;
+		
+	}
+	
+	
+	
 	public void deleteArtiForm (String arti_No){
 		dao.deleteArti(arti_No);
 	}

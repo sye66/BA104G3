@@ -105,7 +105,7 @@
                          <div class="widget-toolbar">
                              <div class="widget-main padding-6">
                              文章附圖:<br/>
-                             <img id="theImage" src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic&arti_No=${artiFormVO.arti_No}"
+                             <img id="theImage" src="<%=request.getContextPath()%>/tool/showimage.do?action=arti_Pic_update&arti_No=${artiFormVO.arti_No}"
 	                     style="height:111px;width:120px;"/> <br>
 		<input type="file" name="arti_Pic" size="45" value="<%=artiFormVO.getArti_Pic()%>"  id="theBinaryFile" onchange="onLoadBinaryFile()"/>
                               </div>
