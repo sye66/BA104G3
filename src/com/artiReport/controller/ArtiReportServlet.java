@@ -353,7 +353,7 @@ public class ArtiReportServlet extends HttpServlet {
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("artiReportVO", artiReportVO);
 				req.setAttribute("artiFormVO",artiFormVO);
-System.out.println(artiFormVO.getArti_Title());
+
 				String url = "/frontdesk/artiReport/listOneReport_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -366,7 +366,6 @@ System.out.println(artiFormVO.getArti_Title());
 				failureView.forward(req, res);
 			}
 		}
-		
 		
 		/******[ 更新 ]******/
 		if("Report_Reply".equals(action)){
