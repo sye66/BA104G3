@@ -189,10 +189,11 @@ public class EmpServlet extends HttpServlet {
 	req.setAttribute("empVO", empVO);
 	
                 String url = requestURL;
-                System.out.println(url);
+System.out.println(url);
                 if(url.equals(null)){
                 	System.out.println("11111111111111111111111");
                 }
+                
 				RequestDispatcher successView = req.getRequestDispatcher(url);   
 				successView.forward(req, res);
 
