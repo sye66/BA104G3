@@ -380,7 +380,7 @@ public class ArtiReportServlet extends HttpServlet {
 			String mem_No = req.getParameter("mem_No");
 			
 			String emp_No = req.getParameter("emp_No");
-			if(req.getSession().getAttribute("emp_No")==null){
+			if(emp_No==null){
 				String contextPath = getServletContext().getContextPath();
 				errorMsgs.add("@@ 要麻煩請你先登入喔~");
 				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");
@@ -555,7 +555,7 @@ public class ArtiReportServlet extends HttpServlet {
 				String report_No = req.getParameter("report_No");
 				
 				String emp_No = req.getParameter("emp_No");
-				if(req.getSession().getAttribute("emp_No")==null){
+				if(emp_No==null){
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiForm/ArtiForm_back_error_log.jsp");

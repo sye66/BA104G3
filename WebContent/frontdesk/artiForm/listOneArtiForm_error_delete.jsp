@@ -11,13 +11,13 @@
 <%-- 取出 Controller ArtiFormServlet.java已存入request的ArtiFormVO物件--%>
 <%
   //ArtiFormServlet.java(Concroller), 存入req的ArtiFormVO物件
-    ArtiFormVO artiFormVO = (ArtiFormVO) request.getAttribute("artiFormVO"); 
-
+  
     ArtiReplyVO artiReplyVO =new ArtiReplyVO();
     ArtiReportVO artiReportVO = new ArtiReportVO();
     
 	String arti_No = (String) session.getAttribute("arti_No");
 	String mem_No = (String) session.getAttribute("mem_No");
+    ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
 %>
 <%-- 取出 對應的ArtiClassVO物件--%>
 <html>
