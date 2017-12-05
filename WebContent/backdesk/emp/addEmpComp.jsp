@@ -31,6 +31,10 @@
 <body bgcolor='white'>
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
+	
+	<br>
+<br>
+<br>
 
 <div class="container" align="center">
 	<div class="row">
@@ -72,7 +76,7 @@
      </table>
        
 
-<input type="submit" value="送出">
+<input class="btn btn-primary" type="submit" value="送出">
 <input type="hidden" name="action" value="insert">
 </FORM>
 		</div>

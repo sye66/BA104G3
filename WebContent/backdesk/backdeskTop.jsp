@@ -52,7 +52,7 @@ String str5 = "AU000005";
 			<div class="col-xs-12 col-sm-1" id="name1">${empVO.emp_Name} 你好</div>
 			<div class="col-xs-12 col-sm-1" id="name2">
 				<br>
-				 <button type="submit" name="action" value="logout">登出</button></div>
+				 <button class="btn btn-primary" type="submit" name="action" value="logout">登出</button></div>
 				</form>
 				
 			

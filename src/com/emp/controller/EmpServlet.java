@@ -118,7 +118,7 @@ public class EmpServlet extends HttpServlet {
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
 				req.setAttribute("empVO", empVO); 
-System.out.println("----------------------------------------");
+
 				String url = "/backdesk/emp/update_emp_input.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
@@ -139,15 +139,15 @@ System.out.println("----------------------------------------");
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
-System.out.println("55555555555555555555555555");
+
 			String requestURL = req.getParameter("requestURL"); 
 		
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
 				String emp_No = new String(req.getParameter("emp_No").trim());
-System.out.println(emp_No);
+
 				String emp_Name = req.getParameter("emp_Name").trim();
-System.out.println(emp_Name);
+
 //				String emp_Pwd = req.getParameter("emp_Pwd").trim();				
 				String emp_Mail = req.getParameter("emp_Mail").trim();
 				String emp_Job = req.getParameter("emp_Job").trim();
@@ -164,7 +164,7 @@ System.out.println(emp_Name);
 				empVO.setEmp_Job(emp_Job);
 				empVO.setEmp_Phone(emp_Phone);
 				empVO.setEmp_State(emp_State);
-System.out.println(emp_Phone);
+
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -182,13 +182,17 @@ System.out.println(emp_Phone);
 				
 				EmpService empSvc = new EmpService();
 				empVO = empSvc.updateEmp(emp_No, emp_Name, emp_Mail, emp_Job, emp_Phone,emp_State);
-	System.out.println("*****"+empVO.getEmp_Name());			
+			
 	/***************************3.修改完成,準備轉交(Send the Success view)*************/					
 				
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 	req.setAttribute("empVO", empVO);
 	
                 String url = requestURL;
+                System.out.println(url);
+                if(url.equals(null)){
+                	System.out.println("11111111111111111111111");
+                }
 				RequestDispatcher successView = req.getRequestDispatcher(url);   
 				successView.forward(req, res);
 
@@ -202,7 +206,7 @@ System.out.println(emp_Phone);
 		}
 
         if ("insert".equals(action)) {  
-System.out.println("11111111111");
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.

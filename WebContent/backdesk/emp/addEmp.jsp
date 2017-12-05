@@ -16,7 +16,7 @@
 
 <style>
  
-  table, th, td ,#bo{
+  table, th, td{
     border: 1px solid #0044BB;
     text-align: center;
      font-size:20px;
@@ -36,7 +36,9 @@
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
 	
-
+<br>
+<br>
+<br>
 <div class="container" align="center">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12">
@@ -88,7 +90,7 @@
 <br>
 
 <input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增">
+<input class="btn btn-primary" type="submit" value="送出新增">
 
 </FORM>
 <button type="button" id="newEmp">神</button>

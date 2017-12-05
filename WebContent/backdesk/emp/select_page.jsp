@@ -7,14 +7,8 @@
 <title>BA104G3:Emp</title>
 
 <style>
-  table {
-	width: 98%;
-	background-color: white;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	
-  }
-  table, th, td ,#bo{
+ 
+  ul,li{
     border: 1px solid #0044BB;
     text-align: center;
      font-size:20px;
@@ -26,7 +20,9 @@
 <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-	
+	<br>
+<br>
+<br>
 
 
 <div class="container" align="center">
@@ -50,7 +46,7 @@
     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" >
         <b>輸入員工編號 (如E000001):</b>
         <input type="text" name="emp_No">
-        <input type="submit" value="送出">
+        <input class="btn btn-primary" type="submit" value="送出">
         <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
@@ -66,7 +62,7 @@
           <option value="${empVO.emp_No}">${empVO.emp_No}
          </c:forEach>   
        </select>
-       <input type="submit" value="送出">
+       <input class="btn btn-primary" type="submit" value="送出">
        <input type="hidden" name="action" value="getOne_For_Display">
     </FORM>
   </li>
@@ -79,7 +75,7 @@
           <option value="${empVO.emp_No}">${empVO.emp_Name}
          </c:forEach>   
        </select>
-       <input type="submit" value="送出">
+       <input class="btn btn-primary" type="submit" value="送出">
        <input type="hidden" name="action" value="getOne_For_Display">
      </FORM>
   </li>

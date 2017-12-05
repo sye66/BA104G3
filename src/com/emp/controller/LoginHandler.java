@@ -125,7 +125,7 @@ public class LoginHandler extends HttpServlet {
 			req.getSession().removeAttribute("empVO");;
 			
 
-			String url = "/index.jsp";
+			String url = "/backdesk/index.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 			

@@ -39,7 +39,9 @@
  <jsp:include page="/backdesk/backdeskTop.jsp" flush="true" />
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
-
+<br>
+<br>
+<br>
 
 <div class="container" align="center">
 	<div class="row">
@@ -76,7 +78,7 @@
 			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改"> 
+			     <input class="btn btn-primary" type="submit" value="修改"> 
 			     <input type="hidden" name="emp_No"      value="${empVO.emp_No}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->
@@ -84,7 +86,7 @@
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
+			     <input class="btn btn-primary" type="submit" value="刪除">
 			     <input type="hidden" name="emp_No"      value="${empVO.emp_No}">
 			     <input type="hidden" name="requestURL"	value="<%=request.getServletPath()%>"><!--送出本網頁的路徑給Controller-->
 			     <input type="hidden" name="whichPage"	value="<%=whichPage%>">               <!--送出當前是第幾頁給Controller-->

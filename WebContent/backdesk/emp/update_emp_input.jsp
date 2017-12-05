@@ -32,7 +32,9 @@
 	<jsp:include page="backdeskEmpLeft.jsp" flush="true" />
 	
 
-
+<br>
+<br>
+<br>
 
 <div class="container" align="center">
 	<div class="row">
@@ -81,7 +83,7 @@
 <input type="hidden" name="emp_No"  value="<%=empVO.getEmp_No()%>">
 <input type="hidden" name="requestURL" value="<%=request.getParameter("requestURL")%>"> <!--接收原送出修改的來源網頁路徑後,再送給Controller準備轉交之用-->
 <input type="hidden" name="whichPage"  value="<%=request.getParameter("whichPage")%>">  <!--只用於:istAllEmp.jsp-->
-<input type="submit" value="送出修改"></FORM>
+<input class="btn btn-primary" type="submit" value="送出修改"></FORM>
 
 		</div>
 	</div>
