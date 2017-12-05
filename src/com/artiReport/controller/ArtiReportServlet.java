@@ -30,7 +30,7 @@ public class ArtiReportServlet extends HttpServlet {
 			
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		
+
 		/******[ 取出ㄧ個展示 ]******/
 		if("getOneReport_For_Display".equals(action)){
 			List<String> errorMsgs = new LinkedList<String>();
@@ -293,7 +293,7 @@ public class ArtiReportServlet extends HttpServlet {
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}
-		
+//		String actions = req.getParameter("actions");
 		if ("insertReport".equals(action)){
 	
 			List<String> errorMsgs = new LinkedList<String>();
@@ -305,7 +305,9 @@ public class ArtiReportServlet extends HttpServlet {
 				HttpSession session = req.getSession();
 				
 				String mem_No = req.getParameter("mem_No").trim();
-				if(req.getSession().getAttribute("mem_No")==null){
+				System.out.println(mem_No);
+				if(mem_No==null){
+					System.out.println("111");
 					String contextPath = getServletContext().getContextPath();
 					errorMsgs.add("@@ 要麻煩請你先登入喔~");
 					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_log.jsp");
@@ -313,15 +315,6 @@ public class ArtiReportServlet extends HttpServlet {
 					return;
 				}
 				
-				String user = (String) req.getSession().getAttribute("mem_No");
-
-				if(!user.equals(mem_No)){
-					String contextPath = getServletContext().getContextPath();
-					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
-					failuewView.forward(req, res);
-					return;
-				}
 
 				String arti_No = req.getParameter("arti_No").trim();			
 				String report_Desc = req.getParameter("report_Desc").trim();
@@ -333,11 +326,13 @@ public class ArtiReportServlet extends HttpServlet {
 				Timestamp nowTime = new Timestamp(System.currentTimeMillis());
 				Timestamp report_Time = nowTime;
 
-				String rep_Re_Desc = req.getParameter("rep_Re_Desc");
+				String rep_Re_Desc = "[待處理]";
 				String report_Status = "待處理";
 
+				ArtiFormService artiFormSvc = new ArtiFormService ();
+				ArtiFormVO artiFormVO = artiFormSvc.getOneArtiForm(arti_No);
+				
 				ArtiReportVO artiReportVO = new ArtiReportVO();
-
 				artiReportVO.setMem_No(mem_No);
 				artiReportVO.setArti_No(arti_No);
 				artiReportVO.setReport_Desc (report_Desc );
@@ -357,6 +352,8 @@ public class ArtiReportServlet extends HttpServlet {
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				req.setAttribute("artiReportVO", artiReportVO);
+				req.setAttribute("artiFormVO",artiFormVO);
+System.out.println(artiFormVO.getArti_Title());
 				String url = "/frontdesk/artiReport/listOneReport_info.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
