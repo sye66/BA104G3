@@ -482,7 +482,7 @@
 			<nav style="margin-bottom:27px"class="navbar navbar-expand-lg navbar-light fixed-top "
 				id="mainNav" style="height: 100px;">
 				<div class="container">
-					 <img style="max-height:70px" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/logo.png">
+					 <img style="max-height:70px" src="<%=request.getContextPath() %>/lib/publicfile/include/img/logo/teamwork.png">
         
 					<button class="navbar-toggler navbar-toggler-right" type="button"
 						data-toggle="collapse" data-target="#navbarResponsive"

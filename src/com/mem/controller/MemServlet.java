@@ -29,6 +29,24 @@ public class MemServlet extends HttpServlet{
 		doPost(req, res);
 	}
 
+	public String getRandomPassword() {
+	    int z;
+	    StringBuilder sb = new StringBuilder();
+	    int i;
+	    for (i = 0; i < 8; i++) {
+	      z = (int) ((Math.random() * 7) % 3);
+	 
+	      if (z == 1) { // 放數字
+	        sb.append((int) ((Math.random() * 10) + 48));
+	      } else if (z == 2) { // 放大寫英文
+	        sb.append((char) (((Math.random() * 26) + 65)));
+	      } else {// 放小寫英文
+	        sb.append(((char) ((Math.random() * 26) + 97)));
+	      }
+	    }
+	    return sb.toString();
+	  }
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		
@@ -109,7 +127,8 @@ if ("forgetPw".equals(action)){
 				MemService memSvc = new MemService();
 				MemVO memVO = memSvc.loginMem(mem_Email);
 				String email = memVO.getMem_Email();
-				
+				Date realBD = memVO.getMem_Bday();
+				System.out.println("realBD +" +realBD);
 				
 				String mem_Email_reg = "^[a-zA-Z0-9_]{3,15}@[a-zA-Z]{2,7}.[a-zA-Z.]{3,7}$";
 				if (mem_Email ==null || mem_Email.trim().length() ==0){
@@ -124,7 +143,9 @@ if ("forgetPw".equals(action)){
 				Date mem_Bday =null;
 				try{
 					mem_Bday = Date.valueOf(req.getParameter("mem_Bday").trim());
-					
+					if(!(mem_Bday.equals(realBD))){
+						errorMsgs.add("查無此匹配帳號");
+					}
 				} catch (IllegalArgumentException e) {
 					mem_Bday = new Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入正確生日 ! ");
@@ -148,7 +169,11 @@ if ("forgetPw".equals(action)){
 			    String subject = "密碼補發";
 			      
 			    String ch_name = memVO.getMem_Id();
-			    String passRandom = "WD750x5p1G9b6Y9";
+			    
+			    
+			    
+//			    String passRandom = "WD750x5p1G9b6Y9";
+			    String passRandom = getRandomPassword();
 			    String messageText = "Hello! " + ch_name + " 請使用此新密碼: " + passRandom + "\n" +
 			    					 ", 請登入後至會員中心 修改密碼，或至http://10.120.25.29:8081/BA104G3/lib/publicfile/include/file/index.jsp 修改密碼,謝謝您"; 
 			    
@@ -158,9 +183,9 @@ if ("forgetPw".equals(action)){
 				
 				/***************************2.再呼叫Service修改密碼*****************************************/
 			   
-				String mem_Pw = "WD750x5p1G9b6Y9";
+//				String mem_Pw = "WD750x5p1G9b6Y9";
 				
-				memVO.setMem_Pw(mem_Pw);
+				memVO.setMem_Pw(passRandom);
 
 				//更改資料庫密碼
 				memVO = memSvc.updatePw(memVO);
@@ -415,14 +440,16 @@ if ("forgetPw".equals(action)){
 				
 				String to = mem_Email;
 			      
-			    String subject = "密碼通知";
+			    String subject = "驗證碼通知";
 			      
 			    String ch_name = mem_Id;
-			    String passRandom = "111";
-			    String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" +
-			    					 " (已經啟用) , 請至會員中心 http://10.120.25.29:8081/BA104G3/frontdesk/mem/memAuthentication.jsp 驗證,謝謝您"; 
 			    
-			    Integer mem_Code = Integer.valueOf(passRandom);
+//			    String passRandom = "9K2A0x4p1L5b6Q3";
+			    int rand = (int)(Math.random()*899999998+100000001);
+			    String messageText = "Hello! " + ch_name + " 請謹記此驗證碼: " + rand + "\n" +
+			    					 " (已經啟用) , 請至會員中心 http://10.120.25.29:8081/BA104G3/lib/publicfile/include/file/index.jsp 驗證,謝謝您"; 
+			    
+			    Integer mem_Code = Integer.valueOf(rand);
 			    
 				/***************************mail區塊 1***************************************/
 				

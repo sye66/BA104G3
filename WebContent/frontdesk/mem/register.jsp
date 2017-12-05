@@ -71,7 +71,7 @@
 	<font style="color:#da0">請修正以下錯誤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:#00f">${message}</li>
+			<li id="misstake" style="color:#00f">${message}</li>
 		</c:forEach>
 	</ul>
 </c:if>
@@ -315,15 +315,15 @@
 		}
 		
 		
-		$('#City').change(function(){
-		var cityname = $('select#City option:selected').text();
-			$('#City2').val(cityname);
-		});
+// 		$('#City').change(function(){
+// 		var cityname = $('select#City option:selected').text();
+// 			$('#City2').val(cityname);
+// 		});
 		
-		$('#Area').change(function(){
-			var areaname = $('select#Area option:selected').text();
-				$('#Area2').val(areaname);
-			});
+// 		$('#Area').change(function(){
+// 			var areaname = $('select#Area option:selected').text();
+// 				$('#Area2').val(areaname);
+// 			});
 		
 
 
@@ -343,6 +343,11 @@
 				$('.aa').click(function(){
 					swal('<p>Ｑ4、在這個平台有什麼需要注意的嗎　？</p><p>Ａ4、本平台僅提供會員們可以交流的環境，若會員在此發生什麼違反法律的事情，本平台一概不負任何責任，也請會員們不要輕易以身試法，謝謝! (詳情醒看FAQ)</p><br>')
 					});
+		if($('#misstake').html() != null){
+			var errorMsg = $('#misstake').val();
+			console.log(errorMsg);
+			swal('Oops !','你輸入的資料有錯誤' , 'error');
+		}
 </script>
 
 
