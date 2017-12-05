@@ -66,7 +66,8 @@ public class WowAmaze extends HttpServlet {
 			CaseCandidateService caseCandidateSvc = new CaseCandidateService();
 			GetMissionVO getMissionVO  = new GetMissionVO();
 			MemService memSvc = new MemService();
-			if(clickNum>=1000){
+			if(getMissionVO.getMission_State()!=5&&getMissionVO.getMission_State()!=6&&getMissionVO.getMission_State()!=9){
+				if(clickNum>=1000){
 				getMissionSvc.updateOneMissionStatus(mission_No, 5);
 				getMissionVO= getMissionSvc.getOneMission(mission_No);
 				List<CaseCandidateVO> lists = caseCandidateSvc.getCandidate(mission_No);
@@ -83,6 +84,14 @@ public class WowAmaze extends HttpServlet {
 				successView.forward(req, res);
 				
 			}
+			}else{
+				errorMsgs.add("此任務已經結束囉");
+				System.out.println("此任務已經結束囉");
+				String url = "/frontdesk/getmission/getMissionlogin.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
+				successView.forward(req, res);
+			}
+			
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("getMissionVO", getMissionVO); // 含有輸入格式錯誤的empVO物件,也存入req
 				RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMisisonlogin.jsp");
