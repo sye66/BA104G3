@@ -74,7 +74,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body style="background-color : #ffc">
+<body">
 	<jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
 	<br>
 	<br>
