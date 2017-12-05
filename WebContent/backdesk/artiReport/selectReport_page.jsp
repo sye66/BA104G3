@@ -68,6 +68,13 @@
         </div>
                  <div class="widgetcontent userlistwidget nopadding">
                      <ul>
+                     
+                            <li>
+                                <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
+                                    <div class="info">
+                                    <li><a href="/BA104G3/backdesk/artiReport/ArtiReport_forWork.jsp">檢舉待回覆清單 </a> <br></li>
+                                    </div><!--info-->
+                            </li>
 
                          <li>
                              <div class="avatar"><img src="images/thumbs/avatar1.png" alt="" /></div>
@@ -97,12 +104,6 @@
                                 </div><!--info-->
                         </li>
 
-                            <li>
-                                <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
-                                    <div class="info">
-                                    <li><a href="/BA104G3/frontdesk/artiReport/addArtiReport.jsp">Add</a> a new Article report.<br></li>
-                                    </div><!--info-->
-                            </li>
                         </ul>
                     </div><!--widgetcontent-->
     </div><!--widgetbox-->

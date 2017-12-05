@@ -104,12 +104,7 @@
                                     
                                     </div><!--info-->
                             </li>
-                            <li>
-                                <div class="avatar"><img src="images/thumbs/avatar2.png" alt="" /></div>
-                                    <div class="info">
-                                    <li><a href="/BA104G3/frontdesk/artiReply/addArtiReply.jsp">Add</a> a new Article reply.<br></li>
-                                    </div><!--info-->
-                            </li>
+
                         </ul>
                     </div><!--widgetcontent-->
     </div><!--widgetbox-->
