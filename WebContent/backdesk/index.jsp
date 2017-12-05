@@ -298,8 +298,8 @@
 			
 				<br>
 				<!--神奇小按鈕-->
-						<button type="button" onclick="e01()"  class="btn btn-success" style="width:20px;height:10px;">老</button>						
-					    <button type="button" onclick="e02()"  class="btn btn-success" style="width:20px;height:10px;">王</button>
+						<button type="button" onclick="e01()"  class="btn btn-success" style="width:20px;height:10px;">boss</button>						
+					    <button type="button" onclick="e02()"  class="btn btn-success" style="width:20px;height:10px;">兆</button>
                 <!--神奇小按鈕 -->
 				
 

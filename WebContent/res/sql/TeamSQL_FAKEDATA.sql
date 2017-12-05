@@ -942,6 +942,4 @@ INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob(
 INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob('BA104G4.jpg'),'BA104G4-探險GO寶-旅遊達人行程規劃',TO_date('2017-06-27 09:00:00','YYYY-MM-DD HH24:MI:SS'),TO_date('2117-12-08 17:00:00','YYYY-MM-DD HH24:MI:SS'),'BA104-G4','探險GO寶');
 INSERT INTO AD VALUES ('AD'||LPAD(to_char(AD_SEQUENCE.NEXTVAL),8,'0'),load_blob('BA104G5.png'),'BA104G5-好房市-We dont know how but we know houser',TO_date('2017-06-27 09:00:00','YYYY-MM-DD HH24:MI:SS'),TO_date('2117-12-08 17:00:00','YYYY-MM-DD HH24:MI:SS'),'BA104-G5','好房市');
 
-
-
 COMMIT;

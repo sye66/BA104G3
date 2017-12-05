@@ -60,7 +60,9 @@ if ("insert".equals(action)){// 來自addStored.jsp的請求
 				System.out.println("chat_Datetime +" + chat_Datetime);
 				String sender_Mem_No = req.getParameter("Sender_Mem_No");
 				String receiver_Mem_No= req.getParameter("Receiver_Mem_No");
-				chat_Content = chat_Content +req.getParameter("src");
+				if(req.getParameter("src") != null){
+				chat_Content = req.getParameter("src") + chat_Content ;
+				}
 				
 				crSvc.addChatRecord(sender_Mem_No, receiver_Mem_No, chat_Datetime, chat_Content);
 				

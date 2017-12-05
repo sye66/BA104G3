@@ -63,5 +63,9 @@ public class ArtiReportService {
 	public Set<ArtiReportVO> findReportByMemNo(String mem_No){
 		return dao.findReportByMemNo(mem_No);
 	}
+	
+	public Set<ArtiReportVO> findReportByStatus(){
+		return dao.findReportByStatus();
+	}
 
 }

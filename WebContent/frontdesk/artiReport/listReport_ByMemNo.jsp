@@ -110,7 +110,7 @@
    </div>    
 
 <div class="container">
-<c:forEach var="artiReportVO" items="${artiReportSvc1.findReportByMemNo(mem_No)}" >
+
 <div class="col-xs-12 col-sm-12 widget-container-span">
                 <div class="widget-box">
                     <div class="widget-header header-color-dark">
@@ -195,14 +195,14 @@
                         
                     </div>
                     </div>
-	</c:forEach>
+	
 </div>
 </c:forEach>
 <div class="container" style="font-size: 18px; text-align: center;">    
  <%@ include file="/backdesk/page2.file" %> 
  </div>     
 </html>
-<br> </b>
+<br>
 </body>
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </html>

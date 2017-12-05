@@ -61,8 +61,7 @@ div {
 
 
 <br><br><br><br><br><br><br><br>
-${artiFormVO}
-${artiFormVO.arti_No}
+
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">
 <div class="container">
 <div class="col-xs-12 col-sm-11 widget-container-span">

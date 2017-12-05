@@ -519,28 +519,28 @@ public class ArtiReportServlet extends HttpServlet {
 					return;
 				}
 				
-				String user = (String) req.getSession().getAttribute("mem_No");
-				if(!user.equals(mem_No)){
-					String contextPath = getServletContext().getContextPath();
-					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
-					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
-					failuewView.forward(req, res);
-					return;
-				}
+//				String user = (String) req.getSession().getAttribute("mem_No");
+//				if(!user.equals(mem_No)){
+//					String contextPath = getServletContext().getContextPath();
+//					errorMsgs.add(" = ___ = A 要本人才能刪除喔~");
+//					RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiForm/listOneArtiForm_error_men.jsp");
+//					failuewView.forward(req, res);
+//					return;
+//				}
 			
 				/***************************2.開始刪除資料***************************************/
 				ArtiReportService artiReportSvc = new ArtiReportService();
 				artiReportSvc.deleteArtiReport(report_No);
 
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/backdesk/artiReport/listAllArtiReport.jsp";
+				String url = "/frontdesk/artiReport/listReport_ByMemNo.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e){
 				errorMsgs.add(" 刪除回覆資料失敗 : " + e.getMessage());
-				RequestDispatcher failuewView = req.getRequestDispatcher("/backdesk/artiReport/selectReport_page.jsp");
+				RequestDispatcher failuewView = req.getRequestDispatcher("/frontdesk/artiReport/listReport_ByMemNo.jsp");
 				failuewView.forward(req, res);
 			}
 		}
