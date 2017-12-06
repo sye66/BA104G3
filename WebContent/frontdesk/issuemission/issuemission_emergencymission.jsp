@@ -163,17 +163,15 @@
 						      	var lat;
 						      	var lng;
 						        var map = new google.maps.Map(document.getElementById('map'), {
-						          center: {lat: -34.397, lng: 150.644},
+						          center: {lat: 24.967982, lng:121.191678},
 						          zoom: 15
 						        });
 						        var infoWindow = new google.maps.InfoWindow({map: map});
 
 						        // Try HTML5 geolocation.
-						        if (navigator.geolocation) {
-						          navigator.geolocation.getCurrentPosition(function(position) {
 						            pos = {
-						              lat: position.coords.latitude,
-						              lng: position.coords.longitude
+						              lat: 24.967982,
+						              lng: 121.191678
 						            };
 
 						            infoWindow.setPosition(pos);
@@ -186,13 +184,7 @@
 						        //   	map: map
 						        // }
 						        // );	
-						          }, function() {
-						            handleLocationError(true, infoWindow, map.getCenter());
-						          });
-						        } else {
-						          // Browser doesn't support Geolocation
-						          handleLocationError(false, infoWindow, map.getCenter());
-						        }
+						      
 						      }
 					      
 						      function handleLocationError(browserHasGeolocation, infoWindow, pos) {

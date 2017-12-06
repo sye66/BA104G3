@@ -207,64 +207,44 @@
 					    var pos;
 					    var lat;
 					    var lng;
-
-
 					    var map = new google.maps.Map(document.getElementById('map'), {
-					        center: { lat: -34.397, lng: 150.644 },
+					        center: {lat: 24.967982, lng:121.191678},
 					        zoom: 15
 					    });
 
-					    // Try HTML5 geolocation.
+			            $.ajax({
+			                url: '<%=request.getContextPath()%>/getmission/getmission.do',
+			                type: 'post',
+			                data: {
+			                    action: "get_Location_Json",
+			                },
+			                dataType: "json",
 
-					    if (navigator.geolocation) {
-					        navigator.geolocation.getCurrentPosition(function(position) {
-					            pos = {
-					                lat: position.coords.latitude,
-					                lng: position.coords.longitude
-					            };
-					            map.setCenter(pos);
-
-					            $.ajax({
-					                url: '<%=request.getContextPath()%>/getmission/getmission.do',
-					                type: 'post',
-					                data: {
-					                    action: "get_Location_Json",
-					                },
-					                dataType: "json",
-
-					                success: function(data) {
-					                    for (var i = 0; i < data.length; i++) {
-					                        var obj = data[i];
-					                        var contentString = '<h2>' + obj.mem_Id + '</h2>' + '<p>已完成任務數量：' + obj.mission_Count + '</p>' +
-					                            '<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
-					                        var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
-					                        // InfoWindow
-					                        var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });
-					                        infoWindow2.setPosition(GPS_Position);
-					                        // Marker
-					                        var marker2 = new google.maps.Marker({
-					                            position: GPS_Position,
-					                            map: map,
-					                            title: "某工具人"
-					                        });
-					                        google.maps.event.addListener(marker2, 'click', (function(marker2, contentString, infoWindow2) {
-					                            return function() {
-					                                infoWindow2.setContent(contentString);
-					                                infoWindow2.open(map, marker2);
-					                            };
-					                        })(marker2, contentString, infoWindow2));
-					                    }
-					                }
-					            })
-					        }, function() {
-					            handleLocationError(true, infoWindow, map.getCenter());
-					        });
-					    } else {
-					        // Browser doesn't support Geolocation
-					        handleLocationError(false, infoWindow, map.getCenter());
-					    }
-					}
-
+			                success: function(data) {
+			                    for (var i = 0; i < data.length; i++) {
+			                        var obj = data[i];
+			                        var contentString = '<h2>' + obj.mem_Id + '</h2>' + '<p>已完成任務數量：' + obj.mission_Count + '</p>' +
+			                            '<form action="<%=request.getContextPath()%>/frontdesk/issuemission/issuemission_takecasemission.jsp" method="post"><input type="hidden" name="takecase_Mem_No"	value="' + obj.mem_No + '"><input type="submit" value="直接發案" class="btn btn-info"></form>';
+			                        var GPS_Position = { lat: obj.mem_GPS_LAT, lng: obj.mem_GPS_LNG }
+			                        // InfoWindow
+			                        var infoWindow2 = new google.maps.InfoWindow({ contents: contentString });
+			                        infoWindow2.setPosition(GPS_Position);
+			                        // Marker
+			                        var marker2 = new google.maps.Marker({
+			                            position: GPS_Position,
+			                            map: map,
+			                            title: "某工具人"
+			                        });
+			                        google.maps.event.addListener(marker2, 'click', (function(marker2, contentString, infoWindow2) {
+			                            return function() {
+			                                infoWindow2.setContent(contentString);
+			                                infoWindow2.open(map, marker2);
+			                            };
+			                        })(marker2, contentString, infoWindow2));
+			                    }
+			                }
+			            })
+				    }
 					function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 					    infoWindow.setPosition(pos);
 					    infoWindow.setContent(browserHasGeolocation ?
