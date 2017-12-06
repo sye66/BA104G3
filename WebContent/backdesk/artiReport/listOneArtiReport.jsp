@@ -101,10 +101,34 @@
                             ${artiReportSet.report_Desc}
                         </div>
                         
+             <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="ReportSample()">懶人1</button>
+						</div>
+					</div>	
+              </div>
+              
+              <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="ReportSample2()">懶人2</button>
+						</div>
+					</div>	
+              </div>
+              
+             <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="ReportSample3()">懶人3</button>
+						</div>
+					</div>	
+              </div>
+                        
                         <div class="widget-main padding-16">
                              <div>
                                 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-                                <input type="text" name="rep_Re_Desc" size="126"  value="${artiReportSet.rep_Re_Desc}">
+                                <input type="text" name="rep_Re_Desc" size="126" id="rep_Re_Desc" value="${artiReportSet.rep_Re_Desc}">
                                 <input type="hidden" name="report_No"  value="${artiReportSet.report_No}">
                                 <input type="hidden" name="mem_No"  value="${artiReportSet.mem_No}">
                                 <input type="hidden" name="arti_No"  value="${artiReportSet.arti_No}">
@@ -115,9 +139,12 @@
 			                    <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
  			                    <button class="btn btn-success" type="submit" name="action" value="Report_Reply">檢舉回覆</button>
 			                    </FORM>
+			                    
                             </div>
                         </div>
                     </div>
+                    
+                    
                     <div class="widget-header header-color-dark">
                         <h5 class="bigger lighter">${artiReportSet.report_Time}</h5>
                         <div class="widget-toolbar">
@@ -144,4 +171,23 @@
                           </div>
                         </div>     
 </body>
+
+<!--神奇方法 -->
+<script type="text/javascript">
+    function ReportSample(){
+    	var no = document.getElementById("rep_Re_Desc");			
+    	    no.value="[不太懂施主你的標準阿~~~]";
+	}
+    
+    function ReportSample2(){
+    	var no = document.getElementById("rep_Re_Desc");			
+    	    no.value="[有病要去看醫生阿~~~]";
+	}
+    
+    function ReportSample3(){
+    	var no = document.getElementById("rep_Re_Desc");			
+    	    no.value="[腦袋有BUG神難修阿~~~]";
+	}
+</script>
+<!--神奇方法 -->
 </html>
