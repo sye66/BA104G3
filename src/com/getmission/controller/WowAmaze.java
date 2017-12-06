@@ -89,6 +89,7 @@ public class WowAmaze extends HttpServlet {
 					String url = "/frontdesk/getmission/getMissionlogin.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交回送出修改的來源網頁
 					successView.forward(req, res);
+					return;
 				}
 			}else{
 					clickNum = clickNum + plusone;
