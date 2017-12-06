@@ -42,7 +42,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/index.jsp");
+							.getRequestDispatcher("/backdesk/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -57,7 +57,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/index.jsp");
+							.getRequestDispatcher("/backdesk/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -71,7 +71,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/index.jsp");
+							.getRequestDispatcher("/backdesk/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -87,7 +87,7 @@ public class LoginHandler extends HttpServlet {
 					errorMsgs.add("查無資料password is wrong");
 
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/index.jsp");
+							.getRequestDispatcher("/backdesk/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}else{
@@ -104,7 +104,7 @@ public class LoginHandler extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/index.jsp");
+							.getRequestDispatcher("/backdesk/index.jsp");
 					failureView.forward(req, res);
 					return;
 				}
@@ -116,7 +116,7 @@ public class LoginHandler extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/index.jsp");
+						.getRequestDispatcher("/backdesk/index.jsp");
 				failureView.forward(req, res);
 			}
 		}
