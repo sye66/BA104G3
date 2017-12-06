@@ -148,13 +148,13 @@ window.onscroll = function() {
 			<!-- 標籤面板：標籤區 -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:457px;text-align:center;background-color:#FFFFBB;border:1px 1px 1px 1px #CCC solid;"><h4>購物車(<%=count%>)</h4></a></li>
+					<a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" style="width:450px;text-align:center;background-color:#FFFFBB;border:1px 1px 1px 1px #CCC solid;"><h4>購物車(<%=count%>)</h4></a></li>
 				<li role="presentation">
-					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:457px;text-align:center;background-color:#96FFFF;border:1px 1px 1px 1px #CCC solid;"><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
+					<a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" style="width:450px;text-align:center;background-color:#96FFFF;border:1px 1px 1px 1px #CCC solid;"><h4>商品追蹤清單(<%=count2%>)</h4></a></li>
 			</ul>
 
 			<!-- 標籤面板：內容區 -->
-			<div class="tab-content" style="width:100%;">
+			<div class="tab-content" style="width:940px;">
 			
 				<div role="tabpanel" class="tab-pane active" id="tab1">
 <!-- 					<table class="table table-hover"> -->
@@ -171,7 +171,7 @@ window.onscroll = function() {
 		 i++;
 		 ProCartVO order = buylist.get(index);
 	%>
-	<table class="cartPro" id="tab001" style="width:100%;">	
+	<table class="cartPro" id="tab001" style="width:900px;">	
 		<tr>
 			<th>照片</th><th>品名</th><th >單價</th><th >數量</th><th>小計</th><th>更動</th>
 		</tr>
@@ -241,9 +241,9 @@ window.onscroll = function() {
 			</div>
 		</div>
 
+<div class="col-xs-12 col-sm-3">
 
-
-
+</div>
 
 
 
