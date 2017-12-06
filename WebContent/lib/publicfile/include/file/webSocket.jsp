@@ -227,7 +227,7 @@ var context = '<%=request.getContextPath() %>';
 var memname = "${memVO.mem_Id}";
 var targetMemName ='<%=memVO2.getMem_Id()%>';
 <%-- var issuer_Mem_No ='<%=memVO3.getMem_Id()%>'; --%>
-alert("missionNo + targetMemNo" +targetMemNo+missionNo);
+// alert("missionNo + targetMemNo" +targetMemNo+missionNo);
 
 var MyPoint = "/MyEchoServer/"+'<%=memVO.getMem_No()%>'+"/"+missionNo;		// 對照server 哪個Server / 使用者編號 / 房號
 var host = window.location.host; 
@@ -550,7 +550,7 @@ $.ajax({
 	 dataType: "json",
 	 
 	 success: function (data){ },
-	 error: function(){alert("網路不穩斷線")}
+	 error: function(){}
 	 
 });
 	
@@ -576,7 +576,7 @@ function sendImg(url){
 	console.log(date);
 	var nowdate = date;
 	//*******************************撰寫Timestamp格式
- alert(userName);
+//  alert(userName);
   jsonObj ={
  		"action":"insert",
  		"chatContent":message, 
