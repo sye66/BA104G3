@@ -15,6 +15,7 @@
 	class="com.casecandidate.model.CaseCandidateService" />
 <jsp:useBean id="accusecaseSvc" scope="page"
 	class="com.accusecase.model.AccuseCaseService" />
+	<jsp:useBean id="Doubletoint" scope="page" class="com.getmission.controller.Doubletoint" />
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
@@ -253,7 +254,7 @@
 						<h5 style="color:brown">任務發佈時間</h5><p style="color:#6d6767">${getMissionVO.mission_Release_Time}</p>
 						<h5 style="color:brown">任務截止日期</h5><p style="color:#6d6767">${getMissionVO.mission_Due_Time}</p>
 						<h5 style="color:brown">任務模式</h5><p style="color:red">${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
-						<h5 style="color:brown">任務報酬</h5><p style="color:#6d6767">${Integer.valueOf(getMissionVO.mission_Pay)} 積分</p>
+						<h5 style="color:brown">任務報酬</h5><p style="color:#6d6767">${Doubletoint.DoubleToint(getMissionVO.mission_Pay)} 積分</p>
 					</div>
 				</div>
 
