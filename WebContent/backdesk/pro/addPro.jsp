@@ -168,7 +168,7 @@ textarea {
 </div>
 	<script type="text/javascript">
 		function previewFile() {
-	 		 var preview = document.querySelector('img');
+	 		 var preview = document.getElementById('blah');
 	 		 var file    = document.querySelector('input[type=file]').files[0];
 	  		 var reader  = new FileReader();
 
