@@ -29,8 +29,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Mission_Detaillogin</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
 <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -332,6 +332,7 @@
 		</tr>
 	
 	</table>
+	<div id="map"></div>
 	</div>
 </div>
 	<div class="col-xs-12 col-sm-12">
@@ -344,8 +345,49 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-		
+	function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: 24.9722, lng: 121.2054}
+        });
+
+        setMarkers(map);
+      }
+      
+      var mission = [  '${getMissionVO.mission_Name}','${getMissionVO.mission_Category}',${getMissionVO.mission_Gps_Lat} , ${getMissionVO.mission_Gps_Lng}  ];
+      
+
+      function setMarkers(map) {
+      
+        var image = {
+          url: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          size: new google.maps.Size(20, 32),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(0, 32)
+        };
+
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+       
+          var marker = new google.maps.Marker({
+            position: {lat: mission[2], lng: mission[3]},
+            map: map,
+            icon: image,
+            shape: shape,
+            title: mission[0]
+          });
+        
+
+      }
+      
+      
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI0AqzghxJv55TD4xLnlng-4hZ57jt2JQ&libraries=places&callback=initMap">
+	
 	</script>
+	
 </body>
 </html>
 </body>
