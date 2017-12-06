@@ -223,7 +223,7 @@ System.out.println("url"+url);
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
 				String emp_Name = req.getParameter("emp_Name").trim();
-				Integer random = (int)(Math.random()*999+1);
+				Integer random = (int)(Math.random()*999999+1);
 				String emp_Pwd = String.valueOf(random);
 //				String emp_Pwd = String.valueOf((int)(Math.random()*999+1));
 				String emp_Mail = req.getParameter("emp_Mail").trim();

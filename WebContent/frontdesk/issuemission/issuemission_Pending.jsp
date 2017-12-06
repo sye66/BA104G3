@@ -14,7 +14,7 @@
 		<![endif]-->
 		<style type="text/css">
 			img{
-				width: 300px;
+				width: 0px;
 			}
 			body {
 	            background-image: url(<%=request.getContextPath()%>/res/images/QRcode/mountain_1920.jpg);
@@ -49,18 +49,15 @@
 					<h1 class="text-center">接案人驗證</h1>
 					<br>
 					<br>
-					<p style="font-size: 200%">請掃描下方QRcode</p>
+					
+					<%-- QRCode拔掉 --%>
+
+					
+					<%-- <p style="font-size: 200%">請掃描下方QRcode</p> --%>
 					<br>
-					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do?takecase_Mem_No=<%=request.getParameter("mission_No")%>&mission_No=<%=request.getParameter("takecase_Mem_No")%>">
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<p style="font-size: 200%; color: grey;">...或是直接輸入驗證碼</p>
+					<img src="<%=request.getContextPath()%>/qrcode/qrcode.do?takecase_Mem_No=<%=request.getParameter("mission_No")%>&mission_No=<%=request.getParameter("takecase_Mem_No")%>"> 
+
+					<p style="font-size: 200%; color: grey;">輸入驗證碼</p>
 					<br>
 					<br>
 					<br>

@@ -11,7 +11,7 @@
 <style>
 
 .cartPro2{ 
-	width:918px;
+	width:900px;
 	border-bottom:3px #FFBA3B solid;
 	border-left:1px #CCC solid;
 	border-right:1px #CCC solid;
@@ -69,12 +69,12 @@ System.out.println("session取得的會員編號 "+mem_No);
 		<th>照片</th><th>品名</th><th >單價</th><th colspan="2">更動</th>
 	</tr>
 	<tr height="30" >
-		<td width="120"><img class="card-img-top" width="100"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=proVO.getPro_No()%>" alt="Card image cap"></td>
-		<td width="100"><div align="center"><b><%=proVO.getPro_Name()%></b></div></td>
+		<td width="120px"><img class="card-img-top" width="100px"  src="<%=request.getContextPath()%>/tool/showimage.do?action=propic&pro_No=<%=proVO.getPro_No()%>" alt="Card image cap"></td>
+		<td width="100px"><div align="center"><b><%=proVO.getPro_Name()%></b></div></td>
 		
-		<td width="100"><div align="center"><b><%=price%></b>點</div></td>
+		<td width="100px"><div align="center"><b><%=price%></b>點</div></td>
 		
-		<td width="100"><div align="center">
+		<td width="100px"><div align="center">
 		<form METHOD="post"   ACTION="<%=request.getContextPath()%>/pro/shoppingCartServlet.do" >
 			
 			<input type="hidden" class="proCar_No"  value="<%=pro_No%>">
@@ -86,7 +86,7 @@ System.out.println("session取得的會員編號 "+mem_No);
 		</td>
 		
 		
-        <td width="100"><div align="center">
+        <td width="100px"><div align="center">
           <form name="deleteForm" action="<%=request.getContextPath()%>/pro/proTrackServlet.do" method="POST" >
               <input type="hidden" class="action" name="action"  value="deleteProTrack">
               <input type="hidden" class="requestURL" value="<%=request.getServletPath()%>">

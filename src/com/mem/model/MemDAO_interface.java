@@ -15,6 +15,7 @@ public interface MemDAO_interface {
 	public MemVO findByPrimaryKey(String mem_No);
 	public MemVO findByMemEmail(String mem_Email);
 	public List<MemVO> getAll();
+	public List<MemVO> getAll(Integer searchable);
 	public List<MemVO> getAllForFriend(String mem_No);
 	public void register(MemVO memVO);
 	public MemVO Authentication(MemVO memVO);

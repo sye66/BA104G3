@@ -194,14 +194,25 @@ div {
 		    </div>                     
         </div>
     </div>
+            
+
                                    
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic"> 
-                     <input type="TEXT" style="height: 80px; width:100%" name="reply_Desc" size="100"	value="<%= (artiReplyVO.getReply_Desc()==null)?" @@? ": artiReplyVO.getReply_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="reply_Desc" id="Reply_Desc" size="100" value="<%= (artiReplyVO.getReply_Desc()==null)?" @@? ": artiReplyVO.getReply_Desc()%>" />
                      </div>
                  </div>
-             </div>     
+             </div> 
+             
+              <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="Reply()"> 神奇回覆 </button>
+						</div>
+					</div>	
+              </div> 
+                 
              </div>
          </div>
 </div>
@@ -236,11 +247,19 @@ div {
             <div class="widget-toolbar">
                 <div class="widget-main padding-2">
                     <div class="pic">                       
-                     <input type="TEXT" style="height: 80px; width:100%" name="report_Desc" size="100"	value="<%= (artiReportVO.getReport_Desc()==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
+                     <input type="TEXT" style="height: 80px; width:100%" name="report_Desc" id="Report_Desc"  size="100" value="<%= (artiReportVO.getReport_Desc()==null)? " @@? " : artiReportVO.getReport_Desc()%>" />
                      </div>
                  </div>
              </div>
-                                         
+             
+                           <div class="widget-toolbar">
+                 <div class="btn-group">
+					<div class="col-xs-12 col-sm-8">
+						<button class="btn btn-warning" type="button" onclick="Report()"> 神奇檢舉 </button>
+						</div>
+					</div>	
+              </div> 
+                                          
              </div>
          </div>
      </div>
@@ -252,6 +271,20 @@ div {
 	<jsp:include page="/frontdesk/artiReply/listReply_ByArtiNo.jsp" flush="true" />
 
 </body>
+
+<!--神奇方法 -->
+<script type="text/javascript">
+    function Reply(){
+    	var no = document.getElementById("Reply_Desc");			
+			no.value="景富莊柚木家具裡面又木的款式非常多，現場人員也非常專業，真的很值得推薦阿~~~";
+    }
+    
+    function Report(){
+    	var no = document.getElementById("Report_Desc");			
+			no.value="這種肉麻的發文真的是太矯情了~~~";
+    }
+</script>
+		<!--神奇方法 -->
 
  <jsp:include page="/lib/publicfile/include/file/footer.jsp" flush="true" />
 </html>

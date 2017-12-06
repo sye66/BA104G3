@@ -41,8 +41,7 @@
 <br>
 <br><br><br>
 <div class="container">
-	<div class="col-xs-12 col-sm-4"></div>
-		<div class="col-xs-12 col-sm-8">
+	<div class="col-xs-12 col-sm-12">
 		<div class="container">
 			<div class="row">
 			    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="missiongroup">

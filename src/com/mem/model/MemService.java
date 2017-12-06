@@ -10,6 +10,7 @@ import javax.mail.search.IntegerComparisonTerm;
 
 import org.hibernate.exception.GenericJDBCException;
 
+import com.sun.javafx.binding.StringFormatter;
 import com.sun.org.apache.bcel.internal.generic.StackInstruction;
 
 public class MemService {
@@ -188,6 +189,17 @@ public class MemService {
 
 	public List<MemVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public List<MemVO> getAll(String mem_No,Integer searchable) {
+		MemVO memVO = dao.findByPrimaryKey(mem_No);
+		List<MemVO> listGetAllMem = dao.getAll(searchable);
+		if (listGetAllMem.contains(memVO)) {
+			listGetAllMem.remove(memVO);
+			System.out.println("移除登入的memVO:" + memVO.getMem_Name() + " " + memVO.getMem_No());
+			return listGetAllMem;
+		}
+		return dao.getAll(searchable);
 	}
 	public List<MemVO> getAll(String mem_No) {
 		MemVO memVO = dao.findByPrimaryKey(mem_No);
