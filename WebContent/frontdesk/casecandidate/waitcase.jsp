@@ -17,6 +17,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>接案候選人等待區</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+    	td{
+    		text-align: center;
+    	}
+    	table {
+  			background-color: transparent;
+  			table-layout: fixed;
+		}	
+	</style>
 </head>
 
 <body>
@@ -50,16 +59,11 @@
 								mission_status ==4 || 
 								mission_status ==7 ||
 								mission_status ==72	}">
-					<div class="panel panel-danger">
+					<div class="panel panel-warning">
 						<div class="panel-heading">
 							<%-- 標題 --%>
 							<h3 class="panel-title">${mission_No} 任務>> ${missionVO.mission_Name} </h3>
-							<%-- 表單 - 取得任務細節 --%>
-							<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
-								<input type="hidden" name="mission_No" value="${caseCandidateVO.mission_No}">
-								<input type="hidden" name="requestURL" value="/frontdesk/casecandidate/waitcase.jsp">
-								<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">了解任務細節</button>
-							</form>
+							
 						</div>
 						<div class="panel-body">
 							<%-- 表格 - 內容 --%>					
@@ -68,6 +72,7 @@
 							        <th>發案人編號</th>
 							        <th>發案人</th>
 							        <th>聊個天嗎?</th>
+							        <th></th>
 							    </tr>
 							    <tr>
 							        <td>${missionVO.issuer_Mem_No}</td>
@@ -76,13 +81,18 @@
 										<form BorderStyle="0" method="get"
 											action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?issuer_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${mission_No}"
 											name="getmission5">
-											<button
-												onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=700')"
-												class="btn btn-lg btn-success" type="button" name="action"
-												value="chatting">和他聊天~</button>
-											<input type="hidden" name="issuer_Mem_No"
-												value="${missionVO.issuer_Mem_No}"> <input
-												type="hidden" name="mission_No" value="${mission_No}">
+											<button onclick="window.open('<%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${missionVO.issuer_Mem_No}&mission_No=${caseCandidateVO.mission_No} ', 'Yahoo', config='height=500,width=700')"
+												class="btn btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
+											<input type="hidden" name="issuer_Mem_No" value="${missionVO.issuer_Mem_No}"> 
+											<input type="hidden" name="mission_No" value="${mission_No}">
+										</form>
+									</td>
+									<td>
+									<%-- 表單 - 取得任務細節 --%>
+										<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission1">
+											<input type="hidden" name="mission_No" value="${caseCandidateVO.mission_No}">
+											<input type="hidden" name="requestURL" value="/frontdesk/casecandidate/waitcase.jsp">
+											<button class="btn btn-warning pull-right" type="submit" name="action" value="mission_Detail">了解任務細節</button>
 										</form>
 									</td>
 							    </tr>

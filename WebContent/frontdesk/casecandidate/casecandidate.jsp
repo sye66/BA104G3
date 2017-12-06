@@ -41,8 +41,7 @@
 <br>
 <br><br><br>
 <div class="container">
-	<div class="col-xs-12 col-sm-4"></div>
-		<div class="col-xs-12 col-sm-8">
+		<div class="col-xs-12 col-sm-12">
 		<div class="container">
 			<div class="row">
 			    <form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="missiongroup">
@@ -80,7 +79,7 @@
 												<form method="post" action="<%=request.getContextPath()%>/getmission/getmission.do" name="getmission3">
 													<%-- 啟動modal --%>
 													<a href='#modal-id${i.index}-${m.index} ' data-toggle="modal">
-														<button class="btn-lg btn-info" type="submit" name="action" value="chosemem">確認人選</button>
+														<button class="btn btn-lg btn-info" type="submit" name="action" value="chosemem">確認人選</button>
 													</a> 
 													<%-- 備用 --%>
 													<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
@@ -112,7 +111,7 @@
 									                    <%-- TODO: Send Email , SMS, Generate QRcode here. --%>
 								                        <input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}">
 								                        <input type="hidden" name="mission_No" value="${caseVO.mission_No}">
-									                    <button class="btn btn-warning" type="submit" name="action" value="chosemem">就決定是你了~</button>
+									                    <button class="btn btn-warning" type="submit" name="action" value="chosemem">確定人選</button>
 									                </form>
 									                <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
 									            </div>
@@ -126,7 +125,7 @@
 								<td>
 									<div class="panel-body">
 										<form BorderStyle="0" method="get" action="<%=request.getContextPath()%>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No}" name="getmission3">
-										<button onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No} ', 'Yahoo', config='height=500,width=700')" class="btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
+										<button onclick="window.open(' <%=request.getContextPath() %>/lib/publicfile/include/file/webSocket.jsp?takecase_Mem_No=${caseCandidateVO.candidate_Mem_No}&mission_No=${caseVO.mission_No} ', 'Yahoo', config='height=500,width=700')" class="btn btn-lg btn-success" type="button" name="action" value="chatting">和他聊天~</button>
 										<input type="hidden" name="takecase_Mem_No" value="${caseCandidateVO.candidate_Mem_No}"> 
 										<input type="hidden" name="mission_No" value="${caseVO.mission_No}"> 
 										</form>
