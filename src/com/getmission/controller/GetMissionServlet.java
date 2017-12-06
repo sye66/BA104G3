@@ -155,7 +155,7 @@ public class GetMissionServlet extends HttpServlet {
 
 				return;
 			}
-
+try{
 			String mission_No = req.getParameter("mission_No").trim();
 			GetMissionService getMissionSvc = new GetMissionService();
 			GetMissionVO getMissionVO = new GetMissionVO();
@@ -216,7 +216,11 @@ public class GetMissionServlet extends HttpServlet {
 				failureView.forward(req, res);
 				return;
 			}
-
+}catch(Exception e){
+	RequestDispatcher failureView = req.getRequestDispatcher("/frontdesk/getmission/getMissionlogin.jsp");
+	failureView.forward(req, res);
+	return;
+}
 		}
 
 		if ("chosemem".equals(action)) { // 來自getmission.jsp 或
@@ -781,7 +785,7 @@ public class GetMissionServlet extends HttpServlet {
 			MemService memSvc = new MemService();
 			String takecase_Mem_No = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
 			double takecasemem_Point = memSvc.getOneMem(takecase_Mem_No).getMem_Point();
-			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay();
+			double mission_Pay = getMissionSvc.getOneMission(mission_No).getMission_Pay().intValue();
 			int now = (int) (takecasemem_Point + mission_Pay);
 			if (getMissionSvc.getOneMission(mission_No).getIssuer_Mem_No().equals(memVO.getMem_No())) {
 
