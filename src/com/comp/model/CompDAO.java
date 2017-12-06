@@ -5,7 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -268,8 +271,8 @@ public class CompDAO implements CompDAO_interface{
 	}
 
 	@Override
-	public List<CompVO> findByPk(String emp_No) {
-		List<CompVO> list1 = new ArrayList<CompVO>();
+	public Set<CompVO> findByPk(String emp_No) {
+		Set<CompVO> list1 = new LinkedHashSet<CompVO>();
 		CompVO compVO = null;
 
 		Connection con = null;

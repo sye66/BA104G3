@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import com.comp.model.CompVO;
 
@@ -301,7 +303,7 @@ public class CompJdbcDAO implements CompDAO_interface{
 //			compVO2.setEmp_No("E000002");
 //			dao.delete(compVO2);
 			
-			List<CompVO> list1 = dao.findByPk("E000001");
+			Set<CompVO> list1 = dao.findByPk("E000001");
 			for(CompVO compVO5 : list1){
 				System.out.println(compVO5.getAuth_No());
 			}
@@ -328,8 +330,8 @@ public class CompJdbcDAO implements CompDAO_interface{
 		
 
 	@Override
-	public List<CompVO> findByPk(String emp_No) {
-		List<CompVO> list1 = new ArrayList<CompVO>();
+	public Set<CompVO> findByPk(String emp_No) {
+		Set<CompVO> list1 = new LinkedHashSet<CompVO>();
 		CompVO compVO = null;
 
 		Connection con = null;

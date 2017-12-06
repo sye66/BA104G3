@@ -86,6 +86,7 @@ public class EmpServlet extends HttpServlet {
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
 				req.setAttribute("empVO", empVO); 
 				String url = "/backdesk/emp/listOneEmp.jsp";
+				req.setAttribute("url", url); 
 				RequestDispatcher successView = req.getRequestDispatcher(url); 
 				successView.forward(req, res);
 
@@ -189,14 +190,20 @@ public class EmpServlet extends HttpServlet {
 	req.setAttribute("empVO", empVO);
 	
                 String url = requestURL;
-System.out.println(url);
-                if(url.equals(null)){
-                	System.out.println("11111111111111111111111");
-                }
-                
-				RequestDispatcher successView = req.getRequestDispatcher(url);   
-				successView.forward(req, res);
-
+System.out.println("url"+url);
+				String str = (String) req.getAttribute("url");
+				if(url.equals(new String("null"))){
+					RequestDispatcher successView = req.getRequestDispatcher(str);   
+					successView.forward(req, res);
+					System.out.println("url after"+url);
+					return;
+				}else{
+					RequestDispatcher successView = req.getRequestDispatcher(url);   
+					successView.forward(req, res);
+					System.out.println("url+++++++++++++"+url);
+					return;
+				}
+     
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("錯誤:"+e.getMessage());

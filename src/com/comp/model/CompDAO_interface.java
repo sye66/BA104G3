@@ -1,6 +1,7 @@
 package com.comp.model;
 
 import java.util.List;
+import java.util.Set;
 
 import com.emp.model.EmpVO;
 
@@ -10,5 +11,5 @@ public interface CompDAO_interface {
     public void delete(CompVO compVO);
     public CompVO findByPrimaryKey(String emp_No);
     public List<CompVO> getAll();
-    public List<CompVO> findByPk(String emp_No);
+    public Set<CompVO> findByPk(String emp_No);
 }

@@ -33,10 +33,10 @@ public class DecideEmpComp extends HttpServlet {
 		EmpVO empVO = (EmpVO) session.getAttribute("empVO");
 		String emp_No = empVO.getEmp_No();
 		CompService compSvc = new CompService();
-		List<CompVO> list = compSvc.getAllAuthNo(emp_No);
-		for(CompVO compVO : list){
-			System.out.println(compVO.getAuth_No());
-		}
+//		List<CompVO> list = compSvc.getAllAuthNo(emp_No);
+//		for(CompVO compVO : list){
+//			System.out.println(compVO.getAuth_No());
+//		}
 		}
 	}
 	

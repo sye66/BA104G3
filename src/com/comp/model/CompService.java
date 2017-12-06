@@ -1,6 +1,7 @@
 package com.comp.model;
 
 import java.util.List;
+import java.util.Set;
 
 import com.comp.model.CompVO;
 
@@ -43,7 +44,7 @@ public class CompService {
 		return dao.getAll();
 	}
 	
-	public List<CompVO> getAllAuthNo(String emp_No){
+	public Set<CompVO> getAllAuthNo(String emp_No){
 		return dao.findByPk(emp_No);
 	}
 }

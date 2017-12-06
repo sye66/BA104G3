@@ -6,7 +6,7 @@
 <%@ page import="com.comp.model.*"%>
 <%
 String emp_No=null;
-List<CompVO> list = null;
+Set<CompVO> list = null;
 String str1 = "AU000001";
 String str2 = "AU000002";
 String str3 = "AU000003";
