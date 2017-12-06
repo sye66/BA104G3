@@ -332,6 +332,7 @@
 		</tr>
 	
 	</table>
+	<h2 style="color:red">任務地點</h2>
 	<div id="map"></div>
 	</div>
 </div>
