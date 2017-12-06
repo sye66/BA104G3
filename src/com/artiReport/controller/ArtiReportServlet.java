@@ -437,7 +437,7 @@ public class ArtiReportServlet extends HttpServlet {
 
 			/***************************3.修改完成,準備轉交(Send the Success view)*************/
 			req.setAttribute("artiReportSet",artiReportVO);
-			String url = "/backdesk/artiReport/listAllArtiReport.jsp";
+			String url = "/backdesk/artiReport/ArtiReport_forWork.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 			successView.forward(req, res);
 		}

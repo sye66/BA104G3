@@ -65,7 +65,7 @@ div {
 
 </head>
 <body bgcolor='white'>
-<br><br><br>
+
 <jsp:include page="/lib/publicfile/include/file/navbar.jsp" flush="true" />
    <br><br><br><br><br><br><br><br>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiForm/artiForm.do" name="form1" enctype="multipart/form-data">

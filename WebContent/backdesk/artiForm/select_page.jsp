@@ -54,7 +54,6 @@
 	<jsp:include page="/backdesk/artiForm/backdeskLeft_ArtiForm.jsp" flush="true" />
 
 
-	
 <%-- 錯誤表列 --%>
 <c:if test="${not empty errorMsgs}">
 	<font style="color:red">請修正以下錯誤:</font>
@@ -68,7 +67,6 @@
     <div class="widgetbox">
         <div class="title">
         <h3>討論區文章資料查詢 : <a href="/BA104G3/backdesk/artiForm/listAllArtiForm_back.jsp">List</a> all Article.  
-                           /                 <a href="/BA104G3/frontdesk/artiForm/addArtiForm.jsp">Add</a> a new Article.</h3><br/>
         </div>
                  <div class="widgetcontent userlistwidget nopadding">
                      <ul>
