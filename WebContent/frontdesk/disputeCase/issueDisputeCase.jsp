@@ -106,11 +106,16 @@
 							</div>
 							<div style="text-align: center;">
 								<input type="submit" class=" btn btn-danger btn-lg" value="給我弄死他！">
+								<input type="button" id="dispute_case_demo" value="爭">
 							</div>
 						</form>
 				</div>
 			</div>
 		</div>
-
+	<script type="text/javascript">
+		$("#dispute_case_demo").click(function() {
+			$("#dispute_Content").val("有人妖啊覺得怕怕");
+		});
+	</script>
 	</body>
 </html>
