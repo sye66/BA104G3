@@ -69,7 +69,7 @@ public class MissionSocket {
 		System.out.println(userSession.getId() + ": Disconnected: " + Integer.toString(reason.getCloseCode().getCode()));
 	}
 
-	 static void pushMissionText(String mem_no,String action) {
+	 public static void pushMissionText(String mem_no,String action) {
 		 System.out.println("outside missionOk");
 		 System.out.println(action);
 		 		if(missionMessage.containsKey(mem_no)){

@@ -23,7 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.android.model.*;
-
+import com.getmission.controller.MissionSocket;
+import com.getmission.model.*;
 
 
 
@@ -319,6 +320,7 @@ public class MissionServlet extends HttpServlet {
 			String take_Case_NO = jsonObject.get("takecase_NO").getAsString();
 			Timestamp mission_Start_Time = new Timestamp(System.currentTimeMillis());
 			Timestamp mission_End_Time = new Timestamp(System.currentTimeMillis()+60*60*24*1000*5);
+			MissionSocket.pushMissionText(take_Case_NO,"checkmem"); //websocket
 			System.out.println(mission_No+"tacccc"+take_Case_NO);
 //			case_CandidateSvc.deleteCaseCandidateByMissionNo(mission_No);
 			case_CandidateSvc.deleteCaseCandidate(take_Case_NO, mission_No);
@@ -327,7 +329,13 @@ public class MissionServlet extends HttpServlet {
 		} else 
 		if ("updateMissionState".equals(action)){
 			Integer mission_State = jsonObject.get("mission_State").getAsInt();
-			String mission_No = jsonObject.get("mission_No").getAsString();	
+			String mission_No = jsonObject.get("mission_No").getAsString();
+			GetMissionService getMissionSvc = new GetMissionService();
+			
+			if(mission_State == 5){
+				String take_Case_NO = getMissionSvc.getOneMission(mission_No).getTakecase_Mem_No();
+				MissionSocket.pushMissionText(take_Case_NO,"missionOk"); //websocket
+			}
 			missionDAO.updateMissionState(mission_State, mission_No);
 			
 		} else

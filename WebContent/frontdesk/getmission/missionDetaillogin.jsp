@@ -10,10 +10,12 @@
 <%@ page import="com.getmission.model.*"%>
 <%@ page import="com.missionimages.model.*"%>
 <%@ page import="com.casecandidate.model.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="caseCandidateSvc" scope="page"
 	class="com.casecandidate.model.CaseCandidateService" />
 <jsp:useBean id="accusecaseSvc" scope="page"
 	class="com.accusecase.model.AccuseCaseService" />
+	<jsp:useBean id="Doubletoint" scope="page" class="com.getmission.controller.Doubletoint" />
 <%
 	GetMissionVO getMissionVO = (GetMissionVO) request.getAttribute("getMissionVO");
 	String mem_No = (String) session.getAttribute("mem_No");
@@ -31,6 +33,7 @@
 <title>Mission_Detaillogin</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/lib/css/getmission/map.css">
+
 <!--[if lt IE 9]>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -251,7 +254,7 @@
 						<h5 style="color:brown">任務發佈時間</h5><p style="color:#6d6767">${getMissionVO.mission_Release_Time}</p>
 						<h5 style="color:brown">任務截止日期</h5><p style="color:#6d6767">${getMissionVO.mission_Due_Time}</p>
 						<h5 style="color:brown">任務模式</h5><p style="color:red">${ChangeStateToName.ChangePatternToName(getMissionVO.mission_Pattern)}</p>
-						<h5 style="color:brown">任務報酬</h5><p style="color:#6d6767">${getMissionVO.mission_Pay} 積分</p>
+						<h5 style="color:brown">任務報酬</h5><p style="color:#6d6767">${Doubletoint.DoubleToint(getMissionVO.mission_Pay)} 積分</p>
 					</div>
 				</div>
 
@@ -302,7 +305,7 @@
 							<form method="post"
 								action="<%=request.getContextPath()%>/getmission/getmission.do"
 								name="getmission2">
-								<button class="btn btn-info" type="submit" name="action"
+								<button class="btn btn-info dontclicktwice" type="submit" name="action"
 									value="take_mission">確認接案</button>
 								<input type="hidden" name="mission_No"
 									value="${getMissionVO.mission_No}">
@@ -346,6 +349,15 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
+	
+		$('.dontclicktwice').click(function(){
+			$('.dontclicktwice').attr('disabled', true);
+
+		});
+		
+	
+	
+	
 	function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,

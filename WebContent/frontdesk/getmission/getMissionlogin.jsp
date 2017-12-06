@@ -8,8 +8,8 @@
 	class="com.missionimages.model.MissionImagesService" />
 <jsp:useBean id="getMissionSvc" scope="page" class="com.getmission.model.GetMissionService" />
 <jsp:useBean id="memSvc" scope="page" class="com.mem.model.MemService" />
-<jsp:useBean id="caseCandidateSvc" scope="page"
-	class="com.casecandidate.model.CaseCandidateService" />
+<jsp:useBean id="caseCandidateSvc" scope="page" class="com.casecandidate.model.CaseCandidateService" />
+<jsp:useBean id="Doubletoint" scope="page" class="com.getmission.controller.Doubletoint" />
 <%
 	GetMissionService getMissionService = new GetMissionService();
 	MemVO memVO2 = (MemVO) request.getSession().getAttribute("memVO");
@@ -195,7 +195,7 @@
 
 							<p>1.任務方向:${getMissionVO.mission_Category }</p>
 
-							<p>2.報酬是:${getMissionVO.mission_Pay } 積分</p>
+							<p>2.報酬是:${Doubletoint.DoubleToint(getMissionVO.mission_Pay)} 積分</p>
 						</div>
 					
 						<table>
