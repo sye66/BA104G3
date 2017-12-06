@@ -201,7 +201,10 @@ function getFocus() {
 						<button type="button" onclick="aa0953711016()">兆</button>
 						<button type="button" id="M000002">柏</button>	
 						<button type="button" id="M000003">武</button>
-						<button type="button" id="M000004">子</button></div>						
+						<button type="button" id="M000004">子</button>
+						<button type="button" id="M000012">恭</button>
+						<button type="button" id="M000015">仁</button>
+						</div>						
 <!-- 						<button type="button" id="GM1">官</button></div>						 -->
                     <!--神奇小按鈕 -->
                     
@@ -318,6 +321,16 @@ function getFocus() {
  	$('#M000004').click(function(){
 		$('#login_username').val("ziu0614@gmail.com");
 		$('#login_password').val("B123456");
+	});
+ 	
+ 	$('#M000012').click(function(){
+		$('#login_username').val("kyoko1102@gmail.com");
+		$('#login_password').val("L123456");
+	});
+ 	
+ 	$('#M000015').click(function(){
+		$('#login_username').val("dazon0827@gmail.com");
+		$('#login_password').val("O123456");
 	});
  	
 //  	$('#GM1').click(function(){
