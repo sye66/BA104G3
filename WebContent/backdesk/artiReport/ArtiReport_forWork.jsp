@@ -98,30 +98,5 @@ h3{
          <br>
  <%@ include file="/backdesk/page2.file" %> 
 
-	   
-		
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
-			     <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
-			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     <input type="hidden" name="action"	value="getOneReport_For_Update">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     </FORM>
-			     
-			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/artiReport/artiReport.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="刪除">
-			     <input type="hidden" name="report_No"  value="${artiReportVO.report_No}">
-			     <input type="hidden" name="requestURL" value="<%=request.getServletPath()%>">
-			     <input type="hidden" name="whichPage" value="<%=whichPage%>">
-			     <input type="hidden" name="action" value="deleteReport">
- 			     <input type="hidden" name="whichPage" value="<%=whichPage%>"> 
-			     </FORM>
-			</td>
-		</tr>
-
 </body>
 </html>
