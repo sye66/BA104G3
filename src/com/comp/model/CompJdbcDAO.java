@@ -383,4 +383,10 @@ public class CompJdbcDAO implements CompDAO_interface{
 		}
 		return list1;
 	}
+
+	@Override
+	public void deleteComp(String emp_No) {
+		// TODO Auto-generated method stub
+		
+	}
 }

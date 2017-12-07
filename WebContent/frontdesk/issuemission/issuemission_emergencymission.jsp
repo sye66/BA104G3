@@ -128,7 +128,7 @@
 								<label for="mission_Name">
 									任務名稱
 								</label>
-								<input type="text" name="mission_Name" id="mission_Name" placeholder="請輸入任務名稱" class="form-control">
+								<input type="text" name="mission_Name" id="mission_Name" placeholder="請輸入任務名稱" class="form-control" id="mission_Name">
 							</div>
 						<%-- 任務敘述 --%>
 							<div class="form-group">
@@ -201,6 +201,8 @@
 								<input type="file" name="mission_images" id="mission_images" class="form-control">
 								<br>
 								<img class="preview" style="max-width: 300px; max-height: 300px;">
+								<input type="button" name="dispute_demo" id="dispute_demo" value="爭">
+								<input type="button" name="dispute_demo" id="accuse_demo" value="檢">
 							</div>
 						<div style="text-align: center; height: 200px; width: 100%; margin-top: 30px;">
 								<input type="hidden" name="action" value="issue_Emergency_Mission">
@@ -211,5 +213,17 @@
 				</form>
 			</div>
 		</div>
+		<script type="text/javascript">
+		$("#dispute_demo").click(function(){
+			console.log("dispute_demo clicked")
+			$("#mission_Name").val("需要正妹陪我吃飯！");
+			$("#mission_Des").val("快來找我吃飯吧呵呵")
+		})
+		$("#accuse_demo").click(function() {
+			console.log("accuse_demo clicked")
+			$("#mission_Name").val("積積陰陰德");
+			$("#mission_Des").val("最近有點in")
+		});
+		</script>
 	</body>
 </html>

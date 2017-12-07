@@ -12,4 +12,5 @@ public interface CompDAO_interface {
     public CompVO findByPrimaryKey(String emp_No);
     public List<CompVO> getAll();
     public Set<CompVO> findByPk(String emp_No);
+    public void deleteComp(String emp_No);
 }
