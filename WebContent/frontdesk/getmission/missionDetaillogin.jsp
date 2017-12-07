@@ -349,12 +349,18 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
-	
+	var click = false;
 		$('.dontclicktwice').click(function(){
-			$('.dontclicktwice').attr('disabled', true);
+			click = true
+			
 
 		});
-		
+		if(click ==true){
+			
+			$('.dontclicktwice').attr('disabled', true);
+		}else{
+			$('.dontclicktwice').attr('disabled', false);
+		}
 	
 	
 	
