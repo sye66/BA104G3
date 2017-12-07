@@ -261,7 +261,7 @@
 												<form method="post"
 													action="<%=request.getContextPath()%>/getmission/getmission.do"
 													name="getmission2">
-													<button class="btn btn-info" type="submit" name="action"
+													<button class="btn btn-info dontclicktwice" type="submit" name="action"
 														value="take_mission">確認接案</button>
 													<input type="hidden" name="mission_No"
 														value="${getMissionVO.mission_No}"> 
@@ -345,7 +345,18 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		 <script>
+			var click = false;
+			$('.dontclicktwice').click(function(){
+				click = true
+				
 
+			});
+			if(click ==true){
+				
+				$('.dontclicktwice').attr('disabled', true);
+			}else{
+				$('.dontclicktwice').attr('disabled', false);
+			}
 
        // The following example creates complex markers to indicate beaches near
       // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
